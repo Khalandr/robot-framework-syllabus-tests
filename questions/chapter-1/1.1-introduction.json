@@ -1,0 +1,61 @@
+{
+  "chapter": "1-Introduction to Robot Framework",
+  "subchapter": "1.1-Introduction and Overview",
+  "questions": [
+    {
+      "id": "ch1-1-q1",
+      "question": "What is Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "A generic open source automation framework for acceptance testing",
+          "correct": true
+        },
+        {
+          "text": "A proprietary testing tool only for web applications",
+          "correct": false,
+          "explanation": "Robot Framework is open source, not proprietary, and can test more than just web applications"
+        },
+        {
+          "text": "A programming language for test automation",
+          "correct": false,
+          "explanation": "Robot Framework is a framework, not a programming language itself"
+        },
+        {
+          "text": "A tool specifically designed only for mobile testing",
+          "correct": false,
+          "explanation": "Robot Framework is generic and can be used for various types of testing, not just mobile"
+        }
+      ]
+    },
+    {
+      "id": "ch1-1-q2",
+      "question": "Which of the following are key features of Robot Framework? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Keyword-driven testing approach",
+          "correct": true
+        },
+        {
+          "text": "Human-readable test cases",
+          "correct": true
+        },
+        {
+          "text": "Only supports Python libraries",
+          "correct": false,
+          "explanation": "Robot Framework supports libraries written in Python, Java, and other languages"
+        },
+        {
+          "text": "Extensible with custom libraries",
+          "correct": true
+        },
+        {
+          "text": "Requires compilation before execution",
+          "correct": false,
+          "explanation": "Robot Framework tests are interpreted, not compiled"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Robot Framework
+log.html
+output.xml
+report.html
+*.log
+results/
+logs/
+
+# Test outputs
+test_output/
+test_results/
+
+# Temporary files
+*.tmp
+temp/
+tmp/
+
+# Operating System
+Thumbs.db
+Desktop.ini
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Project PDFs
+Syllabus.pdf
+Writing MC Questions.pdf
+CLAUDE.md

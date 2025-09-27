@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Framework Certification Practice</title>
+    <link rel="icon" type="image/svg+xml" href="assets/rf_logo.svg">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="assets/rf_logo.svg" alt="Robot Framework Logo" class="rf-logo">
+            </div>
+            <h1>Robot Framework Certification Practice</h1>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Mode Selection Screen -->
+        <div id="modeSelection" class="screen active">
+            <div class="card">
+                <h2>Select Practice Mode</h2>
+                <div class="mode-grid">
+                    <button class="mode-btn" data-mode="chapter">
+                        <h3>Chapter Practice</h3>
+                        <p>Practice all questions from a specific chapter</p>
+                    </button>
+                    <button class="mode-btn" data-mode="subchapter">
+                        <h3>Subchapter Practice</h3>
+                        <p>Focus on a specific topic within a chapter</p>
+                    </button>
+                    <button class="mode-btn" data-mode="random">
+                        <h3>Random Practice</h3>
+                        <p>Mix questions from all chapters</p>
+                    </button>
+                    <button class="mode-btn exam" data-mode="exam">
+                        <h3>Exam Mode</h3>
+                        <p>40 questions simulating the real exam</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter/Subchapter Selection -->
+        <div id="topicSelection" class="screen">
+            <div class="card">
+                <h2>Select Topic</h2>
+                <div id="topicList" class="topic-list"></div>
+                <button class="btn btn-secondary" onclick="app.showModeSelection()">Back</button>
+            </div>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quizScreen" class="screen">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+                <span class="progress-text" id="progressText">1 / 10</span>
+            </div>
+
+            <div class="card quiz-card">
+                <div class="question-header">
+                    <span class="question-type" id="questionType">Single Answer</span>
+                    <span class="question-chapter" id="questionChapter">Chapter 1</span>
+                </div>
+
+                <h3 id="questionText" class="question-text">Question will appear here</h3>
+
+                <div id="answerOptions" class="answer-options"></div>
+
+                <div class="quiz-actions">
+                    <button id="submitBtn" class="btn btn-primary" onclick="quiz.submitAnswer()">Submit</button>
+                    <button id="nextBtn" class="btn btn-primary" style="display:none" onclick="quiz.nextQuestion()">Next</button>
+                    <button class="btn btn-secondary" onclick="quiz.endQuiz()">End Quiz</button>
+                </div>
+            </div>
+
+            <div id="feedback" class="feedback-card" style="display:none">
+                <div class="feedback-content"></div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="resultsScreen" class="screen">
+            <div class="card">
+                <h2>Quiz Results</h2>
+
+                <div class="score-display">
+                    <div class="score-circle">
+                        <span class="score-percentage" id="scorePercentage">0%</span>
+                        <span class="score-label">Score</span>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-value" id="correctCount">0</span>
+                        <span class="stat-label">Correct</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="incorrectCount">0</span>
+                        <span class="stat-label">Incorrect</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="totalQuestions">0</span>
+                        <span class="stat-label">Total</span>
+                    </div>
+                </div>
+
+                <div id="chapterBreakdown" class="chapter-breakdown">
+                    <h3>Performance by Chapter</h3>
+                    <div id="breakdownContent"></div>
+                </div>
+
+                <div id="recommendations" class="recommendations">
+                    <h3>Recommendations</h3>
+                    <div id="recommendationsList"></div>
+                </div>
+
+                <div class="result-actions">
+                    <button class="btn btn-primary" onclick="app.showModeSelection()">Practice Again</button>
+                    <button class="btn btn-secondary" onclick="stats.viewHistory()">View History</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/questions.js"></script>
+    <script src="js/quiz.js"></script>
+    <script src="js/stats.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
