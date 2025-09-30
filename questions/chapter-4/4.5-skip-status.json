@@ -4,27 +4,27 @@
   "questions": [
     {
       "id": "ch4-5-q1",
-      "question": "What test|task statuses exist in Robot Framework besides PASS and FAIL?",
+      "question": "How does the SKIP status differ from FAIL in Robot Framework execution reports?",
       "type": "single",
       "options": [
         {
-          "text": "SKIP",
+          "text": "SKIP indicates tests that were intentionally not executed, while FAIL indicates tests that ran but had errors",
           "correct": true
         },
         {
-          "text": "PENDING",
+          "text": "SKIP and FAIL are equivalent; SKIP is just the modern name for FAIL",
           "correct": false,
-          "explanation": "Robot Framework has SKIP status, not PENDING"
+          "explanation": "SKIP and FAIL are distinct statuses with different meanings"
         },
         {
-          "text": "IGNORED",
+          "text": "SKIP means the test passed but was marked for future review",
           "correct": false,
-          "explanation": "The status is SKIP, not IGNORED"
+          "explanation": "SKIP indicates the test was not executed, not that it passed"
         },
         {
-          "text": "DEFERRED",
+          "text": "SKIP is used for tests that failed due to timeout, while FAIL is for assertion errors",
           "correct": false,
-          "explanation": "The status is SKIP, not DEFERRED"
+          "explanation": "Both timeouts and assertions result in FAIL; SKIP means not executed"
         }
       ]
     },

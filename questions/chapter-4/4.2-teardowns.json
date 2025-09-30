@@ -43,9 +43,9 @@
           "explanation": "Teardowns are single keyword calls and run regardless of pass/fail status"
         },
         {
-          "text": "A special section in Robot Framework files like *** Teardown ***",
+          "text": "A setting that executes after the *** Variables *** section is evaluated",
           "correct": false,
-          "explanation": "There is no *** Teardown *** section; teardowns are defined using settings"
+          "explanation": "Teardowns execute after tests/tasks/suites complete, not after variable evaluation"
         },
         {
           "text": "An automatic cleanup process that runs without explicit definition",
@@ -686,23 +686,23 @@
       "type": "single",
       "options": [
         {
-          "text": "Ensures each test|task starts with a clean state, reducing dependencies between tests and improving reliability",
+          "text": "Ensures clean state for subsequent tests, reducing inter-test dependencies",
           "correct": true
         },
         {
-          "text": "Improves test execution speed by parallelizing cleanup operations",
+          "text": "Improves speed by parallelizing cleanup across test execution",
           "correct": false,
-          "explanation": "Teardowns address reliability through cleanup, not performance optimization"
+          "explanation": "Teardowns address reliability through cleanup, not performance"
         },
         {
-          "text": "Allows tests to pass even when they would otherwise fail",
+          "text": "Allows failed tests to pass by cleaning up error conditions",
           "correct": false,
-          "explanation": "Teardowns don't change test results; they ensure proper cleanup"
+          "explanation": "Teardowns don't change test results; they ensure cleanup"
         },
         {
-          "text": "Prevents error messages from being logged in reports",
+          "text": "Prevents error messages from appearing in test reports",
           "correct": false,
-          "explanation": "Teardowns still log errors; the benefit is ensuring cleanup happens"
+          "explanation": "Teardowns still log errors; benefit is guaranteed cleanup"
         }
       ]
     },

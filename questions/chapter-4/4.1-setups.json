@@ -8,23 +8,23 @@
       "type": "single",
       "options": [
         {
-          "text": "To prepare the environment or system for execution or verify that requirements/preconditions are met",
+          "text": "To prepare the environment and verify preconditions before execution",
           "correct": true
         },
         {
-          "text": "To clean up resources after test execution completes",
+          "text": "To clean up resources and restore state after execution",
           "correct": false,
           "explanation": "Cleanup is the purpose of Teardowns, not Setups"
         },
         {
-          "text": "To define variables that will be used during test execution",
+          "text": "To define and initialize variables for test execution",
           "correct": false,
-          "explanation": "While Setups may set variables, their primary purpose is environment preparation and precondition verification"
+          "explanation": "While Setups may set variables, their primary purpose is preparation"
         },
         {
-          "text": "To log test execution metadata for reporting purposes",
+          "text": "To capture and log execution metadata for reports",
           "correct": false,
-          "explanation": "Logging is a side effect; the primary purpose is preparation and precondition verification"
+          "explanation": "Logging is a side effect; primary purpose is preparation"
         }
       ]
     },
@@ -77,9 +77,9 @@
           "explanation": "Setups are keyword calls, not configuration files"
         },
         {
-          "text": "A special section in Robot Framework files like *** Setup ***",
+          "text": "A setting that runs before the *** Test Cases *** section is parsed",
           "correct": false,
-          "explanation": "There is no *** Setup *** section; Setups are defined using settings"
+          "explanation": "Setups execute during runtime, not during file parsing"
         }
       ]
     },

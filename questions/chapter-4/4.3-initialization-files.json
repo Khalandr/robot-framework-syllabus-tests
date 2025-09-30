@@ -768,23 +768,23 @@
       "type": "single",
       "options": [
         {
-          "text": "Provides a centralized place to define setup/teardown for all sub-suites and tests within a directory structure",
+          "text": "Centralizes setup/teardown for all sub-suites in a directory",
           "correct": true
         },
         {
-          "text": "Improves test execution performance by caching setup operations",
+          "text": "Caches operations to improve test execution performance",
           "correct": false,
-          "explanation": "The benefit is centralization and organization, not performance optimization"
+          "explanation": "Benefit is centralization and organization, not performance"
         },
         {
-          "text": "Allows setup and teardown to run in parallel with test execution",
+          "text": "Allows setup and teardown to execute parallel with tests",
           "correct": false,
-          "explanation": "Setup/teardown are sequential; the benefit is centralized definition"
+          "explanation": "Setup/teardown are sequential; benefit is centralization"
         },
         {
-          "text": "Makes it possible to use suite-level setup and teardown for the first time",
+          "text": "Enables suite-level setup and teardown for the first time",
           "correct": false,
-          "explanation": "Suite Setup/Teardown can be defined in regular suites; initialization files centralize it for directories"
+          "explanation": "Suite Setup/Teardown exist in regular suites too; benefit is centralization"
         }
       ]
     }

@@ -4,55 +4,53 @@
   "questions": [
     {
       "id": "ch4-4-q1",
-      "question": "What is the purpose of tags in Robot Framework?",
-      "type": "multiple",
+      "question": "What is the primary purpose of tags in Robot Framework?",
+      "type": "single",
       "options": [
         {
-          "text": "To classify and control the execution of tests|tasks",
+          "text": "To classify and control test execution through flexible filtering",
           "correct": true
         },
         {
-          "text": "To provide metadata for tests|tasks",
-          "correct": true
-        },
-        {
-          "text": "To enable flexible test selection",
-          "correct": true
-        },
-        {
-          "text": "To create statistical summaries in execution protocols",
-          "correct": true
-        },
-        {
-          "text": "To define execution order of tests within a suite",
+          "text": "To define the execution order of tests within a suite",
           "correct": false,
           "explanation": "Tags are for classification and selection, not execution order"
+        },
+        {
+          "text": "To enable parallel execution of multiple tests simultaneously",
+          "correct": false,
+          "explanation": "Tags don't control parallelization; they enable test selection"
+        },
+        {
+          "text": "To specify timeout values for individual test cases",
+          "correct": false,
+          "explanation": "Timeouts are set with [Timeout] setting, not tags"
         }
       ]
     },
     {
       "id": "ch4-4-q2",
-      "question": "Are tags case-sensitive in Robot Framework?",
+      "question": "If a test is tagged with 'Smoke' and you run `robot --include smoke tests/`, what happens?",
       "type": "single",
       "options": [
         {
-          "text": "No, tags are case-insensitive",
+          "text": "The test executes because tags are case-insensitive",
           "correct": true
         },
         {
-          "text": "Yes, tags are case-sensitive",
+          "text": "The test is skipped because the case doesn't match",
           "correct": false,
-          "explanation": "Tags are case-insensitive in Robot Framework"
+          "explanation": "Tags are case-insensitive; 'Smoke' matches 'smoke'"
         },
         {
-          "text": "Only reserved tags are case-sensitive",
+          "text": "Robot Framework throws a case mismatch error",
           "correct": false,
-          "explanation": "All tags are case-insensitive"
+          "explanation": "No error occurs; tags are case-insensitive"
         },
         {
-          "text": "Tags are case-sensitive only when used in command-line filtering",
+          "text": "The test executes only if lowercase was used in [Tags]",
           "correct": false,
-          "explanation": "Tags are case-insensitive everywhere, though lowercase is recommended for filtering"
+          "explanation": "Tags are case-insensitive in both definition and filtering"
         }
       ]
     },
