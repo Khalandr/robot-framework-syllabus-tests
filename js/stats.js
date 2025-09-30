@@ -1,24 +1,5 @@
-// Statistics and Results Module
+// Statistics and Results Module (Session-only, no history tracking)
 const stats = {
-    STORAGE_KEY: 'rf_practice_results',
-
-    saveResults(results) {
-        const history = this.getHistory();
-        history.push(results);
-
-        // Keep only last 50 results
-        if (history.length > 50) {
-            history.shift();
-        }
-
-        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(history));
-    },
-
-    getHistory() {
-        const stored = localStorage.getItem(this.STORAGE_KEY);
-        return stored ? JSON.parse(stored) : [];
-    },
-
     displayResults(results) {
         // Calculate percentage
         const percentage = Math.round((results.correctAnswers / results.totalQuestions) * 100);
@@ -143,47 +124,5 @@ const stats = {
 
             recommendationsDiv.appendChild(list);
         }
-    },
-
-    viewHistory() {
-        const history = this.getHistory();
-        if (history.length === 0) {
-            alert('No practice history available yet.');
-            return;
-        }
-
-        // For now, show a simple alert with recent scores
-        const recent = history.slice(-5).reverse();
-        let message = 'Recent Practice Sessions:\n\n';
-
-        recent.forEach(session => {
-            const percentage = Math.round((session.correctAnswers / session.totalQuestions) * 100);
-            const date = new Date(session.timestamp).toLocaleDateString();
-            message += `${date} - ${session.mode} Mode: ${percentage}% (${session.correctAnswers}/${session.totalQuestions})\n`;
-        });
-
-        alert(message);
-    },
-
-    clearHistory() {
-        if (confirm('Are you sure you want to clear all practice history?')) {
-            localStorage.removeItem(this.STORAGE_KEY);
-            alert('Practice history cleared.');
-        }
-    },
-
-    getOverallStats() {
-        const history = this.getHistory();
-        if (history.length === 0) return null;
-
-        const totalQuestions = history.reduce((sum, h) => sum + h.totalQuestions, 0);
-        const totalCorrect = history.reduce((sum, h) => sum + h.correctAnswers, 0);
-
-        return {
-            sessions: history.length,
-            totalQuestions,
-            totalCorrect,
-            averageScore: Math.round((totalCorrect / totalQuestions) * 100)
-        };
     }
 };

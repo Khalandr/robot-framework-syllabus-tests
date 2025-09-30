@@ -18,9 +18,8 @@ A web-based practice application for Robot Framework certification training and 
 
 - **Performance Analytics**
   - Detailed results breakdown by chapter and topic
-  - Practice history tracking with localStorage
+  - Session-based results (no persistent tracking)
   - Personalized recommendations for improvement
-  - Performance statistics and trends
 
 - **Modern Design**
   - Official Robot Framework Foundation color scheme
@@ -96,7 +95,7 @@ Each JSON file follows this schema:
 ## Technology Stack
 
 - **Frontend**: Vanilla JavaScript, HTML5, CSS3
-- **Storage**: localStorage for progress tracking
+- **Storage**: Session-based (no persistent storage)
 - **Deployment**: Static files (can be hosted anywhere)
 
 ## Browser Support

@@ -54,30 +54,42 @@
 
         <!-- Quiz Screen -->
         <div id="quizScreen" class="screen">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-                <span class="progress-text" id="progressText">1 / 10</span>
-            </div>
-
-            <div class="card quiz-card">
-                <div class="question-header">
-                    <span class="question-type" id="questionType">Single Answer</span>
-                    <span class="question-chapter" id="questionChapter">Chapter 1</span>
+            <!-- Question Navigation -->
+            <div class="question-navigation">
+                <div class="navigation-header">
+                    <span class="navigation-title">Questions</span>
+                    <span class="progress-text" id="progressText">1 / 10</span>
                 </div>
-
-                <h3 id="questionText" class="question-text">Question will appear here</h3>
-
-                <div id="answerOptions" class="answer-options"></div>
-
-                <div class="quiz-actions">
-                    <button id="submitBtn" class="btn btn-primary" onclick="quiz.submitAnswer()">Submit</button>
-                    <button id="nextBtn" class="btn btn-primary" style="display:none" onclick="quiz.nextQuestion()">Next</button>
-                    <button class="btn btn-secondary" onclick="quiz.endQuiz()">End Quiz</button>
+                <div class="question-indicators" id="questionIndicators">
+                    <!-- Question number indicators will be generated here -->
                 </div>
             </div>
 
-            <div id="feedback" class="feedback-card" style="display:none">
-                <div class="feedback-content"></div>
+            <div class="quiz-content">
+                <div class="card quiz-card">
+                    <div class="question-header">
+                        <span class="question-type" id="questionType">Single Answer</span>
+                        <span class="question-chapter" id="questionChapter">Chapter 1</span>
+                    </div>
+
+                    <h3 id="questionText" class="question-text">Question will appear here</h3>
+
+                    <div id="answerOptions" class="answer-options"></div>
+
+                    <div class="quiz-actions">
+                        <button id="markBtn" class="btn btn-warning" onclick="quiz.toggleMark()">Mark</button>
+                        <div class="navigation-buttons">
+                            <button id="prevBtn" class="btn btn-secondary" onclick="quiz.previousQuestion()">Previous</button>
+                            <button id="nextBtn" class="btn btn-secondary" onclick="quiz.nextQuestion()">Next</button>
+                        </div>
+                        <button id="submitQuizBtn" class="btn btn-primary" onclick="quiz.submitQuiz()">Submit Quiz</button>
+                        <button class="btn btn-secondary" onclick="quiz.endQuiz()">End Quiz</button>
+                    </div>
+                </div>
+
+                <div id="feedback" class="feedback-card" style="display:none">
+                    <div class="feedback-content"></div>
+                </div>
             </div>
         </div>
 
@@ -120,7 +132,6 @@
 
                 <div class="result-actions">
                     <button class="btn btn-primary" onclick="app.showModeSelection()">Practice Again</button>
-                    <button class="btn btn-secondary" onclick="stats.viewHistory()">View History</button>
                 </div>
             </div>
         </div>
