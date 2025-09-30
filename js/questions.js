@@ -29,7 +29,8 @@ const questions = {
             'questions/chapter-4/4.3-initialization-files.json',
             'questions/chapter-4/4.4-tags-filtering.json',
             'questions/chapter-4/4.5-skip-status.json',
-            'questions/chapter-5/5.1-advanced-variables.json'
+            'questions/chapter-5/5.1-advanced-variables.json',
+            'questions/chapter-5/5.2-control-structures.json'
             // Add more files as they are created
         ];
 

@@ -1,0 +1,787 @@
+{
+  "chapter": "5-Advanced Topics",
+  "subchapter": "5.2-Control Structures",
+  "questions": [
+    {
+      "id": "ch5-2-q1",
+      "question": "Is Robot Framework a Turing-complete language?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Yes, it supports all common control structures",
+          "correct": true
+        },
+        {
+          "text": "No, it only supports basic sequential execution",
+          "correct": false,
+          "explanation": "Robot Framework is Turing-complete and supports IF, FOR, WHILE, and other control structures"
+        },
+        {
+          "text": "Only when using Python libraries",
+          "correct": false,
+          "explanation": "Robot Framework itself is Turing-complete with native control structures"
+        },
+        {
+          "text": "Yes, but only in user keywords, not in test cases",
+          "correct": false,
+          "explanation": "Control structures can be used in both test cases and keywords"
+        }
+      ]
+    },
+    {
+      "id": "ch5-2-q2",
+      "question": "What is the purpose of IF statements in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To control flow by allowing certain keywords to run only when specific conditions are met",
+          "correct": true
+        },
+        {
+          "text": "To define variables conditionally",
+          "correct": false,
+          "explanation": "While variables can be set in IF blocks, the primary purpose is controlling execution flow"
+        },
+        {
+          "text": "To handle errors and exceptions",
+          "correct": false,
+          "explanation": "Error handling uses different mechanisms; IF is for conditional execution"
+        },
+        {
+          "text": "To iterate over lists of values",
+          "correct": false,
+          "explanation": "Iteration is done with FOR loops, not IF statements"
+        }
+      ]
+    },
+    {
+      "id": "ch5-2-q3",
+      "question": "How are conditions in IF statements evaluated in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "As Python expressions",
+          "correct": true
+        },
+        {
+          "text": "As Robot Framework keyword calls that return boolean",
+          "correct": false,
+          "explanation": "Conditions are Python expressions, not keyword calls"
+        },
+        {
+          "text": "As JavaScript expressions",
+          "correct": false,
+          "explanation": "Conditions are evaluated as Python expressions"
+        },
+        {
+          "text": "As string pattern matches",
+          "correct": false,
+          "explanation": "Conditions are Python expressions that evaluate to boolean"
+        }
+      ]
+    },
+    {
+      "id": "ch5-2-q4",
+      "question": "```robot\nIF '${status}' == 'SUCCESS'\n    Log    Operation was successful.\nEND\n```\n\nWhat is required to close an IF statement?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The END token",
+          "correct": true
+        },
+        {
+          "text": "The ENDIF token",
+          "correct": false,
+          "explanation": "Robot Framework uses END, not ENDIF"
+        },
+        {
+          "text": "Indentation decrease",
+          "correct": false,
+          "explanation": "While indentation is used, the END token is required"
+        },
+        {
+          "text": "Nothing; IF is automatically closed",
+          "correct": false,
+          "explanation": "IF blocks must be explicitly closed with END"
+        }
+      ]
+    },
+    {
+      "id": "ch5-2-q5",
+      "question": "```robot\nIF '${status}' == 'SUCCESS'\n    Log    Operation was successful.\nEND\n```\n\nWhen is the Log keyword executed?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Only if ${status} equals the string 'SUCCESS'",
+          "correct": true
+        },
+        {
+          "text": "Always, regardless of ${status} value",
+          "correct": false,
+          "explanation": "Log only executes when the condition is true"
+        },
+        {
+          "text": "Only if ${status} is True (boolean)",
+          "correct": false,
+          "explanation": "The condition checks for string equality with 'SUCCESS'"
+        },
+        {
+          "text": "Only if ${status} is not empty",
+          "correct": false,
+          "explanation": "The condition checks for specific string equality"
+        }
+      ]
+    },
+    {
+      "id": "ch5-2-q6",
+      "question": "What optional clauses can be used with an IF statement?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "ELSE (for alternative actions when condition is false)",
+          "correct": true
+        },
+        {
+          "text": "ELSE IF (for checking additional conditions)",
+          "correct": true
+        },
+        {
+          "text": "THEN (to mark the start of the true block)",
+          "correct": false,
+          "explanation": "Robot Framework doesn't use THEN; the block starts after the condition"
+        },
+        {
+          "text": "ELIF (shorthand for else if)",
+          "correct": false,
+          "explanation": "Robot Framework uses 'ELSE IF', not 'ELIF'"
+        }
+      ]
+    },
+    {
+      "id": "ch5-2-q7",
+      "question": "```robot\nIF ${score} >= 90\n    Log    Grade A\nELSE IF ${score} >= 80\n    Log    Grade B\nELSE\n    Log    Grade C or below\nEND\n```\n\nWhat is logged if ${score} is 85?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Grade B",
+          "correct": true
+        },
+        {
+          "text": "Grade A",
+          "correct": false,
+          "explanation": "85 is not >= 90, so the first condition is false"
+        },
+        {
+          "text": "Grade C or below",
+          "correct": false,
+          "explanation": "85 >= 80, so the ELSE IF condition is true"
+        },
+        {
+          "text": "Both Grade A and Grade B",
+          "correct": false,
+          "explanation": "Only the first matching condition executes"
+        }
+      ]
+    },
+    {
+      "id": "ch5-2-q8",
+      "question": "What is an inline IF statement?",
+      "type": "single",
+      "options": [
+        {
+          "text": "A simplified IF statement for single conditional keywords that doesn't require END",
+          "correct": true
+        },
+        {
+          "text": "An IF statement that can be written in a single line with END",
+          "correct": false,
+          "explanation": "Inline IF doesn't use END at all"
+        },
+        {
+          "text": "An IF statement inside a keyword argument",
+          "correct": false,
+          "explanation": "Inline IF is a simplified syntax for conditional execution"
+        },
+        {
+          "text": "An IF statement that executes faster than regular IF",
+          "correct": false,
+          "explanation": "Inline IF is syntactic sugar; performance is the same"
+        }
+      ]
+    },
+    {
+      "id": "ch5-2-q9",
+      "question": "```robot\nIF ${user} == 'Admin'    Log    Admin access granted.\n```\n\nWhat is special about this IF statement?",
+      "type": "single",
+      "options": [
+        {
+          "text": "It's an inline IF that doesn't require END",
+          "correct": true
+        },
+        {
+          "text": "It's a syntax error; IF must span multiple lines",
+          "correct": false,
+          "explanation": "Inline IF is valid syntax for single keywords"
+        },
+        {
+          "text": "It requires ENDIF instead of END",
+          "correct": false,
+          "explanation": "Inline IF doesn't require any closing token"
+        },
+        {
+          "text": "It can only be used in test cases, not keywords",
+          "correct": false,
+          "explanation": "Inline IF can be used in both test cases and keywords"
+        }
+      ]
+    },
+    {
+      "id": "ch5-2-q10",
+      "question": "What is the purpose of FOR loops in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To repeat a set of keywords multiple times, iterating over a sequence of values",
+          "correct": true
+        },
+        {
+          "text": "To execute keywords in parallel",
+          "correct": false,
+          "explanation": "FOR loops execute sequentially, not in parallel"
+        },
+        {
+          "text": "To define multiple test cases at once",
+          "correct": false,
+          "explanation": "FOR loops are for repeating keywords within execution, not defining tests"
+        },
+        {
+          "text": "To handle errors in a loop until success",
+          "correct": false,
+          "explanation": "FOR loops iterate over values; error handling uses different mechanisms"
+        }
+      ]
+    },
+    {
+      "id": "ch5-2-q11",
+      "question": "How many types of FOR loops does Robot Framework have?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Four: FOR-IN, FOR-IN-RANGE, FOR-IN-ENUMERATE, FOR-IN-ZIP",
+          "correct": true
+        },
+        {
+          "text": "Two: FOR and FOREACH",
+          "correct": false,
+          "explanation": "Robot Framework has four FOR loop variants"
+        },
+        {
+          "text": "One: FOR-IN with different options",
+          "correct": false,
+          "explanation": "There are four distinct FOR loop types"
+        },
+        {
+          "text": "Three: FOR-IN, FOR-EACH, FOR-WHILE",
+          "correct": false,
+          "explanation": "The four types are FOR-IN, FOR-IN-RANGE, FOR-IN-ENUMERATE, and FOR-IN-ZIP"
+        }
+      ]
+    },
+    {
+      "id": "ch5-2-q12",
+      "question": "What is the purpose of FOR-IN loop?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To iterate over a list of values",
+          "correct": true
+        },
+        {
+          "text": "To iterate over a range of numbers",
+          "correct": false,
+          "explanation": "FOR-IN-RANGE iterates over number ranges; FOR-IN iterates over lists"
+        },
+        {
+          "text": "To iterate over list values and their indexes",
+          "correct": false,
+          "explanation": "FOR-IN-ENUMERATE provides indexes; FOR-IN only provides values"
+        },
+        {
+          "text": "To iterate over multiple lists simultaneously",
+          "correct": false,
+          "explanation": "FOR-IN-ZIP handles multiple lists; FOR-IN handles single lists"
+        }
+      ]
+    },
+    {
+      "id": "ch5-2-q13",
+      "question": "What is the purpose of FOR-IN-RANGE loop?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To iterate over a range of numbers",
+          "correct": true
+        },
+        {
+          "text": "To iterate over a list of values",
+          "correct": false,
+          "explanation": "FOR-IN iterates over lists; FOR-IN-RANGE iterates over number ranges"
+        },
+        {
+          "text": "To iterate over a range of dates",
+          "correct": false,
+          "explanation": "FOR-IN-RANGE specifically handles numeric ranges"
+        },
+        {
+          "text": "To iterate over dictionary keys in a range",
+          "correct": false,
+          "explanation": "FOR-IN-RANGE creates numeric sequences"
+        }
+      ]
+    },
+    {
+      "id": "ch5-2-q14",
+      "question": "What is the purpose of FOR-IN-ENUMERATE loop?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To iterate over a list of values and their indexes",
+          "correct": true
+        },
+        {
+          "text": "To count how many items are in a list",
+          "correct": false,
+          "explanation": "FOR-IN-ENUMERATE iterates with both index and value, not just counting"
+        },
+        {
+          "text": "To iterate over enum types",
+          "correct": false,
+          "explanation": "It provides list indexes and values, not enum type handling"
+        },
+        {
+          "text": "To iterate over a range of numbers",
+          "correct": false,
+          "explanation": "FOR-IN-RANGE iterates over numbers; FOR-IN-ENUMERATE provides list indexes"
+        }
+      ]
+    },
+    {
+      "id": "ch5-2-q15",
+      "question": "What is the purpose of FOR-IN-ZIP loop?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To iterate over multiple lists simultaneously",
+          "correct": true
+        },
+        {
+          "text": "To iterate over compressed files",
+          "correct": false,
+          "explanation": "ZIP refers to zipping lists together, not file compression"
+        },
+        {
+          "text": "To iterate over lists in reverse order",
+          "correct": false,
+          "explanation": "ZIP combines multiple lists; it doesn't reverse them"
+        },
+        {
+          "text": "To iterate over a list faster than FOR-IN",
+          "correct": false,
+          "explanation": "ZIP is for handling multiple lists together, not performance"
+        }
+      ]
+    },
+    {
+      "id": "ch5-2-q16",
+      "question": "```robot\n*** Variables ***\n@{fruits}    apple    banana    cherry\n\n*** Test Cases ***\nProcess Fruit List\n    FOR    ${fruit}    IN    @{fruits}\n        Log    Processing ${fruit}\n    END\n```\n\nHow many times is the Log keyword executed?",
+      "type": "single",
+      "options": [
+        {
+          "text": "3 times (once for each fruit)",
+          "correct": true
+        },
+        {
+          "text": "1 time (logs the entire list)",
+          "correct": false,
+          "explanation": "FOR loop executes the body for each item individually"
+        },
+        {
+          "text": "0 times (loop doesn't execute)",
+          "correct": false,
+          "explanation": "The list has 3 items, so the loop executes 3 times"
+        },
+        {
+          "text": "Infinite times until stopped",
+          "correct": false,
+          "explanation": "FOR-IN loop iterates exactly once per list item"
+        }
+      ]
+    },
+    {
+      "id": "ch5-2-q17",
+      "question": "```robot\nFOR    ${fruit}    IN    @{fruits}\n    Log    Processing ${fruit}\nEND\n```\n\nWhat does ${fruit} represent in each iteration?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The current value from the list",
+          "correct": true
+        },
+        {
+          "text": "The index of the current item",
+          "correct": false,
+          "explanation": "${fruit} is the loop variable that holds the current value"
+        },
+        {
+          "text": "The entire list",
+          "correct": false,
+          "explanation": "The loop variable holds the current item, not the entire list"
+        },
+        {
+          "text": "The number of remaining iterations",
+          "correct": false,
+          "explanation": "The loop variable holds the current value from the list"
+        }
+      ]
+    },
+    {
+      "id": "ch5-2-q18",
+      "question": "What is the most common way to use a FOR-IN loop?",
+      "type": "single",
+      "options": [
+        {
+          "text": "With an unpacked list variable like @{values}",
+          "correct": true
+        },
+        {
+          "text": "With individual values listed directly",
+          "correct": false,
+          "explanation": "While possible, using @{} to unpack a list is most common"
+        },
+        {
+          "text": "With a dictionary variable",
+          "correct": false,
+          "explanation": "FOR-IN typically uses lists, not dictionaries"
+        },
+        {
+          "text": "With a numeric range",
+          "correct": false,
+          "explanation": "Numeric ranges use FOR-IN-RANGE, not FOR-IN"
+        }
+      ]
+    },
+    {
+      "id": "ch5-2-q19",
+      "question": "What is the purpose of WHILE loops in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To repeat keywords as long as a condition is met, when the number of iterations is not known in advance",
+          "correct": true
+        },
+        {
+          "text": "To iterate over a known list of values",
+          "correct": false,
+          "explanation": "FOR loops iterate over known values; WHILE loops repeat while a condition is true"
+        },
+        {
+          "text": "To pause execution for a specified time",
+          "correct": false,
+          "explanation": "WHILE loops are for conditional iteration, not delays"
+        },
+        {
+          "text": "To execute keywords in the background while other keywords run",
+          "correct": false,
+          "explanation": "WHILE loops run sequentially, not in parallel"
+        }
+      ]
+    },
+    {
+      "id": "ch5-2-q20",
+      "question": "What is a typical use case for WHILE loops?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Scrolling down a page until a certain element is visible",
+          "correct": true
+        },
+        {
+          "text": "Processing each item in a known list",
+          "correct": false,
+          "explanation": "Known lists are better handled with FOR loops"
+        },
+        {
+          "text": "Executing setup actions before a test",
+          "correct": false,
+          "explanation": "Setup actions use Test Setup, not WHILE loops"
+        },
+        {
+          "text": "Defining multiple similar test cases",
+          "correct": false,
+          "explanation": "WHILE loops are for conditional iteration during execution"
+        }
+      ]
+    },
+    {
+      "id": "ch5-2-q21",
+      "question": "```robot\n${element_visible}    Get Element Visibility    <locator>\nWHILE    not ${element_visible}\n    Scroll Down\n    ${element_visible}    Get Element Visibility    <locator>\nEND\n```\n\nWhen does this WHILE loop exit?",
+      "type": "single",
+      "options": [
+        {
+          "text": "When ${element_visible} becomes true or the iteration limit is reached",
+          "correct": true
+        },
+        {
+          "text": "After exactly one scroll",
+          "correct": false,
+          "explanation": "The loop continues while the element is not visible"
+        },
+        {
+          "text": "Never; it's an infinite loop",
+          "correct": false,
+          "explanation": "WHILE loops have a configurable iteration limit to prevent infinite loops"
+        },
+        {
+          "text": "After scrolling to the bottom of the page",
+          "correct": false,
+          "explanation": "The loop exits when the condition becomes false or limit is reached"
+        }
+      ]
+    },
+    {
+      "id": "ch5-2-q22",
+      "question": "What happens when a WHILE loop reaches its maximum iteration limit?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The loop exits with a failure, causing the test|task or keyword to fail",
+          "correct": true
+        },
+        {
+          "text": "The loop continues indefinitely",
+          "correct": false,
+          "explanation": "The iteration limit prevents infinite loops by failing"
+        },
+        {
+          "text": "The loop exits successfully and execution continues",
+          "correct": false,
+          "explanation": "Reaching the limit causes a failure, not a success"
+        },
+        {
+          "text": "The loop waits for user input to continue",
+          "correct": false,
+          "explanation": "The loop fails automatically when the limit is reached"
+        }
+      ]
+    },
+    {
+      "id": "ch5-2-q23",
+      "question": "Why does Robot Framework have an iteration limit for WHILE loops?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To prevent infinite loops and ensure tests|tasks do not hang indefinitely",
+          "correct": true
+        },
+        {
+          "text": "To improve performance by limiting loop execution time",
+          "correct": false,
+          "explanation": "The limit is for safety, not performance optimization"
+        },
+        {
+          "text": "To enforce best practices in test design",
+          "correct": false,
+          "explanation": "While it encourages good design, the primary purpose is preventing hangs"
+        },
+        {
+          "text": "To save memory by limiting loop iterations",
+          "correct": false,
+          "explanation": "The limit is primarily to prevent infinite loops"
+        }
+      ]
+    },
+    {
+      "id": "ch5-2-q24",
+      "question": "What does the BREAK statement do?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Stops the current loop and exits it immediately",
+          "correct": true
+        },
+        {
+          "text": "Skips the remaining part of the current iteration and continues with the next",
+          "correct": false,
+          "explanation": "CONTINUE skips to next iteration; BREAK exits the loop entirely"
+        },
+        {
+          "text": "Pauses the loop for debugging",
+          "correct": false,
+          "explanation": "BREAK exits the loop; it doesn't pause"
+        },
+        {
+          "text": "Marks the test as failed and stops execution",
+          "correct": false,
+          "explanation": "BREAK only exits the loop; it doesn't fail the test"
+        }
+      ]
+    },
+    {
+      "id": "ch5-2-q25",
+      "question": "What does the CONTINUE statement do?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Skips the remaining part of the current iteration and continues with the next iteration",
+          "correct": true
+        },
+        {
+          "text": "Stops the loop and exits it immediately",
+          "correct": false,
+          "explanation": "BREAK exits the loop; CONTINUE moves to the next iteration"
+        },
+        {
+          "text": "Continues execution after an error",
+          "correct": false,
+          "explanation": "CONTINUE is for loop control, not error handling"
+        },
+        {
+          "text": "Resumes a paused loop",
+          "correct": false,
+          "explanation": "CONTINUE skips to the next iteration within a running loop"
+        }
+      ]
+    },
+    {
+      "id": "ch5-2-q26",
+      "question": "```robot\nWHILE    True\n    ${element_visible}    Get Element Visibility    <locator>\n    IF    ${element_visible}    BREAK\n    Scroll Down\nEND\n```\n\nWhat prevents this from being an infinite loop?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The BREAK statement when the element is visible, or the iteration limit",
+          "correct": true
+        },
+        {
+          "text": "The WHILE True condition eventually becomes false",
+          "correct": false,
+          "explanation": "WHILE True is always true; BREAK or iteration limit exits the loop"
+        },
+        {
+          "text": "The Scroll Down keyword eventually fails",
+          "correct": false,
+          "explanation": "BREAK when element is visible or iteration limit exits the loop"
+        },
+        {
+          "text": "Nothing; this is an infinite loop",
+          "correct": false,
+          "explanation": "BREAK exits when element is visible; iteration limit prevents infinite loops"
+        }
+      ]
+    },
+    {
+      "id": "ch5-2-q27",
+      "question": "```robot\nFOR    ${participant}    IN    @{participants}\n    IF    ${participant.age} < ${minimum_age}    CONTINUE\n    Log    Participant ${participant.name} is older than 40\n    Append To List    ${older_participants}    ${participant}\nEND\n```\n\nWhat happens when a participant's age is less than minimum_age?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The remaining keywords in that iteration are skipped and the loop continues with the next participant",
+          "correct": true
+        },
+        {
+          "text": "The entire loop stops immediately",
+          "correct": false,
+          "explanation": "CONTINUE skips to next iteration; BREAK would stop the loop"
+        },
+        {
+          "text": "The Log and Append keywords still execute",
+          "correct": false,
+          "explanation": "CONTINUE skips all remaining keywords in the current iteration"
+        },
+        {
+          "text": "An error is raised",
+          "correct": false,
+          "explanation": "CONTINUE is normal loop control; no error occurs"
+        }
+      ]
+    },
+    {
+      "id": "ch5-2-q28",
+      "question": "Can BREAK and CONTINUE be combined with IF statements?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Yes, this is a common pattern to control loop flow based on conditions",
+          "correct": true
+        },
+        {
+          "text": "No, BREAK and CONTINUE must be unconditional",
+          "correct": false,
+          "explanation": "BREAK and CONTINUE are commonly used with IF for conditional loop control"
+        },
+        {
+          "text": "Yes, but only with inline IF statements",
+          "correct": false,
+          "explanation": "Both inline and block IF statements work with BREAK/CONTINUE"
+        },
+        {
+          "text": "No, using them together causes a syntax error",
+          "correct": false,
+          "explanation": "Combining IF with BREAK/CONTINUE is valid and common"
+        }
+      ]
+    },
+    {
+      "id": "ch5-2-q29",
+      "question": "```robot\nFOR    ${i}    IN    @{items}\n    Process Item    ${i}\n    IF    ${i} == 'target'    BREAK\n    Log    Finished processing ${i}\nEND\n```\n\nWhat happens when ${i} equals 'target'?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Process Item executes for 'target', then BREAK exits the loop; Log doesn't execute for 'target'",
+          "correct": true
+        },
+        {
+          "text": "Process Item is skipped and the loop breaks immediately",
+          "correct": false,
+          "explanation": "BREAK is after Process Item, so it executes before breaking"
+        },
+        {
+          "text": "Both Process Item and Log execute, then the loop breaks",
+          "correct": false,
+          "explanation": "BREAK occurs before Log, so Log doesn't execute for 'target'"
+        },
+        {
+          "text": "Only Log executes and then the loop breaks",
+          "correct": false,
+          "explanation": "Process Item executes before the IF/BREAK"
+        }
+      ]
+    },
+    {
+      "id": "ch5-2-q30",
+      "question": "Which control structures are supported in Robot Framework?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "IF statements (with ELSE IF and ELSE)",
+          "correct": true
+        },
+        {
+          "text": "FOR loops (FOR-IN, FOR-IN-RANGE, FOR-IN-ENUMERATE, FOR-IN-ZIP)",
+          "correct": true
+        },
+        {
+          "text": "WHILE loops",
+          "correct": true
+        },
+        {
+          "text": "BREAK and CONTINUE statements",
+          "correct": true
+        },
+        {
+          "text": "SWITCH/CASE statements",
+          "correct": false,
+          "explanation": "Robot Framework doesn't have SWITCH/CASE; use IF/ELSE IF/ELSE"
+        }
+      ]
+    }
+  ]
+}
