@@ -1,0 +1,786 @@
+{
+  "chapter": "3-Resource Files & User Keywords",
+  "subchapter": "3.5-Advanced Importing of Keywords and Naming Conflicts",
+  "questions": [
+    {
+      "id": "ch3-5-q1",
+      "question": "What happens when a suite imports a resource file that itself imports other resource files and libraries?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The suite has access to all keywords, variables, and libraries from all transitively imported files",
+          "correct": true
+        },
+        {
+          "text": "The suite only has access to keywords and variables defined directly in the imported resource file",
+          "correct": false,
+          "explanation": "Robot Framework supports transitive imports, making all nested imports available"
+        },
+        {
+          "text": "The suite must explicitly import each library and resource file individually",
+          "correct": false,
+          "explanation": "Transitive imports automatically make nested resources available"
+        },
+        {
+          "text": "Only variables are transitively imported, not keywords or libraries",
+          "correct": false,
+          "explanation": "All elements (keywords, variables, libraries) are transitively imported"
+        }
+      ]
+    },
+    {
+      "id": "ch3-5-q2",
+      "question": "Which import pattern should be avoided in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Circular imports where A.resource imports B.resource and B.resource imports A.resource",
+          "correct": true
+        },
+        {
+          "text": "Importing multiple libraries in a single resource file",
+          "correct": false,
+          "explanation": "This is a common and acceptable practice for organizing imports"
+        },
+        {
+          "text": "Importing resource files that contain only variables",
+          "correct": false,
+          "explanation": "Variable-only resource files are valid and useful for organization"
+        },
+        {
+          "text": "Creating hierarchical import structures with multiple levels",
+          "correct": false,
+          "explanation": "Hierarchical imports are supported and useful for organization"
+        }
+      ]
+    },
+    {
+      "id": "ch3-5-q3",
+      "question": "What happens when the same library with the exact same configuration is imported multiple times in different resource files?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Robot Framework ignores subsequent imports because it already has the library in its catalog",
+          "correct": true
+        },
+        {
+          "text": "Robot Framework creates multiple instances of the library with separate keyword sets",
+          "correct": false,
+          "explanation": "Duplicate imports with identical configuration are ignored to avoid redundancy"
+        },
+        {
+          "text": "Robot Framework throws an error about duplicate imports",
+          "correct": false,
+          "explanation": "No error is thrown; the duplicate import is simply ignored"
+        },
+        {
+          "text": "The library is reloaded, clearing any state from previous imports",
+          "correct": false,
+          "explanation": "The library is not reloaded; the existing import is retained"
+        }
+      ]
+    },
+    {
+      "id": "ch3-5-q4",
+      "question": "What is the recommended practice for importing libraries that are needed in multiple places?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Import the library only in one resource file with one configuration and use that resource file everywhere it's needed",
+          "correct": true
+        },
+        {
+          "text": "Import the library directly in every suite that needs it to make dependencies explicit",
+          "correct": false,
+          "explanation": "This can lead to multiple imports and potential configuration conflicts"
+        },
+        {
+          "text": "Import the library with different configurations in different files to customize behavior per context",
+          "correct": false,
+          "explanation": "Multiple configurations can cause side effects and unpredictable behavior"
+        },
+        {
+          "text": "Avoid importing the same library in more than three resource files",
+          "correct": false,
+          "explanation": "The recommendation is to import only once, not multiple times with a limit"
+        }
+      ]
+    },
+    {
+      "id": "ch3-5-q5",
+      "question": "Where is library configuration information documented?",
+      "type": "single",
+      "options": [
+        {
+          "text": "In the library documentation's Importing section, directly before the list of keywords",
+          "correct": true
+        },
+        {
+          "text": "In a separate configuration file with .libconf extension",
+          "correct": false,
+          "explanation": "Library configuration is documented in the library's own documentation"
+        },
+        {
+          "text": "In the *** Settings *** section of the library source code",
+          "correct": false,
+          "explanation": "Library documentation contains the configuration details, not the source code settings"
+        },
+        {
+          "text": "In the Robot Framework user guide under Library Configuration",
+          "correct": false,
+          "explanation": "Configuration is specific to each library and documented in that library's documentation"
+        }
+      ]
+    },
+    {
+      "id": "ch3-5-q6",
+      "question": "How are library import arguments specified?",
+      "type": "single",
+      "options": [
+        {
+          "text": "After the library name/path, separated by multiple spaces, similar to keyword arguments",
+          "correct": true
+        },
+        {
+          "text": "In a separate [Arguments] setting within the *** Settings *** section",
+          "correct": false,
+          "explanation": "Library arguments follow the library name directly, not in a separate setting"
+        },
+        {
+          "text": "Using the CONFIG keyword before importing the library",
+          "correct": false,
+          "explanation": "No CONFIG keyword exists; arguments follow the Library statement"
+        },
+        {
+          "text": "In a dictionary variable passed to the Library statement",
+          "correct": false,
+          "explanation": "Arguments are passed directly as space-separated values, not as a dictionary"
+        }
+      ]
+    },
+    {
+      "id": "ch3-5-q7",
+      "question": "```robot\n*** Settings ***\nLibrary    Telnet    newline=LF    encoding=ISO-8859-1\n```\n\nWhat type of arguments are being used in this library import?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Named arguments",
+          "correct": true
+        },
+        {
+          "text": "Positional arguments",
+          "correct": false,
+          "explanation": "The arguments use name=value format, which indicates named arguments"
+        },
+        {
+          "text": "Embedded arguments",
+          "correct": false,
+          "explanation": "Embedded arguments are used in keyword names, not library imports"
+        },
+        {
+          "text": "Configuration dictionary arguments",
+          "correct": false,
+          "explanation": "These are individual named arguments, not a dictionary structure"
+        }
+      ]
+    },
+    {
+      "id": "ch3-5-q8",
+      "question": "Why is it recommended to use named arguments for library configuration?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Makes usage more readable",
+          "correct": true
+        },
+        {
+          "text": "Makes usage more future-proof",
+          "correct": true
+        },
+        {
+          "text": "Named arguments execute faster than positional arguments",
+          "correct": false,
+          "explanation": "There is no performance difference between named and positional arguments"
+        },
+        {
+          "text": "Positional arguments are deprecated for library imports",
+          "correct": false,
+          "explanation": "Positional arguments are still valid, just not recommended"
+        }
+      ]
+    },
+    {
+      "id": "ch3-5-q9",
+      "question": "What is a Remote library in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "A library running as a server that Robot Framework connects to as a client via network",
+          "correct": true
+        },
+        {
+          "text": "A library that can be imported from a remote Git repository",
+          "correct": false,
+          "explanation": "Remote libraries refer to network-connected library servers, not source code repositories"
+        },
+        {
+          "text": "A library that executes keywords on remote machines via SSH",
+          "correct": false,
+          "explanation": "SSHLibrary provides SSH functionality; Remote library is about network-based keyword servers"
+        },
+        {
+          "text": "A third-party library not maintained by the Robot Framework Foundation",
+          "correct": false,
+          "explanation": "This describes external libraries; Remote is a specific built-in library type"
+        }
+      ]
+    },
+    {
+      "id": "ch3-5-q10",
+      "question": "```robot\n*** Settings ***\nLibrary    Remote    uri=http://127.0.0.1:8270    AS    EmbeddedAPI\nLibrary    Remote    uri=http://remote.devices.local:8270    AS    DeviceAPI\n```\n\nWhy is the AS statement necessary in this example?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To define unique library names since there are multiple Remote library instances with different configurations",
+          "correct": true
+        },
+        {
+          "text": "AS is always required when using named arguments in library imports",
+          "correct": false,
+          "explanation": "AS is only needed when importing the same library multiple times with different configurations"
+        },
+        {
+          "text": "To create aliases for easier typing of library names",
+          "correct": false,
+          "explanation": "While AS does create an alias, the primary purpose here is to distinguish multiple Remote library instances"
+        },
+        {
+          "text": "Remote libraries require the AS statement for security reasons",
+          "correct": false,
+          "explanation": "AS is needed to distinguish multiple instances, not for security"
+        }
+      ]
+    },
+    {
+      "id": "ch3-5-q11",
+      "question": "Given the import `Library    Remote    uri=http://127.0.0.1:8270    AS    EmbeddedAPI`, how would you call a keyword named `Close Contact` from this library?",
+      "type": "single",
+      "options": [
+        {
+          "text": "EmbeddedAPI.Close Contact",
+          "correct": true
+        },
+        {
+          "text": "Remote.Close Contact",
+          "correct": false,
+          "explanation": "When AS is used, the defined name (EmbeddedAPI) becomes the library prefix, not the original name (Remote)"
+        },
+        {
+          "text": "Close Contact",
+          "correct": false,
+          "explanation": "While this might work if there are no conflicts, the question asks about proper usage with the AS name"
+        },
+        {
+          "text": "http://127.0.0.1:8270.Close Contact",
+          "correct": false,
+          "explanation": "The URI is not used as a prefix; the AS name is used"
+        }
+      ]
+    },
+    {
+      "id": "ch3-5-q12",
+      "question": "When do naming conflicts occur in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "When two or more keywords have the same name",
+          "correct": true
+        },
+        {
+          "text": "When two libraries are imported with the same configuration",
+          "correct": false,
+          "explanation": "Identical imports are simply ignored; they don't cause conflicts"
+        },
+        {
+          "text": "When a variable name matches a keyword name",
+          "correct": false,
+          "explanation": "Variables and keywords have different syntax and don't conflict with each other"
+        },
+        {
+          "text": "When a resource file name matches a library name",
+          "correct": false,
+          "explanation": "File names don't cause naming conflicts; only keyword names do"
+        }
+      ]
+    },
+    {
+      "id": "ch3-5-q13",
+      "question": "What tool can help detect naming conflicts when creating duplicate user keyword names?",
+      "type": "single",
+      "options": [
+        {
+          "text": "A proper IDE that warns about duplicate user keyword names",
+          "correct": true
+        },
+        {
+          "text": "The robot --check-duplicates command",
+          "correct": false,
+          "explanation": "No such command exists; IDEs provide this functionality"
+        },
+        {
+          "text": "The libdoc tool when generating documentation",
+          "correct": false,
+          "explanation": "Libdoc generates documentation but doesn't check for naming conflicts across files"
+        },
+        {
+          "text": "The rebot post-processing tool",
+          "correct": false,
+          "explanation": "Rebot processes output files; it doesn't check for naming conflicts"
+        }
+      ]
+    },
+    {
+      "id": "ch3-5-q14",
+      "question": "Which two libraries are commonly known to have naming conflicts with each other?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Telnet and SSHLibrary",
+          "correct": true
+        },
+        {
+          "text": "Collections and BuiltIn",
+          "correct": false,
+          "explanation": "These libraries are designed to work together without conflicts"
+        },
+        {
+          "text": "SeleniumLibrary and Browser",
+          "correct": false,
+          "explanation": "While both handle web automation, they are typically not used together"
+        },
+        {
+          "text": "String and OperatingSystem",
+          "correct": false,
+          "explanation": "These libraries have different purposes and few overlapping keyword names"
+        }
+      ]
+    },
+    {
+      "id": "ch3-5-q15",
+      "question": "Why do Telnet and SSHLibrary have multiple keywords with the same names?",
+      "type": "single",
+      "options": [
+        {
+          "text": "They both work with network connections and have similar functionality",
+          "correct": true
+        },
+        {
+          "text": "SSHLibrary was designed as a drop-in replacement for Telnet",
+          "correct": false,
+          "explanation": "They are separate libraries with similar domains, not designed as replacements"
+        },
+        {
+          "text": "They share a common base class that defines standard keyword names",
+          "correct": false,
+          "explanation": "The similar names arise from similar functionality, not inheritance"
+        },
+        {
+          "text": "It's a design flaw that should be reported as a bug",
+          "correct": false,
+          "explanation": "It's an expected consequence of libraries with similar domains, handled by full naming"
+        }
+      ]
+    },
+    {
+      "id": "ch3-5-q16",
+      "question": "```robot\n*** Settings ***\nLibrary    Telnet\nLibrary    SSHLibrary\n\n*** Test Cases ***\nExample\n    Open Connection    ${host}\n```\n\nWhat error message would Robot Framework give for this test?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Multiple keywords with name 'Open Connection' found. Give the full name of the keyword you want to use",
+          "correct": true
+        },
+        {
+          "text": "Library conflict: Cannot import both Telnet and SSHLibrary in the same suite",
+          "correct": false,
+          "explanation": "Both libraries can be imported; the conflict is resolved at keyword call time"
+        },
+        {
+          "text": "Ambiguous keyword call: Please specify which library to use",
+          "correct": false,
+          "explanation": "The actual error message is more specific and includes available options"
+        },
+        {
+          "text": "Open Connection requires library prefix when multiple implementations exist",
+          "correct": false,
+          "explanation": "This captures the concept but not the actual error message format"
+        }
+      ]
+    },
+    {
+      "id": "ch3-5-q17",
+      "question": "What is the easiest way to resolve naming conflicts from imported libraries?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Use the full name of the keyword, including the library name as a prefix",
+          "correct": true
+        },
+        {
+          "text": "Import only one of the conflicting libraries per suite",
+          "correct": false,
+          "explanation": "This avoids the conflict but prevents using both libraries, which may be necessary"
+        },
+        {
+          "text": "Create wrapper user keywords with unique names",
+          "correct": false,
+          "explanation": "While this works, it's more complex than using full keyword names"
+        },
+        {
+          "text": "Use the WITH NAME statement to rename one library",
+          "correct": false,
+          "explanation": "The correct statement is AS, not WITH NAME"
+        }
+      ]
+    },
+    {
+      "id": "ch3-5-q18",
+      "question": "```robot\n*** Test Cases ***\nUsing Telnet and SSHLibrary\n    Telnet.Open Connection\n    Telnet.Login    ${username}    ${password}\n    ${telnet_init} =    Telnet.Read Until Prompt\n    Telnet.Close Connection\n    \n    SSHLibrary.Open Connection    ${host}    ${port}\n    SSHLibrary.Login    ${username}    ${password}\n    ${ssh_init} =    SSHLibrary.Read Until Prompt\n    SSHLibrary.Close Connection\n```\n\nWhat technique is being used to avoid naming conflicts?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Full keyword names with library prefix",
+          "correct": true
+        },
+        {
+          "text": "Library aliasing with AS statements",
+          "correct": false,
+          "explanation": "While AS could be used, this example shows direct library prefixing without AS"
+        },
+        {
+          "text": "Embedded arguments in keyword calls",
+          "correct": false,
+          "explanation": "This shows library prefixing, not embedded arguments"
+        },
+        {
+          "text": "Named arguments for disambiguation",
+          "correct": false,
+          "explanation": "Named arguments don't resolve library conflicts; library prefixes do"
+        }
+      ]
+    },
+    {
+      "id": "ch3-5-q19",
+      "question": "Can Robot Framework automatically resolve naming conflicts from the same type of source (e.g., two libraries)?",
+      "type": "single",
+      "options": [
+        {
+          "text": "No, Robot Framework cannot resolve conflicts from the same source type and requires explicit full names",
+          "correct": true
+        },
+        {
+          "text": "Yes, Robot Framework uses the most recently imported library",
+          "correct": false,
+          "explanation": "Robot Framework does not make assumptions; it requires explicit resolution"
+        },
+        {
+          "text": "Yes, Robot Framework uses the library imported first",
+          "correct": false,
+          "explanation": "Import order doesn't resolve conflicts; explicit naming is required"
+        },
+        {
+          "text": "Yes, Robot Framework prompts the user at runtime to choose",
+          "correct": false,
+          "explanation": "Robot Framework raises an error; it doesn't provide runtime prompts"
+        }
+      ]
+    },
+    {
+      "id": "ch3-5-q20",
+      "question": "```robot\n*** Settings ***\nLibrary    Remote    uri=http://api.server.local:8270    AS    API\n\n*** Test Cases ***\nCall Remote Keyword\n    API.Initialize System\n    API.Get Status    device_id=15\n```\n\nWhat would happen if you tried to call `Remote.Initialize System` instead of `API.Initialize System`?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Error: No keyword with name 'Remote.Initialize System' found",
+          "correct": true
+        },
+        {
+          "text": "It would work the same as API.Initialize System",
+          "correct": false,
+          "explanation": "Once AS is used, only the new name is valid as a prefix"
+        },
+        {
+          "text": "It would connect to the default Remote library location instead",
+          "correct": false,
+          "explanation": "There is no default location; the AS name replaces the original name"
+        },
+        {
+          "text": "Robot Framework would warn but still execute the keyword",
+          "correct": false,
+          "explanation": "This would be an error, not a warning"
+        }
+      ]
+    },
+    {
+      "id": "ch3-5-q21",
+      "question": "Consider this structure:\n```\nA.resource imports: LibraryX, B.resource\nB.resource imports: LibraryY, C.resource\nC.resource imports: LibraryZ\nsuite.robot imports: A.resource\n```\n\nWhich libraries are available to suite.robot?",
+      "type": "single",
+      "options": [
+        {
+          "text": "LibraryX, LibraryY, and LibraryZ (all transitively imported libraries)",
+          "correct": true
+        },
+        {
+          "text": "Only LibraryX (directly imported by A.resource)",
+          "correct": false,
+          "explanation": "Transitive imports make all nested libraries available"
+        },
+        {
+          "text": "LibraryX and LibraryY (one level of transitive import)",
+          "correct": false,
+          "explanation": "All levels of transitive imports are available, not just one level"
+        },
+        {
+          "text": "None, suite.robot must import libraries directly",
+          "correct": false,
+          "explanation": "Resource file imports are transitively available to importing suites"
+        }
+      ]
+    },
+    {
+      "id": "ch3-5-q22",
+      "question": "What happens if a library is imported with different configurations in multiple resource files?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The library may be imported multiple times, potentially causing side effects or unpredictable behavior",
+          "correct": true
+        },
+        {
+          "text": "Robot Framework merges the configurations and uses combined settings",
+          "correct": false,
+          "explanation": "Robot Framework doesn't merge configurations; each different configuration may create a new instance"
+        },
+        {
+          "text": "Robot Framework raises an error about conflicting configurations",
+          "correct": false,
+          "explanation": "No error is raised; the behavior depends on the library's internal handling"
+        },
+        {
+          "text": "The last imported configuration overrides all previous ones",
+          "correct": false,
+          "explanation": "The effect depends on the library; there's no guaranteed override behavior"
+        }
+      ]
+    },
+    {
+      "id": "ch3-5-q23",
+      "question": "What is strongly recommended for library importing arguments according to the syllabus?",
+      "type": "single",
+      "options": [
+        {
+          "text": "All arguments should be defined with default values in the library",
+          "correct": true
+        },
+        {
+          "text": "All arguments should be passed as named arguments when importing",
+          "correct": false,
+          "explanation": "While recommended for usage, the syllabus states default values should be in the library itself"
+        },
+        {
+          "text": "Arguments should be documented in a separate configuration file",
+          "correct": false,
+          "explanation": "Arguments should have default values in the library, not separate documentation"
+        },
+        {
+          "text": "Libraries should avoid having any configuration arguments",
+          "correct": false,
+          "explanation": "Configuration is often necessary; the recommendation is about default values"
+        }
+      ]
+    },
+    {
+      "id": "ch3-5-q24",
+      "question": "```robot\n*** Settings ***\nResource    common.resource\nLibrary     DatabaseLibrary\n\n# common.resource contains:\n# Library    DatabaseLibrary\n```\n\nWhat happens with the DatabaseLibrary import?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The second import in the suite is ignored because it's already in the catalog with the same configuration",
+          "correct": true
+        },
+        {
+          "text": "DatabaseLibrary is loaded twice, creating two independent instances",
+          "correct": false,
+          "explanation": "Identical imports are deduplicated by Robot Framework"
+        },
+        {
+          "text": "Robot Framework raises a warning about duplicate imports",
+          "correct": false,
+          "explanation": "No warning is raised; duplicate imports are silently ignored"
+        },
+        {
+          "text": "The import in the suite overrides the import from the resource file",
+          "correct": false,
+          "explanation": "There's no override; the first import is used and subsequent ones are ignored"
+        }
+      ]
+    },
+    {
+      "id": "ch3-5-q25",
+      "question": "Which of these are examples of common keywords that conflict between Telnet and SSHLibrary?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Open Connection",
+          "correct": true
+        },
+        {
+          "text": "Login",
+          "correct": true
+        },
+        {
+          "text": "Read",
+          "correct": true
+        },
+        {
+          "text": "Close Connection",
+          "correct": true
+        },
+        {
+          "text": "Execute Command",
+          "correct": false,
+          "explanation": "While both might have similar keywords, Execute Command is not specifically mentioned in the syllabus"
+        }
+      ]
+    },
+    {
+      "id": "ch3-5-q26",
+      "question": "```robot\n*** Settings ***\nLibrary    MyLibrary    timeout=30    retry=3\nLibrary    MyLibrary    timeout=60    retry=5\n```\n\nAccording to best practices, what's wrong with this import pattern?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The same library is being imported with different configurations, which should be avoided",
+          "correct": true
+        },
+        {
+          "text": "Library names must be unique, so the second import should use AS",
+          "correct": false,
+          "explanation": "While AS could help, the fundamental issue is importing with different configurations"
+        },
+        {
+          "text": "Named arguments should not be used for numeric values",
+          "correct": false,
+          "explanation": "Named arguments work fine with numeric values; the issue is multiple imports"
+        },
+        {
+          "text": "Libraries can only be imported once per *** Settings *** section",
+          "correct": false,
+          "explanation": "Multiple imports are technically possible; the issue is that it's not recommended"
+        }
+      ]
+    },
+    {
+      "id": "ch3-5-q27",
+      "question": "What is the purpose of hierarchical organization of imports using resource files?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "To organize user keywords and library imports in a structured way",
+          "correct": true
+        },
+        {
+          "text": "To make keywords and variables transitively available through resource file imports",
+          "correct": true
+        },
+        {
+          "text": "To improve test execution performance by caching imports",
+          "correct": false,
+          "explanation": "Organization is for maintainability, not performance optimization"
+        },
+        {
+          "text": "To enforce access control and prevent unauthorized keyword usage",
+          "correct": false,
+          "explanation": "Robot Framework doesn't provide access control; all imports are available"
+        }
+      ]
+    },
+    {
+      "id": "ch3-5-q28",
+      "question": "```robot\n*** Settings ***\nLibrary    Telnet    timeout=10s\nLibrary    SSHLibrary\n\n*** Test Cases ***\nTest Connection\n    Open Connection    ${host}\n```\n\nHow should this be fixed to avoid the naming conflict?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Use Telnet.Open Connection or SSHLibrary.Open Connection",
+          "correct": true
+        },
+        {
+          "text": "Add AS TelnetLib and AS SSHLib to the imports",
+          "correct": false,
+          "explanation": "While AS could work, using the direct library name as prefix is simpler and recommended"
+        },
+        {
+          "text": "Remove the timeout argument from Telnet import",
+          "correct": false,
+          "explanation": "Configuration arguments don't affect naming conflicts"
+        },
+        {
+          "text": "Import only one library per test case",
+          "correct": false,
+          "explanation": "Both libraries can be used; the conflict is resolved with full keyword names"
+        }
+      ]
+    },
+    {
+      "id": "ch3-5-q29",
+      "question": "If a library cannot work without configuration arguments, what should be done?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Pass the required configuration arguments when importing the library",
+          "correct": true
+        },
+        {
+          "text": "Create a wrapper resource file that sets default values",
+          "correct": false,
+          "explanation": "While possible, the direct approach is to pass arguments at import time"
+        },
+        {
+          "text": "Configure the library using Set Library Search Order keyword",
+          "correct": false,
+          "explanation": "This keyword is for resolving conflicts, not for library configuration"
+        },
+        {
+          "text": "Use environment variables to configure the library externally",
+          "correct": false,
+          "explanation": "While some libraries support this, the standard approach is import-time arguments"
+        }
+      ]
+    },
+    {
+      "id": "ch3-5-q30",
+      "question": "```robot\n*** Settings ***\nResource    tech_keywords.resource\n\n# tech_keywords.resource contains:\n# Library    Collections\n# Library    String\n# Resource   variables.resource\n#\n# variables.resource contains:\n# Library    OperatingSystem\n```\n\nWhich libraries are available in the suite?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Collections, String, and OperatingSystem",
+          "correct": true
+        },
+        {
+          "text": "Only Collections and String",
+          "correct": false,
+          "explanation": "OperatingSystem is also available through transitive import"
+        },
+        {
+          "text": "None, the suite must import libraries directly",
+          "correct": false,
+          "explanation": "Libraries imported by resource files are available to the suite"
+        },
+        {
+          "text": "Only OperatingSystem from the most deeply nested resource",
+          "correct": false,
+          "explanation": "All transitively imported libraries are available, not just the deepest one"
+        }
+      ]
+    }
+  ]
+}

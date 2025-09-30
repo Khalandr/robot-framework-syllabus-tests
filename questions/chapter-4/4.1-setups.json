@@ -1,0 +1,785 @@
+{
+  "chapter": "4-Test/Task Execution & Flow Control",
+  "subchapter": "4.1-Setups (Suite, Test|Task, Keyword)",
+  "questions": [
+    {
+      "id": "ch4-1-q1",
+      "question": "What is the primary purpose of Setups in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To prepare the environment or system for execution or verify that requirements/preconditions are met",
+          "correct": true
+        },
+        {
+          "text": "To clean up resources after test execution completes",
+          "correct": false,
+          "explanation": "Cleanup is the purpose of Teardowns, not Setups"
+        },
+        {
+          "text": "To define variables that will be used during test execution",
+          "correct": false,
+          "explanation": "While Setups may set variables, their primary purpose is environment preparation and precondition verification"
+        },
+        {
+          "text": "To log test execution metadata for reporting purposes",
+          "correct": false,
+          "explanation": "Logging is a side effect; the primary purpose is preparation and precondition verification"
+        }
+      ]
+    },
+    {
+      "id": "ch4-1-q2",
+      "question": "At which levels can Setups be defined in Robot Framework?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Suite level",
+          "correct": true
+        },
+        {
+          "text": "Test|Task level",
+          "correct": true
+        },
+        {
+          "text": "Keyword level",
+          "correct": true
+        },
+        {
+          "text": "Variable level",
+          "correct": false,
+          "explanation": "There is no Setup concept at the variable level"
+        },
+        {
+          "text": "Library level",
+          "correct": false,
+          "explanation": "Setups are not defined at the library level"
+        }
+      ]
+    },
+    {
+      "id": "ch4-1-q3",
+      "question": "What is a Setup in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "A single keyword with potential argument values that is called before other execution",
+          "correct": true
+        },
+        {
+          "text": "A sequence of keywords that must all pass for execution to proceed",
+          "correct": false,
+          "explanation": "A Setup is a single keyword call, not a sequence (though that keyword can contain multiple steps)"
+        },
+        {
+          "text": "A configuration file that defines test parameters",
+          "correct": false,
+          "explanation": "Setups are keyword calls, not configuration files"
+        },
+        {
+          "text": "A special section in Robot Framework files like *** Setup ***",
+          "correct": false,
+          "explanation": "There is no *** Setup *** section; Setups are defined using settings"
+        }
+      ]
+    },
+    {
+      "id": "ch4-1-q4",
+      "question": "Which of these are typical use cases for Setups?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Establishing connections to databases or services",
+          "correct": true
+        },
+        {
+          "text": "Initializing test data or configurations",
+          "correct": true
+        },
+        {
+          "text": "Setting the system under test to a known state",
+          "correct": true
+        },
+        {
+          "text": "Logging into applications or systems",
+          "correct": true
+        },
+        {
+          "text": "Generating test execution reports",
+          "correct": false,
+          "explanation": "Report generation happens after execution, not during setup"
+        }
+      ]
+    },
+    {
+      "id": "ch4-1-q5",
+      "question": "When is a Suite Setup executed?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Before any tests|tasks or child suites within the suite are run",
+          "correct": true
+        },
+        {
+          "text": "Before each test|task in the suite individually",
+          "correct": false,
+          "explanation": "This describes Test Setup, not Suite Setup"
+        },
+        {
+          "text": "After all tests|tasks in the suite complete but before child suites",
+          "correct": false,
+          "explanation": "Suite Setup runs before execution, not after"
+        },
+        {
+          "text": "Only before the first test|task, but not before child suites",
+          "correct": false,
+          "explanation": "Suite Setup runs before all tests and child suites"
+        }
+      ]
+    },
+    {
+      "id": "ch4-1-q6",
+      "question": "What happens if a Suite Setup fails?",
+      "type": "single",
+      "options": [
+        {
+          "text": "All tests|tasks in the suite and its child suites are marked as failed and not executed",
+          "correct": true
+        },
+        {
+          "text": "Only the first test|task is marked as failed; the rest continue executing",
+          "correct": false,
+          "explanation": "All tests in the suite fail when Suite Setup fails"
+        },
+        {
+          "text": "The suite setup is retried once before failing the suite",
+          "correct": false,
+          "explanation": "There is no automatic retry mechanism for Suite Setup"
+        },
+        {
+          "text": "Robot Framework continues with a warning but executes all tests|tasks",
+          "correct": false,
+          "explanation": "Suite Setup failure prevents all test execution in that suite"
+        }
+      ]
+    },
+    {
+      "id": "ch4-1-q7",
+      "question": "```robot\n*** Settings ***\nSuite Setup    Initialize Environment    dataset=Config_C3\n```\n\nWhat does this Suite Setup do?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Calls the 'Initialize Environment' keyword with a named argument dataset=Config_C3 before any tests run",
+          "correct": true
+        },
+        {
+          "text": "Calls 'Initialize Environment' before each test with the dataset parameter",
+          "correct": false,
+          "explanation": "Suite Setup runs once before all tests, not before each test"
+        },
+        {
+          "text": "Defines a variable named dataset with value Config_C3",
+          "correct": false,
+          "explanation": "This is a keyword call with an argument, not a variable definition"
+        },
+        {
+          "text": "Imports the Initialize Environment library with configuration",
+          "correct": false,
+          "explanation": "This is calling a keyword, not importing a library"
+        }
+      ]
+    },
+    {
+      "id": "ch4-1-q8",
+      "question": "What is a key benefit of using Suite Setup instead of Test Setup for common preparation?",
+      "type": "single",
+      "options": [
+        {
+          "text": "It saves time by executing the action only once before all tests|tasks instead of before each one",
+          "correct": true
+        },
+        {
+          "text": "It provides better error messages when setup fails",
+          "correct": false,
+          "explanation": "Error message quality is similar; the benefit is execution efficiency"
+        },
+        {
+          "text": "It allows for more complex keyword logic",
+          "correct": false,
+          "explanation": "Both can call the same keywords; the difference is timing and frequency"
+        },
+        {
+          "text": "It is required for suites with child suites",
+          "correct": false,
+          "explanation": "Suite Setup is optional; it's used when beneficial for efficiency"
+        }
+      ]
+    },
+    {
+      "id": "ch4-1-q9",
+      "question": "Which are typical use cases for Suite Setup?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Checking preconditions that must be met before running the tests|tasks",
+          "correct": true
+        },
+        {
+          "text": "Starting services or applications required for the suite",
+          "correct": true
+        },
+        {
+          "text": "Loading configurations or resources shared across multiple tests|tasks",
+          "correct": true
+        },
+        {
+          "text": "Setting up data unique to each individual test|task",
+          "correct": false,
+          "explanation": "Test-specific data setup is done in Test Setup, not Suite Setup"
+        }
+      ]
+    },
+    {
+      "id": "ch4-1-q10",
+      "question": "When is a Test|Task Setup executed?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Before a single test|task runs",
+          "correct": true
+        },
+        {
+          "text": "Before all tests|tasks in the suite",
+          "correct": false,
+          "explanation": "This describes Suite Setup, not Test Setup"
+        },
+        {
+          "text": "After the test|task body but before teardown",
+          "correct": false,
+          "explanation": "Setup runs before the test body, not after"
+        },
+        {
+          "text": "Only if the previous test|task passed",
+          "correct": false,
+          "explanation": "Test Setup runs regardless of previous test results"
+        }
+      ]
+    },
+    {
+      "id": "ch4-1-q11",
+      "question": "Where can you define a default Test|Task Setup that applies to all tests|tasks in a suite?",
+      "type": "single",
+      "options": [
+        {
+          "text": "In the *** Settings *** section using the Test Setup or Task Setup setting",
+          "correct": true
+        },
+        {
+          "text": "In the *** Variables *** section as ${TEST_SETUP}",
+          "correct": false,
+          "explanation": "Test Setup is a setting, not a variable"
+        },
+        {
+          "text": "In each test|task using the [Setup] tag",
+          "correct": false,
+          "explanation": "[Setup] is for individual test overrides, not default settings"
+        },
+        {
+          "text": "In a separate setup.robot resource file",
+          "correct": false,
+          "explanation": "Default Test Setup is defined in the suite's *** Settings *** section"
+        }
+      ]
+    },
+    {
+      "id": "ch4-1-q12",
+      "question": "```robot\n*** Settings ***\nTest Setup    Login As Standard User\n\n*** Test Cases ***\nAdmin Access Test\n    [Setup]    Login As Admin\n    Perform Admin Actions    007\n```\n\nWhat setup will be executed for the 'Admin Access Test'?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Login As Admin (the local [Setup] overrides the default Test Setup)",
+          "correct": true
+        },
+        {
+          "text": "Both Login As Standard User and Login As Admin (both are executed)",
+          "correct": false,
+          "explanation": "Local [Setup] completely overrides the default, both are not executed"
+        },
+        {
+          "text": "Login As Standard User (default Test Setup always applies)",
+          "correct": false,
+          "explanation": "Local [Setup] overrides the default Test Setup"
+        },
+        {
+          "text": "No setup (the [Setup] tag disables setup for this test)",
+          "correct": false,
+          "explanation": "[Setup] with a keyword name calls that keyword; only [Setup] NONE disables setup"
+        }
+      ]
+    },
+    {
+      "id": "ch4-1-q13",
+      "question": "How do you disable a Test|Task Setup for a specific test|task?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Use [Setup] NONE in the test|task",
+          "correct": true
+        },
+        {
+          "text": "Use [Setup] ${EMPTY} in the test|task",
+          "correct": false,
+          "explanation": "NONE is the specific keyword to disable setup, not ${EMPTY}"
+        },
+        {
+          "text": "Omit the [Setup] setting from the test|task",
+          "correct": false,
+          "explanation": "Omitting [Setup] means the default Test Setup will be used if defined"
+        },
+        {
+          "text": "Use [Disable Setup] in the test|task",
+          "correct": false,
+          "explanation": "There is no [Disable Setup] setting; use [Setup] NONE"
+        }
+      ]
+    },
+    {
+      "id": "ch4-1-q14",
+      "question": "What happens if a Test|Task Setup fails?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The test|task is marked as failed, and its body (main keywords) is not executed",
+          "correct": true
+        },
+        {
+          "text": "The test|task body is executed with a warning about the failed setup",
+          "correct": false,
+          "explanation": "Test body is not executed when setup fails"
+        },
+        {
+          "text": "All remaining tests|tasks in the suite are also marked as failed",
+          "correct": false,
+          "explanation": "Only the current test fails; other tests continue (unlike Suite Setup failure)"
+        },
+        {
+          "text": "The setup is automatically retried before failing the test|task",
+          "correct": false,
+          "explanation": "There is no automatic retry mechanism for Test Setup"
+        }
+      ]
+    },
+    {
+      "id": "ch4-1-q15",
+      "question": "```robot\n*** Settings ***\nTest Setup    Login As Standard User\n\n*** Test Cases ***\nNo Setup Test\n    [Setup]    NONE\n    Perform Actions Without Login    000\n```\n\nIs NONE case-sensitive in this context?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Yes, NONE must be in uppercase to disable the setup",
+          "correct": true
+        },
+        {
+          "text": "No, none, None, or NONE all work the same way",
+          "correct": false,
+          "explanation": "The syllabus specifically states NONE is case-sensitive"
+        },
+        {
+          "text": "Yes, but only when used with Test Setup, not other setup types",
+          "correct": false,
+          "explanation": "NONE is case-sensitive for all setup types"
+        },
+        {
+          "text": "No, Robot Framework is case-insensitive for all keywords and settings",
+          "correct": false,
+          "explanation": "While keywords are generally case-insensitive, NONE is a special case-sensitive value"
+        }
+      ]
+    },
+    {
+      "id": "ch4-1-q16",
+      "question": "Which are typical use cases for Test|Task Setup?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Setting up data unique to the test|task",
+          "correct": true
+        },
+        {
+          "text": "Executing preparation steps to navigate to the automated task or feature under test",
+          "correct": true
+        },
+        {
+          "text": "Distinguishing phases of a test|task (setup, steps, teardown)",
+          "correct": true
+        },
+        {
+          "text": "Starting services needed by all tests in the suite",
+          "correct": false,
+          "explanation": "Suite-wide services should be started in Suite Setup, not Test Setup"
+        }
+      ]
+    },
+    {
+      "id": "ch4-1-q17",
+      "question": "When is a Keyword Setup executed?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Before the body of a user keyword is executed",
+          "correct": true
+        },
+        {
+          "text": "Before any test that calls the keyword",
+          "correct": false,
+          "explanation": "Keyword Setup runs only when that specific keyword is called, not before tests"
+        },
+        {
+          "text": "After the keyword's arguments are processed but before return values are set",
+          "correct": false,
+          "explanation": "Keyword Setup runs before the keyword body, which includes all execution"
+        },
+        {
+          "text": "Only the first time the keyword is called in a suite",
+          "correct": false,
+          "explanation": "Keyword Setup runs every time the keyword is called"
+        }
+      ]
+    },
+    {
+      "id": "ch4-1-q18",
+      "question": "```robot\n*** Keywords ***\nProcess Data\n    [Setup]    Open Data Connection\n    Process the Data\n    Close Data Connection\n```\n\nWhat happens if 'Open Data Connection' fails?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The keyword's body ('Process the Data' and 'Close Data Connection') is not executed",
+          "correct": true
+        },
+        {
+          "text": "Only 'Process the Data' is skipped, but 'Close Data Connection' still runs",
+          "correct": false,
+          "explanation": "The entire keyword body is skipped when Keyword Setup fails"
+        },
+        {
+          "text": "The keyword retries the setup once before failing",
+          "correct": false,
+          "explanation": "There is no automatic retry for Keyword Setup"
+        },
+        {
+          "text": "The keyword body executes with a warning about the failed setup",
+          "correct": false,
+          "explanation": "The keyword body is not executed when setup fails"
+        }
+      ]
+    },
+    {
+      "id": "ch4-1-q19",
+      "question": "Which are typical use cases for Keyword Setup?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Opening connections or files needed by the keyword",
+          "correct": true
+        },
+        {
+          "text": "Initializing variables or data structures",
+          "correct": true
+        },
+        {
+          "text": "Ensuring preconditions specific to the keyword are met",
+          "correct": true
+        },
+        {
+          "text": "Logging into applications before running any tests",
+          "correct": false,
+          "explanation": "Application login for tests is typically done in Suite or Test Setup, not Keyword Setup"
+        }
+      ]
+    },
+    {
+      "id": "ch4-1-q20",
+      "question": "How are Setups logged in the execution log?",
+      "type": "single",
+      "options": [
+        {
+          "text": "As a separate section, indicating the setup status",
+          "correct": true
+        },
+        {
+          "text": "As the first keyword in the test|task|keyword body",
+          "correct": false,
+          "explanation": "Setups are logged separately from the body, not as part of it"
+        },
+        {
+          "text": "Only if they fail; successful setups are not logged",
+          "correct": false,
+          "explanation": "All setups are logged regardless of success or failure"
+        },
+        {
+          "text": "In the *** Settings *** section of the log file",
+          "correct": false,
+          "explanation": "Setups are logged in the execution flow, not in a settings section"
+        }
+      ]
+    },
+    {
+      "id": "ch4-1-q21",
+      "question": "```robot\n*** Settings ***\nSuite Setup     Start Application Server\nTest Setup      Login As Standard User\n\n*** Test Cases ***\nTest One\n    Perform Action A\n\nTest Two\n    [Setup]    Login As Admin\n    Perform Action B\n```\n\nWhat is the execution order for 'Test One'?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Start Application Server → Login As Standard User → Perform Action A",
+          "correct": true
+        },
+        {
+          "text": "Login As Standard User → Start Application Server → Perform Action A",
+          "correct": false,
+          "explanation": "Suite Setup always runs before Test Setup"
+        },
+        {
+          "text": "Start Application Server → Perform Action A (Test Setup doesn't run for Test One)",
+          "correct": false,
+          "explanation": "Default Test Setup applies unless overridden or disabled"
+        },
+        {
+          "text": "Login As Standard User → Perform Action A (Suite Setup only runs once for the entire suite)",
+          "correct": false,
+          "explanation": "While Suite Setup runs once, it runs before Test One as the first test"
+        }
+      ]
+    },
+    {
+      "id": "ch4-1-q22",
+      "question": "```robot\n*** Settings ***\nSuite Setup     Start Application Server\nTest Setup      Login As Standard User\n\n*** Test Cases ***\nTest Two\n    [Setup]    Login As Admin\n    Perform Action B\n```\n\nIf 'Test Two' is the second test in the suite, what is its execution order?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Login As Admin → Perform Action B (Suite Setup already ran before the first test)",
+          "correct": true
+        },
+        {
+          "text": "Start Application Server → Login As Admin → Perform Action B",
+          "correct": false,
+          "explanation": "Suite Setup runs only once before all tests, not before each test"
+        },
+        {
+          "text": "Login As Standard User → Login As Admin → Perform Action B",
+          "correct": false,
+          "explanation": "The local [Setup] completely overrides the default Test Setup"
+        },
+        {
+          "text": "Start Application Server → Login As Standard User → Login As Admin → Perform Action B",
+          "correct": false,
+          "explanation": "Suite Setup runs once, and local Setup overrides default Test Setup"
+        }
+      ]
+    },
+    {
+      "id": "ch4-1-q23",
+      "question": "What is a key characteristic that all Setup levels (Suite, Test|Task, Keyword) share?",
+      "type": "single",
+      "options": [
+        {
+          "text": "They are all single keyword calls with potential argument values",
+          "correct": true
+        },
+        {
+          "text": "They can all be disabled using the NONE keyword",
+          "correct": false,
+          "explanation": "Only Test|Task Setup and Keyword Setup can be disabled with NONE in individual items"
+        },
+        {
+          "text": "They all affect the execution of all tests in the suite if they fail",
+          "correct": false,
+          "explanation": "Only Suite Setup failure affects all tests; Test and Keyword Setup failures are more limited"
+        },
+        {
+          "text": "They are all optional but recommended for every suite",
+          "correct": false,
+          "explanation": "While optional, not every suite needs every type of setup"
+        }
+      ]
+    },
+    {
+      "id": "ch4-1-q24",
+      "question": "```robot\n*** Settings ***\nSuite Setup    Initialize Database\n\n*** Test Cases ***\nFirst Test\n    Query Database\n    Verify Results\n\nSecond Test\n    Update Database\n    Verify Update\n```\n\nIf 'Initialize Database' fails, what happens?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Both 'First Test' and 'Second Test' are marked as failed and not executed",
+          "correct": true
+        },
+        {
+          "text": "Only 'First Test' fails; 'Second Test' attempts to run",
+          "correct": false,
+          "explanation": "Suite Setup failure prevents all tests from executing"
+        },
+        {
+          "text": "Both tests run but with a warning about the failed setup",
+          "correct": false,
+          "explanation": "Tests do not run when Suite Setup fails"
+        },
+        {
+          "text": "Robot Framework retries 'Initialize Database' before failing",
+          "correct": false,
+          "explanation": "There is no automatic retry for Suite Setup"
+        }
+      ]
+    },
+    {
+      "id": "ch4-1-q25",
+      "question": "What distinguishes the phases of a test|task when using Test|Task Setup?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Setup (preparation/precondition checking), test body (steps), and teardown (cleanup/postconditions)",
+          "correct": true
+        },
+        {
+          "text": "Initialization, execution, and reporting",
+          "correct": false,
+          "explanation": "These are general execution phases, not the specific setup/body/teardown structure"
+        },
+        {
+          "text": "Import, configure, and execute",
+          "correct": false,
+          "explanation": "These don't describe test phases with setup"
+        },
+        {
+          "text": "Start, process, and finish",
+          "correct": false,
+          "explanation": "The correct terminology is setup, body, and teardown"
+        }
+      ]
+    },
+    {
+      "id": "ch4-1-q26",
+      "question": "```robot\n*** Keywords ***\nSend Email\n    [Arguments]    ${recipient}    ${subject}    ${body}\n    [Setup]    Connect To Email Server\n    Compose Email    ${recipient}    ${subject}    ${body}\n    Send Message\n    [Teardown]    Disconnect From Email Server\n```\n\nHow many times will 'Connect To Email Server' be called if 'Send Email' is called 3 times?",
+      "type": "single",
+      "options": [
+        {
+          "text": "3 times (once each time Send Email is called)",
+          "correct": true
+        },
+        {
+          "text": "1 time (Keyword Setup runs once per suite)",
+          "correct": false,
+          "explanation": "Keyword Setup runs every time the keyword is called, not once per suite"
+        },
+        {
+          "text": "0 times (Keyword Setup is optional and not executed by default)",
+          "correct": false,
+          "explanation": "When defined, Keyword Setup is executed every time the keyword is called"
+        },
+        {
+          "text": "2 times (first and last call only)",
+          "correct": false,
+          "explanation": "Keyword Setup runs on every call, not just first and last"
+        }
+      ]
+    },
+    {
+      "id": "ch4-1-q27",
+      "question": "Which statement about Suite Setup execution is correct?",
+      "type": "single",
+      "options": [
+        {
+          "text": "It executes once before any tests|tasks and child suites in the suite",
+          "correct": true
+        },
+        {
+          "text": "It executes before each test|task but only once per child suite",
+          "correct": false,
+          "explanation": "Suite Setup runs once before everything, not before each test"
+        },
+        {
+          "text": "It executes before each child suite but not before tests|tasks",
+          "correct": false,
+          "explanation": "Suite Setup runs once before both tests and child suites"
+        },
+        {
+          "text": "It executes in parallel with child suite setups for efficiency",
+          "correct": false,
+          "explanation": "Execution is sequential, not parallel"
+        }
+      ]
+    },
+    {
+      "id": "ch4-1-q28",
+      "question": "```robot\n*** Settings ***\nTest Setup    Prepare Test Environment\n\n*** Test Cases ***\nTest With Setup\n    Execute Test Steps\n\nTest Without Setup\n    [Setup]    NONE\n    Execute Test Steps\n\nTest With Custom Setup\n    [Setup]    Prepare Special Environment\n    Execute Test Steps\n```\n\nWhich tests will execute 'Prepare Test Environment'?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Only 'Test With Setup'",
+          "correct": true
+        },
+        {
+          "text": "'Test With Setup' and 'Test With Custom Setup'",
+          "correct": false,
+          "explanation": "'Test With Custom Setup' overrides the default with its own setup"
+        },
+        {
+          "text": "All three tests (default applies unless explicitly removed)",
+          "correct": false,
+          "explanation": "'Test Without Setup' uses NONE and 'Test With Custom Setup' has a different setup"
+        },
+        {
+          "text": "None, because individual [Setup] declarations override the default for all tests",
+          "correct": false,
+          "explanation": "Only tests without [Setup] use the default; 'Test With Setup' has no [Setup] so uses default"
+        }
+      ]
+    },
+    {
+      "id": "ch4-1-q29",
+      "question": "What is the benefit of using Keyword Setup for resource management?",
+      "type": "single",
+      "options": [
+        {
+          "text": "It ensures resources are properly initialized before the keyword body executes and are isolated to that keyword's scope",
+          "correct": true
+        },
+        {
+          "text": "It shares resource connections across all keywords for better performance",
+          "correct": false,
+          "explanation": "Keyword Setup is per-keyword execution, not shared across keywords"
+        },
+        {
+          "text": "It automatically retries resource connection failures",
+          "correct": false,
+          "explanation": "There is no automatic retry mechanism in Keyword Setup"
+        },
+        {
+          "text": "It prevents other keywords from accessing the same resources simultaneously",
+          "correct": false,
+          "explanation": "Keyword Setup doesn't provide resource locking or exclusive access"
+        }
+      ]
+    },
+    {
+      "id": "ch4-1-q30",
+      "question": "```robot\n*** Settings ***\nSuite Setup     Verify System Requirements\nTest Setup      Initialize Test Data\n\n*** Keywords ***\nComplex Operation\n    [Setup]    Acquire Resource Lock\n    Perform Operation\n    [Teardown]    Release Resource Lock\n\n*** Test Cases ***\nTest Complex Operation\n    Complex Operation\n```\n\nWhat is the complete execution order for 'Test Complex Operation'?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Verify System Requirements → Initialize Test Data → Acquire Resource Lock → Perform Operation → Release Resource Lock",
+          "correct": true
+        },
+        {
+          "text": "Initialize Test Data → Verify System Requirements → Acquire Resource Lock → Perform Operation → Release Resource Lock",
+          "correct": false,
+          "explanation": "Suite Setup runs before Test Setup"
+        },
+        {
+          "text": "Verify System Requirements → Acquire Resource Lock → Initialize Test Data → Perform Operation → Release Resource Lock",
+          "correct": false,
+          "explanation": "Test Setup runs before the test body (which includes calling Complex Operation with its Keyword Setup)"
+        },
+        {
+          "text": "Initialize Test Data → Acquire Resource Lock → Verify System Requirements → Perform Operation → Release Resource Lock",
+          "correct": false,
+          "explanation": "Suite Setup always runs first, then Test Setup, then the keyword with its setup"
+        }
+      ]
+    }
+  ]
+}

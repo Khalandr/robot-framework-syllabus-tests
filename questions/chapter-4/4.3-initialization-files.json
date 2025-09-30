@@ -1,0 +1,792 @@
+{
+  "chapter": "4-Test/Task Execution & Flow Control",
+  "subchapter": "4.3-Initialization Files",
+  "questions": [
+    {
+      "id": "ch4-3-q1",
+      "question": "What is the problem that initialization files solve in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Directories alone cannot hold suite-level settings or information",
+          "correct": true
+        },
+        {
+          "text": "Test files cannot be organized into subdirectories without special configuration",
+          "correct": false,
+          "explanation": "Directories work fine for organization; initialization files add suite-level settings to directories"
+        },
+        {
+          "text": "Robot Framework cannot execute tests from directories without an initialization file",
+          "correct": false,
+          "explanation": "Directories can contain suites without initialization files; the files add optional settings"
+        },
+        {
+          "text": "Variables cannot be shared between test files in the same directory",
+          "correct": false,
+          "explanation": "Resource files solve variable sharing; initialization files provide directory suite settings"
+        }
+      ]
+    },
+    {
+      "id": "ch4-3-q2",
+      "question": "What is an initialization file in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "A file named __init__.robot placed inside a directory that acts as a suite",
+          "correct": true
+        },
+        {
+          "text": "A file named setup.robot that runs before all tests in a directory",
+          "correct": false,
+          "explanation": "The correct name is __init__.robot, not setup.robot"
+        },
+        {
+          "text": "A configuration file named robot.config in the project root",
+          "correct": false,
+          "explanation": "Initialization files are __init__.robot files, not robot.config"
+        },
+        {
+          "text": "Any .robot file that contains only *** Settings *** section",
+          "correct": false,
+          "explanation": "Initialization files must be specifically named __init__.robot"
+        }
+      ]
+    },
+    {
+      "id": "ch4-3-q3",
+      "question": "Which of these can you define using initialization files?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Suite Setup and Suite Teardown keywords for the directory suite",
+          "correct": true
+        },
+        {
+          "text": "Custom name for the suite using the Name setting",
+          "correct": true
+        },
+        {
+          "text": "Suite-level Documentation and Metadata",
+          "correct": true
+        },
+        {
+          "text": "Default Test Setup, Test Teardown, Test Tags, and Test Timeout",
+          "correct": true
+        },
+        {
+          "text": "Individual test cases that will be executed",
+          "correct": false,
+          "explanation": "Initialization files cannot contain *** Test Cases *** section"
+        }
+      ]
+    },
+    {
+      "id": "ch4-3-q4",
+      "question": "When is the Suite Setup defined in an initialization file executed?",
+      "type": "single",
+      "options": [
+        {
+          "text": "At the very start of execution, before any other Suite Setup, Test|Task Setup, and Test|Task",
+          "correct": true
+        },
+        {
+          "text": "Before each sub-suite in the directory individually",
+          "correct": false,
+          "explanation": "Initialization file Suite Setup runs once before all sub-suites, not before each one"
+        },
+        {
+          "text": "After all sub-suite setups but before any tests",
+          "correct": false,
+          "explanation": "Initialization file Suite Setup runs first, before sub-suite setups"
+        },
+        {
+          "text": "Only if no sub-suites have their own Suite Setup defined",
+          "correct": false,
+          "explanation": "Initialization file Suite Setup always runs first, regardless of sub-suite setups"
+        }
+      ]
+    },
+    {
+      "id": "ch4-3-q5",
+      "question": "When is the Suite Teardown defined in an initialization file executed?",
+      "type": "single",
+      "options": [
+        {
+          "text": "After all sub-suites in the directory and their tests|tasks have been completed",
+          "correct": true
+        },
+        {
+          "text": "After each sub-suite completes individually",
+          "correct": false,
+          "explanation": "Initialization file Suite Teardown runs once after all sub-suites complete"
+        },
+        {
+          "text": "Before sub-suite teardowns execute",
+          "correct": false,
+          "explanation": "Initialization file Suite Teardown runs last, after all sub-suite teardowns"
+        },
+        {
+          "text": "Only if all tests in all sub-suites passed",
+          "correct": false,
+          "explanation": "Suite Teardown runs regardless of test results"
+        }
+      ]
+    },
+    {
+      "id": "ch4-3-q6",
+      "question": "What is the relationship between initialization files and regular suite files?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Initialization files have the same structure and syntax as regular suite files but with some limitations",
+          "correct": true
+        },
+        {
+          "text": "Initialization files use a completely different syntax designed specifically for configuration",
+          "correct": false,
+          "explanation": "Initialization files use the same structure as suite files, just with limitations"
+        },
+        {
+          "text": "Initialization files are binary configuration files, not text files like suite files",
+          "correct": false,
+          "explanation": "Initialization files are .robot text files like regular suite files"
+        },
+        {
+          "text": "Initialization files must be imported into suite files to take effect",
+          "correct": false,
+          "explanation": "Initialization files are automatically recognized by their name and location"
+        }
+      ]
+    },
+    {
+      "id": "ch4-3-q7",
+      "question": "Which section is required in an initialization file?",
+      "type": "single",
+      "options": [
+        {
+          "text": "*** Settings ***",
+          "correct": true
+        },
+        {
+          "text": "*** Variables ***",
+          "correct": false,
+          "explanation": "*** Variables *** section is optional in initialization files"
+        },
+        {
+          "text": "*** Keywords ***",
+          "correct": false,
+          "explanation": "*** Keywords *** section is optional in initialization files"
+        },
+        {
+          "text": "*** Test Cases ***",
+          "correct": false,
+          "explanation": "*** Test Cases *** section is not allowed in initialization files"
+        }
+      ]
+    },
+    {
+      "id": "ch4-3-q8",
+      "question": "Which sections are allowed in initialization files?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "*** Settings *** (required)",
+          "correct": true
+        },
+        {
+          "text": "*** Variables *** (optional)",
+          "correct": true
+        },
+        {
+          "text": "*** Keywords *** (optional)",
+          "correct": true
+        },
+        {
+          "text": "*** Comments *** (optional)",
+          "correct": true
+        },
+        {
+          "text": "*** Test Cases *** (optional)",
+          "correct": false,
+          "explanation": "*** Test Cases *** section is not allowed in initialization files"
+        }
+      ]
+    },
+    {
+      "id": "ch4-3-q9",
+      "question": "What is the Name setting used for in an initialization file?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To set a custom name for the suite directory if it should be different from the directory name",
+          "correct": true
+        },
+        {
+          "text": "To define the name of the test suite file that should be executed first",
+          "correct": false,
+          "explanation": "Name sets the suite's display name, not execution order"
+        },
+        {
+          "text": "To assign a unique identifier for the suite in reports",
+          "correct": false,
+          "explanation": "Name changes the display name; suite IDs are generated automatically"
+        },
+        {
+          "text": "To specify which tests should be included in execution",
+          "correct": false,
+          "explanation": "Name sets the suite name; test selection uses different mechanisms"
+        }
+      ]
+    },
+    {
+      "id": "ch4-3-q10",
+      "question": "Which settings can be defined in the *** Settings *** section of an initialization file?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Name, Documentation, Metadata",
+          "correct": true
+        },
+        {
+          "text": "Suite Setup, Suite Teardown",
+          "correct": true
+        },
+        {
+          "text": "Test Setup, Test Teardown, Test Timeout, Test Tags",
+          "correct": true
+        },
+        {
+          "text": "Library, Resource, Variables imports",
+          "correct": true
+        },
+        {
+          "text": "Test Template",
+          "correct": false,
+          "explanation": "Test Template is not typically set at the directory suite level in initialization files"
+        }
+      ]
+    },
+    {
+      "id": "ch4-3-q11",
+      "question": "Can default Test Setup defined in an initialization file be overridden in lower-level suites or tests?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Yes, it can be overridden in lower-level suites or tests|tasks",
+          "correct": true
+        },
+        {
+          "text": "No, initialization file settings cannot be overridden",
+          "correct": false,
+          "explanation": "Lower-level suites and tests can override default settings from initialization files"
+        },
+        {
+          "text": "Yes, but only in suite files, not in individual tests",
+          "correct": false,
+          "explanation": "Both suite files and individual tests can override initialization file defaults"
+        },
+        {
+          "text": "No, Test Setup from initialization files applies to all tests without exception",
+          "correct": false,
+          "explanation": "Lower levels can override or disable settings from initialization files"
+        }
+      ]
+    },
+    {
+      "id": "ch4-3-q12",
+      "question": "How are Test Tags from an initialization file applied to lower-level suites and tests?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Applied recursively to all lower-level suites and tests|tasks, and can be extended or reduced there",
+          "correct": true
+        },
+        {
+          "text": "Applied only to tests in immediate child suites, not recursively",
+          "correct": false,
+          "explanation": "Test Tags from initialization files are applied recursively to all levels"
+        },
+        {
+          "text": "Applied as read-only tags that cannot be modified in lower levels",
+          "correct": false,
+          "explanation": "Lower-level suites and tests can extend or reduce inherited tags"
+        },
+        {
+          "text": "Not applied automatically; each suite must explicitly inherit them",
+          "correct": false,
+          "explanation": "Tags are automatically applied recursively to all lower levels"
+        }
+      ]
+    },
+    {
+      "id": "ch4-3-q13",
+      "question": "Are variables defined in the *** Variables *** section of an initialization file available to lower-level suites and tests?",
+      "type": "single",
+      "options": [
+        {
+          "text": "No, they are local to the initialization file itself",
+          "correct": true
+        },
+        {
+          "text": "Yes, they are automatically available to all sub-suites and tests",
+          "correct": false,
+          "explanation": "Variables in initialization files are local and not shared with sub-suites"
+        },
+        {
+          "text": "Yes, but only to immediate child suites, not deeper levels",
+          "correct": false,
+          "explanation": "Variables in initialization files are not available to any sub-suites"
+        },
+        {
+          "text": "Yes, if the GLOBAL scope is specified",
+          "correct": false,
+          "explanation": "Variables in initialization files remain local regardless of scope"
+        }
+      ]
+    },
+    {
+      "id": "ch4-3-q14",
+      "question": "Are keywords defined in the *** Keywords *** section of an initialization file available to lower-level suites and tests?",
+      "type": "single",
+      "options": [
+        {
+          "text": "No, they are local to the initialization file itself",
+          "correct": true
+        },
+        {
+          "text": "Yes, they are automatically available to all sub-suites and tests",
+          "correct": false,
+          "explanation": "Keywords in initialization files are local and not shared with sub-suites"
+        },
+        {
+          "text": "Yes, but only if explicitly imported by sub-suites",
+          "correct": false,
+          "explanation": "Initialization file keywords cannot be imported; they are strictly local"
+        },
+        {
+          "text": "Yes, they become library keywords for the directory suite",
+          "correct": false,
+          "explanation": "Keywords remain local to the initialization file"
+        }
+      ]
+    },
+    {
+      "id": "ch4-3-q15",
+      "question": "What is the purpose of the *** Keywords *** section in an initialization file if the keywords are local only?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To define keywords available to the initialization file for Suite Setup, Suite Teardown, Test Setup, or Test Teardown",
+          "correct": true
+        },
+        {
+          "text": "To export keywords to all sub-suites automatically",
+          "correct": false,
+          "explanation": "Keywords are local and used within the initialization file's own settings"
+        },
+        {
+          "text": "To override keywords from imported libraries for the directory suite",
+          "correct": false,
+          "explanation": "The purpose is to provide local keywords for the initialization file's own use"
+        },
+        {
+          "text": "To define abstract keywords that must be implemented by sub-suites",
+          "correct": false,
+          "explanation": "There is no abstract keyword concept; keywords are for local use in the initialization file"
+        }
+      ]
+    },
+    {
+      "id": "ch4-3-q16",
+      "question": "How should variables or keywords be shared across multiple suites or tests if initialization files don't share them?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Use resource files and import them where needed",
+          "correct": true
+        },
+        {
+          "text": "Define them in each suite's *** Variables *** and *** Keywords *** sections",
+          "correct": false,
+          "explanation": "While possible, this duplicates code; resource files are the proper solution"
+        },
+        {
+          "text": "Use the EXPORT keyword in the initialization file",
+          "correct": false,
+          "explanation": "There is no EXPORT keyword; use resource files for sharing"
+        },
+        {
+          "text": "Set them with GLOBAL scope in the initialization file",
+          "correct": false,
+          "explanation": "Scope doesn't make initialization file keywords/variables available to sub-suites"
+        }
+      ]
+    },
+    {
+      "id": "ch4-3-q17",
+      "question": "```robot\n# __init__.robot\n*** Settings ***\nDocumentation    Initialization file for the Sample Suite\nSuite Setup      Initialize Environment\nSuite Teardown   Cleanup Environment\n\n*** Variables ***\n${BASE_URL}    http://example.com\n\n*** Keywords ***\nInitialize Environment\n    Start Server\n    Set Base URL    ${BASE_URL}\n```\n\nWhere can the ${BASE_URL} variable be used?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Only within the __init__.robot file itself (e.g., in Initialize Environment keyword)",
+          "correct": true
+        },
+        {
+          "text": "In all test suites and tests within the same directory",
+          "correct": false,
+          "explanation": "Variables in initialization files are local only"
+        },
+        {
+          "text": "In immediate child suites but not in deeper nested suites",
+          "correct": false,
+          "explanation": "Variables in initialization files are not available to any child suites"
+        },
+        {
+          "text": "Anywhere in the project after the initialization file executes",
+          "correct": false,
+          "explanation": "Variables remain local to the initialization file"
+        }
+      ]
+    },
+    {
+      "id": "ch4-3-q18",
+      "question": "```robot\n# __init__.robot\n*** Settings ***\nSuite Setup      Initialize Environment\n\n*** Keywords ***\nInitialize Environment\n    Import Dataset    ${BASE_URL}/imports    dataset=Config_C3\n    Verify Server Status    ${BASE_URL}    status=OK\n```\n\nCan sub-suites call the 'Initialize Environment' keyword?",
+      "type": "single",
+      "options": [
+        {
+          "text": "No, keywords in initialization files are local and not available to sub-suites",
+          "correct": true
+        },
+        {
+          "text": "Yes, all keywords in initialization files are automatically available to sub-suites",
+          "correct": false,
+          "explanation": "Keywords are local to the initialization file only"
+        },
+        {
+          "text": "Yes, if the sub-suite imports the __init__.robot file",
+          "correct": false,
+          "explanation": "Initialization files cannot be imported; keywords remain local"
+        },
+        {
+          "text": "Yes, but only immediate child suites, not deeper levels",
+          "correct": false,
+          "explanation": "Keywords are not available to any sub-suites at any level"
+        }
+      ]
+    },
+    {
+      "id": "ch4-3-q19",
+      "question": "```\nproject/\n├── __init__.robot\n├── suite1.robot\n└── subsuite/\n    ├── __init__.robot\n    └── suite2.robot\n```\n\nIn what order are Suite Setups executed if both initialization files define Suite Setup?",
+      "type": "single",
+      "options": [
+        {
+          "text": "project/__init__.robot Suite Setup → subsuite/__init__.robot Suite Setup → tests",
+          "correct": true
+        },
+        {
+          "text": "subsuite/__init__.robot Suite Setup → project/__init__.robot Suite Setup → tests",
+          "correct": false,
+          "explanation": "Parent suite setup runs before child suite setup"
+        },
+        {
+          "text": "Both Suite Setups run in parallel before tests start",
+          "correct": false,
+          "explanation": "Suite Setups execute sequentially, not in parallel"
+        },
+        {
+          "text": "Only the deepest (subsuite) __init__.robot Suite Setup runs",
+          "correct": false,
+          "explanation": "All Suite Setups in the hierarchy execute, from parent to child"
+        }
+      ]
+    },
+    {
+      "id": "ch4-3-q20",
+      "question": "```\nproject/\n├── __init__.robot\n├── suite1.robot\n└── subsuite/\n    ├── __init__.robot\n    └── suite2.robot\n```\n\nIn what order are Suite Teardowns executed if both initialization files define Suite Teardown?",
+      "type": "single",
+      "options": [
+        {
+          "text": "tests → subsuite/__init__.robot Suite Teardown → project/__init__.robot Suite Teardown",
+          "correct": true
+        },
+        {
+          "text": "tests → project/__init__.robot Suite Teardown → subsuite/__init__.robot Suite Teardown",
+          "correct": false,
+          "explanation": "Child suite teardown runs before parent suite teardown (reverse order of setups)"
+        },
+        {
+          "text": "Both Suite Teardowns run in parallel after tests complete",
+          "correct": false,
+          "explanation": "Suite Teardowns execute sequentially, not in parallel"
+        },
+        {
+          "text": "Only the top-level (project) __init__.robot Suite Teardown runs",
+          "correct": false,
+          "explanation": "All Suite Teardowns in the hierarchy execute, from child to parent"
+        }
+      ]
+    },
+    {
+      "id": "ch4-3-q21",
+      "question": "What setting would you use in an initialization file to add metadata to the directory suite?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Metadata",
+          "correct": true
+        },
+        {
+          "text": "Suite Metadata",
+          "correct": false,
+          "explanation": "The setting is just 'Metadata', not 'Suite Metadata'"
+        },
+        {
+          "text": "Meta",
+          "correct": false,
+          "explanation": "The full setting name is 'Metadata'"
+        },
+        {
+          "text": "Information",
+          "correct": false,
+          "explanation": "The correct setting name is 'Metadata'"
+        }
+      ]
+    },
+    {
+      "id": "ch4-3-q22",
+      "question": "```robot\n# __init__.robot\n*** Settings ***\nTest Setup       Login As User\nTest Teardown    Logout User\nTest Tags        smoke    regression\nTest Timeout     2 minutes\n```\n\nWhat is the effect of these settings?",
+      "type": "single",
+      "options": [
+        {
+          "text": "All tests in the directory and subdirectories will have these defaults unless overridden",
+          "correct": true
+        },
+        {
+          "text": "Only tests in suite files directly in this directory (not subdirectories) will have these defaults",
+          "correct": false,
+          "explanation": "Settings apply recursively to all subdirectories"
+        },
+        {
+          "text": "These settings are templates that must be explicitly applied by each test",
+          "correct": false,
+          "explanation": "These defaults are automatically applied to all tests"
+        },
+        {
+          "text": "These settings only apply to tests that don't define their own setup/teardown",
+          "correct": false,
+          "explanation": "While tests can override these, the phrasing suggests they're conditionally applied rather than defaults"
+        }
+      ]
+    },
+    {
+      "id": "ch4-3-q23",
+      "question": "Can an initialization file import libraries?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Yes, using the Library setting in the *** Settings *** section",
+          "correct": true
+        },
+        {
+          "text": "No, library imports must be done in individual suite files",
+          "correct": false,
+          "explanation": "Initialization files can import libraries"
+        },
+        {
+          "text": "Yes, but only built-in libraries, not external ones",
+          "correct": false,
+          "explanation": "Both built-in and external libraries can be imported"
+        },
+        {
+          "text": "Yes, but imported libraries are only available to the initialization file itself",
+          "correct": false,
+          "explanation": "While variables and keywords are local, library imports affect the suite scope"
+        }
+      ]
+    },
+    {
+      "id": "ch4-3-q24",
+      "question": "What is the Keyword Tags setting used for in an initialization file?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To assign tags to all keywords in the local *** Keywords *** section",
+          "correct": true
+        },
+        {
+          "text": "To assign tags to all test cases in the directory suite",
+          "correct": false,
+          "explanation": "Test Tags is used for tests; Keyword Tags is for keywords"
+        },
+        {
+          "text": "To filter which library keywords can be used in the suite",
+          "correct": false,
+          "explanation": "Keyword Tags adds tags to keywords, it doesn't filter them"
+        },
+        {
+          "text": "To tag imported library keywords for better documentation",
+          "correct": false,
+          "explanation": "Keyword Tags applies to keywords in the local *** Keywords *** section"
+        }
+      ]
+    },
+    {
+      "id": "ch4-3-q25",
+      "question": "```robot\n# parent_dir/__init__.robot\n*** Settings ***\nTest Tags    parent_tag\n\n# parent_dir/child_dir/__init__.robot\n*** Settings ***\nTest Tags    child_tag\n```\n\nWhat tags will tests in child_dir have?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Both parent_tag and child_tag (tags are inherited and extended)",
+          "correct": true
+        },
+        {
+          "text": "Only child_tag (child overrides parent)",
+          "correct": false,
+          "explanation": "Test Tags are additive/cumulative, not overriding"
+        },
+        {
+          "text": "Only parent_tag (child cannot add tags)",
+          "correct": false,
+          "explanation": "Child directories can extend the tag set"
+        },
+        {
+          "text": "Neither tag (tags must be defined at the test level)",
+          "correct": false,
+          "explanation": "Tags from initialization files are applied to tests"
+        }
+      ]
+    },
+    {
+      "id": "ch4-3-q26",
+      "question": "What happens if you try to include a *** Test Cases *** section in an initialization file?",
+      "type": "single",
+      "options": [
+        {
+          "text": "It is not allowed; initialization files cannot contain test cases",
+          "correct": true
+        },
+        {
+          "text": "The test cases are executed before all other tests in the directory",
+          "correct": false,
+          "explanation": "*** Test Cases *** section is not allowed in initialization files"
+        },
+        {
+          "text": "The test cases are ignored with a warning",
+          "correct": false,
+          "explanation": "This would likely cause an error, not just a warning"
+        },
+        {
+          "text": "The test cases are executed as part of the Suite Setup",
+          "correct": false,
+          "explanation": "*** Test Cases *** section is not allowed in initialization files"
+        }
+      ]
+    },
+    {
+      "id": "ch4-3-q27",
+      "question": "Why would you use the Name setting in an initialization file?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To give the suite a more readable or meaningful name than the directory name",
+          "correct": true
+        },
+        {
+          "text": "To specify the execution order of sub-suites",
+          "correct": false,
+          "explanation": "Name changes the display name; execution order is determined by other factors"
+        },
+        {
+          "text": "To enable or disable the suite based on command-line arguments",
+          "correct": false,
+          "explanation": "Name is for display purposes, not conditional execution"
+        },
+        {
+          "text": "To create an alias for the directory that can be used in imports",
+          "correct": false,
+          "explanation": "Name affects display only; it doesn't create importable aliases"
+        }
+      ]
+    },
+    {
+      "id": "ch4-3-q28",
+      "question": "```robot\n# __init__.robot\n*** Settings ***\nSuite Setup      Start Application\nTest Setup       Login User\nTest Teardown    Logout User\nSuite Teardown   Stop Application\n\n# test_suite.robot (in same directory)\n*** Test Cases ***\nTest One\n    Perform Action\n```\n\nWhat is the execution order for Test One?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Start Application → Login User → Perform Action → Logout User → Stop Application",
+          "correct": true
+        },
+        {
+          "text": "Login User → Start Application → Perform Action → Stop Application → Logout User",
+          "correct": false,
+          "explanation": "Suite Setup runs before Test Setup, and Suite Teardown runs after Test Teardown"
+        },
+        {
+          "text": "Start Application → Perform Action → Stop Application",
+          "correct": false,
+          "explanation": "Test Setup and Test Teardown also execute"
+        },
+        {
+          "text": "Login User → Perform Action → Logout User",
+          "correct": false,
+          "explanation": "Suite Setup and Suite Teardown also execute"
+        }
+      ]
+    },
+    {
+      "id": "ch4-3-q29",
+      "question": "Can initialization files import resource files?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Yes, using the Resource setting in the *** Settings *** section",
+          "correct": true
+        },
+        {
+          "text": "No, resource imports must be in individual suite files",
+          "correct": false,
+          "explanation": "Initialization files can import resource files"
+        },
+        {
+          "text": "Yes, but the resources are only available to the initialization file keywords",
+          "correct": false,
+          "explanation": "Resource imports affect the suite scope, making keywords available to setups/teardowns"
+        },
+        {
+          "text": "No, only Library imports are allowed in initialization files",
+          "correct": false,
+          "explanation": "Resource, Library, and Variables imports are all allowed"
+        }
+      ]
+    },
+    {
+      "id": "ch4-3-q30",
+      "question": "What is the primary benefit of using initialization files for Suite Setup and Suite Teardown?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Provides a centralized place to define setup/teardown for all sub-suites and tests within a directory structure",
+          "correct": true
+        },
+        {
+          "text": "Improves test execution performance by caching setup operations",
+          "correct": false,
+          "explanation": "The benefit is centralization and organization, not performance optimization"
+        },
+        {
+          "text": "Allows setup and teardown to run in parallel with test execution",
+          "correct": false,
+          "explanation": "Setup/teardown are sequential; the benefit is centralized definition"
+        },
+        {
+          "text": "Makes it possible to use suite-level setup and teardown for the first time",
+          "correct": false,
+          "explanation": "Suite Setup/Teardown can be defined in regular suites; initialization files centralize it for directories"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1067 @@
+{
+  "chapter": "3-Keywords and Variables",
+  "subchapter": "3.2-Variables",
+  "questions": [
+    {
+      "id": "ch3-2-q1",
+      "question": "What are variables in Robot Framework used for? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "To store values that can be referenced and reused",
+          "correct": true
+        },
+        {
+          "text": "To manage dynamic data",
+          "correct": true
+        },
+        {
+          "text": "To reduce hardcoding in multiple locations",
+          "correct": true
+        },
+        {
+          "text": "To make automation more flexible",
+          "correct": true
+        },
+        {
+          "text": "To execute keywords faster",
+          "correct": false,
+          "explanation": "Variables are for data management, not performance"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q2",
+      "question": "What are the five relevant ways to create and assign variables in Robot Framework? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Definition in *** Variables *** section",
+          "correct": true
+        },
+        {
+          "text": "Capturing return values from keywords",
+          "correct": true
+        },
+        {
+          "text": "Inline assignment using VAR statement",
+          "correct": true
+        },
+        {
+          "text": "As arguments passed to keywords",
+          "correct": true
+        },
+        {
+          "text": "By command line interface",
+          "correct": true
+        },
+        {
+          "text": "By compiling variable files",
+          "correct": false,
+          "explanation": "Variables aren't compiled; they're defined or assigned"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q3",
+      "question": "What are the three attributes that define a variable in Robot Framework?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Prefix: $, @, &, or % to define access type",
+          "correct": true
+        },
+        {
+          "text": "Delimiter: {} to enclose the variable name",
+          "correct": true
+        },
+        {
+          "text": "Variable Name: the string that addresses the variable",
+          "correct": true
+        },
+        {
+          "text": "Data Type: int, str, list, etc.",
+          "correct": false,
+          "explanation": "Data type is not a syntactical attribute; it's determined by the value"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q4",
+      "question": "What are the four syntactical access types for variables in Robot Framework?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Scalar Variables: ${variable_name}",
+          "correct": true
+        },
+        {
+          "text": "List Variables: @{list_variable}",
+          "correct": true
+        },
+        {
+          "text": "Dictionary Variables: &{dict_variable}",
+          "correct": true
+        },
+        {
+          "text": "Environment Variables: %{ENV_VAR}",
+          "correct": true
+        },
+        {
+          "text": "Constant Variables: #{constant}",
+          "correct": false,
+          "explanation": "There is no # prefix for constants"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q5",
+      "question": "How are variable names treated in Robot Framework?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Variable names are case-insensitive",
+          "correct": true
+        },
+        {
+          "text": "Single spaces and underscores are ignored when matching",
+          "correct": true
+        },
+        {
+          "text": "Unicode and special characters are allowed",
+          "correct": true
+        },
+        {
+          "text": "Emojis can be used in variable names",
+          "correct": true
+        },
+        {
+          "text": "Variable names must start with a letter",
+          "correct": false,
+          "explanation": "Variable names can start with any unicode character"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q6",
+      "question": "Which of these variable names refer to the same variable? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "${my_variable}",
+          "correct": true
+        },
+        {
+          "text": "${MY_VARIABLE}",
+          "correct": true
+        },
+        {
+          "text": "${My Variable}",
+          "correct": true
+        },
+        {
+          "text": "${myvariable}",
+          "correct": true
+        },
+        {
+          "text": "@{my_variable}",
+          "correct": false,
+          "explanation": "Different prefix (@) means different access type, not the same variable"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q7",
+      "question": "How do you use the literal text '${variable}' without it being interpreted as a variable?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Escape it with backslash: \\${variable}",
+          "correct": true
+        },
+        {
+          "text": "Use double dollar signs: $${variable}",
+          "correct": false,
+          "explanation": "Use backslash escaping, not doubling"
+        },
+        {
+          "text": "Enclose in quotes: \"${variable}\"",
+          "correct": false,
+          "explanation": "Quotes become part of the value; use backslash"
+        },
+        {
+          "text": "It cannot be used as literal text",
+          "correct": false,
+          "explanation": "Backslash escaping allows literal use"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q8",
+      "question": "What does the prefix in variable syntax define?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The access type to the variable",
+          "correct": true
+        },
+        {
+          "text": "The data type stored in the variable",
+          "correct": false,
+          "explanation": "Prefix defines access type; actual data can be any type"
+        },
+        {
+          "text": "The scope of the variable",
+          "correct": false,
+          "explanation": "Prefix is for access type; scope is defined elsewhere"
+        },
+        {
+          "text": "Whether the variable is read-only",
+          "correct": false,
+          "explanation": "Only % for environment variables are read-only"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q9",
+      "question": "When accessing a variable, which prefix is used in most cases?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Dollar sign $ (scalar syntax)",
+          "correct": true
+        },
+        {
+          "text": "At sign @ (list syntax)",
+          "correct": false,
+          "explanation": "@ is mainly for creation; $ is used for most access"
+        },
+        {
+          "text": "Ampersand & (dictionary syntax)",
+          "correct": false,
+          "explanation": "& is mainly for creation; $ is used for most access"
+        },
+        {
+          "text": "The same prefix used when creating it",
+          "correct": false,
+          "explanation": "$ is used for access in most cases regardless of creation prefix"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q10",
+      "question": "Where can variables be defined in the *** Variables *** section?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "In suite files",
+          "correct": true
+        },
+        {
+          "text": "In resource files",
+          "correct": true
+        },
+        {
+          "text": "In library files",
+          "correct": false,
+          "explanation": "Library files use Python/Java, not *** Variables *** section"
+        },
+        {
+          "text": "In variable files only",
+          "correct": false,
+          "explanation": "Variable files are a different concept"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q11",
+      "question": "What is the scope of variables defined in a suite file's *** Variables *** section?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Accessible throughout that specific suite to all tests/tasks and keywords",
+          "correct": true
+        },
+        {
+          "text": "Only accessible in the first test case",
+          "correct": false,
+          "explanation": "Suite variables are accessible to all tests in the suite"
+        },
+        {
+          "text": "Global to all suites in the project",
+          "correct": false,
+          "explanation": "Suite variables are suite-scoped, not global"
+        },
+        {
+          "text": "Only accessible in the *** Variables *** section",
+          "correct": false,
+          "explanation": "Variables are meant to be used throughout the suite"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q12",
+      "question": "What is the scope of variables defined in a resource file's *** Variables *** section?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Accessible in all files that import the resource file directly or indirectly",
+          "correct": true
+        },
+        {
+          "text": "Only accessible within the resource file itself",
+          "correct": false,
+          "explanation": "Resource file variables are shared with importing files"
+        },
+        {
+          "text": "Global to all suites automatically",
+          "correct": false,
+          "explanation": "Only accessible to files that import the resource"
+        },
+        {
+          "text": "Limited to the first importing file only",
+          "correct": false,
+          "explanation": "All importing files can access these variables"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q13",
+      "question": "When is the *** Variables *** section evaluated?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Before any other section in the resource or suite file",
+          "correct": true
+        },
+        {
+          "text": "After the *** Settings *** section",
+          "correct": false,
+          "explanation": "*** Variables *** is evaluated before other sections"
+        },
+        {
+          "text": "When the variable is first used",
+          "correct": false,
+          "explanation": "The section is evaluated upfront, not lazily"
+        },
+        {
+          "text": "At the end of file parsing",
+          "correct": false,
+          "explanation": "Variables are evaluated first"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q14",
+      "question": "What are the rules for creating variables in the *** Variables *** section? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Variables are not indented",
+          "correct": true
+        },
+        {
+          "text": "Must be created as scalar ($), list-like (@), or dictionary-like (&)",
+          "correct": true
+        },
+        {
+          "text": "Can use optional space and = for readability",
+          "correct": true
+        },
+        {
+          "text": "Values separated by multiple spaces",
+          "correct": true
+        },
+        {
+          "text": "Can be defined across multiple lines using ...",
+          "correct": true
+        },
+        {
+          "text": "Must be indented like keyword calls",
+          "correct": false,
+          "explanation": "Variables in this section are not indented"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q15",
+      "question": "What is the recommended naming convention for variables in the *** Variables *** section?",
+      "type": "single",
+      "options": [
+        {
+          "text": "UPPERCASE to distinguish from local variables",
+          "correct": true
+        },
+        {
+          "text": "lowercase for consistency",
+          "correct": false,
+          "explanation": "UPPERCASE is recommended for *** Variables *** section"
+        },
+        {
+          "text": "camelCase like in Python",
+          "correct": false,
+          "explanation": "UPPERCASE is the RF convention"
+        },
+        {
+          "text": "Any case; there is no convention",
+          "correct": false,
+          "explanation": "UPPERCASE is the recommended convention"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q16",
+      "question": "Analyze this variable definition:\n\n```robot\n*** Variables ***\n${NAME}    Robot Framework\n${VERSION}    8.0\n${TOOL}    ${NAME}, version: ${VERSION}\n```\n\nWhat will ${TOOL} contain at runtime?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Robot Framework, version: 8.0",
+          "correct": true
+        },
+        {
+          "text": "${NAME}, version: ${VERSION} (literal text)",
+          "correct": false,
+          "explanation": "Variables are resolved at runtime"
+        },
+        {
+          "text": "Error: cannot use variables in variable definitions",
+          "correct": false,
+          "explanation": "Variables can reference other variables"
+        },
+        {
+          "text": "TOOL, version: 8.0",
+          "correct": false,
+          "explanation": "${NAME} resolves to 'Robot Framework', not 'TOOL'"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q17",
+      "question": "How are multiple-line scalar variable values joined by default?",
+      "type": "single",
+      "options": [
+        {
+          "text": "With a space character",
+          "correct": true
+        },
+        {
+          "text": "With no separator (concatenated directly)",
+          "correct": false,
+          "explanation": "Default is space; use separator= for no space"
+        },
+        {
+          "text": "With a newline character",
+          "correct": false,
+          "explanation": "Default is space; use separator=\\n for newlines"
+        },
+        {
+          "text": "With a comma",
+          "correct": false,
+          "explanation": "Default is space, not comma"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q18",
+      "question": "Examine this variable definition:\n\n```robot\n*** Variables ***\n${EXAMPLE}    This value is joined\n...    together with a space.\n```\n\nWhat will ${EXAMPLE} contain?",
+      "type": "single",
+      "options": [
+        {
+          "text": "This value is joined together with a space.",
+          "correct": true
+        },
+        {
+          "text": "This value is joinedtogether with a space. (no space)",
+          "correct": false,
+          "explanation": "Default separator is space"
+        },
+        {
+          "text": "This value is joined\\ntogether with a space. (with newline)",
+          "correct": false,
+          "explanation": "Would need separator=\\n for newline"
+        },
+        {
+          "text": "Just the first line: 'This value is joined'",
+          "correct": false,
+          "explanation": "Both lines are joined"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q19",
+      "question": "How do you specify a custom separator for multi-line scalar variables?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Add separator=<value> as the last value",
+          "correct": true
+        },
+        {
+          "text": "Use the --separator option",
+          "correct": false,
+          "explanation": "Use separator=<value> in the variable definition"
+        },
+        {
+          "text": "Put the separator in square brackets",
+          "correct": false,
+          "explanation": "Use separator=<value> syntax"
+        },
+        {
+          "text": "Separators cannot be customized",
+          "correct": false,
+          "explanation": "Custom separators are supported with separator="
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q20",
+      "question": "Analyze this variable:\n\n```robot\n*** Variables ***\n${URL}    https://example.com/search\n...    ?query=robot+framework\n...    &page=1\n...    separator=\n```\n\nWhat will ${URL} contain?",
+      "type": "single",
+      "options": [
+        {
+          "text": "https://example.com/search?query=robot+framework&page=1 (no spaces)",
+          "correct": true
+        },
+        {
+          "text": "https://example.com/search ?query=robot+framework &page=1 (with spaces)",
+          "correct": false,
+          "explanation": "separator= means no separator"
+        },
+        {
+          "text": "Just the first line",
+          "correct": false,
+          "explanation": "All lines are joined with separator="
+        },
+        {
+          "text": "Error: separator cannot be empty",
+          "correct": false,
+          "explanation": "Empty separator is valid"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q21",
+      "question": "What are the primitive data types supported in Robot Framework syntax? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Strings (unicode characters)",
+          "correct": true
+        },
+        {
+          "text": "Integers (whole numbers like ${42})",
+          "correct": true
+        },
+        {
+          "text": "Floats (decimal numbers like ${3.14})",
+          "correct": true
+        },
+        {
+          "text": "Booleans (${True} or ${False})",
+          "correct": true
+        },
+        {
+          "text": "None (${None})",
+          "correct": true
+        },
+        {
+          "text": "Char (single character)",
+          "correct": false,
+          "explanation": "Chars are just strings of length 1"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q22",
+      "question": "How are non-string primitive data types defined?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Using scalar variable syntax: ${value}",
+          "correct": true
+        },
+        {
+          "text": "Using special type prefixes: #int{42}",
+          "correct": false,
+          "explanation": "Use scalar syntax ${42}, not special prefixes"
+        },
+        {
+          "text": "Using quotes: \"42\" for integer",
+          "correct": false,
+          "explanation": "Quotes make it a string; use ${42}"
+        },
+        {
+          "text": "By declaring the type: INT 42",
+          "correct": false,
+          "explanation": "No type declarations needed; use ${42}"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q23",
+      "question": "Analyze these variable definitions:\n\n```robot\n*** Variables ***\n${STRING}    This is a string\n${STILL_STRING}    8270\n${INTEGER}    ${42}\n${ANSWER}    The answer is ${INTEGER}\n```\n\nWhat will ${ANSWER} contain?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The answer is 42 (integer converted to string)",
+          "correct": true
+        },
+        {
+          "text": "The answer is ${42} (literal text)",
+          "correct": false,
+          "explanation": "Variables are resolved and types converted"
+        },
+        {
+          "text": "Error: cannot concatenate string and integer",
+          "correct": false,
+          "explanation": "Integer is automatically converted to string"
+        },
+        {
+          "text": "The answer is INTEGER",
+          "correct": false,
+          "explanation": "${INTEGER} resolves to its value 42"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q24",
+      "question": "How do you define a list variable in the *** Variables *** section?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Using @{variable_name} followed by values separated by multiple spaces",
+          "correct": true
+        },
+        {
+          "text": "Using ${variable_name} with square brackets [val1, val2]",
+          "correct": false,
+          "explanation": "Use @ prefix, not $ with brackets"
+        },
+        {
+          "text": "Using LIST{variable_name}",
+          "correct": false,
+          "explanation": "Use @ prefix, not LIST keyword"
+        },
+        {
+          "text": "Lists cannot be defined in *** Variables *** section",
+          "correct": false,
+          "explanation": "Lists can be defined using @ syntax"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q25",
+      "question": "Examine this list variable:\n\n```robot\n*** Variables ***\n@{NAMES}    Matti    Teppo\n@{NUMBERS}    one    two    three\n...    four    five    six\n```\n\nHow do you access the value 'Teppo'?",
+      "type": "single",
+      "options": [
+        {
+          "text": "${NAMES}[1]",
+          "correct": true
+        },
+        {
+          "text": "@{NAMES}[1]",
+          "correct": false,
+          "explanation": "Use $ for accessing individual items, not @"
+        },
+        {
+          "text": "${NAMES}[2]",
+          "correct": false,
+          "explanation": "Index starts at 0; 'Matti' is [0], 'Teppo' is [1]"
+        },
+        {
+          "text": "${NAMES.1}",
+          "correct": false,
+          "explanation": "Use square brackets [1], not dot notation"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q26",
+      "question": "How do you define a dictionary variable in the *** Variables *** section?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Using &{variable_name} with key=value pairs",
+          "correct": true
+        },
+        {
+          "text": "Using ${variable_name} with curly braces {key: value}",
+          "correct": false,
+          "explanation": "Use & prefix with key=value syntax"
+        },
+        {
+          "text": "Using DICT{variable_name}",
+          "correct": false,
+          "explanation": "Use & prefix, not DICT keyword"
+        },
+        {
+          "text": "Dictionaries cannot be defined in *** Variables *** section",
+          "correct": false,
+          "explanation": "Dictionaries can be defined using & syntax"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q27",
+      "question": "Examine this dictionary variable:\n\n```robot\n*** Variables ***\n&{USER1}    name=Matti    address=xxx    phone=123\n&{USER2}    name=Teppo    address=yyy    phone=456\n```\n\nHow do you access the name from USER1?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "${USER1}[name]",
+          "correct": true
+        },
+        {
+          "text": "${USER1.name} (attribute access for ordered dicts)",
+          "correct": true
+        },
+        {
+          "text": "&{USER1}[name]",
+          "correct": false,
+          "explanation": "Use $ for accessing values, not &"
+        },
+        {
+          "text": "${USER1}['name'] (with quotes)",
+          "correct": false,
+          "explanation": "Quotes are not needed around keys"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q28",
+      "question": "How do you escape an equal sign in a dictionary key?",
+      "type": "single",
+      "options": [
+        {
+          "text": "With a backslash: key\\=value",
+          "correct": true
+        },
+        {
+          "text": "Use double equals: key==value",
+          "correct": false,
+          "explanation": "Use backslash escaping, not doubling"
+        },
+        {
+          "text": "Enclose in quotes: \"key=value\"",
+          "correct": false,
+          "explanation": "Quotes become part of the key; use backslash"
+        },
+        {
+          "text": "Equal signs cannot be in keys",
+          "correct": false,
+          "explanation": "They can with escaping"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q29",
+      "question": "What special features do dictionaries created with &{} syntax have? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "They are ordered (persist assignment order)",
+          "correct": true
+        },
+        {
+          "text": "They can be iterated",
+          "correct": true
+        },
+        {
+          "text": "They support attribute access like ${dict.key}",
+          "correct": true
+        },
+        {
+          "text": "They are immutable",
+          "correct": false,
+          "explanation": "Dictionaries can be modified"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q30",
+      "question": "How can you dynamically access a dictionary value using a variable for the key?\n\n```robot\n${key}    Set Variable    phone\n# Access USER1's phone\n```",
+      "type": "single",
+      "options": [
+        {
+          "text": "${USER1}[${key}]",
+          "correct": true
+        },
+        {
+          "text": "${USER1.${key}}",
+          "correct": false,
+          "explanation": "Attribute access doesn't support variable keys"
+        },
+        {
+          "text": "${USER1}[key]",
+          "correct": false,
+          "explanation": "This would look for literal 'key', not the variable's value"
+        },
+        {
+          "text": "&{USER1}[${key}]",
+          "correct": false,
+          "explanation": "Use $ for accessing, not &"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q31",
+      "question": "How do you assign a return value from a keyword to a variable?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Variable name with optional =, then keyword call",
+          "correct": true
+        },
+        {
+          "text": "Keyword call, then arrow →, then variable name",
+          "correct": false,
+          "explanation": "RF uses variable = keyword syntax"
+        },
+        {
+          "text": "Use RETURN keyword explicitly",
+          "correct": false,
+          "explanation": "RETURN is in the keyword; assignment is in the caller"
+        },
+        {
+          "text": "Variables cannot capture return values",
+          "correct": false,
+          "explanation": "This is a primary way to use variables"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q32",
+      "question": "Analyze this example:\n\n```robot\n*** Settings ***\nLibrary    OperatingSystem\n\n*** Test Cases ***\nExample\n    ${server_log} =    Get File    server.log\n    Should Contain    ${server_log}    Success\n```\n\nWhat is the scope of ${server_log}?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Local to the 'Example' test case",
+          "correct": true
+        },
+        {
+          "text": "Suite-wide (available to all tests)",
+          "correct": false,
+          "explanation": "Variables from return values are local by default"
+        },
+        {
+          "text": "Global (available in all suites)",
+          "correct": false,
+          "explanation": "Return value assignments create local variables"
+        },
+        {
+          "text": "Available only in the Get File keyword",
+          "correct": false,
+          "explanation": "The variable is in the test, not the keyword"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q33",
+      "question": "If a keyword returns multiple values to a scalar variable, how are they stored?",
+      "type": "single",
+      "options": [
+        {
+          "text": "As a list of values accessible with index syntax",
+          "correct": true
+        },
+        {
+          "text": "Only the first value is stored",
+          "correct": false,
+          "explanation": "All values are stored as a list"
+        },
+        {
+          "text": "As concatenated string",
+          "correct": false,
+          "explanation": "Values remain as a list, not concatenated"
+        },
+        {
+          "text": "Error: must use multiple variables",
+          "correct": false,
+          "explanation": "Single scalar variable can hold multiple values as a list"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q34",
+      "question": "Examine this code:\n\n```robot\n*** Settings ***\nLibrary    OperatingSystem\n\n*** Test Cases ***\nExample\n    ${path}    ${file} =    Split Path    server/logs/server.log\n    Should Be Equal    ${path}    server/logs\n    Should Be Equal    ${file}    server.log\n```\n\nWhat is happening in the Split Path line?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Two return values assigned to two separate scalar variables",
+          "correct": true
+        },
+        {
+          "text": "Two arguments passed to Split Path",
+          "correct": false,
+          "explanation": "server/logs/server.log is the argument; ${path} and ${file} receive returns"
+        },
+        {
+          "text": "Creating a list with two elements",
+          "correct": false,
+          "explanation": "Creating two separate variables, not one list"
+        },
+        {
+          "text": "Syntax error: cannot assign to two variables",
+          "correct": false,
+          "explanation": "Multiple assignment is valid"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q35",
+      "question": "What is the VAR statement used for?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To create and assign variables within test/task or keyword bodies during execution",
+          "correct": true
+        },
+        {
+          "text": "To define variables in the *** Variables *** section",
+          "correct": false,
+          "explanation": "VAR is for inline definition in test/keyword bodies"
+        },
+        {
+          "text": "To declare variable types",
+          "correct": false,
+          "explanation": "VAR creates variables, not declares types"
+        },
+        {
+          "text": "To make variables read-only",
+          "correct": false,
+          "explanation": "VAR creates mutable variables"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q36",
+      "question": "Analyze this code:\n\n```robot\n*** Test Cases ***\nTest with VAR\n    VAR    ${filename}    test.log\n    ${file}    Get File    ${filename}\n    VAR    &{file_info}\n    ...    name=${filename}\n    ...    content=${file}\n```\n\nWhat statements are correct? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "VAR creates a scalar variable ${filename}",
+          "correct": true
+        },
+        {
+          "text": "VAR can create dictionary variables using &{}",
+          "correct": true
+        },
+        {
+          "text": "VAR supports multi-line definitions with ...",
+          "correct": true
+        },
+        {
+          "text": "Variables created by VAR have suite scope",
+          "correct": false,
+          "explanation": "VAR creates local scope by default"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q37",
+      "question": "What are common use cases for the VAR statement? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Combining values during test execution",
+          "correct": true
+        },
+        {
+          "text": "Conditional assignments based on runtime conditions",
+          "correct": true
+        },
+        {
+          "text": "Initializing variables (like empty lists before FOR loops)",
+          "correct": true
+        },
+        {
+          "text": "Defining constants at suite level",
+          "correct": false,
+          "explanation": "Use *** Variables *** section for suite-level constants"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q38",
+      "question": "What is the default scope of variables created with VAR statement?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Local to the test/task or keyword where defined",
+          "correct": true
+        },
+        {
+          "text": "Suite-wide automatically",
+          "correct": false,
+          "explanation": "VAR creates local scope by default"
+        },
+        {
+          "text": "Global to all suites",
+          "correct": false,
+          "explanation": "VAR creates local scope unless scope= is specified"
+        },
+        {
+          "text": "Depends on the variable prefix",
+          "correct": false,
+          "explanation": "Default is local; use scope= to change"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q39",
+      "question": "What are the two main variable scopes introduced in this chapter?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "LOCAL scope - variables created within test/task or keyword",
+          "correct": true
+        },
+        {
+          "text": "SUITE scope - variables defined in *** Variables *** section",
+          "correct": true
+        },
+        {
+          "text": "GLOBAL scope - available everywhere",
+          "correct": false,
+          "explanation": "GLOBAL scope is mentioned but details are in chapter 5"
+        },
+        {
+          "text": "TEST scope - test-specific variables",
+          "correct": false,
+          "explanation": "TEST scope details are in chapter 5"
+        }
+      ]
+    },
+    {
+      "id": "ch3-2-q40",
+      "question": "Which statements about LOCAL scope variables are correct? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Created by keyword return value assignment",
+          "correct": true
+        },
+        {
+          "text": "Created as keyword arguments",
+          "correct": true
+        },
+        {
+          "text": "Created by VAR statement (by default)",
+          "correct": true
+        },
+        {
+          "text": "Cannot be accessed outside their block",
+          "correct": true
+        },
+        {
+          "text": "Are destroyed when the block completes",
+          "correct": true
+        },
+        {
+          "text": "Can be accessed from called keywords automatically",
+          "correct": false,
+          "explanation": "LOCAL variables cannot be accessed in called keywords unless passed as arguments"
+        }
+      ]
+    }
+  ]
+}

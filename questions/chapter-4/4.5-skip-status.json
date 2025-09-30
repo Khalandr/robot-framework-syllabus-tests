@@ -1,0 +1,784 @@
+{
+  "chapter": "4-Test/Task Execution & Flow Control",
+  "subchapter": "4.5-SKIP Test|Task Status",
+  "questions": [
+    {
+      "id": "ch4-5-q1",
+      "question": "What test|task statuses exist in Robot Framework besides PASS and FAIL?",
+      "type": "single",
+      "options": [
+        {
+          "text": "SKIP",
+          "correct": true
+        },
+        {
+          "text": "PENDING",
+          "correct": false,
+          "explanation": "Robot Framework has SKIP status, not PENDING"
+        },
+        {
+          "text": "IGNORED",
+          "correct": false,
+          "explanation": "The status is SKIP, not IGNORED"
+        },
+        {
+          "text": "DEFERRED",
+          "correct": false,
+          "explanation": "The status is SKIP, not DEFERRED"
+        }
+      ]
+    },
+    {
+      "id": "ch4-5-q2",
+      "question": "What does the SKIP status indicate?",
+      "type": "single",
+      "options": [
+        {
+          "text": "That a test|task was explicitly skipped during execution",
+          "correct": true
+        },
+        {
+          "text": "That a test|task failed but the failure was ignored",
+          "correct": false,
+          "explanation": "SKIP indicates the test was not executed, not that a failure was ignored"
+        },
+        {
+          "text": "That a test|task passed but with warnings",
+          "correct": false,
+          "explanation": "SKIP means the test was not executed, not that it passed with warnings"
+        },
+        {
+          "text": "That a test|task is scheduled for future execution",
+          "correct": false,
+          "explanation": "SKIP indicates the test was not executed in the current run"
+        }
+      ]
+    },
+    {
+      "id": "ch4-5-q3",
+      "question": "Where do skipped tests|tasks appear?",
+      "type": "single",
+      "options": [
+        {
+          "text": "In logs and reports, clearly marked as skipped",
+          "correct": true
+        },
+        {
+          "text": "They don't appear anywhere; skipped tests are omitted",
+          "correct": false,
+          "explanation": "Skipped tests appear in logs and reports with SKIP status"
+        },
+        {
+          "text": "Only in a separate skipped tests report",
+          "correct": false,
+          "explanation": "Skipped tests appear in the regular logs and reports"
+        },
+        {
+          "text": "Only in the console output, not in reports",
+          "correct": false,
+          "explanation": "Skipped tests appear in both logs and reports"
+        }
+      ]
+    },
+    {
+      "id": "ch4-5-q4",
+      "question": "Which are valid reasons to use the SKIP status?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Temporal exclusion of tests|tasks for known issues until resolved",
+          "correct": true
+        },
+        {
+          "text": "Conditional execution based on runtime conditions",
+          "correct": true
+        },
+        {
+          "text": "Marking tests|tasks as unsupported in certain environments but keeping them in logs",
+          "correct": true
+        },
+        {
+          "text": "Hiding failed tests from reports to improve success rate",
+          "correct": false,
+          "explanation": "SKIP is not for hiding failures; it's for legitimate reasons to not execute tests"
+        }
+      ]
+    },
+    {
+      "id": "ch4-5-q5",
+      "question": "What command-line option is used to skip tests|tasks by tags?",
+      "type": "single",
+      "options": [
+        {
+          "text": "--skip",
+          "correct": true
+        },
+        {
+          "text": "--exclude",
+          "correct": false,
+          "explanation": "--exclude removes tests entirely; --skip marks them as skipped"
+        },
+        {
+          "text": "--ignore",
+          "correct": false,
+          "explanation": "The correct option is --skip"
+        },
+        {
+          "text": "--omit",
+          "correct": false,
+          "explanation": "The correct option is --skip"
+        }
+      ]
+    },
+    {
+      "id": "ch4-5-q6",
+      "question": "What is the difference between --skip and --exclude?",
+      "type": "single",
+      "options": [
+        {
+          "text": "--skip marks tests as skipped in reports and logs; --exclude doesn't execute them at all and omits them from reports",
+          "correct": true
+        },
+        {
+          "text": "--skip and --exclude are identical in functionality",
+          "correct": false,
+          "explanation": "--skip includes tests in reports as skipped; --exclude omits them entirely"
+        },
+        {
+          "text": "--skip prevents execution but --exclude still runs tests and marks them failed",
+          "correct": false,
+          "explanation": "Both prevent execution; the difference is in reporting"
+        },
+        {
+          "text": "--exclude is deprecated and should be replaced with --skip",
+          "correct": false,
+          "explanation": "Both are current options with different purposes"
+        }
+      ]
+    },
+    {
+      "id": "ch4-5-q7",
+      "question": "Why is --skip better than --exclude for documenting that a test was not executed?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Because --skip shows the test in reports with the reason it was not executed, while --exclude omits it entirely",
+          "correct": true
+        },
+        {
+          "text": "Because --skip runs the test faster than --exclude",
+          "correct": false,
+          "explanation": "Both prevent execution; the benefit is in documentation, not performance"
+        },
+        {
+          "text": "Because --skip allows the test to be re-enabled easily",
+          "correct": false,
+          "explanation": "Both can be easily changed; the benefit is in visibility in reports"
+        },
+        {
+          "text": "Because --exclude causes errors in reports while --skip doesn't",
+          "correct": false,
+          "explanation": "--exclude doesn't cause errors; it just omits tests from reports"
+        }
+      ]
+    },
+    {
+      "id": "ch4-5-q8",
+      "question": "```bash\nrobot --skip BUG-42 --skip mobile path/to/tests\n```\n\nWhat happens to tests tagged with 'BUG-42' or 'mobile'?",
+      "type": "single",
+      "options": [
+        {
+          "text": "They are marked as skipped in reports and logs but not executed",
+          "correct": true
+        },
+        {
+          "text": "They are completely excluded from reports and logs",
+          "correct": false,
+          "explanation": "--skip includes tests in reports as skipped; --exclude would omit them"
+        },
+        {
+          "text": "They are executed but marked as skipped if they fail",
+          "correct": false,
+          "explanation": "--skip prevents execution entirely; --skiponfailure would mark failures as skipped"
+        },
+        {
+          "text": "Only tests with both tags are skipped",
+          "correct": false,
+          "explanation": "Tests with either tag are skipped (OR logic)"
+        }
+      ]
+    },
+    {
+      "id": "ch4-5-q9",
+      "question": "What is a typical use case for skipping tests by tag with a defect number?",
+      "type": "single",
+      "options": [
+        {
+          "text": "When a defect exists in the SUT and a test has been written to reproduce it, but the defect is not yet resolved",
+          "correct": true
+        },
+        {
+          "text": "To permanently remove tests that found bugs from the test suite",
+          "correct": false,
+          "explanation": "Tests should be kept and re-enabled when the bug is fixed"
+        },
+        {
+          "text": "To hide failed tests from stakeholders",
+          "correct": false,
+          "explanation": "SKIP is for legitimate reasons, not hiding failures"
+        },
+        {
+          "text": "To mark tests that have never found any defects",
+          "correct": false,
+          "explanation": "SKIP is for tests that cannot currently run, not for test effectiveness"
+        }
+      ]
+    },
+    {
+      "id": "ch4-5-q10",
+      "question": "What is a typical use case for skipping tests by environment tag?",
+      "type": "single",
+      "options": [
+        {
+          "text": "When tests can only be executed on specific environments and should be skipped on others",
+          "correct": true
+        },
+        {
+          "text": "To run different tests in different environments without any visibility",
+          "correct": false,
+          "explanation": "SKIP provides visibility; tests are shown as skipped in reports"
+        },
+        {
+          "text": "To avoid configuring tests for multiple environments",
+          "correct": false,
+          "explanation": "SKIP is for execution control, not avoiding configuration"
+        },
+        {
+          "text": "To permanently disable tests that don't work in production",
+          "correct": false,
+          "explanation": "SKIP is for temporary or conditional exclusion, not permanent disabling"
+        }
+      ]
+    },
+    {
+      "id": "ch4-5-q11",
+      "question": "What reserved tag can be used to mark tests|tasks as skipped?",
+      "type": "single",
+      "options": [
+        {
+          "text": "robot:skip",
+          "correct": true
+        },
+        {
+          "text": "robot:exclude",
+          "correct": false,
+          "explanation": "robot:exclude excludes tests; robot:skip marks them as skipped"
+        },
+        {
+          "text": "robot:ignore",
+          "correct": false,
+          "explanation": "The correct reserved tag is robot:skip"
+        },
+        {
+          "text": "robot:disabled",
+          "correct": false,
+          "explanation": "The correct reserved tag is robot:skip"
+        }
+      ]
+    },
+    {
+      "id": "ch4-5-q12",
+      "question": "```robot\n*** Test Cases ***\nTemporary Test\n    [Tags]    robot:skip\n    Perform Actions\n```\n\nWhat happens to this test?",
+      "type": "single",
+      "options": [
+        {
+          "text": "It appears in reports as skipped but is not executed",
+          "correct": true
+        },
+        {
+          "text": "It is completely excluded from reports and logs",
+          "correct": false,
+          "explanation": "robot:skip includes the test in reports as skipped"
+        },
+        {
+          "text": "It executes normally but is marked as skipped regardless of result",
+          "correct": false,
+          "explanation": "robot:skip prevents execution; the test is not run"
+        },
+        {
+          "text": "It causes a warning but executes normally",
+          "correct": false,
+          "explanation": "robot:skip prevents execution without causing warnings"
+        }
+      ]
+    },
+    {
+      "id": "ch4-5-q13",
+      "question": "What keyword can be used to skip a test|task dynamically during execution?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Skip",
+          "correct": true
+        },
+        {
+          "text": "Skip Test",
+          "correct": false,
+          "explanation": "The keyword is simply 'Skip'"
+        },
+        {
+          "text": "Mark As Skipped",
+          "correct": false,
+          "explanation": "The keyword is 'Skip'"
+        },
+        {
+          "text": "Set Skip Status",
+          "correct": false,
+          "explanation": "The keyword is 'Skip'"
+        }
+      ]
+    },
+    {
+      "id": "ch4-5-q14",
+      "question": "What does the Skip keyword do?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Stops execution of a test|task and marks it as skipped with a custom message",
+          "correct": true
+        },
+        {
+          "text": "Marks the test as skipped but continues execution",
+          "correct": false,
+          "explanation": "Skip stops execution immediately"
+        },
+        {
+          "text": "Skips only the current keyword and continues with the next one",
+          "correct": false,
+          "explanation": "Skip stops the entire test|task execution"
+        },
+        {
+          "text": "Schedules the test to be skipped in the next execution",
+          "correct": false,
+          "explanation": "Skip immediately stops the current test execution"
+        }
+      ]
+    },
+    {
+      "id": "ch4-5-q15",
+      "question": "```robot\n*** Test Cases ***\nConditional Test\n    ${browser} =    Get Environment Variable    BROWSER\n    IF    '${browser}' == 'safari'\n        Skip    Test not supported on Safari\n    END\n    Perform Test Actions\n```\n\nWhat happens when this test runs on Safari?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The test is marked as skipped with message 'Test not supported on Safari' and 'Perform Test Actions' is not executed",
+          "correct": true
+        },
+        {
+          "text": "'Perform Test Actions' still executes after the Skip keyword",
+          "correct": false,
+          "explanation": "Skip stops execution immediately; subsequent keywords don't run"
+        },
+        {
+          "text": "The entire suite is skipped",
+          "correct": false,
+          "explanation": "Only the current test is skipped, not the entire suite"
+        },
+        {
+          "text": "The test fails with an error message",
+          "correct": false,
+          "explanation": "Skip marks the test as skipped, not failed"
+        }
+      ]
+    },
+    {
+      "id": "ch4-5-q16",
+      "question": "Does the Test|Task Teardown execute when a test|task is skipped using the Skip keyword?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Yes, the Test|Task Teardown is executed",
+          "correct": true
+        },
+        {
+          "text": "No, the entire test including teardown is skipped",
+          "correct": false,
+          "explanation": "Teardown executes even when Skip is called"
+        },
+        {
+          "text": "Only if the Skip keyword is in the test setup",
+          "correct": false,
+          "explanation": "Teardown executes regardless of where Skip is called"
+        },
+        {
+          "text": "Yes, but only if explicitly configured with [Teardown]",
+          "correct": false,
+          "explanation": "Any configured teardown executes when Skip is used"
+        }
+      ]
+    },
+    {
+      "id": "ch4-5-q17",
+      "question": "What command-line option automatically marks failed tests as skipped?",
+      "type": "single",
+      "options": [
+        {
+          "text": "--skiponfailure",
+          "correct": true
+        },
+        {
+          "text": "--skip-if-fail",
+          "correct": false,
+          "explanation": "The correct option is --skiponfailure"
+        },
+        {
+          "text": "--convert-fail-to-skip",
+          "correct": false,
+          "explanation": "The correct option is --skiponfailure"
+        },
+        {
+          "text": "--ignore-failures",
+          "correct": false,
+          "explanation": "The correct option is --skiponfailure"
+        }
+      ]
+    },
+    {
+      "id": "ch4-5-q18",
+      "question": "```bash\nrobot --skiponfailure flaky path/to/tests\n```\n\nWhat happens to tests tagged with 'flaky' if they fail?",
+      "type": "single",
+      "options": [
+        {
+          "text": "They are automatically marked as skipped instead of failed",
+          "correct": true
+        },
+        {
+          "text": "They are excluded from reports entirely",
+          "correct": false,
+          "explanation": "--skiponfailure changes failed tests to skipped status, they still appear in reports"
+        },
+        {
+          "text": "They are retried once before being marked as failed",
+          "correct": false,
+          "explanation": "--skiponfailure converts failures to skipped status; it doesn't retry"
+        },
+        {
+          "text": "They are marked as passed with a warning",
+          "correct": false,
+          "explanation": "--skiponfailure converts failures to skipped status, not passed"
+        }
+      ]
+    },
+    {
+      "id": "ch4-5-q19",
+      "question": "What is the reserved tag for automatically skipping tests on failure?",
+      "type": "single",
+      "options": [
+        {
+          "text": "robot:skip-on-failure",
+          "correct": true
+        },
+        {
+          "text": "robot:skiponfailure",
+          "correct": false,
+          "explanation": "The reserved tag uses hyphens: robot:skip-on-failure"
+        },
+        {
+          "text": "robot:skip-if-fail",
+          "correct": false,
+          "explanation": "The correct reserved tag is robot:skip-on-failure"
+        },
+        {
+          "text": "robot:auto-skip",
+          "correct": false,
+          "explanation": "The correct reserved tag is robot:skip-on-failure"
+        }
+      ]
+    },
+    {
+      "id": "ch4-5-q20",
+      "question": "```robot\n*** Test Cases ***\nUnstable Test\n    [Tags]    robot:skip-on-failure\n    Perform Flaky Operation\n```\n\nWhat happens if 'Perform Flaky Operation' fails?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The test is automatically marked as skipped instead of failed",
+          "correct": true
+        },
+        {
+          "text": "The test remains marked as failed",
+          "correct": false,
+          "explanation": "robot:skip-on-failure converts failures to skipped status"
+        },
+        {
+          "text": "The test is excluded from reports",
+          "correct": false,
+          "explanation": "The test appears in reports with skipped status"
+        },
+        {
+          "text": "The test is retried automatically",
+          "correct": false,
+          "explanation": "robot:skip-on-failure converts failures to skipped; it doesn't retry"
+        }
+      ]
+    },
+    {
+      "id": "ch4-5-q21",
+      "question": "When would you use --skip vs --exclude?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Use --skip when you want visibility in reports that tests were not executed; use --exclude to omit tests entirely",
+          "correct": true
+        },
+        {
+          "text": "Use --skip for permanent exclusions; use --exclude for temporary ones",
+          "correct": false,
+          "explanation": "--skip is typically for temporary exclusions with visibility; --exclude omits tests"
+        },
+        {
+          "text": "Use --skip for test-level exclusions; use --exclude for suite-level exclusions",
+          "correct": false,
+          "explanation": "Both work at any level; the difference is in reporting"
+        },
+        {
+          "text": "They are interchangeable and can be used in any situation",
+          "correct": false,
+          "explanation": "They have different purposes: visibility vs omission"
+        }
+      ]
+    },
+    {
+      "id": "ch4-5-q22",
+      "question": "What is the benefit of using --skiponfailure for flaky tests?",
+      "type": "single",
+      "options": [
+        {
+          "text": "It prevents unreliable tests from failing the entire test run while keeping them visible in reports",
+          "correct": true
+        },
+        {
+          "text": "It automatically fixes flaky tests by retrying them",
+          "correct": false,
+          "explanation": "--skiponfailure converts failures to skipped status; it doesn't retry or fix tests"
+        },
+        {
+          "text": "It removes flaky tests from reports to improve success metrics",
+          "correct": false,
+          "explanation": "Tests remain visible in reports with skipped status"
+        },
+        {
+          "text": "It makes flaky tests pass regardless of their actual result",
+          "correct": false,
+          "explanation": "--skiponfailure marks them as skipped, not passed"
+        }
+      ]
+    },
+    {
+      "id": "ch4-5-q23",
+      "question": "```robot\n*** Test Cases ***\nPrecondition Test\n    ${precondition} =    Check Precondition\n    IF    not ${precondition}\n        Skip    Precondition not met\n    END\n    Run Main Test Logic\n```\n\nWhat happens if the precondition is not met?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The test is skipped with message 'Precondition not met' and main logic doesn't run",
+          "correct": true
+        },
+        {
+          "text": "The test fails with message 'Precondition not met'",
+          "correct": false,
+          "explanation": "Skip marks the test as skipped, not failed"
+        },
+        {
+          "text": "The main test logic runs anyway with a warning",
+          "correct": false,
+          "explanation": "Skip stops execution; subsequent keywords don't run"
+        },
+        {
+          "text": "The entire suite is skipped",
+          "correct": false,
+          "explanation": "Only the current test is skipped, not the suite"
+        }
+      ]
+    },
+    {
+      "id": "ch4-5-q24",
+      "question": "Can --skip use tag patterns with wildcards?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Yes, --skip supports tags and tag patterns",
+          "correct": true
+        },
+        {
+          "text": "No, --skip only works with exact tag matches",
+          "correct": false,
+          "explanation": "--skip supports tag patterns like other tag-based options"
+        },
+        {
+          "text": "Yes, but only the * wildcard, not ?",
+          "correct": false,
+          "explanation": "--skip supports full tag pattern syntax"
+        },
+        {
+          "text": "No, patterns only work with --exclude, not --skip",
+          "correct": false,
+          "explanation": "Both options support tag patterns"
+        }
+      ]
+    },
+    {
+      "id": "ch4-5-q25",
+      "question": "```bash\nrobot --skip BUG-* path/to/tests\n```\n\nWhat does this command do?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Skips all tests with tags starting with 'BUG-'",
+          "correct": true
+        },
+        {
+          "text": "Skips only tests with exactly the tag 'BUG-*'",
+          "correct": false,
+          "explanation": "The asterisk is a wildcard, not a literal character"
+        },
+        {
+          "text": "Excludes all tests with tags starting with 'BUG-' from reports",
+          "correct": false,
+          "explanation": "--skip includes tests in reports as skipped; it doesn't exclude them"
+        },
+        {
+          "text": "Marks all tests starting with 'BUG-' as failed",
+          "correct": false,
+          "explanation": "--skip marks tests as skipped, not failed"
+        }
+      ]
+    },
+    {
+      "id": "ch4-5-q26",
+      "question": "What happens when you combine --skip and --include?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Tests matching --include are selected, but those also matching --skip are marked as skipped",
+          "correct": true
+        },
+        {
+          "text": "The options conflict and cause an error",
+          "correct": false,
+          "explanation": "The options work together: --include selects, --skip marks selected tests as skipped"
+        },
+        {
+          "text": "--skip is ignored when --include is present",
+          "correct": false,
+          "explanation": "Both options are applied"
+        },
+        {
+          "text": "Only tests matching both conditions are executed",
+          "correct": false,
+          "explanation": "Tests matching --include are selected; those also matching --skip are skipped"
+        }
+      ]
+    },
+    {
+      "id": "ch4-5-q27",
+      "question": "```robot\n*** Test Cases ***\nTest With Cleanup\n    [Setup]    Open Resource\n    [Teardown]    Close Resource\n    Skip    Not ready for execution\n    Perform Operations\n```\n\nWhat is the execution order?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Open Resource → Skip (test marked as skipped) → Close Resource",
+          "correct": true
+        },
+        {
+          "text": "Skip (test marked as skipped) - nothing else executes",
+          "correct": false,
+          "explanation": "Setup runs before the test body, and teardown runs even when skipped"
+        },
+        {
+          "text": "Open Resource → Skip → Perform Operations → Close Resource",
+          "correct": false,
+          "explanation": "Skip stops execution; Perform Operations doesn't run"
+        },
+        {
+          "text": "Open Resource → Perform Operations → Close Resource (Skip is ignored)",
+          "correct": false,
+          "explanation": "Skip is not ignored; it stops execution"
+        }
+      ]
+    },
+    {
+      "id": "ch4-5-q28",
+      "question": "What is a key difference between using robot:skip tag and calling the Skip keyword?",
+      "type": "single",
+      "options": [
+        {
+          "text": "robot:skip prevents execution entirely; Skip keyword allows setup to run before skipping",
+          "correct": true
+        },
+        {
+          "text": "robot:skip can have custom messages; Skip keyword cannot",
+          "correct": false,
+          "explanation": "Skip keyword accepts custom messages; robot:skip doesn't"
+        },
+        {
+          "text": "They are functionally identical",
+          "correct": false,
+          "explanation": "robot:skip prevents all execution; Skip runs during test execution"
+        },
+        {
+          "text": "Skip keyword is deprecated; robot:skip should be used instead",
+          "correct": false,
+          "explanation": "Both are current and serve different purposes"
+        }
+      ]
+    },
+    {
+      "id": "ch4-5-q29",
+      "question": "When would you use Skip keyword instead of robot:skip tag?",
+      "type": "single",
+      "options": [
+        {
+          "text": "When the decision to skip depends on runtime conditions evaluated during test execution",
+          "correct": true
+        },
+        {
+          "text": "When you want to skip tests based on known issues before execution starts",
+          "correct": false,
+          "explanation": "For known issues before execution, robot:skip tag or --skip CLI option is more appropriate"
+        },
+        {
+          "text": "When you want to skip entire suites",
+          "correct": false,
+          "explanation": "Skip keyword works at test level during execution; suite-level skipping uses different mechanisms"
+        },
+        {
+          "text": "When you want to skip tests permanently",
+          "correct": false,
+          "explanation": "For permanent skipping, robot:skip tag is simpler than conditional Skip keyword"
+        }
+      ]
+    },
+    {
+      "id": "ch4-5-q30",
+      "question": "```bash\nrobot --skiponfailure unstable --skip broken path/to/tests\n```\n\nWhat happens to a test tagged with both 'unstable' and 'broken'?",
+      "type": "single",
+      "options": [
+        {
+          "text": "It is skipped before execution due to --skip (--skiponfailure only applies if test fails)",
+          "correct": true
+        },
+        {
+          "text": "It runs and is marked as skipped only if it fails",
+          "correct": false,
+          "explanation": "--skip prevents execution; --skiponfailure would only apply if the test ran and failed"
+        },
+        {
+          "text": "The options conflict and cause an error",
+          "correct": false,
+          "explanation": "--skip takes precedence by preventing execution"
+        },
+        {
+          "text": "It runs normally and both options are ignored",
+          "correct": false,
+          "explanation": "--skip prevents execution of tests with the 'broken' tag"
+        }
+      ]
+    }
+  ]
+}

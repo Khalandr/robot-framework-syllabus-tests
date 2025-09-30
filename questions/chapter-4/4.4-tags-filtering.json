@@ -1,0 +1,786 @@
+{
+  "chapter": "4-Test/Task Execution & Flow Control",
+  "subchapter": "4.4-Test|Task Tags and Filtering Execution",
+  "questions": [
+    {
+      "id": "ch4-4-q1",
+      "question": "What is the purpose of tags in Robot Framework?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "To classify and control the execution of tests|tasks",
+          "correct": true
+        },
+        {
+          "text": "To provide metadata for tests|tasks",
+          "correct": true
+        },
+        {
+          "text": "To enable flexible test selection",
+          "correct": true
+        },
+        {
+          "text": "To create statistical summaries in execution protocols",
+          "correct": true
+        },
+        {
+          "text": "To define execution order of tests within a suite",
+          "correct": false,
+          "explanation": "Tags are for classification and selection, not execution order"
+        }
+      ]
+    },
+    {
+      "id": "ch4-4-q2",
+      "question": "Are tags case-sensitive in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "No, tags are case-insensitive",
+          "correct": true
+        },
+        {
+          "text": "Yes, tags are case-sensitive",
+          "correct": false,
+          "explanation": "Tags are case-insensitive in Robot Framework"
+        },
+        {
+          "text": "Only reserved tags are case-sensitive",
+          "correct": false,
+          "explanation": "All tags are case-insensitive"
+        },
+        {
+          "text": "Tags are case-sensitive only when used in command-line filtering",
+          "correct": false,
+          "explanation": "Tags are case-insensitive everywhere, though lowercase is recommended for filtering"
+        }
+      ]
+    },
+    {
+      "id": "ch4-4-q3",
+      "question": "If a tag appears multiple times with different cases, which case is used in reports and logs?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The case of the first appearance of the tag",
+          "correct": true
+        },
+        {
+          "text": "The case of the last appearance of the tag",
+          "correct": false,
+          "explanation": "The first appearance determines the case used in reports"
+        },
+        {
+          "text": "All tags are converted to lowercase in reports",
+          "correct": false,
+          "explanation": "The case of the first appearance is preserved in reports"
+        },
+        {
+          "text": "All tags are converted to uppercase in reports",
+          "correct": false,
+          "explanation": "The case of the first appearance is preserved in reports"
+        }
+      ]
+    },
+    {
+      "id": "ch4-4-q4",
+      "question": "How can you assign tags to all tests|tasks in a suite?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Using the Test Tags setting in the *** Settings *** section",
+          "correct": true
+        },
+        {
+          "text": "Using the [Tags] setting in each individual test|task",
+          "correct": false,
+          "explanation": "While this works, it's not efficient for all tests; Test Tags in *** Settings *** is the suite-level approach"
+        },
+        {
+          "text": "Using the Suite Tags setting in the *** Settings *** section",
+          "correct": false,
+          "explanation": "The correct setting is Test Tags, not Suite Tags"
+        },
+        {
+          "text": "Using the --tags command-line option",
+          "correct": false,
+          "explanation": "Command-line options filter execution; they don't assign tags"
+        }
+      ]
+    },
+    {
+      "id": "ch4-4-q5",
+      "question": "```robot\n*** Settings ***\nTest Tags    smoke    regression\n```\n\nWhat is the effect of this setting?",
+      "type": "single",
+      "options": [
+        {
+          "text": "All tests|tasks in the suite will have both 'smoke' and 'regression' tags",
+          "correct": true
+        },
+        {
+          "text": "Only tests that don't have their own [Tags] will get these tags",
+          "correct": false,
+          "explanation": "Test Tags are added to all tests, even those with their own [Tags]"
+        },
+        {
+          "text": "Tests must choose either 'smoke' or 'regression', not both",
+          "correct": false,
+          "explanation": "Both tags are applied to all tests"
+        },
+        {
+          "text": "Only the first test in the suite gets these tags",
+          "correct": false,
+          "explanation": "All tests in the suite receive these tags"
+        }
+      ]
+    },
+    {
+      "id": "ch4-4-q6",
+      "question": "How do you assign tags to an individual test|task?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Using the [Tags] setting within the test|task",
+          "correct": true
+        },
+        {
+          "text": "Using the Test Tags setting in the test|task body",
+          "correct": false,
+          "explanation": "Test Tags is a suite-level setting; use [Tags] for individual tests"
+        },
+        {
+          "text": "Using the @tags decorator before the test name",
+          "correct": false,
+          "explanation": "Robot Framework doesn't use decorators; use [Tags] setting"
+        },
+        {
+          "text": "Using the TAG keyword in the test body",
+          "correct": false,
+          "explanation": "Use [Tags] setting; TAG is not a keyword for tag assignment (though Set Tags exists)"
+        }
+      ]
+    },
+    {
+      "id": "ch4-4-q7",
+      "question": "```robot\n*** Settings ***\nTest Tags    smoke    regression\n\n*** Test Cases ***\nValid Login Test\n    [Tags]    login    critical\n    Perform Login Steps\n```\n\nWhat tags will 'Valid Login Test' have?",
+      "type": "single",
+      "options": [
+        {
+          "text": "smoke, regression, login, critical (suite tags plus test-specific tags)",
+          "correct": true
+        },
+        {
+          "text": "Only login and critical (test [Tags] overrides suite tags)",
+          "correct": false,
+          "explanation": "[Tags] adds to suite tags, doesn't override them"
+        },
+        {
+          "text": "Only smoke and regression (suite tags only)",
+          "correct": false,
+          "explanation": "Test-specific tags are added to suite tags"
+        },
+        {
+          "text": "Only the first two tags: smoke and login",
+          "correct": false,
+          "explanation": "All tags from both sources are applied"
+        }
+      ]
+    },
+    {
+      "id": "ch4-4-q8",
+      "question": "```robot\n*** Settings ***\nTest Tags    smoke    regression\n\n*** Test Cases ***\nValid Login Test\n    [Tags]    login    critical    -smoke\n    Perform Login Steps\n```\n\nWhat tags will 'Valid Login Test' have?",
+      "type": "single",
+      "options": [
+        {
+          "text": "regression, login, critical (smoke is removed by the minus sign)",
+          "correct": true
+        },
+        {
+          "text": "smoke, regression, login, critical (minus sign has no effect)",
+          "correct": false,
+          "explanation": "The minus sign (-) before a tag removes it from the test's tags"
+        },
+        {
+          "text": "login, critical, -smoke (minus sign is part of the tag name)",
+          "correct": false,
+          "explanation": "The minus sign removes the tag, it's not part of the tag name"
+        },
+        {
+          "text": "Only smoke and regression (suite tags cannot be removed)",
+          "correct": false,
+          "explanation": "Suite tags can be removed using the minus sign prefix"
+        }
+      ]
+    },
+    {
+      "id": "ch4-4-q9",
+      "question": "How do you remove a suite-level tag from a specific test|task?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Add a minus sign (-) before the tag name in the test's [Tags] setting",
+          "correct": true
+        },
+        {
+          "text": "Use the NOT operator before the tag name",
+          "correct": false,
+          "explanation": "The minus sign (-) is the syntax for removing tags"
+        },
+        {
+          "text": "Omit the [Tags] setting from the test",
+          "correct": false,
+          "explanation": "Omitting [Tags] keeps all suite tags; use minus sign to remove specific ones"
+        },
+        {
+          "text": "Use [Tags] NONE to remove all inherited tags",
+          "correct": false,
+          "explanation": "While this might work, the question asks about removing specific tags, which uses the minus sign"
+        }
+      ]
+    },
+    {
+      "id": "ch4-4-q10",
+      "question": "```robot\n*** Variables ***\n${ENV}    production\n\n*** Test Cases ***\nData Processing Test\n    [Tags]    environment:${ENV}\n    Process Data\n```\n\nWhat tag will this test have?",
+      "type": "single",
+      "options": [
+        {
+          "text": "environment:production",
+          "correct": true
+        },
+        {
+          "text": "environment:${ENV} (variables are not resolved in tags)",
+          "correct": false,
+          "explanation": "Variables are resolved in tags"
+        },
+        {
+          "text": "environment and production (as two separate tags)",
+          "correct": false,
+          "explanation": "The colon is part of the tag name; it's a single tag"
+        },
+        {
+          "text": "${ENV} (the environment: prefix is ignored)",
+          "correct": false,
+          "explanation": "The entire string including the prefix becomes the tag"
+        }
+      ]
+    },
+    {
+      "id": "ch4-4-q11",
+      "question": "Which built-in keywords can be used to dynamically assign or remove tags during test|task execution?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Set Tags",
+          "correct": true
+        },
+        {
+          "text": "Remove Tags",
+          "correct": true
+        },
+        {
+          "text": "Add Tags",
+          "correct": false,
+          "explanation": "The keyword is 'Set Tags', not 'Add Tags'"
+        },
+        {
+          "text": "Clear Tags",
+          "correct": false,
+          "explanation": "The keyword is 'Remove Tags', not 'Clear Tags'"
+        }
+      ]
+    },
+    {
+      "id": "ch4-4-q12",
+      "question": "What command-line option is used to include only tests|tasks that have a specific tag?",
+      "type": "single",
+      "options": [
+        {
+          "text": "--include or -i",
+          "correct": true
+        },
+        {
+          "text": "--tag or -t",
+          "correct": false,
+          "explanation": "The correct option is --include or -i"
+        },
+        {
+          "text": "--select or -s",
+          "correct": false,
+          "explanation": "The correct option is --include or -i"
+        },
+        {
+          "text": "--filter or -f",
+          "correct": false,
+          "explanation": "The correct option is --include or -i"
+        }
+      ]
+    },
+    {
+      "id": "ch4-4-q13",
+      "question": "```bash\nrobot --include smoke path/to/tests\n```\n\nWhat does this command do?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Executes only tests|tasks that have the 'smoke' tag",
+          "correct": true
+        },
+        {
+          "text": "Executes all tests and adds the 'smoke' tag to them",
+          "correct": false,
+          "explanation": "--include filters execution; it doesn't add tags"
+        },
+        {
+          "text": "Excludes tests with the 'smoke' tag",
+          "correct": false,
+          "explanation": "--include includes tests with the tag; --exclude excludes them"
+        },
+        {
+          "text": "Generates a report of tests with the 'smoke' tag without executing them",
+          "correct": false,
+          "explanation": "--include executes the filtered tests"
+        }
+      ]
+    },
+    {
+      "id": "ch4-4-q14",
+      "question": "What command-line option is used to exclude tests|tasks that have a specific tag?",
+      "type": "single",
+      "options": [
+        {
+          "text": "--exclude or -e",
+          "correct": true
+        },
+        {
+          "text": "--skip or -s",
+          "correct": false,
+          "explanation": "While --skip exists, --exclude is the option that excludes by tag"
+        },
+        {
+          "text": "--ignore or -i",
+          "correct": false,
+          "explanation": "The correct option is --exclude or -e"
+        },
+        {
+          "text": "--remove or -r",
+          "correct": false,
+          "explanation": "The correct option is --exclude or -e"
+        }
+      ]
+    },
+    {
+      "id": "ch4-4-q15",
+      "question": "```bash\nrobot --exclude slow path/to/tests\n```\n\nWhat happens to tests with the 'slow' tag?",
+      "type": "single",
+      "options": [
+        {
+          "text": "They are not executed or logged at all",
+          "correct": true
+        },
+        {
+          "text": "They are executed but marked as skipped in logs",
+          "correct": false,
+          "explanation": "--exclude completely excludes tests from execution and logs; --skip would mark them as skipped"
+        },
+        {
+          "text": "They are executed with a warning",
+          "correct": false,
+          "explanation": "--exclude prevents execution entirely"
+        },
+        {
+          "text": "They are logged but not executed",
+          "correct": false,
+          "explanation": "--exclude excludes them from both execution and logging"
+        }
+      ]
+    },
+    {
+      "id": "ch4-4-q16",
+      "question": "What is the difference between --exclude and --skip for handling tests by tag?",
+      "type": "single",
+      "options": [
+        {
+          "text": "--exclude removes tests from execution and logs entirely; --skip doesn't execute tests but includes them in logs as skipped",
+          "correct": true
+        },
+        {
+          "text": "--exclude and --skip are identical in functionality",
+          "correct": false,
+          "explanation": "--exclude omits tests completely; --skip includes them as skipped in logs"
+        },
+        {
+          "text": "--exclude only works with tags; --skip works with test names",
+          "correct": false,
+          "explanation": "Both can work with tags; the difference is in how they handle the tests"
+        },
+        {
+          "text": "--skip is a deprecated alias for --exclude",
+          "correct": false,
+          "explanation": "Both are current options with different behaviors"
+        }
+      ]
+    },
+    {
+      "id": "ch4-4-q17",
+      "question": "```bash\nrobot --include regression --exclude unstable path/to/tests\n```\n\nWhich tests will be executed?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Tests that have the 'regression' tag but not the 'unstable' tag",
+          "correct": true
+        },
+        {
+          "text": "Tests that have either 'regression' or are not 'unstable'",
+          "correct": false,
+          "explanation": "Tests must have 'regression' AND not have 'unstable'"
+        },
+        {
+          "text": "No tests (conflicting options)",
+          "correct": false,
+          "explanation": "The options work together to refine the selection"
+        },
+        {
+          "text": "Only tests with both 'regression' and 'unstable' tags",
+          "correct": false,
+          "explanation": "Tests with 'unstable' are excluded, not included"
+        }
+      ]
+    },
+    {
+      "id": "ch4-4-q18",
+      "question": "Why is it recommended to use lowercase tag names when filtering?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Because logical operators (AND, OR, NOT) are case-sensitive and uppercase",
+          "correct": true
+        },
+        {
+          "text": "Because Robot Framework only recognizes lowercase tags",
+          "correct": false,
+          "explanation": "Tags are case-insensitive; the reason is to avoid conflicts with uppercase operators"
+        },
+        {
+          "text": "Because uppercase tags are reserved for system use",
+          "correct": false,
+          "explanation": "Tags with robot: prefix are reserved; case doesn't determine reservation"
+        },
+        {
+          "text": "Because lowercase tags execute faster",
+          "correct": false,
+          "explanation": "There is no performance difference; it's about operator conflicts"
+        }
+      ]
+    },
+    {
+      "id": "ch4-4-q19",
+      "question": "What wildcard characters can be used in tag patterns?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "* (matches any number of characters)",
+          "correct": true
+        },
+        {
+          "text": "? (matches any single character)",
+          "correct": true
+        },
+        {
+          "text": "+ (matches one or more characters)",
+          "correct": false,
+          "explanation": "The plus sign is not a wildcard in Robot Framework tag patterns"
+        },
+        {
+          "text": "% (matches any character)",
+          "correct": false,
+          "explanation": "The percent sign is not a wildcard in Robot Framework tag patterns"
+        }
+      ]
+    },
+    {
+      "id": "ch4-4-q20",
+      "question": "```bash\nrobot --include feature-* path/to/tests\n```\n\nWhat does this command do?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Includes tests with tags starting with 'feature-'",
+          "correct": true
+        },
+        {
+          "text": "Includes tests with exactly the tag 'feature-*'",
+          "correct": false,
+          "explanation": "The asterisk is a wildcard, not a literal character"
+        },
+        {
+          "text": "Includes all tests and tags them with 'feature-*'",
+          "correct": false,
+          "explanation": "--include filters tests; it doesn't add tags"
+        },
+        {
+          "text": "Includes tests in directories starting with 'feature-'",
+          "correct": false,
+          "explanation": "This filters by tag pattern, not directory names"
+        }
+      ]
+    },
+    {
+      "id": "ch4-4-q21",
+      "question": "```bash\nrobot --exclude *-deprecated path/to/tests\n```\n\nWhat does this command do?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Excludes tests with tags ending with '-deprecated'",
+          "correct": true
+        },
+        {
+          "text": "Excludes tests with exactly the tag '*-deprecated'",
+          "correct": false,
+          "explanation": "The asterisk is a wildcard, not a literal character"
+        },
+        {
+          "text": "Excludes all tests except those tagged 'deprecated'",
+          "correct": false,
+          "explanation": "It excludes tests with tags ending in '-deprecated'"
+        },
+        {
+          "text": "Excludes deprecated Robot Framework features",
+          "correct": false,
+          "explanation": "This filters tests by tag pattern, not framework features"
+        }
+      ]
+    },
+    {
+      "id": "ch4-4-q22",
+      "question": "What is the purpose of the wildcard ? in tag patterns?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To match any single character",
+          "correct": true
+        },
+        {
+          "text": "To match any number of characters",
+          "correct": false,
+          "explanation": "The asterisk (*) matches any number; the question mark matches one"
+        },
+        {
+          "text": "To indicate an optional tag",
+          "correct": false,
+          "explanation": "The question mark is a wildcard for single character matching"
+        },
+        {
+          "text": "To mark a tag as uncertain in reports",
+          "correct": false,
+          "explanation": "The question mark is a wildcard character in patterns"
+        }
+      ]
+    },
+    {
+      "id": "ch4-4-q23",
+      "question": "What prefix is reserved for internal use by Robot Framework and should not be used in user-defined tags?",
+      "type": "single",
+      "options": [
+        {
+          "text": "robot:",
+          "correct": true
+        },
+        {
+          "text": "rf:",
+          "correct": false,
+          "explanation": "The reserved prefix is 'robot:', not 'rf:'"
+        },
+        {
+          "text": "system:",
+          "correct": false,
+          "explanation": "The reserved prefix is 'robot:'"
+        },
+        {
+          "text": "internal:",
+          "correct": false,
+          "explanation": "The reserved prefix is 'robot:'"
+        }
+      ]
+    },
+    {
+      "id": "ch4-4-q24",
+      "question": "What may happen if you use tags with the robot: prefix?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Unexpected behavior in test execution and reporting",
+          "correct": true
+        },
+        {
+          "text": "The tags are automatically converted to user: prefix",
+          "correct": false,
+          "explanation": "Robot Framework doesn't convert the prefix; using it causes problems"
+        },
+        {
+          "text": "Robot Framework raises an error and stops execution",
+          "correct": false,
+          "explanation": "It may cause unexpected behavior rather than an explicit error"
+        },
+        {
+          "text": "The tags work normally but are hidden from reports",
+          "correct": false,
+          "explanation": "Using reserved prefixes causes unexpected behavior, not just hiding"
+        }
+      ]
+    },
+    {
+      "id": "ch4-4-q25",
+      "question": "What is the purpose of the robot:exclude reserved tag?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Marks tests|tasks that should be excluded from execution, similar to --exclude",
+          "correct": true
+        },
+        {
+          "text": "Marks tests that should be skipped but logged, similar to --skip",
+          "correct": false,
+          "explanation": "robot:exclude is for exclusion; robot:skip is for skipping"
+        },
+        {
+          "text": "Removes tags from test metadata",
+          "correct": false,
+          "explanation": "robot:exclude controls test execution, not tag removal"
+        },
+        {
+          "text": "Excludes tests from statistical reports but still executes them",
+          "correct": false,
+          "explanation": "robot:exclude prevents execution, not just reporting"
+        }
+      ]
+    },
+    {
+      "id": "ch4-4-q26",
+      "question": "What is the purpose of the robot:skip reserved tag?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Marks tests|tasks that should be skipped during execution, similar to --skip",
+          "correct": true
+        },
+        {
+          "text": "Marks tests that should be completely excluded from execution and logs",
+          "correct": false,
+          "explanation": "robot:skip skips tests but logs them; robot:exclude omits them entirely"
+        },
+        {
+          "text": "Skips tag assignment for the test",
+          "correct": false,
+          "explanation": "robot:skip controls test execution, not tag assignment"
+        },
+        {
+          "text": "Skips the test in reports but executes it normally",
+          "correct": false,
+          "explanation": "robot:skip prevents execution but includes in logs as skipped"
+        }
+      ]
+    },
+    {
+      "id": "ch4-4-q27",
+      "question": "```robot\n*** Settings ***\nTest Tags    api    regression\n\n*** Test Cases ***\nTest A\n    [Tags]    smoke\n    Keyword A\n\nTest B\n    [Tags]    -api    critical\n    Keyword B\n```\n\nWhat tags does Test A have?",
+      "type": "single",
+      "options": [
+        {
+          "text": "api, regression, smoke",
+          "correct": true
+        },
+        {
+          "text": "Only smoke (test tags override suite tags)",
+          "correct": false,
+          "explanation": "Test tags are added to suite tags, not replacing them"
+        },
+        {
+          "text": "api, regression (suite tags only)",
+          "correct": false,
+          "explanation": "Test-specific tags are also applied"
+        },
+        {
+          "text": "smoke, regression (api is removed)",
+          "correct": false,
+          "explanation": "Test A doesn't remove any tags; it only adds 'smoke'"
+        }
+      ]
+    },
+    {
+      "id": "ch4-4-q28",
+      "question": "```robot\n*** Settings ***\nTest Tags    api    regression\n\n*** Test Cases ***\nTest B\n    [Tags]    -api    critical\n    Keyword B\n```\n\nWhat tags does Test B have?",
+      "type": "single",
+      "options": [
+        {
+          "text": "regression, critical (api is removed by -api)",
+          "correct": true
+        },
+        {
+          "text": "api, regression, critical (minus sign is ignored)",
+          "correct": false,
+          "explanation": "The minus sign removes the api tag"
+        },
+        {
+          "text": "api, regression, -api, critical (minus sign is part of tag name)",
+          "correct": false,
+          "explanation": "The minus sign is an operator that removes tags, not part of the name"
+        },
+        {
+          "text": "Only critical (both suite tags are removed)",
+          "correct": false,
+          "explanation": "Only 'api' is removed; 'regression' remains"
+        }
+      ]
+    },
+    {
+      "id": "ch4-4-q29",
+      "question": "```bash\nrobot --include smoke --include regression path/to/tests\n```\n\nWhich tests will be executed?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Tests that have either 'smoke' OR 'regression' tag (or both)",
+          "correct": true
+        },
+        {
+          "text": "Tests that have both 'smoke' AND 'regression' tags",
+          "correct": false,
+          "explanation": "Multiple --include options use OR logic, not AND"
+        },
+        {
+          "text": "Only tests with the 'smoke' tag (first option takes precedence)",
+          "correct": false,
+          "explanation": "Both options are applied with OR logic"
+        },
+        {
+          "text": "No tests (conflicting options)",
+          "correct": false,
+          "explanation": "Multiple --include options are combined with OR logic"
+        }
+      ]
+    },
+    {
+      "id": "ch4-4-q30",
+      "question": "Where can tags be used to create statistical summaries?",
+      "type": "single",
+      "options": [
+        {
+          "text": "In the execution protocols (reports and logs)",
+          "correct": true
+        },
+        {
+          "text": "Only in separate analytics tools outside Robot Framework",
+          "correct": false,
+          "explanation": "Robot Framework's own execution protocols include tag-based statistics"
+        },
+        {
+          "text": "Only when using the --statistics command-line option",
+          "correct": false,
+          "explanation": "Tag statistics are automatically generated in execution protocols"
+        },
+        {
+          "text": "Only in the rebot post-processing tool",
+          "correct": false,
+          "explanation": "Tag statistics are available in regular execution reports, not just rebot"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1060 @@
+{
+  "chapter": "3-Keywords and Variables",
+  "subchapter": "3.3-User Keyword Definition & Arguments",
+  "questions": [
+    {
+      "id": "ch3-3-q1",
+      "question": "What is the purpose of User Keywords in Robot Framework? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "To create reusable higher-level actions by combining existing keywords",
+          "correct": true
+        },
+        {
+          "text": "To improve readability and maintainability",
+          "correct": true
+        },
+        {
+          "text": "To improve modularity in automation",
+          "correct": true
+        },
+        {
+          "text": "To abstract complex sequences into named actions",
+          "correct": true
+        },
+        {
+          "text": "To execute keywords faster than library keywords",
+          "correct": false,
+          "explanation": "User Keywords are for organization, not performance"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q2",
+      "question": "Where are User Keywords defined?",
+      "type": "single",
+      "options": [
+        {
+          "text": "In the *** Keywords *** section of suite files or resource files",
+          "correct": true
+        },
+        {
+          "text": "In the *** Test Cases *** section",
+          "correct": false,
+          "explanation": "Test Cases is for tests, not keyword definitions"
+        },
+        {
+          "text": "In the *** Variables *** section",
+          "correct": false,
+          "explanation": "Variables section is for data, not keywords"
+        },
+        {
+          "text": "In separate .keyword files",
+          "correct": false,
+          "explanation": "Keywords are defined in *** Keywords *** section"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q3",
+      "question": "How is the *** Keywords *** section structured?",
+      "type": "single",
+      "options": [
+        {
+          "text": "User keyword names are unindented; their bodies are indented by multiple spaces",
+          "correct": true
+        },
+        {
+          "text": "All keyword definitions are indented consistently",
+          "correct": false,
+          "explanation": "Names are unindented; only bodies are indented"
+        },
+        {
+          "text": "Keywords use curly braces to define their scope",
+          "correct": false,
+          "explanation": "RF uses indentation, not braces"
+        },
+        {
+          "text": "Keywords must be separated by blank lines",
+          "correct": false,
+          "explanation": "Blank lines are optional for readability"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q4",
+      "question": "What is the difference in scope between User Keywords defined in suite files vs resource files?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Suite keywords are local to that suite; resource keywords can be used in any suite that imports the resource",
+          "correct": true
+        },
+        {
+          "text": "There is no difference; both are globally available",
+          "correct": false,
+          "explanation": "Suite keywords have limited scope"
+        },
+        {
+          "text": "Resource keywords cannot be imported",
+          "correct": false,
+          "explanation": "Resource keywords are meant to be imported and shared"
+        },
+        {
+          "text": "Suite keywords execute faster",
+          "correct": false,
+          "explanation": "Performance is not affected by location"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q5",
+      "question": "Analyze this User Keyword structure:\n\n```robot\n*** Keywords ***\nVerify Valid Login\n    [Arguments]    ${exp_full_name}\n    ${version}=    Get Server Version\n    Should Not Be Empty    ${version}\n    ${name}=    Get User Name\n    Should Be Equal    ${name}    ${exp_full_name}\n```\n\nWhat elements are present? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Unindented keyword name 'Verify Valid Login'",
+          "correct": true
+        },
+        {
+          "text": "Indented keyword body with settings and keyword calls",
+          "correct": true
+        },
+        {
+          "text": "[Arguments] setting defining one parameter",
+          "correct": true
+        },
+        {
+          "text": "Variable assignments from keyword returns",
+          "correct": true
+        },
+        {
+          "text": "[Return] statement",
+          "correct": false,
+          "explanation": "This keyword doesn't have a [Return] or RETURN statement"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q6",
+      "question": "What characteristics should User Keyword names have?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Descriptive and clear",
+          "correct": true
+        },
+        {
+          "text": "Reflecting the purpose of the keyword",
+          "correct": true
+        },
+        {
+          "text": "Can include spaces",
+          "correct": true
+        },
+        {
+          "text": "Support Unicode and special characters",
+          "correct": true
+        },
+        {
+          "text": "Must be all lowercase",
+          "correct": false,
+          "explanation": "Case doesn't matter; names are case-insensitive"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q7",
+      "question": "How does Robot Framework match keyword names?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Case-insensitive matching",
+          "correct": true
+        },
+        {
+          "text": "Spaces are ignored",
+          "correct": true
+        },
+        {
+          "text": "Underscores are ignored",
+          "correct": true
+        },
+        {
+          "text": "Hyphens must match exactly",
+          "correct": false,
+          "explanation": "All special characters are normalized during matching"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q8",
+      "question": "Which of these keyword names are considered identical by Robot Framework? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Login To System",
+          "correct": true
+        },
+        {
+          "text": "login_to_system",
+          "correct": true
+        },
+        {
+          "text": "LOGIN TO SYSTEM",
+          "correct": true
+        },
+        {
+          "text": "logintosystem",
+          "correct": true
+        },
+        {
+          "text": "Login.To.System",
+          "correct": false,
+          "explanation": "Dots are not ignored; this would be different"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q9",
+      "question": "What is the keyword matching algorithm when an exact match is not found?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Try removing BDD prefixes (Given/When/Then/And/But), then try embedded argument matching",
+          "correct": true
+        },
+        {
+          "text": "Immediately fail with keyword not found error",
+          "correct": false,
+          "explanation": "RF tries multiple matching strategies"
+        },
+        {
+          "text": "Use the first keyword that partially matches",
+          "correct": false,
+          "explanation": "RF uses specific matching strategies, not partial matching"
+        },
+        {
+          "text": "Ask the user which keyword to use",
+          "correct": false,
+          "explanation": "Matching is automatic using defined algorithms"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q10",
+      "question": "What is the default naming convention for Library Keywords?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Title Case with capital letters at the beginning of each word and spaces between words",
+          "correct": true
+        },
+        {
+          "text": "snake_case with underscores",
+          "correct": false,
+          "explanation": "Library keywords typically use Title Case"
+        },
+        {
+          "text": "camelCase",
+          "correct": false,
+          "explanation": "Library keywords typically use Title Case with spaces"
+        },
+        {
+          "text": "All lowercase",
+          "correct": false,
+          "explanation": "Library keywords typically use Title Case"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q11",
+      "question": "What settings are available for User Keywords? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "[Documentation] - for keyword documentation",
+          "correct": true
+        },
+        {
+          "text": "[Arguments] - to specify keyword arguments",
+          "correct": true
+        },
+        {
+          "text": "[Setup] - for keyword setup",
+          "correct": true
+        },
+        {
+          "text": "[Teardown] - for keyword teardown",
+          "correct": true
+        },
+        {
+          "text": "[Tags] - to set keyword tags",
+          "correct": true
+        },
+        {
+          "text": "[Timeout] - to set keyword timeout",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q12",
+      "question": "What is the purpose of the [Documentation] setting in User Keywords?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To provide a description of the keyword's purpose and usage",
+          "correct": true
+        },
+        {
+          "text": "To define the keyword's arguments",
+          "correct": false,
+          "explanation": "[Arguments] defines arguments, not [Documentation]"
+        },
+        {
+          "text": "To specify keyword execution order",
+          "correct": false,
+          "explanation": "[Documentation] is for description, not execution control"
+        },
+        {
+          "text": "To set keyword permissions",
+          "correct": false,
+          "explanation": "RF doesn't have permission settings"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q13",
+      "question": "What part of keyword documentation appears in log.html as short documentation?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The first logical line until the first empty row",
+          "correct": true
+        },
+        {
+          "text": "The entire documentation text",
+          "correct": false,
+          "explanation": "Only the first logical line is used as short documentation"
+        },
+        {
+          "text": "The last line of documentation",
+          "correct": false,
+          "explanation": "The first line is used for short documentation"
+        },
+        {
+          "text": "Only the keyword name",
+          "correct": false,
+          "explanation": "Short documentation comes from the first line of [Documentation]"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q14",
+      "question": "What documentation formatting does Robot Framework support? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "*bold* for bold text",
+          "correct": true
+        },
+        {
+          "text": "_italic_ for italic text",
+          "correct": true
+        },
+        {
+          "text": "`code` for code formatting",
+          "correct": true
+        },
+        {
+          "text": "Tables, lists, links, and images",
+          "correct": true
+        },
+        {
+          "text": "Full Markdown compatibility",
+          "correct": false,
+          "explanation": "RF format is similar to but not compatible with Markdown"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q15",
+      "question": "What is the purpose of the [Arguments] setting?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To define the arguments a user keyword expects",
+          "correct": true
+        },
+        {
+          "text": "To document the keyword",
+          "correct": false,
+          "explanation": "[Documentation] is for documentation, not [Arguments]"
+        },
+        {
+          "text": "To specify return values",
+          "correct": false,
+          "explanation": "[Arguments] is for inputs, not outputs"
+        },
+        {
+          "text": "To set keyword timeout",
+          "correct": false,
+          "explanation": "[Timeout] sets timeout, not [Arguments]"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q16",
+      "question": "How are arguments defined in User Keywords?",
+      "type": "single",
+      "options": [
+        {
+          "text": "As scalar variables ${arg} separated by multiple spaces",
+          "correct": true
+        },
+        {
+          "text": "In parentheses after the keyword name",
+          "correct": false,
+          "explanation": "RF uses [Arguments] setting, not parentheses"
+        },
+        {
+          "text": "As a comma-separated list",
+          "correct": false,
+          "explanation": "RF uses space separation, not commas"
+        },
+        {
+          "text": "With type declarations like int, str",
+          "correct": false,
+          "explanation": "User Keywords cannot define argument types"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q17",
+      "question": "Can User Keywords define argument types (like string, number)?",
+      "type": "single",
+      "options": [
+        {
+          "text": "No, User Keywords cannot define argument types",
+          "correct": true
+        },
+        {
+          "text": "Yes, using type hints like ${arg: int}",
+          "correct": false,
+          "explanation": "Type hints are for Library Keywords, not User Keywords"
+        },
+        {
+          "text": "Yes, using the [Types] setting",
+          "correct": false,
+          "explanation": "No [Types] setting exists for User Keywords"
+        },
+        {
+          "text": "Yes, but only for optional arguments",
+          "correct": false,
+          "explanation": "User Keywords don't support type definitions"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q18",
+      "question": "What makes an argument mandatory in a User Keyword?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Defined as ${arg} without a default value",
+          "correct": true
+        },
+        {
+          "text": "Defined with [mandatory] tag",
+          "correct": false,
+          "explanation": "No special tag needed; lack of default makes it mandatory"
+        },
+        {
+          "text": "Defined in ALL CAPS ${ARG}",
+          "correct": false,
+          "explanation": "Case doesn't determine if argument is mandatory"
+        },
+        {
+          "text": "All arguments are mandatory by default",
+          "correct": false,
+          "explanation": "Arguments with defaults are optional"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q19",
+      "question": "Analyze this keyword:\n\n```robot\n*** Keywords ***\nVerify File Contains\n    [Arguments]    ${file_path}    ${expected_content}\n    ${server_log}=    Get File    ${file_path}\n    Should Contain    ${server_log}    ${expected_content}\n```\n\nHow many mandatory arguments does this keyword have?",
+      "type": "single",
+      "options": [
+        {
+          "text": "2 mandatory arguments (file_path, expected_content)",
+          "correct": true
+        },
+        {
+          "text": "0 mandatory arguments (all are optional)",
+          "correct": false,
+          "explanation": "Arguments without defaults are mandatory"
+        },
+        {
+          "text": "1 mandatory argument (file_path only)",
+          "correct": false,
+          "explanation": "Both arguments lack defaults, so both are mandatory"
+        },
+        {
+          "text": "3 arguments including server_log",
+          "correct": false,
+          "explanation": "server_log is a local variable, not an argument"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q20",
+      "question": "What is the scope of variables defined in [Arguments]?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Local to the keyword body; they don't exist outside the keyword",
+          "correct": true
+        },
+        {
+          "text": "Suite-wide; accessible in all tests",
+          "correct": false,
+          "explanation": "Argument variables are local to the keyword"
+        },
+        {
+          "text": "Global; accessible everywhere",
+          "correct": false,
+          "explanation": "Arguments are locally scoped"
+        },
+        {
+          "text": "Available in called keywords automatically",
+          "correct": false,
+          "explanation": "Arguments must be passed explicitly to called keywords"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q21",
+      "question": "How do you define optional arguments in User Keywords?",
+      "type": "single",
+      "options": [
+        {
+          "text": "By assigning default values using = without spaces: ${arg}=default",
+          "correct": true
+        },
+        {
+          "text": "By marking them with [optional] tag",
+          "correct": false,
+          "explanation": "Use default values, not tags"
+        },
+        {
+          "text": "By putting them in square brackets: [${arg}]",
+          "correct": false,
+          "explanation": "Use = for defaults, not square brackets"
+        },
+        {
+          "text": "All arguments are optional by default",
+          "correct": false,
+          "explanation": "Arguments without defaults are mandatory"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q22",
+      "question": "Where must optional arguments be positioned in the [Arguments] list?",
+      "type": "single",
+      "options": [
+        {
+          "text": "After all mandatory arguments",
+          "correct": true
+        },
+        {
+          "text": "Before all mandatory arguments",
+          "correct": false,
+          "explanation": "Optional arguments must come after mandatory ones"
+        },
+        {
+          "text": "Position doesn't matter",
+          "correct": false,
+          "explanation": "Mandatory must come before optional"
+        },
+        {
+          "text": "In a separate [Optional] setting",
+          "correct": false,
+          "explanation": "All arguments are in [Arguments]; position determines if mandatory"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q23",
+      "question": "Analyze this keyword:\n\n```robot\n*** Keywords ***\nVerify File Contains\n    [Arguments]    ${file_path}    ${expected_content}    ${encoding}=utf-8    ${ignore_case}=${True}\n```\n\nWhich statements are correct? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "2 mandatory arguments: file_path, expected_content",
+          "correct": true
+        },
+        {
+          "text": "2 optional arguments: encoding, ignore_case",
+          "correct": true
+        },
+        {
+          "text": "encoding defaults to string 'utf-8'",
+          "correct": true
+        },
+        {
+          "text": "ignore_case defaults to boolean True",
+          "correct": true
+        },
+        {
+          "text": "All 4 arguments are mandatory",
+          "correct": false,
+          "explanation": "Arguments with = are optional"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q24",
+      "question": "What are embedded arguments in User Keywords?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Arguments included directly within the keyword name using ${placeholder} syntax",
+          "correct": true
+        },
+        {
+          "text": "Arguments defined inside the keyword body",
+          "correct": false,
+          "explanation": "Embedded arguments are in the keyword name, not body"
+        },
+        {
+          "text": "Arguments passed as nested data structures",
+          "correct": false,
+          "explanation": "This describes complex arguments, not embedded"
+        },
+        {
+          "text": "Arguments with default values",
+          "correct": false,
+          "explanation": "Embedded arguments are about name placeholders"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q25",
+      "question": "When are embedded arguments particularly useful?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "For Behavior-Driven Development (BDD) style test cases",
+          "correct": true
+        },
+        {
+          "text": "For making keyword names more readable and meaningful",
+          "correct": true
+        },
+        {
+          "text": "For performance optimization",
+          "correct": false,
+          "explanation": "Embedded arguments are for readability, not performance"
+        },
+        {
+          "text": "For reducing the number of keyword arguments",
+          "correct": false,
+          "explanation": "Embedded arguments are arguments; they don't reduce count"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q26",
+      "question": "Examine this keyword:\n\n```robot\n*** Keywords ***\nThe file '${file_name}' should contain '${expected_content}'\n    ${file_content}=    Get File    ${file_name}\n    Should Contain    ${file_content}    ${expected_content}\n```\n\nHow would you call this keyword?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The file 'server.log' should contain 'Success'",
+          "correct": true
+        },
+        {
+          "text": "The file '${file_name}' should contain '${expected_content}'    server.log    Success",
+          "correct": false,
+          "explanation": "Arguments are embedded in the name, not passed separately"
+        },
+        {
+          "text": "The file should contain    file_name=server.log    expected_content=Success",
+          "correct": false,
+          "explanation": "Embedded arguments are positional in the name"
+        },
+        {
+          "text": "Call File Check    server.log    Success",
+          "correct": false,
+          "explanation": "Must use the full keyword name with embedded values"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q27",
+      "question": "What role do quotes play in embedded argument keyword names?",
+      "type": "single",
+      "options": [
+        {
+          "text": "They are regular characters that improve readability and distinguish arguments",
+          "correct": true
+        },
+        {
+          "text": "They are required syntax for embedded arguments",
+          "correct": false,
+          "explanation": "Quotes are optional for readability"
+        },
+        {
+          "text": "They define string type for the argument",
+          "correct": false,
+          "explanation": "Quotes are just characters; they don't define types"
+        },
+        {
+          "text": "They must match in the keyword call",
+          "correct": false,
+          "explanation": "Quotes are part of the name pattern"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q28",
+      "question": "Can embedded arguments be mixed with regular arguments?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Yes, to manage complex data and enhance readability",
+          "correct": true
+        },
+        {
+          "text": "No, only one type is allowed per keyword",
+          "correct": false,
+          "explanation": "Mixing is supported and recommended for complex cases"
+        },
+        {
+          "text": "Yes, but only if embedded arguments come last",
+          "correct": false,
+          "explanation": "Both types can be mixed in any order"
+        },
+        {
+          "text": "No, embedded arguments replace all regular arguments",
+          "correct": false,
+          "explanation": "Both types can coexist"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q29",
+      "question": "Analyze this example:\n\n```robot\n*** Keywords ***\nthe number of ${animals} should be\n    [Arguments]    ${count}\n    ${current}=    Get Animal Count    ${animals}\n    Should Be Equal As Numbers    ${current}    ${count}\n```\n\nHow is this keyword called with animals='dogs' and count=3?",
+      "type": "single",
+      "options": [
+        {
+          "text": "the number of dogs should be    3",
+          "correct": true
+        },
+        {
+          "text": "the number of ${animals} should be    dogs    3",
+          "correct": false,
+          "explanation": "'dogs' goes in the name; only count is passed as regular argument"
+        },
+        {
+          "text": "the number of should be    animals=dogs    count=3",
+          "correct": false,
+          "explanation": "Embedded argument must be in the name"
+        },
+        {
+          "text": "the number of dogs should be count=3",
+          "correct": false,
+          "explanation": "Regular arguments need space separation"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q30",
+      "question": "What is the purpose of the RETURN statement?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To return values from a User Keyword to be used in further test steps",
+          "correct": true
+        },
+        {
+          "text": "To end keyword execution without returning values",
+          "correct": false,
+          "explanation": "RETURN both ends execution AND returns values"
+        },
+        {
+          "text": "To call another keyword",
+          "correct": false,
+          "explanation": "RETURN returns values, not calls keywords"
+        },
+        {
+          "text": "To document return values",
+          "correct": false,
+          "explanation": "RETURN actually returns values, not just documents them"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q31",
+      "question": "Is the RETURN statement case-sensitive?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Yes, it must be RETURN in uppercase",
+          "correct": true
+        },
+        {
+          "text": "No, return and RETURN work the same",
+          "correct": false,
+          "explanation": "RETURN is case-sensitive and must be uppercase"
+        },
+        {
+          "text": "Only in Python-based keywords",
+          "correct": false,
+          "explanation": "RETURN is case-sensitive in all contexts"
+        },
+        {
+          "text": "Depends on the RF version",
+          "correct": false,
+          "explanation": "RETURN is consistently case-sensitive"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q32",
+      "question": "Examine this keyword:\n\n```robot\n*** Keywords ***\nGet File Name From Path\n    [Arguments]    ${file_path}\n    ${path}    ${file}=    Split Path    ${file_path}\n    RETURN    ${file}\n```\n\nIf called with 'server/logs/app.log', what is returned?",
+      "type": "single",
+      "options": [
+        {
+          "text": "app.log",
+          "correct": true
+        },
+        {
+          "text": "server/logs",
+          "correct": false,
+          "explanation": "${file} contains 'app.log', which is returned"
+        },
+        {
+          "text": "Both 'server/logs' and 'app.log'",
+          "correct": false,
+          "explanation": "Only ${file} is returned, not ${path}"
+        },
+        {
+          "text": "The entire path 'server/logs/app.log'",
+          "correct": false,
+          "explanation": "Only ${file} (the filename) is returned"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q33",
+      "question": "Can RETURN return multiple values?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Yes, which can be assigned to multiple variables or stored as a list",
+          "correct": true
+        },
+        {
+          "text": "No, only one value can be returned",
+          "correct": false,
+          "explanation": "Multiple values can be returned"
+        },
+        {
+          "text": "Yes, but only up to 3 values",
+          "correct": false,
+          "explanation": "Any number of values can be returned"
+        },
+        {
+          "text": "Yes, but they must be the same type",
+          "correct": false,
+          "explanation": "Different types can be returned together"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q34",
+      "question": "Where is the RETURN statement normally placed?",
+      "type": "single",
+      "options": [
+        {
+          "text": "At the end of the keyword, but can be used earlier for conditional early exit",
+          "correct": true
+        },
+        {
+          "text": "Only at the very end; it cannot be placed elsewhere",
+          "correct": false,
+          "explanation": "RETURN can be used conditionally earlier"
+        },
+        {
+          "text": "At the beginning to declare return type",
+          "correct": false,
+          "explanation": "RETURN executes and ends the keyword"
+        },
+        {
+          "text": "In the [Arguments] section",
+          "correct": false,
+          "explanation": "RETURN is in the keyword body, not [Arguments]"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q35",
+      "question": "What happens when RETURN is executed?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Keyword execution ends and returns to the caller with the specified values",
+          "correct": true
+        },
+        {
+          "text": "Only the values are returned; execution continues",
+          "correct": false,
+          "explanation": "RETURN ends execution"
+        },
+        {
+          "text": "The entire test case stops",
+          "correct": false,
+          "explanation": "Only the keyword stops; test continues"
+        },
+        {
+          "text": "Values are logged but not returned",
+          "correct": false,
+          "explanation": "Values are returned to the caller"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q36",
+      "question": "Can RETURN directly return a value from a keyword call without storing it first?",
+      "type": "single",
+      "options": [
+        {
+          "text": "No, the value must be stored in a variable first, then returned",
+          "correct": true
+        },
+        {
+          "text": "Yes, like: RETURN Get File path.txt",
+          "correct": false,
+          "explanation": "RF requires storing in a variable first"
+        },
+        {
+          "text": "Yes, but only for built-in keywords",
+          "correct": false,
+          "explanation": "All return values must be stored first"
+        },
+        {
+          "text": "Yes, using special syntax RETURN CALL Get File",
+          "correct": false,
+          "explanation": "No such syntax exists; store in variable first"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q37",
+      "question": "What should keyword conventions address? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Naming case (Title Case, camelCase, snake_case, etc.)",
+          "correct": true
+        },
+        {
+          "text": "Grammatical form/mood (Imperative, Declarative)",
+          "correct": true
+        },
+        {
+          "text": "Word/character count limits",
+          "correct": true
+        },
+        {
+          "text": "Argument count limits",
+          "correct": true
+        },
+        {
+          "text": "Documentation structure and requirements",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q38",
+      "question": "What naming case options are mentioned for keyword conventions?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Title Case",
+          "correct": true
+        },
+        {
+          "text": "camelCase",
+          "correct": true
+        },
+        {
+          "text": "snake_case",
+          "correct": true
+        },
+        {
+          "text": "kebab-case",
+          "correct": true
+        },
+        {
+          "text": "sentence case",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q39",
+      "question": "Which naming cases are recommended from a readability perspective?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Title Case",
+          "correct": true
+        },
+        {
+          "text": "Sentence case",
+          "correct": true
+        },
+        {
+          "text": "kebab-case",
+          "correct": false,
+          "explanation": "Title Case and Sentence case are specifically recommended"
+        },
+        {
+          "text": "snake_case",
+          "correct": false,
+          "explanation": "Title Case and Sentence case are specifically recommended"
+        }
+      ]
+    },
+    {
+      "id": "ch3-3-q40",
+      "question": "What grammatical forms are mentioned for keyword conventions?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Imperative for actions (Click Button, Verify Text)",
+          "correct": true
+        },
+        {
+          "text": "Declarative/Indicative for assertions (Text Should Be, Element Should Be Visible)",
+          "correct": true
+        },
+        {
+          "text": "Subjunctive mood required",
+          "correct": false,
+          "explanation": "Imperative and Declarative are mentioned, not Subjunctive"
+        },
+        {
+          "text": "Past tense for completed actions",
+          "correct": false,
+          "explanation": "Imperative and Declarative are the mentioned forms"
+        }
+      ]
+    }
+  ]
+}

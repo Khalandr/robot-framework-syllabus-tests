@@ -1,0 +1,781 @@
+{
+  "chapter": "5-Advanced Topics",
+  "subchapter": "5.1-Advanced Variables",
+  "questions": [
+    {
+      "id": "ch5-1-q1",
+      "question": "What are the two main types of variables based on how they are created in Robot Framework?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Statically defined or imported variables",
+          "correct": true
+        },
+        {
+          "text": "Dynamically created variables during execution",
+          "correct": true
+        },
+        {
+          "text": "Compiled variables",
+          "correct": false,
+          "explanation": "Robot Framework doesn't compile variables; the types are static and dynamic"
+        },
+        {
+          "text": "Temporary variables",
+          "correct": false,
+          "explanation": "This is not one of the two main categorizations; the types are static and dynamic"
+        }
+      ]
+    },
+    {
+      "id": "ch5-1-q2",
+      "question": "What is the rule of thumb for priority of statically defined or imported variables?",
+      "type": "single",
+      "options": [
+        {
+          "text": "First come, first served",
+          "correct": true
+        },
+        {
+          "text": "Last one wins",
+          "correct": false,
+          "explanation": "'Last one wins' applies to dynamically created variables, not static ones"
+        },
+        {
+          "text": "Highest scope wins",
+          "correct": false,
+          "explanation": "For static variables, the time of definition matters most"
+        },
+        {
+          "text": "Alphabetical order",
+          "correct": false,
+          "explanation": "Variable priority is not based on alphabetical order"
+        }
+      ]
+    },
+    {
+      "id": "ch5-1-q3",
+      "question": "What is the rule of thumb for priority of dynamically created variables?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Last one wins",
+          "correct": true
+        },
+        {
+          "text": "First come, first served",
+          "correct": false,
+          "explanation": "'First come, first served' applies to static variables, not dynamic ones"
+        },
+        {
+          "text": "Lowest scope wins",
+          "correct": false,
+          "explanation": "While scope matters, the rule is 'Last one wins' as long as in scope"
+        },
+        {
+          "text": "Random selection",
+          "correct": false,
+          "explanation": "Variable resolution is deterministic, not random"
+        }
+      ]
+    },
+    {
+      "id": "ch5-1-q4",
+      "question": "In what order do statically defined variables have priority (highest to lowest)?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Global command-line variables → *** Variables *** section → Resource files",
+          "correct": true
+        },
+        {
+          "text": "*** Variables *** section → Global command-line variables → Resource files",
+          "correct": false,
+          "explanation": "Command-line variables have the highest priority"
+        },
+        {
+          "text": "Resource files → *** Variables *** section → Global command-line variables",
+          "correct": false,
+          "explanation": "Command-line variables have the highest priority, resource files the lowest"
+        },
+        {
+          "text": "All have equal priority; last definition wins",
+          "correct": false,
+          "explanation": "There is a specific priority order based on time of definition"
+        }
+      ]
+    },
+    {
+      "id": "ch5-1-q5",
+      "question": "Can dynamically created variables overwrite or shadow statically defined variables?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Yes, dynamically created variables have higher priority than static variables",
+          "correct": true
+        },
+        {
+          "text": "No, static variables always have higher priority",
+          "correct": false,
+          "explanation": "Dynamic variables can overwrite or shadow static ones"
+        },
+        {
+          "text": "Only if the static variable was from a resource file",
+          "correct": false,
+          "explanation": "Dynamic variables can overwrite any static variable"
+        },
+        {
+          "text": "No, attempting to overwrite causes an error",
+          "correct": false,
+          "explanation": "Overwriting is allowed and expected behavior"
+        }
+      ]
+    },
+    {
+      "id": "ch5-1-q6",
+      "question": "What happens when a local variable defined as a keyword argument has the same name as a suite variable?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The local variable has higher priority within the keyword body; once the keyword exits, the suite variable is back in scope",
+          "correct": true
+        },
+        {
+          "text": "The suite variable always has higher priority",
+          "correct": false,
+          "explanation": "Local variables shadow suite variables within their scope"
+        },
+        {
+          "text": "Both variables coexist and can be accessed independently",
+          "correct": false,
+          "explanation": "The local variable shadows the suite variable within its scope"
+        },
+        {
+          "text": "Robot Framework raises an error about duplicate variable names",
+          "correct": false,
+          "explanation": "Shadowing is allowed; no error is raised"
+        }
+      ]
+    },
+    {
+      "id": "ch5-1-q7",
+      "question": "What are the four variable scopes in Robot Framework?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Global scope",
+          "correct": true
+        },
+        {
+          "text": "Suite scope",
+          "correct": true
+        },
+        {
+          "text": "Test|Task scope",
+          "correct": true
+        },
+        {
+          "text": "Local scope",
+          "correct": true
+        },
+        {
+          "text": "Module scope",
+          "correct": false,
+          "explanation": "There is no module scope in Robot Framework"
+        }
+      ]
+    },
+    {
+      "id": "ch5-1-q8",
+      "question": "How can global scope variables be created?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Set from command line using --variable or --variablefile (static)",
+          "correct": true
+        },
+        {
+          "text": "Created during execution using VAR syntax with scope=GLOBAL (dynamic)",
+          "correct": true
+        },
+        {
+          "text": "Defined in the *** Variables *** section (static)",
+          "correct": false,
+          "explanation": "*** Variables *** section creates suite scope variables, not global"
+        },
+        {
+          "text": "Imported from resource files (static)",
+          "correct": false,
+          "explanation": "Resource files provide suite scope variables, not global"
+        }
+      ]
+    },
+    {
+      "id": "ch5-1-q9",
+      "question": "What is the recommended naming convention for global variables?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Uppercase letters, like ${GLOBAL_VARIABLE}",
+          "correct": true
+        },
+        {
+          "text": "Lowercase letters, like ${global_variable}",
+          "correct": false,
+          "explanation": "Global variables should use uppercase to distinguish from local variables"
+        },
+        {
+          "text": "Mixed case, like ${GlobalVariable}",
+          "correct": false,
+          "explanation": "Global variables should use uppercase"
+        },
+        {
+          "text": "Prefix with 'global_', like ${global_myvar}",
+          "correct": false,
+          "explanation": "The convention is uppercase letters, not a prefix"
+        }
+      ]
+    },
+    {
+      "id": "ch5-1-q10",
+      "question": "What is the most common use case for global variables?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To define environment-specific or execution configurations like URLs, credentials, browser types, API keys",
+          "correct": true
+        },
+        {
+          "text": "To store temporary calculation results during test execution",
+          "correct": false,
+          "explanation": "Temporary results should use local variables, not global"
+        },
+        {
+          "text": "To share data between tests within a single suite",
+          "correct": false,
+          "explanation": "Suite scope variables are better for suite-specific sharing"
+        },
+        {
+          "text": "To define test data that changes frequently",
+          "correct": false,
+          "explanation": "Global variables are for configuration that should be consistent across execution"
+        }
+      ]
+    },
+    {
+      "id": "ch5-1-q11",
+      "question": "How can suite scope variables be created?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Defined in the *** Variables *** section of the suite file (static)",
+          "correct": true
+        },
+        {
+          "text": "Imported from resource or variable files (static)",
+          "correct": true
+        },
+        {
+          "text": "Set during execution using VAR syntax with scope=SUITE (dynamic)",
+          "correct": true
+        },
+        {
+          "text": "Defined on command line with --variable (static)",
+          "correct": false,
+          "explanation": "Command-line variables are global scope, not suite scope"
+        }
+      ]
+    },
+    {
+      "id": "ch5-1-q12",
+      "question": "Are suite scope variables from initialization files available in lower-level suites?",
+      "type": "single",
+      "options": [
+        {
+          "text": "No, suite scope is not recursive; use resource files to share variables across suites",
+          "correct": true
+        },
+        {
+          "text": "Yes, they are automatically available to all child suites",
+          "correct": false,
+          "explanation": "Suite scope is not recursive; variables don't propagate to child suites"
+        },
+        {
+          "text": "Yes, but only to immediate child suites, not deeper levels",
+          "correct": false,
+          "explanation": "Suite scope is not recursive at any level"
+        },
+        {
+          "text": "Yes, if the child suite explicitly imports them",
+          "correct": false,
+          "explanation": "Suite variables cannot be imported; use resource files for sharing"
+        }
+      ]
+    },
+    {
+      "id": "ch5-1-q13",
+      "question": "What happens when a suite-level variable is dynamically defined with the same name as a global command-line variable?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The suite variable shadows the global variable as long as the suite is in scope; then the global variable returns to scope",
+          "correct": true
+        },
+        {
+          "text": "The global variable always has higher priority and cannot be shadowed",
+          "correct": false,
+          "explanation": "Dynamic suite variables can shadow global variables within their scope"
+        },
+        {
+          "text": "Robot Framework raises an error about conflicting variable definitions",
+          "correct": false,
+          "explanation": "Shadowing is allowed; no error is raised"
+        },
+        {
+          "text": "The suite variable permanently overwrites the global variable",
+          "correct": false,
+          "explanation": "The shadowing is temporary; global variable returns when suite exits"
+        }
+      ]
+    },
+    {
+      "id": "ch5-1-q14",
+      "question": "What is the recommended naming convention for suite variables?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Uppercase letters, like ${SUITE_VARIABLE}",
+          "correct": true
+        },
+        {
+          "text": "Lowercase letters, like ${suite_variable}",
+          "correct": false,
+          "explanation": "Suite variables should use uppercase to distinguish from local variables"
+        },
+        {
+          "text": "Mixed case, like ${SuiteVariable}",
+          "correct": false,
+          "explanation": "Suite variables should use uppercase"
+        },
+        {
+          "text": "No specific convention; any case is acceptable",
+          "correct": false,
+          "explanation": "The convention is uppercase letters"
+        }
+      ]
+    },
+    {
+      "id": "ch5-1-q15",
+      "question": "How can test|task scope variables be created?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Only dynamically during test execution using VAR syntax with scope=TEST or scope=TASK",
+          "correct": true
+        },
+        {
+          "text": "Statically in the *** Variables *** section with [Test] prefix",
+          "correct": false,
+          "explanation": "Test|Task scope variables can only be created dynamically during execution"
+        },
+        {
+          "text": "Imported from resource files with TEST scope marker",
+          "correct": false,
+          "explanation": "Test|Task variables cannot be imported; they are created dynamically"
+        },
+        {
+          "text": "Using command-line option --test-variable",
+          "correct": false,
+          "explanation": "Command-line creates global variables; test scope is dynamic only"
+        }
+      ]
+    },
+    {
+      "id": "ch5-1-q16",
+      "question": "Can test|task scope variables be created in suite setup or teardown?",
+      "type": "single",
+      "options": [
+        {
+          "text": "No, test|task variables can only be created within test|task execution",
+          "correct": true
+        },
+        {
+          "text": "Yes, but only in suite setup, not teardown",
+          "correct": false,
+          "explanation": "Test|Task variables cannot be created in suite setup or teardown"
+        },
+        {
+          "text": "Yes, they can be created in both setup and teardown",
+          "correct": false,
+          "explanation": "Test|Task variables are only available within test|task scope"
+        },
+        {
+          "text": "Yes, if scope=TEST is explicitly specified",
+          "correct": false,
+          "explanation": "Test|Task scope only exists during test|task execution"
+        }
+      ]
+    },
+    {
+      "id": "ch5-1-q17",
+      "question": "What is the recommended naming convention for local variables?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Lowercase letters, like ${local_variable}",
+          "correct": true
+        },
+        {
+          "text": "Uppercase letters, like ${LOCAL_VARIABLE}",
+          "correct": false,
+          "explanation": "Local variables should use lowercase; uppercase is for global/suite variables"
+        },
+        {
+          "text": "Mixed case, like ${LocalVariable}",
+          "correct": false,
+          "explanation": "Local variables should use lowercase"
+        },
+        {
+          "text": "No specific convention; any case is acceptable",
+          "correct": false,
+          "explanation": "The convention is lowercase letters"
+        }
+      ]
+    },
+    {
+      "id": "ch5-1-q18",
+      "question": "How can local scope variables be created?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Variables assigned by keyword return values",
+          "correct": true
+        },
+        {
+          "text": "Variables defined using VAR syntax (with optional scope=LOCAL)",
+          "correct": true
+        },
+        {
+          "text": "Keyword arguments",
+          "correct": true
+        },
+        {
+          "text": "Variables imported from resource files",
+          "correct": false,
+          "explanation": "Imported variables have suite scope, not local scope"
+        }
+      ]
+    },
+    {
+      "id": "ch5-1-q19",
+      "question": "What variable scope should be preferred for most use cases?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Local scope, as it has the fewest side effects",
+          "correct": true
+        },
+        {
+          "text": "Suite scope, as it allows sharing across tests",
+          "correct": false,
+          "explanation": "Local scope should be preferred unless sharing is explicitly needed"
+        },
+        {
+          "text": "Global scope, as it provides maximum flexibility",
+          "correct": false,
+          "explanation": "Global scope should be used sparingly for configuration, not general use"
+        },
+        {
+          "text": "Test scope, as it isolates test data",
+          "correct": false,
+          "explanation": "Local scope is preferred; test scope should be used cautiously"
+        }
+      ]
+    },
+    {
+      "id": "ch5-1-q20",
+      "question": "What command-line option is used to define global variables?",
+      "type": "single",
+      "options": [
+        {
+          "text": "--variable or -v",
+          "correct": true
+        },
+        {
+          "text": "--global or -g",
+          "correct": false,
+          "explanation": "The correct option is --variable or -v"
+        },
+        {
+          "text": "--var or -V",
+          "correct": false,
+          "explanation": "The correct option is --variable or -v (lowercase)"
+        },
+        {
+          "text": "--set or -s",
+          "correct": false,
+          "explanation": "The correct option is --variable or -v"
+        }
+      ]
+    },
+    {
+      "id": "ch5-1-q21",
+      "question": "```bash\nrobot --variable name:Robot .\n```\n\nWhat variable is created and what is its value?",
+      "type": "single",
+      "options": [
+        {
+          "text": "${name} with value 'Robot' (string)",
+          "correct": true
+        },
+        {
+          "text": "${name:Robot} with empty value",
+          "correct": false,
+          "explanation": "The syntax is name:value; name is the variable, value after colon"
+        },
+        {
+          "text": "@{name} with value ['Robot']",
+          "correct": false,
+          "explanation": "Command-line variables are scalar strings, not lists"
+        },
+        {
+          "text": "${variable} with value 'name:Robot'",
+          "correct": false,
+          "explanation": "The syntax name:value creates variable ${name} with value 'Robot'"
+        }
+      ]
+    },
+    {
+      "id": "ch5-1-q22",
+      "question": "```bash\nrobot -v \"hello:Hello world\" .\n```\n\nWhat is the value of ${hello}?",
+      "type": "single",
+      "options": [
+        {
+          "text": "'Hello world' (string with space)",
+          "correct": true
+        },
+        {
+          "text": "'Hello' (only first word)",
+          "correct": false,
+          "explanation": "Quotes preserve the entire value including spaces"
+        },
+        {
+          "text": "['Hello', 'world'] (list)",
+          "correct": false,
+          "explanation": "Command-line variables are scalar strings, not lists"
+        },
+        {
+          "text": "'Hello:world' (colon preserved)",
+          "correct": false,
+          "explanation": "The colon separates variable name from value; it's not part of the value"
+        }
+      ]
+    },
+    {
+      "id": "ch5-1-q23",
+      "question": "What happens when using @{} syntax to assign a return value from a keyword that returns a list-like value (tuple, set, etc.)?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The value is automatically converted to a list",
+          "correct": true
+        },
+        {
+          "text": "The value remains in its original type",
+          "correct": false,
+          "explanation": "@{} syntax converts list-like values to lists"
+        },
+        {
+          "text": "Robot Framework raises a type error",
+          "correct": false,
+          "explanation": "List-like values can be converted to lists with @{} syntax"
+        },
+        {
+          "text": "Only the first element is assigned",
+          "correct": false,
+          "explanation": "The entire list-like value is converted to a list"
+        }
+      ]
+    },
+    {
+      "id": "ch5-1-q24",
+      "question": "Are strings converted to lists when assigned to a list variable using @{} syntax?",
+      "type": "single",
+      "options": [
+        {
+          "text": "No, strings are explicitly NOT converted to prevent mistakes",
+          "correct": true
+        },
+        {
+          "text": "Yes, strings are split into individual characters as a list",
+          "correct": false,
+          "explanation": "Strings are explicitly not converted even though they are iterable in Python"
+        },
+        {
+          "text": "Yes, strings are split by whitespace into word lists",
+          "correct": false,
+          "explanation": "Strings are not converted to lists"
+        },
+        {
+          "text": "Only if the string contains commas",
+          "correct": false,
+          "explanation": "Strings are not converted regardless of content"
+        }
+      ]
+    },
+    {
+      "id": "ch5-1-q25",
+      "question": "```robot\n*** Variables ***\n@{participants}    Alice    Bob    Charlie\n\n*** Test Cases ***\nTest List Variables\n    Log Many    @{participants}\n    Log Many    ${participants}\n```\n\nWhat is the difference between these two Log Many calls?",
+      "type": "single",
+      "options": [
+        {
+          "text": "@{participants} unpacks to three arguments; ${participants} is one list argument",
+          "correct": true
+        },
+        {
+          "text": "They are identical; both unpack the list",
+          "correct": false,
+          "explanation": "@{} unpacks values; ${} passes the list as a single argument"
+        },
+        {
+          "text": "@{participants} logs only the first item; ${participants} logs all",
+          "correct": false,
+          "explanation": "@{} unpacks all items as separate arguments; ${} passes the list"
+        },
+        {
+          "text": "${participants} causes an error because it's a list variable",
+          "correct": false,
+          "explanation": "List variables can be accessed with ${} syntax"
+        }
+      ]
+    },
+    {
+      "id": "ch5-1-q26",
+      "question": "How do you access individual elements in a list variable?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "${var}[0] for the first element",
+          "correct": true
+        },
+        {
+          "text": "${var}[-1] for the last element",
+          "correct": true
+        },
+        {
+          "text": "${var}[1:3] for slicing",
+          "correct": true
+        },
+        {
+          "text": "@{var}[0] for the first element",
+          "correct": false,
+          "explanation": "Use ${} syntax for indexing, not @{}"
+        }
+      ]
+    },
+    {
+      "id": "ch5-1-q27",
+      "question": "What is the difference between assigning with &{dict} vs ${dict} for dictionary return values?",
+      "type": "single",
+      "options": [
+        {
+          "text": "&{dict} converts to Robot Framework Dictionary (DotDict) enabling dot-access; ${dict} keeps it as a regular dictionary",
+          "correct": true
+        },
+        {
+          "text": "They are identical; both create the same dictionary type",
+          "correct": false,
+          "explanation": "&{} creates a special DotDict with dot-access capability"
+        },
+        {
+          "text": "&{dict} unpacks keys as separate variables; ${dict} keeps the dictionary",
+          "correct": false,
+          "explanation": "That's for accessing, not assigning; &{} creates DotDict on assignment"
+        },
+        {
+          "text": "${dict} is required; &{dict} causes an error",
+          "correct": false,
+          "explanation": "Both are valid; &{} provides additional dot-access functionality"
+        }
+      ]
+    },
+    {
+      "id": "ch5-1-q28",
+      "question": "```robot\n&{participant}    name=Alice    age=23\n```\n\nHow can you access the 'name' value from this Robot Framework Dictionary?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "${participant.name} (dot-access)",
+          "correct": true
+        },
+        {
+          "text": "${participant}[name] (bracket-access)",
+          "correct": true
+        },
+        {
+          "text": "@{participant.name} (list unpacking)",
+          "correct": false,
+          "explanation": "This is a dictionary, not a list; use ${} with dot or bracket access"
+        },
+        {
+          "text": "&{participant.name} (dictionary unpacking)",
+          "correct": false,
+          "explanation": "Use ${} syntax to access values; &{} is for unpacking key-value pairs"
+        }
+      ]
+    },
+    {
+      "id": "ch5-1-q29",
+      "question": "```robot\n*** Variables ***\n&{participant}    name=Bob    age=42\n\n*** Keywords ***\nLog Participant\n    [Arguments]    ${name}    ${age}\n    Log    ${name} is ${age} years old\n\n*** Test Cases ***\nTest\n    Log Participant    &{participant}\n```\n\nWhat does &{participant} do when passed to Log Participant?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Unpacks to two named arguments: name=Bob and age=42",
+          "correct": true
+        },
+        {
+          "text": "Passes the entire dictionary as the first argument",
+          "correct": false,
+          "explanation": "&{} syntax unpacks dictionary to named arguments"
+        },
+        {
+          "text": "Causes an error because dictionaries cannot be passed to keywords",
+          "correct": false,
+          "explanation": "&{} syntax unpacks dictionaries to named arguments"
+        },
+        {
+          "text": "Creates two variables ${name} and ${age} in the test scope",
+          "correct": false,
+          "explanation": "&{} unpacks as keyword arguments, not creating separate variables"
+        }
+      ]
+    },
+    {
+      "id": "ch5-1-q30",
+      "question": "Which built-in variables provide information about file system paths?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "${CURDIR} - absolute path to directory where current suite/resource file is located",
+          "correct": true
+        },
+        {
+          "text": "${EXECDIR} - absolute path to directory where test execution was started",
+          "correct": true
+        },
+        {
+          "text": "${OUTPUT_DIR} - absolute path to directory where output files are written",
+          "correct": true
+        },
+        {
+          "text": "${TEMPDIR} - absolute path to system temporary directory",
+          "correct": true
+        },
+        {
+          "text": "${HOMEDIR} - absolute path to user's home directory",
+          "correct": false,
+          "explanation": "${HOMEDIR} is not a built-in Robot Framework variable"
+        }
+      ]
+    }
+  ]
+}

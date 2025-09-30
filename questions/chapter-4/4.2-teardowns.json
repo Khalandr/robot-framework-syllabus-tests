@@ -1,0 +1,788 @@
+{
+  "chapter": "4-Test/Task Execution & Flow Control",
+  "subchapter": "4.2-Teardowns (Suite, Test|Task, Keyword)",
+  "questions": [
+    {
+      "id": "ch4-2-q1",
+      "question": "What problem does the Teardown functionality help prevent in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Issues when a preceding test|task fails and leaves the system in an unclean state, affecting subsequent tests|tasks",
+          "correct": true
+        },
+        {
+          "text": "Slow execution performance due to resource allocation overhead",
+          "correct": false,
+          "explanation": "Teardowns address cleanup and state management, not performance optimization"
+        },
+        {
+          "text": "Compilation errors when tests are executed in the wrong order",
+          "correct": false,
+          "explanation": "Robot Framework doesn't have compilation; teardowns address state cleanup"
+        },
+        {
+          "text": "Memory leaks from variable declarations in test cases",
+          "correct": false,
+          "explanation": "Teardowns are for explicit cleanup actions, not automatic memory management"
+        }
+      ]
+    },
+    {
+      "id": "ch4-2-q2",
+      "question": "What is a Teardown in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "A single keyword call with potential argument values that is executed after completion, regardless of outcome",
+          "correct": true
+        },
+        {
+          "text": "A sequence of keywords that execute only when tests fail",
+          "correct": false,
+          "explanation": "Teardowns are single keyword calls and run regardless of pass/fail status"
+        },
+        {
+          "text": "A special section in Robot Framework files like *** Teardown ***",
+          "correct": false,
+          "explanation": "There is no *** Teardown *** section; teardowns are defined using settings"
+        },
+        {
+          "text": "An automatic cleanup process that runs without explicit definition",
+          "correct": false,
+          "explanation": "Teardowns must be explicitly defined; they are not automatic"
+        }
+      ]
+    },
+    {
+      "id": "ch4-2-q3",
+      "question": "When is a Teardown executed?",
+      "type": "single",
+      "options": [
+        {
+          "text": "After the respective scope has completed execution, regardless of the outcome",
+          "correct": true
+        },
+        {
+          "text": "Only when the test|task or keyword fails",
+          "correct": false,
+          "explanation": "Teardowns execute regardless of success or failure"
+        },
+        {
+          "text": "Only when the test|task or keyword passes successfully",
+          "correct": false,
+          "explanation": "Teardowns execute regardless of the outcome"
+        },
+        {
+          "text": "Before the test|task body but after setup",
+          "correct": false,
+          "explanation": "Teardowns execute after completion, not before the body"
+        }
+      ]
+    },
+    {
+      "id": "ch4-2-q4",
+      "question": "Which are typical use cases for Teardowns?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Cleaning up the system under test after a test|task has been executed",
+          "correct": true
+        },
+        {
+          "text": "Closing connections to databases, files, or other resources",
+          "correct": true
+        },
+        {
+          "text": "Resetting the system under test to a known state",
+          "correct": true
+        },
+        {
+          "text": "Closing user sessions or logging out users",
+          "correct": true
+        },
+        {
+          "text": "Initializing test data before test execution",
+          "correct": false,
+          "explanation": "Data initialization is a Setup task, not a Teardown task"
+        }
+      ]
+    },
+    {
+      "id": "ch4-2-q5",
+      "question": "What status do not-executed keywords receive when a keyword with status FAIL causes Robot Framework to stop executing subsequent keywords?",
+      "type": "single",
+      "options": [
+        {
+          "text": "NOT RUN",
+          "correct": true
+        },
+        {
+          "text": "SKIPPED",
+          "correct": false,
+          "explanation": "The status is NOT RUN, not SKIPPED"
+        },
+        {
+          "text": "PENDING",
+          "correct": false,
+          "explanation": "There is no PENDING status; not-executed keywords are marked NOT RUN"
+        },
+        {
+          "text": "FAIL",
+          "correct": false,
+          "explanation": "NOT RUN status is different from FAIL; these keywords weren't attempted"
+        }
+      ]
+    },
+    {
+      "id": "ch4-2-q6",
+      "question": "When is a Suite Teardown executed?",
+      "type": "single",
+      "options": [
+        {
+          "text": "After all tests|tasks and all child suites in a suite have been executed",
+          "correct": true
+        },
+        {
+          "text": "After each test|task in the suite individually",
+          "correct": false,
+          "explanation": "This describes Test Teardown, not Suite Teardown"
+        },
+        {
+          "text": "Before child suites but after all tests|tasks in the parent suite",
+          "correct": false,
+          "explanation": "Suite Teardown runs after both tests and child suites complete"
+        },
+        {
+          "text": "Only if all tests|tasks in the suite passed",
+          "correct": false,
+          "explanation": "Suite Teardown runs regardless of test outcomes"
+        }
+      ]
+    },
+    {
+      "id": "ch4-2-q7",
+      "question": "Does Suite Teardown execute if the Suite Setup fails?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Yes, Suite Teardown executes even if Suite Setup fails",
+          "correct": true
+        },
+        {
+          "text": "No, if Setup fails, Teardown is skipped",
+          "correct": false,
+          "explanation": "Teardown always runs regardless of Setup status"
+        },
+        {
+          "text": "Yes, but only if at least one test was attempted",
+          "correct": false,
+          "explanation": "Suite Teardown runs even if no tests were executed due to Setup failure"
+        },
+        {
+          "text": "No, Suite Teardown requires successful Setup execution",
+          "correct": false,
+          "explanation": "Teardown runs regardless of Setup success or failure"
+        }
+      ]
+    },
+    {
+      "id": "ch4-2-q8",
+      "question": "What happens if a Suite Teardown fails?",
+      "type": "single",
+      "options": [
+        {
+          "text": "All tests|tasks in the suite are marked as failed in reports and logs",
+          "correct": true
+        },
+        {
+          "text": "Only the Suite Teardown itself is marked as failed; test results are unaffected",
+          "correct": false,
+          "explanation": "Suite Teardown failure causes all tests in the suite to be marked as failed"
+        },
+        {
+          "text": "The suite is retried once before marking tests as failed",
+          "correct": false,
+          "explanation": "There is no automatic retry mechanism for Suite Teardown"
+        },
+        {
+          "text": "Only tests that passed are marked as failed; already-failed tests remain failed",
+          "correct": false,
+          "explanation": "All tests in the suite are marked as failed when Suite Teardown fails"
+        }
+      ]
+    },
+    {
+      "id": "ch4-2-q9",
+      "question": "What happens when a keyword within a Suite Teardown fails?",
+      "type": "single",
+      "options": [
+        {
+          "text": "All keywords within the Suite Teardown are still executed, even if one fails",
+          "correct": true
+        },
+        {
+          "text": "Execution of the Suite Teardown stops at the failed keyword",
+          "correct": false,
+          "explanation": "Teardowns continue executing all keywords even when some fail"
+        },
+        {
+          "text": "The failed keyword is retried once before continuing",
+          "correct": false,
+          "explanation": "There is no automatic retry in teardowns"
+        },
+        {
+          "text": "Only remaining keywords without dependencies on the failed keyword execute",
+          "correct": false,
+          "explanation": "All keywords in the teardown execute regardless of failures"
+        }
+      ]
+    },
+    {
+      "id": "ch4-2-q10",
+      "question": "```robot\n*** Settings ***\nSuite Teardown    Close All Resources    force=True\n```\n\nWhat does this Suite Teardown do?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Calls 'Close All Resources' keyword with named argument force=True after all tests and child suites complete",
+          "correct": true
+        },
+        {
+          "text": "Calls 'Close All Resources' after each test with the force parameter",
+          "correct": false,
+          "explanation": "Suite Teardown runs once after all tests, not after each test"
+        },
+        {
+          "text": "Forces all resources to close even if Setup fails",
+          "correct": false,
+          "explanation": "While it does run even if Setup fails, 'force=True' is an argument to the keyword, not a Suite Teardown setting"
+        },
+        {
+          "text": "Defines a variable ${force} with value True for use in teardown",
+          "correct": false,
+          "explanation": "This is a keyword call with an argument, not a variable definition"
+        }
+      ]
+    },
+    {
+      "id": "ch4-2-q11",
+      "question": "When is a Test|Task Teardown executed?",
+      "type": "single",
+      "options": [
+        {
+          "text": "After a single test|task body has been executed",
+          "correct": true
+        },
+        {
+          "text": "After all tests|tasks in the suite have been executed",
+          "correct": false,
+          "explanation": "This describes Suite Teardown, not Test|Task Teardown"
+        },
+        {
+          "text": "Before the test|task body but after setup",
+          "correct": false,
+          "explanation": "Teardown runs after the test body, not before"
+        },
+        {
+          "text": "Only after successful test|task execution",
+          "correct": false,
+          "explanation": "Test|Task Teardown runs regardless of test success or failure"
+        }
+      ]
+    },
+    {
+      "id": "ch4-2-q12",
+      "question": "Does Test|Task Teardown execute if the Test|Task Setup fails?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Yes, Test|Task Teardown executes even if Test|Task Setup fails",
+          "correct": true
+        },
+        {
+          "text": "No, Teardown requires successful Setup execution",
+          "correct": false,
+          "explanation": "Teardown always runs regardless of Setup status"
+        },
+        {
+          "text": "Yes, but only if at least one keyword in the test body was executed",
+          "correct": false,
+          "explanation": "Teardown runs even if the test body wasn't executed due to Setup failure"
+        },
+        {
+          "text": "No, if Setup fails, the entire test including Teardown is skipped",
+          "correct": false,
+          "explanation": "The test body is skipped but Teardown still runs"
+        }
+      ]
+    },
+    {
+      "id": "ch4-2-q13",
+      "question": "Where can you define a default Test|Task Teardown that applies to all tests|tasks in a suite?",
+      "type": "single",
+      "options": [
+        {
+          "text": "In the *** Settings *** section using the Test Teardown or Task Teardown setting",
+          "correct": true
+        },
+        {
+          "text": "In the *** Variables *** section as ${TEST_TEARDOWN}",
+          "correct": false,
+          "explanation": "Test Teardown is a setting, not a variable"
+        },
+        {
+          "text": "In each test|task using the [Teardown] tag",
+          "correct": false,
+          "explanation": "[Teardown] is for individual test overrides, not default settings"
+        },
+        {
+          "text": "In a separate teardown.robot resource file",
+          "correct": false,
+          "explanation": "Default Test Teardown is defined in the suite's *** Settings *** section"
+        }
+      ]
+    },
+    {
+      "id": "ch4-2-q14",
+      "question": "```robot\n*** Settings ***\nTest Teardown    Logout User\n\n*** Test Cases ***\nCustom Teardown Test\n    Perform Test Steps\n    [Teardown]    Cleanup Specific Data\n```\n\nWhat teardown will be executed for 'Custom Teardown Test'?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Cleanup Specific Data (the local [Teardown] overrides the default)",
+          "correct": true
+        },
+        {
+          "text": "Both Logout User and Cleanup Specific Data (both are executed)",
+          "correct": false,
+          "explanation": "Local [Teardown] completely overrides the default"
+        },
+        {
+          "text": "Logout User (default Test Teardown always applies)",
+          "correct": false,
+          "explanation": "Local [Teardown] overrides the default Test Teardown"
+        },
+        {
+          "text": "No teardown (the [Teardown] tag disables teardown)",
+          "correct": false,
+          "explanation": "[Teardown] with a keyword name calls that keyword; only [Teardown] NONE disables teardown"
+        }
+      ]
+    },
+    {
+      "id": "ch4-2-q15",
+      "question": "How do you disable a Test|Task Teardown for a specific test|task?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Use [Teardown] NONE in the test|task",
+          "correct": true
+        },
+        {
+          "text": "Use [Teardown] ${EMPTY} in the test|task",
+          "correct": false,
+          "explanation": "NONE is the specific keyword to disable teardown, not ${EMPTY}"
+        },
+        {
+          "text": "Omit the [Teardown] setting from the test|task",
+          "correct": false,
+          "explanation": "Omitting [Teardown] means the default Test Teardown will be used if defined"
+        },
+        {
+          "text": "Use [Disable Teardown] in the test|task",
+          "correct": false,
+          "explanation": "There is no [Disable Teardown] setting; use [Teardown] NONE"
+        }
+      ]
+    },
+    {
+      "id": "ch4-2-q16",
+      "question": "Is NONE case-sensitive when used to disable teardowns?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Yes, NONE must be in uppercase",
+          "correct": true
+        },
+        {
+          "text": "No, none, None, or NONE all work the same way",
+          "correct": false,
+          "explanation": "NONE is case-sensitive and must be uppercase"
+        },
+        {
+          "text": "Yes, but only for Test Teardown, not other teardown types",
+          "correct": false,
+          "explanation": "NONE is case-sensitive for all teardown types"
+        },
+        {
+          "text": "No, Robot Framework is case-insensitive for all keywords and settings",
+          "correct": false,
+          "explanation": "While keywords are generally case-insensitive, NONE is a special case-sensitive value"
+        }
+      ]
+    },
+    {
+      "id": "ch4-2-q17",
+      "question": "Where is it recommended to place the local [Teardown] setting in a test|task?",
+      "type": "single",
+      "options": [
+        {
+          "text": "As the last line of the test|task",
+          "correct": true
+        },
+        {
+          "text": "As the first line of the test|task, immediately after the test name",
+          "correct": false,
+          "explanation": "While functional, it's recommended to place it as the last line for readability"
+        },
+        {
+          "text": "Immediately before the keyword that might fail",
+          "correct": false,
+          "explanation": "Teardown is a test-level setting, not placed before specific keywords"
+        },
+        {
+          "text": "In the *** Settings *** section, not in the test|task body",
+          "correct": false,
+          "explanation": "Local overrides use [Teardown] in the test body; *** Settings *** is for defaults"
+        }
+      ]
+    },
+    {
+      "id": "ch4-2-q18",
+      "question": "What happens if a Test|Task Teardown fails?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The test|task is marked as failed in reports and logs",
+          "correct": true
+        },
+        {
+          "text": "The test|task result remains as it was (pass/fail); only teardown is marked as failed",
+          "correct": false,
+          "explanation": "Teardown failure causes the entire test to be marked as failed"
+        },
+        {
+          "text": "All remaining tests in the suite are also marked as failed",
+          "correct": false,
+          "explanation": "Only the current test is affected; other tests continue (unlike Suite Teardown)"
+        },
+        {
+          "text": "The teardown is automatically retried once",
+          "correct": false,
+          "explanation": "There is no automatic retry mechanism for teardowns"
+        }
+      ]
+    },
+    {
+      "id": "ch4-2-q19",
+      "question": "Which are typical use cases for Test|Task Teardown?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Logging out of an application after a test|task completes",
+          "correct": true
+        },
+        {
+          "text": "Deleting test data created during the test|task",
+          "correct": true
+        },
+        {
+          "text": "Restoring configurations altered during the test|task",
+          "correct": true
+        },
+        {
+          "text": "Distinguishing phases of a test|task (setup, steps, teardown)",
+          "correct": true
+        },
+        {
+          "text": "Closing services needed by all tests in the suite",
+          "correct": false,
+          "explanation": "Suite-wide service closure should be in Suite Teardown, not Test Teardown"
+        }
+      ]
+    },
+    {
+      "id": "ch4-2-q20",
+      "question": "When is a Keyword Teardown executed?",
+      "type": "single",
+      "options": [
+        {
+          "text": "After a user keyword body has been executed",
+          "correct": true
+        },
+        {
+          "text": "After any test that calls the keyword",
+          "correct": false,
+          "explanation": "Keyword Teardown runs when that specific keyword completes, not at test end"
+        },
+        {
+          "text": "Before the keyword's return statement",
+          "correct": false,
+          "explanation": "Teardown runs after the keyword body, including any return"
+        },
+        {
+          "text": "Only the last time the keyword is called in a suite",
+          "correct": false,
+          "explanation": "Keyword Teardown runs every time the keyword is called"
+        }
+      ]
+    },
+    {
+      "id": "ch4-2-q21",
+      "question": "Does Keyword Teardown execute if the keyword's setup fails?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Yes, Keyword Teardown executes even if the keyword's setup fails",
+          "correct": true
+        },
+        {
+          "text": "No, Teardown requires successful Setup execution",
+          "correct": false,
+          "explanation": "Teardown always runs regardless of Setup status"
+        },
+        {
+          "text": "Yes, but only if at least one keyword in the body was executed",
+          "correct": false,
+          "explanation": "Teardown runs even if the body wasn't executed due to Setup failure"
+        },
+        {
+          "text": "No, if Setup fails, the entire keyword including Teardown is skipped",
+          "correct": false,
+          "explanation": "The keyword body is skipped but Teardown still runs"
+        }
+      ]
+    },
+    {
+      "id": "ch4-2-q22",
+      "question": "```robot\n*** Keywords ***\nProcess Data\n    Open Data Connection\n    Process the Data\n    [Teardown]    Close Data Connection\n```\n\nWhere is it recommended to place the [Teardown] setting for readability?",
+      "type": "single",
+      "options": [
+        {
+          "text": "As the last line of the keyword (as shown in the example)",
+          "correct": true
+        },
+        {
+          "text": "As the first line after the keyword name",
+          "correct": false,
+          "explanation": "While functional, it's recommended as the last line for better readability"
+        },
+        {
+          "text": "Immediately after the [Setup] setting",
+          "correct": false,
+          "explanation": "Setup and Teardown are typically separated by the keyword body"
+        },
+        {
+          "text": "In the *** Settings *** section of the suite",
+          "correct": false,
+          "explanation": "Keyword Teardown is defined within the keyword, not in suite settings"
+        }
+      ]
+    },
+    {
+      "id": "ch4-2-q23",
+      "question": "What happens when a keyword within a Keyword Teardown fails?",
+      "type": "single",
+      "options": [
+        {
+          "text": "All keywords within the Keyword Teardown are still executed, even if one fails",
+          "correct": true
+        },
+        {
+          "text": "Execution of the Keyword Teardown stops at the failed keyword",
+          "correct": false,
+          "explanation": "Teardowns continue executing all keywords even when some fail"
+        },
+        {
+          "text": "The failed keyword is retried before continuing",
+          "correct": false,
+          "explanation": "There is no automatic retry mechanism"
+        },
+        {
+          "text": "Only critical keywords continue executing",
+          "correct": false,
+          "explanation": "All keywords in the teardown execute regardless of failures"
+        }
+      ]
+    },
+    {
+      "id": "ch4-2-q24",
+      "question": "Which are typical use cases for Keyword Teardown?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Closing temporary files or connections opened within the keyword",
+          "correct": true
+        },
+        {
+          "text": "Resetting variables or states altered during keyword execution",
+          "correct": true
+        },
+        {
+          "text": "Logging additional information after keyword execution",
+          "correct": true
+        },
+        {
+          "text": "Cleaning up the entire test environment after all tests complete",
+          "correct": false,
+          "explanation": "Environment cleanup after all tests is a Suite Teardown use case"
+        }
+      ]
+    },
+    {
+      "id": "ch4-2-q25",
+      "question": "```robot\n*** Settings ***\nSuite Setup     Initialize Database\nSuite Teardown  Cleanup Database\nTest Teardown   Reset Session\n\n*** Test Cases ***\nTest One\n    Perform Database Query\n\nTest Two\n    [Teardown]    NONE\n    Perform Another Query\n```\n\nWhich teardowns execute for 'Test Two'?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Only Suite Teardown (after all tests complete)",
+          "correct": true
+        },
+        {
+          "text": "Both Reset Session and Cleanup Database",
+          "correct": false,
+          "explanation": "[Teardown] NONE disables the Test Teardown; only Suite Teardown runs"
+        },
+        {
+          "text": "None, [Teardown] NONE disables all teardowns",
+          "correct": false,
+          "explanation": "[Teardown] NONE only disables the test-level teardown, not Suite Teardown"
+        },
+        {
+          "text": "Reset Session, because default Test Teardown cannot be overridden",
+          "correct": false,
+          "explanation": "[Teardown] NONE overrides and disables the default Test Teardown"
+        }
+      ]
+    },
+    {
+      "id": "ch4-2-q26",
+      "question": "```robot\n*** Keywords ***\nDatabase Operation\n    [Setup]    Connect To Database\n    Execute Query    ${SQL}\n    [Teardown]    Disconnect From Database\n```\n\nIf 'Connect To Database' fails, what executes?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Only 'Disconnect From Database' (Teardown runs even when Setup fails)",
+          "correct": true
+        },
+        {
+          "text": "Nothing executes because Setup failed",
+          "correct": false,
+          "explanation": "Teardown runs even when Setup fails"
+        },
+        {
+          "text": "Only 'Execute Query' and 'Disconnect From Database'",
+          "correct": false,
+          "explanation": "When Setup fails, the keyword body doesn't execute, but Teardown does"
+        },
+        {
+          "text": "All three keywords execute in sequence regardless of failures",
+          "correct": false,
+          "explanation": "Setup failure prevents body execution; only Teardown runs"
+        }
+      ]
+    },
+    {
+      "id": "ch4-2-q27",
+      "question": "What is the key benefit of Teardowns always executing regardless of outcome?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Ensures each test|task starts with a clean state, reducing dependencies between tests and improving reliability",
+          "correct": true
+        },
+        {
+          "text": "Improves test execution speed by parallelizing cleanup operations",
+          "correct": false,
+          "explanation": "Teardowns address reliability through cleanup, not performance optimization"
+        },
+        {
+          "text": "Allows tests to pass even when they would otherwise fail",
+          "correct": false,
+          "explanation": "Teardowns don't change test results; they ensure proper cleanup"
+        },
+        {
+          "text": "Prevents error messages from being logged in reports",
+          "correct": false,
+          "explanation": "Teardowns still log errors; the benefit is ensuring cleanup happens"
+        }
+      ]
+    },
+    {
+      "id": "ch4-2-q28",
+      "question": "```robot\n*** Settings ***\nTest Teardown    Logout User\n\n*** Test Cases ***\nTest With Default\n    Login User\n    Do Testing\n\nNo Teardown Test\n    Perform Steps\n    [Teardown]    NONE\n\nCustom Teardown\n    Do More Testing\n    [Teardown]    Special Cleanup\n```\n\nWhich tests execute 'Logout User'?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Only 'Test With Default'",
+          "correct": true
+        },
+        {
+          "text": "'Test With Default' and 'Custom Teardown'",
+          "correct": false,
+          "explanation": "'Custom Teardown' has its own teardown that overrides the default"
+        },
+        {
+          "text": "All three tests (default applies to all)",
+          "correct": false,
+          "explanation": "'No Teardown Test' uses NONE and 'Custom Teardown' has a different teardown"
+        },
+        {
+          "text": "None, because [Teardown] declarations disable the default",
+          "correct": false,
+          "explanation": "Only 'Test With Default' has no [Teardown] declaration, so it uses the default"
+        }
+      ]
+    },
+    {
+      "id": "ch4-2-q29",
+      "question": "```robot\n*** Settings ***\nSuite Setup     Start Services\nSuite Teardown  Stop Services\n\n*** Test Cases ***\nTest One\n    Keyword A    # Fails\n    Keyword B    # NOT RUN\n    Keyword C    # NOT RUN\n```\n\nWhat is the status of 'Stop Services' when Keyword A fails?",
+      "type": "single",
+      "options": [
+        {
+          "text": "It executes normally regardless of Keyword A's failure",
+          "correct": true
+        },
+        {
+          "text": "It receives status NOT RUN because a keyword in the test failed",
+          "correct": false,
+          "explanation": "Suite Teardown always executes regardless of test failures"
+        },
+        {
+          "text": "It executes with a modified cleanup-only mode",
+          "correct": false,
+          "explanation": "Teardown executes normally; there is no special mode"
+        },
+        {
+          "text": "It only executes if there are more tests after Test One",
+          "correct": false,
+          "explanation": "Suite Teardown executes after all tests regardless of how many tests there are"
+        }
+      ]
+    },
+    {
+      "id": "ch4-2-q30",
+      "question": "```robot\n*** Keywords ***\nMulti-Step Cleanup\n    Close Application    # Fails\n    Delete Temp Files    # Executes anyway\n    Reset Config         # Executes anyway\n```\n\nIf this is used as a Suite Teardown and 'Close Application' fails, what happens?",
+      "type": "single",
+      "options": [
+        {
+          "text": "All three keywords execute, and all tests in the suite are marked as failed",
+          "correct": true
+        },
+        {
+          "text": "Execution stops at 'Close Application' and tests remain with their original status",
+          "correct": false,
+          "explanation": "All teardown keywords execute even when some fail, and Suite Teardown failure marks all tests as failed"
+        },
+        {
+          "text": "Only 'Delete Temp Files' and 'Reset Config' execute; tests keep original status",
+          "correct": false,
+          "explanation": "All three execute, but Suite Teardown failure marks all tests as failed"
+        },
+        {
+          "text": "All three execute with a warning, but test results are not affected",
+          "correct": false,
+          "explanation": "Suite Teardown failure causes all tests to be marked as failed"
+        }
+      ]
+    }
+  ]
+}

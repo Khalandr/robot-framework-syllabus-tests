@@ -19,7 +19,17 @@ const questions = {
             'questions/chapter-2/2.4-keyword-imports.json',
             'questions/chapter-2/2.5-keyword-documentation.json',
             'questions/chapter-2/2.6-calling-keywords.json',
-            'questions/chapter-3/3.1-resource-file-structure.json'
+            'questions/chapter-3/3.1-resource-file-structure.json',
+            'questions/chapter-3/3.2-variables.json',
+            'questions/chapter-3/3.3-user-keywords.json',
+            'questions/chapter-3/3.4-data-driven-specification.json',
+            'questions/chapter-3/3.5-advanced-importing.json',
+            'questions/chapter-4/4.1-setups.json',
+            'questions/chapter-4/4.2-teardowns.json',
+            'questions/chapter-4/4.3-initialization-files.json',
+            'questions/chapter-4/4.4-tags-filtering.json',
+            'questions/chapter-4/4.5-skip-status.json',
+            'questions/chapter-5/5.1-advanced-variables.json'
             // Add more files as they are created
         ];
 

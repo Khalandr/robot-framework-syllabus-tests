@@ -1,0 +1,790 @@
+{
+  "chapter": "3-Keywords and Variables",
+  "subchapter": "3.4-Using Data-Driven Specification",
+  "questions": [
+    {
+      "id": "ch3-4-q1",
+      "question": "What is the purpose of Data-Driven Specification in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To separate test/task logic from data, enabling execution with multiple data sets efficiently",
+          "correct": true
+        },
+        {
+          "text": "To store test data in external databases",
+          "correct": false,
+          "explanation": "Data-Driven is about separating logic from data in the test structure"
+        },
+        {
+          "text": "To automatically generate test data",
+          "correct": false,
+          "explanation": "Data-Driven uses predefined data sets, not automatic generation"
+        },
+        {
+          "text": "To run tests faster with parallel execution",
+          "correct": false,
+          "explanation": "Data-Driven is about data separation, not parallel execution"
+        }
+      ]
+    },
+    {
+      "id": "ch3-4-q2",
+      "question": "How does Data-Driven Specification work?",
+      "type": "single",
+      "options": [
+        {
+          "text": "A single higher-level keyword represents the workflow; test data is defined as rows of input/output values",
+          "correct": true
+        },
+        {
+          "text": "Multiple keywords are created for each data set",
+          "correct": false,
+          "explanation": "One keyword is reused with different data sets"
+        },
+        {
+          "text": "Data is hardcoded in each test case",
+          "correct": false,
+          "explanation": "Data-Driven separates data from logic"
+        },
+        {
+          "text": "Tests query databases for data at runtime",
+          "correct": false,
+          "explanation": "Data is typically defined in the test file, not queried"
+        }
+      ]
+    },
+    {
+      "id": "ch3-4-q3",
+      "question": "What settings can be used to define test/task templates? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Test Template or Task Template at suite level in *** Settings ***",
+          "correct": true
+        },
+        {
+          "text": "[Template] at test/task level",
+          "correct": true
+        },
+        {
+          "text": "Test Data setting",
+          "correct": false,
+          "explanation": "No Test Data setting exists; use Test Template or [Template]"
+        },
+        {
+          "text": "[Data] setting at test/task level",
+          "correct": false,
+          "explanation": "Use [Template], not [Data]"
+        }
+      ]
+    },
+    {
+      "id": "ch3-4-q4",
+      "question": "What is the difference between Test Template and [Template]?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Test Template at suite level applies to all tests; [Template] at test level applies to individual test",
+          "correct": true
+        },
+        {
+          "text": "Test Template is for data-driven; [Template] is for behavior-driven",
+          "correct": false,
+          "explanation": "Both are for data-driven; difference is scope"
+        },
+        {
+          "text": "Test Template is mandatory; [Template] is optional",
+          "correct": false,
+          "explanation": "Both are optional; choice depends on whether template applies to all tests"
+        },
+        {
+          "text": "They are identical; just different syntax",
+          "correct": false,
+          "explanation": "Scope differs: suite-wide vs individual test"
+        }
+      ]
+    },
+    {
+      "id": "ch3-4-q5",
+      "question": "Can Test Setup and Test Teardown be used with templates?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Yes, Test Setup/Teardown can be used together with templates",
+          "correct": true
+        },
+        {
+          "text": "No, templates replace Setup/Teardown",
+          "correct": false,
+          "explanation": "Setup/Teardown and templates can work together"
+        },
+        {
+          "text": "Only Test Setup, not Test Teardown",
+          "correct": false,
+          "explanation": "Both Setup and Teardown can be used"
+        },
+        {
+          "text": "Only with [Template], not Test Template",
+          "correct": false,
+          "explanation": "Both template types support Setup/Teardown"
+        }
+      ]
+    },
+    {
+      "id": "ch3-4-q6",
+      "question": "Analyze this example:\n\n```robot\n*** Settings ***\nTest Setup       Open Login Page\nTest Template    Login With Invalid Credentials Should Fail\nTest Teardown    Close Page\n\n*** Test Cases ***    USERNAME    PASSWORD\nInvalid User Name    invalid     ${VALID PASSWORD}\nInvalid Password     ${VALID USER}    invalid\n```\n\nHow many tests are executed?",
+      "type": "single",
+      "options": [
+        {
+          "text": "2 separate tests: Invalid User Name and Invalid Password",
+          "correct": true
+        },
+        {
+          "text": "1 test with 2 data rows",
+          "correct": false,
+          "explanation": "This approach creates separate tests for each row"
+        },
+        {
+          "text": "3 tests including the template keyword",
+          "correct": false,
+          "explanation": "Only the named tests are executed"
+        },
+        {
+          "text": "0 tests; this is a resource file",
+          "correct": false,
+          "explanation": "This defines executable tests"
+        }
+      ]
+    },
+    {
+      "id": "ch3-4-q7",
+      "question": "In the multiple named test/task approach, what appears in the statistics and reports?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Each test/task appears separately with its own name",
+          "correct": true
+        },
+        {
+          "text": "Only a single aggregated result",
+          "correct": false,
+          "explanation": "Each named test appears separately"
+        },
+        {
+          "text": "Only failed tests appear",
+          "correct": false,
+          "explanation": "All tests appear in statistics"
+        },
+        {
+          "text": "The template keyword appears, not individual tests",
+          "correct": false,
+          "explanation": "Individual test names appear"
+        }
+      ]
+    },
+    {
+      "id": "ch3-4-q8",
+      "question": "What are the advantages of multiple named test/task with one template? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Each test is executed separately with its own name and data set",
+          "correct": true
+        },
+        {
+          "text": "Each test appears in statistics and reports",
+          "correct": true
+        },
+        {
+          "text": "Single tests can be filtered and re-executed",
+          "correct": true
+        },
+        {
+          "text": "Individual tests can be tagged",
+          "correct": true
+        },
+        {
+          "text": "Faster execution than other approaches",
+          "correct": false,
+          "explanation": "Execution speed is the same; benefits are organizational"
+        }
+      ]
+    },
+    {
+      "id": "ch3-4-q9",
+      "question": "What can be added to the *** Test Cases *** header line to improve readability?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Column header names to describe the data columns (e.g., USERNAME    PASSWORD)",
+          "correct": true
+        },
+        {
+          "text": "Test execution order numbers",
+          "correct": false,
+          "explanation": "Column headers describe data, not execution order"
+        },
+        {
+          "text": "The template keyword name",
+          "correct": false,
+          "explanation": "Template is in settings; headers describe data columns"
+        },
+        {
+          "text": "Nothing; headers cannot be customized",
+          "correct": false,
+          "explanation": "Column headers can be added for readability"
+        }
+      ]
+    },
+    {
+      "id": "ch3-4-q10",
+      "question": "Examine this structure:\n\n```robot\n*** Settings ***\nTest Template    Calculate And Verify\n\n*** Test Cases ***    EXPRESSION    EXPECTED\nAddition              2 + 2         4\nSubtraction          10 - 5         5\nMultiplication        3 * 4        12\n```\n\nWhat do 'EXPRESSION' and 'EXPECTED' represent?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Column headers describing the data (not executed as tests)",
+          "correct": true
+        },
+        {
+          "text": "Additional test cases to be executed",
+          "correct": false,
+          "explanation": "These are headers, not test cases"
+        },
+        {
+          "text": "Variables that must be defined",
+          "correct": false,
+          "explanation": "These are descriptive headers, not variables"
+        },
+        {
+          "text": "Keyword names to be called",
+          "correct": false,
+          "explanation": "These describe data columns, not keywords"
+        }
+      ]
+    },
+    {
+      "id": "ch3-4-q11",
+      "question": "In the named test/task with multiple data rows approach, where is the template typically defined?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Locally for each test/task using [Template] setting",
+          "correct": true
+        },
+        {
+          "text": "Always at suite level with Test Template",
+          "correct": false,
+          "explanation": "For multiple rows per test, [Template] is more common"
+        },
+        {
+          "text": "In the *** Variables *** section",
+          "correct": false,
+          "explanation": "Templates are defined in settings, not variables"
+        },
+        {
+          "text": "Templates are not used in this approach",
+          "correct": false,
+          "explanation": "This approach still uses templates"
+        }
+      ]
+    },
+    {
+      "id": "ch3-4-q12",
+      "question": "Analyze this example:\n\n```robot\n*** Test Cases ***\nInvalid Logins\n    [Template]    Login With Invalid Credentials Should Fail\n    invalid       ${VALID PASSWORD}\n    ${VALID USER}    invalid\n    invalid       whatever\n```\n\nHow many tests are executed?",
+      "type": "single",
+      "options": [
+        {
+          "text": "1 test named 'Invalid Logins' with 3 data rows",
+          "correct": true
+        },
+        {
+          "text": "3 separate tests",
+          "correct": false,
+          "explanation": "This creates one test with multiple data rows"
+        },
+        {
+          "text": "4 tests including the template",
+          "correct": false,
+          "explanation": "One test with 3 data row executions"
+        },
+        {
+          "text": "0 tests; syntax error",
+          "correct": false,
+          "explanation": "This is valid syntax for multiple data rows"
+        }
+      ]
+    },
+    {
+      "id": "ch3-4-q13",
+      "question": "What happens if one data row fails in the multiple data rows approach?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The template execution is marked FAIL, test is marked FAIL, but other data rows still execute",
+          "correct": true
+        },
+        {
+          "text": "All subsequent data rows are skipped",
+          "correct": false,
+          "explanation": "Other data rows continue to execute"
+        },
+        {
+          "text": "The entire suite stops execution",
+          "correct": false,
+          "explanation": "Only that test is affected; suite continues"
+        },
+        {
+          "text": "The failed row is retried automatically",
+          "correct": false,
+          "explanation": "No automatic retry; execution continues with next row"
+        }
+      ]
+    },
+    {
+      "id": "ch3-4-q14",
+      "question": "What is an advantage of the multiple data rows per test approach?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Creates a single test for multiple data rows in logs/reports, beneficial statistically",
+          "correct": true
+        },
+        {
+          "text": "Each data row appears as a separate test in statistics",
+          "correct": false,
+          "explanation": "This is actually a characteristic of the multiple named tests approach"
+        },
+        {
+          "text": "Individual data rows can be filtered and re-executed",
+          "correct": false,
+          "explanation": "This is a drawback, not an advantage"
+        },
+        {
+          "text": "Faster execution speed",
+          "correct": false,
+          "explanation": "Speed is the same; the benefit is statistical grouping"
+        }
+      ]
+    },
+    {
+      "id": "ch3-4-q15",
+      "question": "What are drawbacks of the multiple data rows per test approach? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Test setup/teardown execute only once for all data rows",
+          "correct": true
+        },
+        {
+          "text": "Test name is not unique for each data row",
+          "correct": true
+        },
+        {
+          "text": "Filtering and re-execution of single data rows is not possible",
+          "correct": true
+        },
+        {
+          "text": "Cannot use templates with this approach",
+          "correct": false,
+          "explanation": "This approach uses templates; that's not a drawback"
+        },
+        {
+          "text": "Slower execution than multiple named tests",
+          "correct": false,
+          "explanation": "Execution speed is the same"
+        }
+      ]
+    },
+    {
+      "id": "ch3-4-q16",
+      "question": "If setup/teardown is needed for each data row (not just once per test), what should be used?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Keyword setup or teardown in the template keyword",
+          "correct": true
+        },
+        {
+          "text": "Multiple Test Setup settings",
+          "correct": false,
+          "explanation": "Test Setup runs once; use keyword setup for per-row execution"
+        },
+        {
+          "text": "FOR loop in the test",
+          "correct": false,
+          "explanation": "Templates handle iteration; use keyword setup/teardown"
+        },
+        {
+          "text": "Per-row setup is not possible",
+          "correct": false,
+          "explanation": "Keyword setup/teardown provides this functionality"
+        }
+      ]
+    },
+    {
+      "id": "ch3-4-q17",
+      "question": "Compare these two approaches:\n\n```robot\nApproach A:\n*** Settings ***\nTest Template    Login Should Fail\n\n*** Test Cases ***\nInvalid User     invalid    ${PASS}\nInvalid Pass     ${USER}    invalid\n\nApproach B:\n*** Test Cases ***\nInvalid Logins\n    [Template]    Login Should Fail\n    invalid       ${PASS}\n    ${USER}       invalid\n```\n\nHow many tests appear in reports for each?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Approach A: 2 tests; Approach B: 1 test",
+          "correct": true
+        },
+        {
+          "text": "Both create 2 tests",
+          "correct": false,
+          "explanation": "A creates 2 named tests; B creates 1 test with 2 rows"
+        },
+        {
+          "text": "Both create 1 test",
+          "correct": false,
+          "explanation": "A creates 2 separate tests"
+        },
+        {
+          "text": "Approach A: 1 test; Approach B: 2 tests",
+          "correct": false,
+          "explanation": "It's the opposite"
+        }
+      ]
+    },
+    {
+      "id": "ch3-4-q18",
+      "question": "Which approach allows filtering and re-executing individual data sets?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Multiple named tests with one template (each test is a separate entity)",
+          "correct": true
+        },
+        {
+          "text": "Named test with multiple data rows",
+          "correct": false,
+          "explanation": "Cannot filter individual rows; only the entire test"
+        },
+        {
+          "text": "Both approaches support this equally",
+          "correct": false,
+          "explanation": "Only multiple named tests allow individual filtering"
+        },
+        {
+          "text": "Neither approach supports filtering",
+          "correct": false,
+          "explanation": "Multiple named tests support filtering"
+        }
+      ]
+    },
+    {
+      "id": "ch3-4-q19",
+      "question": "Which approach is better when you want detailed statistics for each data combination?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Multiple named tests (each appears separately in statistics)",
+          "correct": true
+        },
+        {
+          "text": "Multiple data rows per test (aggregated statistics)",
+          "correct": false,
+          "explanation": "This aggregates data; use multiple named tests for detail"
+        },
+        {
+          "text": "Both provide equal statistical detail",
+          "correct": false,
+          "explanation": "Multiple named tests provide more granular statistics"
+        },
+        {
+          "text": "Neither provides statistics",
+          "correct": false,
+          "explanation": "Both provide statistics; detail level differs"
+        }
+      ]
+    },
+    {
+      "id": "ch3-4-q20",
+      "question": "Which approach is better when you want to test multiple scenarios with different templates in the same suite?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Named test with multiple data rows using [Template] per test",
+          "correct": true
+        },
+        {
+          "text": "Multiple named tests with suite-level Test Template",
+          "correct": false,
+          "explanation": "Suite-level template applies to all; use [Template] for different templates"
+        },
+        {
+          "text": "Both are equally suitable",
+          "correct": false,
+          "explanation": "[Template] allows different templates per test"
+        },
+        {
+          "text": "Neither; must use separate suites",
+          "correct": false,
+          "explanation": "[Template] allows different templates in same suite"
+        }
+      ]
+    },
+    {
+      "id": "ch3-4-q21",
+      "question": "Examine this suite:\n\n```robot\n*** Settings ***\nTest Setup       Open Browser\nTest Teardown    Close Browser\n\n*** Test Cases ***\nInvalid Logins\n    [Template]    Login Should Fail\n    invalid       pass123\n    user123       invalid\n    \nValid Logins  \n    [Template]    Login Should Pass\n    admin         admin123\n    user          user456\n```\n\nHow many times does 'Open Browser' execute?",
+      "type": "single",
+      "options": [
+        {
+          "text": "2 times (once per test: Invalid Logins and Valid Logins)",
+          "correct": true
+        },
+        {
+          "text": "4 times (once per data row)",
+          "correct": false,
+          "explanation": "Test Setup runs once per test, not per data row"
+        },
+        {
+          "text": "1 time (once for the suite)",
+          "correct": false,
+          "explanation": "Test Setup is per test, not per suite"
+        },
+        {
+          "text": "0 times (not executed with templates)",
+          "correct": false,
+          "explanation": "Test Setup executes with templates"
+        }
+      ]
+    },
+    {
+      "id": "ch3-4-q22",
+      "question": "In the previous example, how could you make 'Open Browser' execute for each data row?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Include 'Open Browser' in the template keywords with [Setup]",
+          "correct": true
+        },
+        {
+          "text": "Use Test Setup multiple times",
+          "correct": false,
+          "explanation": "Test Setup runs once per test; use keyword setup"
+        },
+        {
+          "text": "Add Open Browser to each data row",
+          "correct": false,
+          "explanation": "Data rows pass arguments to template, not keyword calls"
+        },
+        {
+          "text": "Cannot execute setup per data row",
+          "correct": false,
+          "explanation": "Keyword setup provides this functionality"
+        }
+      ]
+    },
+    {
+      "id": "ch3-4-q23",
+      "question": "Analyze this template keyword:\n\n```robot\n*** Keywords ***\nLogin With Invalid Credentials Should Fail\n    [Arguments]    ${username}    ${password}\n    [Setup]    Open Login Page\n    [Teardown]    Clear Form\n    Input Username    ${username}\n    Input Password    ${password}\n    Submit Credentials\n    Page Should Contain    Invalid credentials\n```\n\nWhen used with multiple data rows, when does [Setup] execute?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Before each data row execution",
+          "correct": true
+        },
+        {
+          "text": "Once before all data rows",
+          "correct": false,
+          "explanation": "Keyword setup runs per keyword call (per data row)"
+        },
+        {
+          "text": "Only on the first data row",
+          "correct": false,
+          "explanation": "Setup runs for each execution"
+        },
+        {
+          "text": "Setup is ignored in template keywords",
+          "correct": false,
+          "explanation": "Keyword setup is executed normally"
+        }
+      ]
+    },
+    {
+      "id": "ch3-4-q24",
+      "question": "What do the data rows represent in a test with [Template]?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Arguments to be passed to the template keyword",
+          "correct": true
+        },
+        {
+          "text": "Additional keywords to execute",
+          "correct": false,
+          "explanation": "Data rows are arguments, not keyword calls"
+        },
+        {
+          "text": "Variable definitions",
+          "correct": false,
+          "explanation": "Data rows pass values to template, not define variables"
+        },
+        {
+          "text": "Setup and teardown instructions",
+          "correct": false,
+          "explanation": "Data rows are template arguments"
+        }
+      ]
+    },
+    {
+      "id": "ch3-4-q25",
+      "question": "Can a test with [Template] have regular keyword calls in addition to data rows?",
+      "type": "single",
+      "options": [
+        {
+          "text": "No, tests with [Template] should only have data rows",
+          "correct": true
+        },
+        {
+          "text": "Yes, keyword calls can be mixed with data rows",
+          "correct": false,
+          "explanation": "Template tests contain only data rows, not keyword calls"
+        },
+        {
+          "text": "Yes, but only before the data rows",
+          "correct": false,
+          "explanation": "Template test body should contain only data rows"
+        },
+        {
+          "text": "Yes, but only after the data rows",
+          "correct": false,
+          "explanation": "Template test body should contain only data rows"
+        }
+      ]
+    },
+    {
+      "id": "ch3-4-q26",
+      "question": "Which specification style does the Data-Driven approach primarily represent?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Data-Driven Specification",
+          "correct": true
+        },
+        {
+          "text": "Keyword-Driven Specification",
+          "correct": false,
+          "explanation": "Templates are the Data-Driven approach"
+        },
+        {
+          "text": "Behavior-Driven Specification",
+          "correct": false,
+          "explanation": "BDD uses Given/When/Then, not templates"
+        },
+        {
+          "text": "Event-Driven Specification",
+          "correct": false,
+          "explanation": "Event-Driven is not a Robot Framework specification style"
+        }
+      ]
+    },
+    {
+      "id": "ch3-4-q27",
+      "question": "What is the main goal of Data-Driven Specification?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To reuse the same test logic with different input data combinations",
+          "correct": true
+        },
+        {
+          "text": "To generate test data automatically",
+          "correct": false,
+          "explanation": "Data is predefined, not auto-generated"
+        },
+        {
+          "text": "To execute tests in parallel",
+          "correct": false,
+          "explanation": "Data-Driven is about data separation, not parallelization"
+        },
+        {
+          "text": "To reduce test execution time",
+          "correct": false,
+          "explanation": "Primary goal is data reuse, not performance"
+        }
+      ]
+    },
+    {
+      "id": "ch3-4-q28",
+      "question": "When should you use multiple named tests approach vs multiple data rows approach?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Use named tests when you need individual test filtering and detailed statistics; use data rows for aggregated results",
+          "correct": true
+        },
+        {
+          "text": "Always use named tests; it's always better",
+          "correct": false,
+          "explanation": "Choice depends on needs; data rows can be beneficial"
+        },
+        {
+          "text": "Always use data rows; it's more efficient",
+          "correct": false,
+          "explanation": "Choice depends on statistical and filtering needs"
+        },
+        {
+          "text": "The approaches are identical in functionality",
+          "correct": false,
+          "explanation": "They have different characteristics for different use cases"
+        }
+      ]
+    },
+    {
+      "id": "ch3-4-q29",
+      "question": "Examine this scenario: You're testing a calculator with 100 different number combinations, and you need to identify exactly which combinations fail. Which approach is better?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Multiple named tests (each combination as a separate test for easy identification)",
+          "correct": true
+        },
+        {
+          "text": "Multiple data rows (all combinations in one test)",
+          "correct": false,
+          "explanation": "100 data rows make failure identification harder"
+        },
+        {
+          "text": "Both are equally suitable",
+          "correct": false,
+          "explanation": "Named tests make failure identification much easier"
+        },
+        {
+          "text": "Neither; use a FOR loop instead",
+          "correct": false,
+          "explanation": "Named tests with template are the better data-driven approach"
+        }
+      ]
+    },
+    {
+      "id": "ch3-4-q30",
+      "question": "What happens to empty or ${EMPTY} values in template data rows?",
+      "type": "single",
+      "options": [
+        {
+          "text": "They are passed as empty strings to the template keyword",
+          "correct": true
+        },
+        {
+          "text": "They are skipped and not passed",
+          "correct": false,
+          "explanation": "Empty values are still passed as arguments"
+        },
+        {
+          "text": "They cause the test to fail",
+          "correct": false,
+          "explanation": "Empty values are valid arguments"
+        },
+        {
+          "text": "They are converted to None",
+          "correct": false,
+          "explanation": "${EMPTY} is an empty string, not None"
+        }
+      ]
+    }
+  ]
+}
