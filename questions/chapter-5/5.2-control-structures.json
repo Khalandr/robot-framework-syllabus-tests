@@ -475,21 +475,21 @@
       "type": "single",
       "options": [
         {
-          "text": "To repeat keywords as long as a condition is met, when the number of iterations is not known in advance",
+          "text": "To repeat keywords conditionally when iteration count is unknown",
           "correct": true
         },
         {
-          "text": "To iterate over a known list of values",
+          "text": "To iterate sequentially over a known list of predefined values",
           "correct": false,
           "explanation": "FOR loops iterate over known values; WHILE loops repeat while a condition is true"
         },
         {
-          "text": "To pause execution for a specified time",
+          "text": "To pause execution temporarily for a specified time duration",
           "correct": false,
           "explanation": "WHILE loops are for conditional iteration, not delays"
         },
         {
-          "text": "To execute keywords in the background while other keywords run",
+          "text": "To execute keywords in background parallel with other keywords",
           "correct": false,
           "explanation": "WHILE loops run sequentially, not in parallel"
         }
@@ -679,7 +679,7 @@
     },
     {
       "id": "ch5-2-q27",
-      "question": "```robot\nFOR    ${participant}    IN    @{participants}\n    IF    ${participant.age} < ${minimum_age}    CONTINUE\n    Log    Participant ${participant.name} is older than 40\n    Append To List    ${older_participants}    ${participant}\nEND\n```\n\nWhat happens when a participant's age is less than minimum_age?",
+      "question": "```robot\nFOR    ${participant}    IN    @{participants}\n    IF    ${participant.age} < ${minimum_age}    CONTINUE\n    Log    Participant ${participant.name} meets minimum age requirement\n    Append To List    ${qualified_participants}    ${participant}\nEND\n```\n\nWhat happens when a participant's age is less than minimum_age?",
       "type": "single",
       "options": [
         {
@@ -735,21 +735,21 @@
       "type": "single",
       "options": [
         {
-          "text": "Process Item executes for 'target', then BREAK exits the loop; Log doesn't execute for 'target'",
+          "text": "Process Item executes; BREAK exits loop; Log skipped for 'target'",
           "correct": true
         },
         {
-          "text": "Process Item is skipped and the loop breaks immediately",
+          "text": "Process Item skipped; loop breaks immediately without processing",
           "correct": false,
           "explanation": "BREAK is after Process Item, so it executes before breaking"
         },
         {
-          "text": "Both Process Item and Log execute, then the loop breaks",
+          "text": "Both Process Item and Log execute fully before loop breaks",
           "correct": false,
           "explanation": "BREAK occurs before Log, so Log doesn't execute for 'target'"
         },
         {
-          "text": "Only Log executes and then the loop breaks",
+          "text": "Only Log executes without processing; then loop breaks immediately",
           "correct": false,
           "explanation": "Process Item executes before the IF/BREAK"
         }

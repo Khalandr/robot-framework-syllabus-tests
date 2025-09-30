@@ -29,53 +29,53 @@
     },
     {
       "id": "ch5-1-q2",
-      "question": "What is the rule of thumb for priority of statically defined or imported variables?",
+      "question": "Given this scenario:\n\n```robot\n*** Variables ***\n${URL}    http://dev.example.com\n\n*** Settings ***\nResource    config.resource    # defines ${URL} = http://prod.example.com\n```\n\nWhich ${URL} value is used?",
       "type": "single",
       "options": [
         {
-          "text": "First come, first served",
+          "text": "http://dev.example.com (first definition wins for static variables)",
           "correct": true
         },
         {
-          "text": "Last one wins",
+          "text": "http://prod.example.com (last definition overwrites for static variables)",
           "correct": false,
-          "explanation": "'Last one wins' applies to dynamically created variables, not static ones"
+          "explanation": "For static variables, 'first come, first served' applies; the initial *** Variables *** definition wins"
         },
         {
-          "text": "Highest scope wins",
+          "text": "Both values available with different access prefixes",
           "correct": false,
-          "explanation": "For static variables, the time of definition matters most"
+          "explanation": "Only one value is accessible; the first definition takes priority"
         },
         {
-          "text": "Alphabetical order",
+          "text": "Robot Framework raises duplicate variable error",
           "correct": false,
-          "explanation": "Variable priority is not based on alphabetical order"
+          "explanation": "No error; first static definition wins silently"
         }
       ]
     },
     {
       "id": "ch5-1-q3",
-      "question": "What is the rule of thumb for priority of dynamically created variables?",
+      "question": "Given this scenario:\n\n```robot\n*** Test Cases ***\nExample\n    Set Suite Variable    ${STATUS}    initialized\n    Process Data\n    Set Suite Variable    ${STATUS}    completed\n    Log    ${STATUS}\n```\n\nWhat does Log output?",
       "type": "single",
       "options": [
         {
-          "text": "Last one wins",
+          "text": "completed (last dynamic assignment wins)",
           "correct": true
         },
         {
-          "text": "First come, first served",
+          "text": "initialized (first dynamic assignment is protected)",
           "correct": false,
-          "explanation": "'First come, first served' applies to static variables, not dynamic ones"
+          "explanation": "For dynamic variables, 'last one wins'; the second Set Suite Variable overwrites"
         },
         {
-          "text": "Lowest scope wins",
+          "text": "Error: cannot reassign suite variable",
           "correct": false,
-          "explanation": "While scope matters, the rule is 'Last one wins' as long as in scope"
+          "explanation": "Dynamic variables can be reassigned; last assignment wins"
         },
         {
-          "text": "Random selection",
+          "text": "Both values logged as comma-separated list",
           "correct": false,
-          "explanation": "Variable resolution is deterministic, not random"
+          "explanation": "Only the last assigned value is accessible"
         }
       ]
     },
@@ -318,21 +318,21 @@
       "type": "single",
       "options": [
         {
-          "text": "The suite variable shadows the global variable as long as the suite is in scope; then the global variable returns to scope",
+          "text": "Suite variable shadows global within suite scope; global returns after suite exits",
           "correct": true
         },
         {
-          "text": "The global variable always has higher priority and cannot be shadowed",
+          "text": "Global variable maintains priority and cannot be shadowed by suite variables",
           "correct": false,
           "explanation": "Dynamic suite variables can shadow global variables within their scope"
         },
         {
-          "text": "Robot Framework raises an error about conflicting variable definitions",
+          "text": "Robot Framework raises conflicting variable definition error at runtime",
           "correct": false,
           "explanation": "Shadowing is allowed; no error is raised"
         },
         {
-          "text": "The suite variable permanently overwrites the global variable",
+          "text": "Suite variable permanently overwrites global for all remaining suites",
           "correct": false,
           "explanation": "The shadowing is temporary; global variable returns when suite exits"
         }
