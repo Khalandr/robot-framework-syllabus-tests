@@ -85,7 +85,7 @@
     },
     {
       "id": "ch2-3-q4",
-      "question": "Given a directory structure where 'robot_files' contains 'TestSuite.robot', and your current working directory contains the 'robot_files' directory, which command correctly executes the suite?",
+      "question": "Given a directory structure where 'robot_files' contains 'TestSuite.robot', which command executes ALL suites within the robot_files directory and its subdirectories?",
       "type": "single",
       "options": [
         {
@@ -95,17 +95,17 @@
         {
           "text": "robot robot_files/TestSuite.robot",
           "correct": false,
-          "explanation": "While this works, the question asks for executing the directory"
+          "explanation": "This executes only TestSuite.robot, not all suites in the directory"
         },
         {
           "text": "robot --suite robot_files",
           "correct": false,
-          "explanation": "--suite is for filtering, not specifying the path"
+          "explanation": "--suite is for filtering by name, not specifying the execution path"
         },
         {
-          "text": "python robot robot_files",
+          "text": "python -m robot robot_files",
           "correct": false,
-          "explanation": "The robot command is directly executable"
+          "explanation": "While this works, the direct robot command is the standard approach"
         }
       ]
     },

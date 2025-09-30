@@ -237,27 +237,27 @@
     },
     {
       "id": "ch2-4-q10",
-      "question": "Does the BuiltIn library need to be imported explicitly?",
+      "question": "What is unique about the BuiltIn library compared to all other Robot Framework libraries?",
       "type": "single",
       "options": [
         {
-          "text": "No, BuiltIn is always imported invisibly and automatically",
+          "text": "It is the only library imported invisibly and automatically in every scope",
           "correct": true
         },
         {
-          "text": "Yes, all libraries including BuiltIn must be imported explicitly",
+          "text": "It is the only library written in Python",
           "correct": false,
-          "explanation": "BuiltIn is the only library imported automatically"
+          "explanation": "Many libraries are written in Python; automatic import is BuiltIn's unique feature"
         },
         {
-          "text": "Only in resource files; not in suite files",
+          "text": "It is the only library that can be used in both test cases and tasks",
           "correct": false,
-          "explanation": "BuiltIn is automatic everywhere"
+          "explanation": "All libraries can be used in both; automatic import makes BuiltIn unique"
         },
         {
-          "text": "Yes, but only once per project",
+          "text": "It is the only library shipped with Robot Framework",
           "correct": false,
-          "explanation": "BuiltIn never needs explicit import"
+          "explanation": "Multiple standard libraries ship with RF; BuiltIn is unique in being auto-imported"
         }
       ]
     },

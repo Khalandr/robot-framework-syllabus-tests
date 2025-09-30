@@ -4,27 +4,27 @@
   "questions": [
     {
       "id": "ch2-6-q1",
-      "question": "What is the typical structure of a test case or task in Robot Framework?",
+      "question": "How does Robot Framework determine the execution flow within a test case or task?",
       "type": "single",
       "options": [
         {
-          "text": "A sequence of keyword calls executed in a specific order",
+          "text": "Keywords execute sequentially in definition order unless control structures modify the flow",
           "correct": true
         },
         {
-          "text": "A collection of variable definitions",
-          "correct": false,
-          "explanation": "Test cases contain keyword calls, not primarily variable definitions"
-        },
-        {
-          "text": "A single keyword with multiple arguments",
-          "correct": false,
-          "explanation": "Tests typically contain multiple keyword calls"
-        },
-        {
-          "text": "A parallel execution of multiple keywords",
+          "text": "All keywords execute in parallel for faster test execution",
           "correct": false,
           "explanation": "Keywords execute sequentially by default, not in parallel"
+        },
+        {
+          "text": "Execution order is determined by keyword priority tags",
+          "correct": false,
+          "explanation": "Robot Framework doesn't use priority-based execution for keywords"
+        },
+        {
+          "text": "Keywords are executed in alphabetical order by name",
+          "correct": false,
+          "explanation": "Execution follows the order keywords appear in the test definition"
         }
       ]
     },

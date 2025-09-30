@@ -269,27 +269,27 @@
     },
     {
       "id": "ch2-2-q11",
-      "question": "Are empty lines allowed in Robot Framework files?",
+      "question": "What is the effect of empty lines on Robot Framework parsing and execution?",
       "type": "single",
       "options": [
         {
-          "text": "Yes, they are allowed and encouraged for readability; they are ignored during parsing",
+          "text": "They are completely ignored during parsing and have no effect on execution",
           "correct": true
         },
         {
-          "text": "No, empty lines cause parsing errors",
+          "text": "They create implicit test/keyword boundaries",
           "correct": false,
-          "explanation": "Empty lines are allowed and ignored"
+          "explanation": "Empty lines don't create boundaries; indentation determines structure"
         },
         {
-          "text": "Only one empty line is allowed between sections",
+          "text": "They are converted to comments during parsing",
           "correct": false,
-          "explanation": "Multiple empty lines are allowed anywhere"
+          "explanation": "Empty lines are simply ignored, not converted to comments"
         },
         {
-          "text": "Empty lines are only allowed in *** Comments *** section",
+          "text": "They force a pause in execution timing",
           "correct": false,
-          "explanation": "Empty lines are allowed throughout the file"
+          "explanation": "Empty lines are parsing-level only and don't affect execution timing"
         }
       ]
     },
