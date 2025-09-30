@@ -1,0 +1,295 @@
+{
+  "chapter": "1-Introduction to Robot Framework",
+  "subchapter": "1.4-Specification Styles",
+  "questions": [
+    {
+      "id": "ch1-4-q1",
+      "question": "What are the three specification styles available in Robot Framework?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Keyword-Driven Specification",
+          "correct": true
+        },
+        {
+          "text": "Behavior-Driven Specification",
+          "correct": true
+        },
+        {
+          "text": "Object-Oriented Specification",
+          "correct": false,
+          "explanation": "Robot Framework doesn't have an Object-Oriented Specification style"
+        },
+        {
+          "text": "Data-Driven Specification",
+          "correct": true
+        },
+        {
+          "text": "Test-Driven Specification",
+          "correct": false,
+          "explanation": "Test-Driven is not one of Robot Framework's specification styles"
+        }
+      ]
+    },
+    {
+      "id": "ch1-4-q2",
+      "question": "What is the fundamental difference between Keyword-Driven and Behavior-Driven specification styles?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Keyword-Driven is declarative; Behavior-Driven is imperative",
+          "correct": false,
+          "explanation": "It's the opposite - Keyword-Driven is imperative, Behavior-Driven is declarative"
+        },
+        {
+          "text": "Keyword-Driven is imperative (action-centric); Behavior-Driven is declarative (behavior-centric)",
+          "correct": true
+        },
+        {
+          "text": "There is no fundamental difference; they are the same",
+          "correct": false,
+          "explanation": "They have fundamental differences in approach and focus"
+        },
+        {
+          "text": "Keyword-Driven can only be used for testing; Behavior-Driven only for RPA",
+          "correct": false,
+          "explanation": "Both styles can be used for both testing and RPA"
+        }
+      ]
+    },
+    {
+      "id": "ch1-4-q3",
+      "question": "In Behavior-Driven Specification, what happens to the Given, When, Then, And, and But prefixes in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "They are required for the test to run",
+          "correct": false,
+          "explanation": "The prefixes are optional and are basically ignored by Robot Framework"
+        },
+        {
+          "text": "They are basically ignored if a keyword matching the rest of the name is found",
+          "correct": true
+        },
+        {
+          "text": "They define special execution order",
+          "correct": false,
+          "explanation": "The prefixes don't affect execution order, they are for readability"
+        },
+        {
+          "text": "They must be defined as separate keywords",
+          "correct": false,
+          "explanation": "They are prefixes to existing keywords, not separate keywords"
+        }
+      ]
+    },
+    {
+      "id": "ch1-4-q4",
+      "question": "What is the main purpose of Data-Driven Specification in testing?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To dynamically acquire data from external sources during execution",
+          "correct": false,
+          "explanation": "That's typical for RPA; in testing, data is specifically chosen to cover different scenarios"
+        },
+        {
+          "text": "To automate the same sequence with different sets of input and expected output data",
+          "correct": true
+        },
+        {
+          "text": "To generate random test data automatically",
+          "correct": false,
+          "explanation": "Data-Driven Testing uses predefined data sets, not random generation"
+        },
+        {
+          "text": "To store test results in a database",
+          "correct": false,
+          "explanation": "Data-Driven Specification is about input data variation, not result storage"
+        }
+      ]
+    },
+    {
+      "id": "ch1-4-q5",
+      "question": "Which specification style is better suited for complex tasks with complex data and why?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Behavior-Driven, because it uses natural language",
+          "correct": false,
+          "explanation": "Natural language can become less understandable with complex data"
+        },
+        {
+          "text": "Keyword-Driven, because it enables clear separation between keyword names and argument values",
+          "correct": true
+        },
+        {
+          "text": "Data-Driven, because it handles all types of data",
+          "correct": false,
+          "explanation": "Data-Driven is for running the same logic with different data sets, not necessarily complex tasks"
+        },
+        {
+          "text": "Both styles are equally suited for complex tasks",
+          "correct": false,
+          "explanation": "Keyword-Driven is specifically better for complex tasks due to its structure"
+        }
+      ]
+    },
+    {
+      "id": "ch1-4-q6",
+      "question": "Looking at this Robot Framework test case:\n\n```robot\n*** Test Cases ***\nVerify Login Page\n    Open Browser    https://example.com    Chrome\n    Input Text    id=username    testuser\n    Input Password    id=password    Test123!\n    Click Button    id=login-btn\n    Page Should Contain    Welcome testuser\n    Close Browser\n```\n\nWhat specification style is being used?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Behavior-Driven Specification",
+          "correct": false,
+          "explanation": "This uses imperative commands without Given/When/Then structure"
+        },
+        {
+          "text": "Keyword-Driven Specification",
+          "correct": true
+        },
+        {
+          "text": "Data-Driven Specification",
+          "correct": false,
+          "explanation": "This doesn't use test templates or data variations"
+        },
+        {
+          "text": "Mixed specification style",
+          "correct": false,
+          "explanation": "This is purely Keyword-Driven style"
+        }
+      ]
+    },
+    {
+      "id": "ch1-4-q7",
+      "question": "Consider these two test implementations:\n\n**Implementation A:**\n```robot\n*** Test Cases ***\nUser Can Purchase Product\n    Given user is logged in as \"customer\"\n    And product \"laptop\" is in the cart\n    When user proceeds to checkout\n    And enters payment details\n    Then order should be confirmed\n    And confirmation email should be sent\n```\n\n**Implementation B:**\n```robot\n*** Test Cases ***\nPurchase Product Test\n    Login As User    customer\n    Add To Cart    laptop\n    Click Checkout Button\n    Fill Payment Form    visa    4111111111111111\n    Submit Order\n    Verify Order Status    confirmed\n    Check Email    order_confirmation\n```\n\nWhich statements are correct? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Implementation A uses Behavior-Driven style",
+          "correct": true
+        },
+        {
+          "text": "Implementation B uses Keyword-Driven style",
+          "correct": true
+        },
+        {
+          "text": "Implementation A is declarative (describes what should happen)",
+          "correct": true
+        },
+        {
+          "text": "Implementation B is imperative (specifies what actions to perform)",
+          "correct": true
+        },
+        {
+          "text": "Both implementations would execute exactly the same way",
+          "correct": false,
+          "explanation": "While they might achieve the same result, the keywords and execution would differ"
+        }
+      ]
+    },
+    {
+      "id": "ch1-4-q8",
+      "question": "Examine this Robot Framework code:\n\n```robot\n*** Test Cases ***\nValidate Calculator Operations\n    [Template]    Calculate And Verify\n    2 + 2    4\n    10 - 5    5\n    3 * 4    12\n    15 / 3    5\n    100 + 200    300\n\n*** Keywords ***\nCalculate And Verify\n    [Arguments]    ${expression}    ${expected}\n    ${result}=    Evaluate    ${expression}\n    Should Be Equal As Numbers    ${result}    ${expected}\n```\n\nWhat specification style is being demonstrated here?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Keyword-Driven Specification only",
+          "correct": false,
+          "explanation": "This uses Test Templates which is a Data-Driven approach"
+        },
+        {
+          "text": "Behavior-Driven Specification",
+          "correct": false,
+          "explanation": "There's no Given/When/Then structure or behavior description"
+        },
+        {
+          "text": "Data-Driven Specification",
+          "correct": true
+        },
+        {
+          "text": "Mixed Keyword-Driven and Behavior-Driven",
+          "correct": false,
+          "explanation": "This is purely Data-Driven using Test Templates"
+        }
+      ]
+    },
+    {
+      "id": "ch1-4-q9",
+      "question": "Which of the following test cases correctly demonstrate Behavior-Driven style with proper Robot Framework syntax? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "```robot\nGiven system is initialized\nWhen user logs in\nThen dashboard is displayed\n```",
+          "correct": true
+        },
+        {
+          "text": "```robot\nuser is on login page\nuser enters credentials\nuser sees dashboard\n```",
+          "correct": true
+        },
+        {
+          "text": "```robot\nAnd product is available\nBut price is too high\nWhen discount is applied\n```",
+          "correct": true
+        },
+        {
+          "text": "```robot\nOpen Login Page\nEnter Credentials    user    pass\nVerify Dashboard Loaded\n```",
+          "correct": false,
+          "explanation": "This is Keyword-Driven style with imperative commands"
+        }
+      ]
+    },
+    {
+      "id": "ch1-4-q10",
+      "question": "A team wants to write acceptance tests that business stakeholders can understand, but implement them using technical keywords. Based on the specification styles, what approach is recommended?\n\n```robot\n*** Test Cases ***\nUser Registration\n    Given the registration page is open\n    When user registers with email \"test@example.com\"\n    Then account should be created successfully\n\n*** Keywords ***\nthe registration page is open\n    Open Browser    ${BASE_URL}/register    ${BROWSER}\n    Wait Until Page Contains Element    id=registration-form\n\nuser registers with email \"${email}\"\n    Input Text    id=email    ${email}\n    Input Text    id=password    SecurePass123!\n    Input Text    id=confirm-password    SecurePass123!\n    Click Button    id=submit-registration\n\naccount should be created successfully\n    Wait Until Page Contains    Registration successful\n    Location Should Be    ${BASE_URL}/welcome\n```\n\nWhat is correct about this approach?",
+      "type": "single",
+      "options": [
+        {
+          "text": "This violates Robot Framework best practices by mixing styles",
+          "correct": false,
+          "explanation": "This is actually a recommended approach - BDD for test cases, KDT for implementation"
+        },
+        {
+          "text": "Test cases use Behavior-Driven style while keywords use Keyword-Driven implementation",
+          "correct": true
+        },
+        {
+          "text": "This approach doesn't work in Robot Framework",
+          "correct": false,
+          "explanation": "This is a valid and recommended approach in Robot Framework"
+        },
+        {
+          "text": "The keywords should also use Given/When/Then prefixes",
+          "correct": false,
+          "explanation": "Keywords implementing BDD steps typically use imperative style"
+        }
+      ]
+    },
+    {
+      "id": "ch1-4-q11",
+      "question": "What is a key advantage of Robot Framework's Behavior-Driven implementation compared to other BDD frameworks like Cucumber?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Robot Framework doesn't require step definitions",
+          "correct": false,
+          "explanation": "Keywords in RF serve a similar purpose to step definitions"
+        },
+        {
+          "text": "Robot Framework allows multiple keyword layers with detailed logging",
+          "correct": true
+        },
+        {
+          "text": "Robot Framework's BDD syntax is more strict",
+          "correct": false,
+          "explanation": "RF is actually more flexible, ignoring Given/When/Then if keywords match"
+        },
+        {
+          "text": "Robot Framework only supports Python for implementations",
+          "correct": false,
+          "explanation": "This isn't an advantage and RF supports multiple languages through libraries"
+        }
+      ]
+    }
+  ]
+}

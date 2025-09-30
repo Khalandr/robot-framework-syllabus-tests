@@ -1,0 +1,223 @@
+{
+  "chapter": "1-Introduction to Robot Framework",
+  "subchapter": "1.5-Organization and Licensing",
+  "questions": [
+    {
+      "id": "ch1-5-q1",
+      "question": "Under which open-source license is Robot Framework distributed?",
+      "type": "single",
+      "options": [
+        {
+          "text": "MIT License",
+          "correct": false,
+          "explanation": "Robot Framework uses Apache License 2.0, not MIT"
+        },
+        {
+          "text": "Apache License 2.0",
+          "correct": true
+        },
+        {
+          "text": "GNU General Public License (GPL)",
+          "correct": false,
+          "explanation": "Robot Framework uses Apache License 2.0, which is more permissive than GPL"
+        },
+        {
+          "text": "BSD License",
+          "correct": false,
+          "explanation": "Robot Framework uses Apache License 2.0, not BSD"
+        }
+      ]
+    },
+    {
+      "id": "ch1-5-q2",
+      "question": "What are the key characteristics of the Apache License 2.0 under which Robot Framework is licensed? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "It allows free use, modification, and distribution including for commercial purposes",
+          "correct": true
+        },
+        {
+          "text": "It requires all derivative works to be open source",
+          "correct": false,
+          "explanation": "Apache License 2.0 is permissive and doesn't require derivative works to be open source"
+        },
+        {
+          "text": "The software is provided 'as-is' without warranties",
+          "correct": true
+        },
+        {
+          "text": "Users must maintain attribution and document changes",
+          "correct": true
+        },
+        {
+          "text": "It prohibits commercial use without payment",
+          "correct": false,
+          "explanation": "Apache License 2.0 explicitly allows commercial use without payment"
+        }
+      ]
+    },
+    {
+      "id": "ch1-5-q3",
+      "question": "What is the official name and location of the Robot Framework Foundation?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Robot Framework Foundation Inc., San Francisco, USA",
+          "correct": false,
+          "explanation": "The foundation is based in Helsinki, Finland, not USA"
+        },
+        {
+          "text": "Robot Framework ry, Helsinki, Finland",
+          "correct": true
+        },
+        {
+          "text": "RF Foundation Ltd, London, UK",
+          "correct": false,
+          "explanation": "The foundation is Robot Framework ry in Helsinki, Finland"
+        },
+        {
+          "text": "Robot Framework Association, Stockholm, Sweden",
+          "correct": false,
+          "explanation": "The foundation is based in Helsinki, Finland, not Sweden"
+        }
+      ]
+    },
+    {
+      "id": "ch1-5-q4",
+      "question": "Which of the following are key objectives of the Robot Framework Foundation? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Support for core development and maintenance of Robot Framework",
+          "correct": true
+        },
+        {
+          "text": "Selling commercial licenses for enterprise use",
+          "correct": false,
+          "explanation": "The foundation is non-profit and RF remains freely available to all"
+        },
+        {
+          "text": "Democratic governance with elected Board of Directors",
+          "correct": true
+        },
+        {
+          "text": "Organizing RoboCon, the annual Robot Framework User Conference",
+          "correct": true
+        },
+        {
+          "text": "Funding ecosystem projects proposed by community members",
+          "correct": true
+        },
+        {
+          "text": "Restricting framework usage to foundation members only",
+          "correct": false,
+          "explanation": "Robot Framework is freely available to everyone, not just members"
+        }
+      ]
+    },
+    {
+      "id": "ch1-5-q5",
+      "question": "How is the Robot Framework Foundation governed?",
+      "type": "single",
+      "options": [
+        {
+          "text": "By a single founder who makes all decisions",
+          "correct": false,
+          "explanation": "The foundation operates under democratic principles with an elected board"
+        },
+        {
+          "text": "By a Board of Directors elected annually by foundation members",
+          "correct": true
+        },
+        {
+          "text": "By the largest financial contributor",
+          "correct": false,
+          "explanation": "The foundation has democratic governance, not control by largest donor"
+        },
+        {
+          "text": "By community vote on all decisions",
+          "correct": false,
+          "explanation": "Members elect a Board of Directors annually who oversee operations"
+        }
+      ]
+    },
+    {
+      "id": "ch1-5-q6",
+      "question": "What are the official webpages for Robot Framework and its resources?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "robotframework.org",
+          "correct": true
+        },
+        {
+          "text": "github.com/robotframework",
+          "correct": true
+        },
+        {
+          "text": "robot-framework.com",
+          "correct": false,
+          "explanation": "The official domain is robotframework.org, not robot-framework.com"
+        },
+        {
+          "text": "robotframework.io",
+          "correct": false,
+          "explanation": "The official domain is robotframework.org, not robotframework.io"
+        }
+      ]
+    },
+    {
+      "id": "ch1-5-q7",
+      "question": "What type of organization is the Robot Framework Foundation?",
+      "type": "single",
+      "options": [
+        {
+          "text": "A for-profit corporation",
+          "correct": false,
+          "explanation": "The foundation is a non-profit association"
+        },
+        {
+          "text": "A non-profit association",
+          "correct": true
+        },
+        {
+          "text": "A government agency",
+          "correct": false,
+          "explanation": "The foundation is a non-profit association, not a government entity"
+        },
+        {
+          "text": "A subsidiary of a tech company",
+          "correct": false,
+          "explanation": "The foundation is an independent non-profit association"
+        }
+      ]
+    },
+    {
+      "id": "ch1-5-q8",
+      "question": "How does the Robot Framework Foundation primarily fund its operations?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Through selling Robot Framework licenses",
+          "correct": false,
+          "explanation": "Robot Framework is free and open source, not sold"
+        },
+        {
+          "text": "Through membership fees from companies",
+          "correct": true
+        },
+        {
+          "text": "Through advertising on the website",
+          "correct": false,
+          "explanation": "The foundation is funded primarily through membership fees"
+        },
+        {
+          "text": "Through government grants only",
+          "correct": false,
+          "explanation": "The foundation is funded primarily through membership fees from companies"
+        }
+      ]
+    }
+  ]
+}

@@ -56,6 +56,139 @@
           "explanation": "Robot Framework tests are interpreted, not compiled"
         }
       ]
+    },
+    {
+      "id": "ch1-1-q3",
+      "question": "What are the two main use cases of Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Unit testing and integration testing",
+          "correct": false,
+          "explanation": "Robot Framework is typically not used for unit or low-level integration testing"
+        },
+        {
+          "text": "Test automation and robotic process automation (RPA)",
+          "correct": true
+        },
+        {
+          "text": "Performance testing and security testing",
+          "correct": false,
+          "explanation": "While possible with extensions, these are not the main use cases of Robot Framework"
+        },
+        {
+          "text": "Code compilation and deployment automation",
+          "correct": false,
+          "explanation": "Robot Framework is not designed for code compilation or deployment tasks"
+        }
+      ]
+    },
+    {
+      "id": "ch1-1-q4",
+      "question": "Which of the following test levels is Robot Framework PRIMARILY used for? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Component testing",
+          "correct": false,
+          "explanation": "Robot Framework is typically not used for component/unit testing due to its high-level abstraction"
+        },
+        {
+          "text": "System testing",
+          "correct": true
+        },
+        {
+          "text": "Integration testing",
+          "correct": false,
+          "explanation": "Low-level integration testing is not Robot Framework's primary strength"
+        },
+        {
+          "text": "Acceptance testing",
+          "correct": true
+        },
+        {
+          "text": "End-to-end testing",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": "ch1-1-q5",
+      "question": "Why is Robot Framework typically NOT used for component testing?",
+      "type": "single",
+      "options": [
+        {
+          "text": "It doesn't support Python libraries",
+          "correct": false,
+          "explanation": "Robot Framework has excellent support for Python libraries"
+        },
+        {
+          "text": "It cannot handle automated testing",
+          "correct": false,
+          "explanation": "Robot Framework is specifically designed for automated testing"
+        },
+        {
+          "text": "Component testing requires low-level, granular tests with direct code interaction, which is better handled by unit testing frameworks",
+          "correct": true
+        },
+        {
+          "text": "Robot Framework is too fast for component testing",
+          "correct": false,
+          "explanation": "Speed is not the reason; the abstraction level and design philosophy are"
+        }
+      ]
+    },
+    {
+      "id": "ch1-1-q6",
+      "question": "Which of the following is a common RPA use case for Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Compiling source code",
+          "correct": false,
+          "explanation": "Code compilation is not an RPA task and not what Robot Framework is designed for"
+        },
+        {
+          "text": "Data extraction and manipulation between systems",
+          "correct": true
+        },
+        {
+          "text": "Operating system kernel development",
+          "correct": false,
+          "explanation": "Kernel development is low-level programming, not an RPA task"
+        },
+        {
+          "text": "Hardware driver installation",
+          "correct": false,
+          "explanation": "Driver installation is a system-level task, not typical RPA"
+        }
+      ]
+    },
+    {
+      "id": "ch1-1-q7",
+      "question": "What is the primary goal of Synthetic Monitoring (Active/Proactive Monitoring) in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To monitor system resources like CPU and memory",
+          "correct": false,
+          "explanation": "Resource monitoring is infrastructure monitoring, not synthetic monitoring"
+        },
+        {
+          "text": "To detect performance issues or downtime before they affect actual users",
+          "correct": true
+        },
+        {
+          "text": "To analyze code complexity",
+          "correct": false,
+          "explanation": "Code complexity analysis is static code analysis, not synthetic monitoring"
+        },
+        {
+          "text": "To generate test documentation automatically",
+          "correct": false,
+          "explanation": "Documentation generation is not related to synthetic monitoring"
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,276 @@
+{
+  "chapter": "1-Introduction to Robot Framework",
+  "subchapter": "1.3-Basic Syntax & Structure",
+  "questions": [
+    {
+      "id": "ch1-3-q1",
+      "question": "Which of the following are key attributes of Robot Framework's syntax that make it simple and human-readable?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Space-separated syntax using two or more spaces as separator",
+          "correct": true
+        },
+        {
+          "text": "Extensive use of special characters for better parsing",
+          "correct": false,
+          "explanation": "Robot Framework reduces the use of special characters to improve readability"
+        },
+        {
+          "text": "Indentation-based blocks for defining test/keyword bodies",
+          "correct": true
+        },
+        {
+          "text": "Variables need quotation marks while strings don't",
+          "correct": false,
+          "explanation": "It's the opposite - unquoted strings are considered as strings, while variables need special syntax"
+        },
+        {
+          "text": "Mostly case-insensitive keyword and variable names",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": "ch1-3-q2",
+      "question": "What is the difference between User Keywords and Library Keywords in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "User Keywords are written in Python, Library Keywords in Robot Framework syntax",
+          "correct": false,
+          "explanation": "It's the opposite - User Keywords are written in RF syntax, Library Keywords typically in Python"
+        },
+        {
+          "text": "User Keywords are written in RF syntax and call other keywords; Library Keywords are typically in Python and interact with the SUT",
+          "correct": true
+        },
+        {
+          "text": "There is no difference; they are the same thing with different names",
+          "correct": false,
+          "explanation": "They are fundamentally different - User Keywords are high-level, Library Keywords are low-level"
+        },
+        {
+          "text": "User Keywords can only be used once; Library Keywords can be reused",
+          "correct": false,
+          "explanation": "Both types of keywords are reusable"
+        }
+      ]
+    },
+    {
+      "id": "ch1-3-q3",
+      "question": "In Robot Framework's file organization, what constitutes a Suite?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "A *.robot file that contains test cases or tasks",
+          "correct": true
+        },
+        {
+          "text": "Any Python file with keyword implementations",
+          "correct": false,
+          "explanation": "Python files with keywords are libraries, not suites"
+        },
+        {
+          "text": "A directory containing *.robot suite files",
+          "correct": true
+        },
+        {
+          "text": "Resource files containing user keywords",
+          "correct": false,
+          "explanation": "Resource files contain keywords but are not suites themselves"
+        },
+        {
+          "text": "Sub-directories that contain other suites",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": "ch1-3-q4",
+      "question": "What is the recommended number of spaces to use as a separator in Robot Framework syntax for clarity and readability?",
+      "type": "single",
+      "options": [
+        {
+          "text": "One space",
+          "correct": false,
+          "explanation": "One space is allowed as a character but not recommended as a separator"
+        },
+        {
+          "text": "Two spaces",
+          "correct": false,
+          "explanation": "Two spaces work as a separator but four spaces are recommended for better readability"
+        },
+        {
+          "text": "Four spaces",
+          "correct": true
+        },
+        {
+          "text": "Tab character",
+          "correct": false,
+          "explanation": "Robot Framework uses space-separated syntax, not tabs"
+        }
+      ]
+    },
+    {
+      "id": "ch1-3-q5",
+      "question": "What is the difference between Resource Files and Keyword Libraries in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Resource Files contain Library Keywords; Libraries contain User Keywords",
+          "correct": false,
+          "explanation": "It's the opposite - Resource Files contain User Keywords; Libraries contain Library Keywords"
+        },
+        {
+          "text": "Resource Files contain User Keywords and belong to Definition Layer; Libraries contain Library Keywords and belong to Adaptation Layer",
+          "correct": true
+        },
+        {
+          "text": "Both contain the same type of keywords but in different formats",
+          "correct": false,
+          "explanation": "They contain fundamentally different types of keywords for different purposes"
+        },
+        {
+          "text": "Resource Files are for RPA; Libraries are for testing",
+          "correct": false,
+          "explanation": "Both can be used for testing and RPA; the difference is in the type of keywords they contain"
+        }
+      ]
+    },
+    {
+      "id": "ch1-3-q6",
+      "question": "Consider the following Robot Framework test case:\n\n```robot\n*** Test Cases ***\nLogin Test\n Login User admin password123\n  Check Dashboard\n   Verify User Status\n    Logout\n```\n\nWhat is wrong with this test case?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Keywords should be separated by commas",
+          "correct": false,
+          "explanation": "Robot Framework doesn't use commas to separate keywords"
+        },
+        {
+          "text": "The indentation is inconsistent - all keywords in the test body should have the same indentation",
+          "correct": true
+        },
+        {
+          "text": "Test case names cannot contain spaces",
+          "correct": false,
+          "explanation": "Test case names can contain spaces in Robot Framework"
+        },
+        {
+          "text": "There's nothing wrong with this test case",
+          "correct": false,
+          "explanation": "The indentation is inconsistent, which will cause parsing errors"
+        }
+      ]
+    },
+    {
+      "id": "ch1-3-q7",
+      "question": "Consider the following keyword calls where '·' represents a space character:\n\n```robot\nA) Login·User····admin····password123\nB) Login·User·admin·password123\nC) Login·User··admin··password123\nD) LOGIN·USER····admin····password123\nE) login·user····admin····password123\n```\n\nWhich of these keyword calls are syntactically correct in Robot Framework? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "A) Login·User····admin····password123 (4 spaces between elements)",
+          "correct": true
+        },
+        {
+          "text": "B) Login·User·admin·password123 (1 space between elements)",
+          "correct": false,
+          "explanation": "Single spaces between arguments won't work as separators; need at least two spaces"
+        },
+        {
+          "text": "C) Login·User··admin··password123 (2 spaces between elements)",
+          "correct": true
+        },
+        {
+          "text": "D) LOGIN·USER····admin····password123 (uppercase with 4 spaces)",
+          "correct": true
+        },
+        {
+          "text": "E) login·user····admin····password123 (lowercase with 4 spaces)",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": "ch1-3-q8",
+      "question": "Look at this Robot Framework code:\n\n```robot\n*** Settings ***\nResource    keywords.resource\n\n*** Test Cases ***\nVerify User Creation\n    Create New User    John Doe    john@example.com\n    ...    role=admin\n    ...    department=IT Support\n    Verify User Details    john@example.com\n```\n\nWhat does the '...' represent in this code?",
+      "type": "single",
+      "options": [
+        {
+          "text": "A comment that will be ignored",
+          "correct": false,
+          "explanation": "The '...' is not a comment; it has a specific purpose in RF syntax"
+        },
+        {
+          "text": "An error in the syntax",
+          "correct": false,
+          "explanation": "This is valid Robot Framework syntax"
+        },
+        {
+          "text": "Line continuation for the Create New User keyword arguments",
+          "correct": true
+        },
+        {
+          "text": "A placeholder for missing code",
+          "correct": false,
+          "explanation": "The '...' is the continuation syntax, not a placeholder"
+        }
+      ]
+    },
+    {
+      "id": "ch1-3-q9",
+      "question": "Which of the following statements about Robot Framework syntax are correct? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Variable names like ${user} and ${USER} refer to the same variable",
+          "correct": true
+        },
+        {
+          "text": "Keyword names 'Login User' and 'login user' are treated as different keywords",
+          "correct": false,
+          "explanation": "Keyword names are case-insensitive, so these would be the same keyword"
+        },
+        {
+          "text": "Strings can contain single spaces without quotation marks",
+          "correct": true
+        },
+        {
+          "text": "Library imports in Settings section are case-sensitive",
+          "correct": true
+        },
+        {
+          "text": "Test case bodies must be indented relative to the test case name",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": "ch1-3-q10",
+      "question": "Consider this Robot Framework code structure:\n\n```robot\n*** Settings ***\nDocumentation    Test suite for user management\nResource    ../resources/common.resource\nLibrary    SeleniumLibrary\n\n*** Variables ***\n${URL}    https://example.com\n${BROWSER}    chrome\n\n*** Keywords ***\nOpen Application\n    Open Browser    ${URL}    ${BROWSER}\n    Maximize Browser Window\n```\n\nWhich statement about this code is correct?",
+      "type": "single",
+      "options": [
+        {
+          "text": "This is a test suite file because it contains the Settings section",
+          "correct": false,
+          "explanation": "Without Test Cases or Tasks sections, this would be a resource file, not a suite"
+        },
+        {
+          "text": "This code represents a resource file structure",
+          "correct": true
+        },
+        {
+          "text": "The Keywords section can only appear in library files",
+          "correct": false,
+          "explanation": "Keywords section can appear in resource files for user keywords"
+        },
+        {
+          "text": "Variables must be defined in a separate .py file",
+          "correct": false,
+          "explanation": "Variables can be defined directly in robot files using the Variables section"
+        }
+      ]
+    }
+  ]
+}

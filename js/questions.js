@@ -6,81 +6,34 @@ const questions = {
 
     // Load all questions from JSON files
     async loadAllQuestions() {
-        // For demo, we'll use the sample questions we created
-        // In production, this would fetch all JSON files
-        const sampleData = [
-            {
-                path: 'questions/chapter-1/1.1-introduction.json',
-                data: {
-                    "chapter": "1-Introduction to Robot Framework",
-                    "subchapter": "1.1-Introduction and Overview",
-                    "questions": [
-                        {
-                            "id": "ch1-1-q1",
-                            "question": "What is Robot Framework?",
-                            "type": "single",
-                            "options": [
-                                {"text": "A generic open source automation framework for acceptance testing", "correct": true},
-                                {"text": "A proprietary testing tool only for web applications", "correct": false, "explanation": "Robot Framework is open source, not proprietary"},
-                                {"text": "A programming language for test automation", "correct": false, "explanation": "Robot Framework is a framework, not a programming language"},
-                                {"text": "A tool specifically designed only for mobile testing", "correct": false, "explanation": "Robot Framework is generic and can be used for various types of testing"}
-                            ]
-                        },
-                        {
-                            "id": "ch1-1-q2",
-                            "question": "Which of the following are key features of Robot Framework? (Select all that apply)",
-                            "type": "multiple",
-                            "options": [
-                                {"text": "Keyword-driven testing approach", "correct": true},
-                                {"text": "Human-readable test cases", "correct": true},
-                                {"text": "Only supports Python libraries", "correct": false, "explanation": "Robot Framework supports libraries written in Python, Java, and other languages"},
-                                {"text": "Extensible with custom libraries", "correct": true},
-                                {"text": "Requires compilation before execution", "correct": false, "explanation": "Robot Framework tests are interpreted, not compiled"}
-                            ]
-                        }
-                    ]
-                }
-            },
-            {
-                path: 'questions/chapter-2/2.1-test-data.json',
-                data: {
-                    "chapter": "2-Robot Framework Architecture",
-                    "subchapter": "2.1-Test Data Syntax",
-                    "questions": [
-                        {
-                            "id": "ch2-1-q1",
-                            "question": "Which test data formats are supported by Robot Framework?",
-                            "type": "multiple",
-                            "options": [
-                                {"text": "Plain text format (.robot)", "correct": true},
-                                {"text": "TSV (Tab-separated values)", "correct": true},
-                                {"text": "JSON format", "correct": false, "explanation": "Robot Framework does not natively support JSON as a test data format"},
-                                {"text": "reStructuredText format", "correct": true},
-                                {"text": "YAML format", "correct": false, "explanation": "YAML is not a supported test data format in Robot Framework"}
-                            ]
-                        },
-                        {
-                            "id": "ch2-1-q2",
-                            "question": "In Robot Framework test data, what symbol is used to separate cells in space-separated format?",
-                            "type": "single",
-                            "options": [
-                                {"text": "Two or more spaces", "correct": true},
-                                {"text": "A single space", "correct": false, "explanation": "Single spaces are not enough to separate cells"},
-                                {"text": "A tab character", "correct": false, "explanation": "Tab characters are used in TSV format, not in space-separated format"},
-                                {"text": "A pipe character (|)", "correct": false, "explanation": "Pipe characters can be used but are optional and mainly for readability"}
-                            ]
-                        }
-                    ]
-                }
-            }
+        // Define all question files to load
+        const questionFiles = [
+            'questions/chapter-1/1.1-introduction.json',
+            'questions/chapter-1/1.2-architecture.json',
+            'questions/chapter-1/1.3-basic-syntax.json',
+            'questions/chapter-1/1.4-specification-styles.json',
+            'questions/chapter-1/1.5-organization-licensing.json',
+            'questions/chapter-2/2.1-test-data.json'
+            // Add more files as they are created
         ];
 
-        // Process the sample data
-        sampleData.forEach(file => {
-            this.processQuestionFile(file.data);
-        });
+        // Load each file
+        for (const file of questionFiles) {
+            try {
+                const response = await fetch(file);
+                if (response.ok) {
+                    const data = await response.json();
+                    this.processQuestionFile(data);
+                    console.log(`Loaded questions from ${file}`);
+                } else {
+                    console.warn(`Could not load ${file}: ${response.status}`);
+                }
+            } catch (error) {
+                console.error(`Error loading ${file}:`, error);
+            }
+        }
 
-        console.log(`Loaded ${this.allQuestions.length} questions`);
+        console.log(`Loaded ${this.allQuestions.length} total questions`);
     },
 
     processQuestionFile(data) {
