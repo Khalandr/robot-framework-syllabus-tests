@@ -21,6 +21,12 @@ const quiz = {
 
         this.userAnswers = new Array(questions.length).fill(null);
 
+        // Show/hide export button based on mode
+        const exportBtn = document.getElementById('exportBtn');
+        if (exportBtn) {
+            exportBtn.style.display = mode === 'review' ? 'inline-block' : 'none';
+        }
+
         this.createQuestionNavigation();
         this.displayQuestion();
     },
@@ -68,8 +74,16 @@ const quiz = {
         progressText.textContent = `${this.currentQuestionIndex + 1} / ${this.currentQuestions.length}`;
 
         // Update question info
-        document.getElementById('questionType').textContent =
-            currentQuestion.type === 'multiple' ? 'Multiple Answers' : 'Single Answer';
+        const questionTypeText = currentQuestion.type === 'multiple' ? 'Multiple Answers' : 'Single Answer';
+        const questionTypeElement = document.getElementById('questionType');
+
+        // In review mode, show question ID
+        if (this.mode === 'review') {
+            questionTypeElement.textContent = `${questionTypeText} | ID: ${currentQuestion.id}`;
+        } else {
+            questionTypeElement.textContent = questionTypeText;
+        }
+
         document.getElementById('questionChapter').textContent =
             currentQuestion.chapter.split('-')[0];
 
@@ -89,12 +103,14 @@ const quiz = {
             questionElement.innerHTML = questionText.replace(/\n/g, '<br>');
         }
 
-        // Shuffle and display options
-        const shuffledOptions = questions.shuffle([...currentQuestion.options]);
+        // Shuffle options (except in review mode)
+        const optionsToDisplay = this.mode === 'review'
+            ? [...currentQuestion.options]
+            : questions.shuffle([...currentQuestion.options]);
         const optionsContainer = document.getElementById('answerOptions');
         optionsContainer.innerHTML = '';
 
-        shuffledOptions.forEach((option, index) => {
+        optionsToDisplay.forEach((option, index) => {
             const optionDiv = document.createElement('div');
             optionDiv.className = 'answer-option';
             optionDiv.dataset.index = index;

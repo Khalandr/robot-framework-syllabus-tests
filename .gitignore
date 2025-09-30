@@ -47,3 +47,6 @@ dist/
 Syllabus.pdf
 Writing MC Questions.pdf
 CLAUDE.md
+
+# Question exports (for manual review)
+rf-questions-export.json

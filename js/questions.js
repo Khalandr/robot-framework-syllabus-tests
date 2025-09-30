@@ -139,6 +139,43 @@ const questions = {
         return this.shuffle(examQuestions).slice(0, count);
     },
 
+    getAllQuestionsInOrder() {
+        // Return all questions in their natural order (by file, not shuffled)
+        // Useful for review mode
+        return [...this.allQuestions];
+    },
+
+    exportAllQuestions() {
+        // Export all questions to a JSON file for manual review
+        const exportData = {
+            exportDate: new Date().toISOString(),
+            totalQuestions: this.allQuestions.length,
+            chapters: Object.keys(this.chapters).length,
+            subchapters: Object.keys(this.subchapters).length,
+            questions: this.allQuestions.map(q => ({
+                id: q.id,
+                chapter: q.chapter,
+                subchapter: q.subchapter,
+                type: q.type,
+                question: q.question,
+                options: q.options
+            }))
+        };
+
+        const dataStr = JSON.stringify(exportData, null, 2);
+        const dataBlob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(dataBlob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'rf-questions-export.json';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+
+        console.log('Questions exported successfully');
+    },
+
     shuffle(array) {
         const arr = [...array];
         for (let i = arr.length - 1; i > 0; i--) {

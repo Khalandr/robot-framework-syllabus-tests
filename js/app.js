@@ -36,6 +36,9 @@ const app = {
             case 'exam':
                 this.startExamMode();
                 break;
+            case 'review':
+                this.startReviewMode();
+                break;
         }
     },
 
@@ -108,6 +111,14 @@ const app = {
         const examQuestions = questions.getExamQuestions(40);
         if (examQuestions.length > 0) {
             quiz.startQuiz(examQuestions, 'exam');
+            this.showQuizScreen();
+        }
+    },
+
+    startReviewMode() {
+        const allQuestions = questions.getAllQuestionsInOrder();
+        if (allQuestions.length > 0) {
+            quiz.startQuiz(allQuestions, 'review');
             this.showQuizScreen();
         }
     },

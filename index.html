@@ -39,6 +39,10 @@
                         <h3>Exam Mode</h3>
                         <p>40 questions simulating the real exam</p>
                     </button>
+                    <button class="mode-btn review" data-mode="review">
+                        <h3>Review Mode</h3>
+                        <p>Review all questions with IDs (constant order)</p>
+                    </button>
                 </div>
             </div>
         </div>
@@ -82,6 +86,7 @@
                             <button id="prevBtn" class="btn btn-secondary" onclick="quiz.previousQuestion()">Previous</button>
                             <button id="nextBtn" class="btn btn-secondary" onclick="quiz.nextQuestion()">Next</button>
                         </div>
+                        <button id="exportBtn" class="btn btn-success" onclick="questions.exportAllQuestions()" style="display:none">Export Questions</button>
                         <button id="submitQuizBtn" class="btn btn-primary" onclick="quiz.submitQuiz()">Submit Quiz</button>
                         <button class="btn btn-secondary" onclick="quiz.endQuiz()">End Quiz</button>
                     </div>
