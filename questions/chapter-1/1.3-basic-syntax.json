@@ -158,9 +158,9 @@
           "explanation": "Test case names can contain spaces in Robot Framework"
         },
         {
-          "text": "There's nothing wrong with this test case",
+          "text": "The *** Test Cases *** section must appear after *** Keywords ***",
           "correct": false,
-          "explanation": "The indentation is inconsistent, which will cause parsing errors"
+          "explanation": "Test Cases section can appear in any order; the issue is inconsistent indentation"
         }
       ]
     },

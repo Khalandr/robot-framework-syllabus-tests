@@ -169,27 +169,27 @@
     },
     {
       "id": "ch1-5-q7",
-      "question": "What type of organization is the Robot Framework Foundation?",
+      "question": "How does the Robot Framework Foundation ensure democratic governance and community involvement?",
       "type": "single",
       "options": [
         {
-          "text": "A for-profit corporation",
-          "correct": false,
-          "explanation": "The foundation is a non-profit association"
-        },
-        {
-          "text": "A non-profit association",
+          "text": "Through annual elections where members elect a Board of Directors to oversee operations",
           "correct": true
         },
         {
-          "text": "A government agency",
+          "text": "Through community voting on every technical decision",
           "correct": false,
-          "explanation": "The foundation is a non-profit association, not a government entity"
+          "explanation": "The foundation uses representative governance via elected board, not direct democracy for all decisions"
         },
         {
-          "text": "A subsidiary of a tech company",
+          "text": "Through ownership shares distributed to largest contributors",
           "correct": false,
-          "explanation": "The foundation is an independent non-profit association"
+          "explanation": "As a non-profit, the foundation does not have ownership shares; it has member-elected governance"
+        },
+        {
+          "text": "Through rotating leadership among corporate sponsors",
+          "correct": false,
+          "explanation": "Leadership is elected by members annually, not rotated among sponsors"
         }
       ]
     },

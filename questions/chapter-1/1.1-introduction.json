@@ -68,16 +68,16 @@
           "explanation": "Robot Framework is typically not used for unit or low-level integration testing"
         },
         {
-          "text": "Test automation and robotic process automation (RPA)",
+          "text": "Test automation and RPA",
           "correct": true
         },
         {
-          "text": "Performance testing and security testing",
+          "text": "Performance and security testing",
           "correct": false,
           "explanation": "While possible with extensions, these are not the main use cases of Robot Framework"
         },
         {
-          "text": "Code compilation and deployment automation",
+          "text": "Code compilation and CI/CD",
           "correct": false,
           "explanation": "Robot Framework is not designed for code compilation or deployment tasks"
         }
@@ -100,7 +100,7 @@
         {
           "text": "Integration testing",
           "correct": false,
-          "explanation": "Low-level integration testing is not Robot Framework's primary strength"
+          "explanation": "Robot Framework is typically used for high-level integration and system testing rather than low-level component integration"
         },
         {
           "text": "Acceptance testing",
@@ -114,27 +114,27 @@
     },
     {
       "id": "ch1-1-q5",
-      "question": "Why is Robot Framework typically NOT used for component testing?",
+      "question": "Which statement BEST describes Robot Framework's abstraction level and typical use cases?",
       "type": "single",
       "options": [
         {
-          "text": "It doesn't support Python libraries",
-          "correct": false,
-          "explanation": "Robot Framework has excellent support for Python libraries"
-        },
-        {
-          "text": "It cannot handle automated testing",
-          "correct": false,
-          "explanation": "Robot Framework is specifically designed for automated testing"
-        },
-        {
-          "text": "Component testing requires low-level, granular tests with direct code interaction, which is better handled by unit testing frameworks",
+          "text": "High-level abstraction designed for acceptance, system, and end-to-end testing",
           "correct": true
         },
         {
-          "text": "Robot Framework is too fast for component testing",
+          "text": "Low-level framework optimized for unit and component testing",
           "correct": false,
-          "explanation": "Speed is not the reason; the abstraction level and design philosophy are"
+          "explanation": "Robot Framework operates at high-level abstraction, not suitable for low-level unit/component testing"
+        },
+        {
+          "text": "Mid-level framework exclusively for API integration testing",
+          "correct": false,
+          "explanation": "Robot Framework is high-level and supports various testing types, not just API testing"
+        },
+        {
+          "text": "Code-level framework designed for test-driven development",
+          "correct": false,
+          "explanation": "Robot Framework is not designed for code-level TDD; it focuses on acceptance and system testing"
         }
       ]
     },
