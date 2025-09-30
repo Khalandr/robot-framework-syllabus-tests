@@ -3,11 +3,12 @@ const app = {
     currentMode: null,
     currentTopicType: null,
 
-    init() {
+    async init() {
         console.log('Robot Framework Practice App Initialized');
         this.attachEventListeners();
         this.showModeSelection();
-        questions.loadAllQuestions();
+        await questions.loadAllQuestions();
+        console.log('All questions loaded and ready');
     },
 
     attachEventListeners() {
@@ -116,10 +117,15 @@ const app = {
     },
 
     startReviewMode() {
+        console.log('Starting review mode...');
         const allQuestions = questions.getAllQuestionsInOrder();
+        console.log('Questions loaded:', allQuestions.length);
         if (allQuestions.length > 0) {
             quiz.startQuiz(allQuestions, 'review');
             this.showQuizScreen();
+        } else {
+            console.error('No questions available for review mode');
+            alert('Questions are still loading. Please wait a moment and try again.');
         }
     },
 
