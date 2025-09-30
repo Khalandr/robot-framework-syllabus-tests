@@ -137,21 +137,21 @@
       "type": "single",
       "options": [
         {
-          "text": "The local variable has higher priority within the keyword body; once the keyword exits, the suite variable is back in scope",
+          "text": "Local variable shadows suite variable within keyword; suite variable returns after exit",
           "correct": true
         },
         {
-          "text": "The suite variable always has higher priority",
+          "text": "Suite variable maintains priority regardless of local variable scope",
           "correct": false,
           "explanation": "Local variables shadow suite variables within their scope"
         },
         {
-          "text": "Both variables coexist and can be accessed independently",
+          "text": "Both variables coexist independently with different access prefixes",
           "correct": false,
           "explanation": "The local variable shadows the suite variable within its scope"
         },
         {
-          "text": "Robot Framework raises an error about duplicate variable names",
+          "text": "Robot Framework raises duplicate variable name error at runtime",
           "correct": false,
           "explanation": "Shadowing is allowed; no error is raised"
         }
@@ -242,23 +242,23 @@
       "type": "single",
       "options": [
         {
-          "text": "To define environment-specific or execution configurations like URLs, credentials, browser types, API keys",
+          "text": "To define environment-specific configurations shared across all suites",
           "correct": true
         },
         {
-          "text": "To store temporary calculation results during test execution",
+          "text": "To store temporary calculation results during individual test execution",
           "correct": false,
           "explanation": "Temporary results should use local variables, not global"
         },
         {
-          "text": "To share data between tests within a single suite",
+          "text": "To share dynamically changing data between tests within a suite",
           "correct": false,
           "explanation": "Suite scope variables are better for suite-specific sharing"
         },
         {
-          "text": "To define test data that changes frequently",
+          "text": "To define test data expected to change frequently during runs",
           "correct": false,
-          "explanation": "Global variables are for configuration that should be consistent across execution"
+          "explanation": "Global variables are for configuration consistent across execution"
         }
       ]
     },
