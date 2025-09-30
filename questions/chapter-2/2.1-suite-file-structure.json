@@ -1,0 +1,823 @@
+{
+  "chapter": "2-Robot Framework Test Data",
+  "subchapter": "2.1-Suite File & Tree Structure",
+  "questions": [
+    {
+      "id": "ch2-1-q1",
+      "question": "What is considered the Root Suite in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The path given to Robot Framework where it starts parsing",
+          "correct": true
+        },
+        {
+          "text": "The first .robot file found in the directory tree",
+          "correct": false,
+          "explanation": "The Root Suite is determined by the path given to RF, not by discovery order"
+        },
+        {
+          "text": "The directory containing the most test cases",
+          "correct": false,
+          "explanation": "The Root Suite is the starting path specified, regardless of test case count"
+        },
+        {
+          "text": "Always the top-level directory of the project",
+          "correct": false,
+          "explanation": "The Root Suite is whatever path is given to RF, which can be any level"
+        }
+      ]
+    },
+    {
+      "id": "ch2-1-q2",
+      "question": "Which of the following statements about Suite Files are correct? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "A Suite File must have the .robot extension",
+          "correct": true
+        },
+        {
+          "text": "A Suite File must contain at least one test case or task",
+          "correct": true
+        },
+        {
+          "text": "A Suite File can contain both *** Test Cases *** and *** Tasks *** sections simultaneously",
+          "correct": false,
+          "explanation": "A Suite File CANNOT contain both types simultaneously - it's either test cases OR tasks"
+        },
+        {
+          "text": "A .robot file without test cases or tasks is still considered a Suite File",
+          "correct": false,
+          "explanation": "A file without test cases or tasks is NOT a Suite File, even with .robot extension"
+        },
+        {
+          "text": "Suite Files are also called Low-Level Suites",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": "ch2-1-q3",
+      "question": "What happens when a directory path is given to Robot Framework as the Root Suite?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Only the .robot files in that specific directory are parsed, subdirectories are ignored",
+          "correct": false,
+          "explanation": "Robot Framework parses all *.robot files and directories within the path recursively"
+        },
+        {
+          "text": "Robot Framework parses all *.robot files and directories within this path",
+          "correct": true
+        },
+        {
+          "text": "Robot Framework only parses files named test_*.robot",
+          "correct": false,
+          "explanation": "All .robot files are parsed, not just those with specific naming patterns"
+        },
+        {
+          "text": "Robot Framework requires an __init__.robot file to start parsing",
+          "correct": false,
+          "explanation": "No special initialization file is required to parse a directory"
+        }
+      ]
+    },
+    {
+      "id": "ch2-1-q4",
+      "question": "What is the difference between Suite Files (Low-Level Suites) and Suite Directories (Higher-Level Suites)?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Suite Files contain test cases or tasks; Suite Directories either directly or indirectly contain Suite Files",
+          "correct": true
+        },
+        {
+          "text": "Suite Files are always executed first, then Suite Directories",
+          "correct": false,
+          "explanation": "Execution order is determined alphabetically, not by suite type"
+        },
+        {
+          "text": "Suite Directories cannot contain other directories",
+          "correct": false,
+          "explanation": "Suite Directories can contain other directories (nested suites)"
+        },
+        {
+          "text": "Suite Files are written in Python; Suite Directories contain Robot Framework files",
+          "correct": false,
+          "explanation": "Suite Files are .robot files with test cases/tasks, not Python files"
+        }
+      ]
+    },
+    {
+      "id": "ch2-1-q5",
+      "question": "How are suites ordered during execution by default in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "By creation date of the files",
+          "correct": false,
+          "explanation": "Execution order is not based on file creation date"
+        },
+        {
+          "text": "By case-insensitive alphabetical order based on name and hierarchy",
+          "correct": true
+        },
+        {
+          "text": "By file size, smallest to largest",
+          "correct": false,
+          "explanation": "File size does not affect execution order"
+        },
+        {
+          "text": "Randomly on each execution",
+          "correct": false,
+          "explanation": "Execution order is deterministic, based on alphabetical sorting"
+        }
+      ]
+    },
+    {
+      "id": "ch2-1-q6",
+      "question": "Consider these file names in the same directory:\n\n```\n01__First_Suite.robot\n2_Second_Suite.robot\n03__Third_Suite.robot\n```\n\nWhat will be the suite names and execution order?",
+      "type": "single",
+      "options": [
+        {
+          "text": "First Suite → 2 Second Suite → Third Suite",
+          "correct": true
+        },
+        {
+          "text": "01 First Suite → 2 Second Suite → 03 Third Suite",
+          "correct": false,
+          "explanation": "Prefixes with double underscore __ are NOT part of the suite name"
+        },
+        {
+          "text": "2 Second Suite → First Suite → Third Suite",
+          "correct": false,
+          "explanation": "The 01__ prefix controls order but is not part of the name"
+        },
+        {
+          "text": "All three would have identical names 'Suite'",
+          "correct": false,
+          "explanation": "Each has a different name after processing underscores"
+        }
+      ]
+    },
+    {
+      "id": "ch2-1-q7",
+      "question": "What is the rule for using prefixes to control suite execution order without affecting the suite name?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Use a single underscore _ after the prefix",
+          "correct": false,
+          "explanation": "A single underscore is replaced by a space; use double underscore __"
+        },
+        {
+          "text": "Add a prefix followed by two underscores __ to the file or directory name",
+          "correct": true
+        },
+        {
+          "text": "Add a prefix in square brackets like [01]Suite.robot",
+          "correct": false,
+          "explanation": "Robot Framework uses double underscore __, not square brackets for ordering"
+        },
+        {
+          "text": "Use a hash symbol # followed by a number",
+          "correct": false,
+          "explanation": "The hash symbol is not used for suite ordering in Robot Framework"
+        }
+      ]
+    },
+    {
+      "id": "ch2-1-q8",
+      "question": "How are underscores in file or directory names treated when determining suite names?",
+      "type": "single",
+      "options": [
+        {
+          "text": "All underscores are kept as-is in the suite name",
+          "correct": false,
+          "explanation": "Underscores are replaced by spaces in suite names"
+        },
+        {
+          "text": "One or more underscores are replaced by space characters",
+          "correct": true
+        },
+        {
+          "text": "Underscores are removed completely from suite names",
+          "correct": false,
+          "explanation": "Underscores are replaced by spaces, not removed"
+        },
+        {
+          "text": "Only single underscores are replaced; double underscores remain",
+          "correct": false,
+          "explanation": "Double underscores after a prefix are removed; other underscores become spaces"
+        }
+      ]
+    },
+    {
+      "id": "ch2-1-q9",
+      "question": "Examine this directory structure:\n\n```\nRoot_Suite/\n├── A_Suite.robot\n├── Earlier_Suite_Directory/\n│   ├── B_Suite.robot\n│   └── C_Suite.robot\n├── Keywords/\n│   └── technical_keywords.resource\n└── Later_Suite_Directory/\n    ├── 01__FirstSuite.robot\n    └── 02__SecondSuite.robot\n```\n\nWhich files/directories are considered suites? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Root_Suite directory",
+          "correct": true
+        },
+        {
+          "text": "A_Suite.robot file",
+          "correct": true
+        },
+        {
+          "text": "Keywords directory",
+          "correct": false,
+          "explanation": "Keywords directory contains only .resource files, no test cases/tasks, so it's not a suite"
+        },
+        {
+          "text": "Earlier_Suite_Directory",
+          "correct": true
+        },
+        {
+          "text": "technical_keywords.resource file",
+          "correct": false,
+          "explanation": "Resource files are not suites; they don't contain test cases or tasks"
+        },
+        {
+          "text": "Later_Suite_Directory",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": "ch2-1-q10",
+      "question": "What sections are recognized by Robot Framework in suite files? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "*** Settings ***",
+          "correct": true
+        },
+        {
+          "text": "*** Variables ***",
+          "correct": true
+        },
+        {
+          "text": "*** Test Cases ***",
+          "correct": true
+        },
+        {
+          "text": "*** Tasks ***",
+          "correct": true
+        },
+        {
+          "text": "*** Keywords ***",
+          "correct": true
+        },
+        {
+          "text": "*** Comments ***",
+          "correct": true
+        },
+        {
+          "text": "*** Imports ***",
+          "correct": false,
+          "explanation": "There is no *** Imports *** section; imports are done in *** Settings ***"
+        }
+      ]
+    },
+    {
+      "id": "ch2-1-q11",
+      "question": "What is the correct format for section headers in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Three asterisks before and after section name with Title Case separated by spaces: *** Section Name ***",
+          "correct": true
+        },
+        {
+          "text": "Two asterisks before and after section name: ** Section Name **",
+          "correct": false,
+          "explanation": "Section headers require exactly three asterisks, not two"
+        },
+        {
+          "text": "Square brackets with section name: [Section Name]",
+          "correct": false,
+          "explanation": "Square brackets are for test/keyword settings, not section headers"
+        },
+        {
+          "text": "Hash symbol followed by section name: # Section Name",
+          "correct": false,
+          "explanation": "Hash symbols are for comments, not section headers"
+        }
+      ]
+    },
+    {
+      "id": "ch2-1-q12",
+      "question": "Which sections are mandatory in a Robot Framework Suite File?",
+      "type": "single",
+      "options": [
+        {
+          "text": "*** Settings *** and *** Test Cases ***",
+          "correct": false,
+          "explanation": "Only *** Test Cases *** or *** Tasks *** is mandatory, not *** Settings ***"
+        },
+        {
+          "text": "*** Test Cases *** OR *** Tasks *** (one of them)",
+          "correct": true
+        },
+        {
+          "text": "*** Settings ***, *** Variables ***, and *** Test Cases ***",
+          "correct": false,
+          "explanation": "Only *** Test Cases *** or *** Tasks *** is mandatory in suite files"
+        },
+        {
+          "text": "All sections are optional",
+          "correct": false,
+          "explanation": "Suite Files must have *** Test Cases *** or *** Tasks ***"
+        }
+      ]
+    },
+    {
+      "id": "ch2-1-q13",
+      "question": "What is the recommended order of sections in a Robot Framework suite file?",
+      "type": "single",
+      "options": [
+        {
+          "text": "*** Test Cases *** → *** Settings *** → *** Variables *** → *** Keywords ***",
+          "correct": false,
+          "explanation": "*** Settings *** should come first, followed by *** Variables ***"
+        },
+        {
+          "text": "*** Settings *** → *** Variables *** → *** Test Cases *** or *** Tasks *** → *** Keywords *** → *** Comments ***",
+          "correct": true
+        },
+        {
+          "text": "*** Keywords *** → *** Variables *** → *** Settings *** → *** Test Cases ***",
+          "correct": false,
+          "explanation": "This order is backwards; *** Settings *** should be first"
+        },
+        {
+          "text": "The order of sections doesn't matter in Robot Framework",
+          "correct": false,
+          "explanation": "While RF may parse any order, there is a recommended order for consistency"
+        }
+      ]
+    },
+    {
+      "id": "ch2-1-q14",
+      "question": "In the *** Settings *** section, which of the following can be imported? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "External libraries using the Library setting",
+          "correct": true
+        },
+        {
+          "text": "Resource files using the Resource setting",
+          "correct": true
+        },
+        {
+          "text": "Variable files using the Variables setting",
+          "correct": true
+        },
+        {
+          "text": "Test data files using the Import setting",
+          "correct": false,
+          "explanation": "There is no Import setting; use Library, Resource, or Variables"
+        },
+        {
+          "text": "Python modules using the Module setting",
+          "correct": false,
+          "explanation": "Python libraries are imported using Library, not Module"
+        }
+      ]
+    },
+    {
+      "id": "ch2-1-q15",
+      "question": "Which *** Settings *** can be used to define keywords for execution flow control at the suite level? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Suite Setup",
+          "correct": true
+        },
+        {
+          "text": "Suite Teardown",
+          "correct": true
+        },
+        {
+          "text": "Test Setup / Task Setup",
+          "correct": true
+        },
+        {
+          "text": "Test Teardown / Task Teardown",
+          "correct": true
+        },
+        {
+          "text": "Suite Initialize",
+          "correct": false,
+          "explanation": "There is no Suite Initialize setting; use Suite Setup"
+        }
+      ]
+    },
+    {
+      "id": "ch2-1-q16",
+      "question": "How can the suite name be customized in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "By renaming the file or directory",
+          "correct": false,
+          "explanation": "While this works, the question asks about customization beyond file names"
+        },
+        {
+          "text": "Using the Name setting in the *** Settings *** section",
+          "correct": true
+        },
+        {
+          "text": "Using the [Name] setting in *** Test Cases ***",
+          "correct": false,
+          "explanation": "[Name] is not a valid setting; use Name in *** Settings ***"
+        },
+        {
+          "text": "Suite names cannot be customized; they are always derived from file names",
+          "correct": false,
+          "explanation": "Suite names can be redefined using the Name setting"
+        }
+      ]
+    },
+    {
+      "id": "ch2-1-q17",
+      "question": "Consider this *** Settings *** section:\n\n```robot\n*** Settings ***\nDocumentation    User authentication test suite\nMetadata         Author    John Doe\nMetadata         Version    1.2.0\nMetadata         Requirement    REQ-AUTH-001\nLibrary          SeleniumLibrary\nResource         ../resources/login_keywords.resource\nTest Setup       Open Browser To Login Page\nTest Teardown    Close Browser\nTest Timeout     2 minutes\n```\n\nWhat is the purpose of the Metadata entries?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To configure test execution parameters",
+          "correct": false,
+          "explanation": "Metadata stores information but doesn't configure execution"
+        },
+        {
+          "text": "To store additional information about the suite like author, version, or requirements",
+          "correct": true
+        },
+        {
+          "text": "To import external data files",
+          "correct": false,
+          "explanation": "Metadata doesn't import files; it stores key-value information"
+        },
+        {
+          "text": "To define test-level variables",
+          "correct": false,
+          "explanation": "Metadata is for information storage, not variable definition"
+        }
+      ]
+    },
+    {
+      "id": "ch2-1-q18",
+      "question": "What is the difference between Test Setup defined in *** Settings *** and [Setup] defined in a test case?",
+      "type": "single",
+      "options": [
+        {
+          "text": "There is no difference; they are identical",
+          "correct": false,
+          "explanation": "Test Setup applies to all tests; [Setup] applies to individual test"
+        },
+        {
+          "text": "Test Setup in *** Settings *** defines default for all tests; [Setup] in test case overrides this default",
+          "correct": true
+        },
+        {
+          "text": "Test Setup runs before the suite; [Setup] runs before each test",
+          "correct": false,
+          "explanation": "Test Setup runs before each test by default; Suite Setup runs before the suite"
+        },
+        {
+          "text": "[Setup] is only for tasks, not test cases",
+          "correct": false,
+          "explanation": "[Setup] can be used in both test cases and tasks"
+        }
+      ]
+    },
+    {
+      "id": "ch2-1-q19",
+      "question": "Which of the following settings have both a suite-level setting (in *** Settings ***) and a local setting (in individual test cases)? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Setup: Test Setup vs [Setup]",
+          "correct": true
+        },
+        {
+          "text": "Teardown: Test Teardown vs [Teardown]",
+          "correct": true
+        },
+        {
+          "text": "Timeout: Test Timeout vs [Timeout]",
+          "correct": true
+        },
+        {
+          "text": "Tags: Test Tags vs [Tags]",
+          "correct": true
+        },
+        {
+          "text": "Template: Test Template vs [Template]",
+          "correct": true
+        },
+        {
+          "text": "Documentation: Suite Documentation vs [Documentation]",
+          "correct": false,
+          "explanation": "Documentation uses the same setting name at both levels, not prefixed with 'Test'"
+        }
+      ]
+    },
+    {
+      "id": "ch2-1-q20",
+      "question": "Analyze this suite file structure:\n\n```robot\n*** Variables ***\n${URL}    https://example.com\n${BROWSER}    chrome\n\n*** Settings ***\nLibrary    SeleniumLibrary\nTest Setup    Open Browser    ${URL}    ${BROWSER}\n\n*** Test Cases ***\nLogin Test\n    Input Text    id=username    admin\n    Click Button    id=login\n```\n\nWhat is wrong with this file?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Variables cannot be used in Test Setup",
+          "correct": false,
+          "explanation": "Variables can be used in Test Setup; this is valid"
+        },
+        {
+          "text": "*** Settings *** section should come before *** Variables *** section",
+          "correct": true
+        },
+        {
+          "text": "Test cases must have [Setup] defined locally",
+          "correct": false,
+          "explanation": "Test Setup in *** Settings *** applies to all tests by default"
+        },
+        {
+          "text": "There is nothing wrong with this file structure",
+          "correct": false,
+          "explanation": "The recommended order is *** Settings *** before *** Variables ***"
+        }
+      ]
+    },
+    {
+      "id": "ch2-1-q21",
+      "question": "What is the purpose of the *** Variables *** section?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To import variable files from external sources",
+          "correct": false,
+          "explanation": "Importing variable files is done in *** Settings ***; *** Variables *** defines variables"
+        },
+        {
+          "text": "To define suite variables that are used in the suite, its tests/tasks, or inside keywords",
+          "correct": true
+        },
+        {
+          "text": "To declare which variables can be modified during execution",
+          "correct": false,
+          "explanation": "*** Variables *** defines variables; it doesn't control modification permissions"
+        },
+        {
+          "text": "To configure variable scoping rules",
+          "correct": false,
+          "explanation": "*** Variables *** defines variables; scoping is built into RF"
+        }
+      ]
+    },
+    {
+      "id": "ch2-1-q22",
+      "question": "According to best practices, what is the most common use case for variables defined in the *** Variables *** section?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To store test results during execution",
+          "correct": false,
+          "explanation": "Variables in this section are typically for constants, not runtime results"
+        },
+        {
+          "text": "To define constants with static values that remain unchanged during execution",
+          "correct": true
+        },
+        {
+          "text": "To create counters that increment during test execution",
+          "correct": false,
+          "explanation": "While possible, this is not the most common or recommended use case"
+        },
+        {
+          "text": "To define temporary variables for a single test case",
+          "correct": false,
+          "explanation": "*** Variables *** is suite-level; temporary variables are typically defined in keywords"
+        }
+      ]
+    },
+    {
+      "id": "ch2-1-q23",
+      "question": "Why is dynamically reassigning variables defined in *** Variables *** section during execution NOT recommended?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Robot Framework doesn't allow variable reassignment",
+          "correct": false,
+          "explanation": "RF allows reassignment; it's just not recommended in this context"
+        },
+        {
+          "text": "It may lead to test/task runtime dependencies and hard-to-debug side-effects",
+          "correct": true
+        },
+        {
+          "text": "Reassigned variables lose their original type",
+          "correct": false,
+          "explanation": "Type handling is not the main concern with reassignment"
+        },
+        {
+          "text": "It significantly decreases test execution performance",
+          "correct": false,
+          "explanation": "Performance is not the primary concern; maintainability and debugging are"
+        }
+      ]
+    },
+    {
+      "id": "ch2-1-q24",
+      "question": "What is the primary difference between the *** Test Cases *** and *** Tasks *** sections?",
+      "type": "single",
+      "options": [
+        {
+          "text": "*** Test Cases *** is for testing; *** Tasks *** is for RPA; but they are technically synonyms",
+          "correct": true
+        },
+        {
+          "text": "*** Tasks *** can only run sequentially; *** Test Cases *** can run in parallel",
+          "correct": false,
+          "explanation": "Both execute similarly; the difference is semantic purpose, not execution"
+        },
+        {
+          "text": "*** Test Cases *** can have assertions; *** Tasks *** cannot",
+          "correct": false,
+          "explanation": "Both can use the same keywords including assertions"
+        },
+        {
+          "text": "*** Tasks *** requires additional installation; *** Test Cases *** is built-in",
+          "correct": false,
+          "explanation": "Both are built into Robot Framework core"
+        }
+      ]
+    },
+    {
+      "id": "ch2-1-q25",
+      "question": "How are test cases and tasks structured in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Using JSON-like key-value pairs",
+          "correct": false,
+          "explanation": "RF uses indentation-based format, not JSON"
+        },
+        {
+          "text": "Using an indentation-based format with the name un-indented and body indented",
+          "correct": true
+        },
+        {
+          "text": "Using curly braces to define test/task boundaries",
+          "correct": false,
+          "explanation": "RF doesn't use curly braces for structure; it uses indentation"
+        },
+        {
+          "text": "Using XML-style tags",
+          "correct": false,
+          "explanation": "RF doesn't use XML tags; it uses space/tab-separated format with indentation"
+        }
+      ]
+    },
+    {
+      "id": "ch2-1-q26",
+      "question": "Consider this test case structure:\n\n```robot\n*** Test Cases ***\nUser Registration\n    [Documentation]    Verify new user can register\n    [Tags]    smoke    registration\n    [Setup]    Navigate To Registration Page\n    [Timeout]    1 minute\n    Fill Registration Form    john@example.com    SecurePass123\n    Submit Form\n    Verify Success Message\n    [Teardown]    Clear Test Data\n```\n\nWhich elements are test-specific settings? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "[Documentation]",
+          "correct": true
+        },
+        {
+          "text": "[Tags]",
+          "correct": true
+        },
+        {
+          "text": "[Setup]",
+          "correct": true
+        },
+        {
+          "text": "[Timeout]",
+          "correct": true
+        },
+        {
+          "text": "[Teardown]",
+          "correct": true
+        },
+        {
+          "text": "Fill Registration Form",
+          "correct": false,
+          "explanation": "This is a keyword call, not a setting"
+        }
+      ]
+    },
+    {
+      "id": "ch2-1-q27",
+      "question": "What is the difference between keywords defined in the *** Keywords *** section of a suite file versus keywords in resource files?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Keywords in suite files can only be used within that suite; keywords in resource files can be used in any suite that imports them",
+          "correct": true
+        },
+        {
+          "text": "Keywords in suite files are faster to execute",
+          "correct": false,
+          "explanation": "Performance is the same; the difference is scope/reusability"
+        },
+        {
+          "text": "Keywords in resource files cannot have arguments",
+          "correct": false,
+          "explanation": "Keywords in resource files can have arguments just like suite keywords"
+        },
+        {
+          "text": "There is no difference; they function identically",
+          "correct": false,
+          "explanation": "The key difference is scope - suite keywords are local, resource keywords are reusable"
+        }
+      ]
+    },
+    {
+      "id": "ch2-1-q28",
+      "question": "What is a common use case for defining keywords locally in a suite's *** Keywords *** section?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To share keywords across multiple projects",
+          "correct": false,
+          "explanation": "For sharing across projects, use resource files or libraries"
+        },
+        {
+          "text": "To define suite-specific actions like Suite Setup keywords that are only relevant to that suite",
+          "correct": true
+        },
+        {
+          "text": "To override keywords from imported libraries",
+          "correct": false,
+          "explanation": "While possible, this is not the primary use case for suite keywords"
+        },
+        {
+          "text": "To create keywords that execute faster",
+          "correct": false,
+          "explanation": "Location doesn't affect execution speed"
+        }
+      ]
+    },
+    {
+      "id": "ch2-1-q29",
+      "question": "Examine this file structure:\n\n```robot\n*** Settings ***\nLibrary    DatabaseLibrary\nResource    common_keywords.resource\n\n*** Keywords ***\nSetup Test Database\n    Connect To Database    testdb    admin    password\n    Execute SQL    DELETE FROM test_users\n    \nCleanup Test Database\n    Execute SQL    TRUNCATE TABLE test_logs\n    Disconnect From Database\n```\n\nIs this a Suite File or a Resource File?",
+      "type": "single",
+      "options": [
+        {
+          "text": "This is a Suite File because it has *** Settings *** and *** Keywords *** sections",
+          "correct": false,
+          "explanation": "Without *** Test Cases *** or *** Tasks ***, this is a Resource File, not a Suite File"
+        },
+        {
+          "text": "This is a Resource File because it lacks *** Test Cases *** or *** Tasks *** section",
+          "correct": true
+        },
+        {
+          "text": "This is invalid because it's missing required sections",
+          "correct": false,
+          "explanation": "This is valid as a Resource File; only Suite Files require *** Test Cases *** or *** Tasks ***"
+        },
+        {
+          "text": "This is a Library File written in Robot Framework syntax",
+          "correct": false,
+          "explanation": "Library files are Python/Java code; this is a Resource File in RF syntax"
+        }
+      ]
+    },
+    {
+      "id": "ch2-1-q30",
+      "question": "What is the purpose of the *** Comments *** section?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To define metadata about the suite",
+          "correct": false,
+          "explanation": "Metadata is defined in *** Settings ***, not *** Comments ***"
+        },
+        {
+          "text": "To add comments that are ignored by Robot Framework and not executed or parsed",
+          "correct": true
+        },
+        {
+          "text": "To document keywords for auto-generated documentation",
+          "correct": false,
+          "explanation": "Keyword documentation uses [Documentation] setting, not *** Comments ***"
+        },
+        {
+          "text": "To temporarily disable test cases",
+          "correct": false,
+          "explanation": "While it could be used this way, its purpose is general comments, not test disabling"
+        }
+      ]
+    }
+  ]
+}

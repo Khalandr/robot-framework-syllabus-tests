@@ -1,0 +1,788 @@
+{
+  "chapter": "2-Robot Framework Test Data",
+  "subchapter": "2.4-Keyword Imports",
+  "questions": [
+    {
+      "id": "ch2-4-q1",
+      "question": "Which keywords are available in a Robot Framework suite without any imports?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Keywords from the BuiltIn library",
+          "correct": true
+        },
+        {
+          "text": "Robot Framework language statements",
+          "correct": true
+        },
+        {
+          "text": "Keywords from SeleniumLibrary",
+          "correct": false,
+          "explanation": "SeleniumLibrary must be explicitly imported"
+        },
+        {
+          "text": "Keywords from all Standard Libraries",
+          "correct": false,
+          "explanation": "Only BuiltIn is imported automatically; other standard libraries need explicit import"
+        }
+      ]
+    },
+    {
+      "id": "ch2-4-q2",
+      "question": "What are the two main sources for importing external keywords into a suite?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Libraries",
+          "correct": true
+        },
+        {
+          "text": "Resource files",
+          "correct": true
+        },
+        {
+          "text": "JSON configuration files",
+          "correct": false,
+          "explanation": "JSON files are not used for keyword imports"
+        },
+        {
+          "text": "Python scripts directly",
+          "correct": false,
+          "explanation": "Python code must be packaged as a library, not imported directly"
+        }
+      ]
+    },
+    {
+      "id": "ch2-4-q3",
+      "question": "What are the three types of libraries in Robot Framework from a user perspective? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Robot Framework Standard Libraries",
+          "correct": true
+        },
+        {
+          "text": "3rd Party / External Libraries",
+          "correct": true
+        },
+        {
+          "text": "Custom Libraries",
+          "correct": true
+        },
+        {
+          "text": "System Libraries",
+          "correct": false,
+          "explanation": "System Libraries is not a category in Robot Framework"
+        },
+        {
+          "text": "Built-in Libraries",
+          "correct": false,
+          "explanation": "BuiltIn is one standard library, not a category"
+        }
+      ]
+    },
+    {
+      "id": "ch2-4-q4",
+      "question": "What are Robot Framework Standard Libraries?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Libraries shipped with Robot Framework that are available without additional installation",
+          "correct": true
+        },
+        {
+          "text": "Libraries that must be downloaded from PyPI separately",
+          "correct": false,
+          "explanation": "Standard libraries are included with RF installation"
+        },
+        {
+          "text": "Libraries created by the user for their project",
+          "correct": false,
+          "explanation": "User-created libraries are Custom Libraries, not Standard"
+        },
+        {
+          "text": "Only the BuiltIn library",
+          "correct": false,
+          "explanation": "Standard libraries include BuiltIn, Collections, String, OperatingSystem, and more"
+        }
+      ]
+    },
+    {
+      "id": "ch2-4-q5",
+      "question": "What are 3rd Party / External Libraries?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Libraries developed by community members that must be installed separately",
+          "correct": true
+        },
+        {
+          "text": "Libraries that come pre-installed with Robot Framework",
+          "correct": false,
+          "explanation": "3rd party libraries require separate installation"
+        },
+        {
+          "text": "Libraries written by the user for their specific project",
+          "correct": false,
+          "explanation": "These are Custom Libraries, not 3rd party"
+        },
+        {
+          "text": "Libraries that can only be used with a commercial license",
+          "correct": false,
+          "explanation": "3rd party libraries can be open source or commercial"
+        }
+      ]
+    },
+    {
+      "id": "ch2-4-q6",
+      "question": "How do you import a library into a suite or resource file?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Use the Library setting in the *** Settings *** section followed by the library name",
+          "correct": true
+        },
+        {
+          "text": "Use the Import setting in the *** Settings *** section",
+          "correct": false,
+          "explanation": "The setting is called Library, not Import"
+        },
+        {
+          "text": "Use the @library decorator in the test case",
+          "correct": false,
+          "explanation": "Robot Framework doesn't use decorators for imports"
+        },
+        {
+          "text": "Add the library to a configuration.yml file",
+          "correct": false,
+          "explanation": "Libraries are imported in the *** Settings *** section"
+        }
+      ]
+    },
+    {
+      "id": "ch2-4-q7",
+      "question": "Is the library name case-sensitive when importing?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Yes, the library name is case-sensitive",
+          "correct": true
+        },
+        {
+          "text": "No, library names are case-insensitive like keyword names",
+          "correct": false,
+          "explanation": "Library names are case-sensitive, unlike keyword names"
+        },
+        {
+          "text": "Only on Linux; case-insensitive on Windows",
+          "correct": false,
+          "explanation": "Library names are case-sensitive on all platforms"
+        },
+        {
+          "text": "Case-sensitive for custom libraries only",
+          "correct": false,
+          "explanation": "All library names are case-sensitive"
+        }
+      ]
+    },
+    {
+      "id": "ch2-4-q8",
+      "question": "Analyze these library imports:\n\n```robot\n*** Settings ***\nLibrary    OperatingSystem\nLibrary    Browser\nLibrary    DatabaseLibrary\n```\n\nWhich statements are correct? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "OperatingSystem is likely a Robot Framework Standard Library",
+          "correct": true
+        },
+        {
+          "text": "All three libraries are imported by name (not path)",
+          "correct": true
+        },
+        {
+          "text": "These libraries must be in the Python module search path",
+          "correct": true
+        },
+        {
+          "text": "These imports are case-insensitive",
+          "correct": false,
+          "explanation": "Library names are case-sensitive"
+        }
+      ]
+    },
+    {
+      "id": "ch2-4-q9",
+      "question": "What happens when a library is imported?",
+      "type": "single",
+      "options": [
+        {
+          "text": "All keywords from that library become available in that suite or resource file",
+          "correct": true
+        },
+        {
+          "text": "Only selected keywords from the library become available",
+          "correct": false,
+          "explanation": "All keywords become available, not just selected ones"
+        },
+        {
+          "text": "The library is compiled and optimized for execution",
+          "correct": false,
+          "explanation": "Libraries are not compiled; they're imported at runtime"
+        },
+        {
+          "text": "A copy of the library is created in the project directory",
+          "correct": false,
+          "explanation": "Libraries are referenced, not copied"
+        }
+      ]
+    },
+    {
+      "id": "ch2-4-q10",
+      "question": "Does the BuiltIn library need to be imported explicitly?",
+      "type": "single",
+      "options": [
+        {
+          "text": "No, BuiltIn is always imported invisibly and automatically",
+          "correct": true
+        },
+        {
+          "text": "Yes, all libraries including BuiltIn must be imported explicitly",
+          "correct": false,
+          "explanation": "BuiltIn is the only library imported automatically"
+        },
+        {
+          "text": "Only in resource files; not in suite files",
+          "correct": false,
+          "explanation": "BuiltIn is automatic everywhere"
+        },
+        {
+          "text": "Yes, but only once per project",
+          "correct": false,
+          "explanation": "BuiltIn never needs explicit import"
+        }
+      ]
+    },
+    {
+      "id": "ch2-4-q11",
+      "question": "How can libraries that are NOT in the Python module search path be imported?",
+      "type": "single",
+      "options": [
+        {
+          "text": "By using the path to the Python module",
+          "correct": true
+        },
+        {
+          "text": "They cannot be imported; they must be in the search path",
+          "correct": false,
+          "explanation": "Libraries can be imported by path if not in search path"
+        },
+        {
+          "text": "By using the --force-import flag",
+          "correct": false,
+          "explanation": "There is no such flag; use path instead"
+        },
+        {
+          "text": "By copying them to the Robot Framework installation directory",
+          "correct": false,
+          "explanation": "This is not necessary; use path-based import"
+        }
+      ]
+    },
+    {
+      "id": "ch2-4-q12",
+      "question": "What is the primary purpose of resource files?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To organize and store keywords and variables used in multiple suites",
+          "correct": true
+        },
+        {
+          "text": "To store test cases that can be shared across projects",
+          "correct": false,
+          "explanation": "Resource files don't contain test cases"
+        },
+        {
+          "text": "To configure Robot Framework execution settings",
+          "correct": false,
+          "explanation": "Resource files contain keywords and variables, not configuration"
+        },
+        {
+          "text": "To generate documentation for the project",
+          "correct": false,
+          "explanation": "Documentation is generated by libdoc, not resource files"
+        }
+      ]
+    },
+    {
+      "id": "ch2-4-q13",
+      "question": "What is the main difference between suite files and resource files?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Resource files do not contain test cases or tasks; suite files must contain them",
+          "correct": true
+        },
+        {
+          "text": "Resource files use different syntax than suite files",
+          "correct": false,
+          "explanation": "They share the same syntax"
+        },
+        {
+          "text": "Resource files cannot import libraries",
+          "correct": false,
+          "explanation": "Resource files can import libraries"
+        },
+        {
+          "text": "Suite files cannot contain keywords",
+          "correct": false,
+          "explanation": "Suite files can contain keywords in *** Keywords *** section"
+        }
+      ]
+    },
+    {
+      "id": "ch2-4-q14",
+      "question": "If a resource file imports a library, where are that library's keywords available?",
+      "type": "single",
+      "options": [
+        {
+          "text": "In any suite that imports that resource file",
+          "correct": true
+        },
+        {
+          "text": "Only in the resource file itself",
+          "correct": false,
+          "explanation": "Keywords are available in importing suites too"
+        },
+        {
+          "text": "Only in suites in the same directory as the resource file",
+          "correct": false,
+          "explanation": "Availability depends on import, not location"
+        },
+        {
+          "text": "Globally in all suites in the project",
+          "correct": false,
+          "explanation": "Only in suites that import the resource file"
+        }
+      ]
+    },
+    {
+      "id": "ch2-4-q15",
+      "question": "Consider this structure:\n\n```robot\n# common_keywords.resource\n*** Settings ***\nLibrary    SeleniumLibrary\nLibrary    DatabaseLibrary\n\n*** Keywords ***\nLogin As User\n    # keyword implementation\n\n# test_suite.robot\n*** Settings ***\nResource    common_keywords.resource\n\n*** Test Cases ***\nTest Login\n    Login As User\n    Open Browser    url    chrome\n```\n\nWhat keywords are available in test_suite.robot? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Login As User (from resource file)",
+          "correct": true
+        },
+        {
+          "text": "SeleniumLibrary keywords (imported in resource file)",
+          "correct": true
+        },
+        {
+          "text": "DatabaseLibrary keywords (imported in resource file)",
+          "correct": true
+        },
+        {
+          "text": "BuiltIn library keywords",
+          "correct": true
+        },
+        {
+          "text": "Only Login As User, not library keywords",
+          "correct": false,
+          "explanation": "Library imports in resource files are also available to importing suites"
+        }
+      ]
+    },
+    {
+      "id": "ch2-4-q16",
+      "question": "How do you import a resource file into a suite or resource file?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Use the Resource setting in *** Settings *** section followed by the path to the resource file",
+          "correct": true
+        },
+        {
+          "text": "Use the Library setting followed by the resource file name",
+          "correct": false,
+          "explanation": "Library is for libraries; Resource is for resource files"
+        },
+        {
+          "text": "Use the Include setting followed by the resource file path",
+          "correct": false,
+          "explanation": "The setting is called Resource, not Include"
+        },
+        {
+          "text": "Resource files are automatically discovered and don't need importing",
+          "correct": false,
+          "explanation": "Resource files must be explicitly imported"
+        }
+      ]
+    },
+    {
+      "id": "ch2-4-q17",
+      "question": "What file extension should resource files use?",
+      "type": "single",
+      "options": [
+        {
+          "text": ".resource (recommended for clarity)",
+          "correct": true
+        },
+        {
+          "text": ".robot (required)",
+          "correct": false,
+          "explanation": ".robot works but .resource is recommended for clarity"
+        },
+        {
+          "text": ".py (Python extension)",
+          "correct": false,
+          "explanation": "Resource files use RF syntax, not Python"
+        },
+        {
+          "text": ".txt (plain text)",
+          "correct": false,
+          "explanation": ".resource or .robot extensions are recognized by IDEs"
+        }
+      ]
+    },
+    {
+      "id": "ch2-4-q18",
+      "question": "Why is the .resource extension recommended over .robot for resource files?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To make it clear what they are (resource files vs suite files)",
+          "correct": true
+        },
+        {
+          "text": ".robot extension doesn't work for resource files",
+          "correct": false,
+          "explanation": ".robot works but .resource is clearer"
+        },
+        {
+          "text": ".resource files load faster",
+          "correct": false,
+          "explanation": "Performance is identical; it's about clarity"
+        },
+        {
+          "text": "IDE extensions only recognize .resource files",
+          "correct": false,
+          "explanation": "IDEs recognize both .robot and .resource"
+        }
+      ]
+    },
+    {
+      "id": "ch2-4-q19",
+      "question": "Analyze these imports:\n\n```robot\n*** Settings ***\nResource    local_keywords.resource\nResource    D:/keywords/central_keywords.resource\n```\n\nWhat types of paths are used? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "First import uses a relative path",
+          "correct": true
+        },
+        {
+          "text": "Second import uses an absolute path",
+          "correct": true
+        },
+        {
+          "text": "Both imports use absolute paths",
+          "correct": false,
+          "explanation": "First is relative, second is absolute"
+        },
+        {
+          "text": "Both imports use relative paths",
+          "correct": false,
+          "explanation": "Second is absolute with drive letter"
+        }
+      ]
+    },
+    {
+      "id": "ch2-4-q20",
+      "question": "When a relative path is used to import a resource file, where is it resolved relative to?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The data file (suite or resource file) that is importing it",
+          "correct": true
+        },
+        {
+          "text": "The current working directory where robot command was executed",
+          "correct": false,
+          "explanation": "Relative paths are relative to the importing file, not CWD"
+        },
+        {
+          "text": "The Robot Framework installation directory",
+          "correct": false,
+          "explanation": "Paths are relative to the importing file"
+        },
+        {
+          "text": "The root suite directory",
+          "correct": false,
+          "explanation": "Paths are relative to the importing file, not root suite"
+        }
+      ]
+    },
+    {
+      "id": "ch2-4-q21",
+      "question": "If a relative path for a resource file is given and the file is not found relative to the importing file, where else does Robot Framework search?",
+      "type": "single",
+      "options": [
+        {
+          "text": "In the Python module search path (PYTHONPATH)",
+          "correct": true
+        },
+        {
+          "text": "In the user's home directory",
+          "correct": false,
+          "explanation": "RF doesn't automatically search home directory"
+        },
+        {
+          "text": "In the Robot Framework installation directory",
+          "correct": false,
+          "explanation": "RF uses Python module search path, not its own directory"
+        },
+        {
+          "text": "Nowhere else; the import fails",
+          "correct": false,
+          "explanation": "RF also searches the Python module search path"
+        }
+      ]
+    },
+    {
+      "id": "ch2-4-q22",
+      "question": "How can the Python module search path be influenced? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "By setting the PYTHONPATH environment variable",
+          "correct": true
+        },
+        {
+          "text": "By using the --pythonpath CLI argument when executing robot",
+          "correct": true
+        },
+        {
+          "text": "By editing the Robot Framework configuration file",
+          "correct": false,
+          "explanation": "Use PYTHONPATH or --pythonpath, not a config file"
+        },
+        {
+          "text": "By installing libraries with pip",
+          "correct": false,
+          "explanation": "pip installs to a location already in search path"
+        }
+      ]
+    },
+    {
+      "id": "ch2-4-q23",
+      "question": "What path separator should be used in Robot Framework import paths?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Forward slashes / on all operating systems (strongly recommended)",
+          "correct": true
+        },
+        {
+          "text": "Backslashes \\ on Windows, forward slashes / on Linux/Mac",
+          "correct": false,
+          "explanation": "Forward slashes work everywhere and are recommended"
+        },
+        {
+          "text": "Backslashes \\ on all systems",
+          "correct": false,
+          "explanation": "Backslashes require escaping and cause issues"
+        },
+        {
+          "text": "Either forward or back slashes work equally well",
+          "correct": false,
+          "explanation": "Backslashes require escaping; forward slashes are strongly recommended"
+        }
+      ]
+    },
+    {
+      "id": "ch2-4-q24",
+      "question": "Why are forward slashes / recommended over backslashes \\ for paths, even on Windows?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Backslashes are escape characters in Robot Framework and can cause issues",
+          "correct": true
+        },
+        {
+          "text": "Windows doesn't support backslashes in Robot Framework",
+          "correct": false,
+          "explanation": "Windows supports backslashes, but they require escaping"
+        },
+        {
+          "text": "Forward slashes are faster to process",
+          "correct": false,
+          "explanation": "Performance is not the reason; it's about escaping complexity"
+        },
+        {
+          "text": "Robot Framework only runs on Linux",
+          "correct": false,
+          "explanation": "RF runs on all platforms; forward slashes work everywhere"
+        }
+      ]
+    },
+    {
+      "id": "ch2-4-q25",
+      "question": "Which of these path examples is correct and recommended?\n\n```robot\nA) Resource    ..\\resources\\keywords.resource\nB) Resource    ../resources/keywords.resource\nC) Resource    ..//resources//keywords.resource\nD) Resource    ..\\\\resources\\\\keywords.resource\n```",
+      "type": "single",
+      "options": [
+        {
+          "text": "B - uses forward slashes (recommended)",
+          "correct": true
+        },
+        {
+          "text": "A - uses backslashes (Windows standard)",
+          "correct": false,
+          "explanation": "Backslashes work but require escaping and are not recommended"
+        },
+        {
+          "text": "C - uses double forward slashes",
+          "correct": false,
+          "explanation": "Double slashes are incorrect"
+        },
+        {
+          "text": "D - uses escaped backslashes",
+          "correct": false,
+          "explanation": "While this works, forward slashes are simpler and recommended"
+        }
+      ]
+    },
+    {
+      "id": "ch2-4-q26",
+      "question": "Why should absolute paths be avoided when importing resources?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Absolute paths are typically not portable across different environments",
+          "correct": true
+        },
+        {
+          "text": "Absolute paths don't work in Robot Framework",
+          "correct": false,
+          "explanation": "Absolute paths work but are not portable"
+        },
+        {
+          "text": "Absolute paths are slower to resolve",
+          "correct": false,
+          "explanation": "Performance is not the concern; portability is"
+        },
+        {
+          "text": "Robot Framework syntax doesn't support absolute paths",
+          "correct": false,
+          "explanation": "Absolute paths are supported but not recommended"
+        }
+      ]
+    },
+    {
+      "id": "ch2-4-q27",
+      "question": "When are relative paths considered portable?",
+      "type": "single",
+      "options": [
+        {
+          "text": "When they are related to the importing data file and part of the project structure",
+          "correct": true
+        },
+        {
+          "text": "Relative paths are never portable",
+          "correct": false,
+          "explanation": "Relative paths within project structure are portable"
+        },
+        {
+          "text": "Only when they use absolute directory references",
+          "correct": false,
+          "explanation": "That's contradictory - absolute vs relative"
+        },
+        {
+          "text": "All relative paths are always portable",
+          "correct": false,
+          "explanation": "Only those within project structure are reliably portable"
+        }
+      ]
+    },
+    {
+      "id": "ch2-4-q28",
+      "question": "What is the most stable and recommended way to import resource files and libraries?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Use the Python Path/module search path",
+          "correct": true
+        },
+        {
+          "text": "Use absolute paths to ensure exact location",
+          "correct": false,
+          "explanation": "Absolute paths are not portable; Python path is more stable"
+        },
+        {
+          "text": "Use relative paths from the root suite",
+          "correct": false,
+          "explanation": "Python path is more stable than relative paths"
+        },
+        {
+          "text": "Copy all resources to each suite directory",
+          "correct": false,
+          "explanation": "This creates duplication; use Python path instead"
+        }
+      ]
+    },
+    {
+      "id": "ch2-4-q29",
+      "question": "What is the advantage of using Python module search path for imports?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Each suite can use the same import path regardless of its location in the project",
+          "correct": true
+        },
+        {
+          "text": "Imports are faster",
+          "correct": false,
+          "explanation": "The main advantage is uniform import paths, not speed"
+        },
+        {
+          "text": "No configuration is needed",
+          "correct": false,
+          "explanation": "Python path must be configured when executing robot"
+        },
+        {
+          "text": "Libraries are automatically installed",
+          "correct": false,
+          "explanation": "Python path doesn't install libraries, just makes them findable"
+        }
+      ]
+    },
+    {
+      "id": "ch2-4-q30",
+      "question": "Compare these import approaches:\n\n```robot\n# Approach A: Relative path\n*** Settings ***\nResource    ../../../common/keywords.resource\n\n# Approach B: Python path (assuming 'common' in PYTHONPATH)\n*** Settings ***\nResource    common/keywords.resource\n```\n\nWhat are the advantages of Approach B? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "More uniform import paths across different suites",
+          "correct": true
+        },
+        {
+          "text": "Independent of suite location in project hierarchy",
+          "correct": true
+        },
+        {
+          "text": "More stable when project structure changes",
+          "correct": true
+        },
+        {
+          "text": "Works without any configuration",
+          "correct": false,
+          "explanation": "Python path must be configured via PYTHONPATH or --pythonpath"
+        },
+        {
+          "text": "Automatically creates the resource file if missing",
+          "correct": false,
+          "explanation": "Neither approach creates files; they only import existing ones"
+        }
+      ]
+    }
+  ]
+}

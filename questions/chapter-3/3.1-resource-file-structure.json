@@ -1,0 +1,797 @@
+{
+  "chapter": "3-Keywords and Variables",
+  "subchapter": "3.1-Resource File Structure",
+  "questions": [
+    {
+      "id": "ch3-1-q1",
+      "question": "What are Resource Files used for in Robot Framework? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "To store reusable keywords",
+          "correct": true
+        },
+        {
+          "text": "To store variables",
+          "correct": true
+        },
+        {
+          "text": "To organize imports of other resource files and libraries",
+          "correct": true
+        },
+        {
+          "text": "To define test cases or tasks",
+          "correct": false,
+          "explanation": "Resource files cannot contain test cases or tasks"
+        }
+      ]
+    },
+    {
+      "id": "ch3-1-q2",
+      "question": "Why are Resource Files typically used across many suites?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To share common keywords and variables across different tests or tasks",
+          "correct": true
+        },
+        {
+          "text": "To improve execution speed",
+          "correct": false,
+          "explanation": "Resource files are for reusability, not performance"
+        },
+        {
+          "text": "Because Robot Framework requires at least one resource file",
+          "correct": false,
+          "explanation": "Resource files are optional"
+        },
+        {
+          "text": "To store test execution results",
+          "correct": false,
+          "explanation": "Resource files contain keywords and variables, not results"
+        }
+      ]
+    },
+    {
+      "id": "ch3-1-q3",
+      "question": "How should Resource Files be designed? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "To be modular",
+          "correct": true
+        },
+        {
+          "text": "To be reusable",
+          "correct": true
+        },
+        {
+          "text": "To be maintainable",
+          "correct": true
+        },
+        {
+          "text": "To contain all keywords from all parts of the application in one file",
+          "correct": false,
+          "explanation": "Keywords should be grouped by relation, not all in one file"
+        }
+      ]
+    },
+    {
+      "id": "ch3-1-q4",
+      "question": "What should be the basis for grouping keywords and variables in a resource file? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Common purpose",
+          "correct": true
+        },
+        {
+          "text": "Common abstraction layer",
+          "correct": true
+        },
+        {
+          "text": "Common context",
+          "correct": true
+        },
+        {
+          "text": "Alphabetical order",
+          "correct": false,
+          "explanation": "Grouping should be based on relationship, not alphabetical order"
+        },
+        {
+          "text": "File size limits",
+          "correct": false,
+          "explanation": "Grouping should be logical, not based on file size"
+        }
+      ]
+    },
+    {
+      "id": "ch3-1-q5",
+      "question": "Which is a good example of organizing keywords in a resource file?",
+      "type": "single",
+      "options": [
+        {
+          "text": "All keywords and variables for a specific dialog or part of an application in one file",
+          "correct": true
+        },
+        {
+          "text": "All keywords that start with the same letter in one file",
+          "correct": false,
+          "explanation": "Grouping should be functional, not alphabetical"
+        },
+        {
+          "text": "All keywords written by the same person in one file",
+          "correct": false,
+          "explanation": "Grouping should be based on functionality, not authorship"
+        },
+        {
+          "text": "Random distribution to keep files small",
+          "correct": false,
+          "explanation": "Organization should be logical and purposeful"
+        }
+      ]
+    },
+    {
+      "id": "ch3-1-q6",
+      "question": "How do you import a resource file?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Use the Resource setting in *** Settings *** section with the path to the resource file",
+          "correct": true
+        },
+        {
+          "text": "Use the Library setting in *** Settings *** section",
+          "correct": false,
+          "explanation": "Library is for libraries; Resource is for resource files"
+        },
+        {
+          "text": "Use the Import setting in *** Settings *** section",
+          "correct": false,
+          "explanation": "The setting is called Resource, not Import"
+        },
+        {
+          "text": "Resource files are automatically discovered",
+          "correct": false,
+          "explanation": "Resource files must be explicitly imported"
+        }
+      ]
+    },
+    {
+      "id": "ch3-1-q7",
+      "question": "What file extension should resource files use?",
+      "type": "single",
+      "options": [
+        {
+          "text": ".resource",
+          "correct": true
+        },
+        {
+          "text": ".robot (required)",
+          "correct": false,
+          "explanation": ".robot works but .resource is the recommended extension"
+        },
+        {
+          "text": ".res",
+          "correct": false,
+          "explanation": ".resource is the standard extension"
+        },
+        {
+          "text": ".rf",
+          "correct": false,
+          "explanation": ".resource is the correct extension"
+        }
+      ]
+    },
+    {
+      "id": "ch3-1-q8",
+      "question": "When a relative path is given for a resource file import, where is it searched first?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Relative to the directory where the importing file is located",
+          "correct": true
+        },
+        {
+          "text": "In the current working directory where robot was executed",
+          "correct": false,
+          "explanation": "It's searched relative to the importing file, not CWD"
+        },
+        {
+          "text": "In Python's module search path first",
+          "correct": false,
+          "explanation": "Module search path is checked second, after relative location"
+        },
+        {
+          "text": "In the Robot Framework installation directory",
+          "correct": false,
+          "explanation": "It's searched relative to the importing file first"
+        }
+      ]
+    },
+    {
+      "id": "ch3-1-q9",
+      "question": "If a resource file is not found relative to the importing file, where is it searched next?",
+      "type": "single",
+      "options": [
+        {
+          "text": "In directories in Python's module search path",
+          "correct": true
+        },
+        {
+          "text": "In the current working directory",
+          "correct": false,
+          "explanation": "After relative search, Python's module search path is used"
+        },
+        {
+          "text": "In the user's home directory",
+          "correct": false,
+          "explanation": "Python's module search path is checked, not home directory"
+        },
+        {
+          "text": "The import fails immediately",
+          "correct": false,
+          "explanation": "Python's module search path is checked before failing"
+        }
+      ]
+    },
+    {
+      "id": "ch3-1-q10",
+      "question": "What is the main difference between suite files and resource files regarding sections?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Resource files do not allow *** Test Cases *** or *** Tasks *** sections",
+          "correct": true
+        },
+        {
+          "text": "Resource files cannot have *** Settings *** section",
+          "correct": false,
+          "explanation": "Resource files can have *** Settings *** section"
+        },
+        {
+          "text": "Resource files cannot have *** Keywords *** section",
+          "correct": false,
+          "explanation": "Resource files commonly have *** Keywords *** section"
+        },
+        {
+          "text": "Resource files use different syntax than suite files",
+          "correct": false,
+          "explanation": "Both use the same syntax; only allowed sections differ"
+        }
+      ]
+    },
+    {
+      "id": "ch3-1-q11",
+      "question": "Which sections are allowed in resource files? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "*** Settings ***",
+          "correct": true
+        },
+        {
+          "text": "*** Variables ***",
+          "correct": true
+        },
+        {
+          "text": "*** Keywords ***",
+          "correct": true
+        },
+        {
+          "text": "*** Comments ***",
+          "correct": true
+        },
+        {
+          "text": "*** Test Cases ***",
+          "correct": false,
+          "explanation": "Test Cases are not allowed in resource files"
+        },
+        {
+          "text": "*** Tasks ***",
+          "correct": false,
+          "explanation": "Tasks are not allowed in resource files"
+        }
+      ]
+    },
+    {
+      "id": "ch3-1-q12",
+      "question": "What is the recommended order of sections in a resource file?",
+      "type": "single",
+      "options": [
+        {
+          "text": "*** Settings *** → *** Variables *** → *** Keywords *** → *** Comments ***",
+          "correct": true
+        },
+        {
+          "text": "*** Keywords *** → *** Variables *** → *** Settings *** → *** Comments ***",
+          "correct": false,
+          "explanation": "*** Settings *** should come first"
+        },
+        {
+          "text": "*** Variables *** → *** Settings *** → *** Keywords *** → *** Comments ***",
+          "correct": false,
+          "explanation": "*** Settings *** should be before *** Variables ***"
+        },
+        {
+          "text": "The order doesn't matter in resource files",
+          "correct": false,
+          "explanation": "There is a recommended order for consistency"
+        }
+      ]
+    },
+    {
+      "id": "ch3-1-q13",
+      "question": "What is the *** Settings *** section in resource files used for? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "To import libraries",
+          "correct": true
+        },
+        {
+          "text": "To import other resource files",
+          "correct": true
+        },
+        {
+          "text": "To provide documentation for the resource file",
+          "correct": true
+        },
+        {
+          "text": "To define test setup and teardown",
+          "correct": false,
+          "explanation": "Test Setup/Teardown are not available in resource files"
+        }
+      ]
+    },
+    {
+      "id": "ch3-1-q14",
+      "question": "Which settings are COMMON to both suite files and resource files? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Library - to import libraries",
+          "correct": true
+        },
+        {
+          "text": "Resource - to import other resource files",
+          "correct": true
+        },
+        {
+          "text": "Documentation - to provide documentation",
+          "correct": true
+        },
+        {
+          "text": "Test Setup - to define setup keywords",
+          "correct": false,
+          "explanation": "Test Setup is only in suite files, not resource files"
+        },
+        {
+          "text": "Suite Setup - to define suite initialization",
+          "correct": false,
+          "explanation": "Suite Setup is only in suite files, not resource files"
+        }
+      ]
+    },
+    {
+      "id": "ch3-1-q15",
+      "question": "Which setting is available in resource files but NOT commonly used in the same way in suite files?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Keyword Tags - to set tags for all keywords in the resource file",
+          "correct": true
+        },
+        {
+          "text": "Test Tags - to set tags for all tests",
+          "correct": false,
+          "explanation": "Test Tags is for suite files, not resource files"
+        },
+        {
+          "text": "Library - to import libraries",
+          "correct": false,
+          "explanation": "Library is common to both"
+        },
+        {
+          "text": "Resource - to import resource files",
+          "correct": false,
+          "explanation": "Resource is common to both"
+        }
+      ]
+    },
+    {
+      "id": "ch3-1-q16",
+      "question": "Analyze this resource file structure:\n\n```robot\n*** Settings ***\nLibrary    SeleniumLibrary\nResource   common_data.resource\nDocumentation    Login page keywords and variables\n\n*** Variables ***\n${LOGIN_URL}    https://example.com/login\n${USERNAME_FIELD}    id=username\n\n*** Keywords ***\nOpen Login Page\n    Open Browser    ${LOGIN_URL}    chrome\n    \nEnter Credentials\n    [Arguments]    ${username}    ${password}\n    Input Text    ${USERNAME_FIELD}    ${username}\n```\n\nIs this a valid resource file structure?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Yes, it contains only allowed sections in the correct order",
+          "correct": true
+        },
+        {
+          "text": "No, it's missing *** Test Cases *** section",
+          "correct": false,
+          "explanation": "Resource files cannot have *** Test Cases ***"
+        },
+        {
+          "text": "No, *** Keywords *** cannot be in resource files",
+          "correct": false,
+          "explanation": "*** Keywords *** is commonly used in resource files"
+        },
+        {
+          "text": "No, the sections are in the wrong order",
+          "correct": false,
+          "explanation": "The order is correct: Settings → Variables → Keywords"
+        }
+      ]
+    },
+    {
+      "id": "ch3-1-q17",
+      "question": "What is the difference between variables defined in suite files vs resource files?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Variables in resource files can be used outside the file when imported; suite variables are suite-scoped",
+          "correct": true
+        },
+        {
+          "text": "There is no difference; both work the same way",
+          "correct": false,
+          "explanation": "Resource file variables are accessible to importing files"
+        },
+        {
+          "text": "Resource file variables are read-only",
+          "correct": false,
+          "explanation": "Both can be modified during execution"
+        },
+        {
+          "text": "Suite variables are global; resource variables are local",
+          "correct": false,
+          "explanation": "It's the opposite regarding accessibility after import"
+        }
+      ]
+    },
+    {
+      "id": "ch3-1-q18",
+      "question": "What is the difference between keywords defined in suite files vs resource files?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Keywords in resource files can be used outside the file when imported; suite keywords are suite-scoped",
+          "correct": true
+        },
+        {
+          "text": "Suite keywords are faster to execute",
+          "correct": false,
+          "explanation": "Performance is the same; difference is scope"
+        },
+        {
+          "text": "Resource keywords cannot have arguments",
+          "correct": false,
+          "explanation": "Both can have arguments"
+        },
+        {
+          "text": "There is no difference in scope",
+          "correct": false,
+          "explanation": "Scope is the key difference"
+        }
+      ]
+    },
+    {
+      "id": "ch3-1-q19",
+      "question": "Which suite settings are NOT available in resource files? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Suite Setup",
+          "correct": true
+        },
+        {
+          "text": "Suite Teardown",
+          "correct": true
+        },
+        {
+          "text": "Test Setup",
+          "correct": true
+        },
+        {
+          "text": "Test Teardown",
+          "correct": true
+        },
+        {
+          "text": "Test Tags",
+          "correct": true
+        },
+        {
+          "text": "Library",
+          "correct": false,
+          "explanation": "Library is available in both suite and resource files"
+        }
+      ]
+    },
+    {
+      "id": "ch3-1-q20",
+      "question": "What is the purpose of the Documentation setting in a resource file?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To provide documentation for the resource file itself",
+          "correct": true
+        },
+        {
+          "text": "To document individual keywords",
+          "correct": false,
+          "explanation": "Keyword documentation uses [Documentation] within the keyword"
+        },
+        {
+          "text": "To document test cases",
+          "correct": false,
+          "explanation": "Resource files don't contain test cases"
+        },
+        {
+          "text": "To generate external documentation files",
+          "correct": false,
+          "explanation": "Documentation setting provides content; libdoc generates files"
+        }
+      ]
+    },
+    {
+      "id": "ch3-1-q21",
+      "question": "Examine these two files:\n\n```robot\n# login_keywords.resource\n*** Settings ***\nLibrary    SeleniumLibrary\n\n*** Keywords ***\nLogin As Admin\n    Login User    admin    admin123\n\n# test_suite.robot\n*** Settings ***\nResource    login_keywords.resource\n\n*** Test Cases ***\nAdmin Test\n    Login As Admin\n    Open Browser    url    chrome\n```\n\nWhat keywords are available in test_suite.robot? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Login As Admin (from resource file)",
+          "correct": true
+        },
+        {
+          "text": "SeleniumLibrary keywords (imported in resource file)",
+          "correct": true
+        },
+        {
+          "text": "BuiltIn library keywords",
+          "correct": true
+        },
+        {
+          "text": "Only Login As Admin; library imports don't transfer",
+          "correct": false,
+          "explanation": "Library imports in resource files are available to importing suites"
+        }
+      ]
+    },
+    {
+      "id": "ch3-1-q22",
+      "question": "What happens if a resource file imports another resource file?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Keywords and variables from both resource files become available to suites importing the first",
+          "correct": true
+        },
+        {
+          "text": "Only the first resource file's content is available",
+          "correct": false,
+          "explanation": "Imports cascade through resource files"
+        },
+        {
+          "text": "Circular import error occurs",
+          "correct": false,
+          "explanation": "Cascading imports are allowed and expected"
+        },
+        {
+          "text": "The nested resource file is ignored",
+          "correct": false,
+          "explanation": "Nested resource files are fully imported"
+        }
+      ]
+    },
+    {
+      "id": "ch3-1-q23",
+      "question": "Analyze this structure:\n\n```robot\n# common.resource\n*** Settings ***\nLibrary    DatabaseLibrary\n\n*** Variables ***\n${DB_HOST}    localhost\n\n*** Keywords ***\nConnect To DB\n    Connect To Database    ${DB_HOST}\n\n# user_keywords.resource  \n*** Settings ***\nResource    common.resource\n\n*** Keywords ***\nCreate User\n    Connect To DB\n    Execute SQL    INSERT INTO users...\n\n# test.robot\n*** Settings ***\nResource    user_keywords.resource\n\n*** Test Cases ***\nTest\n    Create User\n```\n\nWhat is available in test.robot? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Create User keyword",
+          "correct": true
+        },
+        {
+          "text": "Connect To DB keyword (from common.resource)",
+          "correct": true
+        },
+        {
+          "text": "${DB_HOST} variable (from common.resource)",
+          "correct": true
+        },
+        {
+          "text": "DatabaseLibrary keywords (imported in common.resource)",
+          "correct": true
+        },
+        {
+          "text": "Only Create User; nested resources don't transfer",
+          "correct": false,
+          "explanation": "All resources in the import chain are available"
+        }
+      ]
+    },
+    {
+      "id": "ch3-1-q24",
+      "question": "What is the purpose of the *** Comments *** section in resource files?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To store comments that are ignored and not parsed by Robot Framework",
+          "correct": true
+        },
+        {
+          "text": "To provide documentation visible in reports",
+          "correct": false,
+          "explanation": "*** Comments *** is ignored; use Documentation for visible docs"
+        },
+        {
+          "text": "To temporarily disable keywords",
+          "correct": false,
+          "explanation": "While it could be used this way, its purpose is general comments"
+        },
+        {
+          "text": "To add code review notes that appear in logs",
+          "correct": false,
+          "explanation": "*** Comments *** content is completely ignored"
+        }
+      ]
+    },
+    {
+      "id": "ch3-1-q25",
+      "question": "Which file would cause an error?\n\n```robot\nA) login.resource\n*** Keywords ***\nLogin User\n    # keyword implementation\n\nB) login.resource\n*** Test Cases ***\nLogin Test\n    Login User\n\nC) login.resource\n*** Settings ***\nLibrary    SeleniumLibrary\n*** Variables ***\n${URL}    example.com\n\nD) login.resource\n*** Comments ***\nThis is a resource file\n```",
+      "type": "single",
+      "options": [
+        {
+          "text": "B - resource files cannot contain *** Test Cases ***",
+          "correct": true
+        },
+        {
+          "text": "A - resource files must have *** Settings ***",
+          "correct": false,
+          "explanation": "*** Settings *** is optional in resource files"
+        },
+        {
+          "text": "C - resource files cannot import libraries",
+          "correct": false,
+          "explanation": "Resource files can import libraries"
+        },
+        {
+          "text": "D - *** Comments *** is not valid",
+          "correct": false,
+          "explanation": "*** Comments *** is valid in resource files"
+        }
+      ]
+    },
+    {
+      "id": "ch3-1-q26",
+      "question": "What best practice should guide the organization of keywords in resource files?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Group related keywords that share a common purpose, abstraction layer, or context",
+          "correct": true
+        },
+        {
+          "text": "Put all keywords in one resource file for easy access",
+          "correct": false,
+          "explanation": "Keywords should be logically grouped across multiple files"
+        },
+        {
+          "text": "Organize by keyword name alphabetically",
+          "correct": false,
+          "explanation": "Organization should be functional, not alphabetical"
+        },
+        {
+          "text": "Create a new resource file for each keyword",
+          "correct": false,
+          "explanation": "Related keywords should be grouped together"
+        }
+      ]
+    },
+    {
+      "id": "ch3-1-q27",
+      "question": "Consider organizing keywords for an e-commerce application. Which grouping is most appropriate?",
+      "type": "single",
+      "options": [
+        {
+          "text": "login_keywords.resource, product_catalog_keywords.resource, checkout_keywords.resource",
+          "correct": true
+        },
+        {
+          "text": "keywords_a_to_m.resource, keywords_n_to_z.resource",
+          "correct": false,
+          "explanation": "Alphabetical grouping is not functional"
+        },
+        {
+          "text": "all_keywords.resource (single file)",
+          "correct": false,
+          "explanation": "Keywords should be modularly organized"
+        },
+        {
+          "text": "john_keywords.resource, mary_keywords.resource (by author)",
+          "correct": false,
+          "explanation": "Organize by functionality, not authorship"
+        }
+      ]
+    },
+    {
+      "id": "ch3-1-q28",
+      "question": "Why is modularity important in resource file design?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Makes files easier to maintain",
+          "correct": true
+        },
+        {
+          "text": "Improves reusability across different test suites",
+          "correct": true
+        },
+        {
+          "text": "Allows importing only needed functionality",
+          "correct": true
+        },
+        {
+          "text": "Reduces file parsing time significantly",
+          "correct": false,
+          "explanation": "Modularity is for organization, not performance"
+        }
+      ]
+    },
+    {
+      "id": "ch3-1-q29",
+      "question": "Compare these import approaches:\n\n```robot\nA) Resource    ./keywords/login.resource\nB) Resource    C:/project/keywords/login.resource  \nC) Resource    login.resource  # login.resource in PYTHONPATH\n```\n\nWhich approach is most portable?",
+      "type": "single",
+      "options": [
+        {
+          "text": "C - using PYTHONPATH is most portable and stable",
+          "correct": true
+        },
+        {
+          "text": "A - relative paths are always most portable",
+          "correct": false,
+          "explanation": "Relative paths are good but PYTHONPATH is more stable across environments"
+        },
+        {
+          "text": "B - absolute paths guarantee the exact location",
+          "correct": false,
+          "explanation": "Absolute paths are not portable across environments"
+        },
+        {
+          "text": "All three are equally portable",
+          "correct": false,
+          "explanation": "PYTHONPATH approach is most portable"
+        }
+      ]
+    },
+    {
+      "id": "ch3-1-q30",
+      "question": "What happens if you try to execute a resource file directly with the robot command?\n\n```bash\nrobot login_keywords.resource\n```",
+      "type": "single",
+      "options": [
+        {
+          "text": "No tests/tasks are executed because resource files don't contain them",
+          "correct": true
+        },
+        {
+          "text": "All keywords in the resource file are executed",
+          "correct": false,
+          "explanation": "Keywords aren't executed without being called from tests"
+        },
+        {
+          "text": "An error occurs because .resource files cannot be executed",
+          "correct": false,
+          "explanation": "Robot will parse it but find no tests/tasks to run"
+        },
+        {
+          "text": "The file is automatically converted to a test suite",
+          "correct": false,
+          "explanation": "Resource files remain resource files; they're not converted"
+        }
+      ]
+    }
+  ]
+}

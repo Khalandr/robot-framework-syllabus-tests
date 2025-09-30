@@ -1,0 +1,781 @@
+{
+  "chapter": "2-Robot Framework Test Data",
+  "subchapter": "2.5-Keyword Interface and Documentation",
+  "questions": [
+    {
+      "id": "ch2-5-q1",
+      "question": "What tool is used to generate keyword documentation files in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "libdoc",
+          "correct": true
+        },
+        {
+          "text": "robot",
+          "correct": false,
+          "explanation": "robot is for execution; libdoc generates documentation"
+        },
+        {
+          "text": "rebot",
+          "correct": false,
+          "explanation": "rebot is for post-processing results, not documentation"
+        },
+        {
+          "text": "docgen",
+          "correct": false,
+          "explanation": "There is no docgen command; use libdoc"
+        }
+      ]
+    },
+    {
+      "id": "ch2-5-q2",
+      "question": "What information can be found in keyword documentation? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Name of the keyword",
+          "correct": true
+        },
+        {
+          "text": "Arguments interface with types and defaults",
+          "correct": true
+        },
+        {
+          "text": "Return type",
+          "correct": true
+        },
+        {
+          "text": "Documentation text describing the keyword",
+          "correct": true
+        },
+        {
+          "text": "Source code implementation",
+          "correct": false,
+          "explanation": "Keyword documentation shows interface, not source code"
+        }
+      ]
+    },
+    {
+      "id": "ch2-5-q3",
+      "question": "Where can you find the keyword documentation for Robot Framework Standard Libraries?",
+      "type": "single",
+      "options": [
+        {
+          "text": "https://robotframework.org/robotframework",
+          "correct": true
+        },
+        {
+          "text": "https://docs.robotframework.org",
+          "correct": false,
+          "explanation": "The correct URL is robotframework.org/robotframework"
+        },
+        {
+          "text": "https://github.com/robotframework",
+          "correct": false,
+          "explanation": "GitHub has source code; documentation is at robotframework.org"
+        },
+        {
+          "text": "Documentation is only available locally after installation",
+          "correct": false,
+          "explanation": "Standard library docs are available online"
+        }
+      ]
+    },
+    {
+      "id": "ch2-5-q4",
+      "question": "Examine this keyword documentation:\n\n```\nShould Be Equal\nArguments: first, second, msg=None, values=True, \n           ignore_case=False, strip_spaces=False, \n           collapse_spaces=False, formatter=str\n```\n\nHow many mandatory arguments does this keyword have?",
+      "type": "single",
+      "options": [
+        {
+          "text": "2 mandatory arguments (first, second)",
+          "correct": true
+        },
+        {
+          "text": "8 mandatory arguments (all listed)",
+          "correct": false,
+          "explanation": "Arguments with = are optional, not mandatory"
+        },
+        {
+          "text": "1 mandatory argument (first)",
+          "correct": false,
+          "explanation": "Both first and second lack defaults, making them mandatory"
+        },
+        {
+          "text": "0 mandatory arguments (all are optional)",
+          "correct": false,
+          "explanation": "Arguments without defaults are mandatory"
+        }
+      ]
+    },
+    {
+      "id": "ch2-5-q5",
+      "question": "What distinguishes mandatory arguments from optional arguments in keyword documentation?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Mandatory arguments lack default values; optional arguments have default values shown with =",
+          "correct": true
+        },
+        {
+          "text": "Mandatory arguments are in UPPERCASE; optional in lowercase",
+          "correct": false,
+          "explanation": "Case doesn't distinguish mandatory vs optional arguments"
+        },
+        {
+          "text": "Mandatory arguments are marked with *; optional are not",
+          "correct": false,
+          "explanation": "* indicates varargs, not mandatory arguments"
+        },
+        {
+          "text": "All arguments are mandatory unless marked [optional]",
+          "correct": false,
+          "explanation": "Default values (=) indicate optional arguments"
+        }
+      ]
+    },
+    {
+      "id": "ch2-5-q6",
+      "question": "What happens if too few arguments are provided to a keyword?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The keyword call fails with an error before execution",
+          "correct": true
+        },
+        {
+          "text": "Missing arguments are set to None automatically",
+          "correct": false,
+          "explanation": "Only optional arguments with defaults are auto-filled"
+        },
+        {
+          "text": "The keyword executes with empty strings for missing arguments",
+          "correct": false,
+          "explanation": "Missing mandatory arguments cause immediate failure"
+        },
+        {
+          "text": "Robot Framework prompts the user for missing values",
+          "correct": false,
+          "explanation": "RF doesn't prompt; it fails with an error"
+        }
+      ]
+    },
+    {
+      "id": "ch2-5-q7",
+      "question": "Analyze this test case:\n\n```robot\n*** Test Cases ***\nTest Args\n    Should Be Equal    One    One\n    Should Be Equal    One    Two\n    Should Be Equal    One\n```\n\nWhat will happen with the third keyword call?",
+      "type": "single",
+      "options": [
+        {
+          "text": "It will fail with an error: 'expected 2 to 8 arguments, got 1'",
+          "correct": true
+        },
+        {
+          "text": "It will pass because 'One' equals 'One'",
+          "correct": false,
+          "explanation": "Two arguments are mandatory; it fails before execution"
+        },
+        {
+          "text": "The second argument defaults to None",
+          "correct": false,
+          "explanation": "Mandatory arguments don't have defaults"
+        },
+        {
+          "text": "It compares 'One' with an empty string",
+          "correct": false,
+          "explanation": "Missing mandatory arguments cause failure"
+        }
+      ]
+    },
+    {
+      "id": "ch2-5-q8",
+      "question": "How are default values represented in keyword documentation?",
+      "type": "single",
+      "options": [
+        {
+          "text": "With an equal sign = after the argument name followed by the default value",
+          "correct": true
+        },
+        {
+          "text": "In square brackets after the argument name",
+          "correct": false,
+          "explanation": "Square brackets are for settings, not defaults"
+        },
+        {
+          "text": "With the keyword 'default:' before the value",
+          "correct": false,
+          "explanation": "Equal sign = is used, not 'default:'"
+        },
+        {
+          "text": "Optional arguments are marked with ? symbol",
+          "correct": false,
+          "explanation": "Default values use =, not ?"
+        }
+      ]
+    },
+    {
+      "id": "ch2-5-q9",
+      "question": "Which of the following are considered optional arguments in keyword documentation? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Arguments with default values (arg=value)",
+          "correct": true
+        },
+        {
+          "text": "Variable Number of Positional Arguments (*args)",
+          "correct": true
+        },
+        {
+          "text": "Free Named Arguments (**kwargs)",
+          "correct": true
+        },
+        {
+          "text": "Arguments without default values",
+          "correct": false,
+          "explanation": "Arguments without defaults are mandatory"
+        }
+      ]
+    },
+    {
+      "id": "ch2-5-q10",
+      "question": "What are embedded arguments in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Arguments included directly in the keyword name using ${var_name} syntax",
+          "correct": true
+        },
+        {
+          "text": "Arguments defined inside the keyword implementation",
+          "correct": false,
+          "explanation": "Embedded arguments are in the keyword name, not implementation"
+        },
+        {
+          "text": "Arguments passed as a single dictionary",
+          "correct": false,
+          "explanation": "This describes free named arguments, not embedded"
+        },
+        {
+          "text": "Arguments that are optional with default values",
+          "correct": false,
+          "explanation": "Embedded arguments are mandatory, not optional"
+        }
+      ]
+    },
+    {
+      "id": "ch2-5-q11",
+      "question": "Analyze these keyword names with embedded arguments:\n\n```robot\n\"${url}\" is open\nthe user clicks the \"${button}\" button\nthe page title should be ${exp_title}\n```\n\nWhich parts are embedded arguments? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "${url}",
+          "correct": true
+        },
+        {
+          "text": "${button}",
+          "correct": true
+        },
+        {
+          "text": "${exp_title}",
+          "correct": true
+        },
+        {
+          "text": "\"${button}\" (including quotes)",
+          "correct": false,
+          "explanation": "Quotes are part of the keyword name for visibility, not the argument"
+        }
+      ]
+    },
+    {
+      "id": "ch2-5-q12",
+      "question": "In Behavior-Driven keywords with embedded arguments, what happens to the Given/When/Then/And/But prefixes?",
+      "type": "single",
+      "options": [
+        {
+          "text": "They are basically ignored by Robot Framework if a keyword matches the rest of the name",
+          "correct": true
+        },
+        {
+          "text": "They must exactly match the keyword definition",
+          "correct": false,
+          "explanation": "RF ignores these prefixes if keyword matches the rest"
+        },
+        {
+          "text": "They are treated as embedded arguments",
+          "correct": false,
+          "explanation": "These prefixes are ignored, not treated as arguments"
+        },
+        {
+          "text": "They determine the execution order",
+          "correct": false,
+          "explanation": "Prefixes are for readability; execution follows definition order"
+        }
+      ]
+    },
+    {
+      "id": "ch2-5-q13",
+      "question": "What are Positional or Named Arguments?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Arguments that can be set either by position or by name (but not both for one argument)",
+          "correct": true
+        },
+        {
+          "text": "Arguments that must be set by position only",
+          "correct": false,
+          "explanation": "These can be set by name OR position"
+        },
+        {
+          "text": "Arguments that must be set by name only",
+          "correct": false,
+          "explanation": "These can be set by position OR name"
+        },
+        {
+          "text": "Arguments that require both position and name",
+          "correct": false,
+          "explanation": "Use either position or name, not both"
+        }
+      ]
+    },
+    {
+      "id": "ch2-5-q14",
+      "question": "How are Positional or Named Arguments marked in keyword documentation?",
+      "type": "single",
+      "options": [
+        {
+          "text": "They have no special prefix; they are the default argument kind",
+          "correct": true
+        },
+        {
+          "text": "They are marked with a @ symbol",
+          "correct": false,
+          "explanation": "No special marking; they're the default type"
+        },
+        {
+          "text": "They are marked with [pos/name]",
+          "correct": false,
+          "explanation": "No brackets or labels; they're the default"
+        },
+        {
+          "text": "They are always in UPPERCASE",
+          "correct": false,
+          "explanation": "Case doesn't indicate argument type"
+        }
+      ]
+    },
+    {
+      "id": "ch2-5-q15",
+      "question": "What is the correct order of argument kinds in a keyword interface?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Positional/Named → Variable Positional (*args) → Named-Only → Free Named (**kwargs)",
+          "correct": true
+        },
+        {
+          "text": "Named-Only → Positional/Named → Variable Positional → Free Named",
+          "correct": false,
+          "explanation": "Positional/Named come first, Named-Only come later"
+        },
+        {
+          "text": "All argument types can be in any order",
+          "correct": false,
+          "explanation": "There is a specific order requirement"
+        },
+        {
+          "text": "Free Named → Variable Positional → Positional/Named → Named-Only",
+          "correct": false,
+          "explanation": "This order is backwards"
+        }
+      ]
+    },
+    {
+      "id": "ch2-5-q16",
+      "question": "How are Variable Number of Positional Arguments (varargs) marked in keyword documentation?",
+      "type": "single",
+      "options": [
+        {
+          "text": "With a single asterisk * before the argument name",
+          "correct": true
+        },
+        {
+          "text": "With double asterisks ** before the argument name",
+          "correct": false,
+          "explanation": "Double ** is for free named arguments, single * for varargs"
+        },
+        {
+          "text": "With [...] after the argument name",
+          "correct": false,
+          "explanation": "Asterisk * is used, not brackets"
+        },
+        {
+          "text": "With the word 'varargs' in the name",
+          "correct": false,
+          "explanation": "Single asterisk * prefix is used"
+        }
+      ]
+    },
+    {
+      "id": "ch2-5-q17",
+      "question": "Examine this keyword documentation:\n\n```\nRun Process\nArguments: command, *arguments, **configuration\n```\n\nHow should this keyword be called to execute 'ping -n 5 localhost'?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Run Process    ping    -n    5    localhost",
+          "correct": true
+        },
+        {
+          "text": "Run Process    ping -n 5 localhost",
+          "correct": false,
+          "explanation": "This passes the entire string as command; arguments need to be separate"
+        },
+        {
+          "text": "Run Process    command=ping    arguments=-n 5 localhost",
+          "correct": false,
+          "explanation": "Varargs (*arguments) must be positional, not named"
+        },
+        {
+          "text": "Run Process    ping    arguments=-n    arguments=5    arguments=localhost",
+          "correct": false,
+          "explanation": "Varargs are passed positionally, not as repeated named arguments"
+        }
+      ]
+    },
+    {
+      "id": "ch2-5-q18",
+      "question": "What happens to arguments that come after Variable Number of Positional Arguments (*varargs)?",
+      "type": "single",
+      "options": [
+        {
+          "text": "They must be set by name only (Named-Only Arguments)",
+          "correct": true
+        },
+        {
+          "text": "They can still be set positionally",
+          "correct": false,
+          "explanation": "After *varargs, all arguments must be named"
+        },
+        {
+          "text": "They are not allowed",
+          "correct": false,
+          "explanation": "Named-Only Arguments are allowed after *varargs"
+        },
+        {
+          "text": "They become part of the varargs",
+          "correct": false,
+          "explanation": "They are separate Named-Only Arguments"
+        }
+      ]
+    },
+    {
+      "id": "ch2-5-q19",
+      "question": "How are Named-Only Arguments marked in keyword documentation?",
+      "type": "single",
+      "options": [
+        {
+          "text": "With a label/tag symbol 🏷 before the argument name",
+          "correct": true
+        },
+        {
+          "text": "With a single asterisk * before the argument name",
+          "correct": false,
+          "explanation": "Single * is for varargs, not named-only"
+        },
+        {
+          "text": "With [named] after the argument name",
+          "correct": false,
+          "explanation": "Label symbol 🏷 is used, not brackets"
+        },
+        {
+          "text": "They have no special marking",
+          "correct": false,
+          "explanation": "They are marked with a label symbol 🏷"
+        }
+      ]
+    },
+    {
+      "id": "ch2-5-q20",
+      "question": "Analyze this keyword documentation:\n\n```\nGet Regexp Matches\nArguments: string, pattern, *groups, 🏷flags\n```\n\nWhich statements are correct? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "string and pattern are Positional or Named Arguments",
+          "correct": true
+        },
+        {
+          "text": "groups is Variable Number of Positional Arguments",
+          "correct": true
+        },
+        {
+          "text": "flags is a Named-Only Argument",
+          "correct": true
+        },
+        {
+          "text": "flags can be set positionally",
+          "correct": false,
+          "explanation": "Named-Only Arguments (🏷) must be set by name"
+        }
+      ]
+    },
+    {
+      "id": "ch2-5-q21",
+      "question": "How are Free Named Arguments marked in keyword documentation?",
+      "type": "single",
+      "options": [
+        {
+          "text": "With double asterisks ** before the argument name",
+          "correct": true
+        },
+        {
+          "text": "With a single asterisk * before the argument name",
+          "correct": false,
+          "explanation": "Single * is for varargs; double ** for free named"
+        },
+        {
+          "text": "With curly braces {} around the argument name",
+          "correct": false,
+          "explanation": "Double asterisks ** are used"
+        },
+        {
+          "text": "With the word 'kwargs' in the name",
+          "correct": false,
+          "explanation": "Double asterisks ** prefix is the marker"
+        }
+      ]
+    },
+    {
+      "id": "ch2-5-q22",
+      "question": "What do Free Named Arguments (**kwargs) collect?",
+      "type": "single",
+      "options": [
+        {
+          "text": "All named arguments that are not explicitly defined as argument names",
+          "correct": true
+        },
+        {
+          "text": "All positional arguments after mandatory arguments",
+          "correct": false,
+          "explanation": "Varargs (*args) collect positional; **kwargs collect named"
+        },
+        {
+          "text": "All arguments regardless of how they're passed",
+          "correct": false,
+          "explanation": "Only unnamed named arguments are collected"
+        },
+        {
+          "text": "Arguments marked as optional",
+          "correct": false,
+          "explanation": "They collect named arguments not in the interface"
+        }
+      ]
+    },
+    {
+      "id": "ch2-5-q23",
+      "question": "Consider this keyword call:\n\n```robot\nRun Process    ping    -n    5    localhost    stdout=output.txt    stderr=error.txt\n```\n\nWith documentation: `Run Process: command, *arguments, **configuration`\n\nWhat goes into each argument?",
+      "type": "single",
+      "options": [
+        {
+          "text": "command='ping', arguments=['-n', '5', 'localhost'], configuration={'stdout': 'output.txt', 'stderr': 'error.txt'}",
+          "correct": true
+        },
+        {
+          "text": "command='ping -n 5 localhost', configuration={'stdout': 'output.txt', 'stderr': 'error.txt'}",
+          "correct": false,
+          "explanation": "Positional values are split into command and arguments"
+        },
+        {
+          "text": "All values go into arguments",
+          "correct": false,
+          "explanation": "First goes to command, middle to arguments, named to configuration"
+        },
+        {
+          "text": "command='ping', arguments='all the rest'",
+          "correct": false,
+          "explanation": "Named arguments go to configuration, not arguments"
+        }
+      ]
+    },
+    {
+      "id": "ch2-5-q24",
+      "question": "What happens when Robot Framework encounters an argument with a type hint and the value doesn't match?",
+      "type": "single",
+      "options": [
+        {
+          "text": "It tries automatic type conversion; if that fails, the keyword call fails before execution",
+          "correct": true
+        },
+        {
+          "text": "The keyword executes with the string value anyway",
+          "correct": false,
+          "explanation": "Type conversion is attempted; failure causes error"
+        },
+        {
+          "text": "It converts to None and continues",
+          "correct": false,
+          "explanation": "Failed conversion causes an error, not None"
+        },
+        {
+          "text": "Type hints are ignored in Robot Framework",
+          "correct": false,
+          "explanation": "Type hints are used for automatic conversion"
+        }
+      ]
+    },
+    {
+      "id": "ch2-5-q25",
+      "question": "Analyze this keyword and test:\n\n```robot\n# Keyword expects: x: int, y: int\n\n*** Test Cases ***\nTest 1\n    Click On Coordinates    10    20\n    \nTest 2\n    Click On Coordinates    10    Not_A_Number\n```\n\nWhat happens?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Test 1 passes; Test 2 fails with 'cannot be converted to integer' error",
+          "correct": true
+        },
+        {
+          "text": "Both tests pass because RF ignores type hints",
+          "correct": false,
+          "explanation": "Type hints are enforced with automatic conversion"
+        },
+        {
+          "text": "Both tests fail because strings can't be coordinates",
+          "correct": false,
+          "explanation": "Test 1 succeeds due to automatic conversion"
+        },
+        {
+          "text": "Test 2 passes with y=0",
+          "correct": false,
+          "explanation": "Failed conversion causes error, not default value"
+        }
+      ]
+    },
+    {
+      "id": "ch2-5-q26",
+      "question": "What built-in type conversions does Robot Framework support? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Integer",
+          "correct": true
+        },
+        {
+          "text": "Float",
+          "correct": true
+        },
+        {
+          "text": "Boolean",
+          "correct": true
+        },
+        {
+          "text": "List",
+          "correct": true
+        },
+        {
+          "text": "Dictionary",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": "ch2-5-q27",
+      "question": "What is the advantage of using argument type hints?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Users get more information about expected value types",
+          "correct": true
+        },
+        {
+          "text": "Keyword implementation can be simpler by relying on correct types",
+          "correct": true
+        },
+        {
+          "text": "Automatic type conversion is performed",
+          "correct": true
+        },
+        {
+          "text": "Keywords execute faster",
+          "correct": false,
+          "explanation": "Type hints improve clarity and safety, not speed"
+        }
+      ]
+    },
+    {
+      "id": "ch2-5-q28",
+      "question": "What does a return type hint in keyword documentation indicate?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The type of value the keyword returns to the caller",
+          "correct": true
+        },
+        {
+          "text": "Whether the keyword passed or failed",
+          "correct": false,
+          "explanation": "Return type is about the data returned, not status"
+        },
+        {
+          "text": "The type of the last argument",
+          "correct": false,
+          "explanation": "Return type is separate from argument types"
+        },
+        {
+          "text": "The keyword's execution time",
+          "correct": false,
+          "explanation": "Return type describes the returned data type"
+        }
+      ]
+    },
+    {
+      "id": "ch2-5-q29",
+      "question": "If a keyword lacks a return type hint in documentation, what does that mean?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The keyword may still return values; check the documentation text",
+          "correct": true
+        },
+        {
+          "text": "The keyword definitely returns nothing",
+          "correct": false,
+          "explanation": "Return type hints are optional and recent; keywords may still return values"
+        },
+        {
+          "text": "The keyword is deprecated",
+          "correct": false,
+          "explanation": "Missing return type hints don't indicate deprecation"
+        },
+        {
+          "text": "The keyword cannot be used in variable assignments",
+          "correct": false,
+          "explanation": "Keywords without type hints can still return values"
+        }
+      ]
+    },
+    {
+      "id": "ch2-5-q30",
+      "question": "Compare these documentation examples:\n\n```\nTable format:\nShould Be Equal    ${x}    expected\nShould Be Equal    ${x}    expected    Custom message    values=False\n\nCode block:\nShould Be Equal ${x} expected\nShould Be Equal ${x} expected Custom message values=False\n```\n\nWhat's the difference?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Both show the same information; it's just formatting preference",
+          "correct": true
+        },
+        {
+          "text": "Table format is mandatory syntax; code block is just comments",
+          "correct": false,
+          "explanation": "Both are example formats showing usage"
+        },
+        {
+          "text": "Code block format uses different argument separation",
+          "correct": false,
+          "explanation": "Both represent the same RF syntax"
+        },
+        {
+          "text": "Table format requires pipes |, code block doesn't",
+          "correct": false,
+          "explanation": "Neither shows pipes; both are valid RF syntax examples"
+        }
+      ]
+    }
+  ]
+}

@@ -13,7 +13,13 @@ const questions = {
             'questions/chapter-1/1.3-basic-syntax.json',
             'questions/chapter-1/1.4-specification-styles.json',
             'questions/chapter-1/1.5-organization-licensing.json',
-            'questions/chapter-2/2.1-test-data.json'
+            'questions/chapter-2/2.1-suite-file-structure.json',
+            'questions/chapter-2/2.2-basic-suite-syntax.json',
+            'questions/chapter-2/2.3-executing-robot.json',
+            'questions/chapter-2/2.4-keyword-imports.json',
+            'questions/chapter-2/2.5-keyword-documentation.json',
+            'questions/chapter-2/2.6-calling-keywords.json',
+            'questions/chapter-3/3.1-resource-file-structure.json'
             // Add more files as they are created
         ];
 

@@ -1,0 +1,796 @@
+{
+  "chapter": "2-Robot Framework Test Data",
+  "subchapter": "2.2-Basic Suite File Syntax",
+  "questions": [
+    {
+      "id": "ch2-2-q1",
+      "question": "How many spaces are required to separate or indent statements in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Two or more spaces, with four spaces recommended for clarity",
+          "correct": true
+        },
+        {
+          "text": "Exactly two spaces, no more",
+          "correct": false,
+          "explanation": "Two spaces is the minimum, but four or more is recommended"
+        },
+        {
+          "text": "One space is sufficient",
+          "correct": false,
+          "explanation": "Single spaces are valid characters in tokens, not separators"
+        },
+        {
+          "text": "Tab characters must be used instead of spaces",
+          "correct": false,
+          "explanation": "While tabs work, multiple spaces are recommended to avoid editor issues"
+        }
+      ]
+    },
+    {
+      "id": "ch2-2-q2",
+      "question": "What is a statement in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "A logical line containing data tokens separated by multiple spaces and ending with a line break",
+          "correct": true
+        },
+        {
+          "text": "Any literal line in a .robot file",
+          "correct": false,
+          "explanation": "A statement can span multiple literal lines using continuation"
+        },
+        {
+          "text": "A section header like *** Test Cases ***",
+          "correct": false,
+          "explanation": "Section headers are special; statements are within sections"
+        },
+        {
+          "text": "Only keyword calls, not variable assignments",
+          "correct": false,
+          "explanation": "Statements include keyword calls, assignments, settings, and more"
+        }
+      ]
+    },
+    {
+      "id": "ch2-2-q3",
+      "question": "How do you continue a statement across multiple lines in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Add ... (three dots) and a separator at the beginning of the next line with same indentation",
+          "correct": true
+        },
+        {
+          "text": "End the line with a backslash \\",
+          "correct": false,
+          "explanation": "RF uses ... (three dots), not backslash for continuation"
+        },
+        {
+          "text": "Simply continue on the next line without any marker",
+          "correct": false,
+          "explanation": "RF requires explicit continuation with ..."
+        },
+        {
+          "text": "Use a comma at the end of the line",
+          "correct": false,
+          "explanation": "RF doesn't use commas for continuation"
+        }
+      ]
+    },
+    {
+      "id": "ch2-2-q4",
+      "question": "Consider these two keyword calls:\n\n```robot\nA) Keyword Call    argument one    argument two\n\nB) Keyword Call\n   ...    argument one\n   ...    argument two\n```\n\nWhat is the relationship between these calls?",
+      "type": "single",
+      "options": [
+        {
+          "text": "They are logically identical - the same keyword with the same arguments",
+          "correct": true
+        },
+        {
+          "text": "Call B has three arguments while A has two",
+          "correct": false,
+          "explanation": "Both have exactly two arguments; ... is continuation, not an argument"
+        },
+        {
+          "text": "Call B will fail due to incorrect syntax",
+          "correct": false,
+          "explanation": "This is valid continuation syntax in Robot Framework"
+        },
+        {
+          "text": "Call A is valid but Call B passes strings '...' as arguments",
+          "correct": false,
+          "explanation": "... is the continuation marker, not a string argument"
+        }
+      ]
+    },
+    {
+      "id": "ch2-2-q5",
+      "question": "Which elements in Robot Framework files are written WITHOUT any indentation? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Settings in the *** Settings *** section",
+          "correct": true
+        },
+        {
+          "text": "Test case names in the *** Test Cases *** section",
+          "correct": true
+        },
+        {
+          "text": "Keyword names in the *** Keywords *** section",
+          "correct": true
+        },
+        {
+          "text": "Keyword calls within test case bodies",
+          "correct": false,
+          "explanation": "Keyword calls in test bodies must be indented"
+        },
+        {
+          "text": "Variables in the *** Variables *** section",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": "ch2-2-q6",
+      "question": "When defining test cases or keywords, how is the body distinguished from the name?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The name is un-indented; all body lines are indented by two or more spaces",
+          "correct": true
+        },
+        {
+          "text": "The name is indented; body lines are un-indented",
+          "correct": false,
+          "explanation": "It's the opposite - names are un-indented, bodies are indented"
+        },
+        {
+          "text": "Both name and body use the same indentation level",
+          "correct": false,
+          "explanation": "Different indentation levels distinguish name from body"
+        },
+        {
+          "text": "A special marker like BEGIN and END encloses the body",
+          "correct": false,
+          "explanation": "RF uses indentation, not explicit markers"
+        }
+      ]
+    },
+    {
+      "id": "ch2-2-q7",
+      "question": "What signals the end of a test case or keyword body?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "A new un-indented test case or keyword name",
+          "correct": true
+        },
+        {
+          "text": "A new section header like *** Keywords ***",
+          "correct": true
+        },
+        {
+          "text": "The end of the file",
+          "correct": true
+        },
+        {
+          "text": "A special END keyword",
+          "correct": false,
+          "explanation": "While END exists for control structures, it's not used for test/keyword bodies"
+        },
+        {
+          "text": "An empty line",
+          "correct": false,
+          "explanation": "Empty lines don't end bodies; they're for readability"
+        }
+      ]
+    },
+    {
+      "id": "ch2-2-q8",
+      "question": "How should content within control structures (loops, conditions) be indented for readability?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Additional four spaces beyond the control structure's indentation (recommended, not mandatory)",
+          "correct": true
+        },
+        {
+          "text": "Same indentation as the control structure (mandatory)",
+          "correct": false,
+          "explanation": "Additional indentation is recommended but not mandatory"
+        },
+        {
+          "text": "Control structures cannot be indented",
+          "correct": false,
+          "explanation": "Control structures and their content can and should be indented"
+        },
+        {
+          "text": "Use curly braces instead of indentation",
+          "correct": false,
+          "explanation": "RF uses indentation, not curly braces"
+        }
+      ]
+    },
+    {
+      "id": "ch2-2-q9",
+      "question": "Why are tabulators (\\t) NOT recommended in Robot Framework files even though they are valid separators?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Different editors may align tabs to a grid making it difficult to distinguish tabs from spaces",
+          "correct": true
+        },
+        {
+          "text": "Tabulators are completely invalid in Robot Framework",
+          "correct": false,
+          "explanation": "Tabs are valid but not recommended"
+        },
+        {
+          "text": "Tabulators cause slower parsing performance",
+          "correct": false,
+          "explanation": "Performance is not the issue; it's about human readability"
+        },
+        {
+          "text": "Tabulators only work in TSV format",
+          "correct": false,
+          "explanation": "Tabs work but can cause readability issues in any format"
+        }
+      ]
+    },
+    {
+      "id": "ch2-2-q10",
+      "question": "Analyze this code snippet:\n\n```robot\n*** Test Cases ***\nLogin Test\n    Open Browser    http://example.com\n    Input Text    username    admin\n    Click Button    login\n```\n\nWhat type of token starts each body statement?",
+      "type": "single",
+      "options": [
+        {
+          "text": "A separator token (the indentation spaces)",
+          "correct": true
+        },
+        {
+          "text": "A keyword token",
+          "correct": false,
+          "explanation": "The keyword comes after the initial separator token"
+        },
+        {
+          "text": "An argument token",
+          "correct": false,
+          "explanation": "Arguments come after keywords"
+        },
+        {
+          "text": "A line break token",
+          "correct": false,
+          "explanation": "Line breaks end statements, not start them"
+        }
+      ]
+    },
+    {
+      "id": "ch2-2-q11",
+      "question": "Are empty lines allowed in Robot Framework files?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Yes, they are allowed and encouraged for readability; they are ignored during parsing",
+          "correct": true
+        },
+        {
+          "text": "No, empty lines cause parsing errors",
+          "correct": false,
+          "explanation": "Empty lines are allowed and ignored"
+        },
+        {
+          "text": "Only one empty line is allowed between sections",
+          "correct": false,
+          "explanation": "Multiple empty lines are allowed anywhere"
+        },
+        {
+          "text": "Empty lines are only allowed in *** Comments *** section",
+          "correct": false,
+          "explanation": "Empty lines are allowed throughout the file"
+        }
+      ]
+    },
+    {
+      "id": "ch2-2-q12",
+      "question": "Where can line continuation with ... be performed? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Between a keyword name and its arguments",
+          "correct": true
+        },
+        {
+          "text": "Between two arguments",
+          "correct": true
+        },
+        {
+          "text": "Between a setting and its value(s)",
+          "correct": true
+        },
+        {
+          "text": "In the middle of a keyword name",
+          "correct": false,
+          "explanation": "Continuation can only be where a separator is expected, not within a token"
+        },
+        {
+          "text": "In the middle of a variable name",
+          "correct": false,
+          "explanation": "Continuation cannot split tokens like variable names"
+        }
+      ]
+    },
+    {
+      "id": "ch2-2-q13",
+      "question": "Consider this documentation example:\n\n```robot\n*** Settings ***\nDocumentation    This is the first line.\n...    \n...    This is the second line.\n```\n\nHow are line breaks with continuation interpreted in documentation settings?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Single line break becomes a space; two consecutive breaks create a paragraph break",
+          "correct": true
+        },
+        {
+          "text": "All line breaks are preserved exactly as written",
+          "correct": false,
+          "explanation": "Single breaks become spaces; use empty continuation for paragraph breaks"
+        },
+        {
+          "text": "All line breaks are removed entirely",
+          "correct": false,
+          "explanation": "Line breaks can be preserved using empty continuation lines"
+        },
+        {
+          "text": "Line breaks are not allowed in documentation",
+          "correct": false,
+          "explanation": "Line breaks are supported and encouraged in documentation"
+        }
+      ]
+    },
+    {
+      "id": "ch2-2-q14",
+      "question": "How do you add an in-line comment in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Add a separator (multiple spaces) followed by a hash # and the comment text",
+          "correct": true
+        },
+        {
+          "text": "Add a single space followed by // and the comment text",
+          "correct": false,
+          "explanation": "RF uses # for comments, not //"
+        },
+        {
+          "text": "Enclose the comment in /* */ markers",
+          "correct": false,
+          "explanation": "RF doesn't use /* */ block comments"
+        },
+        {
+          "text": "Add a semicolon ; followed by the comment text",
+          "correct": false,
+          "explanation": "RF uses # for comments, not semicolons"
+        }
+      ]
+    },
+    {
+      "id": "ch2-2-q15",
+      "question": "Analyze these lines:\n\n```robot\nA) Log    Message    # This is a comment\nB) # This is a full-line comment\nC) Log    Hash#InMiddle    # Not a comment until here\nD) Log    #StartingHash\n```\n\nWhich statements are correct? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Line A: 'This is a comment' is a comment",
+          "correct": true
+        },
+        {
+          "text": "Line B: The entire line is a comment",
+          "correct": true
+        },
+        {
+          "text": "Line C: 'Hash#InMiddle' contains a hash as a normal character",
+          "correct": true
+        },
+        {
+          "text": "Line D: '#StartingHash' will be logged as-is",
+          "correct": false,
+          "explanation": "When # is preceded by a separator, it starts a comment; it needs escaping"
+        },
+        {
+          "text": "Line C: The entire line is a comment because of the first #",
+          "correct": false,
+          "explanation": "Hash in the middle of a value is a normal character"
+        }
+      ]
+    },
+    {
+      "id": "ch2-2-q16",
+      "question": "Does Robot Framework support block comments (multi-line comments)?",
+      "type": "single",
+      "options": [
+        {
+          "text": "No, each line must be prefixed with # or use the *** Comments *** section",
+          "correct": true
+        },
+        {
+          "text": "Yes, using /* to start and */ to end",
+          "correct": false,
+          "explanation": "RF doesn't support /* */ style block comments"
+        },
+        {
+          "text": "Yes, using triple quotes \"\"\" like Python",
+          "correct": false,
+          "explanation": "RF doesn't use Python-style docstrings for comments"
+        },
+        {
+          "text": "Yes, indent the block with extra spaces to mark it as a comment",
+          "correct": false,
+          "explanation": "Indentation doesn't create comments in RF"
+        }
+      ]
+    },
+    {
+      "id": "ch2-2-q17",
+      "question": "What character is used to escape control characters in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Backslash \\",
+          "correct": true
+        },
+        {
+          "text": "Forward slash /",
+          "correct": false,
+          "explanation": "Forward slashes are for paths, not escaping"
+        },
+        {
+          "text": "Double quotes \"",
+          "correct": false,
+          "explanation": "Quotes don't escape in RF; strings are not quoted"
+        },
+        {
+          "text": "Caret ^",
+          "correct": false,
+          "explanation": "Caret is not used for escaping in RF"
+        }
+      ]
+    },
+    {
+      "id": "ch2-2-q18",
+      "question": "Which of the following are examples of control characters that may need escaping in Robot Framework? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Hash # when it should be part of a value",
+          "correct": true
+        },
+        {
+          "text": "Variable syntax ${ when it should be literal text",
+          "correct": true
+        },
+        {
+          "text": "Multiple spaces that should be part of a value",
+          "correct": true
+        },
+        {
+          "text": "Equal sign = used for named arguments",
+          "correct": true
+        },
+        {
+          "text": "Period . in file names",
+          "correct": false,
+          "explanation": "Periods don't need escaping in normal usage"
+        }
+      ]
+    },
+    {
+      "id": "ch2-2-q19",
+      "question": "If you want to use a literal backslash \\ in a value, how must it be written?",
+      "type": "single",
+      "options": [
+        {
+          "text": "As double backslash \\\\",
+          "correct": true
+        },
+        {
+          "text": "As a single backslash \\ (no escaping needed)",
+          "correct": false,
+          "explanation": "Backslash escapes the next character, so it must be doubled"
+        },
+        {
+          "text": "Enclosed in quotes \"\\\"",
+          "correct": false,
+          "explanation": "RF doesn't use quotes for escaping"
+        },
+        {
+          "text": "As forward slash / instead",
+          "correct": false,
+          "explanation": "While recommended for paths, this changes the character"
+        }
+      ]
+    },
+    {
+      "id": "ch2-2-q20",
+      "question": "Why is it strongly recommended to use forward slashes / instead of backslashes \\ for paths in Robot Framework, even on Windows?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Because backslashes must be escaped (doubled), while forward slashes work as-is",
+          "correct": true
+        },
+        {
+          "text": "Because backslashes don't work on Windows in Robot Framework",
+          "correct": false,
+          "explanation": "Backslashes work but require escaping"
+        },
+        {
+          "text": "Because Robot Framework only runs on Linux",
+          "correct": false,
+          "explanation": "RF runs on Windows, Linux, and macOS"
+        },
+        {
+          "text": "Because forward slashes are faster to parse",
+          "correct": false,
+          "explanation": "Performance is not the reason; it's about escaping complexity"
+        }
+      ]
+    },
+    {
+      "id": "ch2-2-q21",
+      "question": "How can you include leading or trailing spaces in argument values? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Enclose the value in backslashes: \\ value with spaces \\",
+          "correct": true
+        },
+        {
+          "text": "Use the ${SPACE} variable",
+          "correct": true
+        },
+        {
+          "text": "Use double quotes: \" value with spaces \"",
+          "correct": false,
+          "explanation": "RF doesn't use quotes; they would become part of the value"
+        },
+        {
+          "text": "Simply add the spaces; they are preserved automatically",
+          "correct": false,
+          "explanation": "Leading/trailing spaces are considered part of the separator"
+        }
+      ]
+    },
+    {
+      "id": "ch2-2-q22",
+      "question": "Analyze these Log statements:\n\n```robot\n*** Test Cases ***\nTest Escaping\n    Log    \\# leading hash.\n    Log    \\ lead & trail \\\n    Log    ${SPACE}and 5 more: \\ \\ \\ \\ \\\n    Log    Not a \\${variable}\n    Log    C:\\\\Windows\\\\System32\n```\n\nWhat will the third Log statement output?",
+      "type": "single",
+      "options": [
+        {
+          "text": "' and 5 more:     ' (space at start, 5 spaces at end)",
+          "correct": true
+        },
+        {
+          "text": "'and 5 more: \\ \\ \\ \\ \\' (backslashes as-is)",
+          "correct": false,
+          "explanation": "Backslash-space becomes a literal space"
+        },
+        {
+          "text": "'and 5 more:' (no spaces)",
+          "correct": false,
+          "explanation": "The escaped spaces are included"
+        },
+        {
+          "text": "Syntax error due to trailing backslashes",
+          "correct": false,
+          "explanation": "This is valid escaping syntax"
+        }
+      ]
+    },
+    {
+      "id": "ch2-2-q23",
+      "question": "How do you pass a CSS selector starting with # (like #element_id) as an argument to a keyword?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Escape the hash: Click Element    \\#element_id",
+          "correct": true
+        },
+        {
+          "text": "No escaping needed: Click Element    #element_id",
+          "correct": false,
+          "explanation": "When # is preceded by separator, it must be escaped"
+        },
+        {
+          "text": "Use quotes: Click Element    \"#element_id\"",
+          "correct": false,
+          "explanation": "Quotes become part of the value in RF"
+        },
+        {
+          "text": "Use css= prefix: Click Element    css=#element_id",
+          "correct": false,
+          "explanation": "While this might work in SeleniumLibrary, it's a different approach, not escaping"
+        }
+      ]
+    },
+    {
+      "id": "ch2-2-q24",
+      "question": "Examine this test case:\n\n```robot\n*** Test Cases ***\nLogin Test\n    Connect To Server\n    Login User    ironman    1234567890\n    Verify Valid Login    Tony Stark\n    Close Server Connection\n```\n\nHow many keyword calls are in this test case?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Four keyword calls",
+          "correct": true
+        },
+        {
+          "text": "One keyword call (Login Test)",
+          "correct": false,
+          "explanation": "Login Test is the test name, not a keyword call"
+        },
+        {
+          "text": "Three keyword calls (excluding Connect To Server)",
+          "correct": false,
+          "explanation": "Connect To Server is also a keyword call, making it four total"
+        },
+        {
+          "text": "Seven items (test name + four keywords + two arguments)",
+          "correct": false,
+          "explanation": "The question asks for keyword calls, not all items"
+        }
+      ]
+    },
+    {
+      "id": "ch2-2-q25",
+      "question": "In this test case:\n\n```robot\nLogin Test\n    Connect To Server\n    Login User    ironman    1234567890\n```\n\nHow many arguments does the 'Login User' keyword receive?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Two arguments: 'ironman' and '1234567890'",
+          "correct": true
+        },
+        {
+          "text": "One argument: 'ironman 1234567890'",
+          "correct": false,
+          "explanation": "Multiple spaces separate arguments into two distinct values"
+        },
+        {
+          "text": "Three arguments including 'Login User'",
+          "correct": false,
+          "explanation": "'Login User' is the keyword name, not an argument"
+        },
+        {
+          "text": "No arguments",
+          "correct": false,
+          "explanation": "Both 'ironman' and '1234567890' are arguments"
+        }
+      ]
+    },
+    {
+      "id": "ch2-2-q26",
+      "question": "Analyze this code:\n\n```robot\n*** Test Cases ***\nPassword Test\n    Login User    ironman    123#wrong\n```\n\nIs the hash # in '123#wrong' interpreted as a comment?",
+      "type": "single",
+      "options": [
+        {
+          "text": "No, hashes in the middle of a value are normal characters",
+          "correct": true
+        },
+        {
+          "text": "Yes, everything after # becomes a comment",
+          "correct": false,
+          "explanation": "Hash is only a comment marker when preceded by a separator"
+        },
+        {
+          "text": "Yes, but it can be prevented by escaping: 123\\#wrong",
+          "correct": false,
+          "explanation": "No escaping needed; hash in middle of value is literal"
+        },
+        {
+          "text": "It causes a syntax error",
+          "correct": false,
+          "explanation": "This is valid; the hash is part of the password value"
+        }
+      ]
+    },
+    {
+      "id": "ch2-2-q27",
+      "question": "Consider this keyword call with continuation:\n\n```robot\nRun Keyword And Expect Error\n    ...    *Invalid Password*\n    ...    Login User\n    ...    ironman\n    ...    123\n```\n\nHow many arguments does 'Run Keyword And Expect Error' receive?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Four arguments: '*Invalid Password*', 'Login User', 'ironman', '123'",
+          "correct": true
+        },
+        {
+          "text": "One argument split across multiple lines",
+          "correct": false,
+          "explanation": "Each continued line with ... adds a separate argument"
+        },
+        {
+          "text": "Five arguments including the ... markers",
+          "correct": false,
+          "explanation": "... is continuation syntax, not an argument"
+        },
+        {
+          "text": "Two arguments: the error pattern and the keyword",
+          "correct": false,
+          "explanation": "Login User's arguments (ironman, 123) are also arguments to the calling keyword"
+        }
+      ]
+    },
+    {
+      "id": "ch2-2-q28",
+      "question": "What is the correct indentation structure in this example?\n\n```robot\n*** Settings ***\nDocumentation    Suite documentation here\nResource         keywords.resource\n\n*** Test Cases ***\nTest Name\n    Keyword Call    argument\n    Another Keyword\n```\n\nWhich statements are correct? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Settings in *** Settings *** are not indented",
+          "correct": true
+        },
+        {
+          "text": "Test name 'Test Name' is not indented",
+          "correct": true
+        },
+        {
+          "text": "Keyword calls in test body are indented",
+          "correct": true
+        },
+        {
+          "text": "Setting values like 'keywords.resource' are indented from their setting name",
+          "correct": false,
+          "explanation": "Values are separated by spaces, not indented on separate lines"
+        }
+      ]
+    },
+    {
+      "id": "ch2-2-q29",
+      "question": "Examine this documentation setting:\n\n```robot\n*** Settings ***\nDocumentation    A suite for login tests.\n...    \n...    Keywords are imported from the resource file.\n```\n\nWhat appears in the final documentation?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Two paragraphs separated by a blank line",
+          "correct": true
+        },
+        {
+          "text": "One paragraph with all text on a single line",
+          "correct": false,
+          "explanation": "The empty continuation line creates a paragraph break"
+        },
+        {
+          "text": "Three lines with the middle line blank",
+          "correct": false,
+          "explanation": "In documentation, the empty continuation becomes a paragraph break, not a blank line"
+        },
+        {
+          "text": "Syntax error due to empty continuation",
+          "correct": false,
+          "explanation": "Empty continuation is valid and creates paragraph breaks"
+        }
+      ]
+    },
+    {
+      "id": "ch2-2-q30",
+      "question": "What is the execution order of test cases in a suite file?",
+      "type": "single",
+      "options": [
+        {
+          "text": "The order they are defined in the file, from top to bottom",
+          "correct": true
+        },
+        {
+          "text": "Alphabetical order by test name",
+          "correct": false,
+          "explanation": "Tests execute in definition order, not alphabetical"
+        },
+        {
+          "text": "Random order on each execution",
+          "correct": false,
+          "explanation": "Execution order is deterministic based on definition order"
+        },
+        {
+          "text": "Priority-based using [Priority] tags",
+          "correct": false,
+          "explanation": "RF doesn't use priority-based execution by default"
+        }
+      ]
+    }
+  ]
+}

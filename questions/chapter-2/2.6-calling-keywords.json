@@ -1,0 +1,779 @@
+{
+  "chapter": "2-Robot Framework Test Data",
+  "subchapter": "2.6-Writing Test/Task and Calling Keywords",
+  "questions": [
+    {
+      "id": "ch2-6-q1",
+      "question": "What is the typical structure of a test case or task in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "A sequence of keyword calls executed in a specific order",
+          "correct": true
+        },
+        {
+          "text": "A collection of variable definitions",
+          "correct": false,
+          "explanation": "Test cases contain keyword calls, not primarily variable definitions"
+        },
+        {
+          "text": "A single keyword with multiple arguments",
+          "correct": false,
+          "explanation": "Tests typically contain multiple keyword calls"
+        },
+        {
+          "text": "A parallel execution of multiple keywords",
+          "correct": false,
+          "explanation": "Keywords execute sequentially by default, not in parallel"
+        }
+      ]
+    },
+    {
+      "id": "ch2-6-q2",
+      "question": "In a keyword call, what is the typical order of elements?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Keyword name first, followed by arguments separated by two or more spaces",
+          "correct": true
+        },
+        {
+          "text": "Arguments first, then keyword name",
+          "correct": false,
+          "explanation": "Keyword name always comes first"
+        },
+        {
+          "text": "Keyword name and arguments in parentheses",
+          "correct": false,
+          "explanation": "RF doesn't use parentheses for keyword calls"
+        },
+        {
+          "text": "Arguments enclosed in square brackets after keyword name",
+          "correct": false,
+          "explanation": "Square brackets are for settings, not arguments"
+        }
+      ]
+    },
+    {
+      "id": "ch2-6-q3",
+      "question": "How should keyword calls be indented within test cases or User Keywords?",
+      "type": "single",
+      "options": [
+        {
+          "text": "All keyword calls must be indented from the test/keyword name",
+          "correct": true
+        },
+        {
+          "text": "Keyword calls should not be indented",
+          "correct": false,
+          "explanation": "Indentation is required to distinguish body from name"
+        },
+        {
+          "text": "Only the first keyword should be indented",
+          "correct": false,
+          "explanation": "All keywords in the body must be indented"
+        },
+        {
+          "text": "Indentation is optional for readability only",
+          "correct": false,
+          "explanation": "Indentation is mandatory syntax"
+        }
+      ]
+    },
+    {
+      "id": "ch2-6-q4",
+      "question": "How are spaces in argument values treated by Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Leading and trailing spaces are stripped; internal spaces are preserved",
+          "correct": true
+        },
+        {
+          "text": "All spaces are preserved exactly as written",
+          "correct": false,
+          "explanation": "Leading/trailing spaces are stripped unless escaped"
+        },
+        {
+          "text": "All spaces are removed from argument values",
+          "correct": false,
+          "explanation": "Internal spaces are preserved"
+        },
+        {
+          "text": "Spaces are converted to underscores",
+          "correct": false,
+          "explanation": "Spaces remain as spaces (except leading/trailing)"
+        }
+      ]
+    },
+    {
+      "id": "ch2-6-q5",
+      "question": "How can you include leading or trailing spaces in argument values?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Escape the spaces with backslash \\ to prevent them from being part of the separator",
+          "correct": true
+        },
+        {
+          "text": "Enclose the value in double quotes",
+          "correct": false,
+          "explanation": "Quotes become part of the value; use backslash escaping"
+        },
+        {
+          "text": "Use single quotes around the value",
+          "correct": false,
+          "explanation": "RF doesn't use quotes; use backslash escaping"
+        },
+        {
+          "text": "Leading/trailing spaces cannot be included",
+          "correct": false,
+          "explanation": "They can be included using backslash escaping"
+        }
+      ]
+    },
+    {
+      "id": "ch2-6-q6",
+      "question": "Analyze this keyword call:\n\n```robot\nShould Be Equal    \\ hello \\    \\ HELLO \\\n```\n\nWhat are the actual argument values passed to the keyword?",
+      "type": "single",
+      "options": [
+        {
+          "text": "first=' hello ', second=' HELLO ' (with leading/trailing spaces)",
+          "correct": true
+        },
+        {
+          "text": "first='hello', second='HELLO' (spaces removed)",
+          "correct": false,
+          "explanation": "Backslash escaping preserves leading/trailing spaces"
+        },
+        {
+          "text": "first='\\\\ hello \\\\', second='\\\\ HELLO \\\\' (backslashes included)",
+          "correct": false,
+          "explanation": "Backslashes escape the spaces; they're not part of the value"
+        },
+        {
+          "text": "Syntax error due to backslashes",
+          "correct": false,
+          "explanation": "This is valid escaping syntax"
+        }
+      ]
+    },
+    {
+      "id": "ch2-6-q7",
+      "question": "Compare these keyword calls:\n\n```robot\nA) Should Be Equal    hello    HELLO    Values are case-insensitive    True    True\n\nB) Should Be Equal    first=hello    second=HELLO    msg=Values are case-insensitive    ignore_case=True\n```\n\nWhat are the advantages of approach B? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Clearer what each argument value does",
+          "correct": true
+        },
+        {
+          "text": "Arguments can be in any order",
+          "correct": true
+        },
+        {
+          "text": "Can omit optional arguments with defaults",
+          "correct": true
+        },
+        {
+          "text": "Executes faster than positional",
+          "correct": false,
+          "explanation": "Performance is the same; clarity is the advantage"
+        }
+      ]
+    },
+    {
+      "id": "ch2-6-q8",
+      "question": "When should you use positional arguments?",
+      "type": "single",
+      "options": [
+        {
+          "text": "When arguments are obvious and easy to understand",
+          "correct": true
+        },
+        {
+          "text": "Always, regardless of clarity",
+          "correct": false,
+          "explanation": "Use named arguments when clarity is needed"
+        },
+        {
+          "text": "Never; always use named arguments",
+          "correct": false,
+          "explanation": "Positional is fine for obvious arguments"
+        },
+        {
+          "text": "Only for mandatory arguments",
+          "correct": false,
+          "explanation": "Optional arguments can also be set positionally if clear"
+        }
+      ]
+    },
+    {
+      "id": "ch2-6-q9",
+      "question": "Analyze this keyword call:\n\n```robot\nLogin User    ironman    1234567890\n```\n\nIs this a good use of positional arguments?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Yes, it's obvious that first is username and second is password",
+          "correct": true
+        },
+        {
+          "text": "No, it should use named arguments: Login User    username=ironman    password=1234567890",
+          "correct": false,
+          "explanation": "While named args are clearer, positional is acceptable here"
+        },
+        {
+          "text": "No, it's missing the msg argument",
+          "correct": false,
+          "explanation": "msg would be optional if it exists"
+        },
+        {
+          "text": "Yes, because named arguments are not allowed",
+          "correct": false,
+          "explanation": "Named arguments are allowed; positional is just clear here"
+        }
+      ]
+    },
+    {
+      "id": "ch2-6-q10",
+      "question": "Which types of arguments CANNOT be set positionally? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Named-Only Arguments",
+          "correct": true
+        },
+        {
+          "text": "Free Named Arguments (**kwargs)",
+          "correct": true
+        },
+        {
+          "text": "Variable Number of Positional Arguments (*args)",
+          "correct": false,
+          "explanation": "Varargs can ONLY be set positionally"
+        },
+        {
+          "text": "Positional or Named Arguments",
+          "correct": false,
+          "explanation": "These can be set positionally"
+        }
+      ]
+    },
+    {
+      "id": "ch2-6-q11",
+      "question": "Examine this keyword documentation and calls:\n\n```\nRun Process: command, *arguments, **configuration\n\n*** Test Cases ***\nTest 1\n    Run Process    command=dir\n    \nTest 2\n    Run Process    ping    -c    2    127.0.0.1\n```\n\nWhich statements are correct? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Test 1: command='dir', arguments is empty, configuration is empty",
+          "correct": true
+        },
+        {
+          "text": "Test 2: command='ping', arguments=['-c', '2', '127.0.0.1']",
+          "correct": true
+        },
+        {
+          "text": "Test 2 must use named arguments for command",
+          "correct": false,
+          "explanation": "command can be set positionally; it's not named-only"
+        },
+        {
+          "text": "Test 1 could omit 'command=' and just use: Run Process    dir",
+          "correct": true
+        }
+      ]
+    },
+    {
+      "id": "ch2-6-q12",
+      "question": "When calling a keyword with Variable Number of Positional Arguments (*args), what requirement exists for preceding arguments?",
+      "type": "single",
+      "options": [
+        {
+          "text": "All preceding arguments must be set by position if *args shall be set",
+          "correct": true
+        },
+        {
+          "text": "All preceding arguments must be set by name",
+          "correct": false,
+          "explanation": "Preceding arguments must be positional if varargs are used"
+        },
+        {
+          "text": "Preceding arguments can be mixed positional and named",
+          "correct": false,
+          "explanation": "All must be positional to set varargs"
+        },
+        {
+          "text": "No special requirement exists",
+          "correct": false,
+          "explanation": "Positional requirement exists for varargs"
+        }
+      ]
+    },
+    {
+      "id": "ch2-6-q13",
+      "question": "What is the syntax for setting a named argument?",
+      "type": "single",
+      "options": [
+        {
+          "text": "argument_name=value (name followed by = and value)",
+          "correct": true
+        },
+        {
+          "text": "argument_name: value (name followed by colon and value)",
+          "correct": false,
+          "explanation": "RF uses =, not :"
+        },
+        {
+          "text": "argument_name => value (name followed by arrow and value)",
+          "correct": false,
+          "explanation": "RF uses =, not =>"
+        },
+        {
+          "text": "--argument_name value (dash-dash prefix)",
+          "correct": false,
+          "explanation": "This is CLI syntax, not keyword call syntax"
+        }
+      ]
+    },
+    {
+      "id": "ch2-6-q14",
+      "question": "Where must named arguments be placed in a keyword call?",
+      "type": "single",
+      "options": [
+        {
+          "text": "After all positional arguments, in any order among themselves",
+          "correct": true
+        },
+        {
+          "text": "Before all positional arguments",
+          "correct": false,
+          "explanation": "Named arguments come after positional"
+        },
+        {
+          "text": "Named and positional can be freely mixed",
+          "correct": false,
+          "explanation": "All positional must come before any named"
+        },
+        {
+          "text": "Named arguments must be in alphabetical order",
+          "correct": false,
+          "explanation": "Order among named arguments is flexible"
+        }
+      ]
+    },
+    {
+      "id": "ch2-6-q15",
+      "question": "When should you use named arguments? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "When keyword arguments are not obvious",
+          "correct": true
+        },
+        {
+          "text": "When setting one optional argument but leaving others at defaults",
+          "correct": true
+        },
+        {
+          "text": "When arguments have no obvious order",
+          "correct": true
+        },
+        {
+          "text": "Only when positional arguments are not supported",
+          "correct": false,
+          "explanation": "Named arguments improve clarity, not just for technical requirements"
+        }
+      ]
+    },
+    {
+      "id": "ch2-6-q16",
+      "question": "Analyze this keyword call:\n\n```robot\nClick On Coordinates    82    70\nClick On Coordinates    x=82    y=70\n```\n\nWhat's the difference between these calls?",
+      "type": "single",
+      "options": [
+        {
+          "text": "They're functionally identical; the second is more explicit about which coordinate is which",
+          "correct": true
+        },
+        {
+          "text": "The first sets x=82, y=70; the second sets y=82, x=70",
+          "correct": false,
+          "explanation": "Both set x=82, y=70; named args clarify but don't change meaning"
+        },
+        {
+          "text": "The first will fail; positional is not allowed",
+          "correct": false,
+          "explanation": "Positional is allowed for these arguments"
+        },
+        {
+          "text": "The second is slower to execute",
+          "correct": false,
+          "explanation": "Performance is identical"
+        }
+      ]
+    },
+    {
+      "id": "ch2-6-q17",
+      "question": "What problem can occur with equal signs = in argument values?",
+      "type": "single",
+      "options": [
+        {
+          "text": "They can be misinterpreted as named argument syntax if the text before = matches an argument name",
+          "correct": true
+        },
+        {
+          "text": "Equal signs are not allowed in argument values",
+          "correct": false,
+          "explanation": "They're allowed but may need escaping"
+        },
+        {
+          "text": "They always cause syntax errors",
+          "correct": false,
+          "explanation": "They're valid characters but can be misinterpreted"
+        },
+        {
+          "text": "Equal signs automatically split the argument",
+          "correct": false,
+          "explanation": "Only when misinterpreted as named argument syntax"
+        }
+      ]
+    },
+    {
+      "id": "ch2-6-q18",
+      "question": "How do you include an equal sign in an argument value without it being interpreted as a named argument?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Escape it with a backslash: \\=",
+          "correct": true
+        },
+        {
+          "text": "Enclose the value in quotes: \"value=2\"",
+          "correct": false,
+          "explanation": "Quotes become part of the value; use backslash"
+        },
+        {
+          "text": "Use double equals: ==",
+          "correct": false,
+          "explanation": "Use backslash escaping, not doubling"
+        },
+        {
+          "text": "Replace with ${EQUALS} variable",
+          "correct": false,
+          "explanation": "While this might work, backslash escaping is the standard approach"
+        }
+      ]
+    },
+    {
+      "id": "ch2-6-q19",
+      "question": "Examine this keyword call:\n\n```robot\nShould Be Equal    first=second=2    second=Second\\=2\n```\n\nWhat are the actual argument values?",
+      "type": "single",
+      "options": [
+        {
+          "text": "first='second=2', second='Second=2'",
+          "correct": true
+        },
+        {
+          "text": "first='first=second=2', second='second=Second=2'",
+          "correct": false,
+          "explanation": "The = starts named arguments; values are after the ="
+        },
+        {
+          "text": "first='second', second='2', third='Second\\=2'",
+          "correct": false,
+          "explanation": "first='second=2' is one value; escaped = doesn't split"
+        },
+        {
+          "text": "Syntax error due to multiple = signs",
+          "correct": false,
+          "explanation": "This is valid with escaping"
+        }
+      ]
+    },
+    {
+      "id": "ch2-6-q20",
+      "question": "What are embedded arguments in Robot Framework?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Arguments that are part of the keyword name using ${var_name} syntax",
+          "correct": true
+        },
+        {
+          "text": "Arguments defined inside keyword implementation",
+          "correct": false,
+          "explanation": "Embedded arguments are in the keyword name"
+        },
+        {
+          "text": "Arguments passed as nested data structures",
+          "correct": false,
+          "explanation": "This describes complex arguments, not embedded"
+        },
+        {
+          "text": "Arguments that are optional",
+          "correct": false,
+          "explanation": "Embedded arguments are mandatory"
+        }
+      ]
+    },
+    {
+      "id": "ch2-6-q21",
+      "question": "When calling a keyword with embedded arguments, how are the argument values determined?",
+      "type": "single",
+      "options": [
+        {
+          "text": "All characters at the position where the embedded argument is expected are used as the value",
+          "correct": true
+        },
+        {
+          "text": "Values must be passed separately after the keyword name",
+          "correct": false,
+          "explanation": "Values are extracted from the keyword name itself"
+        },
+        {
+          "text": "Values are set using standard positional or named syntax",
+          "correct": false,
+          "explanation": "Embedded arguments are extracted from the name"
+        },
+        {
+          "text": "Values must be in variables only",
+          "correct": false,
+          "explanation": "Literal text at the position is used as the value"
+        }
+      ]
+    },
+    {
+      "id": "ch2-6-q22",
+      "question": "Analyze this embedded argument keyword usage:\n\n```robot\n# Keyword definition: \"${url}\" is open\n\n*** Test Cases ***\nTest\n    Given \"robotframework.org\" is open\n```\n\nWhat value is passed to the ${url} argument?",
+      "type": "single",
+      "options": [
+        {
+          "text": "robotframework.org",
+          "correct": true
+        },
+        {
+          "text": "\"robotframework.org\" (including quotes)",
+          "correct": false,
+          "explanation": "Quotes are part of the keyword name pattern, not the value"
+        },
+        {
+          "text": "Given robotframework.org",
+          "correct": false,
+          "explanation": "Given prefix is ignored; only the text at ${url} position is used"
+        },
+        {
+          "text": "${url} (as literal text)",
+          "correct": false,
+          "explanation": "${url} is the placeholder; actual text at that position is the value"
+        }
+      ]
+    },
+    {
+      "id": "ch2-6-q23",
+      "question": "Consider these BDD-style keyword definitions:\n\n```robot\n\"${url}\" is open\nthe user clicks the \"${button}\" button\nthe page title should be ${exp_title}\n```\n\nWhy are some embedded arguments surrounded by quotes in the keyword name?",
+      "type": "single",
+      "options": [
+        {
+          "text": "For better visibility and readability of the argument position",
+          "correct": true
+        },
+        {
+          "text": "Quotes are required syntax for embedded arguments",
+          "correct": false,
+          "explanation": "Quotes are optional for readability, not required"
+        },
+        {
+          "text": "To indicate the argument is a string type",
+          "correct": false,
+          "explanation": "Quotes are for readability, not type indication"
+        },
+        {
+          "text": "To make the argument optional",
+          "correct": false,
+          "explanation": "Embedded arguments are always mandatory"
+        }
+      ]
+    },
+    {
+      "id": "ch2-6-q24",
+      "question": "Where are embedded arguments primarily used?",
+      "type": "single",
+      "options": [
+        {
+          "text": "In Behavior-Driven Development (BDD) using Behavior-Driven Specification style",
+          "correct": true
+        },
+        {
+          "text": "In keyword-driven testing only",
+          "correct": false,
+          "explanation": "Embedded arguments are primarily for BDD style"
+        },
+        {
+          "text": "In all Robot Framework keywords by default",
+          "correct": false,
+          "explanation": "Embedded arguments are a special BDD feature"
+        },
+        {
+          "text": "Only in library keywords, not user keywords",
+          "correct": false,
+          "explanation": "Embedded arguments are typically used in user keywords for BDD"
+        }
+      ]
+    },
+    {
+      "id": "ch2-6-q25",
+      "question": "Analyze this complete BDD test:\n\n```robot\n*** Test Cases ***\nFoundation Page Should Be Accessible\n    Given \"robotframework.org\" is open\n    When the user clicks the \"FOUNDATION\" button\n    Then the page title should be Foundation | Robot Framework\n    And the url should be https://robotframework.org/foundation\n```\n\nHow many embedded arguments are used in total?",
+      "type": "single",
+      "options": [
+        {
+          "text": "4 embedded arguments (url, button, exp_title, exp_url)",
+          "correct": true
+        },
+        {
+          "text": "2 embedded arguments (url, button)",
+          "correct": false,
+          "explanation": "Each ${variable} in keyword names is an embedded argument"
+        },
+        {
+          "text": "5 embedded arguments including Given/When/Then",
+          "correct": false,
+          "explanation": "Given/When/Then/And are prefixes, not arguments"
+        },
+        {
+          "text": "0 embedded arguments (these are positional)",
+          "correct": false,
+          "explanation": "These are embedded arguments based on keyword name patterns"
+        }
+      ]
+    },
+    {
+      "id": "ch2-6-q26",
+      "question": "Can keywords have both embedded arguments AND normal arguments?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Yes, a mix is possible to fully support BDD",
+          "correct": true
+        },
+        {
+          "text": "No, only one type is allowed per keyword",
+          "correct": false,
+          "explanation": "Keywords can mix both types"
+        },
+        {
+          "text": "Yes, but only in library keywords",
+          "correct": false,
+          "explanation": "User keywords can also mix both types"
+        },
+        {
+          "text": "No, embedded arguments replace all normal arguments",
+          "correct": false,
+          "explanation": "Both can coexist in one keyword"
+        }
+      ]
+    },
+    {
+      "id": "ch2-6-q27",
+      "question": "Compare these keyword calls:\n\n```robot\nA) Should Be Equal    1    1\nB) Should Be Equal    first=1    second=1\nC) Should Be Equal    1    second=1\n```\n\nWhich statement is correct?",
+      "type": "single",
+      "options": [
+        {
+          "text": "All three are valid and functionally equivalent",
+          "correct": true
+        },
+        {
+          "text": "Only A is valid; B and C are syntax errors",
+          "correct": false,
+          "explanation": "All three are valid RF syntax"
+        },
+        {
+          "text": "C is invalid; cannot mix positional and named",
+          "correct": false,
+          "explanation": "Mixing is allowed; positional must come first"
+        },
+        {
+          "text": "B is invalid; both arguments must be named if one is",
+          "correct": false,
+          "explanation": "Arguments can be individually chosen for naming"
+        }
+      ]
+    },
+    {
+      "id": "ch2-6-q28",
+      "question": "What is wrong with this keyword call?\n\n```robot\nShould Be Equal    ignore_case=True    hello    HELLO\n```",
+      "type": "single",
+      "options": [
+        {
+          "text": "Named arguments must come after positional arguments",
+          "correct": true
+        },
+        {
+          "text": "ignore_case must be the last argument",
+          "correct": false,
+          "explanation": "Order among named args is flexible, but all must be after positional"
+        },
+        {
+          "text": "hello and HELLO must be named too",
+          "correct": false,
+          "explanation": "Positional is fine for mandatory args; just need to be before named"
+        },
+        {
+          "text": "There's nothing wrong with this call",
+          "correct": false,
+          "explanation": "Named argument appears before positional, which is invalid"
+        }
+      ]
+    },
+    {
+      "id": "ch2-6-q29",
+      "question": "Examine this keyword call with multiple spaces:\n\n```robot\nLog    Text with    multiple    spaces\n```\n\nHow many arguments does the Log keyword receive?",
+      "type": "single",
+      "options": [
+        {
+          "text": "3 arguments: 'Text with', 'multiple', 'spaces'",
+          "correct": true
+        },
+        {
+          "text": "1 argument: 'Text with    multiple    spaces'",
+          "correct": false,
+          "explanation": "Multiple spaces are separators, not part of values"
+        },
+        {
+          "text": "4 arguments including 'Log'",
+          "correct": false,
+          "explanation": "'Log' is the keyword name, not an argument"
+        },
+        {
+          "text": "1 argument: 'Text with multiple spaces' (consecutive spaces collapsed)",
+          "correct": false,
+          "explanation": "Multiple spaces separate arguments; they're not collapsed"
+        }
+      ]
+    },
+    {
+      "id": "ch2-6-q30",
+      "question": "How would you pass 'Text with    multiple    spaces' (preserving the multiple spaces) as a single argument?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Log    Text with\\ \\ \\ \\ multiple\\ \\ \\ \\ spaces",
+          "correct": true
+        },
+        {
+          "text": "Log    \"Text with    multiple    spaces\"",
+          "correct": false,
+          "explanation": "Quotes become part of the value; use backslash escaping"
+        },
+        {
+          "text": "Log    Text with    multiple    spaces    # Just one argument",
+          "correct": false,
+          "explanation": "This creates 3 arguments; multiple spaces need escaping"
+        },
+        {
+          "text": "Log    ${SPACE*4}Text with${SPACE*4}multiple${SPACE*4}spaces",
+          "correct": false,
+          "explanation": "While creative, backslash escaping is the standard approach"
+        }
+      ]
+    }
+  ]
+}

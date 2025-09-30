@@ -1,0 +1,800 @@
+{
+  "chapter": "2-Robot Framework Test Data",
+  "subchapter": "2.3-Executing Robot",
+  "questions": [
+    {
+      "id": "ch2-3-q1",
+      "question": "What are the three main executables that come with Robot Framework installation? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "robot - for executing suites",
+          "correct": true
+        },
+        {
+          "text": "rebot - for post-processing execution results",
+          "correct": true
+        },
+        {
+          "text": "libdoc - for generating keyword documentation",
+          "correct": true
+        },
+        {
+          "text": "robotc - for compiling test suites",
+          "correct": false,
+          "explanation": "There is no robotc command; RF doesn't compile suites"
+        },
+        {
+          "text": "rfrun - for running tests in parallel",
+          "correct": false,
+          "explanation": "There is no rfrun command in standard RF installation"
+        }
+      ]
+    },
+    {
+      "id": "ch2-3-q2",
+      "question": "What is the primary purpose of the 'robot' executable?",
+      "type": "single",
+      "options": [
+        {
+          "text": "To execute suites and their containing tests or tasks",
+          "correct": true
+        },
+        {
+          "text": "To generate keyword documentation for libraries",
+          "correct": false,
+          "explanation": "Documentation generation is done by libdoc, not robot"
+        },
+        {
+          "text": "To post-process execution results and regenerate reports",
+          "correct": false,
+          "explanation": "Post-processing is done by rebot, not robot"
+        },
+        {
+          "text": "To validate syntax without executing tests",
+          "correct": false,
+          "explanation": "While robot parses files, its primary purpose is execution"
+        }
+      ]
+    },
+    {
+      "id": "ch2-3-q3",
+      "question": "What is the basic syntax to run the robot command?",
+      "type": "single",
+      "options": [
+        {
+          "text": "robot <path_to_root_suite>",
+          "correct": true
+        },
+        {
+          "text": "robot --execute <path_to_root_suite>",
+          "correct": false,
+          "explanation": "No --execute flag is needed; path is sufficient"
+        },
+        {
+          "text": "robot run <path_to_root_suite>",
+          "correct": false,
+          "explanation": "No 'run' subcommand is needed"
+        },
+        {
+          "text": "<path_to_root_suite> | robot",
+          "correct": false,
+          "explanation": "Robot expects the path as an argument, not via pipe"
+        }
+      ]
+    },
+    {
+      "id": "ch2-3-q4",
+      "question": "Given a directory structure where 'robot_files' contains 'TestSuite.robot', and your current working directory contains the 'robot_files' directory, which command correctly executes the suite?",
+      "type": "single",
+      "options": [
+        {
+          "text": "robot robot_files",
+          "correct": true
+        },
+        {
+          "text": "robot robot_files/TestSuite.robot",
+          "correct": false,
+          "explanation": "While this works, the question asks for executing the directory"
+        },
+        {
+          "text": "robot --suite robot_files",
+          "correct": false,
+          "explanation": "--suite is for filtering, not specifying the path"
+        },
+        {
+          "text": "python robot robot_files",
+          "correct": false,
+          "explanation": "The robot command is directly executable"
+        }
+      ]
+    },
+    {
+      "id": "ch2-3-q5",
+      "question": "Where should optional configuration options be placed in the robot command?",
+      "type": "single",
+      "options": [
+        {
+          "text": "BEFORE the path to the suite file or directory",
+          "correct": true
+        },
+        {
+          "text": "AFTER the path to the suite file or directory",
+          "correct": false,
+          "explanation": "Options must come before the path argument"
+        },
+        {
+          "text": "In a separate configuration file only",
+          "correct": false,
+          "explanation": "Options can be passed directly on the command line before the path"
+        },
+        {
+          "text": "Options are not supported by the robot command",
+          "correct": false,
+          "explanation": "Robot supports many configuration options"
+        }
+      ]
+    },
+    {
+      "id": "ch2-3-q6",
+      "question": "Which of the following are valid robot command examples? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "robot tests/",
+          "correct": true
+        },
+        {
+          "text": "robot --loglevel DEBUG tests/",
+          "correct": true
+        },
+        {
+          "text": "robot --variable VAR:value tests/",
+          "correct": true
+        },
+        {
+          "text": "robot tests/ --outputdir results",
+          "correct": false,
+          "explanation": "Options must come BEFORE the path, not after"
+        }
+      ]
+    },
+    {
+      "id": "ch2-3-q7",
+      "question": "How can you learn about available options for the robot command?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Run: robot --help",
+          "correct": true
+        },
+        {
+          "text": "Run: robot --options",
+          "correct": false,
+          "explanation": "The correct flag is --help, not --options"
+        },
+        {
+          "text": "Run: help robot",
+          "correct": false,
+          "explanation": "This is shell help, not robot's built-in help"
+        },
+        {
+          "text": "Options are not documented in the command line",
+          "correct": false,
+          "explanation": "Robot provides comprehensive --help documentation"
+        }
+      ]
+    },
+    {
+      "id": "ch2-3-q8",
+      "question": "What three output files does Robot Framework generate by default after executing a suite? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "output.xml - machine-readable file with all logged execution details",
+          "correct": true
+        },
+        {
+          "text": "log.html - detailed HTML log with keyword-level details",
+          "correct": true
+        },
+        {
+          "text": "report.html - summary report with execution statistics",
+          "correct": true
+        },
+        {
+          "text": "results.json - JSON format execution results",
+          "correct": false,
+          "explanation": "RF doesn't generate results.json by default"
+        },
+        {
+          "text": "debug.log - debugging information file",
+          "correct": false,
+          "explanation": "There is no debug.log generated by default"
+        }
+      ]
+    },
+    {
+      "id": "ch2-3-q9",
+      "question": "What is the relationship between output.xml, log.html, and report.html?",
+      "type": "single",
+      "options": [
+        {
+          "text": "log.html and report.html are generated based on information in output.xml",
+          "correct": true
+        },
+        {
+          "text": "output.xml is generated from log.html and report.html",
+          "correct": false,
+          "explanation": "It's the opposite - output.xml is the source"
+        },
+        {
+          "text": "All three are generated independently",
+          "correct": false,
+          "explanation": "log.html and report.html are derived from output.xml"
+        },
+        {
+          "text": "They all contain identical information in different formats",
+          "correct": false,
+          "explanation": "output.xml is comprehensive; log.html and report.html show different views"
+        }
+      ]
+    },
+    {
+      "id": "ch2-3-q10",
+      "question": "Which file contains ALL logged execution details and is machine-readable?",
+      "type": "single",
+      "options": [
+        {
+          "text": "output.xml",
+          "correct": true
+        },
+        {
+          "text": "log.html",
+          "correct": false,
+          "explanation": "log.html is for humans, not machine processing"
+        },
+        {
+          "text": "report.html",
+          "correct": false,
+          "explanation": "report.html is a summary, not comprehensive details"
+        },
+        {
+          "text": "All three files contain the same information",
+          "correct": false,
+          "explanation": "output.xml is the most comprehensive source"
+        }
+      ]
+    },
+    {
+      "id": "ch2-3-q11",
+      "question": "What unique feature does Robot Framework provide in its logging?",
+      "type": "single",
+      "options": [
+        {
+          "text": "It logs each keyword call with arguments, outputs, and timestamps for detailed execution flow",
+          "correct": true
+        },
+        {
+          "text": "It only logs failed keywords to save space",
+          "correct": false,
+          "explanation": "RF logs all keywords including passed and not-run ones"
+        },
+        {
+          "text": "It generates video recordings of test execution",
+          "correct": false,
+          "explanation": "RF doesn't generate videos by default"
+        },
+        {
+          "text": "It automatically sends logs to a central server",
+          "correct": false,
+          "explanation": "Log storage is local by default"
+        }
+      ]
+    },
+    {
+      "id": "ch2-3-q12",
+      "question": "What information can you see in Robot Framework logs even for passed tests? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "All passed keywords with their arguments",
+          "correct": true
+        },
+        {
+          "text": "Non-executed keywords (in conditional branches not taken)",
+          "correct": true
+        },
+        {
+          "text": "Timestamps for each keyword",
+          "correct": true
+        },
+        {
+          "text": "Only failed keywords are logged",
+          "correct": false,
+          "explanation": "RF logs all keywords, not just failures"
+        }
+      ]
+    },
+    {
+      "id": "ch2-3-q13",
+      "question": "What are the four status labels used by Robot Framework? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "PASS",
+          "correct": true
+        },
+        {
+          "text": "FAIL",
+          "correct": true
+        },
+        {
+          "text": "SKIP",
+          "correct": true
+        },
+        {
+          "text": "NOT RUN",
+          "correct": true
+        },
+        {
+          "text": "ERROR",
+          "correct": false,
+          "explanation": "ERROR is a log level, not a status label"
+        },
+        {
+          "text": "PENDING",
+          "correct": false,
+          "explanation": "PENDING is not a Robot Framework status label"
+        }
+      ]
+    },
+    {
+      "id": "ch2-3-q14",
+      "question": "Which status labels can be applied to suites, test cases, tasks, AND keywords? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "PASS",
+          "correct": true
+        },
+        {
+          "text": "FAIL",
+          "correct": true
+        },
+        {
+          "text": "SKIP",
+          "correct": true
+        },
+        {
+          "text": "NOT RUN",
+          "correct": false,
+          "explanation": "NOT RUN is an additional status specifically for keywords"
+        }
+      ]
+    },
+    {
+      "id": "ch2-3-q15",
+      "question": "What is the NOT RUN status used for?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Keywords that were not executed during execution due to failures or conditions",
+          "correct": true
+        },
+        {
+          "text": "Tests that were skipped by tagging",
+          "correct": false,
+          "explanation": "Skipped tests use SKIP status, not NOT RUN"
+        },
+        {
+          "text": "Suites that were excluded from execution",
+          "correct": false,
+          "explanation": "NOT RUN is specifically for keywords, not suites"
+        },
+        {
+          "text": "Tests that haven't been written yet",
+          "correct": false,
+          "explanation": "NOT RUN refers to runtime execution, not test completion"
+        }
+      ]
+    },
+    {
+      "id": "ch2-3-q16",
+      "question": "What is the difference between atomic and composite elements in terms of status determination?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Atomic elements define their own status; composite elements base their status on child elements",
+          "correct": true
+        },
+        {
+          "text": "Atomic elements don't have status; only composite elements do",
+          "correct": false,
+          "explanation": "Both have status, but determine it differently"
+        },
+        {
+          "text": "Composite elements always PASS if any child passes",
+          "correct": false,
+          "explanation": "Composite elements need all executed children to PASS"
+        },
+        {
+          "text": "There is no difference in status determination",
+          "correct": false,
+          "explanation": "The determination method differs significantly"
+        }
+      ]
+    },
+    {
+      "id": "ch2-3-q17",
+      "question": "When is an atomic element (like a Library Keyword) marked as PASS?",
+      "type": "single",
+      "options": [
+        {
+          "text": "When it was executed successfully without reporting an error by raising an exception",
+          "correct": true
+        },
+        {
+          "text": "When it was not executed at all",
+          "correct": false,
+          "explanation": "Non-executed keywords are NOT RUN, not PASS"
+        },
+        {
+          "text": "When it raised an expected exception",
+          "correct": false,
+          "explanation": "This describes specific keywords like 'Run Keyword And Expect Error', not general atomic elements"
+        },
+        {
+          "text": "When at least one of its child keywords passed",
+          "correct": false,
+          "explanation": "Atomic elements don't have child keywords"
+        }
+      ]
+    },
+    {
+      "id": "ch2-3-q18",
+      "question": "When is a composite element (like a User Keyword or test case) marked as PASS?",
+      "type": "single",
+      "options": [
+        {
+          "text": "When all directly executed body elements are PASS",
+          "correct": true
+        },
+        {
+          "text": "When at least one body element is PASS",
+          "correct": false,
+          "explanation": "All executed elements must PASS, not just one"
+        },
+        {
+          "text": "When it has no FAIL elements, including NOT RUN",
+          "correct": false,
+          "explanation": "NOT RUN elements don't affect PASS status; only executed elements matter"
+        },
+        {
+          "text": "When the first keyword is PASS",
+          "correct": false,
+          "explanation": "All executed keywords must PASS, not just the first"
+        }
+      ]
+    },
+    {
+      "id": "ch2-3-q19",
+      "question": "Consider a User Keyword that calls three Library Keywords. The first two PASS, the third FAILS. What is the User Keyword's status?",
+      "type": "single",
+      "options": [
+        {
+          "text": "FAIL - because one of its directly called keywords failed",
+          "correct": true
+        },
+        {
+          "text": "PASS - because majority of keywords passed",
+          "correct": false,
+          "explanation": "All executed keywords must PASS; one FAIL makes the whole keyword FAIL"
+        },
+        {
+          "text": "SKIP - because it didn't complete successfully",
+          "correct": false,
+          "explanation": "Failures result in FAIL, not SKIP"
+        },
+        {
+          "text": "NOT RUN - because it couldn't finish",
+          "correct": false,
+          "explanation": "NOT RUN is for keywords not executed; this keyword was executed"
+        }
+      ]
+    },
+    {
+      "id": "ch2-3-q20",
+      "question": "How does the 'Run Keyword And Expect Error' keyword from BuiltIn Library determine its PASS status?",
+      "type": "single",
+      "options": [
+        {
+          "text": "It PASSES if the keyword it internally calls raises an error with the expected message or type",
+          "correct": true
+        },
+        {
+          "text": "It PASSES only if the internal keyword succeeds without errors",
+          "correct": false,
+          "explanation": "This keyword expects an error, so it PASSES when error occurs"
+        },
+        {
+          "text": "It always FAILS because it contains a failing keyword",
+          "correct": false,
+          "explanation": "Expected failures are PASS for this keyword"
+        },
+        {
+          "text": "It SKIPS if the internal keyword fails",
+          "correct": false,
+          "explanation": "Expected failures result in PASS, not SKIP"
+        }
+      ]
+    },
+    {
+      "id": "ch2-3-q21",
+      "question": "Can a composite element (suite, test, or User Keyword) be PASS even if some of its deeper child elements are FAIL?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Yes, if the FAIL is within a keyword like 'Run Keyword And Expect Error' that expects the failure",
+          "correct": true
+        },
+        {
+          "text": "No, any FAIL at any level always propagates to the top",
+          "correct": false,
+          "explanation": "Expected failures (like in 'Run Keyword And Expect Error') don't propagate"
+        },
+        {
+          "text": "Yes, failures are never propagated upward",
+          "correct": false,
+          "explanation": "Unexpected failures do propagate upward"
+        },
+        {
+          "text": "Only suites can be PASS with child failures",
+          "correct": false,
+          "explanation": "Any composite element can be PASS if child failures are expected"
+        }
+      ]
+    },
+    {
+      "id": "ch2-3-q22",
+      "question": "When is an atomic element marked as FAIL?",
+      "type": "single",
+      "options": [
+        {
+          "text": "When it was tried to be executed but raised an exception",
+          "correct": true
+        },
+        {
+          "text": "When it was not executed at all",
+          "correct": false,
+          "explanation": "Non-executed keywords are NOT RUN, not FAIL"
+        },
+        {
+          "text": "When it returned a false value",
+          "correct": false,
+          "explanation": "Return values don't determine FAIL; exceptions do"
+        },
+        {
+          "text": "When it took longer than expected",
+          "correct": false,
+          "explanation": "Timeout causes exception which leads to FAIL, but timing alone doesn't"
+        }
+      ]
+    },
+    {
+      "id": "ch2-3-q23",
+      "question": "When is a composite element marked as FAIL?",
+      "type": "single",
+      "options": [
+        {
+          "text": "When at least one of its directly executed body elements is FAIL",
+          "correct": true
+        },
+        {
+          "text": "When all of its body elements are FAIL",
+          "correct": false,
+          "explanation": "Only one FAIL is needed to make the composite FAIL"
+        },
+        {
+          "text": "When it has any NOT RUN elements",
+          "correct": false,
+          "explanation": "NOT RUN elements don't cause FAIL status"
+        },
+        {
+          "text": "When it was not executed at all",
+          "correct": false,
+          "explanation": "Non-executed elements would be SKIP or NOT RUN"
+        }
+      ]
+    },
+    {
+      "id": "ch2-3-q24",
+      "question": "What typically happens to subsequent keywords when a failure occurs?",
+      "type": "single",
+      "options": [
+        {
+          "text": "They are skipped, with exceptions like Teardowns",
+          "correct": true
+        },
+        {
+          "text": "They continue executing normally",
+          "correct": false,
+          "explanation": "By default, keywords after a failure are skipped"
+        },
+        {
+          "text": "They are marked as FAIL without execution",
+          "correct": false,
+          "explanation": "Non-executed keywords are marked as NOT RUN, not FAIL"
+        },
+        {
+          "text": "The entire suite stops immediately",
+          "correct": false,
+          "explanation": "Typically the test stops, but the suite continues with next tests"
+        }
+      ]
+    },
+    {
+      "id": "ch2-3-q25",
+      "question": "Analyze this test execution scenario:\n\n```\nTest Case: Login Test\n  1. Open Browser        → PASS\n  2. Input Username      → PASS\n  3. Input Password      → FAIL\n  4. Click Login         → NOT RUN\n  5. Verify Dashboard    → NOT RUN\n```\n\nWhat is the status of the test case?",
+      "type": "single",
+      "options": [
+        {
+          "text": "FAIL - because keyword 3 failed",
+          "correct": true
+        },
+        {
+          "text": "PASS - because 2 out of 5 keywords passed",
+          "correct": false,
+          "explanation": "One failure makes the entire test FAIL"
+        },
+        {
+          "text": "NOT RUN - because keywords 4 and 5 didn't run",
+          "correct": false,
+          "explanation": "The test was executed (not NOT RUN); it just failed"
+        },
+        {
+          "text": "SKIP - because it didn't complete",
+          "correct": false,
+          "explanation": "Incomplete due to failure is FAIL, not SKIP"
+        }
+      ]
+    },
+    {
+      "id": "ch2-3-q26",
+      "question": "How does failure typically propagate through the hierarchy?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Upwards: failed Library Keyword → failed User Keyword → failed test → failed suite",
+          "correct": true
+        },
+        {
+          "text": "Downwards: failed suite → failed test → failed keywords",
+          "correct": false,
+          "explanation": "Failures originate from keywords and propagate up"
+        },
+        {
+          "text": "Failures don't propagate; each level is independent",
+          "correct": false,
+          "explanation": "Failures do propagate upward through the hierarchy"
+        },
+        {
+          "text": "Horizontally: failed test affects sibling tests",
+          "correct": false,
+          "explanation": "Failures don't affect sibling tests by default"
+        }
+      ]
+    },
+    {
+      "id": "ch2-3-q27",
+      "question": "What are the two kinds of logging information in Robot Framework?",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Console Output - printed to terminal during execution",
+          "correct": true
+        },
+        {
+          "text": "Log Messages - written to output.xml and log.html",
+          "correct": true
+        },
+        {
+          "text": "Debug Files - separate debugging information",
+          "correct": false,
+          "explanation": "There are no separate debug files; debug info goes into log messages"
+        },
+        {
+          "text": "Audit Logs - for compliance tracking",
+          "correct": false,
+          "explanation": "There is no separate audit log mechanism"
+        }
+      ]
+    },
+    {
+      "id": "ch2-3-q28",
+      "question": "What is the key difference between Console Output and Log Messages?",
+      "type": "single",
+      "options": [
+        {
+          "text": "Console Output is typically not persistent; Log Messages are persistent in output.xml",
+          "correct": true
+        },
+        {
+          "text": "Console Output is more detailed than Log Messages",
+          "correct": false,
+          "explanation": "Log Messages are typically more detailed"
+        },
+        {
+          "text": "Log Messages appear during execution; Console Output appears after",
+          "correct": false,
+          "explanation": "It's the opposite - Console Output appears during execution"
+        },
+        {
+          "text": "They contain identical information",
+          "correct": false,
+          "explanation": "They serve different purposes and contain different information"
+        }
+      ]
+    },
+    {
+      "id": "ch2-3-q29",
+      "question": "What severity levels can Log Messages have? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "INFO",
+          "correct": true
+        },
+        {
+          "text": "DEBUG",
+          "correct": true
+        },
+        {
+          "text": "TRACE",
+          "correct": true
+        },
+        {
+          "text": "WARN",
+          "correct": true
+        },
+        {
+          "text": "ERROR",
+          "correct": true
+        },
+        {
+          "text": "CRITICAL",
+          "correct": false,
+          "explanation": "CRITICAL is not a standard RF log level"
+        }
+      ]
+    },
+    {
+      "id": "ch2-3-q30",
+      "question": "Examine this console output:\n\n```\n==============================================================================\nRobot Files.TestSuite :: A test suite for valid login.\n==============================================================================\nLogin User With Password | PASS |\n------------------------------------------------------------------------------\nDenied Login With Wrong Password | PASS |\n------------------------------------------------------------------------------\nRobot Files.TestSuite | PASS |\n2 tests, 2 passed, 0 failed\n==============================================================================\n```\n\nWhat information can you determine from this output? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "Both test cases passed",
+          "correct": true
+        },
+        {
+          "text": "The suite 'TestSuite' passed",
+          "correct": true
+        },
+        {
+          "text": "Total of 2 tests were executed",
+          "correct": true
+        },
+        {
+          "text": "Zero tests failed",
+          "correct": true
+        },
+        {
+          "text": "Which specific keywords were executed",
+          "correct": false,
+          "explanation": "Keyword details are in log.html, not in this summary output"
+        }
+      ]
+    }
+  ]
+}
