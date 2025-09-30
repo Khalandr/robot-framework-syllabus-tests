@@ -28,27 +28,27 @@
     },
     {
       "id": "ch3-1-q2",
-      "question": "Why are Resource Files typically used across many suites?",
+      "question": "What is the primary architectural benefit of using resource files in a large test automation project?",
       "type": "single",
       "options": [
         {
-          "text": "To share common keywords and variables across different tests or tasks",
+          "text": "Enables reusability and reduces duplication by centralizing common keywords and variables",
           "correct": true
         },
         {
-          "text": "To improve execution speed",
+          "text": "Improves test execution speed through parallel processing",
           "correct": false,
-          "explanation": "Resource files are for reusability, not performance"
+          "explanation": "Resource files provide organizational benefits, not execution performance improvements"
         },
         {
-          "text": "Because Robot Framework requires at least one resource file",
+          "text": "Automatically generates test documentation from keyword definitions",
           "correct": false,
-          "explanation": "Resource files are optional"
+          "explanation": "Documentation generation requires libdoc tool; resource files don't auto-generate docs"
         },
         {
-          "text": "To store test execution results",
+          "text": "Enforces mandatory code review for all test changes",
           "correct": false,
-          "explanation": "Resource files contain keywords and variables, not results"
+          "explanation": "Resource files are for organization and reuse, not for enforcing development processes"
         }
       ]
     },

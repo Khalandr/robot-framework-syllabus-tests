@@ -198,27 +198,27 @@
     },
     {
       "id": "ch3-2-q8",
-      "question": "What does the prefix in variable syntax define?",
+      "question": "What is the relationship between a variable's prefix and its content?",
       "type": "single",
       "options": [
         {
-          "text": "The access type to the variable",
+          "text": "The prefix defines access type; a scalar ${var} can hold any data type including lists and dictionaries",
           "correct": true
         },
         {
-          "text": "The data type stored in the variable",
+          "text": "The prefix strictly enforces data type; ${var} can only hold strings and numbers",
           "correct": false,
-          "explanation": "Prefix defines access type; actual data can be any type"
+          "explanation": "Prefix defines access type, not data type; ${var} can hold any Python object"
         },
         {
-          "text": "The scope of the variable",
+          "text": "The prefix determines immutability; @{list} cannot be modified after creation",
           "correct": false,
-          "explanation": "Prefix is for access type; scope is defined elsewhere"
+          "explanation": "All variable types can be modified; prefix doesn't control mutability"
         },
         {
-          "text": "Whether the variable is read-only",
+          "text": "The prefix defines scope; $ is local, @ is suite-level, & is global",
           "correct": false,
-          "explanation": "Only % for environment variables are read-only"
+          "explanation": "Prefix defines access type, not scope; scope is determined by where variable is created"
         }
       ]
     },
@@ -950,9 +950,9 @@
           "correct": true
         },
         {
-          "text": "Variables created by VAR have suite scope",
+          "text": "Variables created by VAR are automatically global across all suites",
           "correct": false,
-          "explanation": "VAR creates local scope by default"
+          "explanation": "VAR creates local scope by default; use scope=GLOBAL to make them global"
         }
       ]
     },
