@@ -699,33 +699,37 @@ code.robot {
 /* Responsive adjustments */
 /* Exercise Selection */
 .exercise-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1rem;
-    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 1.5rem 0 2rem 0;
+    max-height: 400px;
+    overflow-y: auto;
 }
 
 .exercise-item {
-    background: rgba(90, 179, 179, 0.1);
-    border: 2px solid var(--primary-teal);
+    background: rgba(90, 179, 179, 0.05);
+    border: 1px solid var(--border-color);
+    padding: 1rem;
     border-radius: 8px;
-    padding: 1.5rem;
     cursor: pointer;
-    transition: all 0.3s ease;
-    min-height: 140px;
+    transition: all 0.2s ease;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
 }
 
 .exercise-item:hover {
-    background: rgba(90, 179, 179, 0.2);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(90, 179, 179, 0.3);
+    background: rgba(90, 179, 179, 0.1);
+    border-color: var(--primary-teal);
 }
 
 .exercise-item h4 {
-    color: var(--primary-teal);
-    margin-bottom: 0.5rem;
+    color: var(--text-light);
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 500;
 }
 
 .badge-difficulty {
@@ -787,12 +791,17 @@ code.robot {
     border-top: 2px solid var(--border-color);
 }
 
-.panel-footer .btn {
-    min-width: 120px;
+.exercise-nav-buttons {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
 }
 
-.panel-footer > div {
-    margin-top: 0.5rem;
+.exercise-nav-buttons .btn {
+    flex: 1;
+    max-width: 120px;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
 }
 
 .hints-section {
