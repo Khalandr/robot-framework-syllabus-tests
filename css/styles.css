@@ -952,19 +952,170 @@ code.robot {
     line-height: 1.8;
 }
 
+/* Section Headings */
+.theory-content .section-heading {
+    font-size: 1.4rem;
+    color: var(--primary-teal);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--primary-teal-20);
+}
+
+.theory-content .section-heading:first-child {
+    margin-top: 0;
+}
+
+.theory-content .subsection-heading {
+    font-size: 1.15rem;
+    color: var(--primary-teal);
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+/* Story Text */
+.theory-content .story {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    color: var(--text-light);
+}
+
+/* Code Blocks - Enhanced */
+.theory-content .code-block {
+    background: #1e1e1e;
+    padding: 1.25rem;
+    border-radius: var(--radius-lg);
+    border-left: 4px solid var(--primary-teal);
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    box-shadow: var(--shadow-md);
+}
+
+.theory-content .code-block code {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #d4d4d4;
+    background: none;
+    padding: 0;
+    border: none;
+}
+
+/* Inline Code */
+.theory-content .inline-code {
+    background: var(--primary-teal-20);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.95em;
+    color: #4ECDC4;
+    border: 1px solid var(--primary-teal-30);
+}
+
+/* Key Rules Box */
+.theory-content .rules-box {
+    background: var(--warning-yellow-10);
+    border-left: 4px solid var(--warning-yellow);
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-md);
+    margin: 1.5rem 0;
+}
+
+.theory-content .rules-box .title {
+    font-weight: 600;
+    color: var(--warning-yellow);
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+}
+
+.theory-content .rules-box ul {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.theory-content .rules-box li {
+    margin-bottom: 0.5rem;
+    line-height: 1.7;
+}
+
+/* Info Box */
+.theory-content .info-box {
+    background: var(--primary-teal-10);
+    border-left: 4px solid var(--primary-teal);
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-md);
+    margin: 1.5rem 0;
+}
+
+.theory-content .info-box .title {
+    font-weight: 600;
+    color: var(--primary-teal);
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+}
+
+.theory-content .info-box ul {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.theory-content .info-box li {
+    margin-bottom: 0.5rem;
+    line-height: 1.7;
+}
+
+/* Steps List */
+.theory-content .steps-list {
+    counter-reset: step-counter;
+    list-style: none;
+    padding-left: 0;
+    margin: 1rem 0;
+}
+
+.theory-content .steps-list li {
+    counter-increment: step-counter;
+    position: relative;
+    padding-left: 3rem;
+    margin-bottom: 1rem;
+    line-height: 1.7;
+}
+
+.theory-content .steps-list li:before {
+    content: counter(step-counter);
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: var(--primary-teal);
+    color: var(--dark-bg);
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Backwards compatibility with markdown */
 .theory-content h2 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     color: var(--primary-teal);
     margin-top: 2rem;
     margin-bottom: 1rem;
     font-weight: 600;
     line-height: 1.3;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--primary-teal-20);
 }
 
 .theory-content h3 {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     color: var(--primary-teal);
-    margin-top: 1.75rem;
+    margin-top: 1.5rem;
     margin-bottom: 0.75rem;
     font-weight: 600;
     line-height: 1.3;

@@ -153,10 +153,18 @@ const exercise = {
 
             // Full theory content (collapsible - starts collapsed)
             const theoryContent = document.getElementById('theoryContent');
-            if (typeof marked !== 'undefined') {
-                theoryContent.innerHTML = marked.parse(theory.content || '');
+
+            // Check if theory content is HTML (starts with <) or markdown
+            const content = theory.content || '';
+            if (content.trim().startsWith('<')) {
+                // It's HTML, render directly
+                theoryContent.innerHTML = content;
+            } else if (typeof marked !== 'undefined') {
+                // It's markdown, parse it
+                theoryContent.innerHTML = marked.parse(content);
             } else {
-                theoryContent.textContent = theory.content || '';
+                // Fallback to plain text
+                theoryContent.textContent = content;
             }
 
             // Reset to collapsed state

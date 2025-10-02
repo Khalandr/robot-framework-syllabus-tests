@@ -21,12 +21,15 @@
         "Don't forget proper spacing (4 spaces)"
       ],
       "validation": {
-        "mustContain": ["Log", "Hello Robot Framework"],
+        "mustContain": [
+          "Log",
+          "Hello Robot Framework"
+        ],
         "mustPass": true
       },
       "theory": {
         "title": "Understanding Robot Framework Test Cases and the Log Keyword",
-        "content": "## Introduction to Test Cases\n\nRobot Framework uses a **keyword-driven testing approach** where test cases are written using human-readable keywords. A test case is the fundamental unit of testing in Robot Framework, representing a single scenario or workflow you want to validate.\n\n### Test Case Structure\n\nEvery Robot Framework file is organized into **sections**, marked by three asterisks (`***`). The `*** Test Cases ***` section is where you define your test scenarios:\n\n```robot\n*** Test Cases ***\nMy Test Name\n    Keyword    Argument1    Argument2\n    Another Keyword    Argument\n```\n\n**Key rules:**\n- Test case names start at the beginning of the line (no indentation)\n- Keywords within test cases must be indented with **exactly 4 spaces**\n- Keywords and arguments are separated by **4 spaces** (or 2+ spaces, but 4 is standard)\n- This spacing rule is fundamental to Robot Framework's syntax\n\n## The Log Keyword\n\nThe `Log` keyword is one of the most basic and useful keywords in Robot Framework's **BuiltIn library** (automatically imported). It outputs messages to the execution log, making it invaluable for:\n\n- **Debugging:** See variable values and execution flow\n- **Verification:** Confirm certain code paths are executed\n- **Documentation:** Add runtime information to test reports\n\n### Log Syntax\n\n```robot\nLog    message\nLog    message    log_level\n```\n\n**Parameters:**\n- `message`: The text or variable to display (required)\n- `log_level`: Optional log level (INFO, WARN, ERROR, DEBUG, TRACE)\n\n### Why Spacing Matters\n\nRobot Framework uses **whitespace** as its primary delimiter instead of parentheses or commas. This makes the syntax readable but requires discipline:\n\n```robot\n# Correct - 4 spaces between keyword and argument\nLog    Hello Robot Framework!\n\n# Wrong - will cause syntax errors\nLog Hello Robot Framework!\nLog  Hello Robot Framework!  # Only 2 spaces\n```\n\n### Your First Test\n\nWhen you write your first test case, you're not just logging a message—you're learning the foundation of Robot Framework's syntax that applies to **every keyword** you'll ever use. Master the spacing rules now, and you'll write cleaner tests throughout your automation journey.\n\n### Execution Flow\n\nWhen Robot Framework executes your test:\n1. It identifies the `*** Test Cases ***` section\n2. It finds test case \"My First Test\"\n3. It executes each indented line as a keyword\n4. The `Log` keyword outputs to `log.html` and console\n5. The test passes if all keywords execute without errors\n\nThis simple exercise establishes the pattern you'll use for thousands of test steps in real projects.",
+        "content": "<div class=\"section-heading\">Test Cases: Your First Steps</div>\n\n<p class=\"story\">Robot Framework uses a <span class=\"inline-code\">keyword-driven</span> approach. Think of keywords as building blocks—each one does something specific, and you combine them to create test workflows.</p>\n\n<div class=\"subsection-heading\">The Basic Structure</div>\n\n<p class=\"story\">Every Robot Framework file has sections marked by <span class=\"inline-code\">***</span>. Here's your first test:</p>\n\n<div class=\"code-block\"><code>*** Test Cases ***\nMy Test Name\n    Keyword    Argument1    Argument2\n    Another Keyword    Argument</code></div>\n\n<div class=\"rules-box\">\n    <div class=\"title\">⚠️ Spacing Rules (Critical!)</div>\n    <ul>\n        <li>Test names start at the left (no indentation)</li>\n        <li>Keywords must be indented with <strong>exactly 4 spaces</strong></li>\n        <li>Separate keywords and arguments with <strong>4 spaces</strong></li>\n        <li>This isn't optional—wrong spacing = errors</li>\n    </ul>\n</div>\n\n<div class=\"subsection-heading\">The Log Keyword</div>\n\n<p class=\"story\"><span class=\"inline-code\">Log</span> is your debugging friend. It prints messages to the test log, helping you see what's happening during execution.</p>\n\n<div class=\"code-block\"><code>Log    Hello Robot Framework!</code></div>\n\n<div class=\"info-box\">\n    <div class=\"title\">💡 Why Use Log?</div>\n    <ul>\n        <li><strong>Debugging:</strong> See variable values as tests run</li>\n        <li><strong>Verification:</strong> Confirm code paths execute</li>\n        <li><strong>Documentation:</strong> Add runtime notes to reports</li>\n    </ul>\n</div>\n\n<div class=\"subsection-heading\">What Happens When You Run This?</div>\n\n<ol class=\"steps-list\">\n    <li>Robot Framework finds the <span class=\"inline-code\">*** Test Cases ***</span> section</li>\n    <li>It identifies your test case \"My First Test\"</li>\n    <li>It executes each indented keyword line-by-line</li>\n    <li>The <span class=\"inline-code\">Log</span> keyword outputs to <span class=\"inline-code\">log.html</span></li>\n    <li>If all keywords succeed, the test passes ✅</li>\n</ol>\n\n<p class=\"story\">Master this pattern now—you'll use it for every test you ever write. The spacing rules apply to <strong>all 1000+ Robot Framework keywords</strong>.</p>",
         "learningObjectives": [
           "Understand the structure of a Robot Framework test case",
           "Master the 4-space indentation and keyword-argument spacing rules",
@@ -44,10 +47,22 @@
         "estimatedReadTime": "4-5 minutes"
       },
       "metadata": {
-        "tags": ["beginner", "syntax", "log-keyword", "first-test", "indentation", "test-cases", "builtin-library", "spacing"],
+        "tags": [
+          "beginner",
+          "syntax",
+          "log-keyword",
+          "first-test",
+          "indentation",
+          "test-cases",
+          "builtin-library",
+          "spacing"
+        ],
         "estimatedTime": "5-10 minutes",
         "prerequisites": [],
-        "nextExercises": ["ex-1-4", "ex-1-3"],
+        "nextExercises": [
+          "ex-1-4",
+          "ex-1-3"
+        ],
         "version": "2.0",
         "lastUpdated": "2025-10-02"
       }
@@ -72,7 +87,11 @@
         "Remember proper spacing between keyword and arguments"
       ],
       "validation": {
-        "mustContain": ["Log", "Set Variable", "${count}"],
+        "mustContain": [
+          "Log",
+          "Set Variable",
+          "${count}"
+        ],
         "mustPass": true
       },
       "theory": {
@@ -95,10 +114,24 @@
         "estimatedReadTime": "5-6 minutes"
       },
       "metadata": {
-        "tags": ["beginner", "variables", "set-variable", "sequential-execution", "workflow", "multi-step", "variable-syntax", "logging"],
+        "tags": [
+          "beginner",
+          "variables",
+          "set-variable",
+          "sequential-execution",
+          "workflow",
+          "multi-step",
+          "variable-syntax",
+          "logging"
+        ],
         "estimatedTime": "8-12 minutes",
-        "prerequisites": ["ex-1-1"],
-        "nextExercises": ["ex-1-3", "ex-1-6"],
+        "prerequisites": [
+          "ex-1-1"
+        ],
+        "nextExercises": [
+          "ex-1-3",
+          "ex-1-6"
+        ],
         "version": "2.0",
         "lastUpdated": "2025-10-02"
       }
@@ -122,7 +155,9 @@
         "Both arguments should be 5"
       ],
       "validation": {
-        "mustContain": ["Should Be Equal"],
+        "mustContain": [
+          "Should Be Equal"
+        ],
         "mustPass": true
       },
       "theory": {
@@ -145,10 +180,24 @@
         "estimatedReadTime": "5-6 minutes"
       },
       "metadata": {
-        "tags": ["beginner", "assertions", "should-be-equal", "verification", "testing-fundamentals", "builtin-library", "pass-fail", "validation"],
+        "tags": [
+          "beginner",
+          "assertions",
+          "should-be-equal",
+          "verification",
+          "testing-fundamentals",
+          "builtin-library",
+          "pass-fail",
+          "validation"
+        ],
         "estimatedTime": "6-10 minutes",
-        "prerequisites": ["ex-1-1"],
-        "nextExercises": ["ex-1-4", "ex-1-6"],
+        "prerequisites": [
+          "ex-1-1"
+        ],
+        "nextExercises": [
+          "ex-1-4",
+          "ex-1-6"
+        ],
         "version": "2.0",
         "lastUpdated": "2025-10-02"
       }
@@ -175,7 +224,12 @@
         "Documentation is a single line (or use ... for multi-line)"
       ],
       "validation": {
-        "mustContain": ["[Documentation]", "[Tags]", "login", "authentication"],
+        "mustContain": [
+          "[Documentation]",
+          "[Tags]",
+          "login",
+          "authentication"
+        ],
         "mustPass": true
       },
       "theory": {
@@ -198,10 +252,25 @@
         "estimatedReadTime": "6-7 minutes"
       },
       "metadata": {
-        "tags": ["intermediate", "documentation", "tags", "metadata", "test-organization", "filtering", "best-practices", "maintainability"],
+        "tags": [
+          "intermediate",
+          "documentation",
+          "tags",
+          "metadata",
+          "test-organization",
+          "filtering",
+          "best-practices",
+          "maintainability"
+        ],
         "estimatedTime": "10-15 minutes",
-        "prerequisites": ["ex-1-1", "ex-1-3"],
-        "nextExercises": ["ex-1-7", "ex-1-8"],
+        "prerequisites": [
+          "ex-1-1",
+          "ex-1-3"
+        ],
+        "nextExercises": [
+          "ex-1-7",
+          "ex-1-8"
+        ],
         "version": "2.0",
         "lastUpdated": "2025-10-02"
       }
@@ -227,7 +296,11 @@
         "Should Be Equal compares two values"
       ],
       "validation": {
-        "mustContain": ["Addition Test", "Subtraction Test", "Should Be Equal"],
+        "mustContain": [
+          "Addition Test",
+          "Subtraction Test",
+          "Should Be Equal"
+        ],
         "mustPass": true
       },
       "theory": {
@@ -250,10 +323,25 @@
         "estimatedReadTime": "6-7 minutes"
       },
       "metadata": {
-        "tags": ["intermediate", "multiple-tests", "test-suite", "evaluate-keyword", "test-organization", "python-expressions", "test-independence", "calculations"],
+        "tags": [
+          "intermediate",
+          "multiple-tests",
+          "test-suite",
+          "evaluate-keyword",
+          "test-organization",
+          "python-expressions",
+          "test-independence",
+          "calculations"
+        ],
         "estimatedTime": "12-15 minutes",
-        "prerequisites": ["ex-1-3", "ex-1-4"],
-        "nextExercises": ["ex-1-8", "ex-1-10"],
+        "prerequisites": [
+          "ex-1-3",
+          "ex-1-4"
+        ],
+        "nextExercises": [
+          "ex-1-8",
+          "ex-1-10"
+        ],
         "version": "2.0",
         "lastUpdated": "2025-10-02"
       }
@@ -281,7 +369,11 @@
         "Use comments to explain complex logic"
       ],
       "validation": {
-        "mustContain": ["#", "${status}", "active"],
+        "mustContain": [
+          "#",
+          "${status}",
+          "active"
+        ],
         "mustPass": true
       },
       "theory": {
@@ -304,10 +396,24 @@
         "estimatedReadTime": "6-7 minutes"
       },
       "metadata": {
-        "tags": ["intermediate", "comments", "documentation", "code-readability", "best-practices", "maintainability", "inline-comments", "code-hygiene"],
+        "tags": [
+          "intermediate",
+          "comments",
+          "documentation",
+          "code-readability",
+          "best-practices",
+          "maintainability",
+          "inline-comments",
+          "code-hygiene"
+        ],
         "estimatedTime": "10-12 minutes",
-        "prerequisites": ["ex-1-4"],
-        "nextExercises": ["ex-1-9", "ex-1-10"],
+        "prerequisites": [
+          "ex-1-4"
+        ],
+        "nextExercises": [
+          "ex-1-9",
+          "ex-1-10"
+        ],
         "version": "2.0",
         "lastUpdated": "2025-10-02"
       }
@@ -334,7 +440,11 @@
         "Use spaces, not tabs"
       ],
       "validation": {
-        "mustContain": ["Log", "Hello", "World"],
+        "mustContain": [
+          "Log",
+          "Hello",
+          "World"
+        ],
         "mustPass": true
       },
       "theory": {
@@ -357,10 +467,23 @@
         "estimatedReadTime": "7-8 minutes"
       },
       "metadata": {
-        "tags": ["intermediate", "spacing", "indentation", "formatting", "syntax-rules", "best-practices", "code-style", "whitespace"],
+        "tags": [
+          "intermediate",
+          "spacing",
+          "indentation",
+          "formatting",
+          "syntax-rules",
+          "best-practices",
+          "code-style",
+          "whitespace"
+        ],
         "estimatedTime": "10-15 minutes",
-        "prerequisites": ["ex-1-1"],
-        "nextExercises": ["ex-1-10"],
+        "prerequisites": [
+          "ex-1-1"
+        ],
+        "nextExercises": [
+          "ex-1-10"
+        ],
         "version": "2.0",
         "lastUpdated": "2025-10-02"
       }
@@ -387,7 +510,12 @@
         "Sections separated by blank lines"
       ],
       "validation": {
-        "mustContain": ["*** Settings ***", "*** Variables ***", "*** Test Cases ***", "*** Keywords ***"],
+        "mustContain": [
+          "*** Settings ***",
+          "*** Variables ***",
+          "*** Test Cases ***",
+          "*** Keywords ***"
+        ],
         "mustPass": true
       },
       "theory": {
@@ -410,9 +538,22 @@
         "estimatedReadTime": "8-10 minutes"
       },
       "metadata": {
-        "tags": ["intermediate", "suite-structure", "settings-section", "variables-section", "keywords-section", "suite-setup", "custom-keywords", "test-organization"],
+        "tags": [
+          "intermediate",
+          "suite-structure",
+          "settings-section",
+          "variables-section",
+          "keywords-section",
+          "suite-setup",
+          "custom-keywords",
+          "test-organization"
+        ],
         "estimatedTime": "15-20 minutes",
-        "prerequisites": ["ex-1-6", "ex-1-7", "ex-1-9"],
+        "prerequisites": [
+          "ex-1-6",
+          "ex-1-7",
+          "ex-1-9"
+        ],
         "nextExercises": [],
         "version": "2.0",
         "lastUpdated": "2025-10-02"
