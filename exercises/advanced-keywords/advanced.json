@@ -1,0 +1,132 @@
+{
+  "category": "advanced-keywords",
+  "difficulty": "advanced",
+  "exercises": [
+    {
+      "id": "ex-7-1",
+      "title": "Dynamic Keyword Calls",
+      "difficulty": "advanced",
+      "chapter": "3",
+      "description": "Use Run Keyword to call keywords dynamically by name.",
+      "instructions": [
+        "Create ${keyword_name} with value 'Log'",
+        "Use 'Run Keyword' to call the keyword stored in ${keyword_name}",
+        "Pass 'Dynamic execution!' as argument",
+        "The test should log the message"
+      ],
+      "initialCode": "*** Test Cases ***\nDynamic Call\n    # Write code here\n    ",
+      "solution": "*** Test Cases ***\nDynamic Call\n    ${keyword_name}    Set Variable    Log\n    Run Keyword    ${keyword_name}    Dynamic execution!",
+      "hints": [
+        "Run Keyword executes a keyword by name",
+        "First argument is the keyword name",
+        "Remaining arguments are passed to the keyword",
+        "Useful for conditional execution"
+      ],
+      "validation": {
+        "mustContain": ["Run Keyword", "${keyword_name}", "Dynamic execution"],
+        "mustPass": true
+      }
+    },
+    {
+      "id": "ex-7-2",
+      "title": "Conditional Keyword Execution",
+      "difficulty": "advanced",
+      "chapter": "3",
+      "description": "Use Run Keyword If to conditionally execute keywords.",
+      "instructions": [
+        "Create ${status} with value 'active'",
+        "Use 'Run Keyword If' to check if ${status} == 'active'",
+        "If true, log 'System is active'",
+        "Use Run Keyword If    '${status}' == 'active'    Log    System is active"
+      ],
+      "initialCode": "*** Test Cases ***\nConditional Execution\n    # Write code here\n    ",
+      "solution": "*** Test Cases ***\nConditional Execution\n    ${status}    Set Variable    active\n    Run Keyword If    '${status}' == 'active'    Log    System is active",
+      "hints": [
+        "Run Keyword If takes condition and keyword",
+        "Condition must be in quotes for strings",
+        "Alternative to IF...END for simple cases",
+        "Can use ELSE with Run Keyword Unless"
+      ],
+      "validation": {
+        "mustContain": ["Run Keyword If", "${status}", "active"],
+        "mustPass": true
+      }
+    },
+    {
+      "id": "ex-7-3",
+      "title": "Keyword with Timeout",
+      "difficulty": "advanced",
+      "chapter": "3",
+      "description": "Add timeout to keyword execution.",
+      "instructions": [
+        "Create keyword 'Slow Operation'",
+        "Add [Timeout] 3 seconds",
+        "Sleep for 1 second",
+        "Log 'Operation completed'",
+        "Call it from test"
+      ],
+      "initialCode": "*** Test Cases ***\nTest Timeout\n    # Call keyword\n\n*** Keywords ***\n# Define keyword with timeout\n    ",
+      "solution": "*** Test Cases ***\nTest Timeout\n    Slow Operation\n\n*** Keywords ***\nSlow Operation\n    [Timeout]    3 seconds\n    Sleep    1s\n    Log    Operation completed",
+      "hints": [
+        "[Timeout] prevents keyword from running too long",
+        "Place after keyword name, before other settings",
+        "Keyword fails if timeout exceeded",
+        "Can use: seconds, minutes, hours"
+      ],
+      "validation": {
+        "mustContain": ["[Timeout]", "Sleep", "seconds"],
+        "mustPass": true
+      }
+    },
+    {
+      "id": "ex-7-4",
+      "title": "Keyword with Default Arguments",
+      "difficulty": "advanced",
+      "chapter": "3",
+      "description": "Create keywords with multiple default argument values.",
+      "instructions": [
+        "Create keyword 'Connect To Server'",
+        "Add [Arguments] ${host}=localhost ${port}=8080 ${timeout}=30",
+        "Log 'Connecting to ${host}:${port} (timeout: ${timeout}s)'",
+        "Call it three ways: no args, with host, with host and port"
+      ],
+      "initialCode": "*** Test Cases ***\nTest Defaults\n    # Call keyword multiple ways\n\n*** Keywords ***\n# Define keyword with defaults\n    ",
+      "solution": "*** Test Cases ***\nTest Defaults\n    Connect To Server\n    Connect To Server    192.168.1.1\n    Connect To Server    192.168.1.1    9090\n\n*** Keywords ***\nConnect To Server\n    [Arguments]    ${host}=localhost    ${port}=8080    ${timeout}=30\n    Log    Connecting to ${host}:${port} (timeout: ${timeout}s)",
+      "hints": [
+        "Multiple defaults: ${arg1}=val1 ${arg2}=val2",
+        "Can provide 0 to N arguments",
+        "Defaults filled from left to right",
+        "Makes keywords flexible and reusable"
+      ],
+      "validation": {
+        "mustContain": ["[Arguments]", "localhost", "8080"],
+        "mustPass": true
+      }
+    },
+    {
+      "id": "ex-7-5",
+      "title": "Variable Arguments (Varargs)",
+      "difficulty": "advanced",
+      "chapter": "3",
+      "description": "Use @{args} to accept variable number of arguments.",
+      "instructions": [
+        "Create keyword 'Log All Items'",
+        "Add [Arguments] @{items}",
+        "Loop through @{items} and log each one",
+        "Call it with 3 items: apple, banana, orange"
+      ],
+      "initialCode": "*** Test Cases ***\nTest Varargs\n    # Call keyword with multiple items\n\n*** Keywords ***\n# Define keyword with varargs\n    ",
+      "solution": "*** Test Cases ***\nTest Varargs\n    Log All Items    apple    banana    orange\n\n*** Keywords ***\nLog All Items\n    [Arguments]    @{items}\n    FOR    ${item}    IN    @{items}\n        Log    ${item}\n    END",
+      "hints": [
+        "@{args} accepts any number of arguments",
+        "All arguments collected into a list",
+        "Can combine with regular args: ${req} @{rest}",
+        "Great for flexible keyword interfaces"
+      ],
+      "validation": {
+        "mustContain": ["[Arguments]", "@{items}", "FOR"],
+        "mustPass": true
+      }
+    }
+  ]
+}

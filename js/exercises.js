@@ -13,7 +13,12 @@ const exercise = {
         { id: 'variables', name: 'Variables & Data Types', description: 'Working with different variable types' },
         { id: 'keywords', name: 'Keywords & Libraries', description: 'Using and creating keywords' },
         { id: 'control-flow', name: 'Control Flow', description: 'Loops and conditionals' },
-        { id: 'test-organization', name: 'Test Organization', description: 'Structuring test suites' }
+        { id: 'test-organization', name: 'Test Organization', description: 'Structuring test suites' },
+        { id: 'data-driven', name: 'Data-Driven Testing', description: 'Test with multiple data sets' },
+        { id: 'advanced-keywords', name: 'Advanced Keywords', description: 'Complex keyword patterns' },
+        { id: 'practical-scenarios', name: 'Practical Scenarios', description: 'Real-world test automation' },
+        { id: 'best-practices', name: 'Best Practices', description: 'Clean and maintainable tests' },
+        { id: 'debugging', name: 'Debugging & Troubleshooting', description: 'Finding and fixing issues' }
     ],
 
     async loadExercises() {
@@ -25,8 +30,8 @@ const exercise = {
             for (const cat of this.categories) {
                 const categoryExercises = [];
 
-                // Try to load beginner and intermediate files for each category
-                const difficulties = ['beginner', 'intermediate'];
+                // Try to load beginner, intermediate, and advanced files for each category
+                const difficulties = ['beginner', 'intermediate', 'advanced'];
 
                 for (const diff of difficulties) {
                     try {

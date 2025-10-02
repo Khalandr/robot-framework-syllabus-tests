@@ -1,0 +1,137 @@
+{
+  "category": "practical-scenarios",
+  "difficulty": "advanced",
+  "exercises": [
+    {
+      "id": "ex-8-6",
+      "title": "Complex Workflow with Error Handling",
+      "difficulty": "advanced",
+      "chapter": "5",
+      "description": "Build a multi-step workflow with error recovery.",
+      "instructions": [
+        "Create keyword 'Initialize System' that logs 'System initialized'",
+        "Create keyword 'Process Data' that may fail",
+        "Wrap Process Data in TRY-EXCEPT block",
+        "In EXCEPT, log 'Error handled, continuing'",
+        "Create keyword 'Cleanup' that logs 'Cleanup done'",
+        "Test should: initialize, try to process (handle errors), cleanup"
+      ],
+      "initialCode": "*** Test Cases ***\n# Add workflow with error handling\n\n*** Keywords ***\n# Add keywords\n    ",
+      "solution": "*** Test Cases ***\nRobust Workflow\n    Initialize System\n    TRY\n        Process Data\n    EXCEPT\n        Log    Error handled, continuing\n    END\n    Cleanup\n\n*** Keywords ***\nInitialize System\n    Log    System initialized\n\nProcess Data\n    Log    Processing data\n\nCleanup\n    Log    Cleanup done",
+      "hints": [
+        "TRY-EXCEPT prevents test failure",
+        "Cleanup runs even if error occurs",
+        "Real workflows need error handling",
+        "Can catch specific error types"
+      ],
+      "validation": {
+        "mustContain": ["TRY", "EXCEPT", "Initialize System", "Cleanup"],
+        "mustPass": true
+      }
+    },
+    {
+      "id": "ex-8-7",
+      "title": "Batch Data Processing",
+      "difficulty": "advanced",
+      "chapter": "5",
+      "description": "Process multiple items with validation.",
+      "instructions": [
+        "Create list ${items} with: item1, item2, item3",
+        "Create keyword 'Process Item' with [Arguments] ${item}",
+        "It should log 'Processing ${item}'",
+        "Loop through ${items} and process each one",
+        "Count processed items and verify count is 3"
+      ],
+      "initialCode": "*** Test Cases ***\n# Add batch processing test\n\n*** Keywords ***\n# Add keyword\n    ",
+      "solution": "*** Test Cases ***\nBatch Processing\n    ${items}    Create List    item1    item2    item3\n    ${count}    Set Variable    0\n    FOR    ${item}    IN    @{items}\n        Process Item    ${item}\n        ${count}    Evaluate    ${count} + 1\n    END\n    Should Be Equal    ${count}    ${3}\n\n*** Keywords ***\nProcess Item\n    [Arguments]    ${item}\n    Log    Processing ${item}",
+      "hints": [
+        "Increment counter inside loop",
+        "Evaluate performs calculations",
+        "Verify total count after loop",
+        "Real batch processing needs error handling"
+      ],
+      "validation": {
+        "mustContain": ["FOR", "Process Item", "Should Be Equal"],
+        "mustPass": true
+      }
+    },
+    {
+      "id": "ex-8-8",
+      "title": "Conditional Workflow",
+      "difficulty": "advanced",
+      "chapter": "5",
+      "description": "Create workflow that branches based on conditions.",
+      "instructions": [
+        "Create ${mode} with value 'production'",
+        "IF ${mode} == 'production', log 'Running in production mode'",
+        "ELSE IF ${mode} == 'test', log 'Running in test mode'",
+        "ELSE log 'Running in development mode'",
+        "After IF, log 'Workflow completed'"
+      ],
+      "initialCode": "*** Test Cases ***\nConditional Workflow\n    # Write code\n    ",
+      "solution": "*** Test Cases ***\nConditional Workflow\n    ${mode}    Set Variable    production\n    IF    '${mode}' == 'production'\n        Log    Running in production mode\n    ELSE IF    '${mode}' == 'test'\n        Log    Running in test mode\n    ELSE\n        Log    Running in development mode\n    END\n    Log    Workflow completed",
+      "hints": [
+        "IF-ELSE IF-ELSE for multiple branches",
+        "Quote strings in conditions",
+        "Code after END runs regardless",
+        "Real apps often have environment-specific logic"
+      ],
+      "validation": {
+        "mustContain": ["IF", "ELSE IF", "ELSE", "production"],
+        "mustPass": true
+      }
+    },
+    {
+      "id": "ex-8-9",
+      "title": "State Machine Pattern",
+      "difficulty": "advanced",
+      "chapter": "5",
+      "description": "Implement a simple state machine.",
+      "instructions": [
+        "Create ${state} with value 'idle'",
+        "Create keyword 'Transition' with [Arguments] ${from_state} ${to_state}",
+        "It verifies current state matches ${from_state}, then changes to ${to_state}",
+        "Test: idle -> running -> completed",
+        "Use WHILE loop or multiple IF checks"
+      ],
+      "initialCode": "*** Test Cases ***\n# Add state machine test\n\n*** Keywords ***\n# Add transition keyword\n    ",
+      "solution": "*** Test Cases ***\nState Machine\n    ${state}    Set Variable    idle\n    IF    '${state}' == 'idle'\n        ${state}    Set Variable    running\n        Log    Transitioned to running\n    END\n    IF    '${state}' == 'running'\n        ${state}    Set Variable    completed\n        Log    Transitioned to completed\n    END\n    Should Be Equal    ${state}    completed",
+      "hints": [
+        "State machines track current state",
+        "Transitions move between states",
+        "Validate state before transition",
+        "Common pattern in automation"
+      ],
+      "validation": {
+        "mustContain": ["IF", "Set Variable", "Should Be Equal"],
+        "mustPass": true
+      }
+    },
+    {
+      "id": "ex-8-10",
+      "title": "Reusable Test Component",
+      "difficulty": "advanced",
+      "chapter": "3",
+      "description": "Build a reusable test component with setup and teardown.",
+      "instructions": [
+        "Create keyword 'Setup Environment' that logs 'Environment ready'",
+        "Create keyword 'Teardown Environment' that logs 'Environment cleaned'",
+        "Create keyword 'Run Test Action' with [Arguments] ${action}",
+        "It logs 'Executing ${action}'",
+        "Test should: setup, run action 'test1', run action 'test2', teardown"
+      ],
+      "initialCode": "*** Test Cases ***\n# Add component test\n\n*** Keywords ***\n# Add keywords\n    ",
+      "solution": "*** Test Cases ***\nReusable Component\n    Setup Environment\n    Run Test Action    test1\n    Run Test Action    test2\n    Teardown Environment\n\n*** Keywords ***\nSetup Environment\n    Log    Environment ready\n\nRun Test Action\n    [Arguments]    ${action}\n    Log    Executing ${action}\n\nTeardown Environment\n    Log    Environment cleaned",
+      "hints": [
+        "Reusable keywords reduce duplication",
+        "Setup/teardown pattern is common",
+        "Keywords can call other keywords",
+        "Build libraries of reusable components"
+      ],
+      "validation": {
+        "mustContain": ["Setup Environment", "Run Test Action", "Teardown Environment"],
+        "mustPass": true
+      }
+    }
+  ]
+}
