@@ -183,6 +183,13 @@ const exercise = {
         consoleOutput.innerHTML = '<pre>Executing Robot Framework code...\n</pre>';
 
         try {
+            // Prepare validation rules
+            const validation = this.currentExercise.validation ? {
+                mustContain: this.currentExercise.validation.mustContain || [],
+                mustPass: this.currentExercise.validation.mustPass !== false,
+                forbiddenKeywords: this.currentExercise.validation.forbiddenKeywords || []
+            } : null;
+
             const response = await fetch('http://localhost:8000/api/execute', {
                 method: 'POST',
                 headers: {
@@ -190,7 +197,8 @@ const exercise = {
                 },
                 body: JSON.stringify({
                     code: code,
-                    exercise_id: this.currentExercise.id
+                    exercise_id: this.currentExercise.id,
+                    validation: validation
                 })
             });
 
@@ -200,7 +208,14 @@ const exercise = {
                 const status = result.passed ? '✅ Tests PASSED' : '❌ Tests FAILED';
                 const timeInfo = `\nExecution time: ${result.execution_time.toFixed(2)}s`;
 
-                consoleOutput.innerHTML = `<pre>${status}${timeInfo}\n\n${result.error || 'All tests completed successfully!'}</pre>`;
+                // Display validation errors if any
+                let validationMsg = '';
+                if (result.validation_errors && result.validation_errors.length > 0) {
+                    validationMsg = '\n\n⚠️ Validation Issues:\n' +
+                        result.validation_errors.map(err => `  • ${err}`).join('\n');
+                }
+
+                consoleOutput.innerHTML = `<pre>${status}${timeInfo}${validationMsg}\n\n${result.error || 'All tests completed successfully!'}</pre>`;
 
                 // Update output tabs
                 this.updateOutputTab('log', result.log_html);
@@ -213,7 +228,14 @@ const exercise = {
                     consoleOutput.style.borderLeft = '4px solid var(--error-red)';
                 }
             } else {
-                consoleOutput.innerHTML = `<pre style="color: var(--error-red);">❌ Execution Error:\n\n${result.error}</pre>`;
+                // Handle validation failures before execution
+                let errorMsg = result.error || 'Execution failed';
+                if (result.validation_errors && result.validation_errors.length > 0) {
+                    errorMsg += '\n\n❌ Validation Errors:\n' +
+                        result.validation_errors.map(err => `  • ${err}`).join('\n');
+                }
+
+                consoleOutput.innerHTML = `<pre style="color: var(--error-red);">❌ Execution Error:\n\n${errorMsg}</pre>`;
                 consoleOutput.style.borderLeft = '4px solid var(--error-red)';
             }
 

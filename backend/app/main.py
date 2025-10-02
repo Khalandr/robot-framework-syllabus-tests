@@ -1,12 +1,14 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from typing import Optional, List
 import subprocess
 import tempfile
 import os
 import shutil
 from pathlib import Path
 import time
+import re
 
 app = FastAPI(title="Robot Framework Exercise API")
 
@@ -19,9 +21,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+class ValidationRule(BaseModel):
+    mustContain: List[str] = []
+    mustPass: bool = True
+    forbiddenKeywords: List[str] = []
+
 class CodeExecutionRequest(BaseModel):
     code: str
     exercise_id: str
+    validation: Optional[ValidationRule] = None
 
 class CodeExecutionResponse(BaseModel):
     success: bool
@@ -31,6 +39,7 @@ class CodeExecutionResponse(BaseModel):
     passed: bool = False
     error: str = ""
     execution_time: float = 0.0
+    validation_errors: List[str] = []
 
 # Security: Whitelist of allowed keywords
 ALLOWED_KEYWORDS = {
@@ -40,19 +49,36 @@ ALLOWED_KEYWORDS = {
     'FOR', 'END', 'IF', 'ELSE', 'ELSE IF', 'RETURN', 'CONTINUE', 'BREAK'
 }
 
-def validate_code(code: str) -> bool:
-    """Basic validation to check for dangerous operations"""
+def validate_code_security(code: str) -> bool:
+    """Security validation to check for dangerous operations"""
     dangerous_patterns = [
-        'import ', 'Library ', '__', 'eval', 'exec', 'compile',
-        'open(', 'file(', 'os.', 'subprocess', 'socket'
+        r'\bimport\b', r'\blibrary\b', r'__\w+__', r'\beval\b',
+        r'\bexec\b', r'\bcompile\b', r'\bopen\s*\(', r'\bfile\s*\(',
+        r'\bos\.', r'\bsubprocess\b', r'\bsocket\b'
     ]
 
     code_lower = code.lower()
     for pattern in dangerous_patterns:
-        if pattern.lower() in code_lower:
+        if re.search(pattern, code_lower, re.IGNORECASE):
             return False
 
     return True
+
+def validate_exercise_rules(code: str, validation: ValidationRule) -> List[str]:
+    """Validate code against exercise-specific rules"""
+    errors = []
+
+    # Check mustContain - required keywords/strings
+    for keyword in validation.mustContain:
+        if keyword not in code:
+            errors.append(f"Missing required keyword or text: '{keyword}'")
+
+    # Check forbiddenKeywords - keywords that shouldn't be used
+    for keyword in validation.forbiddenKeywords:
+        if keyword in code:
+            errors.append(f"Forbidden keyword used: '{keyword}'")
+
+    return errors
 
 @app.get("/")
 async def root():
@@ -62,8 +88,8 @@ async def root():
 async def execute_code(request: CodeExecutionRequest):
     """Execute Robot Framework code in isolated environment"""
 
-    # Validate code
-    if not validate_code(request.code):
+    # Security validation
+    if not validate_code_security(request.code):
         raise HTTPException(
             status_code=400,
             detail="Code contains forbidden operations or keywords"
@@ -75,6 +101,19 @@ async def execute_code(request: CodeExecutionRequest):
             status_code=400,
             detail="Code exceeds maximum size of 5KB"
         )
+
+    # Exercise-specific validation
+    validation_errors = []
+    if request.validation:
+        validation_errors = validate_exercise_rules(request.code, request.validation)
+        if validation_errors:
+            return CodeExecutionResponse(
+                success=False,
+                passed=False,
+                error="Validation failed",
+                validation_errors=validation_errors,
+                execution_time=0.0
+            )
 
     # Create temporary directory for execution
     with tempfile.TemporaryDirectory() as temp_dir:
@@ -119,14 +158,20 @@ async def execute_code(request: CodeExecutionRequest):
             # Check if tests passed (return code 0 means all tests passed)
             passed = result.returncode == 0
 
+            # Additional validation: if mustPass is true, execution must pass
+            final_validation_errors = []
+            if request.validation and request.validation.mustPass and not passed:
+                final_validation_errors.append("Tests must pass but some tests failed")
+
             return CodeExecutionResponse(
                 success=True,
                 log_html=log_html,
                 report_html=report_html,
                 output_xml=output_xml,
-                passed=passed,
+                passed=passed and len(final_validation_errors) == 0,
                 error="" if passed else result.stderr,
-                execution_time=execution_time
+                execution_time=execution_time,
+                validation_errors=final_validation_errors
             )
 
         except subprocess.TimeoutExpired:
