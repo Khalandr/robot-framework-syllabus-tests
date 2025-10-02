@@ -80,17 +80,9 @@
 
                 <!-- Exercises Tab Content -->
                 <div id="exercisesTab" class="tab-content">
-                    <h3>Code Exercises</h3>
-                    <div class="coming-soon-message">
-                        <div class="coming-soon-icon">🚀</div>
-                        <h4>Interactive Code Exercises Coming Soon!</h4>
-                        <p>Practice Robot Framework coding with real-time execution and feedback.</p>
-                        <ul class="feature-list">
-                            <li>✅ 3-panel coding environment</li>
-                            <li>✅ Real Robot Framework execution</li>
-                            <li>✅ Instant feedback with log/report output</li>
-                            <li>✅ Progressive difficulty levels</li>
-                        </ul>
+                    <div class="exercise-selection">
+                        <h3>Select Exercise</h3>
+                        <div id="exerciseList" class="exercise-list"></div>
                     </div>
                 </div>
             </div>
@@ -194,12 +186,70 @@
                 </div>
             </div>
         </div>
+
+        <!-- Exercise Workspace (3-Panel Layout) -->
+        <div id="exerciseWorkspace" class="screen">
+            <div class="exercise-container">
+                <!-- Left Panel: Task Description -->
+                <div class="exercise-panel task-panel">
+                    <div class="panel-header">
+                        <h3 id="exerciseTitle">Exercise Title</h3>
+                        <span id="exerciseDifficulty" class="badge-difficulty">Beginner</span>
+                    </div>
+                    <div class="panel-content">
+                        <p id="exerciseDescription"></p>
+                        <h4>Instructions:</h4>
+                        <ul id="exerciseInstructions"></ul>
+                        <div class="hints-section">
+                            <button class="btn-hints" onclick="exercise.toggleHints()">💡 Show Hints</button>
+                            <div id="exerciseHints" class="hints-content" style="display:none"></div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <button class="btn btn-secondary" onclick="exercise.backToExercises()">← Back to Exercises</button>
+                    </div>
+                </div>
+
+                <!-- Right Panel: Editor + Output -->
+                <div class="exercise-panel editor-output-panel">
+                    <!-- Code Editor -->
+                    <div class="editor-section">
+                        <div class="editor-header">
+                            <span>Code Editor</span>
+                            <div class="editor-actions">
+                                <button class="btn-small btn-secondary" onclick="exercise.resetCode()">Reset</button>
+                                <button class="btn-small btn-primary" onclick="exercise.runCode()">▶ Run Code</button>
+                            </div>
+                        </div>
+                        <div id="codeEditor" class="code-editor"></div>
+                    </div>
+
+                    <!-- Output Viewer -->
+                    <div class="output-section">
+                        <div class="output-header">
+                            <div class="output-tabs">
+                                <button class="output-tab active" data-tab="console" onclick="exercise.switchOutputTab('console')">Console</button>
+                                <button class="output-tab" data-tab="log" onclick="exercise.switchOutputTab('log')">Log</button>
+                                <button class="output-tab" data-tab="report" onclick="exercise.switchOutputTab('report')">Report</button>
+                            </div>
+                        </div>
+                        <div id="outputConsole" class="output-content active"></div>
+                        <div id="outputLog" class="output-content"></div>
+                        <div id="outputReport" class="output-content"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
+
+    <!-- Monaco Editor -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/loader.min.js"></script>
 
     <script src="js/auth.js"></script>
     <script src="js/questions.js"></script>
     <script src="js/quiz.js"></script>
     <script src="js/stats.js"></script>
+    <script src="js/exercises.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
