@@ -1,5 +1,6 @@
 /* Robot Framework Theme Variables */
 :root {
+    /* Base Colors */
     --primary-teal: #5AB3B3;
     --dark-bg: #1A1A1A;
     --card-bg: #2A3F3F;
@@ -9,7 +10,58 @@
     --success-green: #28A745;
     --warning-yellow: #FFC107;
     --error-red: #DC3545;
-    --border-color: rgba(90, 179, 179, 0.3);
+
+    /* Opacity Variants - Primary Teal */
+    --primary-teal-5: rgba(90, 179, 179, 0.05);
+    --primary-teal-10: rgba(90, 179, 179, 0.1);
+    --primary-teal-20: rgba(90, 179, 179, 0.2);
+    --primary-teal-30: rgba(90, 179, 179, 0.3);
+    --primary-teal-40: rgba(90, 179, 179, 0.4);
+
+    /* Opacity Variants - Error Red */
+    --error-red-5: rgba(220, 53, 69, 0.05);
+    --error-red-10: rgba(220, 53, 69, 0.1);
+    --error-red-20: rgba(220, 53, 69, 0.2);
+    --error-red-30: rgba(220, 53, 69, 0.3);
+
+    /* Opacity Variants - Success Green */
+    --success-green-10: rgba(40, 167, 69, 0.1);
+    --success-green-20: rgba(40, 167, 69, 0.2);
+
+    /* Opacity Variants - Warning Yellow */
+    --warning-yellow-10: rgba(255, 193, 7, 0.1);
+    --warning-yellow-20: rgba(255, 193, 7, 0.2);
+    --warning-yellow-30: rgba(255, 193, 7, 0.3);
+
+    /* Opacity Variants - White */
+    --white-5: rgba(255, 255, 255, 0.05);
+    --white-10: rgba(255, 255, 255, 0.1);
+    --white-15: rgba(255, 255, 255, 0.15);
+    --white-20: rgba(255, 255, 255, 0.2);
+
+    /* Border Colors */
+    --border-color: var(--primary-teal-30);
+
+    /* Spacing Scale */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 0.75rem;
+    --spacing-base: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+
+    /* Border Radius */
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-xl: 12px;
+    --radius-round: 50%;
+
+    /* Shadows */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 6px 12px var(--primary-teal-30);
 }
 
 * {
@@ -126,7 +178,7 @@ header h1 {
 .password-error {
     margin-top: 1rem;
     padding: 0.75rem;
-    background: rgba(220, 53, 69, 0.2);
+    background: var(--error-red-20);
     border: 1px solid var(--error-red);
     border-radius: 6px;
     color: var(--error-red);
@@ -246,7 +298,7 @@ header h1 {
 }
 
 .mode-btn {
-    background: linear-gradient(135deg, rgba(90, 179, 179, 0.1) 0%, rgba(90, 179, 179, 0.05) 100%);
+    background: linear-gradient(135deg, var(--primary-teal-10) 0%, var(--primary-teal-5) 100%);
     border: 2px solid var(--primary-teal);
     border-radius: 8px;
     padding: 1.5rem;
@@ -256,18 +308,18 @@ header h1 {
 }
 
 .mode-btn:hover {
-    background: rgba(90, 179, 179, 0.2);
+    background: var(--primary-teal-20);
     transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(90, 179, 179, 0.3);
+    box-shadow: 0 6px 12px var(--primary-teal-30);
 }
 
 .mode-btn.exam {
     border-color: var(--accent-red);
-    background: linear-gradient(135deg, rgba(220, 53, 69, 0.1) 0%, rgba(220, 53, 69, 0.05) 100%);
+    background: linear-gradient(135deg, var(--error-red-10) 0%, var(--error-red-5) 100%);
 }
 
 .mode-btn.exam:hover {
-    background: rgba(220, 53, 69, 0.2);
+    background: var(--error-red-20);
     box-shadow: 0 6px 12px rgba(220, 53, 69, 0.3);
 }
 
@@ -383,7 +435,7 @@ header h1 {
 }
 
 .answer-option {
-    background: rgba(90, 179, 179, 0.05);
+    background: var(--primary-teal-5);
     border: 2px solid transparent;
     padding: 1rem;
     border-radius: 8px;
@@ -395,22 +447,22 @@ header h1 {
 }
 
 .answer-option:hover {
-    background: rgba(90, 179, 179, 0.1);
+    background: var(--primary-teal-10);
     border-color: var(--primary-teal);
 }
 
 .answer-option.selected {
-    background: rgba(90, 179, 179, 0.2);
+    background: var(--primary-teal-20);
     border-color: var(--primary-teal);
 }
 
 .answer-option.correct {
-    background: rgba(40, 167, 69, 0.1);
+    background: var(--success-green-10);
     border-color: var(--success-green);
 }
 
 .answer-option.incorrect {
-    background: rgba(220, 53, 69, 0.1);
+    background: var(--error-red-10);
     border-color: var(--error-red);
 }
 
@@ -437,12 +489,12 @@ header h1 {
 
 .feedback-card.correct {
     border-color: var(--success-green);
-    background: rgba(40, 167, 69, 0.1);
+    background: var(--success-green-10);
 }
 
 .feedback-card.incorrect {
     border-color: var(--error-red);
-    background: rgba(220, 53, 69, 0.1);
+    background: var(--error-red-10);
 }
 
 /* Results Screen */
@@ -460,7 +512,7 @@ header h1 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgba(90, 179, 179, 0.1);
+    background: var(--primary-teal-10);
 }
 
 .score-percentage {
@@ -484,7 +536,7 @@ header h1 {
 .stat-item {
     text-align: center;
     padding: 1rem;
-    background: rgba(90, 179, 179, 0.05);
+    background: var(--primary-teal-5);
     border-radius: 8px;
 }
 
@@ -511,7 +563,7 @@ header h1 {
 }
 
 .topic-item {
-    background: rgba(90, 179, 179, 0.05);
+    background: var(--primary-teal-5);
     border: 1px solid var(--border-color);
     padding: 1rem;
     border-radius: 8px;
@@ -520,7 +572,7 @@ header h1 {
 }
 
 .topic-item:hover {
-    background: rgba(90, 179, 179, 0.1);
+    background: var(--primary-teal-10);
     border-color: var(--primary-teal);
 }
 
@@ -708,7 +760,7 @@ code.robot {
 }
 
 .exercise-item {
-    background: rgba(90, 179, 179, 0.05);
+    background: var(--primary-teal-5);
     border: 1px solid var(--border-color);
     padding: 1rem;
     border-radius: 8px;
@@ -721,7 +773,7 @@ code.robot {
 }
 
 .exercise-item:hover {
-    background: rgba(90, 179, 179, 0.1);
+    background: var(--primary-teal-10);
     border-color: var(--primary-teal);
 }
 
@@ -822,7 +874,7 @@ code.robot {
 }
 
 .btn-hints {
-    background: rgba(255, 193, 7, 0.2);
+    background: var(--warning-yellow-20);
     border: 1px solid var(--warning-yellow);
     color: var(--warning-yellow);
     padding: 0.5rem 1rem;
