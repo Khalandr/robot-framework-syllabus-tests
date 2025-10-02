@@ -6,7 +6,7 @@ const app = {
     async init() {
         console.log('Robot Framework Practice App Initialized');
         this.attachEventListeners();
-        this.showModeSelection();
+        // Don't show mode selection - let auth.js handle it after password check
         await questions.loadAllQuestions();
         console.log('All questions loaded and ready');
     },

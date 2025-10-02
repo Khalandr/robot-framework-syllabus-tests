@@ -18,8 +18,21 @@
     </header>
 
     <main class="container">
+        <!-- Password Protection Screen -->
+        <div id="passwordScreen" class="screen active">
+            <div class="card">
+                <h2>Access Required</h2>
+                <p>Please enter the password to access the practice questions.</p>
+                <div class="password-form">
+                    <input type="password" id="passwordInput" placeholder="Enter password" autocomplete="off">
+                    <button class="btn btn-primary" onclick="auth.checkPassword()">Enter</button>
+                </div>
+                <div id="passwordError" class="password-error" style="display:none">Incorrect password. Please try again.</div>
+            </div>
+        </div>
+
         <!-- Mode Selection Screen -->
-        <div id="modeSelection" class="screen active">
+        <div id="modeSelection" class="screen">
             <div class="card">
                 <h2>Select Practice Mode</h2>
                 <div class="mode-grid">
@@ -142,6 +155,7 @@
         </div>
     </main>
 
+    <script src="js/auth.js"></script>
     <script src="js/questions.js"></script>
     <script src="js/quiz.js"></script>
     <script src="js/stats.js"></script>
