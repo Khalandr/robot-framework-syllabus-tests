@@ -712,6 +712,9 @@ code.robot {
     padding: 1.5rem;
     cursor: pointer;
     transition: all 0.3s ease;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
 }
 
 .exercise-item:hover {
@@ -782,6 +785,14 @@ code.robot {
 .panel-footer {
     padding: 1rem 1.5rem;
     border-top: 2px solid var(--border-color);
+}
+
+.panel-footer .btn {
+    min-width: 120px;
+}
+
+.panel-footer > div {
+    margin-top: 0.5rem;
 }
 
 .hints-section {

@@ -81,10 +81,19 @@
                 <!-- Exercises Tab Content -->
                 <div id="exercisesTab" class="tab-content">
                     <div class="exercise-selection">
-                        <h3>Select Exercise</h3>
-                        <div id="exerciseList" class="exercise-list"></div>
+                        <h3>Select Exercise Category</h3>
+                        <div id="exerciseCategoryList" class="mode-grid"></div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Exercise List by Category -->
+        <div id="exerciseListScreen" class="screen">
+            <div class="card">
+                <h2 id="exerciseCategoryTitle">Exercises</h2>
+                <div id="exerciseList" class="exercise-list"></div>
+                <button class="btn btn-secondary" onclick="app.showModeSelection()">Back</button>
             </div>
         </div>
 
@@ -206,7 +215,11 @@
                         </div>
                     </div>
                     <div class="panel-footer">
-                        <button class="btn btn-secondary" onclick="exercise.backToExercises()">← Back to Exercises</button>
+                        <button class="btn btn-secondary" onclick="exercise.backToExercises()">Back to List</button>
+                        <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
+                            <button id="prevExerciseBtn" class="btn btn-secondary" onclick="exercise.previousExercise()">Previous</button>
+                            <button id="nextExerciseBtn" class="btn btn-primary" onclick="exercise.nextExercise()">Next</button>
+                        </div>
                     </div>
                 </div>
 

@@ -1,39 +1,96 @@
 // Exercise Module - Handles code exercises with Monaco editor
 const exercise = {
     allExercises: [],
+    exercisesByCategory: {},
     currentExercise: null,
+    currentCategory: null,
+    currentExerciseIndex: 0,
     editor: null,
     currentOutputTab: 'console',
 
+    categories: [
+        { id: 'basic-syntax', name: 'Basic Syntax & Structure', description: 'Foundation level - RF syntax basics', icon: '📝' },
+        { id: 'variables', name: 'Variables & Data Types', description: 'Working with different variable types', icon: '💾' },
+        { id: 'keywords', name: 'Keywords & Libraries', description: 'Using and creating keywords', icon: '🔧' },
+        { id: 'control-flow', name: 'Control Flow', description: 'Loops and conditionals', icon: '🔄' },
+        { id: 'organization', name: 'Test Organization', description: 'Structuring test suites', icon: '📂' }
+    ],
+
     async loadExercises() {
         try {
+            // Load beginner exercises
             const response = await fetch('exercises/beginner-exercises.json');
             const data = await response.json();
             this.allExercises = data.exercises;
+
+            // Group by category (for now, all are basic-syntax)
+            this.exercisesByCategory = {
+                'basic-syntax': this.allExercises
+            };
+
             console.log(`Loaded ${this.allExercises.length} exercises`);
-            this.displayExerciseList();
+            this.displayCategoryList();
         } catch (error) {
             console.error('Error loading exercises:', error);
         }
     },
 
-    displayExerciseList() {
-        const listContainer = document.getElementById('exerciseList');
+    displayCategoryList() {
+        const listContainer = document.getElementById('exerciseCategoryList');
         if (!listContainer) return;
 
         listContainer.innerHTML = '';
 
-        this.allExercises.forEach(ex => {
+        this.categories.forEach(cat => {
+            const exerciseCount = this.exercisesByCategory[cat.id]?.length || 0;
+            const item = document.createElement('button');
+            item.className = 'mode-btn';
+            item.innerHTML = `
+                <h3>${cat.icon} ${cat.name}</h3>
+                <p>${cat.description}</p>
+                <small>${exerciseCount} exercise${exerciseCount !== 1 ? 's' : ''}</small>
+            `;
+            if (exerciseCount > 0) {
+                item.addEventListener('click', () => this.showExerciseList(cat.id, cat.name));
+            } else {
+                item.style.opacity = '0.5';
+                item.style.cursor = 'not-allowed';
+                item.innerHTML += '<p style="color: var(--warning-yellow); margin-top: 0.5rem;">Coming Soon</p>';
+            }
+            listContainer.appendChild(item);
+        });
+    },
+
+    showExerciseList(categoryId, categoryName) {
+        this.currentCategory = categoryId;
+        const exercises = this.exercisesByCategory[categoryId] || [];
+
+        document.getElementById('exerciseCategoryTitle').textContent = categoryName;
+        const listContainer = document.getElementById('exerciseList');
+        listContainer.innerHTML = '';
+
+        exercises.forEach((ex, index) => {
             const item = document.createElement('div');
             item.className = 'exercise-item';
             item.innerHTML = `
                 <h4>${ex.title}</h4>
                 <span class="badge-difficulty">${ex.difficulty}</span>
-                <p style="color: var(--text-muted); margin-top: 0.5rem;">${ex.description}</p>
             `;
-            item.addEventListener('click', () => this.openExercise(ex.id));
+            item.addEventListener('click', () => this.openExerciseByIndex(index));
             listContainer.appendChild(item);
         });
+
+        app.hideAllScreens();
+        document.getElementById('exerciseListScreen').classList.add('active');
+    },
+
+    openExerciseByIndex(index) {
+        const exercises = this.exercisesByCategory[this.currentCategory];
+        if (!exercises || !exercises[index]) return;
+
+        this.currentExerciseIndex = index;
+        this.currentExercise = exercises[index];
+        this.openExercise(this.currentExercise.id);
     },
 
     openExercise(exerciseId) {
@@ -67,6 +124,9 @@ const exercise = {
 
         // Initialize Monaco editor
         this.initEditor();
+
+        // Update navigation buttons
+        this.updateNavigationButtons();
 
         // Show workspace
         app.hideAllScreens();
@@ -211,6 +271,39 @@ const exercise = {
     backToExercises() {
         app.switchTab('exercises');
         app.showModeSelection();
+    },
+
+    nextExercise() {
+        const exercises = this.exercisesByCategory[this.currentCategory];
+        if (!exercises) return;
+
+        if (this.currentExerciseIndex < exercises.length - 1) {
+            this.openExerciseByIndex(this.currentExerciseIndex + 1);
+        }
+        this.updateNavigationButtons();
+    },
+
+    previousExercise() {
+        if (this.currentExerciseIndex > 0) {
+            this.openExerciseByIndex(this.currentExerciseIndex - 1);
+        }
+        this.updateNavigationButtons();
+    },
+
+    updateNavigationButtons() {
+        const exercises = this.exercisesByCategory[this.currentCategory];
+        if (!exercises) return;
+
+        const prevBtn = document.getElementById('prevExerciseBtn');
+        const nextBtn = document.getElementById('nextExerciseBtn');
+
+        if (prevBtn) {
+            prevBtn.disabled = this.currentExerciseIndex === 0;
+        }
+
+        if (nextBtn) {
+            nextBtn.disabled = this.currentExerciseIndex === exercises.length - 1;
+        }
     }
 };
 
