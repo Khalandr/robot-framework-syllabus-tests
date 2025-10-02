@@ -43,8 +43,15 @@ const auth = {
 
     // Show the main application
     showApp() {
-        document.getElementById('passwordScreen').classList.remove('active');
-        document.getElementById('mainNavigation').classList.add('active');
+        const passwordScreen = document.getElementById('passwordScreen');
+        const mainNav = document.getElementById('mainNavigation');
+
+        if (passwordScreen) {
+            passwordScreen.classList.remove('active');
+        }
+        if (mainNav) {
+            mainNav.classList.add('active');
+        }
     },
 
     // Check if already authenticated
