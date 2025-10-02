@@ -1,0 +1,22 @@
+{
+  "id": "03-organization",
+  "name": "Test Organization",
+  "description": "Structure and organize your test suites effectively",
+  "icon": "📂",
+  "order": 3,
+  "estimatedTime": "2 hours",
+  "topics": [
+    {
+      "id": "01-test-structure",
+      "name": "Test Suite Structure",
+      "order": 1,
+      "exerciseCount": 10
+    },
+    {
+      "id": "02-data-driven",
+      "name": "Data-Driven Testing",
+      "order": 2,
+      "exerciseCount": 5
+    }
+  ]
+}

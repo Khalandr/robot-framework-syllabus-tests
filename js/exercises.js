@@ -8,42 +8,50 @@ const exercise = {
     editor: null,
     currentOutputTab: 'console',
 
-    categories: [
-        { id: 'basic-syntax', name: 'Basic Syntax & Structure', description: 'Foundation level - RF syntax basics' },
-        { id: 'variables', name: 'Variables & Data Types', description: 'Working with different variable types' },
-        { id: 'keywords', name: 'Keywords & Libraries', description: 'Using and creating keywords' },
-        { id: 'control-flow', name: 'Control Flow', description: 'Loops and conditionals' },
-        { id: 'test-organization', name: 'Test Organization', description: 'Structuring test suites' },
-        { id: 'data-driven', name: 'Data-Driven Testing', description: 'Test with multiple data sets' },
-        { id: 'advanced-keywords', name: 'Advanced Keywords', description: 'Complex keyword patterns' },
-        { id: 'practical-scenarios', name: 'Practical Scenarios', description: 'Real-world test automation' },
-        { id: 'best-practices', name: 'Best Practices', description: 'Clean and maintainable tests' },
-        { id: 'debugging', name: 'Debugging & Troubleshooting', description: 'Finding and fixing issues' }
-    ],
+    categories: [],
 
     async loadExercises() {
         try {
             this.allExercises = [];
             this.exercisesByCategory = {};
 
+            // Load root index.json to get categories
+            const indexResponse = await fetch('exercises/index.json');
+            if (!indexResponse.ok) {
+                throw new Error('Failed to load exercises/index.json');
+            }
+            const indexData = await indexResponse.json();
+            this.categories = indexData.categories;
+
+            console.log(`Loaded ${this.categories.length} categories from index.json`);
+
             // Load exercises for each category
             for (const cat of this.categories) {
                 const categoryExercises = [];
 
-                // Try to load beginner, intermediate, and advanced files for each category
-                const difficulties = ['beginner', 'intermediate', 'advanced'];
-
-                for (const diff of difficulties) {
-                    try {
-                        const response = await fetch(`exercises/${cat.id}/${diff}.json`);
-                        if (response.ok) {
-                            const data = await response.json();
-                            categoryExercises.push(...data.exercises);
-                        }
-                    } catch (err) {
-                        // File doesn't exist yet, skip silently
-                        console.log(`No ${diff} exercises for ${cat.id} yet`);
+                try {
+                    // Load category.json to get topics
+                    const categoryResponse = await fetch(`exercises/${cat.id}/category.json`);
+                    if (!categoryResponse.ok) {
+                        console.log(`No category.json for ${cat.id}`);
+                        continue;
                     }
+                    const categoryData = await categoryResponse.json();
+
+                    // Load exercises from each topic
+                    for (const topic of categoryData.topics) {
+                        try {
+                            const exercisesResponse = await fetch(`exercises/${cat.id}/${topic.id}/exercises.json`);
+                            if (exercisesResponse.ok) {
+                                const exercisesData = await exercisesResponse.json();
+                                categoryExercises.push(...exercisesData.exercises);
+                            }
+                        } catch (err) {
+                            console.log(`No exercises for ${cat.id}/${topic.id}`);
+                        }
+                    }
+                } catch (err) {
+                    console.log(`Error loading category ${cat.id}:`, err);
                 }
 
                 if (categoryExercises.length > 0) {

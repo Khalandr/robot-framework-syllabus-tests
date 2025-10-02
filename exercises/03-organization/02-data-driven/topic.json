@@ -1,0 +1,24 @@
+{
+  "id": "02-data-driven",
+  "title": "Data-Driven Testing",
+  "description": "Master template-based testing, variables, and parameterization to handle multiple test scenarios efficiently.",
+  "category": "03-organization",
+  "difficulty": "intermediate",
+  "estimatedTime": "45-60 minutes",
+  "objectives": [
+    "Use test templates to run the same logic with different data sets",
+    "Define and manage test data in Variables section",
+    "Create parameterized test cases with reusable keywords",
+    "Validate multiple data points using loops and collections"
+  ],
+  "prerequisites": [
+    "01-fundamentals/01-basic-syntax",
+    "01-fundamentals/02-variables",
+    "01-fundamentals/03-control-flow"
+  ],
+  "relatedTopics": [
+    "03-organization/01-test-suites",
+    "02-keywords/02-advanced-keywords"
+  ],
+  "tags": ["data-driven", "templates", "variables", "parameterization", "testing-patterns"]
+}

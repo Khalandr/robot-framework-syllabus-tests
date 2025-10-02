@@ -1,0 +1,28 @@
+{
+  "id": "01-fundamentals",
+  "name": "Fundamentals",
+  "description": "Master the core concepts of Robot Framework: syntax, variables, and control flow",
+  "icon": "📚",
+  "order": 1,
+  "estimatedTime": "3-4 hours",
+  "topics": [
+    {
+      "id": "01-basic-syntax",
+      "name": "Basic Syntax & Structure",
+      "order": 1,
+      "exerciseCount": 8
+    },
+    {
+      "id": "02-variables",
+      "name": "Variables & Data Types",
+      "order": 2,
+      "exerciseCount": 7
+    },
+    {
+      "id": "03-control-flow",
+      "name": "Control Flow",
+      "order": 3,
+      "exerciseCount": 10
+    }
+  ]
+}

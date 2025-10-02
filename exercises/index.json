@@ -1,0 +1,44 @@
+{
+  "version": "2.0",
+  "schemaVersion": "2.0",
+  "totalExercises": 80,
+  "lastUpdated": "2025-10-02",
+  "categories": [
+    {
+      "id": "01-fundamentals",
+      "name": "Fundamentals",
+      "description": "Master the core concepts of Robot Framework",
+      "icon": "📚",
+      "order": 1,
+      "exerciseCount": 25,
+      "topicCount": 3
+    },
+    {
+      "id": "02-keywords",
+      "name": "Keywords & Libraries",
+      "description": "Using and creating keywords",
+      "icon": "🔑",
+      "order": 2,
+      "exerciseCount": 15,
+      "topicCount": 2
+    },
+    {
+      "id": "03-organization",
+      "name": "Test Organization",
+      "description": "Structuring and organizing test suites",
+      "icon": "📂",
+      "order": 3,
+      "exerciseCount": 15,
+      "topicCount": 2
+    },
+    {
+      "id": "04-real-world",
+      "name": "Real-World Skills",
+      "description": "Practical scenarios and best practices",
+      "icon": "🌍",
+      "order": 4,
+      "exerciseCount": 25,
+      "topicCount": 3
+    }
+  ]
+}

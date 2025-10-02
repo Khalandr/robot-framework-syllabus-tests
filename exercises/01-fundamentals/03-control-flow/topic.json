@@ -1,0 +1,32 @@
+{
+  "id": "03-control-flow",
+  "title": "Control Flow",
+  "description": "Master conditional logic and iteration with IF statements, ELSE branches, and FOR loops. Learn to create adaptive tests that handle dynamic scenarios, make decisions based on conditions, and efficiently process collections of data.",
+  "category": "01-fundamentals",
+  "order": 3,
+  "estimatedTime": "90-120 minutes",
+  "prerequisites": ["01-basic-syntax", "02-variables"],
+  "skills": [
+    "Conditional execution with IF/ELSE/ELSE IF",
+    "Iterating over lists with FOR loops",
+    "Numeric iteration with IN RANGE",
+    "Nested control structures",
+    "Loop control with BREAK and CONTINUE",
+    "Error handling with TRY-EXCEPT"
+  ],
+  "learningObjectives": [
+    "Implement conditional logic to create adaptive test scenarios",
+    "Use comparison and boolean operators in conditions",
+    "Iterate over data collections efficiently with FOR loops",
+    "Apply proper indentation rules for control flow structures",
+    "Combine conditionals and loops for complex test logic"
+  ],
+  "realWorldApplications": [
+    "Retry logic for flaky API calls or UI interactions",
+    "Environment-specific test configuration (dev/staging/prod)",
+    "Data-driven testing with multiple test cases",
+    "Pagination handling in web scraping or API testing",
+    "Conditional feature testing based on flags or permissions",
+    "Bulk user creation and cleanup in test setup/teardown"
+  ]
+}

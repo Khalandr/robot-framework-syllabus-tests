@@ -1,0 +1,422 @@
+{
+  "topic": "01-basic-syntax",
+  "exercises": [
+    {
+      "id": "ex-1-1",
+      "title": "Your First Robot Test",
+      "difficulty": "beginner",
+      "chapter": "1",
+      "free": true,
+      "description": "Create a simple test case that logs the message 'Hello Robot Framework!' to the console.",
+      "instructions": [
+        "Create a test case named 'My First Test'",
+        "Use the Log keyword to print 'Hello Robot Framework!'",
+        "Remember: Use 4 spaces between keyword and argument"
+      ],
+      "initialCode": "*** Test Cases ***\nMy First Test\n    # Write your code here\n    ",
+      "solution": "*** Test Cases ***\nMy First Test\n    Log    Hello Robot Framework!",
+      "hints": [
+        "The Log keyword is used to output messages",
+        "Syntax: Log    <message>",
+        "Don't forget proper spacing (4 spaces)"
+      ],
+      "validation": {
+        "mustContain": ["Log", "Hello Robot Framework"],
+        "mustPass": true
+      },
+      "theory": {
+        "title": "Understanding Robot Framework Test Cases and the Log Keyword",
+        "content": "## Introduction to Test Cases\n\nRobot Framework uses a **keyword-driven testing approach** where test cases are written using human-readable keywords. A test case is the fundamental unit of testing in Robot Framework, representing a single scenario or workflow you want to validate.\n\n### Test Case Structure\n\nEvery Robot Framework file is organized into **sections**, marked by three asterisks (`***`). The `*** Test Cases ***` section is where you define your test scenarios:\n\n```robot\n*** Test Cases ***\nMy Test Name\n    Keyword    Argument1    Argument2\n    Another Keyword    Argument\n```\n\n**Key rules:**\n- Test case names start at the beginning of the line (no indentation)\n- Keywords within test cases must be indented with **exactly 4 spaces**\n- Keywords and arguments are separated by **4 spaces** (or 2+ spaces, but 4 is standard)\n- This spacing rule is fundamental to Robot Framework's syntax\n\n## The Log Keyword\n\nThe `Log` keyword is one of the most basic and useful keywords in Robot Framework's **BuiltIn library** (automatically imported). It outputs messages to the execution log, making it invaluable for:\n\n- **Debugging:** See variable values and execution flow\n- **Verification:** Confirm certain code paths are executed\n- **Documentation:** Add runtime information to test reports\n\n### Log Syntax\n\n```robot\nLog    message\nLog    message    log_level\n```\n\n**Parameters:**\n- `message`: The text or variable to display (required)\n- `log_level`: Optional log level (INFO, WARN, ERROR, DEBUG, TRACE)\n\n### Why Spacing Matters\n\nRobot Framework uses **whitespace** as its primary delimiter instead of parentheses or commas. This makes the syntax readable but requires discipline:\n\n```robot\n# Correct - 4 spaces between keyword and argument\nLog    Hello Robot Framework!\n\n# Wrong - will cause syntax errors\nLog Hello Robot Framework!\nLog  Hello Robot Framework!  # Only 2 spaces\n```\n\n### Your First Test\n\nWhen you write your first test case, you're not just logging a message—you're learning the foundation of Robot Framework's syntax that applies to **every keyword** you'll ever use. Master the spacing rules now, and you'll write cleaner tests throughout your automation journey.\n\n### Execution Flow\n\nWhen Robot Framework executes your test:\n1. It identifies the `*** Test Cases ***` section\n2. It finds test case \"My First Test\"\n3. It executes each indented line as a keyword\n4. The `Log` keyword outputs to `log.html` and console\n5. The test passes if all keywords execute without errors\n\nThis simple exercise establishes the pattern you'll use for thousands of test steps in real projects.",
+        "learningObjectives": [
+          "Understand the structure of a Robot Framework test case",
+          "Master the 4-space indentation and keyword-argument spacing rules",
+          "Use the Log keyword to output messages during test execution",
+          "Recognize the importance of whitespace in Robot Framework syntax"
+        ],
+        "relatedConcepts": [
+          "Test case sections (*** Test Cases ***)",
+          "BuiltIn library keywords",
+          "Test execution flow",
+          "Log levels and debugging",
+          "Robot Framework spacing conventions"
+        ],
+        "documentation": "https://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#test-case-syntax",
+        "estimatedReadTime": "4-5 minutes"
+      },
+      "metadata": {
+        "tags": ["beginner", "syntax", "log-keyword", "first-test", "indentation", "test-cases", "builtin-library", "spacing"],
+        "estimatedTime": "5-10 minutes",
+        "prerequisites": [],
+        "nextExercises": ["ex-1-4", "ex-1-3"],
+        "version": "2.0",
+        "lastUpdated": "2025-10-02"
+      }
+    },
+    {
+      "id": "ex-1-4",
+      "title": "Multiple Keywords",
+      "difficulty": "beginner",
+      "chapter": "2",
+      "free": true,
+      "description": "Execute multiple keywords in sequence.",
+      "instructions": [
+        "Log the message 'Starting test'",
+        "Create a variable ${count} with value 10",
+        "Log the variable value"
+      ],
+      "initialCode": "*** Test Cases ***\nMulti Step Test\n    # Write code here\n    ",
+      "solution": "*** Test Cases ***\nMulti Step Test\n    Log    Starting test\n    ${count}    Set Variable    10\n    Log    ${count}",
+      "hints": [
+        "Each keyword should be on a new line",
+        "Maintain consistent indentation",
+        "Remember proper spacing between keyword and arguments"
+      ],
+      "validation": {
+        "mustContain": ["Log", "Set Variable", "${count}"],
+        "mustPass": true
+      },
+      "theory": {
+        "title": "Sequential Keyword Execution and Variable Assignment",
+        "content": "## Test Cases as Workflows\n\nReal-world test automation isn't just about executing a single action—it's about orchestrating **sequences of keywords** that represent complete user workflows or system interactions. Robot Framework executes keywords **sequentially from top to bottom**, making it intuitive to model step-by-step procedures.\n\n### Multi-Step Test Structure\n\n```robot\n*** Test Cases ***\nUser Login Workflow\n    Open Browser    https://example.com    Chrome\n    Input Text      id:username          testuser\n    Input Text      id:password          secret123\n    Click Button    id:login-button\n    Page Should Contain    Welcome, testuser!\n```\n\nEach line represents one action in the workflow. **Order matters**—you can't verify a welcome message before logging in!\n\n## Variables in Robot Framework\n\nVariables are containers for data that can be reused throughout your tests. The `Set Variable` keyword assigns a value to a variable at runtime.\n\n### Variable Syntax\n\nRobot Framework uses `${variable_name}` syntax for scalar variables:\n\n```robot\n${count}    Set Variable    10\n${name}     Set Variable    John Doe\n${result}   Set Variable    ${42}\n```\n\n**Important patterns:**\n- Variable names are enclosed in `${...}`\n- Assignment uses keyword `Set Variable`\n- Variables appear **before** the keyword (return value position)\n- Variables can store strings, numbers, objects, or any Python type\n\n### How Variable Assignment Works\n\nThe syntax might look unusual if you're coming from traditional programming:\n\n```robot\n# Robot Framework syntax\n${count}    Set Variable    10\n\n# Similar to Python\ncount = set_variable(10)\n```\n\nIn Robot Framework:\n1. The leftmost column is the **return value** (variable receiving the result)\n2. Next comes the **keyword name**\n3. Then come **arguments** to the keyword\n\nThis pattern applies to **any keyword that returns a value**.\n\n### Using Variables\n\nOnce assigned, variables can be used anywhere:\n\n```robot\n${count}    Set Variable    10\nLog         Count is: ${count}\nLog         ${count}\nShould Be Equal    ${count}    10\n```\n\nVariables are **substituted** before keyword execution. When you write `Log    ${count}`, Robot Framework replaces `${count}` with its value (`10`) before calling the Log keyword.\n\n## Why Sequential Execution Matters\n\n### Readability and Maintainability\n\nSequential keyword execution makes tests read like **documentation**:\n\n```robot\n*** Test Cases ***\nPlace Order Test\n    Log              Starting order workflow\n    ${product_id}    Set Variable    12345\n    Add To Cart      ${product_id}\n    Proceed To Checkout\n    ${total}         Get Order Total\n    Log              Total: ${total}\n    Confirm Order\n```\n\nAnyone reading this—technical or non-technical—can understand what the test does.\n\n### Debugging and Logging\n\nUsing `Log` statements between actions helps track execution:\n\n```robot\n${result}    Calculate Value    5    10\nLog          Intermediate result: ${result}\n${final}     Multiply By Two    ${result}\nLog          Final result: ${final}\n```\n\nLogs appear in `log.html`, creating a **traceable audit trail** of test execution.\n\n## Best Practices\n\n1. **One action per line:** Each keyword should do one clear thing\n2. **Meaningful variable names:** `${user_count}` is better than `${x}`\n3. **Log important values:** Helps debugging when tests fail\n4. **Consistent indentation:** Always 4 spaces for readability\n\nBy mastering sequential keyword execution and variable usage, you can build complex test scenarios from simple, reusable building blocks.",
+        "learningObjectives": [
+          "Execute multiple keywords sequentially in a single test case",
+          "Understand the order of execution in Robot Framework tests",
+          "Create and assign values to variables using Set Variable",
+          "Use variables in subsequent keywords within the same test"
+        ],
+        "relatedConcepts": [
+          "Variable scopes (test, suite, global)",
+          "Variable types (scalar, list, dictionary)",
+          "Return values from keywords",
+          "Test case workflow design",
+          "Built-in variable keywords"
+        ],
+        "documentation": "https://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#variables",
+        "estimatedReadTime": "5-6 minutes"
+      },
+      "metadata": {
+        "tags": ["beginner", "variables", "set-variable", "sequential-execution", "workflow", "multi-step", "variable-syntax", "logging"],
+        "estimatedTime": "8-12 minutes",
+        "prerequisites": ["ex-1-1"],
+        "nextExercises": ["ex-1-3", "ex-1-6"],
+        "version": "2.0",
+        "lastUpdated": "2025-10-02"
+      }
+    },
+    {
+      "id": "ex-1-3",
+      "title": "Basic Assertion",
+      "difficulty": "beginner",
+      "chapter": "2",
+      "free": true,
+      "description": "Test if two values are equal using an assertion.",
+      "instructions": [
+        "Use Should Be Equal keyword to verify that 5 equals 5",
+        "The test should pass"
+      ],
+      "initialCode": "*** Test Cases ***\nAssertion Test\n    # Write assertion here\n    ",
+      "solution": "*** Test Cases ***\nAssertion Test\n    Should Be Equal    5    5",
+      "hints": [
+        "Should Be Equal compares two values",
+        "Syntax: Should Be Equal    <value1>    <value2>",
+        "Both arguments should be 5"
+      ],
+      "validation": {
+        "mustContain": ["Should Be Equal"],
+        "mustPass": true
+      },
+      "theory": {
+        "title": "Assertions and Verification in Robot Framework",
+        "content": "## What Are Assertions?\n\nIn test automation, an **assertion** is a statement that verifies an expected condition is true. Assertions are the foundation of testing—they're how you actually **validate** that your system behaves correctly. Without assertions, you're just executing actions without verifying outcomes.\n\n### The Role of Assertions\n\nConsider a login test:\n\n```robot\n*** Test Cases ***\nLogin Test Without Assertion\n    Open Browser       https://app.com    Chrome\n    Input Text         id:username        user@example.com\n    Input Text         id:password        secret\n    Click Button       id:login\n    # Test ends... but did login succeed? We don't know!\n```\n\nVersus:\n\n```robot\n*** Test Cases ***\nLogin Test With Assertion\n    Open Browser            https://app.com    Chrome\n    Input Text              id:username        user@example.com\n    Input Text              id:password        secret\n    Click Button            id:login\n    Page Should Contain     Welcome Dashboard  # ASSERTION!\n```\n\nThe assertion **validates the expected outcome**, turning an action sequence into a real test.\n\n## The Should Be Equal Keyword\n\n`Should Be Equal` is one of the most fundamental assertion keywords in Robot Framework's BuiltIn library. It compares two values and **fails the test** if they don't match.\n\n### Syntax\n\n```robot\nShould Be Equal    first    second\nShould Be Equal    first    second    Custom error message\n```\n\n**Parameters:**\n- `first`: First value to compare\n- `second`: Second value to compare\n- `msg`: Optional custom error message (shown on failure)\n\n### How It Works\n\n```robot\n# Simple equality check\nShould Be Equal    5    5                    # PASS\nShould Be Equal    5    6                    # FAIL\nShould Be Equal    Hello    Hello            # PASS\nShould Be Equal    Hello    hello            # FAIL (case-sensitive)\n```\n\nWhen the assertion **fails**, Robot Framework:\n1. Marks the test case as **FAIL**\n2. Stops executing remaining keywords in that test\n3. Shows a detailed error message in the log\n4. Continues with the next test case (doesn't stop entire suite)\n\n### Type Conversion\n\nBy default, `Should Be Equal` compares values as **strings**:\n\n```robot\nShould Be Equal    5      5         # PASS (both become \"5\")\nShould Be Equal    5      ${5}      # PASS (number 5 becomes \"5\")\n```\n\nFor strict type checking, use `Should Be Equal As Numbers` or `Should Be Equal As Integers`:\n\n```robot\n${num}    Set Variable    ${5}\nShould Be Equal As Numbers    ${num}    5    # Strict numeric comparison\n```\n\n## Common Assertion Keywords\n\nRobot Framework provides a rich set of assertion keywords:\n\n### Equality Assertions\n```robot\nShould Be Equal              5    5\nShould Not Be Equal          5    6\nShould Be Equal As Numbers   5.0  5\nShould Be Equal As Strings   5    5\n```\n\n### Comparison Assertions\n```robot\nShould Be Greater Than       10    5\nShould Be Less Than          3     7\n```\n\n### Boolean Assertions\n```robot\nShould Be True     ${condition}\nShould Be False    ${flag}\n```\n\n### Existence Assertions\n```robot\nShould Contain       Hello World    World\nShould Not Contain   Hello World    Goodbye\n```\n\n## Why Start With Simple Assertions?\n\nThe `Should Be Equal    5    5` exercise might seem trivial, but it teaches critical concepts:\n\n1. **Assertion syntax:** Understanding the pattern used by all assertion keywords\n2. **Pass/fail mechanics:** How Robot Framework determines test success\n3. **Verification mindset:** The importance of validating outcomes, not just executing actions\n4. **Error handling:** What happens when assertions fail\n\n### Building to Real Tests\n\nOnce you understand basic assertions, you can build realistic tests:\n\n```robot\n*** Test Cases ***\nCalculator Test\n    ${result}    Calculate Sum    2    3\n    Should Be Equal As Numbers    ${result}    5\n    \n    ${product}    Calculate Product    4    5\n    Should Be Equal As Numbers    ${product}    20\n```\n\nEvery real test follows this pattern:\n1. **Arrange:** Set up test data and preconditions\n2. **Act:** Perform the action being tested\n3. **Assert:** Verify the expected outcome\n\nMastering assertions is mastering the \"Assert\" step—the most critical part of any test.",
+        "learningObjectives": [
+          "Understand the purpose and importance of assertions in testing",
+          "Use the Should Be Equal keyword to verify expected values",
+          "Recognize how failed assertions affect test execution",
+          "Differentiate between test actions and test verifications"
+        ],
+        "relatedConcepts": [
+          "Test pass/fail status",
+          "Assertion keywords in BuiltIn library",
+          "Type conversion in comparisons",
+          "Custom error messages",
+          "AAA pattern (Arrange-Act-Assert)"
+        ],
+        "documentation": "https://robotframework.org/robotframework/latest/libraries/BuiltIn.html#Should%20Be%20Equal",
+        "estimatedReadTime": "5-6 minutes"
+      },
+      "metadata": {
+        "tags": ["beginner", "assertions", "should-be-equal", "verification", "testing-fundamentals", "builtin-library", "pass-fail", "validation"],
+        "estimatedTime": "6-10 minutes",
+        "prerequisites": ["ex-1-1"],
+        "nextExercises": ["ex-1-4", "ex-1-6"],
+        "version": "2.0",
+        "lastUpdated": "2025-10-02"
+      }
+    },
+    {
+      "id": "ex-1-6",
+      "title": "Test Case Documentation",
+      "difficulty": "intermediate",
+      "chapter": "2",
+      "free": true,
+      "description": "Add documentation and tags to organize test cases.",
+      "instructions": [
+        "Create test case 'User Login Test'",
+        "Add [Documentation] explaining it tests user authentication",
+        "Add [Tags] with: login authentication",
+        "Log 'Testing user login'"
+      ],
+      "initialCode": "*** Test Cases ***\n# Add test with documentation and tags\n    ",
+      "solution": "*** Test Cases ***\nUser Login Test\n    [Documentation]    Tests user authentication functionality\n    [Tags]    login    authentication\n    Log    Testing user login",
+      "hints": [
+        "[Documentation] comes first after test name",
+        "[Tags] comes after [Documentation]",
+        "Both use 4-space indentation",
+        "Documentation is a single line (or use ... for multi-line)"
+      ],
+      "validation": {
+        "mustContain": ["[Documentation]", "[Tags]", "login", "authentication"],
+        "mustPass": true
+      },
+      "theory": {
+        "title": "Test Case Metadata: Documentation and Tags",
+        "content": "## Why Document Test Cases?\n\nAs test suites grow from 10 tests to 100 or 1,000, **organization becomes critical**. Documentation and tags are Robot Framework's built-in mechanisms for making test suites maintainable, searchable, and understandable by teams.\n\n### The Problem Without Documentation\n\n```robot\n*** Test Cases ***\nTC_001\n    Login User    admin    password123\n    Navigate To Settings\n    Update Profile    New Name\n    Logout\n```\n\nQuestions arise:\n- What does TC_001 actually test?\n- Who wrote it and why?\n- What's the expected behavior?\n- When should this test run?\n\n### The Solution: Built-In Metadata\n\n```robot\n*** Test Cases ***\nUser Profile Update Test\n    [Documentation]    Verifies that authenticated users can update their profile name\n    ...                Prerequisites: Valid user account exists\n    ...                Expected: Profile changes are saved and displayed\n    [Tags]    profile    settings    regression    smoke\n    Login User         admin    password123\n    Navigate To Settings\n    Update Profile     New Name\n    Logout\n```\n\nNow the test is **self-documenting** and **discoverable**.\n\n## Documentation Setting\n\nThe `[Documentation]` setting provides a human-readable description of what the test does and why it exists.\n\n### Syntax\n\n```robot\n[Documentation]    Single line description\n\n# Multi-line documentation\n[Documentation]    First line of description\n...                Second line of description\n...                Third line of description\n```\n\n**Key points:**\n- Must come **immediately after** the test case name\n- Uses 4-space indentation\n- Multi-line docs use `...` continuation marker\n- Appears in **reports and logs**\n- Supports HTML formatting and links\n\n### What to Include\n\nGood documentation answers:\n- **What:** What functionality is being tested?\n- **Why:** Why is this test important?\n- **How:** Any special setup or preconditions?\n- **Expected:** What should happen?\n\n```robot\n*** Test Cases ***\nPassword Complexity Validation\n    [Documentation]    Tests that password must meet complexity requirements:\n    ...                - Minimum 8 characters\n    ...                - At least one uppercase letter\n    ...                - At least one number\n    ...                - At least one special character\n    ...                Bug reference: ISSUE-1234\n    [Tags]    security    validation    critical\n```\n\n## Tags: Organizing and Filtering Tests\n\nTags are **labels** you attach to test cases for organization, filtering, and selective execution.\n\n### Syntax\n\n```robot\n[Tags]    tag1    tag2    tag3\n```\n\n**Characteristics:**\n- Multiple tags separated by 4 spaces (or 2+)\n- Case-insensitive when filtering\n- Can be added at test or suite level\n- Inherited from suite settings\n\n### Common Tagging Strategies\n\n#### By Test Type\n```robot\n[Tags]    smoke       # Quick critical tests\n[Tags]    regression  # Comprehensive tests\n[Tags]    integration # System integration tests\n[Tags]    unit        # Component-level tests\n```\n\n#### By Feature/Module\n```robot\n[Tags]    login    authentication\n[Tags]    checkout    payment\n[Tags]    profile    user-management\n```\n\n#### By Priority/Severity\n```robot\n[Tags]    critical    blocker\n[Tags]    high        priority-1\n[Tags]    low         nice-to-have\n```\n\n#### By Execution Context\n```robot\n[Tags]    nightly     # Run in nightly builds\n[Tags]    manual      # Requires manual intervention\n[Tags]    wip         # Work in progress\n```\n\n### Selective Test Execution\n\nTags enable powerful filtering when running tests:\n\n```bash\n# Run only tests tagged 'smoke'\nrobot --include smoke tests/\n\n# Run tests tagged 'login' OR 'logout'\nrobot --include loginORlogout tests/\n\n# Run tests tagged 'regression' but NOT 'slow'\nrobot --include regression --exclude slow tests/\n\n# Run tests with tag 'critical' AND 'api'\nrobot --include criticalANDapi tests/\n```\n\nThis allows:\n- **Fast smoke tests** before commits\n- **Full regression** in CI/CD pipelines\n- **Feature-specific testing** during development\n- **Priority-based execution** when time-constrained\n\n## Suite-Level Settings\n\nYou can also apply documentation and tags to entire suites:\n\n```robot\n*** Settings ***\nDocumentation    Test suite for user authentication features\n...              Covers login, logout, password reset, and session management\nForce Tags       authentication    regression\nDefault Tags     web-ui\n\n*** Test Cases ***\nLogin Test\n    [Tags]    smoke    # Inherits: authentication, regression, web-ui, smoke\n    # Test implementation\n```\n\n- **Force Tags:** Applied to ALL tests in suite (can't be removed)\n- **Default Tags:** Applied unless test overrides with its own tags\n\n## Best Practices\n\n### Documentation\n1. **Be concise but complete:** 1-3 sentences usually sufficient\n2. **Include bug IDs:** Link to issue tracker when relevant\n3. **Document preconditions:** What must be true before test runs?\n4. **Update when tests change:** Keep docs in sync with code\n\n### Tags\n1. **Use consistent naming:** Establish team conventions\n2. **Avoid tag explosion:** Too many tags = no organization\n3. **Combine strategies:** Use type + feature + priority\n4. **Document tag meanings:** Create a tag dictionary for teams\n\n### Example: Well-Organized Test\n\n```robot\n*** Test Cases ***\nSuccessful User Registration Flow\n    [Documentation]    Verifies new users can register with valid email and password.\n    ...                After registration, user receives confirmation email and\n    ...                can log in with credentials.\n    ...                Related: USER-STORY-456\n    [Tags]    registration    smoke    high-priority    email\n    Navigate To Registration Page\n    Fill Registration Form    user@example.com    ValidPass123!\n    Submit Registration\n    Email Should Be Received    user@example.com    Welcome to App\n    Login With Credentials      user@example.com    ValidPass123!\n    Dashboard Should Be Visible\n```\n\nThis test is:\n- **Discoverable:** Easy to find via tags\n- **Understandable:** Clear documentation explains purpose\n- **Traceable:** Links to user story\n- **Filterable:** Can run smoke tests or registration tests independently\n\nMastering documentation and tags transforms disorganized test suites into **structured, maintainable test assets**.",
+        "learningObjectives": [
+          "Add documentation to test cases to explain their purpose and context",
+          "Use tags to categorize and organize tests for selective execution",
+          "Understand the syntax and placement of [Documentation] and [Tags] settings",
+          "Apply metadata best practices for maintainable test suites"
+        ],
+        "relatedConcepts": [
+          "Suite-level documentation and tags",
+          "Force Tags and Default Tags",
+          "Test filtering with --include/--exclude",
+          "Test reporting and traceability",
+          "Tag naming conventions"
+        ],
+        "documentation": "https://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#test-case-name-and-documentation",
+        "estimatedReadTime": "6-7 minutes"
+      },
+      "metadata": {
+        "tags": ["intermediate", "documentation", "tags", "metadata", "test-organization", "filtering", "best-practices", "maintainability"],
+        "estimatedTime": "10-15 minutes",
+        "prerequisites": ["ex-1-1", "ex-1-3"],
+        "nextExercises": ["ex-1-7", "ex-1-8"],
+        "version": "2.0",
+        "lastUpdated": "2025-10-02"
+      }
+    },
+    {
+      "id": "ex-1-7",
+      "title": "Multiple Test Cases",
+      "difficulty": "intermediate",
+      "chapter": "2",
+      "free": true,
+      "description": "Organize multiple test cases in one suite.",
+      "instructions": [
+        "Create 'Addition Test' that verifies 2+2=4 using Should Be Equal",
+        "Create 'Subtraction Test' that verifies 5-3=2",
+        "Both should pass"
+      ],
+      "initialCode": "*** Test Cases ***\n# Add two test cases\n    ",
+      "solution": "*** Test Cases ***\nAddition Test\n    ${result}    Evaluate    2+2\n    Should Be Equal    ${result}    ${4}\n\nSubtraction Test\n    ${result}    Evaluate    5-3\n    Should Be Equal    ${result}    ${2}",
+      "hints": [
+        "Separate test cases with blank line",
+        "Each test case starts with no indentation",
+        "Evaluate keyword can calculate expressions",
+        "Should Be Equal compares two values"
+      ],
+      "validation": {
+        "mustContain": ["Addition Test", "Subtraction Test", "Should Be Equal"],
+        "mustPass": true
+      },
+      "theory": {
+        "title": "Organizing Multiple Test Cases in a Suite",
+        "content": "## Test Suites: The Container for Test Cases\n\nIn Robot Framework, a **test suite** is a collection of test cases stored in a single `.robot` file (or directory). Each suite represents a logical grouping of related tests—for example, all tests for a specific feature, module, or user workflow.\n\n### Why Multiple Test Cases Per Suite?\n\nReal applications require **many test scenarios** to achieve adequate coverage:\n\n```robot\n*** Test Cases ***\nValid Login\n    # Test successful login\n\nInvalid Password\n    # Test wrong password\n\nInvalid Username\n    # Test non-existent user\n\nLocked Account\n    # Test disabled account\n\nSession Timeout\n    # Test session expiration\n```\n\nGrouping related scenarios in one suite provides:\n- **Logical organization:** All login tests in `login_tests.robot`\n- **Shared setup/teardown:** Suite-level initialization\n- **Better reporting:** Clear test categories in results\n- **Easier maintenance:** Related tests in one place\n\n## Syntax for Multiple Test Cases\n\nTest cases within a suite are separated by **one or more blank lines**:\n\n```robot\n*** Test Cases ***\nFirst Test\n    Log    This is test 1\n    Should Be Equal    1    1\n\nSecond Test\n    Log    This is test 2\n    Should Be Equal    2    2\n\nThird Test\n    Log    This is test 3\n    Should Be Equal    3    3\n```\n\n**Key rules:**\n1. Each test case name starts at the **beginning of the line** (no indentation)\n2. Test case steps are indented with **4 spaces**\n3. Test cases are separated by **blank lines**\n4. Order in file = execution order (by default)\n\n## Independent Test Execution\n\nEach test case is **independent** and **isolated**:\n\n```robot\n*** Test Cases ***\nTest One\n    ${var}    Set Variable    100\n    Log    ${var}\n\nTest Two\n    Log    ${var}    # FAIL! Variable from Test One doesn't exist here\n```\n\n**Important characteristics:**\n- Each test starts with a **clean state**\n- Variables don't carry over between tests (unless suite/global scope)\n- One test's failure doesn't prevent others from running\n- Tests can be executed individually or as a group\n\n## The Evaluate Keyword\n\nThe `Evaluate` keyword executes Python expressions and returns the result, making it useful for calculations:\n\n```robot\n${sum}        Evaluate    2 + 3           # Returns 5\n${product}    Evaluate    4 * 5           # Returns 20\n${comparison} Evaluate    10 > 5          # Returns True\n${length}     Evaluate    len('hello')    # Returns 5\n```\n\n### Common Uses\n\n**Mathematical operations:**\n```robot\n${total}    Evaluate    ${price} * ${quantity}\n${avg}      Evaluate    sum([1, 2, 3, 4, 5]) / 5\n```\n\n**String operations:**\n```robot\n${upper}    Evaluate    'hello'.upper()          # HELLO\n${joined}   Evaluate    '-'.join(['a','b','c'])  # a-b-c\n```\n\n**Conditional expressions:**\n```robot\n${status}    Evaluate    'pass' if ${score} >= 60 else 'fail'\n```\n\n**Type conversions:**\n```robot\n${num}    Evaluate    int('42')\n${str}    Evaluate    str(123)\n```\n\n### Security Note\n\n`Evaluate` executes **arbitrary Python code**, so use with caution:\n- Prefer built-in keywords when available\n- Don't evaluate untrusted user input\n- For simple math, consider `Set Variable` with numeric operations\n\n## Test Suite Execution Flow\n\nWhen Robot Framework executes a suite:\n\n```\n1. Suite Setup (if defined)\n   |\n   v\n2. Test Case 1\n   - Test Setup (if defined)\n   - Test steps\n   - Test Teardown (if defined)\n   |\n   v\n3. Test Case 2\n   - Test Setup (if defined)\n   - Test steps\n   - Test Teardown (if defined)\n   |\n   v\n4. Test Case N\n   - Test Setup (if defined)\n   - Test steps\n   - Test Teardown (if defined)\n   |\n   v\n5. Suite Teardown (if defined)\n```\n\n**Result aggregation:**\n- Suite **PASSES** if all tests pass\n- Suite **FAILS** if any test fails\n- Individual test results shown in reports\n\n## Best Practices for Test Organization\n\n### 1. Logical Grouping\n\nGroup tests by feature or functionality:\n\n```\nlogin_tests.robot\n    ├─ Valid Login\n    ├─ Invalid Password\n    └─ Account Lockout\n\nprofile_tests.robot\n    ├─ View Profile\n    ├─ Edit Profile\n    └─ Delete Profile\n```\n\n### 2. Naming Conventions\n\nUse descriptive, action-oriented names:\n\n```robot\n# Good names\nUser Can Login With Valid Credentials\nSystem Rejects Invalid Email Format\nOrder Total Includes Tax And Shipping\n\n# Poor names\nTest1\nTC_042\nCheck Thing\n```\n\n### 3. Suite Size\n\nBalance granularity with manageability:\n- **Too small:** 100 suites with 1-2 tests each (hard to navigate)\n- **Too large:** 1 suite with 500 tests (slow, unwieldy)\n- **Sweet spot:** 10-50 related tests per suite\n\n### 4. Test Independence\n\nEach test should be **runnable in isolation**:\n\n```robot\n# Bad: Tests depend on execution order\nTest 1 - Create User\n    Create User    testuser\n\nTest 2 - Login As User\n    Login    testuser    password    # Fails if Test 1 didn't run!\n\n# Good: Each test is self-contained\nTest 1 - Create User\n    Create User    testuser\n    User Should Exist    testuser\n    [Teardown]    Delete User    testuser\n\nTest 2 - Login As User\n    Create User    testuser    password\n    Login    testuser    password\n    [Teardown]    Delete User    testuser\n```\n\n### 5. Clear Assertions\n\nEvery test should verify something specific:\n\n```robot\n*** Test Cases ***\nAddition Test\n    ${result}    Evaluate    2+2\n    Should Be Equal As Numbers    ${result}    4\n    \nSubtraction Test\n    ${result}    Evaluate    5-3\n    Should Be Equal As Numbers    ${result}    2\n```\n\nEach test has:\n- **One primary purpose:** Test addition or subtraction\n- **Clear verification:** Explicit assertion\n- **Obvious pass/fail:** No ambiguity\n\n## Scaling to Larger Suites\n\nAs suites grow, consider:\n\n**Setup and teardown:**\n```robot\n*** Settings ***\nSuite Setup     Initialize Test Environment\nSuite Teardown  Cleanup Test Environment\nTest Setup      Reset To Default State\n```\n\n**Shared resources:**\n```robot\n*** Settings ***\nResource    ../resources/common_keywords.robot\nResource    ../resources/test_data.robot\n```\n\n**Data-driven testing:**\n```robot\n*** Test Cases ***\nCalculation Tests\n    [Template]    Verify Calculation\n    2+2    4\n    5-3    2\n    4*3    12\n    10/2   5\n```\n\nBy understanding how to organize multiple test cases effectively, you create **maintainable, scalable test suites** that grow with your application.",
+        "learningObjectives": [
+          "Organize multiple related test cases within a single test suite",
+          "Understand test case independence and execution flow",
+          "Use the Evaluate keyword to perform calculations and Python expressions",
+          "Apply best practices for test naming and organization"
+        ],
+        "relatedConcepts": [
+          "Test suite structure and hierarchy",
+          "Suite setup and teardown",
+          "Test independence and isolation",
+          "Data-driven testing with templates",
+          "Test execution order"
+        ],
+        "documentation": "https://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#test-case-files",
+        "estimatedReadTime": "6-7 minutes"
+      },
+      "metadata": {
+        "tags": ["intermediate", "multiple-tests", "test-suite", "evaluate-keyword", "test-organization", "python-expressions", "test-independence", "calculations"],
+        "estimatedTime": "12-15 minutes",
+        "prerequisites": ["ex-1-3", "ex-1-4"],
+        "nextExercises": ["ex-1-8", "ex-1-10"],
+        "version": "2.0",
+        "lastUpdated": "2025-10-02"
+      }
+    },
+    {
+      "id": "ex-1-8",
+      "title": "Using Comments",
+      "difficulty": "intermediate",
+      "chapter": "1",
+      "free": true,
+      "description": "Add comments to explain your code.",
+      "instructions": [
+        "Create a test case 'Documented Test'",
+        "Add a comment: # Initialize test data",
+        "Create variable ${status} with 'active'",
+        "Add comment: # Verify status",
+        "Log the status"
+      ],
+      "initialCode": "*** Test Cases ***\n# Add test with inline comments\n    ",
+      "solution": "*** Test Cases ***\nDocumented Test\n    # Initialize test data\n    ${status}    Set Variable    active\n    # Verify status\n    Log    ${status}",
+      "hints": [
+        "Comments start with #",
+        "Comments use same indentation as code",
+        "Comments are ignored during execution",
+        "Use comments to explain complex logic"
+      ],
+      "validation": {
+        "mustContain": ["#", "${status}", "active"],
+        "mustPass": true
+      },
+      "theory": {
+        "title": "Comments and Code Documentation in Robot Framework",
+        "content": "## The Purpose of Comments\n\nComments are **non-executable text** embedded in your code to explain **why** something is done, not just **what** is done. While Robot Framework's keyword-driven syntax is inherently readable, comments add context that code alone cannot convey.\n\n### When Code Speaks for Itself\n\n```robot\n*** Test Cases ***\nUser Login Test\n    Open Browser       https://app.com    Chrome\n    Input Text         id:username        testuser\n    Input Text         id:password        secret123\n    Click Button       id:login\n```\n\nThis code is self-explanatory—the keywords clearly describe actions.\n\n### When Comments Add Value\n\n```robot\n*** Test Cases ***\nUser Login Test\n    Open Browser       https://app.com    Chrome\n    \n    # Using test user created in database migration v2.3\n    Input Text         id:username        testuser\n    Input Text         id:password        secret123\n    \n    Click Button       id:login\n    \n    # Bug #1234: Login button sometimes takes 2 clicks\n    # Workaround: Wait 1 second before proceeding\n    Sleep              1s\n```\n\nNow we understand **context**:\n- Where test data comes from\n- Why there's an unexpected wait\n- Links to external references\n\n## Comment Syntax\n\nRobot Framework uses the hash symbol (`#`) for comments:\n\n```robot\n# This is a comment\n    # This is an indented comment\n```\n\n### Placement Rules\n\n**1. Start-of-line comments:**\n```robot\n*** Test Cases ***\nMy Test\n    # This comment describes the next action\n    Log    Hello World\n```\n\n**2. Inline comments (after code):**\n```robot\nLog    Hello World    # This logs to console\n```\n\n**3. Indentation matches code:**\n```robot\n*** Test Cases ***\nMy Test\n    # Comment at test case level\n    Log    First step\n    # Comment at same level\n    Log    Second step\n```\n\n### Multi-Line Comments\n\nRobot Framework doesn't have block comment syntax. Use multiple single-line comments:\n\n```robot\n# This is a long explanation that spans\n# multiple lines to describe complex logic\n# that requires detailed documentation\n${result}    Complex Keyword    arg1    arg2\n```\n\n## What to Comment (and What Not to)\n\n### DO Comment:\n\n**1. Complex logic or workarounds:**\n```robot\n# Workaround for ISSUE-456: API returns stale data\n# Must clear cache before each request\nClear API Cache\n${data}    Get User Data    user_id=123\n```\n\n**2. Business rules or requirements:**\n```robot\n# Per company policy: Users under 18 cannot create accounts\n${age}    Get User Age    ${user_id}\nRun Keyword If    ${age} < 18    Fail    User must be 18 or older\n```\n\n**3. External dependencies or data sources:**\n```robot\n# Test data from: configs/test_users.csv\n# Maintained by QA team, updated weekly\n${users}    Load Test Users From CSV\n```\n\n**4. Known issues or technical debt:**\n```robot\n# TODO: Replace with proper API once backend team finishes endpoint\n# Tracking: BACKEND-789\n${result}    Evaluate    {'status': 'mock_data'}\n```\n\n**5. Non-obvious timing or synchronization:**\n```robot\n# UI animation takes 500ms, wait for completion\nSleep    0.5s\nElement Should Be Visible    id:welcome-message\n```\n\n### DON'T Comment:\n\n**1. Obvious code:**\n```robot\n# Bad: Comment restates the code\n# Log the message hello\nLog    hello\n\n# Good: No comment needed, code is clear\nLog    hello\n```\n\n**2. Outdated information:**\n```robot\n# Bad: Comment contradicts code\n# Set status to inactive\n${status}    Set Variable    active    # Code was updated, comment wasn't!\n```\n\n**3. Commented-out code (usually):**\n```robot\n# Bad: Dead code clutters the file\n# Log    This is old code\n# ${old_var}    Set Variable    obsolete\n\n# Good: Delete it or move to version control\n```\n\nException: Temporarily comment code during debugging, but clean up before committing.\n\n## Comments vs. Documentation\n\nUnderstand the difference:\n\n### Comments (Internal)\n- For **developers** maintaining the code\n- Explain **implementation details**\n- Not visible in test reports\n\n```robot\n*** Test Cases ***\nMy Test\n    # Using SHA-256 because MD5 is deprecated\n    ${hash}    Generate Hash    SHA-256    ${data}\n```\n\n### Documentation (External)\n- For **stakeholders** reading test reports\n- Describe **what and why** at high level\n- Visible in HTML reports and logs\n\n```robot\n*** Test Cases ***\nPassword Hashing Test\n    [Documentation]    Verifies that user passwords are hashed using SHA-256\n    ...                before storage, as per security requirement SEC-42\n    # Implementation uses SHA-256 because MD5 is deprecated\n    ${hash}    Generate Hash    SHA-256    ${password}\n```\n\n## Comment Best Practices\n\n### 1. Explain Why, Not What\n\n```robot\n# Poor: Repeats what the code does\n# Set variable count to 10\n${count}    Set Variable    10\n\n# Good: Explains why this value\n# API limit is 10 requests per batch\n${count}    Set Variable    10\n```\n\n### 2. Keep Comments Updated\n\nWhen code changes, update comments:\n\n```robot\n# Outdated after code change\n# Retry 3 times before failing\nWait Until Keyword Succeeds    5x    1s    API Call\n\n# Updated to match reality\n# Retry 5 times before failing (increased for flaky API)\nWait Until Keyword Succeeds    5x    1s    API Call\n```\n\n### 3. Use TODO/FIXME/NOTE Markers\n\n```robot\n# TODO: Add validation for negative numbers\n# FIXME: This fails on Windows, needs investigation\n# NOTE: This timeout value is configurable in config.yaml\n```\n\n### 4. Link to External Resources\n\n```robot\n# Based on algorithm described in:\n# https://en.wikipedia.org/wiki/Luhn_algorithm\n${is_valid}    Validate Credit Card Number    ${card_number}\n\n# Reproduces bug reported in:\n# https://jira.company.com/browse/BUG-1234\n```\n\n### 5. Section Dividers for Long Files\n\n```robot\n*** Test Cases ***\n\n# ========================================\n# Positive Test Cases\n# ========================================\n\nSuccessful Login\n    ...\n\nSuccessful Logout\n    ...\n\n# ========================================\n# Negative Test Cases\n# ========================================\n\nInvalid Password\n    ...\n```\n\n## Comments in Different Sections\n\n### Settings Section\n```robot\n*** Settings ***\n# Using custom library for PDF validation\nLibrary    PdfLibrary\n\n# Shared keywords for all login tests\nResource    login_keywords.robot\n\n# Clean up users created during tests\nSuite Teardown    Delete Test Users\n```\n\n### Variables Section\n```robot\n*** Variables ***\n# Production API endpoint\n${API_URL}    https://api.production.com\n\n# Default timeout for all API calls (in seconds)\n${TIMEOUT}    30\n\n# Test data: user accounts from configs/users.json\n${ADMIN_USER}    admin@example.com\n```\n\n### Keywords Section\n```robot\n*** Keywords ***\nLogin As User\n    [Arguments]    ${username}    ${password}\n    # Using CSS selector because ID is dynamic\n    Input Text    css:.username-field    ${username}\n    Input Text    css:.password-field    ${password}\n    Click Button    id:login-btn\n```\n\n## When Comments Indicate Deeper Issues\n\nSometimes excessive comments signal code that should be refactored:\n\n```robot\n# Poor: Comment explains confusing code\n# This calculates the discounted price after applying\n# the 15% loyalty discount and 10% seasonal discount\n${price}    Evaluate    ${original_price} * 0.85 * 0.90\n\n# Better: Extract to keyword with clear name\n${price}    Calculate Price With Discounts    ${original_price}\n\n*** Keywords ***\nCalculate Price With Discounts\n    [Arguments]    ${original_price}\n    ${with_loyalty}    Evaluate    ${original_price} * 0.85\n    ${final_price}     Evaluate    ${with_loyalty} * 0.90\n    [Return]    ${final_price}\n```\n\nIf you need many comments to explain code, consider:\n- Breaking complex keywords into smaller steps\n- Using more descriptive variable/keyword names\n- Extracting magic numbers into named variables\n\nMastering comments means knowing **when to add context** and **when to let clear code speak for itself**.",
+        "learningObjectives": [
+          "Use comments to add context and explanations to test code",
+          "Understand the difference between comments and documentation",
+          "Apply commenting best practices (explain why, not what)",
+          "Recognize when comments indicate need for refactoring"
+        ],
+        "relatedConcepts": [
+          "Code readability and maintainability",
+          "[Documentation] setting vs. inline comments",
+          "TODO/FIXME/NOTE comment markers",
+          "Self-documenting code principles",
+          "Comment maintenance and hygiene"
+        ],
+        "documentation": "https://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#comments",
+        "estimatedReadTime": "6-7 minutes"
+      },
+      "metadata": {
+        "tags": ["intermediate", "comments", "documentation", "code-readability", "best-practices", "maintainability", "inline-comments", "code-hygiene"],
+        "estimatedTime": "10-12 minutes",
+        "prerequisites": ["ex-1-4"],
+        "nextExercises": ["ex-1-9", "ex-1-10"],
+        "version": "2.0",
+        "lastUpdated": "2025-10-02"
+      }
+    },
+    {
+      "id": "ex-1-9",
+      "title": "Fix Spacing and Indentation",
+      "difficulty": "intermediate",
+      "chapter": "1",
+      "free": true,
+      "description": "Fix a badly formatted test to follow RF conventions.",
+      "instructions": [
+        "The initial code has spacing errors",
+        "Fix the indentation to use 4 spaces consistently",
+        "Fix keyword-argument spacing to use 4 spaces",
+        "Test should log 'Hello' then 'World'"
+      ],
+      "initialCode": "*** Test Cases ***\nBadly Formatted Test\n  Log  Hello\n      Log  World",
+      "solution": "*** Test Cases ***\nBadly Formatted Test\n    Log    Hello\n    Log    World",
+      "hints": [
+        "Test case body uses 4-space indentation",
+        "Keyword and arguments separated by 4 spaces",
+        "Consistent spacing is crucial in Robot Framework",
+        "Use spaces, not tabs"
+      ],
+      "validation": {
+        "mustContain": ["Log", "Hello", "World"],
+        "mustPass": true
+      },
+      "theory": {
+        "title": "Robot Framework Spacing and Indentation Rules",
+        "content": "## Why Spacing Matters in Robot Framework\n\nUnlike many programming languages that use parentheses, brackets, or explicit delimiters, Robot Framework uses **whitespace** as its primary syntax element. This design choice prioritizes **readability** but demands **strict adherence** to spacing conventions.\n\n### The Whitespace-Based Syntax Philosophy\n\n**Traditional languages:**\n```python\nlogin(username, password)  # Comma-separated arguments\n```\n\n**Robot Framework:**\n```robot\nLogin    username    password    # Space-separated arguments\n```\n\nRobot Framework's whitespace syntax makes tests readable as **plain English**, but incorrect spacing causes:\n- **Syntax errors:** Keywords not recognized\n- **Argument confusion:** Values merged or split incorrectly  \n- **Execution failures:** Tests behave unexpectedly\n- **Maintenance nightmares:** Inconsistent formatting across files\n\n## The Two Critical Spacing Rules\n\n### Rule 1: Indentation (4 Spaces)\n\nAll content **within** a section must be indented with **exactly 4 spaces**:\n\n```robot\n*** Test Cases ***\nMy Test Name           # No indentation (test case name)\n    Log    Message    # 4-space indentation (test case content)\n    Should Be Equal    1    1    # 4-space indentation\n\n*** Keywords ***\nMy Keyword             # No indentation (keyword name)\n    [Arguments]    ${arg}    # 4-space indentation (keyword content)\n    Log    ${arg}            # 4-space indentation\n```\n\n**Common mistakes:**\n```robot\n# Wrong: 2 spaces\n  Log    Message\n\n# Wrong: 6 spaces\n      Log    Message\n\n# Wrong: Tab character (may look like 4 spaces but isn't)\n\tLog    Message\n\n# Correct: Exactly 4 spaces\n    Log    Message\n```\n\n### Rule 2: Keyword-Argument Separation (4+ Spaces)\n\nKeywords and arguments must be separated by **at least 4 spaces** (recommended) or **2+ spaces** (minimum):\n\n```robot\n# Recommended: 4 spaces between keyword and arguments\nLog    Hello World\nShould Be Equal    5    5\n\n# Also valid: More than 4 spaces (for alignment)\nLog              Hello World\nShould Be Equal  5    5\n\n# Minimum valid: 2 spaces (but discouraged)\nLog  Hello World\n```\n\n**Arguments separated by 4+ spaces:**\n```robot\nKeyword    arg1    arg2    arg3\n```\n\n## Data Format Detection\n\nRobot Framework supports multiple data formats, but **space-separated** is most common:\n\n### Space Format (Standard)\n```robot\n*** Test Cases ***\nMy Test\n    Log    Message    # 4 spaces = separator\n```\n\n### Tab Format (Alternative)\n```robot\n*** Test Cases ***\nMy Test\n\tLog\tMessage    # Tabs = separator\n```\n\n### Pipe Format (Explicit)\n```robot\n| *** Test Cases *** |\n| My Test            |\n|     | Log | Message |\n```\n\n**Recommendation:** Use **space format** with 4-space separators—it's the most widely adopted convention.\n\n## Common Spacing Errors and Fixes\n\n### Error 1: Inconsistent Indentation\n\n```robot\n# Bad: Mixed indentation\n*** Test Cases ***\nBadly Formatted Test\n  Log    Hello      # 2 spaces - WRONG\n      Log    World  # 6 spaces - WRONG\n    Log    Test     # 4 spaces - CORRECT\n\n# Good: Consistent 4-space indentation\n*** Test Cases ***\nProperly Formatted Test\n    Log    Hello    # 4 spaces\n    Log    World    # 4 spaces\n    Log    Test     # 4 spaces\n```\n\n**Result of inconsistent indentation:**\n- Robot Framework may interpret lines as continuations\n- Keywords may not execute\n- Arguments may be misinterpreted\n\n### Error 2: Insufficient Keyword-Argument Spacing\n\n```robot\n# Bad: Only 1 space\nLog Message\n\n# Bad: Only 2 spaces (minimum, but discouraged)\nLog  Message\n\n# Good: 4 spaces (standard)\nLog    Message\n```\n\n**Why 4 spaces is preferred:**\n- **Consistency:** Same as indentation rule\n- **Clarity:** Visually distinct keyword vs. arguments\n- **Alignment:** Easier to align arguments in columnar style\n\n### Error 3: Tabs vs. Spaces\n\n```robot\n# Invisible error: Looks correct but uses tabs\n*** Test Cases ***\nMy Test\n\tLog    Message    # Tab character - may cause issues\n\n# Correct: Actual spaces\n*** Test Cases ***\nMy Test\n    Log    Message    # 4 space characters\n```\n\n**Editor configuration:**\nMost editors can show whitespace characters to detect tabs. Configure your editor to:\n- Convert tabs to spaces automatically\n- Use 4 spaces per tab\n- Show invisible characters when needed\n\n### Error 4: Trailing Whitespace\n\n```robot\n# Can cause subtle issues\nLog    Message    \n               ^^^^ trailing spaces may cause parsing errors\n\n# Clean\nLog    Message\n```\n\n## Tools for Maintaining Proper Spacing\n\n### Robot Framework IDE (RIDE)\n- Automatically formats spacing\n- Validates syntax in real-time\n- Highlights spacing errors\n\n### Robotidy (Auto-formatter)\n```bash\npip install robotframework-tidy\nrobotidy tests/    # Auto-fix spacing in all test files\n```\n\n### VS Code Extensions\n- **Robot Framework Language Server:** Syntax validation\n- **EditorConfig:** Enforce 4-space indentation\n\n### .editorconfig Example\n```ini\n[*.robot]\nindent_style = space\nindent_size = 4\ntrim_trailing_whitespace = true\ninsert_final_newline = true\n```\n\n## Visual Spacing Guide\n\nUse invisible character markers to see spacing:\n\n```\n***·Test·Cases·***\nMy·Test·Name\n····Log····Hello·World\n····Should·Be·Equal····5····5\n\n^ = start of line\n· = space character\n```\n\n**Breakdown:**\n- Test name: No leading spaces\n- Keywords: 4 leading spaces\n- Keyword-argument gap: 4 spaces\n- Argument-argument gap: 4 spaces\n\n## Style Guide Recommendations\n\n### Indentation\n- **Always 4 spaces** for test case and keyword content\n- **Never use tabs** (configure editor to convert)\n- **Be consistent** throughout entire project\n\n### Keyword-Argument Spacing\n- **Minimum:** 4 spaces (recommended standard)\n- **Alignment:** Optionally align arguments for readability\n\n```robot\n# Minimal spacing (valid)\nLog                     Message\nShould Be Equal         5         5\n\n# Aligned spacing (more readable in some cases)\nLog                     Message\nShould Be Equal         5                5\n```\n\n### Section Headers\n```robot\n# Correct: Three asterisks, spaces, name, three asterisks\n*** Settings ***\n*** Variables ***\n*** Test Cases ***\n*** Keywords ***\n\n# Wrong: Inconsistent spacing\n***Settings***\n*** Variables***\n***  Test Cases  ***\n```\n\n## Debugging Spacing Issues\n\nWhen tests fail with cryptic errors:\n\n1. **Check indentation:** Ensure exactly 4 spaces\n2. **Check separators:** Ensure 4+ spaces between elements\n3. **Check for tabs:** Convert all tabs to spaces\n4. **Check trailing whitespace:** Remove extra spaces at line ends\n5. **Use formatters:** Run `robotidy` or IDE auto-format\n\n### Example Debugging\n\n```robot\n# Error: \"Keyword 'Log    Hello' not found\"\n*** Test Cases ***\nMy Test\n  Log    Hello    # Only 2-space indentation!\n\n# Fixed\n*** Test Cases ***\nMy Test\n    Log    Hello    # Correct 4-space indentation\n```\n\n## Why This Exercise Matters\n\nThe \"Fix Spacing and Indentation\" exercise teaches:\n\n1. **Attention to detail:** Whitespace is syntax in Robot Framework\n2. **Debugging skills:** Identifying and fixing formatting errors\n3. **Best practices:** Learning standard conventions early\n4. **Tool configuration:** Setting up editors correctly\n\nMastering spacing rules **prevents countless hours** of debugging mysterious test failures caused by invisible characters and inconsistent formatting.\n\n## Quick Reference\n\n```robot\n*** Section Name ***     # Sections: *** Name ***\nTest/Keyword Name        # Names: No indentation\n    Keyword    arg1    arg2    # Content: 4 spaces indent, 4 spaces separator\n    [Setting]    value          # Settings: 4 spaces indent, 4 spaces separator\n```\n\n**Golden rules:**\n1. Indent with **4 spaces** (not tabs, not 2, not 6)\n2. Separate with **4 spaces** (keyword from args, arg from arg)\n3. Be **consistent** across all files\n4. Use **tools** to automate formatting\n\nProper spacing isn't just about making tests work—it's about making them **maintainable, professional, and reliable**.",
+        "learningObjectives": [
+          "Understand Robot Framework's whitespace-based syntax rules",
+          "Apply the 4-space indentation rule consistently",
+          "Use 4-space separation between keywords and arguments",
+          "Identify and fix common spacing and indentation errors"
+        ],
+        "relatedConcepts": [
+          "Data format detection (space, tab, pipe formats)",
+          "Editor configuration for Robot Framework",
+          "Robotidy and auto-formatting tools",
+          "Trailing whitespace issues",
+          "Tabs vs. spaces debate"
+        ],
+        "documentation": "https://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#formatting",
+        "estimatedReadTime": "7-8 minutes"
+      },
+      "metadata": {
+        "tags": ["intermediate", "spacing", "indentation", "formatting", "syntax-rules", "best-practices", "code-style", "whitespace"],
+        "estimatedTime": "10-15 minutes",
+        "prerequisites": ["ex-1-1"],
+        "nextExercises": ["ex-1-10"],
+        "version": "2.0",
+        "lastUpdated": "2025-10-02"
+      }
+    },
+    {
+      "id": "ex-1-10",
+      "title": "Complete Suite Structure",
+      "difficulty": "intermediate",
+      "chapter": "2",
+      "free": true,
+      "description": "Create a properly organized test suite with all sections.",
+      "instructions": [
+        "Add Settings section with Suite Setup logging 'Suite Started'",
+        "Add Variables section with ${APP_NAME} = 'MyApp'",
+        "Add Test Cases section with test that logs ${APP_NAME}",
+        "Add Keywords section with 'Custom Keyword' that logs 'Custom'"
+      ],
+      "initialCode": "# Create complete suite structure\n",
+      "solution": "*** Settings ***\nSuite Setup    Log    Suite Started\n\n*** Variables ***\n${APP_NAME}    MyApp\n\n*** Test Cases ***\nTest App Name\n    Log    ${APP_NAME}\n\n*** Keywords ***\nCustom Keyword\n    Log    Custom",
+      "hints": [
+        "Section order: Settings, Variables, Test Cases, Keywords",
+        "Variables section: ${name}    value",
+        "Each section starts with *** Section Name ***",
+        "Sections separated by blank lines"
+      ],
+      "validation": {
+        "mustContain": ["*** Settings ***", "*** Variables ***", "*** Test Cases ***", "*** Keywords ***"],
+        "mustPass": true
+      },
+      "theory": {
+        "title": "Complete Robot Framework Suite Structure and Sections",
+        "content": "## Anatomy of a Robot Framework File\n\nA Robot Framework file (`.robot`) is a **self-contained test suite** organized into distinct **sections**. Each section serves a specific purpose, and understanding their roles and relationships is fundamental to writing professional, maintainable test automation.\n\n### The Four Core Sections\n\n```robot\n*** Settings ***\n# Configuration: libraries, resources, setup/teardown\n\n*** Variables ***\n# Test data and constants\n\n*** Test Cases ***\n# The actual test scenarios\n\n*** Keywords ***\n# Custom reusable keywords (functions)\n```\n\n**Key principles:**\n- Sections are **optional** (only include what you need)\n- Section **order is recommended** but not strictly enforced (except Test Cases before Keywords is common)\n- Sections make large files **organized and scannable**\n\n## Settings Section\n\nThe `*** Settings ***` section configures how the suite operates.\n\n### Common Settings\n\n**Library imports:**\n```robot\n*** Settings ***\nLibrary    SeleniumLibrary\nLibrary    RequestsLibrary\nLibrary    Collections\nLibrary    CustomLibrary    arg1    arg2    # With arguments\n```\n\n**Resource imports:**\n```robot\nResource    ../resources/common_keywords.robot\nResource    ../resources/test_data.robot\n```\n\n**Suite lifecycle:**\n```robot\nSuite Setup       Initialize Test Environment\nSuite Teardown    Cleanup Test Environment\n```\n\n**Test lifecycle:**\n```robot\nTest Setup        Login As Test User\nTest Teardown     Logout And Clear Session\n```\n\n**Metadata and documentation:**\n```robot\nDocumentation     This suite tests the user management module\nMetadata          Version    2.0\nMetadata          Author     QA Team\n```\n\n**Test organization:**\n```robot\nForce Tags        regression    api\nDefault Tags      user-management\n```\n\n### Suite Setup and Teardown\n\n**Suite Setup** runs **once** before all tests in the suite:\n```robot\nSuite Setup    Log    Suite Started\n```\n\nCommon uses:\n- Initialize database connections\n- Start application servers\n- Load configuration files\n- Create test data\n\n**Suite Teardown** runs **once** after all tests complete:\n```robot\nSuite Teardown    Close All Browsers\n```\n\nCommon uses:\n- Close database connections\n- Delete temporary test data\n- Archive logs\n- Send notifications\n\n**Execution flow:**\n```\nSuite Setup\n  |\n  v\nTest 1 (with Test Setup/Teardown)\n  |\n  v\nTest 2 (with Test Setup/Teardown)\n  |\n  v\nTest N (with Test Setup/Teardown)\n  |\n  v\nSuite Teardown\n```\n\n## Variables Section\n\nThe `*** Variables ***` section defines **test data** and **constants** available throughout the suite.\n\n### Scalar Variables\n```robot\n*** Variables ***\n${APP_NAME}        MyApp\n${BASE_URL}        https://example.com\n${TIMEOUT}         30\n${ADMIN_USER}      admin@example.com\n```\n\nUsage:\n```robot\nLog    Application: ${APP_NAME}\nOpen Browser    ${BASE_URL}    Chrome\n```\n\n### List Variables\n```robot\n@{USERS}           alice    bob    charlie\n@{BROWSERS}        Chrome   Firefox   Edge\n```\n\nUsage:\n```robot\nLog Many    @{USERS}           # Logs: alice, bob, charlie\nFOR    ${user}    IN    @{USERS}\n    Create Account    ${user}\nEND\n```\n\n### Dictionary Variables\n```robot\n&{ADMIN}           username=admin    password=secret123    role=admin\n&{CONFIG}          api_key=abc123    timeout=30\n```\n\nUsage:\n```robot\nLog    ${ADMIN.username}      # Logs: admin\nLogin    ${ADMIN.username}    ${ADMIN.password}\n```\n\n### Variable Scope\n\nVariables in `*** Variables ***` section have **suite scope**—available to:\n- All test cases in the suite\n- All keywords in the suite\n- Imported resource files (that reference them)\n\n### Variable Files\n\nFor complex data, use Python/YAML variable files:\n\n```robot\n*** Settings ***\nVariables    configs/test_data.py\nVariables    configs/environment.yaml\n```\n\n## Test Cases Section\n\nThe `*** Test Cases ***` section contains the actual test scenarios—this is the **heart** of your suite.\n\n```robot\n*** Test Cases ***\nTest App Name\n    Log    ${APP_NAME}\n    Should Be Equal    ${APP_NAME}    MyApp\n\nTest Navigation\n    Open Browser    ${BASE_URL}    Chrome\n    Page Should Contain    Welcome\n    [Teardown]    Close Browser\n```\n\n**Characteristics:**\n- Each test is independent (can run in isolation)\n- Tests execute sequentially (top to bottom)\n- One failing test doesn't prevent others from running\n- Test names should be descriptive and action-oriented\n\n## Keywords Section\n\nThe `*** Keywords ***` section defines **custom keywords**—reusable functions that encapsulate common operations.\n\n### Basic Custom Keyword\n\n```robot\n*** Keywords ***\nCustom Keyword\n    Log    Custom\n```\n\nUsage in tests:\n```robot\n*** Test Cases ***\nTest Custom Keyword\n    Custom Keyword    # Calls your custom keyword\n```\n\n### Keywords with Arguments\n\n```robot\n*** Keywords ***\nLogin As User\n    [Arguments]    ${username}    ${password}\n    Input Text     id:username    ${username}\n    Input Text     id:password    ${password}\n    Click Button   id:login\n```\n\nUsage:\n```robot\n*** Test Cases ***\nTest Login\n    Login As User    testuser    secret123\n```\n\n### Keywords with Return Values\n\n```robot\n*** Keywords ***\nGet Full Name\n    [Arguments]    ${first}    ${last}\n    ${full_name}    Set Variable    ${first} ${last}\n    [Return]    ${full_name}\n```\n\nUsage:\n```robot\n*** Test Cases ***\nTest Name Concatenation\n    ${name}    Get Full Name    John    Doe\n    Should Be Equal    ${name}    John Doe\n```\n\n### Why Custom Keywords?\n\n**Without custom keywords:**\n```robot\n*** Test Cases ***\nTest 1\n    Open Browser       https://app.com    Chrome\n    Input Text         id:username        user1\n    Input Text         id:password        pass1\n    Click Button       id:login\n    Page Should Contain    Dashboard\n    Close Browser\n\nTest 2\n    Open Browser       https://app.com    Chrome\n    Input Text         id:username        user2\n    Input Text         id:password        pass2\n    Click Button       id:login\n    Page Should Contain    Dashboard\n    Close Browser\n```\n\n**With custom keywords:**\n```robot\n*** Test Cases ***\nTest 1\n    Login As User    user1    pass1\n    Dashboard Should Be Visible\n\nTest 2\n    Login As User    user2    pass2\n    Dashboard Should Be Visible\n\n*** Keywords ***\nLogin As User\n    [Arguments]    ${username}    ${password}\n    Open Browser       https://app.com    Chrome\n    Input Text         id:username        ${username}\n    Input Text         id:password        ${password}\n    Click Button       id:login\n    [Teardown]         Close Browser\n\nDashboard Should Be Visible\n    Page Should Contain    Dashboard\n```\n\nBenefits:\n- **DRY principle:** Don't repeat yourself\n- **Abstraction:** Hide implementation details\n- **Maintainability:** Change once, fix everywhere\n- **Readability:** Tests read like documentation\n\n## Complete Suite Example\n\n```robot\n*** Settings ***\nLibrary           SeleniumLibrary\nResource          ../resources/common.robot\nSuite Setup       Open Browser    ${BASE_URL}    Chrome\nSuite Teardown    Close All Browsers\nTest Setup        Go To    ${BASE_URL}\nTest Tags         web-ui    smoke\n\n*** Variables ***\n${BASE_URL}       https://example.com\n${ADMIN_USER}     admin@example.com\n${ADMIN_PASS}     secret123\n\n*** Test Cases ***\nSuccessful Login\n    [Documentation]    Verifies admin can log in successfully\n    [Tags]    login    critical\n    Login As User    ${ADMIN_USER}    ${ADMIN_PASS}\n    Dashboard Should Be Visible\n\nUnsuccessful Login\n    [Documentation]    Verifies system rejects invalid credentials\n    [Tags]    login    security\n    Login As User    invalid@example.com    wrongpass\n    Error Message Should Be Displayed    Invalid credentials\n\n*** Keywords ***\nLogin As User\n    [Arguments]    ${username}    ${password}\n    Input Text     id:username    ${username}\n    Input Text     id:password    ${password}\n    Click Button   id:login-btn\n\nDashboard Should Be Visible\n    Wait Until Page Contains    Dashboard    timeout=5s\n    Location Should Be    ${BASE_URL}/dashboard\n\nError Message Should Be Displayed\n    [Arguments]    ${message}\n    Wait Until Page Contains    ${message}    timeout=3s\n```\n\n## Section Best Practices\n\n### Settings\n- Import only libraries you actually use\n- Use Suite Setup for expensive one-time operations\n- Use Test Setup for operations needed before EVERY test\n- Add documentation for complex suites\n\n### Variables\n- Use UPPERCASE for constants: `${BASE_URL}`\n- Use descriptive names: `${ADMIN_USER}` not `${U1}`\n- Group related variables together\n- Consider variable files for large datasets\n\n### Test Cases\n- One test = one scenario/workflow\n- Descriptive names (not TC_001)\n- Add [Documentation] for complex tests\n- Use [Tags] for organization\n- Keep tests focused and independent\n\n### Keywords\n- Create keywords for repeated operations (3+ uses)\n- Use verb-based names: `Login As User`, `Verify Dashboard`\n- Document complex keywords\n- Keep keywords focused (single responsibility)\n\n## When to Split Suites\n\nOne file is appropriate when:\n- 10-50 related test cases\n- All tests use same setup/teardown\n- Tests belong to same feature/module\n\nSplit into multiple files when:\n- Tests exceed 100+ cases\n- Different tests need different setup\n- Testing unrelated features\n- File becomes hard to navigate\n\n### Directory Structure for Multiple Suites\n\n```\ntests/\n├── login_tests.robot\n├── profile_tests.robot\n├── checkout_tests.robot\n└── resources/\n    ├── common_keywords.robot\n    ├── test_data.robot\n    └── page_objects.robot\n```\n\nBy mastering the complete suite structure, you create **organized, maintainable, and professional** test automation that scales from simple smoke tests to comprehensive test suites with thousands of test cases.",
+        "learningObjectives": [
+          "Understand the purpose and structure of all four Robot Framework sections",
+          "Create a complete test suite with Settings, Variables, Test Cases, and Keywords",
+          "Use Suite Setup to perform one-time initialization before tests",
+          "Define custom keywords to encapsulate reusable test logic"
+        ],
+        "relatedConcepts": [
+          "Suite and test setup/teardown lifecycle",
+          "Variable scopes (suite, test, global)",
+          "Library and resource imports",
+          "Custom keyword creation and arguments",
+          "Section ordering and organization"
+        ],
+        "documentation": "https://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#test-data-sections",
+        "estimatedReadTime": "8-10 minutes"
+      },
+      "metadata": {
+        "tags": ["intermediate", "suite-structure", "settings-section", "variables-section", "keywords-section", "suite-setup", "custom-keywords", "test-organization"],
+        "estimatedTime": "15-20 minutes",
+        "prerequisites": ["ex-1-6", "ex-1-7", "ex-1-9"],
+        "nextExercises": [],
+        "version": "2.0",
+        "lastUpdated": "2025-10-02"
+      }
+    }
+  ]
+}

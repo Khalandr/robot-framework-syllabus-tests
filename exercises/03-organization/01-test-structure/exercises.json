@@ -1,0 +1,355 @@
+{
+  "topic": "01-test-structure",
+  "exercises": [
+    {
+      "id": "ex-5-1",
+      "title": "Suite Setup",
+      "difficulty": "beginner",
+      "chapter": "4",
+      "free": true,
+      "description": "Use Suite Setup to run code before all tests in a suite.",
+      "instructions": [
+        "In Settings, add Suite Setup with keyword Log",
+        "Log message: 'Starting Test Suite'",
+        "Create a test case that logs 'Test 1'"
+      ],
+      "initialCode": "*** Settings ***\n# Add Suite Setup here\n\n*** Test Cases ***\n# Add test case here\n    ",
+      "solution": "*** Settings ***\nSuite Setup    Log    Starting Test Suite\n\n*** Test Cases ***\nTest One\n    Log    Test 1",
+      "hints": [
+        "Suite Setup runs once before all tests",
+        "Syntax: Suite Setup    <keyword>    <args>",
+        "No brackets needed in Settings section",
+        "Check the log to see setup runs first"
+      ],
+      "validation": {
+        "mustContain": ["Suite Setup", "Starting Test Suite"],
+        "mustPass": true
+      },
+      "theory": {
+        "title": "Suite Setup and Teardown for Test Initialization",
+        "content": "## Suite-Level Test Lifecycle\n\nRobot Framework provides **suite-level** setup and teardown mechanisms that run **once per test file**, not once per test case. This enables efficient initialization of expensive resources that can be shared across multiple tests.\n\n### Suite Setup\n\n**Suite Setup** executes a single keyword **before any test cases** in the suite run:\n\n```robot\n*** Settings ***\nSuite Setup    Log    Starting Test Suite\n\n*** Test Cases ***\nTest One\n    Log    First test\n\nTest Two\n    Log    Second test\n```\n\n**Execution order:**\n1. Suite Setup: `Log Starting Test Suite`\n2. Test One executes\n3. Test Two executes\n\n### When to Use Suite Setup\n\nCommon scenarios:\n\n**Database initialization:**\n```robot\n*** Settings ***\nLibrary    DatabaseLibrary\nSuite Setup    Connect To Database    mydb    user    pass    host    port\nSuite Teardown    Disconnect From Database\n```\n\n**Browser initialization (shared session):**\n```robot\n*** Settings ***\nLibrary    SeleniumLibrary\nSuite Setup    Open Browser    ${URL}    Chrome\nSuite Teardown    Close All Browsers\n```\n\n**Test data creation:**\n```robot\n*** Settings ***\nSuite Setup    Create Test Users\nSuite Teardown    Delete Test Users\n```\n\n**API authentication:**\n```robot\n*** Settings ***\nSuite Setup    Authenticate API Client\nSuite Teardown    Revoke API Token\n```\n\n### Suite Setup vs. Test Setup\n\n**Suite Setup:**\n- Runs **once** before all tests\n- Shared state across tests\n- Use for expensive initialization\n- Faster execution (one-time cost)\n\n**Test Setup:**\n- Runs **before each test**\n- Fresh state per test\n- Use for test isolation\n- Slower but more reliable\n\n**Example comparison:**\n\n```robot\n# Suite Setup: Browser opened once, shared by all tests\n*** Settings ***\nSuite Setup    Open Browser    ${URL}    Chrome\nSuite Teardown    Close Browser\n\n*** Test Cases ***\nTest Navigation\n    Click Link    About\n    Page Should Contain    About Us\n\nTest Search\n    Input Text    id:search    robot\n    # Uses same browser from Suite Setup\n```\n\n```robot\n# Test Setup: Fresh browser for each test\n*** Settings ***\nTest Setup    Open Browser    ${URL}    Chrome\nTest Teardown    Close Browser\n\n*** Test Cases ***\nTest Navigation\n    Click Link    About\n    Page Should Contain    About Us\n    # Browser closes after\n\nTest Search\n    # New browser opens\n    Input Text    id:search    robot\n```\n\n### Suite Setup Syntax\n\n```robot\n*** Settings ***\nSuite Setup    Keyword Name\nSuite Setup    Keyword With Args    arg1    arg2\nSuite Setup    ${VARIABLE_HOLDING_KEYWORD}\n```\n\n**Multiple operations:**\n\nSince Suite Setup accepts only **one keyword**, use compound keywords:\n\n```robot\n*** Settings ***\nSuite Setup    Initialize Test Environment\n\n*** Keywords ***\nInitialize Test Environment\n    Log    Starting suite\n    Connect To Database    mydb\n    Load Test Data\n    Open Browser    ${URL}    Chrome\n```\n\nOr use `Run Keywords`:\n\n```robot\n*** Settings ***\nSuite Setup    Run Keywords\n...    Log    Starting suite    AND\n...    Connect To Database    mydb    AND\n...    Open Browser    ${URL}    Chrome\n```\n\n### Benefits of Suite Setup\n\n**1. Performance:**\n```robot\n# Without Suite Setup: Open browser 100 times (slow)\nTest Setup    Open Browser    ${URL}    Chrome\nTest Teardown    Close Browser\n\n# With Suite Setup: Open browser once (fast)\nSuite Setup    Open Browser    ${URL}    Chrome\nSuite Teardown    Close Browser\n```\n\n**2. Resource efficiency:**\n- One database connection instead of N\n- One authentication token instead of N\n- One initialization instead of N\n\n**3. Realistic scenarios:**\n- Tests mimic real user sessions (multiple actions in one session)\n- Simulates continuous application usage\n\n### Risks and Considerations\n\n**State pollution:**\n```robot\n*** Settings ***\nSuite Setup    Login As Admin\nSuite Teardown    Logout\n\n*** Test Cases ***\nTest 1\n    Create User    newuser\n    # User now exists in system\n\nTest 2\n    # Test 2 sees user created by Test 1!\n    # May cause unexpected failures\n```\n\n**Solution:** Clean state between tests:\n```robot\n*** Settings ***\nSuite Setup    Login As Admin\nTest Teardown    Delete All Test Data\nSuite Teardown    Logout\n```\n\n**Failure impact:**\n\nIf Suite Setup **fails**, all tests in the suite are **skipped**:\n```robot\n*** Settings ***\nSuite Setup    Connect To Database    invalid_credentials\n\n*** Test Cases ***\nTest 1\n    # SKIPPED - Suite Setup failed\n\nTest 2\n    # SKIPPED - Suite Setup failed\n```\n\n**Best practice:** Make Suite Setup robust:\n```robot\n*** Settings ***\nSuite Setup    Initialize With Retry\n\n*** Keywords ***\nInitialize With Retry\n    Wait Until Keyword Succeeds    3x    5s    Connect To Database    ...\n```\n\n### Suite Teardown\n\n**Suite Teardown** executes **after all tests** complete, even if tests fail:\n\n```robot\n*** Settings ***\nSuite Setup    Open Browser    ${URL}    Chrome\nSuite Teardown    Close All Browsers\n\n*** Test Cases ***\nTest That Fails\n    Fail    This test fails\n\nTest That Passes\n    Log    This test passes\n\n# Suite Teardown STILL runs: Close All Browsers\n```\n\n**Common uses:**\n- Close connections\n- Delete temporary files\n- Archive logs\n- Send notifications\n- Cleanup test data\n\n### Complete Example\n\n```robot\n*** Settings ***\nLibrary           SeleniumLibrary\nLibrary           DatabaseLibrary\nSuite Setup       Initialize Test Suite\nSuite Teardown    Cleanup Test Suite\nTest Setup        Reset Application State\n\n*** Variables ***\n${URL}            https://example.com\n${DB_NAME}        testdb\n\n*** Test Cases ***\nTest User Registration\n    Go To Registration Page\n    Fill Registration Form    user1@example.com\n    Submit Form\n    User Should Be In Database    user1@example.com\n\nTest User Login\n    Login As User    user1@example.com    password\n    Dashboard Should Be Visible\n\n*** Keywords ***\nInitialize Test Suite\n    Log    Starting Test Suite    console=yes\n    Connect To Database    ${DB_NAME}    user    pass    localhost    3306\n    Open Browser    ${URL}    headlesschrome\n    Maximize Browser Window\n\nCleanup Test Suite\n    Close All Browsers\n    Execute SQL String    DELETE FROM users WHERE email LIKE '%@example.com'\n    Disconnect From Database\n    Log    Test Suite Complete    console=yes\n\nReset Application State\n    Go To    ${URL}\n    Delete All Cookies\n```\n\n### Best Practices\n\n1. **Keep Suite Setup fast:** Under 5 seconds ideal\n2. **Make it idempotent:** Safe to run multiple times\n3. **Handle failures gracefully:** Use retries and error handling\n4. **Clean up in teardown:** Always release resources\n5. **Document dependencies:** Explain what setup requires\n6. **Test isolation:** Prevent tests from affecting each other\n\nBy mastering Suite Setup and Teardown, you create **efficient, maintainable test suites** that initialize once and run quickly.",
+        "learningObjectives": [
+          "Understand the difference between Suite Setup and Test Setup",
+          "Use Suite Setup to perform one-time initialization before all tests",
+          "Recognize when to use suite-level vs. test-level setup",
+          "Implement efficient resource sharing across multiple tests"
+        ],
+        "relatedConcepts": [
+          "Suite Teardown for cleanup",
+          "Test Setup and Test Teardown",
+          "Suite-level vs. test-level lifecycle",
+          "Resource initialization and cleanup",
+          "Test execution order and dependencies"
+        ],
+        "documentation": "https://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#suite-setup-and-teardown",
+        "estimatedReadTime": "6-7 minutes"
+      },
+      "metadata": {
+        "tags": ["beginner", "suite-setup", "test-lifecycle", "settings", "initialization", "resource-management", "test-organization"],
+        "estimatedTime": "8-12 minutes",
+        "prerequisites": [],
+        "nextExercises": ["ex-5-2", "ex-5-3"],
+        "version": "2.0",
+        "lastUpdated": "2025-10-02"
+      }
+    },
+    {
+      "id": "ex-5-2",
+      "title": "Suite Teardown",
+      "difficulty": "beginner",
+      "chapter": "4",
+      "free": true,
+      "description": "Use Suite Teardown for cleanup after all tests.",
+      "instructions": [
+        "Add Suite Teardown that logs 'Cleanup Complete'",
+        "Create a test case that logs 'Test Running'"
+      ],
+      "initialCode": "*** Settings ***\n# Add Suite Teardown here\n\n*** Test Cases ***\n# Add test case here\n    ",
+      "solution": "*** Settings ***\nSuite Teardown    Log    Cleanup Complete\n\n*** Test Cases ***\nTest One\n    Log    Test Running",
+      "hints": [
+        "Suite Teardown runs once after all tests",
+        "Useful for cleanup operations",
+        "Runs even if tests fail",
+        "Check the log to see it runs last"
+      ],
+      "validation": {
+        "mustContain": ["Suite Teardown", "Cleanup Complete"],
+        "mustPass": true
+      },
+      "metadata": {
+        "tags": ["beginner", "suite-teardown", "cleanup", "settings", "test-lifecycle"],
+        "estimatedTime": "6-10 minutes",
+        "prerequisites": ["ex-5-1"],
+        "nextExercises": ["ex-5-3"],
+        "version": "2.0",
+        "lastUpdated": "2025-10-02"
+      }
+    },
+    {
+      "id": "ex-5-3",
+      "title": "Test Setup",
+      "difficulty": "beginner",
+      "chapter": "4",
+      "free": true,
+      "description": "Use Test Setup to run code before each test.",
+      "instructions": [
+        "Add Test Setup that logs 'Preparing Test'",
+        "Create two test cases",
+        "Each should log different messages"
+      ],
+      "initialCode": "*** Settings ***\n# Add Test Setup here\n\n*** Test Cases ***\n# Add two test cases\n    ",
+      "solution": "*** Settings ***\nTest Setup    Log    Preparing Test\n\n*** Test Cases ***\nTest One\n    Log    First Test\n\nTest Two\n    Log    Second Test",
+      "hints": [
+        "Test Setup runs before EACH test case",
+        "Useful for initializing test data",
+        "Each test gets fresh setup",
+        "Note how setup runs twice (once per test)"
+      ],
+      "validation": {
+        "mustContain": ["Test Setup", "Preparing Test"],
+        "mustPass": true
+      },
+      "metadata": {
+        "tags": ["beginner", "test-setup", "test-lifecycle", "settings", "initialization"],
+        "estimatedTime": "8-12 minutes",
+        "prerequisites": ["ex-5-1"],
+        "nextExercises": ["ex-5-4"],
+        "version": "2.0",
+        "lastUpdated": "2025-10-02"
+      }
+    },
+    {
+      "id": "ex-5-4",
+      "title": "Test Teardown",
+      "difficulty": "beginner",
+      "chapter": "4",
+      "free": false,
+      "description": "Use Test Teardown to cleanup after each test.",
+      "instructions": [
+        "Add Test Teardown that logs 'Test Finished'",
+        "Create a test that logs 'Running Test'"
+      ],
+      "initialCode": "*** Settings ***\n# Add Test Teardown here\n\n*** Test Cases ***\n# Add test case\n    ",
+      "solution": "*** Settings ***\nTest Teardown    Log    Test Finished\n\n*** Test Cases ***\nTest One\n    Log    Running Test",
+      "hints": [
+        "Test Teardown runs after EACH test",
+        "Runs even if test fails",
+        "Good for cleanup operations",
+        "Separate from Suite Teardown"
+      ],
+      "validation": {
+        "mustContain": ["Test Teardown", "Test Finished"],
+        "mustPass": true
+      },
+      "metadata": {
+        "tags": ["beginner", "test-teardown", "cleanup", "settings", "test-lifecycle"],
+        "estimatedTime": "6-10 minutes",
+        "prerequisites": ["ex-5-3"],
+        "nextExercises": ["ex-5-5"],
+        "version": "2.0",
+        "lastUpdated": "2025-10-02"
+      }
+    },
+    {
+      "id": "ex-5-5",
+      "title": "Test Tags",
+      "difficulty": "beginner",
+      "chapter": "4",
+      "free": false,
+      "description": "Use tags to categorize and filter tests.",
+      "instructions": [
+        "Create a test case 'Login Test'",
+        "Add [Tags] with: smoke critical",
+        "Log 'Testing Login'"
+      ],
+      "initialCode": "*** Test Cases ***\n# Add test with tags\n    ",
+      "solution": "*** Test Cases ***\nLogin Test\n    [Tags]    smoke    critical\n    Log    Testing Login",
+      "hints": [
+        "[Tags] goes inside the test case",
+        "First line after test case name",
+        "Multiple tags separated by spaces",
+        "Tags are used for filtering: robot --include smoke"
+      ],
+      "validation": {
+        "mustContain": ["[Tags]", "smoke", "critical"],
+        "mustPass": true
+      },
+      "metadata": {
+        "tags": ["beginner", "tags", "test-organization", "filtering", "metadata"],
+        "estimatedTime": "8-12 minutes",
+        "prerequisites": [],
+        "nextExercises": ["ex-5-9"],
+        "version": "2.0",
+        "lastUpdated": "2025-10-02"
+      }
+    },
+    {
+      "id": "ex-5-6",
+      "title": "Test Templates",
+      "difficulty": "intermediate",
+      "chapter": "2",
+      "free": false,
+      "description": "Use test templates for data-driven testing.",
+      "instructions": [
+        "Create keyword 'Verify Addition' with [Arguments] ${a} ${b} ${expected}",
+        "Calculate ${a} + ${b} and verify equals ${expected}",
+        "Create test 'Addition Tests' with [Template] Verify Addition",
+        "Add test data rows: 1 1 2, 2 3 5, 5 5 10"
+      ],
+      "initialCode": "*** Test Cases ***\n# Add templated test\n\n*** Keywords ***\n# Add verification keyword\n    ",
+      "solution": "*** Test Cases ***\nAddition Tests\n    [Template]    Verify Addition\n    1    1    2\n    2    3    5\n    5    5    10\n\n*** Keywords ***\nVerify Addition\n    [Arguments]    ${a}    ${b}    ${expected}\n    ${result}    Evaluate    ${a} + ${b}\n    Should Be Equal    ${result}    ${expected}",
+      "hints": [
+        "[Template] makes each data row a test",
+        "Each row passes arguments to the keyword",
+        "No keyword names needed in test rows",
+        "Great for testing multiple data sets"
+      ],
+      "validation": {
+        "mustContain": ["[Template]", "Verify Addition", "[Arguments]"],
+        "mustPass": true
+      },
+      "metadata": {
+        "tags": ["intermediate", "templates", "data-driven", "test-organization", "keywords"],
+        "estimatedTime": "15-20 minutes",
+        "prerequisites": ["ex-5-5"],
+        "nextExercises": ["ex-5-7"],
+        "version": "2.0",
+        "lastUpdated": "2025-10-02"
+      }
+    },
+    {
+      "id": "ex-5-7",
+      "title": "Suite Variables Section",
+      "difficulty": "intermediate",
+      "chapter": "2",
+      "free": false,
+      "description": "Define suite-level variables in Variables section.",
+      "instructions": [
+        "Add *** Variables *** section",
+        "Define ${BASE_URL} with value 'http://example.com'",
+        "Define ${TIMEOUT} with value '30'",
+        "Create test that logs both variables"
+      ],
+      "initialCode": "# Add Variables section and test\n",
+      "solution": "*** Variables ***\n${BASE_URL}    http://example.com\n${TIMEOUT}    30\n\n*** Test Cases ***\nTest Variables\n    Log    ${BASE_URL}\n    Log    ${TIMEOUT}",
+      "hints": [
+        "Variables section comes after Settings",
+        "Format: ${VAR_NAME}    value",
+        "Available to all tests in suite",
+        "Can also define lists: @{LIST} item1 item2"
+      ],
+      "validation": {
+        "mustContain": ["*** Variables ***", "${BASE_URL}", "${TIMEOUT}"],
+        "mustPass": true
+      },
+      "metadata": {
+        "tags": ["intermediate", "variables", "suite-variables", "variables-section", "test-data"],
+        "estimatedTime": "10-15 minutes",
+        "prerequisites": ["ex-5-6"],
+        "nextExercises": ["ex-5-8"],
+        "version": "2.0",
+        "lastUpdated": "2025-10-02"
+      }
+    },
+    {
+      "id": "ex-5-8",
+      "title": "Test Timeout",
+      "difficulty": "intermediate",
+      "chapter": "4",
+      "free": false,
+      "description": "Set timeout for test case execution.",
+      "instructions": [
+        "Create test 'Fast Test'",
+        "Add [Timeout] set to 5 seconds",
+        "Sleep for 1 second",
+        "Log 'Completed'"
+      ],
+      "initialCode": "*** Test Cases ***\n# Add test with timeout\n    ",
+      "solution": "*** Test Cases ***\nFast Test\n    [Timeout]    5 seconds\n    Sleep    1s\n    Log    Completed",
+      "hints": [
+        "[Timeout] prevents tests from running too long",
+        "Can use: seconds, minutes, hours",
+        "Test fails if timeout exceeded",
+        "Can set default: Test Timeout in Settings"
+      ],
+      "validation": {
+        "mustContain": ["[Timeout]", "Sleep", "seconds"],
+        "mustPass": true
+      },
+      "metadata": {
+        "tags": ["intermediate", "timeout", "test-settings", "time-management", "test-control"],
+        "estimatedTime": "10-12 minutes",
+        "prerequisites": ["ex-5-5"],
+        "nextExercises": ["ex-5-9"],
+        "version": "2.0",
+        "lastUpdated": "2025-10-02"
+      }
+    },
+    {
+      "id": "ex-5-9",
+      "title": "Multiple Tags",
+      "difficulty": "intermediate",
+      "chapter": "4",
+      "free": false,
+      "description": "Use tags effectively for test organization.",
+      "instructions": [
+        "Create 'Login Test' with tags: smoke, critical, api",
+        "Create 'Logout Test' with tags: smoke, api",
+        "Both should log appropriate messages"
+      ],
+      "initialCode": "*** Test Cases ***\n# Add two tests with different tags\n    ",
+      "solution": "*** Test Cases ***\nLogin Test\n    [Tags]    smoke    critical    api\n    Log    Testing login\n\nLogout Test\n    [Tags]    smoke    api\n    Log    Testing logout",
+      "hints": [
+        "Tags help categorize and filter tests",
+        "Run with: robot --include smoke",
+        "Exclude: robot --exclude critical",
+        "Combine: robot --include smokeANDapi"
+      ],
+      "validation": {
+        "mustContain": ["[Tags]", "smoke", "critical", "api"],
+        "mustPass": true
+      },
+      "metadata": {
+        "tags": ["intermediate", "tags", "test-organization", "filtering", "multiple-tags"],
+        "estimatedTime": "12-15 minutes",
+        "prerequisites": ["ex-5-5"],
+        "nextExercises": ["ex-5-10"],
+        "version": "2.0",
+        "lastUpdated": "2025-10-02"
+      }
+    },
+    {
+      "id": "ex-5-10",
+      "title": "Force Tags",
+      "difficulty": "intermediate",
+      "chapter": "4",
+      "free": false,
+      "description": "Apply tags to all tests in a suite using Force Tags.",
+      "instructions": [
+        "In Settings, add 'Force Tags regression'",
+        "Create two tests without individual [Tags]",
+        "Both should automatically get 'regression' tag"
+      ],
+      "initialCode": "*** Settings ***\n# Add Force Tags\n\n*** Test Cases ***\n# Add two tests\n    ",
+      "solution": "*** Settings ***\nForce Tags    regression\n\n*** Test Cases ***\nTest One\n    Log    First test\n\nTest Two\n    Log    Second test",
+      "hints": [
+        "Force Tags applies to ALL tests in suite",
+        "Combined with individual [Tags]",
+        "Useful for categorizing entire suites",
+        "Can add multiple: Force Tags tag1 tag2"
+      ],
+      "validation": {
+        "mustContain": ["Force Tags", "regression"],
+        "mustPass": true
+      },
+      "metadata": {
+        "tags": ["intermediate", "force-tags", "suite-tags", "test-organization", "settings"],
+        "estimatedTime": "10-12 minutes",
+        "prerequisites": ["ex-5-9"],
+        "nextExercises": [],
+        "version": "2.0",
+        "lastUpdated": "2025-10-02"
+      }
+    }
+  ]
+}
