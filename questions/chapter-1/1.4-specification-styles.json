@@ -42,7 +42,7 @@
           "explanation": "It's the opposite - Keyword-Driven is imperative, Behavior-Driven is declarative"
         },
         {
-          "text": "Keyword-Driven is imperative (action-centric); Behavior-Driven is declarative (behavior-centric)",
+          "text": "Keyword-Driven is imperative; Behavior-Driven is declarative",
           "correct": true
         },
         {
@@ -221,21 +221,21 @@
       "type": "multiple",
       "options": [
         {
-          "text": "```robot\nGiven system is initialized\nWhen user logs in\nThen dashboard is displayed\n```",
+          "text": "Given system is initialized, When user logs in, Then dashboard is displayed",
           "correct": true
         },
         {
-          "text": "```robot\nuser is on login page\nuser enters credentials\nuser sees dashboard\n```",
+          "text": "Given user is on login page, When user enters credentials, Then user sees dashboard",
           "correct": true
         },
         {
-          "text": "```robot\nAnd product is available\nBut price is too high\nWhen discount is applied\n```",
+          "text": "Given product is available, But price is too high, When discount is applied, Then user can purchase",
           "correct": true
         },
         {
-          "text": "```robot\nOpen Login Page\nEnter Credentials    user    pass\nVerify Dashboard Loaded\n```",
+          "text": "Open Login Page, Enter Credentials user pass, Verify Dashboard Loaded",
           "correct": false,
-          "explanation": "This is Keyword-Driven style with imperative commands"
+          "explanation": "This is Keyword-Driven style with imperative commands, not Behavior-Driven"
         }
       ]
     },
@@ -262,32 +262,6 @@
           "text": "The keywords should also use Given/When/Then prefixes",
           "correct": false,
           "explanation": "Keywords implementing BDD steps typically use imperative style"
-        }
-      ]
-    },
-    {
-      "id": "ch1-4-q11",
-      "question": "What is a key advantage of Robot Framework's Behavior-Driven implementation compared to other BDD frameworks like Cucumber?",
-      "type": "single",
-      "options": [
-        {
-          "text": "Robot Framework doesn't require step definitions",
-          "correct": false,
-          "explanation": "Keywords in RF serve a similar purpose to step definitions"
-        },
-        {
-          "text": "Robot Framework allows multiple keyword layers with detailed logging",
-          "correct": true
-        },
-        {
-          "text": "Robot Framework's BDD syntax is more strict",
-          "correct": false,
-          "explanation": "RF is actually more flexible, ignoring Given/When/Then if keywords match"
-        },
-        {
-          "text": "Robot Framework only supports Python for implementations",
-          "correct": false,
-          "explanation": "This isn't an advantage and RF supports multiple languages through libraries"
         }
       ]
     }

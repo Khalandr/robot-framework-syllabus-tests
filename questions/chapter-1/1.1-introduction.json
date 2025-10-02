@@ -114,27 +114,27 @@
     },
     {
       "id": "ch1-1-q5",
-      "question": "Which statement BEST describes Robot Framework's abstraction level and typical use cases?",
+      "question": "Which testing levels are MOST suitable for Robot Framework?",
       "type": "single",
       "options": [
         {
-          "text": "High-level abstraction designed for acceptance, system, and end-to-end testing",
+          "text": "Acceptance, system, and end-to-end testing",
           "correct": true
         },
         {
-          "text": "Low-level framework optimized for unit and component testing",
+          "text": "Unit, integration, and component testing",
           "correct": false,
-          "explanation": "Robot Framework operates at high-level abstraction, not suitable for low-level unit/component testing"
+          "explanation": "Robot Framework's abstraction level makes it less suitable for low-level unit and component testing"
         },
         {
-          "text": "Mid-level framework exclusively for API integration testing",
+          "text": "Performance, load, and stress testing",
           "correct": false,
-          "explanation": "Robot Framework is high-level and supports various testing types, not just API testing"
+          "explanation": "While possible with extensions, Robot Framework is primarily designed for functional testing at acceptance and system levels"
         },
         {
-          "text": "Code-level framework designed for test-driven development",
+          "text": "Security, penetration, and vulnerability testing",
           "correct": false,
-          "explanation": "Robot Framework is not designed for code-level TDD; it focuses on acceptance and system testing"
+          "explanation": "Robot Framework is primarily a functional test automation tool, not specialized for security testing"
         }
       ]
     },
@@ -144,23 +144,23 @@
       "type": "single",
       "options": [
         {
-          "text": "Compiling source code",
-          "correct": false,
-          "explanation": "Code compilation is not an RPA task and not what Robot Framework is designed for"
-        },
-        {
-          "text": "Data extraction and manipulation between systems",
+          "text": "Automating data extraction and transfer between business applications",
           "correct": true
         },
         {
-          "text": "Operating system kernel development",
+          "text": "Creating mobile application UI designs",
           "correct": false,
-          "explanation": "Kernel development is low-level programming, not an RPA task"
+          "explanation": "UI design is a creative task performed by designers, not suitable for RPA automation"
         },
         {
-          "text": "Hardware driver installation",
+          "text": "Writing business requirement specifications",
           "correct": false,
-          "explanation": "Driver installation is a system-level task, not typical RPA"
+          "explanation": "Requirements specification is a human decision-making task that requires business analysis, not suitable for RPA"
+        },
+        {
+          "text": "Conducting user interviews and feedback sessions",
+          "correct": false,
+          "explanation": "User interviews require human interaction and qualitative analysis, not suitable for RPA automation"
         }
       ]
     },

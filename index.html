@@ -10,7 +10,7 @@
 <body>
     <header>
         <div class="container">
-            <div class="logo">
+            <div class="logo" onclick="app.showModeSelection()" style="cursor: pointer;" title="Go to main page">
                 <img src="assets/rf_logo.svg" alt="Robot Framework Logo" class="rf-logo">
             </div>
             <h1>Robot Framework Certification Practice</h1>
@@ -146,6 +146,11 @@
                 <div id="recommendations" class="recommendations">
                     <h3>Recommendations</h3>
                     <div id="recommendationsList"></div>
+                </div>
+
+                <div id="detailedResults" class="detailed-results">
+                    <h3>Question Details</h3>
+                    <div id="questionDetails"></div>
                 </div>
 
                 <div class="result-actions">

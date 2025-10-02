@@ -15,6 +15,9 @@ const stats = {
 
         // Recommendations
         this.displayRecommendations(results.answers);
+
+        // Detailed question results
+        this.displayQuestionDetails(results.answers);
     },
 
     displayChapterBreakdown(answers) {
@@ -124,5 +127,86 @@ const stats = {
 
             recommendationsDiv.appendChild(list);
         }
+    },
+
+    displayQuestionDetails(answers) {
+        const detailsDiv = document.getElementById('questionDetails');
+        detailsDiv.innerHTML = '';
+
+        answers.forEach((answer, index) => {
+            const questionDiv = document.createElement('div');
+            questionDiv.className = 'question-detail';
+            questionDiv.style.cssText = `
+                margin: 1rem 0;
+                padding: 1rem;
+                background: ${answer.isCorrect ? 'rgba(40, 167, 69, 0.1)' : 'rgba(220, 53, 69, 0.1)'};
+                border-left: 4px solid ${answer.isCorrect ? 'var(--success-green)' : 'var(--error-red)'};
+                border-radius: 6px;
+            `;
+
+            const statusIcon = answer.isCorrect ? '✓' : '✗';
+            const statusColor = answer.isCorrect ? 'var(--success-green)' : 'var(--error-red)';
+
+            // Build correct answers display
+            const correctAnswers = answer.question.options
+                .filter(opt => opt.correct)
+                .map(opt => opt.text);
+
+            // Build user answers display
+            const userAnswers = answer.userAnswer || [];
+
+            let detailsHTML = `
+                <div style="display: flex; align-items: start; gap: 0.5rem; margin-bottom: 0.5rem;">
+                    <span style="color: ${statusColor}; font-size: 1.5rem; font-weight: bold;">${statusIcon}</span>
+                    <div style="flex: 1;">
+                        <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.25rem;">
+                            ${answer.subchapter} ${answer.question.id ? `• ${answer.question.id}` : ''}
+                        </div>
+                        <div style="font-weight: 500; margin-bottom: 0.5rem;">
+                            ${this.escapeHtml(answer.question.question)}
+                        </div>
+            `;
+
+            if (!answer.isCorrect) {
+                detailsHTML += `
+                    <div style="margin-top: 0.75rem;">
+                        <div style="color: var(--error-red); font-size: 0.9rem; margin-bottom: 0.25rem;">
+                            <strong>Your answer:</strong> ${userAnswers.length > 0 ? userAnswers.join(', ') : 'No answer'}
+                        </div>
+                        <div style="color: var(--success-green); font-size: 0.9rem;">
+                            <strong>Correct answer:</strong> ${correctAnswers.join(', ')}
+                        </div>
+                `;
+
+                // Show explanations for wrong answers
+                const wrongAnswerExplanations = answer.question.options
+                    .filter(opt => userAnswers.includes(opt.text) && !opt.correct && opt.explanation)
+                    .map(opt => opt.explanation);
+
+                if (wrongAnswerExplanations.length > 0) {
+                    detailsHTML += `
+                        <div style="margin-top: 0.5rem; padding: 0.5rem; background: rgba(255,255,255,0.05); border-radius: 4px; font-size: 0.85rem;">
+                            <strong>Why incorrect:</strong> ${wrongAnswerExplanations.join(' ')}
+                        </div>
+                    `;
+                }
+
+                detailsHTML += `</div>`;
+            }
+
+            detailsHTML += `
+                    </div>
+                </div>
+            `;
+
+            questionDiv.innerHTML = detailsHTML;
+            detailsDiv.appendChild(questionDiv);
+        });
+    },
+
+    escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
     }
 };

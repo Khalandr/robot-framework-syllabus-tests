@@ -140,54 +140,54 @@
     },
     {
       "id": "ch1-3-q6",
-      "question": "Consider the following Robot Framework test case:\n\n```robot\n*** Test Cases ***\nLogin Test\n Login User admin password123\n  Check Dashboard\n   Verify User Status\n    Logout\n```\n\nWhat is wrong with this test case?",
+      "question": "Consider the following Robot Framework test case:\n\n```robot\n*** Test Cases ***\nLogin Test\n    Login User    admin    password123\n     Check Dashboard\n      Verify User Status\n       Logout\n```\n\nWhat is wrong with this test case?",
       "type": "single",
       "options": [
+        {
+          "text": "Nothing is wrong - the test will execute successfully",
+          "correct": true
+        },
         {
           "text": "Keywords should be separated by commas",
           "correct": false,
           "explanation": "Robot Framework doesn't use commas to separate keywords"
         },
         {
-          "text": "The indentation is inconsistent - all keywords in the test body should have the same indentation",
-          "correct": true
+          "text": "The indentation must be consistent or the test will fail",
+          "correct": false,
+          "explanation": "While consistent indentation is recommended for readability, Robot Framework will execute this test successfully. Inconsistent indentation is a style issue, not a syntax error"
         },
         {
           "text": "Test case names cannot contain spaces",
           "correct": false,
           "explanation": "Test case names can contain spaces in Robot Framework"
-        },
-        {
-          "text": "The *** Test Cases *** section must appear after *** Keywords ***",
-          "correct": false,
-          "explanation": "Test Cases section can appear in any order; the issue is inconsistent indentation"
         }
       ]
     },
     {
       "id": "ch1-3-q7",
-      "question": "Consider the following keyword calls where '·' represents a space character:\n\n```robot\nA) Login·User····admin····password123\nB) Login·User·admin·password123\nC) Login·User··admin··password123\nD) LOGIN·USER····admin····password123\nE) login·user····admin····password123\n```\n\nWhich of these keyword calls are syntactically correct in Robot Framework? (Select all that apply)",
+      "question": "Consider the following keyword calls:\n\n```robot\nA) Login User    admin    password123\nB) Login User admin password123\nC) Login User  admin  password123\nD) LOGIN USER    admin    password123\nE) login user    admin    password123\n```\n\nWhich of these keyword calls are syntactically correct in Robot Framework? (Select all that apply)",
       "type": "multiple",
       "options": [
         {
-          "text": "A) Login·User····admin····password123 (4 spaces between elements)",
+          "text": "A) Login User    admin    password123 (4 spaces between elements)",
           "correct": true
         },
         {
-          "text": "B) Login·User·admin·password123 (1 space between elements)",
+          "text": "B) Login User admin password123 (1 space between elements)",
           "correct": false,
           "explanation": "Single spaces between arguments won't work as separators; need at least two spaces"
         },
         {
-          "text": "C) Login·User··admin··password123 (2 spaces between elements)",
+          "text": "C) Login User  admin  password123 (2 spaces between elements)",
           "correct": true
         },
         {
-          "text": "D) LOGIN·USER····admin····password123 (uppercase with 4 spaces)",
+          "text": "D) LOGIN USER    admin    password123 (uppercase with 4 spaces)",
           "correct": true
         },
         {
-          "text": "E) login·user····admin····password123 (lowercase with 4 spaces)",
+          "text": "E) login user    admin    password123 (lowercase with 4 spaces)",
           "correct": true
         }
       ]

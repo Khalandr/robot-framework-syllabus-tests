@@ -362,6 +362,7 @@ const quiz = {
             questionId: currentQuestion.id,
             question: currentQuestion,
             selectedOptions: selectedOptions,
+            userAnswer: selectedOptions.map(opt => opt.text),
             isCorrect: isCorrect,
             chapter: currentQuestion.chapter,
             subchapter: currentQuestion.subchapter
@@ -421,6 +422,7 @@ const quiz = {
                     questionId: question.id,
                     question: question,
                     selectedOptions: [],
+                    userAnswer: [],
                     isCorrect: false,
                     chapter: question.chapter,
                     subchapter: question.subchapter
@@ -441,6 +443,7 @@ const quiz = {
                 questionId: question.id,
                 question: question,
                 selectedOptions: selectedOptions,
+                userAnswer: selectedOptions.map(opt => opt.text),
                 isCorrect: isCorrect,
                 chapter: question.chapter,
                 subchapter: question.subchapter
