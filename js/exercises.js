@@ -141,7 +141,17 @@ const exercise = {
             document.getElementById('theoryTitle').textContent = theory.title || 'Theory';
             document.getElementById('theoryReadTime').textContent = theory.estimatedReadTime || '';
 
-            // Theory content (markdown to HTML)
+            // Key Points (always visible - from learning objectives)
+            const keyPointsDiv = document.getElementById('theoryKeyPoints');
+            if (theory.learningObjectives && theory.learningObjectives.length > 0) {
+                keyPointsDiv.innerHTML = '<div class="key-points-title">📌 Key Points:</div><ul>' +
+                    theory.learningObjectives.map(obj => `<li>${obj}</li>`).join('') +
+                    '</ul>';
+            } else {
+                keyPointsDiv.innerHTML = '';
+            }
+
+            // Full theory content (collapsible - starts collapsed)
             const theoryContent = document.getElementById('theoryContent');
             if (typeof marked !== 'undefined') {
                 theoryContent.innerHTML = marked.parse(theory.content || '');
@@ -149,15 +159,9 @@ const exercise = {
                 theoryContent.textContent = theory.content || '';
             }
 
-            // Learning objectives
-            const objectivesDiv = document.getElementById('theoryObjectives');
-            if (theory.learningObjectives && theory.learningObjectives.length > 0) {
-                objectivesDiv.innerHTML = '<h5>Learning Objectives:</h5><ul>' +
-                    theory.learningObjectives.map(obj => `<li>${obj}</li>`).join('') +
-                    '</ul>';
-            } else {
-                objectivesDiv.innerHTML = '';
-            }
+            // Reset to collapsed state
+            document.getElementById('theoryFullContent').classList.add('collapsed');
+            document.querySelector('.btn-toggle-theory').textContent = 'Read More ▼';
 
             // Show theory section
             document.getElementById('theorySection').style.display = 'block';
@@ -336,15 +340,15 @@ const exercise = {
     },
 
     toggleTheory() {
-        const theorySection = document.getElementById('theorySection');
+        const fullContent = document.getElementById('theoryFullContent');
         const btn = document.querySelector('.btn-toggle-theory');
 
-        if (theorySection.classList.contains('collapsed')) {
-            theorySection.classList.remove('collapsed');
-            btn.textContent = 'Hide Theory ▲';
+        if (fullContent.classList.contains('collapsed')) {
+            fullContent.classList.remove('collapsed');
+            btn.textContent = 'Read Less ▲';
         } else {
-            theorySection.classList.add('collapsed');
-            btn.textContent = 'Show Theory ▼';
+            fullContent.classList.add('collapsed');
+            btn.textContent = 'Read More ▼';
         }
     },
 

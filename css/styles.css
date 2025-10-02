@@ -872,28 +872,66 @@ code.robot {
     font-size: 0.9rem;
 }
 
-/* Theory Section */
+/* Theory Section - FreeCodeCamp Style */
 .theory-section {
     margin-bottom: 2rem;
     padding-bottom: 2rem;
     border-bottom: 2px solid var(--border-color);
 }
 
-.theory-section.collapsed .theory-content,
-.theory-section.collapsed .theory-objectives {
+.theory-full-content.collapsed {
     display: none;
+}
+
+.theory-key-points {
+    background: linear-gradient(135deg, var(--primary-teal-10), var(--primary-teal-5));
+    padding: 1.25rem;
+    border-radius: var(--radius-lg);
+    border-left: 4px solid var(--primary-teal);
+    margin-bottom: 1.5rem;
+}
+
+.key-points-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-teal);
+    margin-bottom: 0.75rem;
+}
+
+.theory-key-points ul {
+    margin: 0;
+    padding-left: 1.5rem;
+    list-style-type: none;
+}
+
+.theory-key-points li {
+    margin-bottom: 0.75rem;
+    line-height: 1.7;
+    color: var(--text-light);
+    position: relative;
+    padding-left: 0.5rem;
+}
+
+.theory-key-points li:before {
+    content: "→";
+    color: var(--primary-teal);
+    font-weight: bold;
+    position: absolute;
+    left: -1rem;
 }
 
 .theory-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .theory-header h4 {
     margin: 0;
     color: var(--primary-teal);
+    font-size: 1.4rem;
+    font-weight: 600;
 }
 
 .read-time {
@@ -904,68 +942,99 @@ code.robot {
 
 .theory-content {
     margin-bottom: 1.5rem;
-    line-height: 1.6;
+    line-height: 1.8;
     color: var(--text-light);
+    font-size: 1.05rem;
+}
+
+.theory-content p {
+    margin-bottom: 1.25rem;
+    line-height: 1.8;
 }
 
 .theory-content h2 {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     color: var(--primary-teal);
-    margin-top: 1.5rem;
-    margin-bottom: 0.75rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
 }
 
 .theory-content h3 {
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     color: var(--primary-teal);
-    margin-top: 1.25rem;
-    margin-bottom: 0.5rem;
+    margin-top: 1.75rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    line-height: 1.3;
 }
 
 .theory-content h5 {
-    font-size: 0.95rem;
-    color: var(--text-muted);
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
 }
 
 .theory-content code {
-    background: var(--primary-teal-10);
-    padding: 0.2rem 0.4rem;
-    border-radius: 3px;
-    font-family: 'Courier New', monospace;
-    font-size: 0.9em;
-    color: var(--primary-teal);
+    background: var(--primary-teal-20);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.95em;
+    color: #4ECDC4;
+    border: 1px solid var(--primary-teal-30);
 }
 
 .theory-content pre {
-    background: var(--card-bg);
-    padding: 1rem;
-    border-radius: var(--radius-md);
-    border-left: 3px solid var(--primary-teal);
+    background: #1e1e1e;
+    padding: 1.25rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
     overflow-x: auto;
-    margin: 1rem 0;
+    margin: 1.5rem 0;
+    box-shadow: var(--shadow-md);
 }
 
 .theory-content pre code {
     background: none;
     padding: 0;
-    color: var(--text-light);
+    color: #d4d4d4;
+    border: none;
+    font-size: 0.95rem;
+    line-height: 1.6;
 }
 
 .theory-content ul,
 .theory-content ol {
-    margin-left: 1.5rem;
-    margin-bottom: 1rem;
+    margin-left: 0;
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
 }
 
 .theory-content li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.7;
 }
 
 .theory-content strong {
     color: var(--primary-teal);
     font-weight: 600;
+}
+
+.theory-content em {
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.theory-content blockquote {
+    border-left: 4px solid var(--primary-teal);
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+    color: var(--text-muted);
+    font-style: italic;
 }
 
 .theory-objectives {

@@ -210,9 +210,13 @@
                                 <h4 id="theoryTitle">Theory</h4>
                                 <span id="theoryReadTime" class="read-time"></span>
                             </div>
-                            <div id="theoryContent" class="theory-content"></div>
-                            <div id="theoryObjectives" class="theory-objectives"></div>
-                            <button class="btn-toggle-theory" onclick="exercise.toggleTheory()">Hide Theory ▲</button>
+                            <!-- Key Points (Always Visible) -->
+                            <div id="theoryKeyPoints" class="theory-key-points"></div>
+                            <!-- Full Theory (Collapsible) -->
+                            <div id="theoryFullContent" class="theory-full-content collapsed">
+                                <div id="theoryContent" class="theory-content"></div>
+                            </div>
+                            <button class="btn-toggle-theory" onclick="exercise.toggleTheory()">Read More ▼</button>
                         </div>
 
                         <!-- Task Section -->
