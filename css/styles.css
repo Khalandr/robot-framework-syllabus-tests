@@ -743,11 +743,24 @@ code.robot {
 }
 
 /* Exercise Workspace - 3 Panel Layout */
+#exerciseWorkspace {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    background: var(--dark-bg);
+    margin: 0;
+    padding: 0;
+}
+
 .exercise-container {
     display: grid;
-    grid-template-columns: 30% 70%;
-    height: calc(100vh - 120px);
+    grid-template-columns: 400px 1fr;
+    height: 100vh;
     gap: 0;
+    width: 100%;
 }
 
 .exercise-panel {

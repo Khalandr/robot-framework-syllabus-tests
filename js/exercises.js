@@ -9,26 +9,45 @@ const exercise = {
     currentOutputTab: 'console',
 
     categories: [
-        { id: 'basic-syntax', name: 'Basic Syntax & Structure', description: 'Foundation level - RF syntax basics', icon: '📝' },
-        { id: 'variables', name: 'Variables & Data Types', description: 'Working with different variable types', icon: '💾' },
-        { id: 'keywords', name: 'Keywords & Libraries', description: 'Using and creating keywords', icon: '🔧' },
-        { id: 'control-flow', name: 'Control Flow', description: 'Loops and conditionals', icon: '🔄' },
-        { id: 'organization', name: 'Test Organization', description: 'Structuring test suites', icon: '📂' }
+        { id: 'basic-syntax', name: 'Basic Syntax & Structure', description: 'Foundation level - RF syntax basics' },
+        { id: 'variables', name: 'Variables & Data Types', description: 'Working with different variable types' },
+        { id: 'keywords', name: 'Keywords & Libraries', description: 'Using and creating keywords' },
+        { id: 'control-flow', name: 'Control Flow', description: 'Loops and conditionals' },
+        { id: 'organization', name: 'Test Organization', description: 'Structuring test suites' }
     ],
 
     async loadExercises() {
         try {
-            // Load beginner exercises
-            const response = await fetch('exercises/beginner-exercises.json');
-            const data = await response.json();
-            this.allExercises = data.exercises;
+            this.allExercises = [];
+            this.exercisesByCategory = {};
 
-            // Group by category (for now, all are basic-syntax)
-            this.exercisesByCategory = {
-                'basic-syntax': this.allExercises
-            };
+            // Load exercises for each category
+            for (const cat of this.categories) {
+                const categoryExercises = [];
 
-            console.log(`Loaded ${this.allExercises.length} exercises`);
+                // Try to load beginner and intermediate files for each category
+                const difficulties = ['beginner', 'intermediate'];
+
+                for (const diff of difficulties) {
+                    try {
+                        const response = await fetch(`exercises/${cat.id}/${diff}.json`);
+                        if (response.ok) {
+                            const data = await response.json();
+                            categoryExercises.push(...data.exercises);
+                        }
+                    } catch (err) {
+                        // File doesn't exist yet, skip silently
+                        console.log(`No ${diff} exercises for ${cat.id} yet`);
+                    }
+                }
+
+                if (categoryExercises.length > 0) {
+                    this.exercisesByCategory[cat.id] = categoryExercises;
+                    this.allExercises.push(...categoryExercises);
+                }
+            }
+
+            console.log(`Loaded ${this.allExercises.length} exercises across ${Object.keys(this.exercisesByCategory).length} categories`);
             this.displayCategoryList();
         } catch (error) {
             console.error('Error loading exercises:', error);
@@ -46,9 +65,8 @@ const exercise = {
             const item = document.createElement('button');
             item.className = 'mode-btn';
             item.innerHTML = `
-                <h3>${cat.icon} ${cat.name}</h3>
+                <h3>${cat.name}</h3>
                 <p>${cat.description}</p>
-                <small>${exerciseCount} exercise${exerciseCount !== 1 ? 's' : ''}</small>
             `;
             if (exerciseCount > 0) {
                 item.addEventListener('click', () => this.showExerciseList(cat.id, cat.name));

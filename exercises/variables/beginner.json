@@ -1,0 +1,51 @@
+{
+  "category": "variables",
+  "difficulty": "beginner",
+  "exercises": [
+    {
+      "id": "ex-1-2",
+      "title": "Simple Variable",
+      "difficulty": "beginner",
+      "chapter": "3",
+      "description": "Create a variable and log its value.",
+      "instructions": [
+        "Create a scalar variable ${name} with value 'Robot'",
+        "Log the variable value using Log keyword"
+      ],
+      "initialCode": "*** Test Cases ***\nVariable Test\n    # Create variable here\n    # Log the variable\n    ",
+      "solution": "*** Test Cases ***\nVariable Test\n    ${name}    Set Variable    Robot\n    Log    ${name}",
+      "hints": [
+        "Use Set Variable keyword to create a variable",
+        "Variables are denoted with ${variable_name}",
+        "You can log variables just like strings"
+      ],
+      "validation": {
+        "mustContain": ["Set Variable", "Log", "${"],
+        "mustPass": true
+      }
+    },
+    {
+      "id": "ex-1-5",
+      "title": "String Concatenation",
+      "difficulty": "beginner",
+      "chapter": "3",
+      "description": "Combine two strings and log the result.",
+      "instructions": [
+        "Create ${first} variable with 'Hello'",
+        "Create ${second} variable with 'World'",
+        "Combine them and log: 'Hello World'"
+      ],
+      "initialCode": "*** Test Cases ***\nString Test\n    # Write code here\n    ",
+      "solution": "*** Test Cases ***\nString Test\n    ${first}    Set Variable    Hello\n    ${second}    Set Variable    World\n    ${result}    Set Variable    ${first} ${second}\n    Log    ${result}",
+      "hints": [
+        "Variables can be combined in Set Variable",
+        "Syntax: ${var}    Set Variable    ${var1} ${var2}",
+        "Separate variables with space inside the value"
+      ],
+      "validation": {
+        "mustContain": ["Set Variable", "Hello", "World"],
+        "mustPass": true
+      }
+    }
+  ]
+}
