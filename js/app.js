@@ -2,6 +2,7 @@
 const app = {
     currentMode: null,
     currentTopicType: null,
+    currentTab: 'tests',
 
     async init() {
         console.log('Robot Framework Practice App Initialized');
@@ -45,7 +46,25 @@ const app = {
 
     showModeSelection() {
         this.hideAllScreens();
-        document.getElementById('modeSelection').classList.add('active');
+        document.getElementById('mainNavigation').classList.add('active');
+    },
+
+    switchTab(tabName) {
+        this.currentTab = tabName;
+
+        // Update tab buttons
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.dataset.tab === tabName) {
+                btn.classList.add('active');
+            }
+        });
+
+        // Update tab content
+        document.querySelectorAll('.tab-content').forEach(content => {
+            content.classList.remove('active');
+        });
+        document.getElementById(`${tabName}Tab`).classList.add('active');
     },
 
     showTopicSelection(type) {

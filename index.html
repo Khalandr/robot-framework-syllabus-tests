@@ -31,11 +31,30 @@
             </div>
         </div>
 
-        <!-- Mode Selection Screen -->
-        <div id="modeSelection" class="screen">
+        <!-- Main Navigation (Tests vs Exercises) -->
+        <div id="mainNavigation" class="screen">
             <div class="card">
-                <h2>Select Practice Mode</h2>
-                <div class="mode-grid">
+                <h2>Choose Your Practice Type</h2>
+
+                <!-- Tab Navigation -->
+                <div class="tab-navigation">
+                    <button class="tab-btn active" data-tab="tests" onclick="app.switchTab('tests')">
+                        <span class="tab-icon">📝</span>
+                        <span class="tab-label">Tests</span>
+                        <span class="tab-desc">Multiple Choice Questions</span>
+                    </button>
+                    <button class="tab-btn" data-tab="exercises" onclick="app.switchTab('exercises')">
+                        <span class="tab-icon">💻</span>
+                        <span class="tab-label">Exercises</span>
+                        <span class="tab-desc">Code Challenges</span>
+                        <span class="badge-coming-soon">Coming Soon</span>
+                    </button>
+                </div>
+
+                <!-- Tests Tab Content -->
+                <div id="testsTab" class="tab-content active">
+                    <h3>Test Practice Modes</h3>
+                    <div class="mode-grid">
                     <button class="mode-btn" data-mode="chapter">
                         <h3>Chapter Practice</h3>
                         <p>Practice all questions from a specific chapter</p>
@@ -56,6 +75,23 @@
                         <h3>Review Mode</h3>
                         <p>Review all questions with IDs (constant order)</p>
                     </button>
+                </div>
+                </div>
+
+                <!-- Exercises Tab Content -->
+                <div id="exercisesTab" class="tab-content">
+                    <h3>Code Exercises</h3>
+                    <div class="coming-soon-message">
+                        <div class="coming-soon-icon">🚀</div>
+                        <h4>Interactive Code Exercises Coming Soon!</h4>
+                        <p>Practice Robot Framework coding with real-time execution and feedback.</p>
+                        <ul class="feature-list">
+                            <li>✅ 3-panel coding environment</li>
+                            <li>✅ Real Robot Framework execution</li>
+                            <li>✅ Instant feedback with log/report output</li>
+                            <li>✅ Progressive difficulty levels</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
