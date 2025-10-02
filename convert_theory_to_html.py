@@ -37,13 +37,17 @@ def convert_markdown_to_html(markdown_content, exercise_id):
     # Replace bold
     content = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', content)
 
+    # Remove standalone # symbols (markdown artifacts)
+    content = re.sub(r'\n\s*#\s*\n', '\n\n', content)
+    content = re.sub(r'^\s*#\s*$', '', content, flags=re.MULTILINE)
+
     # Convert paragraphs to story class
     lines = content.split('\n\n')
     processed_lines = []
 
     for line in lines:
         line = line.strip()
-        if not line:
+        if not line or line == '#':
             continue
         # Skip if already has HTML tags
         if line.startswith('<div') or line.startswith('<ol') or line.startswith('<ul'):
@@ -83,13 +87,21 @@ def process_exercise_file(filepath):
             theory = exercise.get('theory', {})
             content = theory.get('content', '')
 
-            # Check if already HTML (starts with <div)
-            if content.strip().startswith('<div'):
-                print(f"  [SKIP] {ex_id} (already HTML)")
-                continue
+            # Check if content has standalone # symbols that need cleaning
+            if content and ('\n#\n' in content or '\n# \n' in content):
+                # Clean up the content
+                cleaned_content = re.sub(r'\n\s*#\s*\n', '\n\n', content)
+                cleaned_content = re.sub(r'^\s*#\s*$', '', cleaned_content, flags=re.MULTILINE)
+                # Remove empty paragraphs with just #
+                cleaned_content = re.sub(r'<p class="story">\s*#\s*</p>', '', cleaned_content)
+                cleaned_content = re.sub(r'<p class="story"></p>', '', cleaned_content)
 
-            # Convert markdown to HTML
-            if content and '##' in content:  # Has markdown
+                theory['content'] = cleaned_content
+                converted_count += 1
+                print(f"  [CLEAN] Removed # from {ex_id}")
+            elif content.strip().startswith('<div'):
+                print(f"  [SKIP] {ex_id} (already HTML)")
+            elif content and '##' in content:  # Has markdown
                 html_content = convert_markdown_to_html(content, ex_id)
                 theory['content'] = html_content
                 converted_count += 1
