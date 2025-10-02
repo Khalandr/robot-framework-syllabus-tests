@@ -133,6 +133,38 @@ const exercise = {
         document.getElementById('exerciseDifficulty').textContent = this.currentExercise.difficulty;
         document.getElementById('exerciseDescription').textContent = this.currentExercise.description;
 
+        // Render Theory Section
+        if (this.currentExercise.theory) {
+            const theory = this.currentExercise.theory;
+
+            // Theory title and read time
+            document.getElementById('theoryTitle').textContent = theory.title || 'Theory';
+            document.getElementById('theoryReadTime').textContent = theory.estimatedReadTime || '';
+
+            // Theory content (markdown to HTML)
+            const theoryContent = document.getElementById('theoryContent');
+            if (typeof marked !== 'undefined') {
+                theoryContent.innerHTML = marked.parse(theory.content || '');
+            } else {
+                theoryContent.textContent = theory.content || '';
+            }
+
+            // Learning objectives
+            const objectivesDiv = document.getElementById('theoryObjectives');
+            if (theory.learningObjectives && theory.learningObjectives.length > 0) {
+                objectivesDiv.innerHTML = '<h5>Learning Objectives:</h5><ul>' +
+                    theory.learningObjectives.map(obj => `<li>${obj}</li>`).join('') +
+                    '</ul>';
+            } else {
+                objectivesDiv.innerHTML = '';
+            }
+
+            // Show theory section
+            document.getElementById('theorySection').style.display = 'block';
+        } else {
+            document.getElementById('theorySection').style.display = 'none';
+        }
+
         // Instructions
         const instructionsList = document.getElementById('exerciseInstructions');
         instructionsList.innerHTML = '';
@@ -300,6 +332,19 @@ const exercise = {
         } else {
             hintsDiv.style.display = 'none';
             btn.textContent = '💡 Show Hints';
+        }
+    },
+
+    toggleTheory() {
+        const theorySection = document.getElementById('theorySection');
+        const btn = document.querySelector('.btn-toggle-theory');
+
+        if (theorySection.classList.contains('collapsed')) {
+            theorySection.classList.remove('collapsed');
+            btn.textContent = 'Hide Theory ▲';
+        } else {
+            theorySection.classList.add('collapsed');
+            btn.textContent = 'Show Theory ▼';
         }
     },
 

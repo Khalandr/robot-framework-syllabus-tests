@@ -204,12 +204,27 @@
                         <span id="exerciseDifficulty" class="badge-difficulty">Beginner</span>
                     </div>
                     <div class="panel-content">
-                        <p id="exerciseDescription"></p>
-                        <h4>Instructions:</h4>
-                        <ul id="exerciseInstructions"></ul>
-                        <div class="hints-section">
-                            <button class="btn-hints" onclick="exercise.toggleHints()">💡 Show Hints</button>
-                            <div id="exerciseHints" class="hints-content" style="display:none"></div>
+                        <!-- Theory Section -->
+                        <div id="theorySection" class="theory-section">
+                            <div class="theory-header">
+                                <h4 id="theoryTitle">Theory</h4>
+                                <span id="theoryReadTime" class="read-time"></span>
+                            </div>
+                            <div id="theoryContent" class="theory-content"></div>
+                            <div id="theoryObjectives" class="theory-objectives"></div>
+                            <button class="btn-toggle-theory" onclick="exercise.toggleTheory()">Hide Theory ▲</button>
+                        </div>
+
+                        <!-- Task Section -->
+                        <div class="task-section">
+                            <h4>Task</h4>
+                            <p id="exerciseDescription"></p>
+                            <h4>Instructions:</h4>
+                            <ul id="exerciseInstructions"></ul>
+                            <div class="hints-section">
+                                <button class="btn-hints" onclick="exercise.toggleHints()">💡 Show Hints</button>
+                                <div id="exerciseHints" class="hints-content" style="display:none"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="panel-footer">
@@ -255,6 +270,9 @@
 
     <!-- Monaco Editor -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.44.0/min/vs/loader.min.js"></script>
+
+    <!-- Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
     <script src="js/config.js"></script>
     <script src="js/auth.js"></script>

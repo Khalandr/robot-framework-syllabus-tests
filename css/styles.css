@@ -872,6 +872,152 @@ code.robot {
     font-size: 0.9rem;
 }
 
+/* Theory Section */
+.theory-section {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.theory-section.collapsed .theory-content,
+.theory-section.collapsed .theory-objectives {
+    display: none;
+}
+
+.theory-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.theory-header h4 {
+    margin: 0;
+    color: var(--primary-teal);
+}
+
+.read-time {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.theory-content {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    color: var(--text-light);
+}
+
+.theory-content h2 {
+    font-size: 1.3rem;
+    color: var(--primary-teal);
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.theory-content h3 {
+    font-size: 1.1rem;
+    color: var(--primary-teal);
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.theory-content h5 {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.theory-content code {
+    background: var(--primary-teal-10);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    color: var(--primary-teal);
+}
+
+.theory-content pre {
+    background: var(--card-bg);
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    border-left: 3px solid var(--primary-teal);
+    overflow-x: auto;
+    margin: 1rem 0;
+}
+
+.theory-content pre code {
+    background: none;
+    padding: 0;
+    color: var(--text-light);
+}
+
+.theory-content ul,
+.theory-content ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.theory-content li {
+    margin-bottom: 0.5rem;
+}
+
+.theory-content strong {
+    color: var(--primary-teal);
+    font-weight: 600;
+}
+
+.theory-objectives {
+    background: var(--primary-teal-5);
+    padding: 1rem;
+    border-left: 3px solid var(--primary-teal);
+    border-radius: var(--radius-md);
+    margin-bottom: 1rem;
+}
+
+.theory-objectives h5 {
+    margin: 0 0 0.75rem 0;
+    color: var(--primary-teal);
+    font-size: 0.95rem;
+}
+
+.theory-objectives ul {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.theory-objectives li {
+    margin-bottom: 0.5rem;
+    color: var(--text-light);
+}
+
+.btn-toggle-theory {
+    background: var(--primary-teal-20);
+    border: 1px solid var(--primary-teal);
+    color: var(--primary-teal);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    font-size: 0.9rem;
+}
+
+.btn-toggle-theory:hover {
+    background: var(--primary-teal-30);
+}
+
+.task-section {
+    margin-top: 1rem;
+}
+
+.task-section h4 {
+    color: var(--primary-teal);
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
 .hints-section {
     margin-top: 2rem;
 }
