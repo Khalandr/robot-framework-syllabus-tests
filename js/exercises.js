@@ -190,7 +190,7 @@ const exercise = {
                 forbiddenKeywords: this.currentExercise.validation.forbiddenKeywords || []
             } : null;
 
-            const response = await fetch('http://localhost:8000/api/execute', {
+            const response = await fetch(config.getApiUrl('/api/execute'), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -241,7 +241,7 @@ const exercise = {
 
         } catch (error) {
             console.error('API Error:', error);
-            consoleOutput.innerHTML = `<pre style="color: var(--error-red);">❌ Connection Error:\n\nCould not connect to backend API. Make sure the backend server is running on http://localhost:8000\n\nError: ${error.message}</pre>`;
+            consoleOutput.innerHTML = `<pre style="color: var(--error-red);">❌ Connection Error:\n\nCould not connect to backend API. Make sure the backend server is running on ${config.API_BASE_URL}\n\nError: ${error.message}</pre>`;
             consoleOutput.style.borderLeft = '4px solid var(--error-red)';
         }
     },

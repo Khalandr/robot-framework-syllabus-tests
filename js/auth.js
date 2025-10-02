@@ -1,9 +1,11 @@
 // Authentication module for password protection
 const auth = {
-    // SHA-256 hash of the password (default: "robot2024")
+    // SHA-256 hash loaded from config
     // To generate new hash: https://emn178.github.io/online-tools/sha256.html
     // Or use: console.log(auth.hashPassword("yourpassword"))
-    passwordHash: "9bf32db52342925062cdd41e07254192e70f36bbfb368dfa585e24b4c9e19d1f", 
+    get passwordHash() {
+        return config.PASSWORD_HASH;
+    }, 
 
     // Hash function using SHA-256
     async hashPassword(password) {

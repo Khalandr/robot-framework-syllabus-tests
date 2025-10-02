@@ -105,7 +105,10 @@ async def execute_code(request: CodeExecutionRequest):
     # Exercise-specific validation
     validation_errors = []
     if request.validation:
+        print(f"[DEBUG] Validating exercise {request.exercise_id}")
+        print(f"[DEBUG] Validation rules: mustContain={request.validation.mustContain}, mustPass={request.validation.mustPass}")
         validation_errors = validate_exercise_rules(request.code, request.validation)
+        print(f"[DEBUG] Validation errors: {validation_errors}")
         if validation_errors:
             return CodeExecutionResponse(
                 success=False,
@@ -114,6 +117,8 @@ async def execute_code(request: CodeExecutionRequest):
                 validation_errors=validation_errors,
                 execution_time=0.0
             )
+    else:
+        print(f"[DEBUG] No validation rules provided for exercise {request.exercise_id}")
 
     # Create temporary directory for execution
     with tempfile.TemporaryDirectory() as temp_dir:
