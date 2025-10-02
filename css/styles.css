@@ -1002,6 +1002,8 @@ code.robot {
     background: none;
     padding: 0;
     border: none;
+    white-space: pre;
+    display: block;
 }
 
 /* Inline Code */
