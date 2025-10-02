@@ -22,12 +22,15 @@
         "Check the log to see setup runs first"
       ],
       "validation": {
-        "mustContain": ["Suite Setup", "Starting Test Suite"],
+        "mustContain": [
+          "Suite Setup",
+          "Starting Test Suite"
+        ],
         "mustPass": true
       },
       "theory": {
         "title": "Suite Setup and Teardown for Test Initialization",
-        "content": "## Suite-Level Test Lifecycle\n\nRobot Framework provides **suite-level** setup and teardown mechanisms that run **once per test file**, not once per test case. This enables efficient initialization of expensive resources that can be shared across multiple tests.\n\n### Suite Setup\n\n**Suite Setup** executes a single keyword **before any test cases** in the suite run:\n\n```robot\n*** Settings ***\nSuite Setup    Log    Starting Test Suite\n\n*** Test Cases ***\nTest One\n    Log    First test\n\nTest Two\n    Log    Second test\n```\n\n**Execution order:**\n1. Suite Setup: `Log Starting Test Suite`\n2. Test One executes\n3. Test Two executes\n\n### When to Use Suite Setup\n\nCommon scenarios:\n\n**Database initialization:**\n```robot\n*** Settings ***\nLibrary    DatabaseLibrary\nSuite Setup    Connect To Database    mydb    user    pass    host    port\nSuite Teardown    Disconnect From Database\n```\n\n**Browser initialization (shared session):**\n```robot\n*** Settings ***\nLibrary    SeleniumLibrary\nSuite Setup    Open Browser    ${URL}    Chrome\nSuite Teardown    Close All Browsers\n```\n\n**Test data creation:**\n```robot\n*** Settings ***\nSuite Setup    Create Test Users\nSuite Teardown    Delete Test Users\n```\n\n**API authentication:**\n```robot\n*** Settings ***\nSuite Setup    Authenticate API Client\nSuite Teardown    Revoke API Token\n```\n\n### Suite Setup vs. Test Setup\n\n**Suite Setup:**\n- Runs **once** before all tests\n- Shared state across tests\n- Use for expensive initialization\n- Faster execution (one-time cost)\n\n**Test Setup:**\n- Runs **before each test**\n- Fresh state per test\n- Use for test isolation\n- Slower but more reliable\n\n**Example comparison:**\n\n```robot\n# Suite Setup: Browser opened once, shared by all tests\n*** Settings ***\nSuite Setup    Open Browser    ${URL}    Chrome\nSuite Teardown    Close Browser\n\n*** Test Cases ***\nTest Navigation\n    Click Link    About\n    Page Should Contain    About Us\n\nTest Search\n    Input Text    id:search    robot\n    # Uses same browser from Suite Setup\n```\n\n```robot\n# Test Setup: Fresh browser for each test\n*** Settings ***\nTest Setup    Open Browser    ${URL}    Chrome\nTest Teardown    Close Browser\n\n*** Test Cases ***\nTest Navigation\n    Click Link    About\n    Page Should Contain    About Us\n    # Browser closes after\n\nTest Search\n    # New browser opens\n    Input Text    id:search    robot\n```\n\n### Suite Setup Syntax\n\n```robot\n*** Settings ***\nSuite Setup    Keyword Name\nSuite Setup    Keyword With Args    arg1    arg2\nSuite Setup    ${VARIABLE_HOLDING_KEYWORD}\n```\n\n**Multiple operations:**\n\nSince Suite Setup accepts only **one keyword**, use compound keywords:\n\n```robot\n*** Settings ***\nSuite Setup    Initialize Test Environment\n\n*** Keywords ***\nInitialize Test Environment\n    Log    Starting suite\n    Connect To Database    mydb\n    Load Test Data\n    Open Browser    ${URL}    Chrome\n```\n\nOr use `Run Keywords`:\n\n```robot\n*** Settings ***\nSuite Setup    Run Keywords\n...    Log    Starting suite    AND\n...    Connect To Database    mydb    AND\n...    Open Browser    ${URL}    Chrome\n```\n\n### Benefits of Suite Setup\n\n**1. Performance:**\n```robot\n# Without Suite Setup: Open browser 100 times (slow)\nTest Setup    Open Browser    ${URL}    Chrome\nTest Teardown    Close Browser\n\n# With Suite Setup: Open browser once (fast)\nSuite Setup    Open Browser    ${URL}    Chrome\nSuite Teardown    Close Browser\n```\n\n**2. Resource efficiency:**\n- One database connection instead of N\n- One authentication token instead of N\n- One initialization instead of N\n\n**3. Realistic scenarios:**\n- Tests mimic real user sessions (multiple actions in one session)\n- Simulates continuous application usage\n\n### Risks and Considerations\n\n**State pollution:**\n```robot\n*** Settings ***\nSuite Setup    Login As Admin\nSuite Teardown    Logout\n\n*** Test Cases ***\nTest 1\n    Create User    newuser\n    # User now exists in system\n\nTest 2\n    # Test 2 sees user created by Test 1!\n    # May cause unexpected failures\n```\n\n**Solution:** Clean state between tests:\n```robot\n*** Settings ***\nSuite Setup    Login As Admin\nTest Teardown    Delete All Test Data\nSuite Teardown    Logout\n```\n\n**Failure impact:**\n\nIf Suite Setup **fails**, all tests in the suite are **skipped**:\n```robot\n*** Settings ***\nSuite Setup    Connect To Database    invalid_credentials\n\n*** Test Cases ***\nTest 1\n    # SKIPPED - Suite Setup failed\n\nTest 2\n    # SKIPPED - Suite Setup failed\n```\n\n**Best practice:** Make Suite Setup robust:\n```robot\n*** Settings ***\nSuite Setup    Initialize With Retry\n\n*** Keywords ***\nInitialize With Retry\n    Wait Until Keyword Succeeds    3x    5s    Connect To Database    ...\n```\n\n### Suite Teardown\n\n**Suite Teardown** executes **after all tests** complete, even if tests fail:\n\n```robot\n*** Settings ***\nSuite Setup    Open Browser    ${URL}    Chrome\nSuite Teardown    Close All Browsers\n\n*** Test Cases ***\nTest That Fails\n    Fail    This test fails\n\nTest That Passes\n    Log    This test passes\n\n# Suite Teardown STILL runs: Close All Browsers\n```\n\n**Common uses:**\n- Close connections\n- Delete temporary files\n- Archive logs\n- Send notifications\n- Cleanup test data\n\n### Complete Example\n\n```robot\n*** Settings ***\nLibrary           SeleniumLibrary\nLibrary           DatabaseLibrary\nSuite Setup       Initialize Test Suite\nSuite Teardown    Cleanup Test Suite\nTest Setup        Reset Application State\n\n*** Variables ***\n${URL}            https://example.com\n${DB_NAME}        testdb\n\n*** Test Cases ***\nTest User Registration\n    Go To Registration Page\n    Fill Registration Form    user1@example.com\n    Submit Form\n    User Should Be In Database    user1@example.com\n\nTest User Login\n    Login As User    user1@example.com    password\n    Dashboard Should Be Visible\n\n*** Keywords ***\nInitialize Test Suite\n    Log    Starting Test Suite    console=yes\n    Connect To Database    ${DB_NAME}    user    pass    localhost    3306\n    Open Browser    ${URL}    headlesschrome\n    Maximize Browser Window\n\nCleanup Test Suite\n    Close All Browsers\n    Execute SQL String    DELETE FROM users WHERE email LIKE '%@example.com'\n    Disconnect From Database\n    Log    Test Suite Complete    console=yes\n\nReset Application State\n    Go To    ${URL}\n    Delete All Cookies\n```\n\n### Best Practices\n\n1. **Keep Suite Setup fast:** Under 5 seconds ideal\n2. **Make it idempotent:** Safe to run multiple times\n3. **Handle failures gracefully:** Use retries and error handling\n4. **Clean up in teardown:** Always release resources\n5. **Document dependencies:** Explain what setup requires\n6. **Test isolation:** Prevent tests from affecting each other\n\nBy mastering Suite Setup and Teardown, you create **efficient, maintainable test suites** that initialize once and run quickly.",
+        "content": "<div class=\"section-heading\">Suite-Level Test Lifecycle</div>\n\n<p class=\"story\">Robot Framework provides <strong>suite-level</strong> setup and teardown mechanisms that run <strong>once per test file</strong>, not once per test case. This enables efficient initialization of expensive resources that can be shared across multiple tests.</p>\n\n<p class=\"story\">#<div class=\"section-heading\">Suite Setup</div></p>\n\n<p class=\"story\"><strong>Suite Setup</strong> executes a single keyword <strong>before any test cases</strong> in the suite run:</p>\n\n<div class=\"code-block\"><code><strong>* Settings </strong>*\nSuite Setup    Log    Starting Test Suite\n\n<p class=\"story\"><strong>* Test Cases </strong>*\nTest One\n    Log    First test</p>\n\n<p class=\"story\">Test Two\n    Log    Second test</code></div></p>\n\n<p class=\"story\"><strong>Execution order:</strong>\n1. Suite Setup: <span class=\"inline-code\">Log Starting Test Suite</span>\n2. Test One executes\n3. Test Two executes</p>\n\n<p class=\"story\">#<div class=\"section-heading\">When to Use Suite Setup</div></p>\n\n<p class=\"story\">Common scenarios:</p>\n\n<p class=\"story\"><strong>Database initialization:</strong>\n<div class=\"code-block\"><code><strong>* Settings </strong>*\nLibrary    DatabaseLibrary\nSuite Setup    Connect To Database    mydb    user    pass    host    port\nSuite Teardown    Disconnect From Database</code></div></p>\n\n<p class=\"story\"><strong>Browser initialization (shared session):</strong>\n<div class=\"code-block\"><code><strong>* Settings </strong>*\nLibrary    SeleniumLibrary\nSuite Setup    Open Browser    ${URL}    Chrome\nSuite Teardown    Close All Browsers</code></div></p>\n\n<p class=\"story\"><strong>Test data creation:</strong>\n<div class=\"code-block\"><code><strong>* Settings </strong>*\nSuite Setup    Create Test Users\nSuite Teardown    Delete Test Users</code></div></p>\n\n<p class=\"story\"><strong>API authentication:</strong>\n<div class=\"code-block\"><code><strong>* Settings </strong>*\nSuite Setup    Authenticate API Client\nSuite Teardown    Revoke API Token</code></div></p>\n\n<p class=\"story\">#<div class=\"section-heading\">Suite Setup vs. Test Setup</div></p>\n\n<p class=\"story\"><strong>Suite Setup:</strong>\n- Runs <strong>once</strong> before all tests\n- Shared state across tests\n- Use for expensive initialization\n- Faster execution (one-time cost)</p>\n\n<p class=\"story\"><strong>Test Setup:</strong>\n- Runs <strong>before each test</strong>\n- Fresh state per test\n- Use for test isolation\n- Slower but more reliable</p>\n\n<p class=\"story\"><strong>Example comparison:</strong></p>\n\n<div class=\"code-block\"><code># Suite Setup: Browser opened once, shared by all tests\n<strong>* Settings </strong>*\nSuite Setup    Open Browser    ${URL}    Chrome\nSuite Teardown    Close Browser\n\n<p class=\"story\"><strong>* Test Cases </strong>*\nTest Navigation\n    Click Link    About\n    Page Should Contain    About Us</p>\n\n<p class=\"story\">Test Search\n    Input Text    id:search    robot\n    # Uses same browser from Suite Setup</code></div></p>\n\n<div class=\"code-block\"><code># Test Setup: Fresh browser for each test\n<strong>* Settings </strong>*\nTest Setup    Open Browser    ${URL}    Chrome\nTest Teardown    Close Browser\n\n<p class=\"story\"><strong>* Test Cases </strong>*\nTest Navigation\n    Click Link    About\n    Page Should Contain    About Us\n    # Browser closes after</p>\n\n<p class=\"story\">Test Search\n    # New browser opens\n    Input Text    id:search    robot</code></div></p>\n\n<p class=\"story\">#<div class=\"section-heading\">Suite Setup Syntax</div></p>\n\n<div class=\"code-block\"><code><strong>* Settings </strong>*\nSuite Setup    Keyword Name\nSuite Setup    Keyword With Args    arg1    arg2\nSuite Setup    ${VARIABLE_HOLDING_KEYWORD}</code></div>\n\n<p class=\"story\"><strong>Multiple operations:</strong></p>\n\n<p class=\"story\">Since Suite Setup accepts only <strong>one keyword</strong>, use compound keywords:</p>\n\n<div class=\"code-block\"><code><strong>* Settings </strong>*\nSuite Setup    Initialize Test Environment\n\n<p class=\"story\"><strong>* Keywords </strong>*\nInitialize Test Environment\n    Log    Starting suite\n    Connect To Database    mydb\n    Load Test Data\n    Open Browser    ${URL}    Chrome</code></div></p>\n\n<p class=\"story\">Or use <span class=\"inline-code\">Run Keywords</span>:</p>\n\n<div class=\"code-block\"><code><strong>* Settings </strong>*\nSuite Setup    Run Keywords\n...    Log    Starting suite    AND\n...    Connect To Database    mydb    AND\n...    Open Browser    ${URL}    Chrome</code></div>\n\n<p class=\"story\">#<div class=\"section-heading\">Benefits of Suite Setup</div></p>\n\n<p class=\"story\"><strong>1. Performance:</strong>\n<div class=\"code-block\"><code># Without Suite Setup: Open browser 100 times (slow)\nTest Setup    Open Browser    ${URL}    Chrome\nTest Teardown    Close Browser</p>\n\n<p class=\"story\"># With Suite Setup: Open browser once (fast)\nSuite Setup    Open Browser    ${URL}    Chrome\nSuite Teardown    Close Browser</code></div></p>\n\n<p class=\"story\"><strong>2. Resource efficiency:</strong>\n- One database connection instead of N\n- One authentication token instead of N\n- One initialization instead of N</p>\n\n<p class=\"story\"><strong>3. Realistic scenarios:</strong>\n- Tests mimic real user sessions (multiple actions in one session)\n- Simulates continuous application usage</p>\n\n<p class=\"story\">#<div class=\"section-heading\">Risks and Considerations</div></p>\n\n<p class=\"story\"><strong>State pollution:</strong>\n<div class=\"code-block\"><code><strong>* Settings </strong>*\nSuite Setup    Login As Admin\nSuite Teardown    Logout</p>\n\n<p class=\"story\"><strong>* Test Cases </strong>*\nTest 1\n    Create User    newuser\n    # User now exists in system</p>\n\n<p class=\"story\">Test 2\n    # Test 2 sees user created by Test 1!\n    # May cause unexpected failures</code></div></p>\n\n<p class=\"story\"><strong>Solution:</strong> Clean state between tests:\n<div class=\"code-block\"><code><strong>* Settings </strong>*\nSuite Setup    Login As Admin\nTest Teardown    Delete All Test Data\nSuite Teardown    Logout</code></div></p>\n\n<p class=\"story\"><strong>Failure impact:</strong></p>\n\n<p class=\"story\">If Suite Setup <strong>fails</strong>, all tests in the suite are <strong>skipped</strong>:\n<div class=\"code-block\"><code><strong>* Settings </strong>*\nSuite Setup    Connect To Database    invalid_credentials</p>\n\n<p class=\"story\"><strong>* Test Cases </strong>*\nTest 1\n    # SKIPPED - Suite Setup failed</p>\n\n<p class=\"story\">Test 2\n    # SKIPPED - Suite Setup failed</code></div></p>\n\n<p class=\"story\"><strong>Best practice:</strong> Make Suite Setup robust:\n<div class=\"code-block\"><code><strong>* Settings </strong>*\nSuite Setup    Initialize With Retry</p>\n\n<p class=\"story\"><strong>* Keywords </strong>*\nInitialize With Retry\n    Wait Until Keyword Succeeds    3x    5s    Connect To Database    ...</code></div></p>\n\n<p class=\"story\">#<div class=\"section-heading\">Suite Teardown</div></p>\n\n<p class=\"story\"><strong>Suite Teardown</strong> executes <strong>after all tests</strong> complete, even if tests fail:</p>\n\n<div class=\"code-block\"><code><strong>* Settings </strong>*\nSuite Setup    Open Browser    ${URL}    Chrome\nSuite Teardown    Close All Browsers\n\n<p class=\"story\"><strong>* Test Cases </strong>*\nTest That Fails\n    Fail    This test fails</p>\n\n<p class=\"story\">Test That Passes\n    Log    This test passes</p>\n\n<p class=\"story\"># Suite Teardown STILL runs: Close All Browsers</code></div></p>\n\n<p class=\"story\"><strong>Common uses:</strong>\n- Close connections\n- Delete temporary files\n- Archive logs\n- Send notifications\n- Cleanup test data</p>\n\n<p class=\"story\">#<div class=\"section-heading\">Complete Example</div></p>\n\n<div class=\"code-block\"><code><strong>* Settings </strong>*\nLibrary           SeleniumLibrary\nLibrary           DatabaseLibrary\nSuite Setup       Initialize Test Suite\nSuite Teardown    Cleanup Test Suite\nTest Setup        Reset Application State\n\n<p class=\"story\"><strong>* Variables </strong>*\n${URL}            https://example.com\n${DB_NAME}        testdb</p>\n\n<p class=\"story\"><strong>* Test Cases </strong>*\nTest User Registration\n    Go To Registration Page\n    Fill Registration Form    user1@example.com\n    Submit Form\n    User Should Be In Database    user1@example.com</p>\n\n<p class=\"story\">Test User Login\n    Login As User    user1@example.com    password\n    Dashboard Should Be Visible</p>\n\n<p class=\"story\"><strong>* Keywords </strong>*\nInitialize Test Suite\n    Log    Starting Test Suite    console=yes\n    Connect To Database    ${DB_NAME}    user    pass    localhost    3306\n    Open Browser    ${URL}    headlesschrome\n    Maximize Browser Window</p>\n\n<p class=\"story\">Cleanup Test Suite\n    Close All Browsers\n    Execute SQL String    DELETE FROM users WHERE email LIKE '%@example.com'\n    Disconnect From Database\n    Log    Test Suite Complete    console=yes</p>\n\n<p class=\"story\">Reset Application State\n    Go To    ${URL}\n    Delete All Cookies</code></div></p>\n\n<p class=\"story\">#<div class=\"section-heading\">Best Practices</div></p>\n\n<p class=\"story\">1. <strong>Keep Suite Setup fast:</strong> Under 5 seconds ideal\n2. <strong>Make it idempotent:</strong> Safe to run multiple times\n3. <strong>Handle failures gracefully:</strong> Use retries and error handling\n4. <strong>Clean up in teardown:</strong> Always release resources\n5. <strong>Document dependencies:</strong> Explain what setup requires\n6. <strong>Test isolation:</strong> Prevent tests from affecting each other</p>\n\n<p class=\"story\">By mastering Suite Setup and Teardown, you create <strong>efficient, maintainable test suites</strong> that initialize once and run quickly.</p>",
         "learningObjectives": [
           "Understand the difference between Suite Setup and Test Setup",
           "Use Suite Setup to perform one-time initialization before all tests",
@@ -45,10 +48,21 @@
         "estimatedReadTime": "6-7 minutes"
       },
       "metadata": {
-        "tags": ["beginner", "suite-setup", "test-lifecycle", "settings", "initialization", "resource-management", "test-organization"],
+        "tags": [
+          "beginner",
+          "suite-setup",
+          "test-lifecycle",
+          "settings",
+          "initialization",
+          "resource-management",
+          "test-organization"
+        ],
         "estimatedTime": "8-12 minutes",
         "prerequisites": [],
-        "nextExercises": ["ex-5-2", "ex-5-3"],
+        "nextExercises": [
+          "ex-5-2",
+          "ex-5-3"
+        ],
         "version": "2.0",
         "lastUpdated": "2025-10-02"
       }
@@ -73,14 +87,27 @@
         "Check the log to see it runs last"
       ],
       "validation": {
-        "mustContain": ["Suite Teardown", "Cleanup Complete"],
+        "mustContain": [
+          "Suite Teardown",
+          "Cleanup Complete"
+        ],
         "mustPass": true
       },
       "metadata": {
-        "tags": ["beginner", "suite-teardown", "cleanup", "settings", "test-lifecycle"],
+        "tags": [
+          "beginner",
+          "suite-teardown",
+          "cleanup",
+          "settings",
+          "test-lifecycle"
+        ],
         "estimatedTime": "6-10 minutes",
-        "prerequisites": ["ex-5-1"],
-        "nextExercises": ["ex-5-3"],
+        "prerequisites": [
+          "ex-5-1"
+        ],
+        "nextExercises": [
+          "ex-5-3"
+        ],
         "version": "2.0",
         "lastUpdated": "2025-10-02"
       }
@@ -106,14 +133,27 @@
         "Note how setup runs twice (once per test)"
       ],
       "validation": {
-        "mustContain": ["Test Setup", "Preparing Test"],
+        "mustContain": [
+          "Test Setup",
+          "Preparing Test"
+        ],
         "mustPass": true
       },
       "metadata": {
-        "tags": ["beginner", "test-setup", "test-lifecycle", "settings", "initialization"],
+        "tags": [
+          "beginner",
+          "test-setup",
+          "test-lifecycle",
+          "settings",
+          "initialization"
+        ],
         "estimatedTime": "8-12 minutes",
-        "prerequisites": ["ex-5-1"],
-        "nextExercises": ["ex-5-4"],
+        "prerequisites": [
+          "ex-5-1"
+        ],
+        "nextExercises": [
+          "ex-5-4"
+        ],
         "version": "2.0",
         "lastUpdated": "2025-10-02"
       }
@@ -138,14 +178,27 @@
         "Separate from Suite Teardown"
       ],
       "validation": {
-        "mustContain": ["Test Teardown", "Test Finished"],
+        "mustContain": [
+          "Test Teardown",
+          "Test Finished"
+        ],
         "mustPass": true
       },
       "metadata": {
-        "tags": ["beginner", "test-teardown", "cleanup", "settings", "test-lifecycle"],
+        "tags": [
+          "beginner",
+          "test-teardown",
+          "cleanup",
+          "settings",
+          "test-lifecycle"
+        ],
         "estimatedTime": "6-10 minutes",
-        "prerequisites": ["ex-5-3"],
-        "nextExercises": ["ex-5-5"],
+        "prerequisites": [
+          "ex-5-3"
+        ],
+        "nextExercises": [
+          "ex-5-5"
+        ],
         "version": "2.0",
         "lastUpdated": "2025-10-02"
       }
@@ -171,14 +224,26 @@
         "Tags are used for filtering: robot --include smoke"
       ],
       "validation": {
-        "mustContain": ["[Tags]", "smoke", "critical"],
+        "mustContain": [
+          "[Tags]",
+          "smoke",
+          "critical"
+        ],
         "mustPass": true
       },
       "metadata": {
-        "tags": ["beginner", "tags", "test-organization", "filtering", "metadata"],
+        "tags": [
+          "beginner",
+          "tags",
+          "test-organization",
+          "filtering",
+          "metadata"
+        ],
         "estimatedTime": "8-12 minutes",
         "prerequisites": [],
-        "nextExercises": ["ex-5-9"],
+        "nextExercises": [
+          "ex-5-9"
+        ],
         "version": "2.0",
         "lastUpdated": "2025-10-02"
       }
@@ -205,14 +270,28 @@
         "Great for testing multiple data sets"
       ],
       "validation": {
-        "mustContain": ["[Template]", "Verify Addition", "[Arguments]"],
+        "mustContain": [
+          "[Template]",
+          "Verify Addition",
+          "[Arguments]"
+        ],
         "mustPass": true
       },
       "metadata": {
-        "tags": ["intermediate", "templates", "data-driven", "test-organization", "keywords"],
+        "tags": [
+          "intermediate",
+          "templates",
+          "data-driven",
+          "test-organization",
+          "keywords"
+        ],
         "estimatedTime": "15-20 minutes",
-        "prerequisites": ["ex-5-5"],
-        "nextExercises": ["ex-5-7"],
+        "prerequisites": [
+          "ex-5-5"
+        ],
+        "nextExercises": [
+          "ex-5-7"
+        ],
         "version": "2.0",
         "lastUpdated": "2025-10-02"
       }
@@ -239,14 +318,28 @@
         "Can also define lists: @{LIST} item1 item2"
       ],
       "validation": {
-        "mustContain": ["*** Variables ***", "${BASE_URL}", "${TIMEOUT}"],
+        "mustContain": [
+          "*** Variables ***",
+          "${BASE_URL}",
+          "${TIMEOUT}"
+        ],
         "mustPass": true
       },
       "metadata": {
-        "tags": ["intermediate", "variables", "suite-variables", "variables-section", "test-data"],
+        "tags": [
+          "intermediate",
+          "variables",
+          "suite-variables",
+          "variables-section",
+          "test-data"
+        ],
         "estimatedTime": "10-15 minutes",
-        "prerequisites": ["ex-5-6"],
-        "nextExercises": ["ex-5-8"],
+        "prerequisites": [
+          "ex-5-6"
+        ],
+        "nextExercises": [
+          "ex-5-8"
+        ],
         "version": "2.0",
         "lastUpdated": "2025-10-02"
       }
@@ -273,14 +366,28 @@
         "Can set default: Test Timeout in Settings"
       ],
       "validation": {
-        "mustContain": ["[Timeout]", "Sleep", "seconds"],
+        "mustContain": [
+          "[Timeout]",
+          "Sleep",
+          "seconds"
+        ],
         "mustPass": true
       },
       "metadata": {
-        "tags": ["intermediate", "timeout", "test-settings", "time-management", "test-control"],
+        "tags": [
+          "intermediate",
+          "timeout",
+          "test-settings",
+          "time-management",
+          "test-control"
+        ],
         "estimatedTime": "10-12 minutes",
-        "prerequisites": ["ex-5-5"],
-        "nextExercises": ["ex-5-9"],
+        "prerequisites": [
+          "ex-5-5"
+        ],
+        "nextExercises": [
+          "ex-5-9"
+        ],
         "version": "2.0",
         "lastUpdated": "2025-10-02"
       }
@@ -306,14 +413,29 @@
         "Combine: robot --include smokeANDapi"
       ],
       "validation": {
-        "mustContain": ["[Tags]", "smoke", "critical", "api"],
+        "mustContain": [
+          "[Tags]",
+          "smoke",
+          "critical",
+          "api"
+        ],
         "mustPass": true
       },
       "metadata": {
-        "tags": ["intermediate", "tags", "test-organization", "filtering", "multiple-tags"],
+        "tags": [
+          "intermediate",
+          "tags",
+          "test-organization",
+          "filtering",
+          "multiple-tags"
+        ],
         "estimatedTime": "12-15 minutes",
-        "prerequisites": ["ex-5-5"],
-        "nextExercises": ["ex-5-10"],
+        "prerequisites": [
+          "ex-5-5"
+        ],
+        "nextExercises": [
+          "ex-5-10"
+        ],
         "version": "2.0",
         "lastUpdated": "2025-10-02"
       }
@@ -339,13 +461,24 @@
         "Can add multiple: Force Tags tag1 tag2"
       ],
       "validation": {
-        "mustContain": ["Force Tags", "regression"],
+        "mustContain": [
+          "Force Tags",
+          "regression"
+        ],
         "mustPass": true
       },
       "metadata": {
-        "tags": ["intermediate", "force-tags", "suite-tags", "test-organization", "settings"],
+        "tags": [
+          "intermediate",
+          "force-tags",
+          "suite-tags",
+          "test-organization",
+          "settings"
+        ],
         "estimatedTime": "10-12 minutes",
-        "prerequisites": ["ex-5-9"],
+        "prerequisites": [
+          "ex-5-9"
+        ],
         "nextExercises": [],
         "version": "2.0",
         "lastUpdated": "2025-10-02"
