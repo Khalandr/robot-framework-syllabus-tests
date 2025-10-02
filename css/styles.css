@@ -305,6 +305,9 @@ header h1 {
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: left;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
 }
 
 .mode-btn:hover {

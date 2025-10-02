@@ -1,0 +1,132 @@
+{
+  "category": "control-flow",
+  "difficulty": "intermediate",
+  "exercises": [
+    {
+      "id": "ex-4-6",
+      "title": "Nested FOR Loops",
+      "difficulty": "intermediate",
+      "chapter": "5",
+      "description": "Use a FOR loop inside another FOR loop.",
+      "instructions": [
+        "Create outer loop: FOR ${i} IN RANGE 3",
+        "Inside it, create inner loop: FOR ${j} IN RANGE 2",
+        "Log '${i}-${j}' for each combination",
+        "Should log: 0-0, 0-1, 1-0, 1-1, 2-0, 2-1"
+      ],
+      "initialCode": "*** Test Cases ***\nNested Loops\n    # Write nested FOR loops\n    ",
+      "solution": "*** Test Cases ***\nNested Loops\n    FOR    ${i}    IN RANGE    3\n        FOR    ${j}    IN RANGE    2\n            Log    ${i}-${j}\n        END\n    END",
+      "hints": [
+        "Inner loop has 12-space indentation (triple indent)",
+        "Each loop needs its own END",
+        "Inner END before outer END",
+        "Outer loop runs 3 times, inner runs 2 times each"
+      ],
+      "validation": {
+        "mustContain": ["FOR", "IN RANGE", "END"],
+        "mustPass": true
+      }
+    },
+    {
+      "id": "ex-4-7",
+      "title": "FOR with IF",
+      "difficulty": "intermediate",
+      "chapter": "5",
+      "description": "Combine FOR loop with conditional logic.",
+      "instructions": [
+        "Create list ${numbers} with: 1, 2, 3, 4, 5",
+        "Loop through numbers: FOR ${num} IN @{numbers}",
+        "Use IF to check if ${num} > 3",
+        "If true, log 'Greater: ${num}'"
+      ],
+      "initialCode": "*** Test Cases ***\nConditional Loop\n    # Write FOR loop with IF\n    ",
+      "solution": "*** Test Cases ***\nConditional Loop\n    ${numbers}    Create List    1    2    3    4    5\n    FOR    ${num}    IN    @{numbers}\n        IF    ${num} > 3\n            Log    Greater: ${num}\n        END\n    END",
+      "hints": [
+        "IF inside FOR requires 12-space indentation",
+        "IF body needs 16-space indentation",
+        "Both IF and FOR need END",
+        "Should log for numbers 4 and 5"
+      ],
+      "validation": {
+        "mustContain": ["FOR", "IF", "END", "@{numbers}"],
+        "mustPass": true
+      }
+    },
+    {
+      "id": "ex-4-8",
+      "title": "BREAK and CONTINUE",
+      "difficulty": "intermediate",
+      "chapter": "5",
+      "description": "Control loop execution with BREAK and CONTINUE.",
+      "instructions": [
+        "Loop FOR ${i} IN RANGE 10",
+        "IF ${i} == 3, use CONTINUE (skip to next)",
+        "IF ${i} == 7, use BREAK (exit loop)",
+        "Otherwise log ${i}",
+        "Should log: 0,1,2,4,5,6 (skip 3, stop at 7)"
+      ],
+      "initialCode": "*** Test Cases ***\nLoop Control\n    # Write loop with BREAK and CONTINUE\n    ",
+      "solution": "*** Test Cases ***\nLoop Control\n    FOR    ${i}    IN RANGE    10\n        IF    ${i} == 3\n            CONTINUE\n        END\n        IF    ${i} == 7\n            BREAK\n        END\n        Log    ${i}\n    END",
+      "hints": [
+        "CONTINUE skips rest of current iteration",
+        "BREAK exits the loop immediately",
+        "CONTINUE and BREAK at same indentation as Log",
+        "Useful for complex loop logic"
+      ],
+      "validation": {
+        "mustContain": ["FOR", "BREAK", "CONTINUE", "END"],
+        "mustPass": true
+      }
+    },
+    {
+      "id": "ex-4-9",
+      "title": "WHILE Loop",
+      "difficulty": "intermediate",
+      "chapter": "5",
+      "description": "Use WHILE for condition-based iteration.",
+      "instructions": [
+        "Create ${count} with value 0",
+        "WHILE ${count} < 3",
+        "Log 'Count: ${count}'",
+        "Increment: ${count}    Evaluate    ${count} + 1"
+      ],
+      "initialCode": "*** Test Cases ***\nWhile Loop Test\n    # Write WHILE loop\n    ",
+      "solution": "*** Test Cases ***\nWhile Loop Test\n    ${count}    Set Variable    0\n    WHILE    ${count} < 3\n        Log    Count: ${count}\n        ${count}    Evaluate    ${count} + 1\n    END",
+      "hints": [
+        "WHILE continues as long as condition is true",
+        "Must update condition variable inside loop",
+        "Syntax: WHILE <condition>",
+        "Don't forget END"
+      ],
+      "validation": {
+        "mustContain": ["WHILE", "END", "Evaluate"],
+        "mustPass": true
+      }
+    },
+    {
+      "id": "ex-4-10",
+      "title": "TRY-EXCEPT Error Handling",
+      "difficulty": "intermediate",
+      "chapter": "5",
+      "description": "Handle errors gracefully with TRY-EXCEPT.",
+      "instructions": [
+        "Use TRY block",
+        "Inside, use Should Be Equal to compare 1 and 2 (will fail)",
+        "In EXCEPT block, log 'Error caught'",
+        "Close with END"
+      ],
+      "initialCode": "*** Test Cases ***\nError Handling\n    # Write TRY-EXCEPT block\n    ",
+      "solution": "*** Test Cases ***\nError Handling\n    TRY\n        Should Be Equal    1    2\n    EXCEPT\n        Log    Error caught\n    END",
+      "hints": [
+        "TRY block contains code that might fail",
+        "EXCEPT catches errors and prevents test failure",
+        "Can specify error types: EXCEPT ErrorType",
+        "ELSE block runs if no error occurred"
+      ],
+      "validation": {
+        "mustContain": ["TRY", "EXCEPT", "Error caught", "END"],
+        "mustPass": true
+      }
+    }
+  ]
+}

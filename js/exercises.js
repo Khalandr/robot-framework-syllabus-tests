@@ -13,7 +13,7 @@ const exercise = {
         { id: 'variables', name: 'Variables & Data Types', description: 'Working with different variable types' },
         { id: 'keywords', name: 'Keywords & Libraries', description: 'Using and creating keywords' },
         { id: 'control-flow', name: 'Control Flow', description: 'Loops and conditionals' },
-        { id: 'organization', name: 'Test Organization', description: 'Structuring test suites' }
+        { id: 'test-organization', name: 'Test Organization', description: 'Structuring test suites' }
     ],
 
     async loadExercises() {

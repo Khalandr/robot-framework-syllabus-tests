@@ -1,0 +1,126 @@
+{
+  "category": "keywords",
+  "difficulty": "beginner",
+  "exercises": [
+    {
+      "id": "ex-3-1",
+      "title": "BuiltIn Keywords",
+      "difficulty": "beginner",
+      "chapter": "2",
+      "description": "Practice using common BuiltIn library keywords like Log, Sleep, and Set Variable.",
+      "instructions": [
+        "Log the message 'Starting test'",
+        "Sleep for 1 second",
+        "Create a variable ${status} with value 'Complete'",
+        "Log the status variable"
+      ],
+      "initialCode": "*** Test Cases ***\nBuiltIn Keywords Test\n    # Write your code here\n    ",
+      "solution": "*** Test Cases ***\nBuiltIn Keywords Test\n    Log    Starting test\n    Sleep    1s\n    ${status}    Set Variable    Complete\n    Log    ${status}",
+      "hints": [
+        "Sleep accepts time values like '1s' for seconds",
+        "Log can print both strings and variables",
+        "Set Variable creates or updates a variable"
+      ],
+      "validation": {
+        "mustContain": ["Log", "Sleep", "Set Variable"],
+        "mustPass": true
+      }
+    },
+    {
+      "id": "ex-3-2",
+      "title": "String Library",
+      "difficulty": "beginner",
+      "chapter": "2",
+      "description": "Use String library keywords to manipulate text.",
+      "instructions": [
+        "Import the String library",
+        "Create ${text} with value 'robot framework'",
+        "Convert it to uppercase and store in ${upper}",
+        "Log the uppercase result"
+      ],
+      "initialCode": "*** Settings ***\n# Import library here\n\n*** Test Cases ***\nString Operations\n    # Write your code here\n    ",
+      "solution": "*** Settings ***\nLibrary    String\n\n*** Test Cases ***\nString Operations\n    ${text}    Set Variable    robot framework\n    ${upper}    Convert To Upper Case    ${text}\n    Log    ${upper}",
+      "hints": [
+        "Library imports go in the Settings section",
+        "Convert To Upper Case is a String library keyword",
+        "The keyword takes one argument: the string to convert"
+      ],
+      "validation": {
+        "mustContain": ["Library", "String", "Convert To Upper Case"],
+        "mustPass": true
+      }
+    },
+    {
+      "id": "ex-3-3",
+      "title": "Collections Library",
+      "difficulty": "beginner",
+      "chapter": "2",
+      "description": "Work with lists using the Collections library.",
+      "instructions": [
+        "Import the Collections library",
+        "Create a list ${fruits} with: apple, banana, orange",
+        "Get the length of the list and store in ${count}",
+        "Log the count"
+      ],
+      "initialCode": "*** Settings ***\n# Import library here\n\n*** Test Cases ***\nList Operations\n    # Write your code here\n    ",
+      "solution": "*** Settings ***\nLibrary    Collections\n\n*** Test Cases ***\nList Operations\n    ${fruits}    Create List    apple    banana    orange\n    ${count}    Get Length    ${fruits}\n    Log    ${count}",
+      "hints": [
+        "Create List is a BuiltIn keyword that creates a list",
+        "Get Length works with lists, dictionaries, and strings",
+        "Each list item is separated by 4 spaces"
+      ],
+      "validation": {
+        "mustContain": ["Library", "Collections", "Get Length", "Create List"],
+        "mustPass": true
+      }
+    },
+    {
+      "id": "ex-3-4",
+      "title": "User Keyword",
+      "difficulty": "beginner",
+      "chapter": "3",
+      "description": "Create your first custom keyword.",
+      "instructions": [
+        "Create a user keyword called 'Greet User'",
+        "The keyword should log 'Welcome to Robot Framework!'",
+        "Call the keyword from a test case"
+      ],
+      "initialCode": "*** Test Cases ***\nTest Custom Keyword\n    # Call your keyword here\n\n*** Keywords ***\n# Define your keyword here\n    ",
+      "solution": "*** Test Cases ***\nTest Custom Keyword\n    Greet User\n\n*** Keywords ***\nGreet User\n    Log    Welcome to Robot Framework!",
+      "hints": [
+        "Keywords are defined in the *** Keywords *** section",
+        "Keyword name should be on its own line with no indentation",
+        "Keyword body is indented with 4 spaces",
+        "Call the keyword just like built-in keywords"
+      ],
+      "validation": {
+        "mustContain": ["*** Keywords ***", "Greet User", "Welcome to Robot Framework"],
+        "mustPass": true
+      }
+    },
+    {
+      "id": "ex-3-5",
+      "title": "Keyword with Arguments",
+      "difficulty": "beginner",
+      "chapter": "3",
+      "description": "Create a keyword that accepts arguments.",
+      "instructions": [
+        "Create a keyword 'Greet Person' with [Arguments] ${name}",
+        "Log 'Hello, ${name}!'",
+        "Call it with argument 'Robot'"
+      ],
+      "initialCode": "*** Test Cases ***\nTest With Arguments\n    # Call keyword with argument\n\n*** Keywords ***\n# Define keyword with arguments\n    ",
+      "solution": "*** Test Cases ***\nTest With Arguments\n    Greet Person    Robot\n\n*** Keywords ***\nGreet Person\n    [Arguments]    ${name}\n    Log    Hello, ${name}!",
+      "hints": [
+        "[Arguments] must be the first line in the keyword",
+        "Arguments are defined as ${variable_name}",
+        "Pass arguments to the keyword just like built-in keywords",
+        "Variables can be used inside strings"
+      ],
+      "validation": {
+        "mustContain": ["[Arguments]", "${name}", "Greet Person"],
+        "mustPass": true
+      }
+    }
+  ]
+}
