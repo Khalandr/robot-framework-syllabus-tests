@@ -124,19 +124,30 @@ const questions = {
     },
 
     getExamQuestions(count = 40) {
-        // Distribute questions proportionally across chapters
-        const examQuestions = [];
-        const chaptersArray = Object.values(this.chapters);
-        const questionsPerChapter = Math.floor(count / chaptersArray.length);
-        const remainder = count % chaptersArray.length;
+        // Exam mode: 40 questions with specific distribution
+        // Chapter 1: 3, Chapter 2: 17, Chapter 3: 10, Chapter 4: 7, Chapter 5: 3
+        const distribution = {
+            '1': 3,
+            '2': 17,
+            '3': 10,
+            '4': 7,
+            '5': 3
+        };
 
-        chaptersArray.forEach((chapter, index) => {
-            const chapterQuestions = this.shuffle([...chapter.questions]);
-            const take = questionsPerChapter + (index < remainder ? 1 : 0);
-            examQuestions.push(...chapterQuestions.slice(0, take));
+        const examQuestions = [];
+
+        Object.entries(distribution).forEach(([chapterId, questionCount]) => {
+            const chapter = this.chapters[chapterId];
+            if (chapter && chapter.questions.length > 0) {
+                const shuffledChapterQuestions = this.shuffle([...chapter.questions]);
+                const selected = shuffledChapterQuestions.slice(0, Math.min(questionCount, shuffledChapterQuestions.length));
+                examQuestions.push(...selected);
+            } else {
+                console.warn(`Chapter ${chapterId} not found or has no questions`);
+            }
         });
 
-        return this.shuffle(examQuestions).slice(0, count);
+        return this.shuffle(examQuestions);
     },
 
     getAllQuestionsInOrder() {
