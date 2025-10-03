@@ -209,37 +209,6 @@ const exercise = {
                     .trim();
             }
 
-            // Story introduction or key points (in theoryKeyPoints div)
-            const keyPointsDiv = document.getElementById('theoryKeyPoints');
-            if (this.currentExercise.story) {
-                // Fallback to story text if no image
-                const story = this.currentExercise.story;
-                let storyHTML = '<div class="story-hook">';
-
-                if (story.setup) {
-                    storyHTML += `<div class="story-setup">
-                        <span class="mentor-icon">🤖</span>
-                        <p><em>${story.setup}</em></p>
-                    </div>`;
-                }
-
-                if (story.context) {
-                    storyHTML += `<div class="story-context">
-                        <p>${story.context}</p>
-                    </div>`;
-                }
-
-                storyHTML += '</div>';
-                keyPointsDiv.innerHTML = storyHTML;
-            } else if (theory.learningObjectives && theory.learningObjectives.length > 0) {
-                // Fallback to learning objectives if no story
-                keyPointsDiv.innerHTML = '<div class="key-points-title">📌 Key Points:</div><ul>' +
-                    theory.learningObjectives.map(obj => `<li>${obj}</li>`).join('') +
-                    '</ul>';
-            } else {
-                keyPointsDiv.innerHTML = '';
-            }
-
             // Full theory content (collapsible - starts collapsed)
             const theoryContent = document.getElementById('theoryContent');
 

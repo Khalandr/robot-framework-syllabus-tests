@@ -883,43 +883,6 @@ code.robot {
     display: none;
 }
 
-.theory-key-points {
-    background: linear-gradient(135deg, var(--primary-teal-10), var(--primary-teal-5));
-    padding: 1.25rem;
-    border-radius: var(--radius-lg);
-    border-left: 4px solid var(--primary-teal);
-    margin-bottom: 1.5rem;
-}
-
-.key-points-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--primary-teal);
-    margin-bottom: 0.75rem;
-}
-
-.theory-key-points ul {
-    margin: 0;
-    padding-left: 1.5rem;
-    list-style-type: none;
-}
-
-.theory-key-points li {
-    margin-bottom: 0.75rem;
-    line-height: 1.7;
-    color: var(--text-light);
-    position: relative;
-    padding-left: 0.5rem;
-}
-
-.theory-key-points li:before {
-    content: "→";
-    color: var(--primary-teal);
-    font-weight: bold;
-    position: absolute;
-    left: -1rem;
-}
-
 .theory-header {
     display: flex;
     justify-content: space-between;
