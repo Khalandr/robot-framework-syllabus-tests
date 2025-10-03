@@ -1,0 +1,530 @@
+{
+  "section": "02-memory-banks",
+  "exercises": [
+    {
+      "id": "ex-1-2-1",
+      "title": "Scalar Variables - Single Values",
+      "difficulty": "beginner",
+      "estimatedTime": "8 minutes",
+      "order": 1,
+      "description": "Learn to store and retrieve single values using scalar variables with ${...} syntax.",
+      "story": {
+        "setup": "MENTOR-9: \"Your communication circuits work, but now we need to check memory. Can you store data? Retrieve it? Start simple—store a single value, a ship system name. Use a scalar variable marked with ${...}.\"",
+        "context": "Variables let you store and reuse values, making tests maintainable. Instead of repeating 'Navigation System' everywhere, store it once and reference it. This is how robots remember.",
+        "success": "MENTOR-9: \"Perfect. You stored 'Navigation System' and retrieved it. Memory circuits functional. This is the foundation of all data handling in Robot Framework.\""
+      },
+      "instructions": [
+        "Create the *** Test Cases *** section",
+        "Create a test case named 'Scalar Variable Test'",
+        "Use Set Variable to store the value 'Navigation System' in ${system_name}",
+        "Use Log to output 'Checking system: ${system_name}'",
+        "Use Log Variable to display the variable's value",
+        "Store a second value 'OPERATIONAL' in ${status}",
+        "Log the message 'System status: ${status}'",
+        "Use 4 spaces for indentation"
+      ],
+      "hints": [
+        "Syntax: ${variable_name}    Set Variable    value",
+        "Variables must start with ${ and end with }",
+        "Set Variable keyword assigns values to variables",
+        "Log Variable displays the variable's name and value",
+        "You can use ${variable} inside strings",
+        "Variables are referenced by ${name} syntax"
+      ],
+      "initialCode": "",
+      "solution": "*** Test Cases ***\nScalar Variable Test\n    ${system_name}    Set Variable    Navigation System\n    Log    Checking system: ${system_name}\n    Log Variable    ${system_name}\n    ${status}    Set Variable    OPERATIONAL\n    Log    System status: ${status}",
+      "validation": {
+        "mustContain": [
+          "*** Test Cases ***",
+          "Scalar Variable Test",
+          "${system_name}",
+          "Set Variable",
+          "Navigation System",
+          "Log",
+          "${status}",
+          "OPERATIONAL"
+        ],
+        "forbiddenKeywords": [],
+        "mustPass": true
+      },
+      "theory": {
+        "title": "Scalar Variables: Storing Single Values",
+        "content": "<div class=\"theory-visual\">\n<img src=\"assets/images/theory/section-1-2/ex-1-2-1-scalar-variables.png\" alt=\"PROTO-7 learning scalar variables with memory banks storing single values\" loading=\"lazy\" width=\"1920\" height=\"1080\" />\n</div>\n\n<div class=\"story-intro\">\n<p>MENTOR-9's display shifts to show a memory bank interface.</p>\n<p>\"PROTO-7, your sequencing works. But tests need <strong>data</strong>—and data needs <strong>storage</strong>. That's what variables are for. Let's start with the simplest type: <strong>scalar variables</strong>.\"</p>\n</div>\n\n<div class=\"concept-explain\">\n<h3>What is a Variable?</h3>\n<p>A <strong>variable</strong> is a named storage location that holds a value. Think of it like a labeled box:</p>\n<ul>\n<li>The box has a <strong>name</strong> (the variable name)</li>\n<li>Inside the box is a <strong>value</strong> (the data)</li>\n<li>You can <strong>store</strong> new values</li>\n<li>You can <strong>retrieve</strong> the value anytime</li>\n</ul>\n\n<h3>Scalar Variables</h3>\n<p>A <strong>scalar variable</strong> holds a <strong>single value</strong>. It could be:</p>\n<ul>\n<li>A string: \"Navigation System\"</li>\n<li>A number: 42</li>\n<li>A boolean: True or False</li>\n<li>Any single piece of data</li>\n</ul>\n\n<p>In Robot Framework, scalar variables use the <span class=\"code\">${variable_name}</span> syntax.</p>\n</div>\n\n<div class=\"code-demo\">\n<h4>Basic Syntax</h4>\n<pre><code>*** Test Cases ***\nVariable Example\n    ${name}    Set Variable    Robot Framework\n    Log        ${name}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p><strong>What happens:</strong></p>\n<ol>\n<li><code>${name}</code> is created and assigned the value \"Robot Framework\"</li>\n<li><code>Log ${name}</code> outputs: \"Robot Framework\"</li>\n</ol>\n\n<h3>The Set Variable Keyword</h3>\n<p>The <span class=\"keyword\">Set Variable</span> keyword assigns a value to a variable:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>${variable}    Set Variable    value</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p><strong>Components:</strong></p>\n<ul>\n<li><strong>${variable}</strong> - The variable name (on the left)</li>\n<li><strong>Set Variable</strong> - The keyword that does the assignment</li>\n<li><strong>value</strong> - The value to store (can be text, number, etc.)</li>\n</ul>\n\n<h4>Why Use Variables?</h4>\n<table>\n<tr><th>Benefit</th><th>Example</th></tr>\n<tr>\n<td><strong>Reusability</strong></td>\n<td>Store API URL once, use it in 10 tests</td>\n</tr>\n<tr>\n<td><strong>Maintainability</strong></td>\n<td>Change username in one place, affects all tests</td>\n</tr>\n<tr>\n<td><strong>Readability</strong></td>\n<td>${max_retries} is clearer than the number 3</td>\n</tr>\n<tr>\n<td><strong>Dynamic values</strong></td>\n<td>Store API response, use it in next request</td>\n</tr>\n</table>\n\n<h3>Logging Variables</h3>\n<p>Two ways to display variable values:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nLogging Demo\n    ${ship}    Set Variable    Starlight Explorer\n    \n    # Method 1: Embed in Log message\n    Log    Ship name: ${ship}\n    \n    # Method 2: Use Log Variable (shows name and value)\n    Log Variable    ${ship}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p><strong>Output:</strong></p>\n<pre><code>Method 1: \"Ship name: Starlight Explorer\"\nMethod 2: \"${ship} = Starlight Explorer\"</code></pre>\n\n<p><strong>Log Variable</strong> is useful for debugging because it shows both the variable name and its value.</p>\n\n<h3>Multiple Variables</h3>\n<p>You can create as many variables as needed:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nMultiple Variables\n    ${username}    Set Variable    admin@example.com\n    ${password}    Set Variable    SecurePass123\n    ${url}         Set Variable    https://api.example.com\n    \n    Log    Logging in as ${username}\n    Log    API endpoint: ${url}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Variable Naming Rules</h3>\n<p>Valid variable names:</p>\n<ul>\n<li>✅ <code>${my_var}</code> - Underscores allowed</li>\n<li>✅ <code>${MyVar}</code> - Camel case allowed</li>\n<li>✅ <code>${MY_VAR}</code> - All caps allowed</li>\n<li>✅ <code>${my var}</code> - Spaces allowed (unusual but valid!)</li>\n<li>✅ <code>${var123}</code> - Numbers allowed (not at start)</li>\n</ul>\n\n<p>Invalid variable names:</p>\n<ul>\n<li>❌ <code>${my-var}</code> - Hyphens NOT allowed</li>\n<li>❌ <code>${123var}</code> - Can't start with number</li>\n<li>❌ <code>${my.var}</code> - Dots have special meaning (dictionary access)</li>\n</ul>\n\n<p><strong>Important:</strong> Variable names are <strong>case-sensitive</strong>!</p>\n<ul>\n<li><code>${myVar}</code> is different from <code>${MyVar}</code></li>\n<li><code>${myVar}</code> is different from <code>${MYVAR}</code></li>\n</ul>\n\n<h3>Real-World Example: API Testing</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nGet User Data\n    ${base_url}    Set Variable    https://api.github.com\n    ${username}    Set Variable    robotframework\n    ${endpoint}    Set Variable    ${base_url}/users/${username}\n    \n    Log    Fetching user: ${username}\n    Log    From endpoint: ${endpoint}\n    # Output: From endpoint: https://api.github.com/users/robotframework</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p>Notice how <code>${endpoint}</code> uses other variables inside its value. Variables can reference other variables!</p>\n</div>\n\n<div class=\"try-it\">\n<p>MENTOR-9: \"Now test your memory banks. Create variables for a ship system name and its status. Store them, then log them. Show me your circuits can remember.\"</p>\n</div>",
+        "estimatedReadTime": "5-6 minutes"
+      },
+      "metadata": {
+        "tags": [
+          "beginner",
+          "scalar-variables",
+          "set-variable",
+          "log-variable",
+          "data-storage"
+        ],
+        "prerequisites": [],
+        "nextExercises": [
+          "ex-1-2-2"
+        ]
+      }
+    },
+    {
+      "id": "ex-1-2-2",
+      "title": "Variable Naming Rules - What's Valid?",
+      "difficulty": "beginner",
+      "estimatedTime": "10 minutes",
+      "order": 2,
+      "description": "Master variable naming conventions and understand what Robot Framework accepts.",
+      "story": {
+        "setup": "MENTOR-9: \"Not all variable names are equal. Let me show you what Robot Framework accepts—and what it doesn't. This knowledge prevents cryptic errors.\"",
+        "context": "Understanding naming rules is crucial. Invalid names cause parse errors. Case sensitivity in variables (but not keywords) trips up beginners. Even spaces are allowed in names—unusual but valid.",
+        "success": "MENTOR-9: \"Interesting, right? Variable NAMES are case-sensitive, but KEYWORDS are not. This trips up many beginners. Now you know the rules. Use them wisely.\""
+      },
+      "instructions": [
+        "Create the *** Test Cases *** section",
+        "Create a test case named 'Variable Naming Rules'",
+        "Create valid variables with different naming styles:",
+        "  - ${my_var} with value 'Underscore style'",
+        "  - ${MyVar} with value 'Camel case style'",
+        "  - ${MY_VAR} with value 'All caps style'",
+        "  - ${my var} with value 'Spaces allowed'",
+        "  - ${var123} with value 'Numbers allowed'",
+        "Log all five variables to demonstrate they work",
+        "Add a comment: # Note: ${my-var} would be INVALID (hyphens not allowed)",
+        "Add a comment: # Note: ${123var} would be INVALID (can't start with number)",
+        "Demonstrate case sensitivity by creating ${status} and ${STATUS} as separate variables with different values"
+      ],
+      "hints": [
+        "Valid: ${my_var}, ${MyVar}, ${MY_VAR}, ${my var}, ${var123}",
+        "Invalid: ${my-var}, ${123var}, ${my.var}",
+        "Variable names ARE case-sensitive: ${x} ≠ ${X}",
+        "Comments start with # (no indentation needed)",
+        "Spaces in variable names work but are unconventional",
+        "Create ${status} with 'online' and ${STATUS} with 'CRITICAL' to show they're different"
+      ],
+      "initialCode": "",
+      "solution": "*** Test Cases ***\nVariable Naming Rules\n    ${my_var}    Set Variable    Underscore style\n    ${MyVar}     Set Variable    Camel case style\n    ${MY_VAR}    Set Variable    All caps style\n    ${my var}    Set Variable    Spaces allowed\n    ${var123}    Set Variable    Numbers allowed\n    Log    ${my_var}\n    Log    ${MyVar}\n    Log    ${MY_VAR}\n    Log    ${my var}\n    Log    ${var123}\n    # Note: ${my-var} would be INVALID (hyphens not allowed)\n    # Note: ${123var} would be INVALID (can't start with number)\n    ${status}    Set Variable    online\n    ${STATUS}    Set Variable    CRITICAL\n    Log    Lowercase status: ${status}\n    Log    Uppercase STATUS: ${STATUS}",
+      "validation": {
+        "mustContain": [
+          "*** Test Cases ***",
+          "Variable Naming Rules",
+          "${my_var}",
+          "${MyVar}",
+          "${MY_VAR}",
+          "${my var}",
+          "${var123}",
+          "${status}",
+          "${STATUS}",
+          "Set Variable",
+          "Log"
+        ],
+        "forbiddenKeywords": [],
+        "mustPass": true
+      },
+      "theory": {
+        "title": "Variable Naming: Rules, Case Sensitivity, and Best Practices",
+        "content": "<div class=\"theory-visual\">\n<img src=\"assets/images/theory/section-1-2/ex-1-2-2-naming-rules.png\" alt=\"Variable naming validation system showing valid and invalid names with checkmarks and X marks\" loading=\"lazy\" width=\"1920\" height=\"1080\" />\n</div>\n\n<div class=\"story-intro\">\n<p>MENTOR-9 pulls up a diagnostics panel showing parse errors.</p>\n<p>\"PROTO-7, see these errors? <code>Invalid variable name '${my-var}'</code>. Naming rules prevent this. Let me teach you what works and what doesn't.\"</p>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Valid Variable Names</h3>\n\n<table>\n<tr><th>Naming Style</th><th>Example</th><th>Valid?</th></tr>\n<tr>\n<td><strong>Underscores</strong></td>\n<td>${my_var}, ${ship_name}</td>\n<td>✅ Yes</td>\n</tr>\n<tr>\n<td><strong>Camel case</strong></td>\n<td>${myVar}, ${shipName}</td>\n<td>✅ Yes</td>\n</tr>\n<tr>\n<td><strong>All caps</strong></td>\n<td>${MY_VAR}, ${SHIP_NAME}</td>\n<td>✅ Yes</td>\n</tr>\n<tr>\n<td><strong>Spaces</strong></td>\n<td>${my var}, ${ship name}</td>\n<td>✅ Yes (unusual)</td>\n</tr>\n<tr>\n<td><strong>Numbers (not at start)</strong></td>\n<td>${var1}, ${test123}</td>\n<td>✅ Yes</td>\n</tr>\n<tr>\n<td><strong>Hyphens</strong></td>\n<td>${my-var}, ${ship-name}</td>\n<td>❌ NO</td>\n</tr>\n<tr>\n<td><strong>Starting with number</strong></td>\n<td>${1var}, ${123test}</td>\n<td>❌ NO</td>\n</tr>\n<tr>\n<td><strong>Dots (special meaning)</strong></td>\n<td>${my.var}</td>\n<td>❌ NO (dict access)</td>\n</tr>\n</table>\n\n<h3>Examples of Valid Names</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nValid Names\n    ${username}       Set Variable    admin\n    ${user_name}      Set Variable    admin\n    ${userName}       Set Variable    admin\n    ${UserName}       Set Variable    admin\n    ${USERNAME}       Set Variable    admin\n    ${user name}      Set Variable    admin    # Spaces OK but unusual\n    ${user123}        Set Variable    admin\n    ${_private}       Set Variable    admin    # Leading underscore OK</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Invalid Names (Will Cause Errors)</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nInvalid Names\n    ${user-name}      Set Variable    admin    # ❌ Hyphens not allowed\n    ${123user}        Set Variable    admin    # ❌ Can't start with number\n    ${my.var}         Set Variable    admin    # ❌ Dot has special meaning\n    ${user@name}      Set Variable    admin    # ❌ Special chars not allowed\n    ${user#name}      Set Variable    admin    # ❌ Hash not allowed</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Case Sensitivity: The Critical Distinction</h3>\n<p><strong>IMPORTANT:</strong> Unlike keywords (which are case-insensitive), variable names are <strong>CASE-SENSITIVE</strong>!</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nCase Sensitivity Test\n    ${myVar}    Set Variable    lowercase v\n    ${MyVar}    Set Variable    uppercase V\n    ${MYVAR}    Set Variable    all caps\n    \n    Log    ${myVar}    # Output: \"lowercase v\"\n    Log    ${MyVar}    # Output: \"uppercase V\"\n    Log    ${MYVAR}    # Output: \"all caps\"\n    \n    # These are THREE DIFFERENT VARIABLES!</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p>This is a common source of bugs. Remember:</p>\n<ul>\n<li>✅ <strong>Keywords:</strong> Case-insensitive (Log = log = LOG)</li>\n<li>❌ <strong>Variables:</strong> Case-sensitive (${x} ≠ ${X})</li>\n</ul>\n\n<h3>Why Hyphens Aren't Allowed</h3>\n<p>Robot Framework normalizes keywords by removing spaces and underscores. For example:</p>\n<ul>\n<li><code>Log To Console</code> → normalized to <code>logtoconsole</code></li>\n<li><code>Log_To_Console</code> → normalized to <code>logtoconsole</code></li>\n</ul>\n\n<p>If hyphens were allowed in variables, <code>${my-var}</code> could be confused with:</p>\n<ul>\n<li>Subtraction: <code>${my} - ${var}</code></li>\n<li>A keyword with hyphens</li>\n</ul>\n<p>So hyphens are reserved for operators, not variable names.</p>\n\n<h3>Spaces in Variable Names</h3>\n<p>Technically valid but rarely used:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nSpaces Example\n    ${my variable}    Set Variable    This works!\n    Log    ${my variable}\n    \n    # But most teams prefer underscores:\n    ${my_variable}    Set Variable    More readable</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p><strong>Why avoid spaces?</strong></p>\n<ul>\n<li>Less readable in complex expressions</li>\n<li>Harder to distinguish from keywords</li>\n<li>Not common in programming (breaks conventions)</li>\n</ul>\n\n<h3>Best Practices</h3>\n\n<table>\n<tr><th>Context</th><th>Style</th><th>Example</th></tr>\n<tr>\n<td><strong>Local variables</strong></td>\n<td>Snake case</td>\n<td>${user_name}, ${api_key}</td>\n</tr>\n<tr>\n<td><strong>Constants (*** Variables *** section)</strong></td>\n<td>All caps</td>\n<td>${API_URL}, ${MAX_RETRIES}</td>\n</tr>\n<tr>\n<td><strong>Arguments</strong></td>\n<td>Snake case</td>\n<td>${input_file}, ${expected_result}</td>\n</tr>\n<tr>\n<td><strong>Loop variables</strong></td>\n<td>Short, descriptive</td>\n<td>${item}, ${user}, ${i}</td>\n</tr>\n</table>\n\n<h4>Consistency is Key</h4>\n<p>Pick a style and stick to it throughout your test suite:</p>\n<ul>\n<li>✅ <strong>Good:</strong> All snake_case throughout</li>\n<li>❌ <strong>Bad:</strong> Mix of ${userName}, ${user_name}, ${UserName}</li>\n</ul>\n\n<h3>Real-World Example</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Variables ***\n${API_URL}         https://api.example.com    # Constant: all caps\n${MAX_TIMEOUT}     30s                        # Constant: all caps\n\n*** Test Cases ***\nUser Login Test\n    ${username}        Set Variable    testuser@example.com    # Local: snake_case\n    ${password}        Set Variable    SecurePass123           # Local: snake_case\n    ${response}        POST    ${API_URL}/login               # Uses constant\n    ${status_code}     Set Variable    ${response.status}      # Local: snake_case\n    Should Be Equal    ${status_code}    200</code></pre>\n</div>\n\n<div class=\"try-it\">\n<p>MENTOR-9: \"Create variables using different naming styles. Then demonstrate case sensitivity by making ${status} and ${STATUS} as separate variables. Show me you understand the rules.\"</p>\n</div>",
+        "estimatedReadTime": "6-7 minutes"
+      },
+      "metadata": {
+        "tags": [
+          "beginner",
+          "variable-naming",
+          "case-sensitivity",
+          "naming-conventions",
+          "best-practices"
+        ],
+        "prerequisites": [
+          "ex-1-2-1"
+        ],
+        "nextExercises": [
+          "ex-1-2-3"
+        ]
+      }
+    },
+    {
+      "id": "ex-1-2-3",
+      "title": "List Variables - Collections",
+      "difficulty": "beginner",
+      "estimatedTime": "10 minutes",
+      "order": 3,
+      "description": "Store and work with multiple related items using list variables with @{...} syntax.",
+      "story": {
+        "setup": "MENTOR-9: \"Single values are limiting. We need to store multiple related items—a list of damaged systems, for example. That's where list variables come in.\"",
+        "context": "Lists represent ordered collections. When you have multiple related items (damaged hulls, offline sensors, system components), you need a list. Lists maintain order and can grow dynamically.",
+        "success": "MENTOR-9: \"Good! You've stored 5 damaged systems in one list. Now we can iterate through them—we'll learn iteration in Chapter 3. For now, you understand collection storage.\""
+      },
+      "instructions": [
+        "Create the *** Test Cases *** section",
+        "Create a test case named 'List Variables Test'",
+        "Use Create List to create @{damaged_systems} with these 5 items:",
+        "  - 'Hull Sector 7'",
+        "  - 'Navigation Array'",
+        "  - 'Life Support Module 3'",
+        "  - 'Communication Relay'",
+        "  - 'Sensor Grid B'",
+        "Use Log Many to display all items in the list with label 'Damaged Systems:'",
+        "Create a second list @{priority_repairs} with 3 items:",
+        "  - 'Life Support'",
+        "  - 'Navigation'",
+        "  - 'Hull Breach'",
+        "Log the entire list with: Log    Priority repairs: @{priority_repairs}"
+      ],
+      "hints": [
+        "Syntax: @{list_name}    Create List    item1    item2    item3",
+        "List variables use @{...} instead of ${...}",
+        "Create List can take any number of arguments",
+        "Log Many displays all items with a label",
+        "Lists maintain insertion order",
+        "Each item is a separate argument to Create List"
+      ],
+      "initialCode": "",
+      "solution": "*** Test Cases ***\nList Variables Test\n    @{damaged_systems}    Create List    Hull Sector 7    Navigation Array    Life Support Module 3    Communication Relay    Sensor Grid B\n    Log Many    Damaged Systems:    @{damaged_systems}\n    @{priority_repairs}    Create List    Life Support    Navigation    Hull Breach\n    Log    Priority repairs: @{priority_repairs}",
+      "validation": {
+        "mustContain": [
+          "*** Test Cases ***",
+          "List Variables Test",
+          "@{damaged_systems}",
+          "Create List",
+          "Hull Sector 7",
+          "Navigation Array",
+          "Life Support",
+          "Communication Relay",
+          "Sensor Grid B",
+          "@{priority_repairs}",
+          "Log Many"
+        ],
+        "forbiddenKeywords": [],
+        "mustPass": true
+      },
+      "theory": {
+        "title": "List Variables: Storing Multiple Related Items",
+        "content": "<div class=\"theory-visual\">\n<img src=\"assets/images/theory/section-1-2/ex-1-2-3-list-variables.png\" alt=\"PROTO-7 viewing a list of damaged ship systems in an ordered collection display\" loading=\"lazy\" width=\"1920\" height=\"1080\" />\n</div>\n\n<div class=\"story-intro\">\n<p>MENTOR-9 displays a damage report showing multiple failing systems.</p>\n<p>\"PROTO-7, scalar variables only hold one value. But we have <strong>five</strong> damaged systems. We need a <strong>list variable</strong>—a collection that holds multiple related items.\"</p>\n</div>\n\n<div class=\"concept-explain\">\n<h3>What is a List Variable?</h3>\n<p>A <strong>list variable</strong> stores an <strong>ordered collection</strong> of items. Think of it as a numbered storage rack:</p>\n<ul>\n<li>Item 0: First item</li>\n<li>Item 1: Second item</li>\n<li>Item 2: Third item</li>\n<li>...</li>\n</ul>\n\n<p>In Robot Framework, list variables use the <span class=\"code\">@{list_name}</span> syntax.</p>\n\n<h3>Why Use Lists?</h3>\n<table>\n<tr><th>Use Case</th><th>Example</th></tr>\n<tr>\n<td><strong>Related items</strong></td>\n<td>@{damaged_systems}, @{test_users}</td>\n</tr>\n<tr>\n<td><strong>Iteration</strong></td>\n<td>Loop through each item</td>\n</tr>\n<tr>\n<td><strong>Dynamic data</strong></td>\n<td>API returns array of results</td>\n</tr>\n<tr>\n<td><strong>Test data sets</strong></td>\n<td>Multiple test inputs to try</td>\n</tr>\n</table>\n\n<h3>Creating Lists: The Create List Keyword</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nBasic List\n    @{fruits}    Create List    Apple    Banana    Cherry\n    Log Many     @{fruits}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p><strong>What happens:</strong></p>\n<ol>\n<li><code>@{fruits}</code> is created with 3 items</li>\n<li><code>Log Many @{fruits}</code> outputs each item on a separate line</li>\n</ol>\n\n<h4>Output:</h4>\n<pre><code>Apple\nBanana\nCherry</code></pre>\n\n<h3>List Syntax Rules</h3>\n<ul>\n<li><strong>Definition:</strong> <code>@{list}    Create List    item1    item2    ...</code></li>\n<li><strong>Reference:</strong> Use <code>@{list}</code> to reference all items</li>\n<li><strong>Index access:</strong> Use <code>${list}[0]</code> to get specific item (we'll cover this next)</li>\n<li><strong>@ vs $:</strong> <code>@{list}</code> expands all items, <code>${list}</code> treats list as single object</li>\n</ul>\n\n<h3>@ vs $ with Lists</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nList Expansion\n    @{colors}    Create List    Red    Green    Blue\n    \n    # Using @{colors} - expands to all items\n    Log Many    @{colors}\n    # Output: Red, Green, Blue (separate lines)\n    \n    # Using ${colors} - treats list as single value\n    Log    ${colors}\n    # Output: ['Red', 'Green', 'Blue'] (Python list representation)</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p><strong>Key difference:</strong></p>\n<ul>\n<li><strong>@{list}:</strong> Expands to individual items (like unpacking)</li>\n<li><strong>${list}:</strong> Treats the whole list as one variable</li>\n</ul>\n\n<h3>The Log Many Keyword</h3>\n<p><span class=\"keyword\">Log Many</span> is specifically designed for lists:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nLog Many Demo\n    @{systems}    Create List    Power    Navigation    Life Support\n    \n    # Without label\n    Log Many    @{systems}\n    \n    # With label\n    Log Many    Ship Systems:    @{systems}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>Output with label:</h4>\n<pre><code>Ship Systems:\nPower\nNavigation\nLife Support</code></pre>\n\n<h3>Empty and Single-Item Lists</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nEdge Cases\n    # Empty list\n    @{empty}     Create List\n    Log Many     Empty list:    @{empty}    # Logs just \"Empty list:\"\n    \n    # Single item list\n    @{single}    Create List    Only One\n    Log Many     @{single}                  # Logs \"Only One\"</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Lists in the *** Variables *** Section</h3>\n<p>You can define lists at the file level:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Variables ***\n@{SHIP_SYSTEMS}    Navigation    Power    Life Support    Communications\n@{TEST_USERS}      alice@example.com    bob@example.com    charlie@example.com\n\n*** Test Cases ***\nUse Predefined Lists\n    Log Many    Ship systems:    @{SHIP_SYSTEMS}\n    Log Many    Test users:      @{TEST_USERS}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Real-World Example: API Testing</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nTest Multiple Endpoints\n    @{endpoints}    Create List    /users    /posts    /comments    /albums\n    \n    Log Many    Testing endpoints:    @{endpoints}\n    \n    # Later you'll loop through these:\n    # FOR    ${endpoint}    IN    @{endpoints}\n    #     ${response}    GET    ${API_URL}${endpoint}\n    #     Should Be Equal    ${response.status}    200\n    # END</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>List Operations (Preview)</h3>\n<p>Robot Framework's Collections library has many list operations:</p>\n<ul>\n<li><strong>Append To List:</strong> Add items to existing list</li>\n<li><strong>Get Length:</strong> Count items in list</li>\n<li><strong>Get From List:</strong> Retrieve item by index</li>\n<li><strong>List Should Contain Value:</strong> Verify item exists</li>\n<li><strong>Sort List:</strong> Reorder items alphabetically</li>\n</ul>\n<p>We'll explore these in later chapters. For now, focus on creating and displaying lists.</p>\n\n<h3>Common Mistakes</h3>\n<ul>\n<li>❌ Using <code>${list}</code> instead of <code>@{list}</code> when creating lists</li>\n<li>❌ Forgetting spaces between items: <code>Create List    Item1Item2</code> (one item!)</li>\n<li>❌ Using commas: <code>Create List    A, B, C</code> (creates one item \"A, B, C\")</li>\n</ul>\n</div>\n\n<div class=\"try-it\">\n<p>MENTOR-9: \"Create two lists: one with damaged ship systems, another with priority repairs. Use Log Many to display them. Show me you can organize related data.\"</p>\n</div>",
+        "estimatedReadTime": "6-7 minutes"
+      },
+      "metadata": {
+        "tags": [
+          "beginner",
+          "list-variables",
+          "create-list",
+          "log-many",
+          "collections"
+        ],
+        "prerequisites": [
+          "ex-1-2-2"
+        ],
+        "nextExercises": [
+          "ex-1-2-4"
+        ]
+      }
+    },
+    {
+      "id": "ex-1-2-4",
+      "title": "List Access - Retrieving Elements",
+      "difficulty": "beginner",
+      "estimatedTime": "10 minutes",
+      "order": 4,
+      "description": "Access individual list items using index notation and slicing.",
+      "story": {
+        "setup": "MENTOR-9: \"You've stored a list, but can you retrieve specific elements? Access the first item, the last item, a range of items. Lists are useless if you can't extract their contents.\"",
+        "context": "Lists maintain order. Each item has an index starting at 0. You can access items by position: first [0], last [-1], or ranges [1:3]. This is how you extract specific data from collections.",
+        "success": "MENTOR-9: \"Excellent! You pulled the first damaged system, the last system, and a range. List indexing works like most languages—zero-based, with negative indices for reverse access.\""
+      },
+      "instructions": [
+        "Create the *** Test Cases *** section",
+        "Create a test case named 'List Indexing Test'",
+        "Create @{systems} with Create List containing 5 items:",
+        "  - 'Navigation'",
+        "  - 'Power Core'",
+        "  - 'Life Support'",
+        "  - 'Weapons'",
+        "  - 'Shields'",
+        "Access and log the first item: ${systems}[0]",
+        "Access and log the last item: ${systems}[-1]",
+        "Access and log the third item: ${systems}[2]",
+        "Create ${first_three} using list slicing: ${systems}[0:3]",
+        "Log the sliced list",
+        "Create ${last_two} using negative slicing: ${systems}[-2:]",
+        "Log the last two items"
+      ],
+      "hints": [
+        "List indexing uses ${list}[index] syntax (note the $ not @)",
+        "First item: [0], second: [1], third: [2]",
+        "Last item: [-1], second-to-last: [-2]",
+        "Slicing: [start:end] - includes start, excludes end",
+        "[0:3] gets items at index 0, 1, 2 (first three items)",
+        "[-2:] gets last two items",
+        "Slices return new lists"
+      ],
+      "initialCode": "",
+      "solution": "*** Test Cases ***\nList Indexing Test\n    @{systems}      Create List    Navigation    Power Core    Life Support    Weapons    Shields\n    ${first}        Set Variable    ${systems}[0]\n    Log             First system: ${first}\n    ${last}         Set Variable    ${systems}[-1]\n    Log             Last system: ${last}\n    ${third}        Set Variable    ${systems}[2]\n    Log             Third system: ${third}\n    ${first_three}  Set Variable    ${systems}[0:3]\n    Log             First three: ${first_three}\n    ${last_two}     Set Variable    ${systems}[-2:]\n    Log             Last two: ${last_two}",
+      "validation": {
+        "mustContain": [
+          "*** Test Cases ***",
+          "List Indexing Test",
+          "@{systems}",
+          "Create List",
+          "Navigation",
+          "Power Core",
+          "Life Support",
+          "Weapons",
+          "Shields",
+          "${systems}[0]",
+          "${systems}[-1]",
+          "${systems}[2]",
+          "Log"
+        ],
+        "forbiddenKeywords": [],
+        "mustPass": true
+      },
+      "theory": {
+        "title": "List Indexing and Slicing: Accessing Elements",
+        "content": "<div class=\"theory-visual\">\n<img src=\"assets/images/theory/section-1-2/ex-1-2-4-list-indexing.png\" alt=\"List indexing diagram showing zero-based indices and negative indices for reverse access\" loading=\"lazy\" width=\"1920\" height=\"1080\" />\n</div>\n\n<div class=\"story-intro\">\n<p>MENTOR-9 highlights specific items in the damaged systems list.</p>\n<p>\"PROTO-7, you can store lists, but accessing individual items is equally important. Let me show you <strong>indexing</strong>—the art of extracting specific elements.\"</p>\n</div>\n\n<div class=\"concept-explain\">\n<h3>List Indexing Basics</h3>\n<p>Every item in a list has an <strong>index</strong> (position number). In Robot Framework (like Python), indexing is <strong>zero-based</strong>:</p>\n\n<table>\n<tr><th>Item</th><th>Index</th><th>Negative Index</th></tr>\n<tr><td>First item</td><td>0</td><td>-5 (if list has 5 items)</td></tr>\n<tr><td>Second item</td><td>1</td><td>-4</td></tr>\n<tr><td>Third item</td><td>2</td><td>-3</td></tr>\n<tr><td>Fourth item</td><td>3</td><td>-2</td></tr>\n<tr><td>Fifth item</td><td>4</td><td>-1 (last)</td></tr>\n</table>\n\n<p><strong>Key insight:</strong> Negative indices count from the end!</p>\n\n<h3>Accessing Individual Items</h3>\n<p>Use <span class=\"code\">${list}[index]</span> syntax (note the <code>$</code>, not <code>@</code>):</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nIndexing Example\n    @{fruits}    Create List    Apple    Banana    Cherry    Date    Elderberry\n    \n    ${first}     Set Variable    ${fruits}[0]     # Apple\n    ${second}    Set Variable    ${fruits}[1]     # Banana\n    ${last}      Set Variable    ${fruits}[-1]    # Elderberry\n    ${second_last}    Set Variable    ${fruits}[-2]    # Date\n    \n    Log    First: ${first}\n    Log    Second: ${second}\n    Log    Last: ${last}\n    Log    Second to last: ${second_last}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>Why ${list}[index] and not @{list}[index]?</h4>\n<ul>\n<li><strong>@{list}:</strong> Expands to ALL items (for passing to keywords)</li>\n<li><strong>${list}[index]:</strong> Accesses ONE item (returns scalar value)</li>\n</ul>\n\n<h3>Direct Access in Log</h3>\n<p>You don't always need to store in a variable first:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nDirect Access\n    @{systems}    Create List    Nav    Power    Life Support\n    \n    Log    First system: ${systems}[0]\n    Log    Last system: ${systems}[-1]\n    Log    Middle system: ${systems}[1]</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>List Slicing: Getting Ranges</h3>\n<p><strong>Slicing</strong> extracts a sub-list using <span class=\"code\">[start:end]</span> syntax:</p>\n<ul>\n<li><strong>start:</strong> First index to include</li>\n<li><strong>end:</strong> First index to EXCLUDE (stops before this)</li>\n</ul>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nSlicing Example\n    @{numbers}    Create List    0    1    2    3    4    5    6    7    8    9\n    \n    ${first_three}     Set Variable    ${numbers}[0:3]     # [0, 1, 2]\n    ${middle}          Set Variable    ${numbers}[3:7]     # [3, 4, 5, 6]\n    ${last_three}      Set Variable    ${numbers}[-3:]     # [7, 8, 9]\n    ${all_but_last}    Set Variable    ${numbers}[:-1]     # [0, 1, 2, 3, 4, 5, 6, 7, 8]\n    ${every_second}    Set Variable    ${numbers}[::2]     # [0, 2, 4, 6, 8]\n    \n    Log    First three: ${first_three}\n    Log    Middle: ${middle}\n    Log    Last three: ${last_three}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>Slicing Syntax Breakdown</h4>\n<table>\n<tr><th>Syntax</th><th>Meaning</th><th>Example Result</th></tr>\n<tr><td>[start:end]</td><td>From start to end-1</td><td>[2:5] → items 2, 3, 4</td></tr>\n<tr><td>[:end]</td><td>From beginning to end-1</td><td>[:3] → items 0, 1, 2</td></tr>\n<tr><td>[start:]</td><td>From start to end</td><td>[3:] → items 3, 4, 5...</td></tr>\n<tr><td>[-n:]</td><td>Last n items</td><td>[-2:] → last 2 items</td></tr>\n<tr><td>[:-n]</td><td>All except last n</td><td>[:-1] → all but last</td></tr>\n<tr><td>[::step]</td><td>Every step-th item</td><td>[::2] → every 2nd item</td></tr>\n</table>\n\n<h3>Common Patterns</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nCommon Patterns\n    @{items}    Create List    A    B    C    D    E    F\n    \n    # First item\n    ${first}         Set Variable    ${items}[0]\n    \n    # Last item\n    ${last}          Set Variable    ${items}[-1]\n    \n    # First three\n    ${first_three}   Set Variable    ${items}[:3]\n    \n    # Last two\n    ${last_two}      Set Variable    ${items}[-2:]\n    \n    # All except first\n    ${skip_first}    Set Variable    ${items}[1:]\n    \n    # All except last\n    ${skip_last}     Set Variable    ${items}[:-1]\n    \n    # Middle items (skip first and last)\n    ${middle}        Set Variable    ${items}[1:-1]</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Index Out of Range Errors</h3>\n<p>Accessing an index that doesn't exist causes an error:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nIndex Errors\n    @{items}    Create List    A    B    C\n    \n    ${valid}      Set Variable    ${items}[2]     # ✅ OK (index 2 exists: 'C')\n    ${invalid}    Set Variable    ${items}[5]     # ❌ ERROR: Index 5 out of range</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p><strong>Slicing is safer:</strong> Out-of-range slices return empty lists instead of errors:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nSafe Slicing\n    @{items}    Create List    A    B    C\n    \n    ${safe}    Set Variable    ${items}[5:10]    # ✅ Returns empty list []</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Real-World Example: Processing API Results</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nProcess Search Results\n    @{results}    Create List    Result1    Result2    Result3    Result4    Result5\n    \n    # Get top result\n    ${top_result}    Set Variable    ${results}[0]\n    Log    Top result: ${top_result}\n    \n    # Get top 3 results\n    ${top_three}     Set Variable    ${results}[:3]\n    Log Many    Top three:    @{top_three}\n    \n    # Check if we have results\n    ${count}         Get Length    ${results}\n    Log    Total results: ${count}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>List Access vs List Expansion</h3>\n<p>Important distinction:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nAccess vs Expansion\n    @{colors}    Create List    Red    Green    Blue\n    \n    # EXPANSION: @{colors} → passes 3 separate arguments\n    Log Many    @{colors}    # Logs each color separately\n    \n    # ACCESS: ${colors} → passes the list object\n    Log    ${colors}        # Logs: ['Red', 'Green', 'Blue']\n    \n    # INDEX ACCESS: ${colors}[0] → passes one item\n    Log    ${colors}[0]     # Logs: Red</code></pre>\n</div>\n\n<div class=\"try-it\">\n<p>MENTOR-9: \"Create a list of ship systems. Access the first, last, and third items. Create slices for the first three and last two. Show me you can extract data from collections.\"</p>\n</div>",
+        "estimatedReadTime": "7-8 minutes"
+      },
+      "metadata": {
+        "tags": [
+          "beginner",
+          "list-indexing",
+          "list-slicing",
+          "zero-based-indexing",
+          "negative-indices"
+        ],
+        "prerequisites": [
+          "ex-1-2-3"
+        ],
+        "nextExercises": [
+          "ex-1-2-5"
+        ]
+      }
+    },
+    {
+      "id": "ex-1-2-5",
+      "title": "Dictionary Variables - Key-Value Pairs",
+      "difficulty": "beginner",
+      "estimatedTime": "10 minutes",
+      "order": 5,
+      "description": "Store structured data using dictionary variables with &{...} syntax.",
+      "story": {
+        "setup": "MENTOR-9: \"Lists are ordered, but sometimes you need named data—like system statuses with component names as keys. That's where dictionaries come in.\"",
+        "context": "Dictionaries map keys to values. Unlike lists (indexed by number), dictionaries use meaningful names. 'Navigation' → 'OPERATIONAL', 'Power' → 'DEGRADED'. This structure is perfect for configuration, status reports, and structured data.",
+        "success": "MENTOR-9: \"Perfect! A dictionary of ship systems and their statuses. Structured data is powerful. This is how we organize complex information.\""
+      },
+      "instructions": [
+        "Create the *** Test Cases *** section",
+        "Create a test case named 'Dictionary Variables Test'",
+        "Use Create Dictionary to create &{system_status} with these key-value pairs:",
+        "  - Navigation=OPERATIONAL",
+        "  - Power=DEGRADED",
+        "  - LifeSupport=CRITICAL",
+        "  - Weapons=OFFLINE",
+        "  - Shields=OPERATIONAL",
+        "Use Log Dictionary to display the entire dictionary",
+        "Create a second dictionary &{crew_info} with:",
+        "  - captain=Commander Sarah Chen",
+        "  - engineer=Lt. Marcus Rivera",
+        "  - pilot=Ensign Alex Kim",
+        "Log the dictionary with: Log    Crew: &{crew_info}"
+      ],
+      "hints": [
+        "Syntax: &{dict}    Create Dictionary    key1=value1    key2=value2",
+        "Dictionary variables use &{...} instead of ${...} or @{...}",
+        "Keys and values are separated by = (no spaces around =)",
+        "Log Dictionary displays all key-value pairs",
+        "Dictionaries have no guaranteed order (in Python 3.6+ they maintain insertion order)",
+        "Keys should be unique (duplicate keys overwrite previous values)"
+      ],
+      "initialCode": "",
+      "solution": "*** Test Cases ***\nDictionary Variables Test\n    &{system_status}    Create Dictionary    Navigation=OPERATIONAL    Power=DEGRADED    LifeSupport=CRITICAL    Weapons=OFFLINE    Shields=OPERATIONAL\n    Log Dictionary      ${system_status}\n    &{crew_info}        Create Dictionary    captain=Commander Sarah Chen    engineer=Lt. Marcus Rivera    pilot=Ensign Alex Kim\n    Log                 Crew: &{crew_info}",
+      "validation": {
+        "mustContain": [
+          "*** Test Cases ***",
+          "Dictionary Variables Test",
+          "&{system_status}",
+          "Create Dictionary",
+          "Navigation=OPERATIONAL",
+          "Power=DEGRADED",
+          "LifeSupport=CRITICAL",
+          "Weapons=OFFLINE",
+          "Shields=OPERATIONAL",
+          "&{crew_info}",
+          "Log Dictionary"
+        ],
+        "forbiddenKeywords": [],
+        "mustPass": true
+      },
+      "theory": {
+        "title": "Dictionary Variables: Key-Value Data Structures",
+        "content": "<div class=\"theory-visual\">\n<img src=\"assets/images/theory/section-1-2/ex-1-2-5-dictionaries.png\" alt=\"Dictionary data structure showing key-value pairs for ship systems and their statuses\" loading=\"lazy\" width=\"1920\" height=\"1080\" />\n</div>\n\n<div class=\"story-intro\">\n<p>MENTOR-9 displays a status board with system names and their conditions.</p>\n<p>\"PROTO-7, lists are great for ordered data. But when you need <strong>named</strong> data—where each value has a meaningful key—you need a <strong>dictionary</strong>.\"</p>\n</div>\n\n<div class=\"concept-explain\">\n<h3>What is a Dictionary?</h3>\n<p>A <strong>dictionary</strong> is a collection of <strong>key-value pairs</strong>. Think of it like a real dictionary:</p>\n<ul>\n<li><strong>Key:</strong> The word you look up (e.g., \"Navigation\")</li>\n<li><strong>Value:</strong> The definition/data (e.g., \"OPERATIONAL\")</li>\n</ul>\n\n<p>In Robot Framework, dictionary variables use the <span class=\"code\">&{dict_name}</span> syntax.</p>\n\n<h3>Lists vs Dictionaries</h3>\n<table>\n<tr><th>Feature</th><th>List</th><th>Dictionary</th></tr>\n<tr>\n<td><strong>Access by</strong></td>\n<td>Index (number)</td>\n<td>Key (name)</td>\n</tr>\n<tr>\n<td><strong>Syntax</strong></td>\n<td>@{list}</td>\n<td>&{dict}</td>\n</tr>\n<tr>\n<td><strong>Order</strong></td>\n<td>Always ordered</td>\n<td>Insertion order (Python 3.6+)</td>\n</tr>\n<tr>\n<td><strong>Use case</strong></td>\n<td>Sequences, iterations</td>\n<td>Structured data, configs</td>\n</tr>\n<tr>\n<td><strong>Example</strong></td>\n<td>@{fruits}    [Apple, Banana]</td>\n<td>&{status}    {nav: OK, power: FAIL}</td>\n</tr>\n</table>\n\n<h3>Creating Dictionaries: The Create Dictionary Keyword</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nBasic Dictionary\n    &{user}    Create Dictionary    name=Alice    email=alice@example.com    role=Admin\n    Log Dictionary    ${user}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>Output:</h4>\n<pre><code>Dictionary size is 3 and it contains following items:\nname: Alice\nemail: alice@example.com\nrole: Admin</code></pre>\n\n<h3>Dictionary Syntax Rules</h3>\n<ul>\n<li><strong>Creation:</strong> <code>&{dict}    Create Dictionary    key1=value1    key2=value2</code></li>\n<li><strong>Key-value separator:</strong> Use <code>=</code> with NO spaces around it</li>\n<li><strong>Multiple pairs:</strong> Separate with spaces (4 recommended)</li>\n<li><strong>Keys:</strong> Usually strings, but can be numbers</li>\n<li><strong>Values:</strong> Any data type (strings, numbers, lists, even other dicts)</li>\n</ul>\n\n<h3>& vs $ with Dictionaries</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nDict Expansion\n    &{config}    Create Dictionary    host=localhost    port=8080    ssl=True\n    \n    # Using &{config} - expands to key=value pairs\n    Log Many    &{config}\n    # Output: host=localhost, port=8080, ssl=True\n    \n    # Using ${config} - treats dict as single object\n    Log    ${config}\n    # Output: {'host': 'localhost', 'port': 8080, 'ssl': True}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p><strong>Key difference:</strong></p>\n<ul>\n<li><strong>&{dict}:</strong> Expands to key=value pairs (for passing to keywords)</li>\n<li><strong>${dict}:</strong> Treats the whole dict as one variable</li>\n</ul>\n\n<h3>The Log Dictionary Keyword</h3>\n<p><span class=\"keyword\">Log Dictionary</span> is designed for dictionaries:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nLog Dictionary Demo\n    &{system}    Create Dictionary    cpu=45%    memory=8GB    disk=512GB    status=healthy\n    Log Dictionary    ${system}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>Output:</h4>\n<pre><code>Dictionary size is 4 and it contains following items:\ncpu: 45%\nmemory: 8GB\ndisk: 512GB\nstatus: healthy</code></pre>\n\n<p><strong>Note:</strong> Use <code>${dict}</code> with Log Dictionary (not <code>&{dict}</code>).</p>\n\n<h3>Empty and Single-Entry Dictionaries</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nEdge Cases\n    # Empty dictionary\n    &{empty}     Create Dictionary\n    Log Dictionary    ${empty}    # Logs \"Dictionary size is 0\"\n    \n    # Single entry\n    &{single}    Create Dictionary    status=OK\n    Log Dictionary    ${single}   # Logs one key-value pair</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Dictionaries in the *** Variables *** Section</h3>\n<p>You can define dictionaries at the file level:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Variables ***\n&{API_CONFIG}      base_url=https://api.example.com    timeout=30s    retry=3\n&{TEST_USER}       username=testuser@example.com    password=Test123    role=standard\n\n*** Test Cases ***\nUse Predefined Dicts\n    Log Dictionary    ${API_CONFIG}\n    Log Dictionary    ${TEST_USER}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Keys with Spaces (Requires Quotes in Some Contexts)</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nKeys With Spaces\n    &{data}    Create Dictionary    first name=John    last name=Doe    zip code=12345\n    Log Dictionary    ${data}\n    # Keys: 'first name', 'last name', 'zip code'</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p>Keys with spaces work but require careful handling when accessing (we'll cover access next exercise).</p>\n\n<h3>Real-World Example: System Configuration</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nAPI Health Check\n    &{health_status}    Create Dictionary\n    ...    database=connected\n    ...    cache=connected\n    ...    api_server=running\n    ...    queue_size=127\n    ...    response_time=45ms\n    \n    Log Dictionary    ${health_status}\n    \n    # Use the ... continuation for long lines\n    # Each ...  line adds more key=value pairs</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p><strong>Note:</strong> The <code>...</code> syntax continues the previous line. Useful for long dictionary definitions!</p>\n\n<h3>Nested Structures (Preview)</h3>\n<p>Dictionary values can be lists or other dictionaries:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nNested Data\n    @{admins}      Create List    alice@example.com    bob@example.com\n    &{app_config}  Create Dictionary    admins=${admins}    version=2.1.0\n    \n    Log Dictionary    ${app_config}\n    # Output shows admins: ['alice@example.com', 'bob@example.com']</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Common Mistakes</h3>\n<ul>\n<li>❌ Using <code>key = value</code> (spaces around =): Should be <code>key=value</code></li>\n<li>❌ Using <code>${dict}</code> instead of <code>&{dict}</code> when creating</li>\n<li>❌ Duplicate keys: <code>name=Alice name=Bob</code> → only Bob survives</li>\n<li>❌ Using commas: <code>name=Alice, age=30</code> → comma becomes part of value</li>\n</ul>\n</div>\n\n<div class=\"try-it\">\n<p>MENTOR-9: \"Create two dictionaries: one for ship system statuses, another for crew information. Use Log Dictionary to display them. Show me you can structure complex data.\"</p>\n</div>",
+        "estimatedReadTime": "7-8 minutes"
+      },
+      "metadata": {
+        "tags": [
+          "beginner",
+          "dictionary-variables",
+          "create-dictionary",
+          "log-dictionary",
+          "key-value-pairs"
+        ],
+        "prerequisites": [
+          "ex-1-2-4"
+        ],
+        "nextExercises": [
+          "ex-1-2-6"
+        ]
+      }
+    },
+    {
+      "id": "ex-1-2-6",
+      "title": "Dictionary Access - Retrieving Values",
+      "difficulty": "beginner",
+      "estimatedTime": "10 minutes",
+      "order": 6,
+      "description": "Access dictionary values by key using bracket notation and dot syntax.",
+      "story": {
+        "setup": "MENTOR-9: \"Now retrieve specific values by key. What's the status of 'Navigation'? What's the pilot's name? Dictionaries are accessed by key, not index.\"",
+        "context": "Dictionary access is by key name, not position. ${dict}[key] returns the value for that key. There's also dot syntax for simple keys. Understanding both methods is essential for working with structured data.",
+        "success": "MENTOR-9: \"Good! Navigation status retrieved: 'OPERATIONAL'. You understand key-value access. This is how we query structured data.\""
+      },
+      "instructions": [
+        "Create the *** Test Cases *** section",
+        "Create a test case named 'Dictionary Access Test'",
+        "Create &{systems} with Create Dictionary:",
+        "  - Navigation=OPERATIONAL",
+        "  - Power=DEGRADED",
+        "  - LifeSupport=CRITICAL",
+        "  - Shields=OPERATIONAL",
+        "Access and log Navigation status using ${systems}[Navigation]",
+        "Access and log Power status using ${systems}[Power]",
+        "Access and log LifeSupport status using ${systems}[LifeSupport]",
+        "Create &{crew} with captain=Sarah Chen and pilot=Alex Kim",
+        "Access captain using ${crew}[captain] and log it",
+        "Demonstrate Get From Dictionary keyword to safely get a value",
+        "Use Get From Dictionary to retrieve pilot from ${crew} into ${pilot_name}",
+        "Log the pilot name"
+      ],
+      "hints": [
+        "Dictionary access: ${dict}[key] (note the $ not &)",
+        "Keys are case-sensitive: 'Navigation' ≠ 'navigation'",
+        "Get From Dictionary    ${dict}    key    provides safe access",
+        "Get From Dictionary returns None if key doesn't exist (can set default)",
+        "Direct access ${dict}[key] throws error if key missing",
+        "For keys without spaces, both ${dict}[key] and ${dict.key} work"
+      ],
+      "initialCode": "",
+      "solution": "*** Test Cases ***\nDictionary Access Test\n    &{systems}       Create Dictionary    Navigation=OPERATIONAL    Power=DEGRADED    LifeSupport=CRITICAL    Shields=OPERATIONAL\n    ${nav_status}    Set Variable    ${systems}[Navigation]\n    Log              Navigation: ${nav_status}\n    ${power_status}  Set Variable    ${systems}[Power]\n    Log              Power: ${power_status}\n    ${ls_status}     Set Variable    ${systems}[LifeSupport]\n    Log              Life Support: ${ls_status}\n    &{crew}          Create Dictionary    captain=Sarah Chen    pilot=Alex Kim\n    ${captain}       Set Variable    ${crew}[captain]\n    Log              Captain: ${captain}\n    ${pilot_name}    Get From Dictionary    ${crew}    pilot\n    Log              Pilot: ${pilot_name}",
+      "validation": {
+        "mustContain": [
+          "*** Test Cases ***",
+          "Dictionary Access Test",
+          "&{systems}",
+          "Create Dictionary",
+          "Navigation=OPERATIONAL",
+          "Power=DEGRADED",
+          "${systems}[Navigation]",
+          "${systems}[Power]",
+          "${systems}[LifeSupport]",
+          "&{crew}",
+          "${crew}[captain]",
+          "Get From Dictionary",
+          "Log"
+        ],
+        "forbiddenKeywords": [],
+        "mustPass": true
+      },
+      "theory": {
+        "title": "Dictionary Access: Retrieving Values by Key",
+        "content": "<div class=\"theory-visual\">\n<img src=\"assets/images/theory/section-1-2/ex-1-2-6-dict-access.png\" alt=\"Dictionary key lookup visualization showing key-to-value mapping\" loading=\"lazy\" width=\"1920\" height=\"1080\" />\n</div>\n\n<div class=\"story-intro\">\n<p>MENTOR-9 highlights a specific system in the status dictionary.</p>\n<p>\"PROTO-7, you've created dictionaries, but accessing values by key is where they shine. Let me show you how to <strong>query</strong> structured data.\"</p>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Dictionary Access Basics</h3>\n<p>Unlike lists (accessed by index number), dictionaries are accessed by <strong>key name</strong>:</p>\n\n<table>\n<tr><th>Data Type</th><th>Access Method</th><th>Example</th></tr>\n<tr>\n<td><strong>List</strong></td>\n<td>Index (number)</td>\n<td>${list}[0], ${list}[2]</td>\n</tr>\n<tr>\n<td><strong>Dictionary</strong></td>\n<td>Key (name)</td>\n<td>${dict}[name], ${dict}[status]</td>\n</tr>\n</table>\n\n<h3>Basic Syntax: ${dict}[key]</h3>\n<p>Use <span class=\"code\">${dict}[key]</span> to get the value for a key:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nBasic Access\n    &{user}       Create Dictionary    name=Alice    age=30    role=Admin\n    \n    ${name}       Set Variable    ${user}[name]\n    ${age}        Set Variable    ${user}[age]\n    ${role}       Set Variable    ${user}[role]\n    \n    Log    Name: ${name}     # Output: Name: Alice\n    Log    Age: ${age}       # Output: Age: 30\n    Log    Role: ${role}     # Output: Role: Admin</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p><strong>Important:</strong> Use <code>${dict}[key]</code> (with <code>$</code>), not <code>&{dict}[key]</code>!</p>\n\n<h3>Direct Access (Without Storing)</h3>\n<p>You can access dictionary values directly in Log statements:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nDirect Access\n    &{config}    Create Dictionary    host=localhost    port=8080    ssl=True\n    \n    Log    Server: ${config}[host]:${config}[port]\n    Log    SSL enabled: ${config}[ssl]\n    # Output: Server: localhost:8080\n    # Output: SSL enabled: True</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Alternative: Dot Syntax (For Simple Keys)</h3>\n<p>If keys have no spaces or special characters, you can use dot notation:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nDot Syntax\n    &{server}    Create Dictionary    host=localhost    port=8080\n    \n    # Both syntaxes work:\n    Log    ${server}[host]     # Bracket syntax\n    Log    ${server.host}      # Dot syntax (same result)\n    \n    Log    ${server}[port]     # Bracket syntax\n    Log    ${server.port}      # Dot syntax (same result)</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p><strong>When to use dot syntax:</strong></p>\n<ul>\n<li>✅ Simple keys: <code>${dict.name}</code>, <code>${dict.status}</code></li>\n<li>❌ Keys with spaces: <code>${dict.first name}</code> won't work → use <code>${dict}[first name]</code></li>\n<li>❌ Keys with special chars: <code>${dict.user-id}</code> won't work → use <code>${dict}[user-id]</code></li>\n<li>❌ Numeric keys: <code>${dict.123}</code> won't work → use <code>${dict}[123]</code></li>\n</ul>\n\n<h3>Case Sensitivity in Keys</h3>\n<p>Dictionary keys are <strong>case-sensitive</strong>:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nCase Sensitivity\n    &{data}    Create Dictionary    Status=OK    status=fail    STATUS=unknown\n    \n    Log    ${data}[Status]     # Output: OK\n    Log    ${data}[status]     # Output: fail\n    Log    ${data}[STATUS]     # Output: unknown\n    \n    # These are THREE DIFFERENT KEYS!</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Handling Missing Keys</h3>\n<p>Accessing a non-existent key throws an error:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nMissing Key Error\n    &{user}    Create Dictionary    name=Alice    age=30\n    \n    ${name}    Set Variable    ${user}[name]     # ✅ OK\n    ${email}   Set Variable    ${user}[email]    # ❌ ERROR: Key 'email' not found</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Safe Access: Get From Dictionary</h3>\n<p>Use <span class=\"keyword\">Get From Dictionary</span> for safe access with optional default:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nSafe Access\n    &{user}    Create Dictionary    name=Alice    age=30\n    \n    # Get existing key\n    ${name}    Get From Dictionary    ${user}    name\n    Log        ${name}    # Output: Alice\n    \n    # Get missing key (returns None by default)\n    ${email}   Get From Dictionary    ${user}    email\n    Log        ${email}   # Output: None\n    \n    # Get missing key with default value\n    ${role}    Get From Dictionary    ${user}    role    default=Guest\n    Log        ${role}    # Output: Guest</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>When to Use Each Method</h4>\n<table>\n<tr><th>Method</th><th>When to Use</th><th>Error Handling</th></tr>\n<tr>\n<td><strong>${dict}[key]</strong></td>\n<td>Key is guaranteed to exist</td>\n<td>Throws error if missing</td>\n</tr>\n<tr>\n<td><strong>Get From Dictionary</strong></td>\n<td>Key might not exist</td>\n<td>Returns None or default</td>\n</tr>\n</table>\n\n<h3>Checking if Key Exists</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nCheck Key Existence\n    &{config}    Create Dictionary    host=localhost    port=8080\n    \n    # Dictionary Should Contain Key - passes if key exists\n    Dictionary Should Contain Key    ${config}    host     # ✅ Passes\n    Dictionary Should Contain Key    ${config}    ssl      # ❌ Fails: Key not found\n    \n    # Get Dictionary Keys - returns list of all keys\n    ${keys}      Get Dictionary Keys    ${config}\n    Log Many     Available keys:    @{keys}    # Output: host, port</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Real-World Example: API Response Processing</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nProcess API Response\n    # Simulate API response\n    &{response}    Create Dictionary\n    ...    status=success\n    ...    code=200\n    ...    message=User created successfully\n    ...    user_id=12345\n    \n    # Extract values\n    ${status}      Set Variable    ${response}[status]\n    ${code}        Set Variable    ${response}[code]\n    ${user_id}     Get From Dictionary    ${response}    user_id\n    \n    # Validate\n    Should Be Equal    ${status}    success\n    Should Be Equal As Integers    ${code}    200\n    \n    Log    Created user ID: ${user_id}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Nested Dictionary Access</h3>\n<p>For nested structures, chain the access:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nNested Access\n    &{address}    Create Dictionary    street=123 Main St    city=Boston    zip=02101\n    &{user}       Create Dictionary    name=Alice    address=${address}\n    \n    # Access nested value\n    ${city}       Set Variable    ${user}[address][city]\n    Log           User lives in: ${city}    # Output: User lives in: Boston\n    \n    # Alternative with dot syntax\n    ${street}     Set Variable    ${user.address.street}\n    Log           Street: ${street}          # Output: Street: 123 Main St</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Common Mistakes</h3>\n<ul>\n<li>❌ Using <code>&{dict}[key]</code> instead of <code>${dict}[key]</code></li>\n<li>❌ Case mismatch: <code>${dict}[Name]</code> when key is <code>name</code></li>\n<li>❌ Accessing missing keys without error handling</li>\n<li>❌ Using dot syntax with spaces: <code>${dict.first name}</code> (use brackets!)</li>\n</ul>\n</div>\n\n<div class=\"try-it\">\n<p>MENTOR-9: \"Create a ship systems dictionary and a crew dictionary. Access specific values by key: Navigation status, Power status, captain name, pilot name. Use Get From Dictionary for safe access. Show me you can query structured data.\"</p>\n</div>",
+        "estimatedReadTime": "7-8 minutes"
+      },
+      "metadata": {
+        "tags": [
+          "beginner",
+          "dictionary-access",
+          "get-from-dictionary",
+          "dot-syntax",
+          "key-lookup"
+        ],
+        "prerequisites": [
+          "ex-1-2-5"
+        ],
+        "nextExercises": [
+          "ex-1-2-7"
+        ]
+      }
+    },
+    {
+      "id": "ex-1-2-7",
+      "title": "Variable Flexibility - Case and Spacing Revisited",
+      "difficulty": "beginner",
+      "estimatedTime": "10 minutes",
+      "order": 7,
+      "description": "Master the crucial distinction between case-insensitive keywords and case-sensitive variables.",
+      "story": {
+        "setup": "MENTOR-9: \"Remember how keywords are case-insensitive? Variables are different. Let me show you what's flexible and what's strict. This prevents a common beginner mistake.\"",
+        "context": "Keywords (Log, Set Variable) are case-insensitive, but variable NAMES (${myVar} vs ${MyVar}) ARE case-sensitive. Understanding this distinction prevents mysterious bugs where 'the variable is undefined' even though you 'just created it'.",
+        "success": "MENTOR-9: \"See the difference? Variable NAMES are case-sensitive, but the KEYWORDS that manipulate them are not. Critical distinction. This knowledge will save you hours of debugging.\""
+      },
+      "instructions": [
+        "Create the *** Test Cases *** section",
+        "Create a test case named 'Variable Case Sensitivity'",
+        "Demonstrate keyword case insensitivity:",
+        "  - Use 'Set Variable' (standard) to create ${test1} with value 'Standard keyword'",
+        "  - Use 'set variable' (lowercase) to create ${test2} with value 'Lowercase keyword'",
+        "  - Use 'SET VARIABLE' (uppercase) to create ${test3} with value 'Uppercase keyword'",
+        "  - Use 'SeT VaRiAbLe' (mixed) to create ${test4} with value 'Mixed case keyword'",
+        "Demonstrate variable name case sensitivity:",
+        "  - Create ${status} with value 'system online'",
+        "  - Create ${Status} with value 'SYSTEM READY'",
+        "  - Create ${STATUS} with value 'ALL SYSTEMS GO'",
+        "Log all three status variables to show they are different",
+        "Add comment explaining the key rule"
+      ],
+      "hints": [
+        "Keywords ARE case-insensitive: Log = log = LOG",
+        "Variable names ARE case-sensitive: ${x} ≠ ${X}",
+        "Set Variable = set variable = SET VARIABLE = SeT VaRiAbLe",
+        "${myVar} and ${MyVar} are completely different variables",
+        "This is a common source of bugs!",
+        "Use comments with # to explain the rule"
+      ],
+      "initialCode": "",
+      "solution": "*** Test Cases ***\nVariable Case Sensitivity\n    # Keywords are case-insensitive\n    ${test1}    Set Variable    Standard keyword\n    ${test2}    set variable    Lowercase keyword\n    ${test3}    SET VARIABLE    Uppercase keyword\n    ${test4}    SeT VaRiAbLe    Mixed case keyword\n    Log    All four tests created successfully\n    \n    # Variable NAMES are case-sensitive!\n    ${status}    Set Variable    system online\n    ${Status}    Set Variable    SYSTEM READY\n    ${STATUS}    Set Variable    ALL SYSTEMS GO\n    Log    ${status}\n    Log    ${Status}\n    Log    ${STATUS}\n    \n    # KEY RULE: Keywords = case-insensitive, Variables = case-sensitive",
+      "validation": {
+        "mustContain": [
+          "*** Test Cases ***",
+          "Variable Case Sensitivity",
+          "${test1}",
+          "${test2}",
+          "${test3}",
+          "${test4}",
+          "${status}",
+          "${Status}",
+          "${STATUS}",
+          "Set Variable",
+          "Log"
+        ],
+        "forbiddenKeywords": [],
+        "mustPass": true
+      },
+      "theory": {
+        "title": "The Critical Distinction: Case-Insensitive Keywords vs Case-Sensitive Variables",
+        "content": "<div class=\"theory-visual\">\n<img src=\"assets/images/theory/section-1-2/ex-1-2-7-case-sensitivity.png\" alt=\"Split diagram showing keyword case variations converging versus variable case variations staying separate\" loading=\"lazy\" width=\"1920\" height=\"1080\" />\n</div>\n\n<div class=\"story-intro\">\n<p>MENTOR-9 displays a common error message: <code>Variable '${MyVar}' not found</code>.</p>\n<p>\"PROTO-7, see this? The developer created <code>${myVar}</code> but tried to access <code>${MyVar}</code>. Classic beginner mistake. Let me teach you the crucial distinction between keywords and variables.\"</p>\n</div>\n\n<div class=\"concept-explain\">\n<h3>The Fundamental Rule</h3>\n\n<div class=\"rules-box\">\n<h4>Case Sensitivity in Robot Framework</h4>\n<ul>\n<li>✅ <strong>KEYWORDS are CASE-INSENSITIVE</strong>\n<ul>\n<li>Log = log = LOG = LoG</li>\n<li>Set Variable = set variable = SET VARIABLE</li>\n<li>Create List = CREATE LIST = create list</li>\n</ul>\n</li>\n<li>❌ <strong>VARIABLE NAMES are CASE-SENSITIVE</strong>\n<ul>\n<li>${myVar} ≠ ${MyVar} ≠ ${MYVAR}</li>\n<li>${status} ≠ ${Status} ≠ ${STATUS}</li>\n<li>@{items} ≠ @{Items} ≠ @{ITEMS}</li>\n</ul>\n</li>\n</ul>\n</div>\n\n<h3>Why This Matters</h3>\n<p>This is one of the <strong>most common sources of bugs</strong> for beginners:</p>\n</div>\n\n<div class=\"code-demo\">\n<h4>The Classic Bug</h4>\n<pre><code>*** Test Cases ***\nCommon Mistake\n    ${userName}    Set Variable    Alice    # Create variable with camel case\n    Log            ${username}              # ❌ ERROR: Variable not found!\n    \n    # Robot Framework says: \"Variable '${username}' not found\"\n    # But you \"just created it\"... with different capitalization!</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Keyword Case Insensitivity</h3>\n<p>All of these are <strong>identical</strong>:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nKeyword Variations\n    ${x}    Set Variable    A        # Standard\n    ${y}    set variable    B        # Lowercase\n    ${z}    SET VARIABLE    C        # Uppercase\n    ${w}    SeT VaRiAbLe    D        # Mixed\n    \n    Log    ${x}                      # Standard\n    log    ${y}                      # Lowercase\n    LOG    ${z}                      # Uppercase\n    LoG    ${w}                      # Mixed\n    \n    # All work perfectly! Keywords are normalized internally.</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p><strong>Why?</strong> Robot Framework normalizes keywords by:</p>\n<ol>\n<li>Converting to lowercase</li>\n<li>Removing spaces and underscores</li>\n</ol>\n\n<p>So <code>Log To Console</code>, <code>log_to_console</code>, <code>LOG TO CONSOLE</code>, and <code>logToConsole</code> all become <code>logtoconsole</code> internally.</p>\n\n<h3>Variable Name Case Sensitivity</h3>\n<p>Variable names are <strong>NOT normalized</strong>—they're stored exactly as written:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nVariable Variations\n    ${myvar}     Set Variable    lowercase\n    ${myVar}     Set Variable    camelCase\n    ${MyVar}     Set Variable    PascalCase\n    ${MYVAR}     Set Variable    UPPERCASE\n    \n    Log    ${myvar}     # Output: lowercase\n    Log    ${myVar}     # Output: camelCase\n    Log    ${MyVar}     # Output: PascalCase\n    Log    ${MYVAR}     # Output: UPPERCASE\n    \n    # These are FOUR DIFFERENT VARIABLES!</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Real-World Debugging Scenario</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nThe Bug Hunt\n    # Developer creates variable\n    ${userName}    Set Variable    admin@example.com\n    \n    # Many lines later...\n    # Developer tries to use it\n    Log    Logging in as ${username}\n    # ❌ ERROR: Variable '${username}' not found\n    \n    # Hours of debugging later, they realize:\n    # Created: ${userName} (capital N)\n    # Used: ${username} (lowercase n)\n    # They're DIFFERENT variables!</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>The Fix</h4>\n<ul>\n<li><strong>Option 1:</strong> Use consistent casing: <code>${username}</code> everywhere</li>\n<li><strong>Option 2:</strong> Use consistent casing: <code>${userName}</code> everywhere</li>\n<li><strong>Best practice:</strong> Pick a style (snake_case recommended) and stick to it!</li>\n</ul>\n\n<h3>Why This Design?</h3>\n\n<table>\n<tr><th>Feature</th><th>Case-Insensitive Keywords</th><th>Case-Sensitive Variables</th></tr>\n<tr>\n<td><strong>Reason</strong></td>\n<td>Natural language readability</td>\n<td>Precision and compatibility with Python</td>\n</tr>\n<tr>\n<td><strong>Benefit</strong></td>\n<td>Typos don't break tests</td>\n<td>Distinct names possible (${url} vs ${URL})</td>\n</tr>\n<tr>\n<td><strong>Trade-off</strong></td>\n<td>Multiple valid styles</td>\n<td>Must remember exact capitalization</td>\n</tr>\n</table>\n\n<h3>Best Practices to Avoid Bugs</h3>\n\n<h4>1. Consistent Variable Naming Convention</h4>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Variables ***\n# Pick ONE style and use it everywhere\n${api_url}         https://example.com     # ✅ snake_case (recommended)\n${max_retries}     3                       # ✅ snake_case\n${timeout_ms}      5000                    # ✅ snake_case</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>2. Use All-Caps for Constants</h4>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Variables ***\n${API_URL}         https://example.com     # Constant: all caps\n${MAX_RETRIES}     3                       # Constant: all caps\n\n*** Test Cases ***\nTest Example\n    ${response}    GET    ${API_URL}       # Variable: snake_case</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>3. IDE Auto-Completion</h4>\n<p>Use an IDE (VSCode with Robot Framework plugin, PyCharm, etc.) that:</p>\n<ul>\n<li>Auto-completes variable names (prevents typos)</li>\n<li>Highlights undefined variables</li>\n<li>Shows variable declarations on hover</li>\n</ul>\n\n<h3>Other Case-Sensitive Elements</h3>\n<p>Besides variables, these are also case-sensitive:</p>\n<ul>\n<li><strong>Dictionary keys:</strong> <code>${dict}[Name]</code> ≠ <code>${dict}[name]</code></li>\n<li><strong>File paths:</strong> On Linux/Mac, <code>File.txt</code> ≠ <code>file.txt</code></li>\n<li><strong>Tag names:</strong> <code>[Tags] Smoke</code> ≠ <code>[Tags] smoke</code> (different tags!)</li>\n</ul>\n\n<h3>Testing Your Understanding</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nQuiz: What Happens?\n    ${Count}    Set Variable    5\n    log         The count is ${count}    # ❌ ERROR or ✅ OK?\n    \n    # Answer: ❌ ERROR\n    # Why: 'log' (keyword) is fine (case-insensitive)\n    #      but ${count} ≠ ${Count} (variables are case-sensitive)</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Mnemonic to Remember</h3>\n<p><strong>\"Keywords are forgiving, variables are precise.\"</strong></p>\n<ul>\n<li><strong>Keywords:</strong> Like natural language—multiple ways to say the same thing</li>\n<li><strong>Variables:</strong> Like names in a database—exact match required</li>\n</ul>\n</div>\n\n<div class=\"try-it\">\n<p>MENTOR-9: \"Demonstrate your understanding. Use Set Variable in multiple cases (lowercase, uppercase, mixed) to show keywords are flexible. Then create ${status}, ${Status}, and ${STATUS} as separate variables to show variable names are strict. Prove you know the rule.\"</p>\n</div>",
+        "estimatedReadTime": "7-8 minutes"
+      },
+      "metadata": {
+        "tags": [
+          "beginner",
+          "case-sensitivity",
+          "keyword-vs-variable",
+          "common-mistakes",
+          "debugging"
+        ],
+        "prerequisites": [
+          "ex-1-2-6"
+        ],
+        "nextExercises": [
+          "challenge-1-2"
+        ]
+      }
+    }
+  ]
+}
