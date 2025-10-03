@@ -183,7 +183,18 @@ const exercise = {
 
             // Story introduction (always visible - from story.setup and story.context)
             const keyPointsDiv = document.getElementById('theoryKeyPoints');
-            if (this.currentExercise.story) {
+
+            // Check if there's a theory visual image in the content
+            const content = theory.content || '';
+            const imageMatch = content.match(/<div class="theory-visual">.*?<img src="([^"]+)" alt="([^"]+)"[^>]*>.*?<\/div>/s);
+
+            if (imageMatch) {
+                // Show the image instead of story text
+                keyPointsDiv.innerHTML = `<div class="theory-visual">
+                    <img src="${imageMatch[1]}" alt="${imageMatch[2]}" loading="lazy" width="1920" height="1080" />
+                </div>`;
+            } else if (this.currentExercise.story) {
+                // Fallback to story text if no image
                 const story = this.currentExercise.story;
                 let storyHTML = '<div class="story-hook">';
 
