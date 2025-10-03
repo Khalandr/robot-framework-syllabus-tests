@@ -242,7 +242,11 @@ const exercise = {
         instructionsList.innerHTML = '';
         this.currentExercise.instructions.forEach(instruction => {
             const li = document.createElement('li');
-            li.textContent = instruction;
+
+            // Parse instruction text for code snippets (text within single quotes)
+            const formattedText = instruction.replace(/'([^']+)'/g, '<code>$1</code>');
+            li.innerHTML = formattedText;
+
             instructionsList.appendChild(li);
         });
 
@@ -251,8 +255,11 @@ const exercise = {
         hintsDiv.innerHTML = '';
         this.currentExercise.hints.forEach(hint => {
             const p = document.createElement('p');
-            p.textContent = `💡 ${hint}`;
-            p.style.marginBottom = '0.5rem';
+
+            // Parse hint text for code snippets (text within single quotes or backticks)
+            const formattedHint = hint.replace(/'([^']+)'|`([^`]+)`/g, '<code>$1$2</code>');
+            p.innerHTML = `💡 ${formattedHint}`;
+
             hintsDiv.appendChild(p);
         });
         hintsDiv.style.display = 'none';

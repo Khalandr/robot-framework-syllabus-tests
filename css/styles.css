@@ -1238,32 +1238,124 @@ code.robot {
     color: var(--primary-teal);
     margin-top: 1.5rem;
     margin-bottom: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Instructions List Styling */
+#exerciseInstructions {
+    list-style: none;
+    counter-reset: instruction-counter;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+#exerciseInstructions li {
+    counter-increment: instruction-counter;
+    position: relative;
+    padding: 0.75rem 0.75rem 0.75rem 3rem;
+    margin-bottom: 0.75rem;
+    background: var(--primary-teal-5);
+    border-left: 3px solid var(--primary-teal);
+    border-radius: var(--radius-md);
+    line-height: 1.6;
+    transition: all 0.2s ease;
+}
+
+#exerciseInstructions li:hover {
+    background: var(--primary-teal-10);
+    border-left-color: var(--primary-teal);
+    transform: translateX(2px);
+}
+
+#exerciseInstructions li::before {
+    content: counter(instruction-counter);
+    position: absolute;
+    left: 0.75rem;
+    top: 0.75rem;
+    background: var(--primary-teal);
+    color: var(--dark-bg);
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: var(--radius-round);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+/* Handle indented sub-items (lines starting with spaces) */
+#exerciseInstructions li {
+    white-space: pre-wrap;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.9rem;
+}
+
+/* Code-like elements within instructions */
+#exerciseInstructions li code,
+#exerciseInstructions li strong {
+    color: var(--primary-teal);
+    font-weight: 600;
+    background: var(--primary-teal-10);
+    padding: 0.1rem 0.3rem;
+    border-radius: var(--radius-sm);
 }
 
 .hints-section {
     margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
 }
 
 .btn-hints {
     background: var(--warning-yellow-20);
     border: 1px solid var(--warning-yellow);
     color: var(--warning-yellow);
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
+    padding: var(--spacing-sm) var(--spacing-base);
+    border-radius: var(--radius-md);
     cursor: pointer;
-    transition: all 0.3s ease;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    display: inline-block;
 }
 
 .btn-hints:hover {
-    background: rgba(255, 193, 7, 0.3);
+    background: var(--warning-yellow-30);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
 }
 
 .hints-content {
-    margin-top: 1rem;
-    padding: 1rem;
-    background: rgba(255, 193, 7, 0.1);
+    margin-top: var(--spacing-base);
+    padding: 0;
+}
+
+.hints-content p {
+    padding: var(--spacing-sm) var(--spacing-base);
+    margin-bottom: var(--spacing-sm);
+    background: var(--warning-yellow-10);
     border-left: 3px solid var(--warning-yellow);
-    border-radius: 4px;
+    border-radius: var(--radius-md);
+    line-height: 1.6;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.hints-content p:hover {
+    background: var(--warning-yellow-20);
+    transform: translateX(2px);
+}
+
+.hints-content p code {
+    color: var(--warning-yellow);
+    background: var(--warning-yellow-20);
+    padding: 0.1rem 0.3rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
 }
 
 /* Editor Section */
