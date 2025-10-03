@@ -226,7 +226,6 @@ const exercise = {
             const theoryContent = document.getElementById('theoryContent');
 
             // Check if theory content is HTML (starts with <) or markdown
-            const content = theory.content || '';
             if (content.trim().startsWith('<')) {
                 // It's HTML, render directly
                 theoryContent.innerHTML = content;
