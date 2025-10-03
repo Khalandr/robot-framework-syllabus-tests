@@ -194,7 +194,8 @@ const exercise = {
                     <img src="${imageMatch[1]}" alt="${imageMatch[2]}" loading="lazy" width="1920" height="1080" />
                 </div>`;
                 // Remove the image from the theory content to avoid duplication
-                content = content.replace(/<div class="theory-visual">.*?<\/div>/s, '').trim();
+                // Also remove any leading escaped newlines
+                content = content.replace(/<div class="theory-visual">.*?<\/div>/s, '').replace(/^\\n+/, '').trim();
             } else if (this.currentExercise.story) {
                 // Fallback to story text if no image
                 const story = this.currentExercise.story;
