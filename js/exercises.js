@@ -177,9 +177,8 @@ const exercise = {
         if (this.currentExercise.theory) {
             const theory = this.currentExercise.theory;
 
-            // Theory title and read time
+            // Theory title
             document.getElementById('theoryTitle').textContent = theory.title || 'Theory';
-            document.getElementById('theoryReadTime').textContent = theory.estimatedReadTime || '';
 
             // Check if there's a theory visual image in the content
             let content = theory.content || '';
