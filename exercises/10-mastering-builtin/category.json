@@ -1,7 +1,7 @@
 {
   "id": "10-mastering-builtin",
   "name": "Mastering BuiltIn Library",
-  "description": "Deep dive into Robot Framework's BuiltIn library. Master every keyword, understand edge cases, and become proficient with the tools available in every Robot Framework installation.",
+  "description": "You're back at the academy for advanced training. The BuiltIn library is your core diagnostic toolkit—present in every robot, never requiring import. Prove your mastery through rigorous challenges.",
   "icon": "🔧",
   "order": 1,
   "difficulty": "intermediate",

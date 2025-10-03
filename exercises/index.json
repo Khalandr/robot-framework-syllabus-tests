@@ -3,7 +3,7 @@
     {
       "id": "00-fundamentals",
       "name": "Robot Framework Fundamentals: The Stranded Protocol",
-      "description": "Master the core concepts of Robot Framework through an engaging story-driven curriculum. Two robots crash-land on planet Syntax-IV and must write test suites to repair their ship.",
+      "description": "You are PROTO-7, a test automation robot who just crash-landed on planet Syntax-IV. Your mentor, MENTOR-9, will teach you Robot Framework to repair the ship's diagnostic systems. Master test syntax, variables, control flow, and test organization to escape the planet.",
       "icon": "🤖",
       "difficulty": "beginner-to-intermediate",
       "estimatedTime": "12-15 hours",
@@ -15,7 +15,7 @@
     {
       "id": "10-mastering-builtin",
       "name": "Mastering BuiltIn Library",
-      "description": "Deep dive into Robot Framework's BuiltIn library. Master every keyword, understand edge cases, and become proficient with variables, assertions, and control flow keywords.",
+      "description": "Back at the robot academy, you're training to become a BuiltIn specialist. The BuiltIn library is every robot's core toolkit—always available, never imported. Master logging, assertions, variable scoping, collections, and advanced control flow to earn your certification.",
       "icon": "🔧",
       "difficulty": "intermediate",
       "estimatedTime": "8-10 hours",
@@ -27,7 +27,7 @@
     {
       "id": "20-api-testing",
       "name": "API Testing with Robot Framework",
-      "description": "Learn to test RESTful APIs using Robot Framework. Cover HTTP methods, authentication, JSON validation, and advanced testing patterns.",
+      "description": "Your first real mission: test the Galactic Communication Network's APIs. Systems across the galaxy rely on these endpoints. Learn HTTP methods, authentication protocols, JSON validation, and advanced patterns to ensure the network stays operational.",
       "icon": "🌐",
       "difficulty": "intermediate-to-advanced",
       "estimatedTime": "10-12 hours",

@@ -1,7 +1,7 @@
 {
   "id": "00-fundamentals",
   "name": "Robot Framework Fundamentals: The Stranded Protocol",
-  "description": "Master the core concepts of Robot Framework through an engaging story-driven curriculum featuring PROTO-7 and MENTOR-9",
+  "description": "You are PROTO-7, newly activated and stranded on planet Syntax-IV. MENTOR-9 will guide you through Robot Framework fundamentals as you repair the ship's diagnostic systems and escape.",
   "icon": "🤖",
   "order": 0,
   "difficulty": "beginner-to-intermediate",

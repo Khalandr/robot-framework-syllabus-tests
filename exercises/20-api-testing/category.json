@@ -1,7 +1,7 @@
 {
   "id": "20-api-testing",
   "name": "API Testing with Robot Framework",
-  "description": "Learn to test RESTful APIs using Robot Framework. Cover HTTP methods, authentication, JSON validation, and advanced testing patterns for modern web services.",
+  "description": "Mission briefing: The Galactic Communication Network needs you. Test critical API endpoints that billions rely on. One broken authentication flow, one malformed JSON response—lives are at stake.",
   "icon": "🌐",
   "order": 2,
   "difficulty": "intermediate-to-advanced",
