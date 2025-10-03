@@ -1,44 +1,40 @@
 {
-  "version": "2.0",
-  "schemaVersion": "2.0",
-  "totalExercises": 80,
-  "lastUpdated": "2025-10-02",
   "categories": [
     {
-      "id": "01-fundamentals",
-      "name": "Fundamentals",
-      "description": "Master the core concepts of Robot Framework",
-      "icon": "📚",
+      "id": "00-fundamentals",
+      "name": "Robot Framework Fundamentals: The Stranded Protocol",
+      "description": "Master the core concepts of Robot Framework through an engaging story-driven curriculum. Two robots crash-land on planet Syntax-IV and must write test suites to repair their ship.",
+      "icon": "🤖",
+      "difficulty": "beginner-to-intermediate",
+      "estimatedTime": "12-15 hours",
+      "order": 0,
+      "totalExercises": 84,
+      "totalChallenges": 4,
+      "hasFinalProject": true
+    },
+    {
+      "id": "10-mastering-builtin",
+      "name": "Mastering BuiltIn Library",
+      "description": "Deep dive into Robot Framework's BuiltIn library. Master every keyword, understand edge cases, and become proficient with variables, assertions, and control flow keywords.",
+      "icon": "🔧",
+      "difficulty": "intermediate",
+      "estimatedTime": "8-10 hours",
       "order": 1,
-      "exerciseCount": 25,
-      "topicCount": 3
+      "totalExercises": 40,
+      "totalChallenges": 4,
+      "hasFinalProject": true
     },
     {
-      "id": "02-keywords",
-      "name": "Keywords & Libraries",
-      "description": "Using and creating keywords",
-      "icon": "🔑",
+      "id": "20-api-testing",
+      "name": "API Testing with Robot Framework",
+      "description": "Learn to test RESTful APIs using Robot Framework. Cover HTTP methods, authentication, JSON validation, and advanced testing patterns.",
+      "icon": "🌐",
+      "difficulty": "intermediate-to-advanced",
+      "estimatedTime": "10-12 hours",
       "order": 2,
-      "exerciseCount": 15,
-      "topicCount": 2
-    },
-    {
-      "id": "03-organization",
-      "name": "Test Organization",
-      "description": "Structuring and organizing test suites",
-      "icon": "📂",
-      "order": 3,
-      "exerciseCount": 15,
-      "topicCount": 2
-    },
-    {
-      "id": "04-real-world",
-      "name": "Real-World Skills",
-      "description": "Practical scenarios and best practices",
-      "icon": "🌍",
-      "order": 4,
-      "exerciseCount": 25,
-      "topicCount": 3
+      "totalExercises": 45,
+      "totalChallenges": 4,
+      "hasFinalProject": true
     }
   ]
 }

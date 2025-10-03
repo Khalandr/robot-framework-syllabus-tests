@@ -1,9 +1,0 @@
-{
-  "id": "02-advanced-keywords",
-  "title": "Advanced Keywords",
-  "description": "Master dynamic keyword execution, conditional logic, timeout handling, default arguments, and variable-length arguments for flexible and robust test automation.",
-  "order": 2,
-  "estimatedTime": 52,
-  "exerciseCount": 5,
-  "free": true
-}

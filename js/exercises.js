@@ -38,13 +38,53 @@ const exercise = {
                     }
                     const categoryData = await categoryResponse.json();
 
-                    // Load exercises from each topic
+                    // Load exercises from each topic (may have nested sections)
                     for (const topic of categoryData.topics) {
                         try {
-                            const exercisesResponse = await fetch(`exercises/${cat.id}/${topic.id}/exercises.json`);
-                            if (exercisesResponse.ok) {
-                                const exercisesData = await exercisesResponse.json();
-                                categoryExercises.push(...exercisesData.exercises);
+                            // First try loading topic.json to check for sections
+                            const topicResponse = await fetch(`exercises/${cat.id}/${topic.id}/topic.json`);
+                            if (topicResponse.ok) {
+                                const topicData = await topicResponse.json();
+
+                                // If topic has sections, load exercises from each section
+                                if (topicData.sections && topicData.sections.length > 0) {
+                                    for (const section of topicData.sections) {
+                                        try {
+                                            const exercisesResponse = await fetch(`exercises/${cat.id}/${topic.id}/${section.id}/exercises.json`);
+                                            if (exercisesResponse.ok) {
+                                                const exercisesData = await exercisesResponse.json();
+                                                categoryExercises.push(...exercisesData.exercises);
+                                            }
+
+                                            // Also load challenge if exists
+                                            try {
+                                                const challengeResponse = await fetch(`exercises/${cat.id}/${topic.id}/${section.id}/challenge.json`);
+                                                if (challengeResponse.ok) {
+                                                    const challengeData = await challengeResponse.json();
+                                                    categoryExercises.push(challengeData);
+                                                }
+                                            } catch (err) {
+                                                // No challenge for this section
+                                            }
+                                        } catch (err) {
+                                            console.log(`No exercises for ${cat.id}/${topic.id}/${section.id}`);
+                                        }
+                                    }
+                                } else {
+                                    // No sections, try loading exercises directly from topic
+                                    const exercisesResponse = await fetch(`exercises/${cat.id}/${topic.id}/exercises.json`);
+                                    if (exercisesResponse.ok) {
+                                        const exercisesData = await exercisesResponse.json();
+                                        categoryExercises.push(...exercisesData.exercises);
+                                    }
+                                }
+                            } else {
+                                // No topic.json, try loading exercises directly
+                                const exercisesResponse = await fetch(`exercises/${cat.id}/${topic.id}/exercises.json`);
+                                if (exercisesResponse.ok) {
+                                    const exercisesData = await exercisesResponse.json();
+                                    categoryExercises.push(...exercisesData.exercises);
+                                }
                             }
                         } catch (err) {
                             console.log(`No exercises for ${cat.id}/${topic.id}`);
@@ -141,9 +181,29 @@ const exercise = {
             document.getElementById('theoryTitle').textContent = theory.title || 'Theory';
             document.getElementById('theoryReadTime').textContent = theory.estimatedReadTime || '';
 
-            // Key Points (always visible - from learning objectives)
+            // Story introduction (always visible - from story.setup and story.context)
             const keyPointsDiv = document.getElementById('theoryKeyPoints');
-            if (theory.learningObjectives && theory.learningObjectives.length > 0) {
+            if (this.currentExercise.story) {
+                const story = this.currentExercise.story;
+                let storyHTML = '<div class="story-hook">';
+
+                if (story.setup) {
+                    storyHTML += `<div class="story-setup">
+                        <span class="mentor-icon">🤖</span>
+                        <p><em>${story.setup}</em></p>
+                    </div>`;
+                }
+
+                if (story.context) {
+                    storyHTML += `<div class="story-context">
+                        <p>${story.context}</p>
+                    </div>`;
+                }
+
+                storyHTML += '</div>';
+                keyPointsDiv.innerHTML = storyHTML;
+            } else if (theory.learningObjectives && theory.learningObjectives.length > 0) {
+                // Fallback to learning objectives if no story
                 keyPointsDiv.innerHTML = '<div class="key-points-title">📌 Key Points:</div><ul>' +
                     theory.learningObjectives.map(obj => `<li>${obj}</li>`).join('') +
                     '</ul>';

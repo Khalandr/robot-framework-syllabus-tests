@@ -1,0 +1,94 @@
+{
+  "id": "00-fundamentals",
+  "name": "Robot Framework Fundamentals: The Stranded Protocol",
+  "description": "Master the core concepts of Robot Framework through an engaging story-driven curriculum featuring PROTO-7 and MENTOR-9",
+  "icon": "🤖",
+  "order": 0,
+  "difficulty": "beginner-to-intermediate",
+  "estimatedTime": "12-15 hours",
+  "story": {
+    "title": "The Stranded Protocol",
+    "premise": "Two robots crash-land on planet Syntax-IV. The ship's diagnostic system is damaged. The only way to repair it is to write Robot Framework test suites that check each ship component.",
+    "characters": [
+      {
+        "name": "PROTO-7",
+        "role": "Student (You)",
+        "description": "A test automation robot, recently activated, eager but inexperienced"
+      },
+      {
+        "name": "MENTOR-9",
+        "role": "Teacher",
+        "description": "Senior diagnostic robot, your ship companion, patient teacher"
+      }
+    ],
+    "arc": "Wake up → Learn basics → Check systems → Build logic → Organize diagnostics → Escape the planet"
+  },
+  "topics": [
+    {
+      "id": "01-first-contact",
+      "name": "Chapter 1: First Contact",
+      "order": 1,
+      "story": "PROTO-7 wakes up after crash. MENTOR-9 teaches basic communication protocols.",
+      "learningArc": "Test basics → Variables → Simple assertions",
+      "estimatedTime": "3-4 hours",
+      "exerciseCount": 21,
+      "hasChallengeExercise": true
+    },
+    {
+      "id": "02-system-diagnostics",
+      "name": "Chapter 2: System Diagnostics",
+      "order": 2,
+      "story": "MENTOR-9 teaches how to organize diagnostics and create reusable checks.",
+      "learningArc": "User keywords → Test organization → BuiltIn library deep dive",
+      "estimatedTime": "3-4 hours",
+      "exerciseCount": 23,
+      "hasChallengeExercise": true
+    },
+    {
+      "id": "03-logic-circuits",
+      "name": "Chapter 3: Logic Circuits",
+      "order": 3,
+      "story": "Ship's logic circuits need complex decision-making and iteration.",
+      "learningArc": "IF/ELSE → FOR loops → WHILE → Advanced control flow",
+      "estimatedTime": "2-3 hours",
+      "exerciseCount": 19,
+      "hasChallengeExercise": true
+    },
+    {
+      "id": "04-component-assembly",
+      "name": "Chapter 4: Component Assembly",
+      "order": 4,
+      "story": "Organize complex ship systems using advanced RF patterns.",
+      "learningArc": "Standard libraries → Resource files → Data-driven testing",
+      "estimatedTime": "2-3 hours",
+      "exerciseCount": 16,
+      "hasChallengeExercise": true
+    },
+    {
+      "id": "05-launch-sequence",
+      "name": "Chapter 5: Launch Sequence",
+      "order": 5,
+      "story": "All systems repaired. Time to execute the launch sequence and escape.",
+      "learningArc": "Integration of all concepts → Final escape",
+      "estimatedTime": "2-3 hours",
+      "exerciseCount": 5,
+      "hasFinalChallenge": true
+    }
+  ],
+  "learningObjectives": [
+    "Understand Robot Framework's whitespace-based syntax and formatting rules",
+    "Master test case and keyword structure with proper indentation",
+    "Use variables (scalar, list, dictionary) effectively",
+    "Implement control flow (IF/ELSE, FOR, WHILE, TRY/EXCEPT)",
+    "Create custom keywords and organize code with resource files",
+    "Work with BuiltIn library and standard libraries (Collections, String, DateTime)",
+    "Apply test organization patterns (setup/teardown, tags, templates)",
+    "Build complete, maintainable test suites following best practices"
+  ],
+  "prerequisites": [],
+  "certificationRelevance": {
+    "rfcpFoundation": true,
+    "coveragePercentage": 80,
+    "alignedWith": "RFCP Foundation Level Syllabus"
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "id": "01-first-contact",
+  "chapter": 1,
+  "title": "Chapter 1: First Contact",
+  "category": "00-fundamentals",
+  "description": "PROTO-7 wakes up after the crash. MENTOR-9 teaches basic communication protocols through the Log keyword, variables, and simple assertions.",
+  "order": 1,
+  "difficulty": "beginner",
+  "estimatedTime": "3-4 hours",
+  "story": {
+    "introduction": "You wake up in darkness. Systems rebooting...\n\nMENTOR-9's voice crackles: \"PROTO-7, can you hear me? Our ship crashed. We're on planet Syntax-IV. First things first - can you communicate?\"\n\n\"Try the Log protocol. It's how we robots talk to the diagnostic system.\"",
+    "arc": "Learning to communicate → Storing data in memory → Verifying system status",
+    "conclusion": "With basic communication established and simple diagnostic checks working, you and MENTOR-9 can now begin the real work: checking ship systems."
+  },
+  "sections": [
+    {
+      "id": "01-system-boot",
+      "name": "Section 1.1: System Boot",
+      "order": 1,
+      "exerciseCount": 5,
+      "hasChallengeExercise": true,
+      "story": "Can you communicate? Learn the Log keyword and basic test structure.",
+      "learningFocus": "Test case syntax, Log keyword, indentation rules, log levels"
+    },
+    {
+      "id": "02-memory-banks",
+      "name": "Section 1.2: Memory Banks",
+      "order": 2,
+      "exerciseCount": 8,
+      "hasChallengeExercise": true,
+      "story": "Store data using variables. Learn scalar, list, and dictionary variables.",
+      "learningFocus": "Variable syntax, Set Variable, lists, dictionaries, variable substitution"
+    },
+    {
+      "id": "03-system-checks",
+      "name": "Section 1.3: System Checks",
+      "order": 3,
+      "exerciseCount": 7,
+      "hasChallengeExercise": true,
+      "story": "Verify systems are working using assertions.",
+      "learningFocus": "Should Be Equal, comparison assertions, string checks, boolean assertions"
+    }
+  ],
+  "learningObjectives": [
+    "Understand Robot Framework's test case structure and syntax",
+    "Use the Log keyword to output messages",
+    "Master indentation rules (4 spaces for test content)",
+    "Create and use scalar variables with ${variable}",
+    "Work with list variables @{list} and dictionary variables &{dict}",
+    "Use assertion keywords to verify expected outcomes",
+    "Apply proper spacing between keywords and arguments"
+  ],
+  "keyTakeaways": [
+    "Test cases must be indented exactly 4 spaces from the test name",
+    "Keywords and arguments are separated by 4+ spaces (4 is standard)",
+    "The Log keyword is essential for debugging and verification",
+    "Variables use ${var}, @{list}, or &{dict} syntax",
+    "Assertions validate expected outcomes and fail tests when conditions aren't met",
+    "Consistent formatting is critical for readability"
+  ],
+  "chapterChallenge": {
+    "title": "Emergency Diagnostics Suite",
+    "description": "Create a comprehensive test checking all critical ship systems using variables, logging, and assertions.",
+    "estimatedTime": "15-20 minutes",
+    "concepts": ["All Chapter 1 concepts integrated"]
+  }
+}
