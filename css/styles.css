@@ -1465,3 +1465,54 @@ code.robot {
     line-height: 1.6;
     font-size: 0.95rem;
 }
+
+/* Tables in theory content */
+.theory-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.theory-content table th {
+    background: var(--primary-teal-20);
+    color: var(--primary-teal);
+    font-weight: 600;
+    text-align: left;
+    padding: 1rem;
+    border-bottom: 2px solid var(--primary-teal);
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.theory-content table td {
+    padding: 0.875rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+.theory-content table tr:last-child td {
+    border-bottom: none;
+}
+
+.theory-content table tr:hover {
+    background: var(--primary-teal-5);
+}
+
+.theory-content table td:first-child {
+    font-weight: 600;
+    color: var(--primary-teal);
+    min-width: 120px;
+}
+
+.theory-content table code {
+    background: var(--dark-bg);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
