@@ -1,0 +1,56 @@
+{
+  "id": "ex-00-12-03",
+  "type": "exercise",
+  "section": "12-string-library",
+  "category": "00-fundamentals",
+  "title": "Convert To Upper Case & Lower Case",
+  "difficulty": "beginner",
+  "estimatedTime": "8 minutes",
+  "order": 3,
+  "description": "Use case conversion keywords to normalize text for comparison.",
+  "story": {
+    "setup": "MENTOR-9: \"System names are inconsistent—'navigation', 'NAVIGATION', 'Navigation'. For reliable comparison, convert everything to the same case first.\"",
+    "context": "Case conversion ensures consistent text processing. Essential for searches, comparisons, and validation.",
+    "success": "MENTOR-9: \"Good! You normalized all variations to lowercase. Now comparisons work reliably regardless of original case.\""
+  },
+  "instructions": [
+    "Create *** Settings *** section with Library    String",
+    "Create *** Test Cases *** section",
+    "Create test case 'Normalize System Names'",
+    "  - ${name1} =    Set Variable    navigation",
+    "  - ${name2} =    Set Variable    NAVIGATION",
+    "  - ${name3} =    Set Variable    Navigation",
+    "  - ${lower1} =    Convert To Lower Case    ${name1}",
+    "  - ${lower2} =    Convert To Lower Case    ${name2}",
+    "  - ${lower3} =    Convert To Lower Case    ${name3}",
+    "  - Log    All lowercase: ${lower1}, ${lower2}, ${lower3}",
+    "  - Should Be Equal    ${lower1}    ${lower2}",
+    "  - Should Be Equal    ${lower2}    ${lower3}",
+    "  - ${upper} =    Convert To Upper Case    ${name1}",
+    "  - Should Be Equal    ${upper}    NAVIGATION"
+  ],
+  "hints": [
+    "Convert To Lower Case converts all characters to lowercase",
+    "Convert To Upper Case converts all to uppercase",
+    "Use for normalization before comparison",
+    "Returns new string (doesn't modify original)",
+    "Great for case-insensitive searches"
+  ],
+  "initialCode": "",
+  "solution": "*** Settings ***\nLibrary    String\n\n*** Test Cases ***\nNormalize System Names\n    ${name1}=    Set Variable    navigation\n    ${name2}=    Set Variable    NAVIGATION\n    ${name3}=    Set Variable    Navigation\n    ${lower1}=    Convert To Lower Case    ${name1}\n    ${lower2}=    Convert To Lower Case    ${name2}\n    ${lower3}=    Convert To Lower Case    ${name3}\n    Log    All lowercase: ${lower1}, ${lower2}, ${lower3}\n    Should Be Equal    ${lower1}    ${lower2}\n    Should Be Equal    ${lower2}    ${lower3}\n    ${upper}=    Convert To Upper Case    ${name1}\n    Should Be Equal    ${upper}    NAVIGATION",
+  "validation": {
+    "mustContain": ["*** Settings ***", "Library", "String", "Convert To Lower Case", "Convert To Upper Case"],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Exercise 4.2.3: Case Conversion",
+    "content": "<div class=\"story-intro\"><p>MENTOR-9: \"Case sensitivity causes bugs. User enters 'Admin' but system expects 'admin'—login fails. Convert to consistent case before comparison to avoid these issues.\"</p></div><div class=\"concept-explain\"><h3>Case Conversion Keywords</h3><p>Normalize text case:</p><pre><code>Library    String\n\n${text}=    Set Variable    Hello World\n${lower}=    Convert To Lower Case    ${text}\n# Result: 'hello world'\n\n${upper}=    Convert To Upper Case    ${text}\n# Result: 'HELLO WORLD'\n\n${title}=    Convert To Title Case    ${text}\n# Result: 'Hello World'</code></pre><p><strong>When to Use:</strong></p><ul><li><strong>Search</strong>: Convert search term and target to same case</li><li><strong>Comparison</strong>: Normalize before equals check</li><li><strong>Validation</strong>: Ensure consistent format</li><li><strong>Display</strong>: Format for presentation</li></ul></div><div class=\"code-demo\"><h4>Example: Case-Insensitive Search</h4><pre><code>*** Settings ***\nLibrary    String\n\n*** Test Cases ***\nFind System\n    ${search}=    Set Variable    POWER\n    @{systems}=    Create List    Navigation    Power    Engines\n    FOR    ${system}    IN    @{systems}\n        ${system_lower}=    Convert To Lower Case    ${system}\n        ${search_lower}=    Convert To Lower Case    ${search}\n        IF    '${system_lower}' == '${search_lower}'\n            Log    Found: ${system}\n            BREAK\n        END\n    END</code></pre></div><div class=\"rules-box\"><h4>⚠️ Case Conversion Tips</h4><ul><li>Returns new string (original unchanged)</li><li>Convert To Title Case: First Letter Uppercase</li><li>Use before comparison for case-insensitive matching</li><li>Consider performance: convert once, reuse result</li><li>Alternative: use case_insensitive flag in Should Be Equal</li></ul></div>",
+    "estimatedReadTime": "5-6 minutes"
+  },
+  "metadata": {
+    "tags": ["string", "case-conversion", "normalization", "text-processing"],
+    "prerequisites": ["ex-00-12-02"],
+    "nextExercises": ["ex-00-12-04"]
+  }
+}

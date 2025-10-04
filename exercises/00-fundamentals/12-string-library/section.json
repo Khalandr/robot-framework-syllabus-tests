@@ -1,0 +1,23 @@
+{
+  "id": "12-string-library",
+  "section": "4.2",
+  "title": "String Library",
+  "category": "00-fundamentals",
+  "order": 12,
+  "difficulty": "intermediate",
+  "estimatedTime": "40 minutes",
+  "description": "Master the String library for text manipulation, parsing, formatting, and validation.",
+  "story": {
+    "setup": "MENTOR-9: \"Communication logs are coming in as raw text—garbled, inconsistent formatting, mixed case. The String library gives us tools to parse, clean, format, and extract data from text. Essential for log analysis and data extraction.\"",
+    "context": "String library provides powerful text manipulation: split, join, replace, format, convert case, extract substrings. Critical for working with logs, files, API responses.",
+    "arc": "Learn to import String library, split and join text, replace patterns, format strings, and extract substrings for text processing workflows."
+  },
+  "exercises": [
+    "ex-00-12-01",
+    "ex-00-12-02",
+    "ex-00-12-03",
+    "ex-00-12-04",
+    "ex-00-12-05"
+  ],
+  "challenges": ["ch-00-12"]
+}

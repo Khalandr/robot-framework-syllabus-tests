@@ -78,6 +78,11 @@
       "id": "11-collections-library",
       "name": "Section 4.1: Collections Library",
       "order": 11
+    },
+    {
+      "id": "12-string-library",
+      "name": "Section 4.2: String Library",
+      "order": 12
     }
   ],
   "learningObjectives": [
