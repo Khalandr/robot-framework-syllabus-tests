@@ -1,6 +1,6 @@
 {
-  "id": "03-system-checks",
-  "title": "System Checks",
+  "id": "03-assertions",
+  "title": "Assertions",
   "description": "Learn Robot Framework's assertion keywords to validate data—the foundation of test automation.",
   "order": 3,
   "exerciseFiles": [

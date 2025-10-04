@@ -14,8 +14,8 @@
   },
   "sections": [
     {
-      "id": "01-system-boot",
-      "name": "Section 1.1: System Boot",
+      "id": "01-basic-syntax",
+      "name": "Section 1.1: Basic Syntax",
       "order": 1,
       "exerciseCount": 5,
       "hasChallengeExercise": true,
@@ -23,8 +23,8 @@
       "learningFocus": "Test case syntax, Log keyword, indentation rules, log levels"
     },
     {
-      "id": "02-memory-banks",
-      "name": "Section 1.2: Memory Banks",
+      "id": "02-variables",
+      "name": "Section 1.2: Variables",
       "order": 2,
       "exerciseCount": 8,
       "hasChallengeExercise": true,
@@ -32,8 +32,8 @@
       "learningFocus": "Variable syntax, Set Variable, lists, dictionaries, variable substitution"
     },
     {
-      "id": "03-system-checks",
-      "name": "Section 1.3: System Checks",
+      "id": "03-assertions",
+      "name": "Section 1.3: Assertions",
       "order": 3,
       "exerciseCount": 7,
       "hasChallengeExercise": true,
