@@ -1,0 +1,76 @@
+{
+  "id": "ex-1-2-2",
+  "title": "Variable Naming Rules - What's Valid?",
+  "difficulty": "beginner",
+  "estimatedTime": "10 minutes",
+  "order": 2,
+  "description": "Master variable naming conventions and understand what Robot Framework accepts.",
+  "story": {
+    "setup": "MENTOR-9: \"Not all variable names are equal. Let me show you what Robot Framework accepts—and what it doesn't. This knowledge prevents cryptic errors.\"",
+    "context": "Understanding naming rules is crucial. Invalid names cause parse errors. Variables have the same flexibility as keywords—case-insensitive and spacing-flexible. Even spaces are allowed in names—unusual but valid.",
+    "success": "MENTOR-9: \"Interesting, right? Both variable NAMES and KEYWORDS are flexible—case and spacing don't matter. Robot Framework normalizes them all. Now you know the rules. Use them wisely.\""
+  },
+  "instructions": [
+    "Create the *** Test Cases *** section",
+    "Create a test case named 'Variable Naming Rules'",
+    "Create valid variables with different naming styles:",
+    "  - ${my_var} with value 'Underscore style'",
+    "  - ${MyVar} with value 'Camel case style'",
+    "  - ${MY_VAR} with value 'All caps style'",
+    "  - ${my var} with value 'Spaces allowed'",
+    "  - ${var123} with value 'Numbers allowed'",
+    "Log all five variables to demonstrate they work",
+    "Add a comment: # Note: ${my-var} would be INVALID (hyphens not allowed)",
+    "Add a comment: # Note: ${123var} would be INVALID (can't start with number)",
+    "Demonstrate flexibility: Create ${my_var} and then access it as ${MY_VAR} to show they're the same variable"
+  ],
+  "hints": [
+    "Valid: ${my_var}, ${MyVar}, ${MY_VAR}, ${my var}, ${var123}",
+    "Invalid: ${my-var}, ${123var}, ${my.var}",
+    "Variable names are ALSO case-insensitive: ${x} = ${X} = ${x_}",
+    "Comments start with # (no indentation needed)",
+    "Spaces in variable names work but are unconventional",
+    "Create ${status} with value, then Log ${STATUS} to show they access the same variable"
+  ],
+  "initialCode": "",
+  "solution": "*** Test Cases ***\nVariable Naming Rules\n    ${my_var}    Set Variable    Underscore style\n    ${MyVar}     Set Variable    Camel case style\n    ${MY_VAR}    Set Variable    All caps style\n    ${my var}    Set Variable    Spaces allowed\n    ${var123}    Set Variable    Numbers allowed\n    Log    ${my_var}\n    Log    ${MyVar}\n    Log    ${MY_VAR}\n    Log    ${my var}\n    Log    ${var123}\n    # Note: ${my-var} would be INVALID (hyphens not allowed)\n    # Note: ${123var} would be INVALID (can't start with number)\n    ${test}      Set Variable    Flexibility demo\n    Log    Using ${TEST} to access ${test} - they're the same!",
+  "validation": {
+    "mustContain": [
+      "*** Test Cases ***",
+      "Variable Naming Rules",
+      "${my_var}",
+      "${MyVar}",
+      "${MY_VAR}",
+      "${my var}",
+      "${var123}",
+      "${status}",
+      "${STATUS}",
+      "Set Variable",
+      "Log"
+    ],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Variable Naming: Rules, Flexibility, and Best Practices",
+    "content": "<div class=\"theory-visual\">\n<img src=\"assets/images/theory/section-1-2/ex-1-2-2-naming-rules.png\" alt=\"Variable naming validation system showing valid and invalid names with checkmarks and X marks\" loading=\"lazy\" width=\"1920\" height=\"1080\" />\n</div>\n\n<div class=\"story-intro\">\n<p>MENTOR-9 pulls up a diagnostics panel showing parse errors.</p>\n<p>\"PROTO-7, see these errors? <code>Invalid variable name '${my-var}'</code>. Naming rules prevent this. Let me teach you what works and what doesn't.\"</p>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Valid Variable Names</h3>\n\n<table>\n<tr><th>Naming Style</th><th>Example</th><th>Valid?</th></tr>\n<tr>\n<td><strong>Underscores</strong></td>\n<td>${my_var}, ${ship_name}</td>\n<td>✅ Yes</td>\n</tr>\n<tr>\n<td><strong>Camel case</strong></td>\n<td>${myVar}, ${shipName}</td>\n<td>✅ Yes</td>\n</tr>\n<tr>\n<td><strong>All caps</strong></td>\n<td>${MY_VAR}, ${SHIP_NAME}</td>\n<td>✅ Yes</td>\n</tr>\n<tr>\n<td><strong>Spaces</strong></td>\n<td>${my var}, ${ship name}</td>\n<td>✅ Yes (unusual)</td>\n</tr>\n<tr>\n<td><strong>Numbers (not at start)</strong></td>\n<td>${var1}, ${test123}</td>\n<td>✅ Yes</td>\n</tr>\n<tr>\n<td><strong>Hyphens</strong></td>\n<td>${my-var}, ${ship-name}</td>\n<td>❌ NO</td>\n</tr>\n<tr>\n<td><strong>Starting with number</strong></td>\n<td>${1var}, ${123test}</td>\n<td>❌ NO</td>\n</tr>\n<tr>\n<td><strong>Dots (special meaning)</strong></td>\n<td>${my.var}</td>\n<td>❌ NO (dict access)</td>\n</tr>\n</table>\n\n<h3>Examples of Valid Names</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nValid Names\n    ${username}       Set Variable    admin\n    ${user_name}      Set Variable    admin\n    ${userName}       Set Variable    admin\n    ${UserName}       Set Variable    admin\n    ${USERNAME}       Set Variable    admin\n    ${user name}      Set Variable    admin    # Spaces OK but unusual\n    ${user123}        Set Variable    admin\n    ${_private}       Set Variable    admin    # Leading underscore OK</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Invalid Names (Will Cause Errors)</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nInvalid Names\n    ${user-name}      Set Variable    admin    # ❌ Hyphens not allowed\n    ${123user}        Set Variable    admin    # ❌ Can't start with number\n    ${my.var}         Set Variable    admin    # ❌ Dot has special meaning\n    ${user@name}      Set Variable    admin    # ❌ Special chars not allowed\n    ${user#name}      Set Variable    admin    # ❌ Hash not allowed</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Variable Flexibility: Just Like Keywords!</h3>\n<p><strong>IMPORTANT:</strong> Just like keywords, variable names are <strong>CASE-INSENSITIVE AND SPACING-FLEXIBLE</strong>!</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nVariable Flexibility Test\n    ${myVar}    Set Variable    test value\n    \n    Log    ${myVar}     # Output: \"test value\"\n    Log    ${MyVar}     # Output: \"test value\" (SAME variable!)\n    Log    ${MYVAR}     # Output: \"test value\" (SAME variable!)\n    Log    ${my_var}    # Output: \"test value\" (SAME variable!)\n    Log    ${m y v a r}  # Output: \"test value\" (SAME variable!)\n    \n    # These ALL access THE SAME VARIABLE!</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p>Robot Framework normalizes both keywords AND variables. Remember:</p>\n<ul>\n<li>✅ <strong>Keywords:</strong> Case-insensitive and spacing-flexible (Log = log = LOG)</li>\n<li>✅ <strong>Variables:</strong> Case-insensitive and spacing-flexible (${x} = ${X} = ${x_})</li>\n<li>✅ <strong>Everything is flexible!</strong> Robot Framework prioritizes readability</li>\n</ul>\n\n<h3>Why Hyphens Aren't Allowed</h3>\n<p>Robot Framework normalizes keywords by removing spaces and underscores. For example:</p>\n<ul>\n<li><code>Log To Console</code> → normalized to <code>logtoconsole</code></li>\n<li><code>Log_To_Console</code> → normalized to <code>logtoconsole</code></li>\n</ul>\n\n<p>If hyphens were allowed in variables, <code>${my-var}</code> could be confused with:</p>\n<ul>\n<li>Subtraction: <code>${my} - ${var}</code></li>\n<li>A keyword with hyphens</li>\n</ul>\n<p>So hyphens are reserved for operators, not variable names.</p>\n\n<h3>Spaces in Variable Names</h3>\n<p>Technically valid but rarely used:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nSpaces Example\n    ${my variable}    Set Variable    This works!\n    Log    ${my variable}\n    \n    # But most teams prefer underscores:\n    ${my_variable}    Set Variable    More readable</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p><strong>Why avoid spaces?</strong></p>\n<ul>\n<li>Less readable in complex expressions</li>\n<li>Harder to distinguish from keywords</li>\n<li>Not common in programming (breaks conventions)</li>\n</ul>\n\n<h3>Best Practices</h3>\n\n<table>\n<tr><th>Context</th><th>Style</th><th>Example</th></tr>\n<tr>\n<td><strong>Local variables</strong></td>\n<td>Snake case</td>\n<td>${user_name}, ${api_key}</td>\n</tr>\n<tr>\n<td><strong>Constants (*** Variables *** section)</strong></td>\n<td>All caps</td>\n<td>${API_URL}, ${MAX_RETRIES}</td>\n</tr>\n<tr>\n<td><strong>Arguments</strong></td>\n<td>Snake case</td>\n<td>${input_file}, ${expected_result}</td>\n</tr>\n<tr>\n<td><strong>Loop variables</strong></td>\n<td>Short, descriptive</td>\n<td>${item}, ${user}, ${i}</td>\n</tr>\n</table>\n\n<h4>Consistency is Key</h4>\n<p>Pick a style and stick to it throughout your test suite:</p>\n<ul>\n<li>✅ <strong>Good:</strong> All snake_case throughout</li>\n<li>❌ <strong>Bad:</strong> Mix of ${userName}, ${user_name}, ${UserName}</li>\n</ul>\n\n<h3>Real-World Example</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Variables ***\n${API_URL}         https://api.example.com    # Constant: all caps\n${MAX_TIMEOUT}     30s                        # Constant: all caps\n\n*** Test Cases ***\nUser Login Test\n    ${username}        Set Variable    testuser@example.com    # Local: snake_case\n    ${password}        Set Variable    SecurePass123           # Local: snake_case\n    ${response}        POST    ${API_URL}/login               # Uses constant\n    ${status_code}     Set Variable    ${response.status}      # Local: snake_case\n    Should Be Equal    ${status_code}    200</code></pre>\n</div>\n\n<div class=\"try-it\">\n<p>MENTOR-9: \"Create variables using different naming styles. Then demonstrate flexibility by creating ${test} and accessing it as ${TEST}. Show me you understand Robot Framework's forgiving nature.\"</p>\n</div>",
+    "estimatedReadTime": "6-7 minutes"
+  },
+  "metadata": {
+    "tags": [
+      "beginner",
+      "variable-naming",
+      "case-sensitivity",
+      "naming-conventions",
+      "best-practices"
+    ],
+    "prerequisites": [
+      "ex-1-2-1"
+    ],
+    "nextExercises": [
+      "ex-1-2-3"
+    ]
+  },
+  "section": "02-memory-banks",
+  "chapter": "01-first-contact"
+}

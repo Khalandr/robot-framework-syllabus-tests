@@ -1,0 +1,78 @@
+{
+  "id": "ex-1-2-5",
+  "title": "Dictionary Variables - Key-Value Pairs",
+  "difficulty": "beginner",
+  "estimatedTime": "10 minutes",
+  "order": 5,
+  "description": "Store structured data using dictionary variables with &{...} syntax.",
+  "story": {
+    "setup": "MENTOR-9: \"Lists are ordered, but sometimes you need named data—like system statuses with component names as keys. That's where dictionaries come in.\"",
+    "context": "Dictionaries map keys to values. Unlike lists (indexed by number), dictionaries use meaningful names. 'Navigation' → 'OPERATIONAL', 'Power' → 'DEGRADED'. This structure is perfect for configuration, status reports, and structured data.",
+    "success": "MENTOR-9: \"Perfect! A dictionary of ship systems and their statuses. Structured data is powerful. This is how we organize complex information.\""
+  },
+  "instructions": [
+    "Create the *** Test Cases *** section",
+    "Create a test case named 'Dictionary Variables Test'",
+    "Use Create Dictionary to create &{system_status} with these key-value pairs:",
+    "  - Navigation=OPERATIONAL",
+    "  - Power=DEGRADED",
+    "  - LifeSupport=CRITICAL",
+    "  - Weapons=OFFLINE",
+    "  - Shields=OPERATIONAL",
+    "Use Log Dictionary to display the entire dictionary",
+    "Create a second dictionary &{crew_info} with:",
+    "  - captain=Commander Sarah Chen",
+    "  - engineer=Lt. Marcus Rivera",
+    "  - pilot=Ensign Alex Kim",
+    "Log the dictionary with: Log    Crew: &{crew_info}"
+  ],
+  "hints": [
+    "Syntax: &{dict}    Create Dictionary    key1=value1    key2=value2",
+    "Dictionary variables use &{...} instead of ${...} or @{...}",
+    "Keys and values are separated by = (no spaces around =)",
+    "Log Dictionary displays all key-value pairs",
+    "Dictionaries have no guaranteed order (in Python 3.6+ they maintain insertion order)",
+    "Keys should be unique (duplicate keys overwrite previous values)"
+  ],
+  "initialCode": "",
+  "solution": "*** Test Cases ***\nDictionary Variables Test\n    &{system_status}    Create Dictionary    Navigation=OPERATIONAL    Power=DEGRADED    LifeSupport=CRITICAL    Weapons=OFFLINE    Shields=OPERATIONAL\n    Log Dictionary      ${system_status}\n    &{crew_info}        Create Dictionary    captain=Commander Sarah Chen    engineer=Lt. Marcus Rivera    pilot=Ensign Alex Kim\n    Log                 Crew: &{crew_info}",
+  "validation": {
+    "mustContain": [
+      "*** Test Cases ***",
+      "Dictionary Variables Test",
+      "&{system_status}",
+      "Create Dictionary",
+      "Navigation=OPERATIONAL",
+      "Power=DEGRADED",
+      "LifeSupport=CRITICAL",
+      "Weapons=OFFLINE",
+      "Shields=OPERATIONAL",
+      "&{crew_info}",
+      "Log Dictionary"
+    ],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Dictionary Variables: Key-Value Data Structures",
+    "content": "<div class=\"theory-visual\">\n<img src=\"assets/images/theory/section-1-2/ex-1-2-5-dictionary-variables.png\" alt=\"Dictionary data structure showing key-value pairs for ship systems and their statuses\" loading=\"lazy\" width=\"1920\" height=\"1080\" />\n</div>\n\n<div class=\"story-intro\">\n<p>MENTOR-9 displays a status board with system names and their conditions.</p>\n<p>\"PROTO-7, lists are great for ordered data. But when you need <strong>named</strong> data—where each value has a meaningful key—you need a <strong>dictionary</strong>.\"</p>\n</div>\n\n<div class=\"concept-explain\">\n<h3>What is a Dictionary?</h3>\n<p>A <strong>dictionary</strong> is a collection of <strong>key-value pairs</strong>. Think of it like a real dictionary:</p>\n<ul>\n<li><strong>Key:</strong> The word you look up (e.g., \"Navigation\")</li>\n<li><strong>Value:</strong> The definition/data (e.g., \"OPERATIONAL\")</li>\n</ul>\n\n<p>In Robot Framework, dictionary variables use the <span class=\"code\">&{dict_name}</span> syntax.</p>\n\n<h3>Lists vs Dictionaries</h3>\n<table>\n<tr><th>Feature</th><th>List</th><th>Dictionary</th></tr>\n<tr>\n<td><strong>Access by</strong></td>\n<td>Index (number)</td>\n<td>Key (name)</td>\n</tr>\n<tr>\n<td><strong>Syntax</strong></td>\n<td>@{list}</td>\n<td>&{dict}</td>\n</tr>\n<tr>\n<td><strong>Order</strong></td>\n<td>Always ordered</td>\n<td>Insertion order (Python 3.6+)</td>\n</tr>\n<tr>\n<td><strong>Use case</strong></td>\n<td>Sequences, iterations</td>\n<td>Structured data, configs</td>\n</tr>\n<tr>\n<td><strong>Example</strong></td>\n<td>@{fruits}    [Apple, Banana]</td>\n<td>&{status}    {nav: OK, power: FAIL}</td>\n</tr>\n</table>\n\n<h3>Creating Dictionaries: The Create Dictionary Keyword</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nBasic Dictionary\n    &{user}    Create Dictionary    name=Alice    email=alice@example.com    role=Admin\n    Log Dictionary    ${user}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>Output:</h4>\n<pre><code>Dictionary size is 3 and it contains following items:\nname: Alice\nemail: alice@example.com\nrole: Admin</code></pre>\n\n<h3>Dictionary Syntax Rules</h3>\n<ul>\n<li><strong>Creation:</strong> <code>&{dict}    Create Dictionary    key1=value1    key2=value2</code></li>\n<li><strong>Key-value separator:</strong> Use <code>=</code> with NO spaces around it</li>\n<li><strong>Multiple pairs:</strong> Separate with spaces (4 recommended)</li>\n<li><strong>Keys:</strong> Usually strings, but can be numbers</li>\n<li><strong>Values:</strong> Any data type (strings, numbers, lists, even other dicts)</li>\n</ul>\n\n<h3>& vs $ with Dictionaries</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nDict Expansion\n    &{config}    Create Dictionary    host=localhost    port=8080    ssl=True\n    \n    # Using &{config} - expands to key=value pairs\n    Log Many    &{config}\n    # Output: host=localhost, port=8080, ssl=True\n    \n    # Using ${config} - treats dict as single object\n    Log    ${config}\n    # Output: {'host': 'localhost', 'port': 8080, 'ssl': True}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p><strong>Key difference:</strong></p>\n<ul>\n<li><strong>&{dict}:</strong> Expands to key=value pairs (for passing to keywords)</li>\n<li><strong>${dict}:</strong> Treats the whole dict as one variable</li>\n</ul>\n\n<h3>The Log Dictionary Keyword</h3>\n<p><span class=\"keyword\">Log Dictionary</span> is designed for dictionaries:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nLog Dictionary Demo\n    &{system}    Create Dictionary    cpu=45%    memory=8GB    disk=512GB    status=healthy\n    Log Dictionary    ${system}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>Output:</h4>\n<pre><code>Dictionary size is 4 and it contains following items:\ncpu: 45%\nmemory: 8GB\ndisk: 512GB\nstatus: healthy</code></pre>\n\n<p><strong>Note:</strong> Use <code>${dict}</code> with Log Dictionary (not <code>&{dict}</code>).</p>\n\n<h3>Empty and Single-Entry Dictionaries</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nEdge Cases\n    # Empty dictionary\n    &{empty}     Create Dictionary\n    Log Dictionary    ${empty}    # Logs \"Dictionary size is 0\"\n    \n    # Single entry\n    &{single}    Create Dictionary    status=OK\n    Log Dictionary    ${single}   # Logs one key-value pair</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Dictionaries in the *** Variables *** Section</h3>\n<p>You can define dictionaries at the file level:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Variables ***\n&{API_CONFIG}      base_url=https://api.example.com    timeout=30s    retry=3\n&{TEST_USER}       username=testuser@example.com    password=Test123    role=standard\n\n*** Test Cases ***\nUse Predefined Dicts\n    Log Dictionary    ${API_CONFIG}\n    Log Dictionary    ${TEST_USER}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Keys with Spaces (Requires Quotes in Some Contexts)</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nKeys With Spaces\n    &{data}    Create Dictionary    first name=John    last name=Doe    zip code=12345\n    Log Dictionary    ${data}\n    # Keys: 'first name', 'last name', 'zip code'</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p>Keys with spaces work but require careful handling when accessing (we'll cover access next exercise).</p>\n\n<h3>Real-World Example: System Configuration</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nAPI Health Check\n    &{health_status}    Create Dictionary\n    ...    database=connected\n    ...    cache=connected\n    ...    api_server=running\n    ...    queue_size=127\n    ...    response_time=45ms\n    \n    Log Dictionary    ${health_status}\n    \n    # Use the ... continuation for long lines\n    # Each ...  line adds more key=value pairs</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p><strong>Note:</strong> The <code>...</code> syntax continues the previous line. Useful for long dictionary definitions!</p>\n\n<h3>Nested Structures (Preview)</h3>\n<p>Dictionary values can be lists or other dictionaries:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nNested Data\n    @{admins}      Create List    alice@example.com    bob@example.com\n    &{app_config}  Create Dictionary    admins=${admins}    version=2.1.0\n    \n    Log Dictionary    ${app_config}\n    # Output shows admins: ['alice@example.com', 'bob@example.com']</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Common Mistakes</h3>\n<ul>\n<li>❌ Using <code>key = value</code> (spaces around =): Should be <code>key=value</code></li>\n<li>❌ Using <code>${dict}</code> instead of <code>&{dict}</code> when creating</li>\n<li>❌ Duplicate keys: <code>name=Alice name=Bob</code> → only Bob survives</li>\n<li>❌ Using commas: <code>name=Alice, age=30</code> → comma becomes part of value</li>\n</ul>\n</div>\n\n<div class=\"try-it\">\n<p>MENTOR-9: \"Create two dictionaries: one for ship system statuses, another for crew information. Use Log Dictionary to display them. Show me you can structure complex data.\"</p>\n</div>",
+    "estimatedReadTime": "7-8 minutes"
+  },
+  "metadata": {
+    "tags": [
+      "beginner",
+      "dictionary-variables",
+      "create-dictionary",
+      "log-dictionary",
+      "key-value-pairs"
+    ],
+    "prerequisites": [
+      "ex-1-2-4"
+    ],
+    "nextExercises": [
+      "ex-1-2-6"
+    ]
+  },
+  "section": "02-memory-banks",
+  "chapter": "01-first-contact"
+}

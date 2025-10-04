@@ -26,5 +26,17 @@
     "Variable naming rules",
     "Variable access syntax",
     "Case sensitivity in variables"
+  ],
+  "exercises": [
+    "ex-1-2-1",
+    "ex-1-2-2",
+    "ex-1-2-3",
+    "ex-1-2-4",
+    "ex-1-2-5",
+    "ex-1-2-6",
+    "ex-1-2-7"
+  ],
+  "challenges": [
+    "challenge-1-2"
   ]
 }

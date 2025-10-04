@@ -9,5 +9,18 @@
   ],
   "totalExercises": 7,
   "totalChallenges": 1,
-  "estimatedTime": "90 minutes"
+  "estimatedTime": "90 minutes",
+  "chapter": "01-first-contact",
+  "exercises": [
+    "ex-1-3-1",
+    "ex-1-3-2",
+    "ex-1-3-3",
+    "ex-1-3-4",
+    "ex-1-3-5",
+    "ex-1-3-6",
+    "ex-1-3-7"
+  ],
+  "challenges": [
+    "challenge-1-3"
+  ]
 }

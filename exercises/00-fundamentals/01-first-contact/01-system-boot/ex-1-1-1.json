@@ -1,0 +1,68 @@
+{
+  "id": "ex-1-1-1",
+  "title": "First Boot Sequence",
+  "difficulty": "beginner",
+  "estimatedTime": "8 minutes",
+  "order": 1,
+  "description": "Create a complete boot sequence with multiple sequential status messages.",
+  "story": {
+    "setup": "MENTOR-9: \"Let's verify your core functions are online. Send me a boot sequence—multiple status messages showing your systems initializing. A proper boot has at least 5 stages.\"",
+    "context": "Sequential execution is how robots communicate complex state changes. Each Log keyword executes in order from top to bottom, representing a progression through boot stages.",
+    "success": "MENTOR-9: \"Excellent! All five boot messages received in order. Your sequencing circuits work perfectly. Sequential execution is the foundation of all test automation.\""
+  },
+  "instructions": [
+    "Create the *** Test Cases *** section header at the left margin",
+    "Create a test case named 'Boot Sequence'",
+    "Log 5 sequential boot messages showing system initialization stages:",
+    "  - 'Initializing core systems...'",
+    "  - 'Loading diagnostic protocols...'",
+    "  - 'Activating sensor arrays...'",
+    "  - 'Establishing communication link...'",
+    "  - 'Boot sequence complete'",
+    "Use 4 spaces for indentation (recommended standard)"
+  ],
+  "hints": [
+    "Start with *** Test Cases *** at the left margin",
+    "Test case name goes on next line, no indentation",
+    "Each Log keyword on separate line with 4 spaces indentation",
+    "Keywords execute from top to bottom",
+    "Separate 'Log' and message with at least 2 spaces (4 recommended)",
+    "Each message should show a different boot stage"
+  ],
+  "initialCode": "",
+  "solution": "*** Test Cases ***\nBoot Sequence\n    Log    Initializing core systems...\n    Log    Loading diagnostic protocols...\n    Log    Activating sensor arrays...\n    Log    Establishing communication link...\n    Log    Boot sequence complete",
+  "validation": {
+    "mustContain": [
+      "*** Test Cases ***",
+      "Boot Sequence",
+      "Log",
+      "Initializing",
+      "Loading",
+      "Activating",
+      "Establishing",
+      "complete"
+    ],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Understanding Test Cases and Sequential Execution",
+    "content": "<div class=\"theory-visual\">\\n<img src=\"assets/images/theory/section-1-1/ex-1-1-1-boot-sequence.png\" alt=\"PROTO-7 learning sequential test execution with MENTOR-9 showing cascading log statements\" loading=\"lazy\" width=\"1920\" height=\"1080\" />\\n</div>\\n\\n<div class=\"story-intro\">\n<p>You wake up in the damaged ship. MENTOR-9's voice crackles through damaged speakers.</p>\n<p>\"PROTO-7, can you hear me? Your voice synthesizer is offline, but you can communicate through diagnostic protocols—Robot Framework test outputs.\"</p>\n</div>\n\n<div class=\"concept-explain\">\n<h3>What is a Test Case?</h3>\n<p>In Robot Framework, a <strong>test case</strong> is a named sequence of actions (keywords) that verify behavior. Think of it like a checklist:</p>\n<ul>\n<li>Each test case has a name</li>\n<li>Below the name, you write the steps (keywords) to execute</li>\n<li>Keywords execute <strong>sequentially from top to bottom</strong></li>\n<li>If all steps succeed, the test passes ✅</li>\n<li>If any step fails, the test fails ❌</li>\n</ul>\n\n<h3>The Basic Structure</h3>\n<p>Every Robot Framework file has <strong>sections</strong> marked by <span class=\"code\">***</span>. Here's your first test:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nMy Test Name\n    Log    First action\n    Log    Second action\n    Log    Third action</code></pre>\n</div>\n\n<div class=\"rules-box\">\n<h4>⚠️ Critical Spacing Rules</h4>\n<ul>\n<li><strong>Test names</strong> start at the left margin (no indentation)</li>\n<li><strong>Keywords</strong> must be indented with <strong>at least 2 spaces</strong> (4 spaces recommended for readability)</li>\n<li>Separate keywords and arguments with <strong>at least 2 spaces</strong> (4 is standard)</li>\n<li>Tabs can work but may cause issues with mixed editors—stick to spaces</li>\n</ul>\n<p class=\"warning\"><strong>Best practice:</strong> Use 4 spaces consistently throughout your test files!</p>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Why 4 Spaces?</h3>\n<p>Robot Framework's minimum requirements:</p>\n<ul>\n<li><strong>Test case body:</strong> Minimum 2 spaces indentation</li>\n<li><strong>Keyword/argument separation:</strong> Minimum 2 spaces</li>\n</ul>\n\n<p><strong>Valid examples (all work):</strong></p>\n<pre><code>*** Test Cases ***\nTest With 2 Spaces\n  Log  Message\n\nTest With 4 Spaces\n    Log    Message\n\nTest With 6 Spaces\n      Log      Message</code></pre>\n\n<p><strong>Why 4 spaces is the standard:</strong></p>\n<ul>\n<li>Better readability and visual hierarchy</li>\n<li>Consistent across teams and projects</li>\n<li>Matches Python's PEP 8 style guide</li>\n<li>Clearly distinguishes test body from test name</li>\n<li>Avoids tab/space mixing issues</li>\n</ul>\n</div>\n\n<div class=\"concept-explain\">\n<h3>The Log Keyword</h3>\n<p>The <span class=\"keyword\">Log</span> keyword outputs messages to the test log file (<code>log.html</code>). It's your primary debugging and communication tool.</p>\n\n<p><strong>Syntax:</strong></p>\n<pre><code>Log    Your message here</code></pre>\n\n<h4>Why Use Log?</h4>\n<ul>\n<li><strong>Debugging:</strong> See what values variables have</li>\n<li><strong>Verification:</strong> Confirm code paths execute</li>\n<li><strong>Documentation:</strong> Add runtime notes to reports</li>\n<li><strong>Progress tracking:</strong> Show test execution stages</li>\n</ul>\n\n<h4>Sequential Execution</h4>\n<p>When you write multiple Log keywords:</p>\n<ol>\n<li>Robot Framework executes the first Log</li>\n<li>Then the second Log</li>\n<li>Then the third Log, etc.</li>\n<li>Order matters! They execute top to bottom.</li>\n</ol>\n\n<p>This makes tests read like documentation—anyone can understand the workflow by reading from top to bottom.</p>\n</div>\n\n<div class=\"try-it\">\n<p>MENTOR-9 nods. \"Your turn, PROTO-7. Create a test case called 'Boot Sequence' with 5 sequential log messages showing your systems coming online. Show me you can communicate a multi-stage process.\"</p>\n</div>",
+    "estimatedReadTime": "4-5 minutes"
+  },
+  "metadata": {
+    "tags": [
+      "beginner",
+      "sequential-execution",
+      "log-keyword",
+      "test-structure",
+      "boot-sequence"
+    ],
+    "prerequisites": [],
+    "nextExercises": [
+      "ex-1-1-2"
+    ]
+  },
+  "section": "01-system-boot",
+  "chapter": "01-first-contact"
+}

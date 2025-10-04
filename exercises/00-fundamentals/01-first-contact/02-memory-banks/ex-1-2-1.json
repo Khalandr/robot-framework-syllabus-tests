@@ -1,0 +1,67 @@
+{
+  "id": "ex-1-2-1",
+  "title": "Scalar Variables - Single Values",
+  "difficulty": "beginner",
+  "estimatedTime": "8 minutes",
+  "order": 1,
+  "description": "Learn to store and retrieve single values using scalar variables with ${...} syntax.",
+  "story": {
+    "setup": "MENTOR-9: \"Your communication circuits work, but now we need to check memory. Can you store data? Retrieve it? Start simple—store a single value, a ship system name. Use a scalar variable marked with ${...}.\"",
+    "context": "Variables let you store and reuse values, making tests maintainable. Instead of repeating 'Navigation System' everywhere, store it once and reference it. This is how robots remember.",
+    "success": "MENTOR-9: \"Perfect. You stored 'Navigation System' and retrieved it. Memory circuits functional. This is the foundation of all data handling in Robot Framework.\""
+  },
+  "instructions": [
+    "Create the *** Test Cases *** section",
+    "Create a test case named 'Scalar Variable Test'",
+    "Use Set Variable to store the value 'Navigation System' in ${system_name}",
+    "Use Log to output 'Checking system: ${system_name}'",
+    "Use Log Variable to display the variable's value",
+    "Store a second value 'OPERATIONAL' in ${status}",
+    "Log the message 'System status: ${status}'",
+    "Use 4 spaces for indentation"
+  ],
+  "hints": [
+    "Syntax: ${variable_name}    Set Variable    value",
+    "Variables must start with ${ and end with }",
+    "Set Variable keyword assigns values to variables",
+    "Log Variable displays the variable's name and value",
+    "You can use ${variable} inside strings",
+    "Variables are referenced by ${name} syntax"
+  ],
+  "initialCode": "",
+  "solution": "*** Test Cases ***\nScalar Variable Test\n    ${system_name}    Set Variable    Navigation System\n    Log    Checking system: ${system_name}\n    Log Variable    ${system_name}\n    ${status}    Set Variable    OPERATIONAL\n    Log    System status: ${status}",
+  "validation": {
+    "mustContain": [
+      "*** Test Cases ***",
+      "Scalar Variable Test",
+      "${system_name}",
+      "Set Variable",
+      "Navigation System",
+      "Log",
+      "${status}",
+      "OPERATIONAL"
+    ],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Scalar Variables: Storing Single Values",
+    "content": "<div class=\"theory-visual\">\n<img src=\"assets/images/theory/section-1-2/ex-1-2-1-scalar-variables.png\" alt=\"PROTO-7 learning scalar variables with memory banks storing single values\" loading=\"lazy\" width=\"1920\" height=\"1080\" />\n</div>\n\n<div class=\"story-intro\">\n<p>MENTOR-9's display shifts to show a memory bank interface.</p>\n<p>\"PROTO-7, your sequencing works. But tests need <strong>data</strong>—and data needs <strong>storage</strong>. That's what variables are for. Let's start with the simplest type: <strong>scalar variables</strong>.\"</p>\n</div>\n\n<div class=\"concept-explain\">\n<h3>What is a Variable?</h3>\n<p>A <strong>variable</strong> is a named storage location that holds a value. Think of it like a labeled box:</p>\n<ul>\n<li>The box has a <strong>name</strong> (the variable name)</li>\n<li>Inside the box is a <strong>value</strong> (the data)</li>\n<li>You can <strong>store</strong> new values</li>\n<li>You can <strong>retrieve</strong> the value anytime</li>\n</ul>\n\n<h3>Scalar Variables</h3>\n<p>A <strong>scalar variable</strong> holds a <strong>single value</strong>. It could be:</p>\n<ul>\n<li>A string: \"Navigation System\"</li>\n<li>A number: 42</li>\n<li>A boolean: True or False</li>\n<li>Any single piece of data</li>\n</ul>\n\n<p>In Robot Framework, scalar variables use the <span class=\"code\">${variable_name}</span> syntax.</p>\n</div>\n\n<div class=\"code-demo\">\n<h4>Basic Syntax</h4>\n<pre><code>*** Test Cases ***\nVariable Example\n    ${name}    Set Variable    Robot Framework\n    Log        ${name}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p><strong>What happens:</strong></p>\n<ol>\n<li><code>${name}</code> is created and assigned the value \"Robot Framework\"</li>\n<li><code>Log ${name}</code> outputs: \"Robot Framework\"</li>\n</ol>\n\n<h3>The Set Variable Keyword</h3>\n<p>The <span class=\"keyword\">Set Variable</span> keyword assigns a value to a variable:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>${variable}    Set Variable    value</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p><strong>Components:</strong></p>\n<ul>\n<li><strong>${variable}</strong> - The variable name (on the left)</li>\n<li><strong>Set Variable</strong> - The keyword that does the assignment</li>\n<li><strong>value</strong> - The value to store (can be text, number, etc.)</li>\n</ul>\n\n<h4>Why Use Variables?</h4>\n<table>\n<tr><th>Benefit</th><th>Example</th></tr>\n<tr>\n<td><strong>Reusability</strong></td>\n<td>Store API URL once, use it in 10 tests</td>\n</tr>\n<tr>\n<td><strong>Maintainability</strong></td>\n<td>Change username in one place, affects all tests</td>\n</tr>\n<tr>\n<td><strong>Readability</strong></td>\n<td>${max_retries} is clearer than the number 3</td>\n</tr>\n<tr>\n<td><strong>Dynamic values</strong></td>\n<td>Store API response, use it in next request</td>\n</tr>\n</table>\n\n<h3>Logging Variables</h3>\n<p>Two ways to display variable values:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nLogging Demo\n    ${ship}    Set Variable    Starlight Explorer\n    \n    # Method 1: Embed in Log message\n    Log    Ship name: ${ship}\n    \n    # Method 2: Use Log Variable (shows name and value)\n    Log Variable    ${ship}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p><strong>Output:</strong></p>\n<pre><code>Method 1: \"Ship name: Starlight Explorer\"\nMethod 2: \"${ship} = Starlight Explorer\"</code></pre>\n\n<p><strong>Log Variable</strong> is useful for debugging because it shows both the variable name and its value.</p>\n\n<h3>Multiple Variables</h3>\n<p>You can create as many variables as needed:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nMultiple Variables\n    ${username}    Set Variable    admin@example.com\n    ${password}    Set Variable    SecurePass123\n    ${url}         Set Variable    https://api.example.com\n    \n    Log    Logging in as ${username}\n    Log    API endpoint: ${url}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Variable Naming Rules</h3>\n<p>Valid variable names:</p>\n<ul>\n<li>✅ <code>${my_var}</code> - Underscores allowed</li>\n<li>✅ <code>${MyVar}</code> - Camel case allowed</li>\n<li>✅ <code>${MY_VAR}</code> - All caps allowed</li>\n<li>✅ <code>${my var}</code> - Spaces allowed (unusual but valid!)</li>\n<li>✅ <code>${var123}</code> - Numbers allowed (not at start)</li>\n</ul>\n\n<p>Invalid variable names:</p>\n<ul>\n<li>❌ <code>${my-var}</code> - Hyphens NOT allowed</li>\n<li>❌ <code>${123var}</code> - Can't start with number</li>\n<li>❌ <code>${my.var}</code> - Dots have special meaning (dictionary access)</li>\n</ul>\n\n<p><strong>Important:</strong> Variable names are <strong>case-sensitive</strong>!</p>\n<ul>\n<li><code>${myVar}</code> is different from <code>${MyVar}</code></li>\n<li><code>${myVar}</code> is different from <code>${MYVAR}</code></li>\n</ul>\n\n<h3>Real-World Example: API Testing</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nGet User Data\n    ${base_url}    Set Variable    https://api.github.com\n    ${username}    Set Variable    robotframework\n    ${endpoint}    Set Variable    ${base_url}/users/${username}\n    \n    Log    Fetching user: ${username}\n    Log    From endpoint: ${endpoint}\n    # Output: From endpoint: https://api.github.com/users/robotframework</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p>Notice how <code>${endpoint}</code> uses other variables inside its value. Variables can reference other variables!</p>\n</div>\n\n<div class=\"try-it\">\n<p>MENTOR-9: \"Now test your memory banks. Create variables for a ship system name and its status. Store them, then log them. Show me your circuits can remember.\"</p>\n</div>",
+    "estimatedReadTime": "5-6 minutes"
+  },
+  "metadata": {
+    "tags": [
+      "beginner",
+      "scalar-variables",
+      "set-variable",
+      "log-variable",
+      "data-storage"
+    ],
+    "prerequisites": [],
+    "nextExercises": [
+      "ex-1-2-2"
+    ]
+  },
+  "section": "02-memory-banks",
+  "chapter": "01-first-contact"
+}

@@ -169,5 +169,6 @@
       "File-level vs test-level variable scope",
       "Complex data modeling patterns"
     ]
-  }
+  },
+  "chapter": "01-first-contact"
 }

@@ -57,8 +57,8 @@ This is a Robot Framework training and practice platform with two main features:
    - FastAPI backend + Monaco editor frontend
    - **Full validation system** with exercise requirements checking
    - **Zero scaffolding philosophy**: Blank initialCode forces complete test writing
-   - **Production-ready architecture** after recent refactoring
-   - ⚠️ **REQUIRES REFACTORING**: Current structure groups exercises in single JSON files per section (see REFACTORING_PLAN.md)
+   - **Production-ready architecture** after refactoring complete ✅
+   - **Modular structure**: 1 exercise = 1 JSON file for easy maintenance
 
 ## Project Architecture
 
@@ -367,7 +367,6 @@ Design characteristics:
 
 ### Known Issues
 - **404 in RF Reports**: Internal links between log.html and report.html don't work in iframes (minor UX issue)
-- ⚠️ **Architecture Needs Refactoring**: Current structure groups all exercises/challenges in single JSON files per section. This blocks future updates and maintainability. See REFACTORING_PLAN.md for migration strategy.
 
 ### Recent Refactoring (Completed) ✅
 
@@ -415,17 +414,51 @@ Design characteristics:
   - Splitting would add HTTP requests without benefit
   - Current: 7 requests vs 20-25 if split
 
+### Recent Refactoring: JSON Structure Migration (Completed) ✅
+
+**Date**: 2025-10-04
+**Status**: ✅ COMPLETE
+
+Successfully migrated from grouped exercise files to modular 1-file-per-exercise structure:
+
+**Before:**
+```
+exercises/00-fundamentals/01-first-contact/01-system-boot/
+├── exercises.json  (array of 5 exercises)
+├── challenge.json  (1 challenge)
+└── topic.json      (metadata)
+```
+
+**After:**
+```
+exercises/00-fundamentals/01-first-contact/01-system-boot/
+├── section.json         (metadata + references)
+├── ex-1-1-1.json       (individual exercise)
+├── ex-1-1-2.json
+├── ex-1-1-3.json
+├── ex-1-1-4.json
+├── ex-1-1-5.json
+└── challenge-1-1.json  (individual challenge)
+```
+
+**Benefits Achieved:**
+- ✅ Atomic updates: Edit one exercise without touching others
+- ✅ Parallel development: Multiple developers can work simultaneously
+- ✅ Clean git diffs: Only changed exercises show in commits
+- ✅ Easy maintenance: Direct file access by exercise ID
+- ✅ Future-proof: Scales to 100+ exercises
+
+**Files Changed:**
+- Created 25 new exercise/challenge files (22 exercises + 3 challenges)
+- Updated frontend: `js/exercises.js` (section.json loading logic)
+- Added `.gitignore`: Excluded OLD_STRUCTURE_BACKUP folders
+- Preserved backups: All old files backed up before deletion
+
+See REFACTORING_PLAN.md for complete implementation details.
+
 ### Next Steps
 
-#### CRITICAL - Architecture Refactoring (MUST DO BEFORE CONTINUING)
-⚠️ **STOP**: Before implementing more exercises, refactor the JSON structure
-- **Current Problem**: exercises.json and challenge.json contain arrays of multiple exercises
-- **Blocking Issue**: Updating one exercise requires rewriting entire file
-- **Required Change**: Split to 1 exercise = 1 JSON file
-- **See**: REFACTORING_PLAN.md for complete migration strategy
-- **Status**: Plan created, refactoring NOT yet performed
-
-#### Short Term (After Refactoring)
+#### Short Term (Ready to Proceed)
 - Fix 404 errors in RF log/report internal navigation (minor UX issue)
 - Implement remaining 63 exercises across 4 chapters
 - Add intermediate difficulty exercises

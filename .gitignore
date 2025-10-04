@@ -50,3 +50,6 @@ CLAUDE.md
 
 # Question exports (for manual review)
 rf-questions-export.json
+
+# Exercise migration backups
+**/OLD_STRUCTURE_BACKUP/
