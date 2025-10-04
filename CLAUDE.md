@@ -53,12 +53,18 @@ This is a Robot Framework training and practice platform with two main features:
    - Interactive RF coding challenges with real execution
    - **Story-driven learning**: PROTO-7 & MENTOR-9 narrative on planet Syntax-IV
    - **Comic-style visuals**: AI-generated images for each exercise theory
-   - **21 exercises implemented**: Section 1.1 (6) + Section 1.2 (8) + Section 1.3 (7) + 3 challenges - 84 total planned
+   - **39 exercises implemented**: 6 sections with 36 exercises + 3 challenges - 84 total planned
+     - Section 1.1: Basic Syntax (5 exercises + 1 challenge) ✅
+     - Section 1.2: Variables (7 exercises + 1 challenge) ✅
+     - Section 1.3: Assertions (7 exercises + 1 challenge) ✅
+     - Section 2.1: Settings Section (7 exercises + 1 challenge) ✅
+     - Section 2.2: Custom Keywords (6 exercises + 1 challenge) ✅
+     - Section 2.3: IF Statements (5 exercises + 1 challenge) ✅
    - FastAPI backend + Monaco editor frontend
    - **Full validation system** with exercise requirements checking
    - **Zero scaffolding philosophy**: Blank initialCode forces complete test writing
    - **Production-ready architecture** after refactoring complete ✅
-   - **Modular structure**: 1 exercise = 1 JSON file for easy maintenance
+   - **Flattened 2-level structure**: Category → Section (simplified from 3 levels)
 
 ## Project Architecture
 
@@ -287,14 +293,20 @@ Design characteristics:
 │   ├── chapter-3/         # 5 subchapter files (3.1 - 3.5)
 │   ├── chapter-4/         # 5 subchapter files (4.1 - 4.5)
 │   └── chapter-5/         # 2 subchapter files (5.1 - 5.2)
-├── exercises/             # Category-based exercise structure
-│   ├── basic-syntax/
-│   │   └── beginner.json  # 3 exercises
-│   ├── variables/
-│   │   └── beginner.json  # 2 exercises
-│   ├── keywords/          # (coming soon)
-│   ├── control-flow/      # (coming soon)
-│   └── organization/      # (coming soon)
+├── exercises/             # ✨ FLATTENED 2-level structure (Category → Section)
+│   ├── index.json         # Root index (lists categories)
+│   └── 00-fundamentals/   # Category folder
+│       ├── category.json  # Category metadata + section references
+│       ├── 01-basic-syntax/      # Section folder (was nested under chapter)
+│       │   ├── section.json      # Section metadata + exercise IDs
+│       │   ├── ex-1-1-1.json     # Individual exercise files
+│       │   ├── ex-1-1-2.json
+│       │   └── challenge-1-1.json
+│       ├── 02-variables/
+│       ├── 03-assertions/
+│       ├── 04-settings-section/
+│       ├── 05-custom-keywords/
+│       └── 06-if-statements/
 ├── backend/               # FastAPI server with validation system
 │   ├── app/
 │   │   └── main.py        # API endpoints, RF execution, exercise validation
@@ -358,10 +370,13 @@ Design characteristics:
   - **Scalable to 75+ exercises**: Clean architecture supports growth
 - **Output Display**: Console, Log (iframe), Report (iframe) tabs
 - **Exercise Navigation**: Back | Previous | Next buttons (centered, equal width)
-- **21 Exercises Implemented**:
-  - Section 1.1: System Boot (5 exercises + 1 challenge) ✅
-  - Section 1.2: Memory Banks (7 exercises + 1 challenge) ✅
-  - Section 1.3: System Checks (7 exercises + 1 challenge) ✅
+- **39 Exercises Implemented** (6 sections complete):
+  - Section 1.1: Basic Syntax (5 exercises + 1 challenge) ✅
+  - Section 1.2: Variables (7 exercises + 1 challenge) ✅
+  - Section 1.3: Assertions (7 exercises + 1 challenge) ✅
+  - Section 2.1: Settings Section (7 exercises + 1 challenge) ✅
+  - Section 2.2: Custom Keywords (6 exercises + 1 challenge) ✅
+  - Section 2.3: IF Statements (5 exercises + 1 challenge) ✅
 - **Real-time Feedback**: Pass/Fail status with execution time and validation errors
 - **Reset & Run Buttons**: Code editor controls with initial code reset
 
@@ -370,7 +385,23 @@ Design characteristics:
 
 ### Recent Refactoring (Completed) ✅
 
-**Context**: Before scaling to 75+ exercises, a comprehensive refactoring was performed to ensure production-ready architecture.
+**Context**: Before scaling to 84 exercises, comprehensive refactoring was performed to ensure production-ready architecture.
+
+#### Folder Structure Flattening (LATEST - Oct 2025)
+- **Problem**: 3-level nesting (Category → Chapter → Section) didn't match frontend (flat list)
+- **Solution**: Flattened to 2 levels (Category → Section)
+- **Migration**:
+  - Moved all section folders from chapter subdirectories to category root
+  - Renumbered sections sequentially (01-06 currently)
+  - Removed "chapter" field from all JSON files
+  - Updated category.json (replaced "topics" with "sections")
+  - Updated frontend exercises.js (simplified loading logic)
+- **Benefits**:
+  - Matches frontend display (flat exercise list)
+  - Simpler file paths: `exercises/00-fundamentals/01-basic-syntax/`
+  - Easier to maintain and scale
+  - Clean 2-level hierarchy
+- **Status**: Completed and committed ✅
 
 #### Exercise Validation System (CRITICAL)
 - **Problem**: Exercises ran code but didn't validate against requirements
@@ -467,19 +498,19 @@ See REFACTORING_PLAN.md for complete implementation details.
 
 ### Step 1: Create Individual Exercise File
 
-**File location pattern:**
+**File location pattern (FLATTENED STRUCTURE):**
 ```
-exercises/00-fundamentals/01-first-contact/{section-id}/{exercise-id}.json
+exercises/00-fundamentals/{section-id}/{exercise-id}.json
 ```
 
-**Example:** Create `ex-1-4-1.json` for a new exercise:
+**Example:** Create `ex-2-4-1.json` for a new FOR loop exercise:
 
 ```json
 {
-  "id": "ex-1-4-1",
+  "id": "ex-2-4-1",
   "type": "exercise",
-  "section": "04-new-section",
-  "chapter": "01-first-contact",
+  "section": "07-for-loops",
+  "category": "00-fundamentals",
   "title": "Your Exercise Title",
   "difficulty": "beginner",
   "estimatedTime": "10 minutes",
@@ -520,43 +551,47 @@ Add your exercise ID to the section's exercise list:
 
 ```json
 {
-  "id": "04-new-section",
-  "title": "Section Title",
+  "id": "07-for-loops",
+  "section": "2.4",
+  "title": "FOR Loops",
+  "category": "00-fundamentals",
+  "order": 7,
+  "difficulty": "beginner-to-intermediate",
+  "estimatedTime": "40 minutes",
   "exercises": [
-    "ex-1-4-1",
-    "ex-1-4-2"
+    "ex-2-4-1",
+    "ex-2-4-2"
   ],
   "challenges": [
-    "challenge-1-4"
+    "challenge-2-4"
   ]
 }
 ```
 
-### Step 3: Update topic.json (If New Section)
+### Step 3: Update category.json (If New Section)
 
-If creating a NEW section, add it to the parent topic:
+If creating a NEW section, add it to category.json sections array:
 
 ```json
 {
-  "id": "01-first-contact",
+  "id": "00-fundamentals",
+  "name": "Robot Framework Fundamentals",
   "sections": [
     {
-      "id": "01-system-boot",
-      "name": "Section 1.1: System Boot",
-      "order": 1,
-      "exerciseCount": 5,
-      "hasChallengeExercise": true
+      "id": "01-basic-syntax",
+      "name": "Section 1.1: Basic Syntax",
+      "order": 1
     },
     {
-      "id": "04-new-section",
-      "name": "Section 1.4: New Concept",
-      "order": 4,
-      "exerciseCount": 2,
-      "hasChallengeExercise": true
+      "id": "07-for-loops",
+      "name": "Section 2.4: FOR Loops",
+      "order": 7
     }
   ]
 }
 ```
+
+**Note:** No chapter/topic layer needed - sections reference directly from category.
 
 ### Step 4: Create Challenge (Optional)
 
@@ -603,8 +638,9 @@ Use the character reference from existing sections (PROTO-7, MENTOR-9).
 ### Step 7: Commit Changes
 
 ```bash
-git add exercises/00-fundamentals/01-first-contact/{section-id}/
-git commit -m "Add exercise {id}: {title}"
+# Stage new section folder (flattened structure)
+git add exercises/00-fundamentals/{section-id}/
+git commit -m "Add Section {X.Y}: {Section Name} ({N} exercises + challenge)"
 git push origin feature/code-exercises
 ```
 
@@ -638,14 +674,17 @@ git push origin feature/code-exercises
 
 ## 📂 Current Exercise Inventory
 
-**Completed:**
-- Section 1.1: System Boot (5 exercises + 1 challenge) ✅
-- Section 1.2: Memory Banks (7 exercises + 1 challenge) ✅
-- Section 1.3: System Checks (7 exercises + 1 challenge) ✅
+**Completed (6 sections):**
+- Section 1.1: Basic Syntax (5 exercises + 1 challenge) ✅
+- Section 1.2: Variables (7 exercises + 1 challenge) ✅
+- Section 1.3: Assertions (7 exercises + 1 challenge) ✅
+- Section 2.1: Settings Section (7 exercises + 1 challenge) ✅
+- Section 2.2: Custom Keywords (6 exercises + 1 challenge) ✅
+- Section 2.3: IF Statements (5 exercises + 1 challenge) ✅
 
-**Total:** 21 exercises implemented
+**Total:** 36 exercises + 6 challenges = 42 total
 
-**Remaining:** 63 exercises across chapters 2-5
+**Remaining:** 42 exercises + 6 challenges = 48 total (to reach 84 exercises + 12 challenges)
 
 ---
 
@@ -729,41 +768,55 @@ This approach ensures:
 
 ## Code Exercises - Technical Details
 
-### ✅ CURRENT EXERCISE STRUCTURE (After Refactoring)
+### ✅ CURRENT EXERCISE STRUCTURE (Flattened 2-Level)
 
-**Modular Structure: 1 Exercise = 1 File**
+**Modular Structure: Category → Section → Individual Exercise Files**
 
 ```
 exercises/
-├── index.json                                    # Root index (lists active categories)
-└── 00-fundamentals/
-    ├── category.json                             # Category metadata + topics list
-    └── 01-first-contact/
-        ├── topic.json                            # Topic metadata + sections list
-        └── 01-system-boot/
-            ├── section.json                      # Section metadata + exercise/challenge IDs
-            ├── ex-1-1-1.json                    # Individual exercise file
-            ├── ex-1-1-2.json                    # Individual exercise file
-            ├── ex-1-1-3.json
-            ├── ex-1-1-4.json
-            ├── ex-1-1-5.json
-            ├── challenge-1-1.json               # Individual challenge file
-            └── OLD_STRUCTURE_BACKUP/            # Backups (gitignored)
+├── index.json                           # Root index (lists active categories)
+└── 00-fundamentals/                     # Category folder
+    ├── category.json                    # Category metadata + section references
+    ├── 01-basic-syntax/                 # Section folder (flattened - no chapter layer)
+    │   ├── section.json                 # Section metadata + exercise IDs
+    │   ├── ex-1-1-1.json               # Individual exercise file
+    │   ├── ex-1-1-2.json
+    │   ├── ex-1-1-3.json
+    │   ├── ex-1-1-4.json
+    │   ├── ex-1-1-5.json
+    │   └── challenge-1-1.json          # Individual challenge file
+    ├── 02-variables/
+    │   ├── section.json
+    │   ├── ex-1-2-1.json → ex-1-2-7.json
+    │   └── challenge-1-2.json
+    ├── 03-assertions/
+    ├── 04-settings-section/
+    ├── 05-custom-keywords/
+    └── 06-if-statements/
 ```
 
+**Key Changes from Old Structure:**
+- ❌ REMOVED: Chapter layer (01-first-contact, 02-system-diagnostics folders)
+- ❌ REMOVED: topic.json files
+- ❌ REMOVED: "chapter" field from all JSON files
+- ✅ SIMPLIFIED: 2-level hierarchy (Category → Section)
+- ✅ UPDATED: category.json now has "sections" array instead of "topics"
+- ✅ UPDATED: Frontend loads sections directly from category
+
 **Benefits:**
+- ✅ Matches frontend display (flat exercise list)
+- ✅ Simpler file paths and navigation
 - ✅ Edit one exercise without affecting others
 - ✅ Clean git diffs (only changed file appears)
-- ✅ Parallel development (no merge conflicts)
-- ✅ Direct file access by exercise ID
+- ✅ Easier to maintain and scale
 
 ### Individual Exercise File Format (ex-1-1-1.json):
 ```json
 {
   "id": "ex-1-1-1",
   "type": "exercise",
-  "section": "01-system-boot",
-  "chapter": "01-first-contact",
+  "section": "01-basic-syntax",
+  "category": "00-fundamentals",
   "title": "First Boot Sequence",
   "difficulty": "beginner",
   "estimatedTime": "8 minutes",
