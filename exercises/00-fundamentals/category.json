@@ -39,8 +39,8 @@
       "name": "Chapter 2: System Diagnostics",
       "order": 2,
       "story": "MENTOR-9 teaches how to organize diagnostics and create reusable checks.",
-      "learningArc": "User keywords → Test organization → BuiltIn library deep dive",
-      "estimatedTime": "3-4 hours",
+      "learningArc": "Settings section → Custom keywords → IF statements → FOR loops",
+      "estimatedTime": "5-6 hours",
       "exerciseCount": 23,
       "hasChallengeExercise": true
     },

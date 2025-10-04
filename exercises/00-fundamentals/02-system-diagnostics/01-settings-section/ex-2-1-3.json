@@ -1,0 +1,53 @@
+{
+  "id": "ex-2-1-3",
+  "type": "exercise",
+  "section": "01-settings-section",
+  "chapter": "02-system-diagnostics",
+  "category": "00-fundamentals",
+  "title": "Test Setup & Teardown - Per-Test Hooks",
+  "difficulty": "beginner",
+  "estimatedTime": "7 minutes",
+  "order": 3,
+  "description": "Configure test-level setup and teardown procedures that run before/after EACH test.",
+  "story": {
+    "setup": "MENTOR-9: \"Suite hooks run once for the whole suite. But what if each test needs its own preparation? That's where Test Setup and Test Teardown come in.\"",
+    "context": "Test Setup runs BEFORE each individual test. Test Teardown runs AFTER each individual test. Perfect for resetting state between tests.",
+    "success": "MENTOR-9: \"Perfect! Each test now gets its own clean environment. No test pollutes another test's state!\""
+  },
+  "instructions": [
+    "Create the *** Settings *** section",
+    "Add Documentation: 'Suite with per-test hooks'",
+    "Add Test Setup with the keyword: Log    Preparing test environment",
+    "Add Test Teardown with the keyword: Log    Cleaning up test environment",
+    "Create the *** Test Cases *** section",
+    "Create test case 'Sensor Check' that logs: 'Checking sensors'",
+    "Create test case 'Power Check' that logs: 'Checking power levels'",
+    "Note: Test Setup/Teardown run BEFORE and AFTER EACH test (not once per suite)"
+  ],
+  "hints": [
+    "Test Setup runs before EVERY test case",
+    "Test Teardown runs after EVERY test case",
+    "Syntax: 'Test Setup    Keyword    Arguments'",
+    "Both tests will have their own setup/teardown execution"
+  ],
+  "initialCode": "",
+  "solution": "*** Settings ***\nDocumentation    Suite with per-test hooks\nTest Setup       Log    Preparing test environment\nTest Teardown    Log    Cleaning up test environment\n\n*** Test Cases ***\nSensor Check\n    Log    Checking sensors\n\nPower Check\n    Log    Checking power levels",
+  "validation": {
+    "mustContain": [
+      "*** Settings ***",
+      "Test Setup",
+      "Test Teardown",
+      "Preparing test environment",
+      "Cleaning up test environment",
+      "*** Test Cases ***",
+      "Sensor Check",
+      "Power Check"
+    ],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Exercise 2.1.3: Test Setup & Teardown",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/section-2-1/ex-2-1-3-test-lifecycle.png\" alt=\"PROTO-7 standing at a circular platform that resets between each test - showing Test Setup preparing platform, test running, Test Teardown cleaning, then cycle repeats for next test\" />\n</div>\n\n<div class=\"story-intro\">\n  <h3>🔄 Individual Test Lifecycle</h3>\n  <p><strong>MENTOR-9</strong>: \"PROTO-7, Suite hooks run once for the entire suite. But each test might need its own fresh environment.\"</p>\n  <p>\"<strong>Test Setup</strong> runs <strong>before EACH test</strong>. <strong>Test Teardown</strong> runs <strong>after EACH test</strong>. If you have 5 tests, these hooks run 5 times each.\"</p>\n</div>\n\n<div class=\"concept-explain\">\n  <h3>🔁 What are Test Hooks?</h3>\n  <p><strong>Test Setup</strong> - Runs <strong>BEFORE EACH</strong> test case</p>\n  <ul>\n    <li>✅ Reset application state</li>\n    <li>✅ Navigate to starting page</li>\n    <li>✅ Create fresh test data</li>\n    <li>✅ Initialize variables</li>\n  </ul>\n  <p><strong>Test Teardown</strong> - Runs <strong>AFTER EACH</strong> test case</p>\n  <ul>\n    <li>✅ Clean up test data</li>\n    <li>✅ Close browser windows</li>\n    <li>✅ Reset database state</li>\n    <li>✅ Capture screenshots on failure</li>\n  </ul>\n</div>\n\n<div class=\"code-demo\">\n  <h3>📝 Test Lifecycle Example</h3>\n  <pre><code>*** Settings ***\nTest Setup       Log    Test starting - preparing environment\nTest Teardown    Log    Test finished - cleaning up\n\n*** Test Cases ***\nFirst Test\n    Log    Running first test\n\nSecond Test\n    Log    Running second test</code></pre>\n  <p><strong>Execution Order:</strong></p>\n  <ol>\n    <li>🔹 <strong>Test Setup</strong>: \"Test starting - preparing environment\"</li>\n    <li>🔹 <strong>First Test</strong>: \"Running first test\"</li>\n    <li>🔹 <strong>Test Teardown</strong>: \"Test finished - cleaning up\"</li>\n    <li>🔹 <strong>Test Setup</strong>: \"Test starting - preparing environment\" (again!)</li>\n    <li>🔹 <strong>Second Test</strong>: \"Running second test\"</li>\n    <li>🔹 <strong>Test Teardown</strong>: \"Test finished - cleaning up\" (again!)</li>\n  </ol>\n</div>\n\n<div class=\"rules-box\">\n  <h3>📋 Test Hooks Rules</h3>\n  <ul>\n    <li>🔹 <strong>Frequency</strong>: Run BEFORE and AFTER EVERY test case</li>\n    <li>🔹 <strong>Syntax</strong>: <code>Test Setup    Keyword    Arguments</code></li>\n    <li>🔹 <strong>Difference from Suite</strong>: Suite runs ONCE, Test runs PER TEST</li>\n    <li>🔹 <strong>Failure Handling</strong>: If Test Setup fails, that test is skipped</li>\n    <li>🔹 <strong>Isolation</strong>: Each test gets a fresh setup/teardown cycle</li>\n  </ul>\n</div>\n\n<div class=\"try-it\">\n  <h3>🎯 Your Task</h3>\n  <p>Create a suite with Test Setup and Test Teardown, then add TWO test cases. Watch the log - you'll see the setup and teardown run TWICE (once per test).</p>\n</div>"
+  }
+}

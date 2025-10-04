@@ -1,0 +1,77 @@
+{
+  "id": "02-system-diagnostics",
+  "chapter": 2,
+  "title": "Chapter 2: System Diagnostics",
+  "category": "00-fundamentals",
+  "description": "Day 6-10 on Syntax-IV. With basic communication established, PROTO-7 learns to configure test suites using the Settings section, create reusable keywords, and handle complex control flow.",
+  "order": 2,
+  "difficulty": "beginner-to-intermediate",
+  "estimatedTime": "5-6 hours",
+  "story": {
+    "introduction": "Day 6. Basic systems are online, but MENTOR-9 needs more sophisticated diagnostics.\n\n\"PROTO-7, we need to organize our tests better. Learn the Settings section - it's the control panel for your test suites.\"\n\n\"Then we'll build custom diagnostic procedures using Keywords, and add smart decision-making with IF statements.\"",
+    "arc": "Configure test suites → Create reusable keywords → Add conditional logic → Master loops",
+    "conclusion": "With Settings mastered, custom keywords created, and control flow in place, you can now build sophisticated diagnostic routines."
+  },
+  "sections": [
+    {
+      "id": "01-settings-section",
+      "name": "Section 2.1: Settings Section",
+      "order": 1,
+      "exerciseCount": 7,
+      "hasChallengeExercise": true,
+      "story": "Configure test suites with Settings: hooks, tags, timeouts, libraries.",
+      "learningFocus": "*** Settings ***, Suite/Test Setup/Teardown, Default Tags, Test Timeout, Library imports"
+    },
+    {
+      "id": "02-custom-keywords",
+      "name": "Section 2.2: Custom Keywords",
+      "order": 2,
+      "exerciseCount": 6,
+      "hasChallengeExercise": true,
+      "story": "Build reusable diagnostic procedures using custom keywords.",
+      "learningFocus": "*** Keywords ***, keyword arguments, return values, keyword documentation"
+    },
+    {
+      "id": "03-control-flow-if",
+      "name": "Section 2.3: Control Flow - IF Statements",
+      "order": 3,
+      "exerciseCount": 5,
+      "hasChallengeExercise": true,
+      "story": "Add decision-making to tests with IF/ELSE/ELSE IF logic.",
+      "learningFocus": "IF conditions, ELSE, ELSE IF, comparison operators, boolean logic"
+    },
+    {
+      "id": "04-control-flow-loops",
+      "name": "Section 2.4: Control Flow - Loops",
+      "order": 4,
+      "exerciseCount": 5,
+      "hasChallengeExercise": true,
+      "story": "Automate repetitive tasks using FOR loops.",
+      "learningFocus": "FOR loops, IN RANGE, iterating lists, loop variables, nested loops"
+    }
+  ],
+  "learningObjectives": [
+    "Configure test suites using the *** Settings *** section",
+    "Implement Suite Setup/Teardown and Test Setup/Teardown hooks",
+    "Apply Default Tags and Test Timeout settings",
+    "Import and use built-in libraries (Collections, String, DateTime)",
+    "Create custom keywords with arguments and return values",
+    "Use IF/ELSE/ELSE IF for conditional logic",
+    "Implement FOR loops for iteration",
+    "Build reusable diagnostic procedures"
+  ],
+  "keyTakeaways": [
+    "Settings section configures suite-level behavior (hooks, tags, timeout, libraries)",
+    "Suite hooks run ONCE per suite, Test hooks run BEFORE/AFTER EACH test",
+    "Custom keywords promote code reuse and readability",
+    "IF statements enable conditional execution based on runtime conditions",
+    "FOR loops automate repetitive tasks and data-driven testing",
+    "Proper organization separates configuration, reusable logic, and test cases"
+  ],
+  "chapterChallenge": {
+    "title": "Advanced Diagnostic Framework",
+    "description": "Create a complete diagnostic suite with Settings configuration, custom keywords, conditional logic, and loops.",
+    "estimatedTime": "25-30 minutes",
+    "concepts": ["All Chapter 2 concepts integrated"]
+  }
+}
