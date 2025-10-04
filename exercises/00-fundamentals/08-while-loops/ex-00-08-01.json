@@ -1,0 +1,50 @@
+{
+  "id": "ex-00-08-01",
+  "type": "exercise",
+  "section": "08-while-loops",
+  "category": "00-fundamentals",
+  "title": "Reactor Countdown",
+  "difficulty": "intermediate",
+  "estimatedTime": "8 minutes",
+  "order": 1,
+  "description": "Create a WHILE loop that counts down from 5 to 1, logging each number.",
+  "story": {
+    "setup": "MENTOR-9: \"The reactor is in cooldown mode. It needs to count down from 5 to 1 before it's safe to restart. We'll use a WHILE loop to monitor this countdown.\"",
+    "context": "WHILE loops execute as long as their condition evaluates to True. They're perfect for situations where you don't know the exact number of iterations in advance, or when you need to check a condition before each iteration.",
+    "success": "MENTOR-9: \"Perfect! The reactor counted down safely. Notice how the WHILE loop checked the condition before each iteration. This is different from FOR loops, which iterate a predetermined number of times.\""
+  },
+  "instructions": [
+    "Create the *** Test Cases *** section",
+    "Create a test case named 'Reactor Countdown'",
+    "Create a variable ${counter} and set it to 5",
+    "Create a WHILE loop with condition: $counter > 0",
+    "Inside the loop:",
+    "  - Log the current counter value",
+    "  - Decrement the counter by 1 (use Set Variable keyword: ${counter - 1})",
+    "After the loop, log 'Countdown complete!'"
+  ],
+  "hints": [
+    "WHILE loop syntax: WHILE    ${condition}",
+    "WHILE body must be indented (4 spaces recommended)",
+    "Use END to close the WHILE loop",
+    "Decrement: ${counter}=    Set Variable    ${counter - 1}",
+    "Make sure the condition eventually becomes False to avoid infinite loops!"
+  ],
+  "initialCode": "",
+  "solution": "*** Test Cases ***\nReactor Countdown\n    ${counter}=    Set Variable    5\n    WHILE    ${counter} > 0\n        Log    Countdown: ${counter}\n        ${counter}=    Set Variable    ${counter - 1}\n    END\n    Log    Countdown complete!",
+  "validation": {
+    "mustContain": ["*** Test Cases ***", "WHILE", "END", "Set Variable", "${counter}"],
+    "forbiddenKeywords": ["FOR"],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Exercise 3.1.1: Introduction to WHILE Loops",
+    "content": "<div class=\"story-intro\"><p>MENTOR-9 points at the ship's reactor display, showing a countdown timer.</p><p>\"See that? We need to wait until the counter reaches zero. But we don't control the timer—we just monitor it. FOR loops won't work here because we don't know exactly when it'll finish. We need a WHILE loop.\"</p></div><div class=\"concept-explain\"><h3>What is a WHILE Loop?</h3><p>A <strong>WHILE loop</strong> repeats a block of code as long as a condition remains true. Unlike FOR loops that iterate a specific number of times, WHILE loops continue until their condition becomes false.</p><p><strong>Syntax:</strong></p><pre><code>WHILE    ${condition}\n    # Code to repeat\n    # ...\nEND</code></pre><p><strong>Key Differences from FOR Loops:</strong></p><table><tr><th>FOR Loop</th><th>WHILE Loop</th></tr><tr><td>Fixed iterations</td><td>Conditional iterations</td></tr><tr><td>FOR ${i} IN RANGE 10</td><td>WHILE ${counter} &lt; 10</td></tr><tr><td>Iterates over collection</td><td>Checks condition each time</td></tr><tr><td>Always finite</td><td>Can be infinite if condition never false</td></tr></table></div><div class=\"code-demo\"><h4>Example: Simple Countdown</h4><pre><code>*** Test Cases ***\nCountdown Example\n    ${count}=    Set Variable    3\n    WHILE    ${count} &gt; 0\n        Log    T-minus ${count}\n        ${count}=    Set Variable    ${count - 1}\n    END\n    Log    Liftoff!</code></pre><p><strong>Output:</strong></p><pre>T-minus 3\nT-minus 2\nT-minus 1\nLiftoff!</pre></div><div class=\"rules-box\"><h4>⚠️ WHILE Loop Rules</h4><ul><li><strong>Condition Check</strong>: Evaluated BEFORE each iteration</li><li><strong>Must Close with END</strong>: Required to mark loop end</li><li><strong>Indentation</strong>: Loop body must be indented (4 spaces standard)</li><li><strong>Infinite Loop Risk</strong>: If condition never becomes False, loop runs forever!</li><li><strong>Variables</strong>: Often use variables that change inside the loop</li></ul></div><div class=\"concept-explain\"><h3>Common WHILE Loop Patterns</h3><p><strong>1. Counter-Based:</strong></p><pre><code>${counter}=    Set Variable    5\nWHILE    ${counter} &gt; 0\n    Log    ${counter}\n    ${counter}=    Set Variable    ${counter - 1}\nEND</code></pre><p><strong>2. Boolean Flag:</strong></p><pre><code>${done}=    Set Variable    False\nWHILE    ${done} == False\n    # Do something\n    ${done}=    Set Variable    True  # Eventually set to True\nEND</code></pre><p><strong>3. Waiting for Condition:</strong></p><pre><code>WHILE    '${status}' != 'ready'\n    ${status}=    Get System Status\n    Sleep    1s\nEND</code></pre></div><div class=\"try-it\"><p>MENTOR-9: \"Your turn. Create a countdown from 5 to 1 using a WHILE loop. This will teach you the basic pattern: check condition → execute body → modify variable → repeat.\"</p></div>",
+    "estimatedReadTime": "6-7 minutes"
+  },
+  "metadata": {
+    "tags": ["while-loop", "countdown", "basic-iteration", "conditional-loop"],
+    "prerequisites": ["ex-00-02-01", "ex-00-07-01"],
+    "nextExercises": ["ex-00-08-02"]
+  }
+}

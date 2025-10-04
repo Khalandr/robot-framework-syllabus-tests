@@ -58,6 +58,11 @@
       "id": "07-for-loops",
       "name": "Section 2.4: FOR Loops",
       "order": 7
+    },
+    {
+      "id": "08-while-loops",
+      "name": "Section 3.1: WHILE Loops",
+      "order": 8
     }
   ],
   "learningObjectives": [
