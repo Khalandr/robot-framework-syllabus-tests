@@ -1,0 +1,52 @@
+{
+  "id": "ex-00-09-01",
+  "type": "exercise",
+  "section": "09-try-except",
+  "category": "00-fundamentals",
+  "title": "Basic Error Catching",
+  "difficulty": "beginner",
+  "estimatedTime": "8 minutes",
+  "order": 1,
+  "description": "Use TRY/EXCEPT to catch and handle a failing operation without crashing the test.",
+  "story": {
+    "setup": "MENTOR-9: \"A damaged sensor will fail when we try to read it. Without error handling, our entire diagnostic crashes. TRY/EXCEPT lets us catch the error and continue.\"",
+    "context": "Error handling prevents one failure from stopping the entire test suite. This is essential in real-world automation where some operations are expected to fail.",
+    "success": "MENTOR-9: \"Perfect! The sensor failed, but you caught the error and continued. The diagnostic didn't crash. That's resilient automation.\""
+  },
+  "instructions": [
+    "Create test case 'Sensor Error Handling'",
+    "Use TRY block",
+    "Inside TRY:",
+    "  - Log 'Attempting to read damaged sensor...'",
+    "  - Use 'Fail' keyword to simulate sensor failure with message 'Sensor timeout'",
+    "Use EXCEPT block",
+    "Inside EXCEPT:",
+    "  - Log 'Sensor read failed, but test continues'",
+    "Close with END",
+    "After TRY/EXCEPT, log 'Diagnostic complete'"
+  ],
+  "hints": [
+    "TRY block syntax: TRY (then indented code)",
+    "EXCEPT catches any error from TRY block",
+    "Fail keyword: Fail    Error message here",
+    "Code after EXCEPT runs even if error occurred",
+    "Both TRY and EXCEPT blocks need END"
+  ],
+  "initialCode": "",
+  "solution": "*** Test Cases ***\nSensor Error Handling\n    TRY\n        Log    Attempting to read damaged sensor...\n        Fail    Sensor timeout\n    EXCEPT\n        Log    Sensor read failed, but test continues\n    END\n    Log    Diagnostic complete",
+  "validation": {
+    "mustContain": ["*** Test Cases ***", "TRY", "EXCEPT", "END", "Fail"],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Exercise 3.2.1: Basic TRY/EXCEPT",
+    "content": "<div class=\"story-intro\"><p>MENTOR-9: \"When operations might fail, we use TRY/EXCEPT. Think of it like a safety net—if something goes wrong in the TRY block, the EXCEPT block catches it.\"</p></div><div class=\"concept-explain\"><h3>TRY/EXCEPT Error Handling</h3><p><strong>TRY/EXCEPT</strong> blocks catch errors and handle them gracefully:</p><pre><code>TRY\n    # Code that might fail\n    Risky Operation\nEXCEPT\n    # Code that runs if error occurs\n    Log    Error caught!\nEND</code></pre><p><strong>How It Works:</strong></p><ol><li>Code in TRY block executes normally</li><li>If an error occurs, execution jumps to EXCEPT block</li><li>EXCEPT block handles the error</li><li>Test continues after END (doesn't fail)</li><li>If no error occurs, EXCEPT block is skipped</li></ol></div><div class=\"code-demo\"><h4>Example: Handling Timeout</h4><pre><code>TRY\n    Log    Reading sensor data...\n    Fail    Connection timeout  # Simulates error\nEXCEPT\n    Log    Sensor unavailable, using default value\n    ${value}=    Set Variable    0\nEND\nLog    Diagnostic continues with value: ${value}</code></pre><p><strong>Output:</strong> Logs \"Reading sensor data...\", then \"Sensor unavailable, using default value\", then \"Diagnostic continues with value: 0\". Test passes despite the Fail keyword.</p></div><div class=\"rules-box\"><h4>⚠️ TRY/EXCEPT Rules</h4><ul><li>TRY block must come before EXCEPT</li><li>EXCEPT catches ALL errors in TRY block</li><li>Without TRY/EXCEPT, Fail keyword would stop the test</li><li>Code after END runs regardless of error</li><li>TRY/EXCEPT/END structure must be complete</li></ul></div>",
+    "estimatedReadTime": "5-6 minutes"
+  },
+  "metadata": {
+    "tags": ["try-except", "error-handling", "resilience", "fail-keyword"],
+    "prerequisites": [],
+    "nextExercises": ["ex-00-09-02"]
+  }
+}

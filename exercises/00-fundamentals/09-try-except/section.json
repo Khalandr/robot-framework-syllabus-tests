@@ -1,0 +1,23 @@
+{
+  "id": "09-try-except",
+  "section": "3.2",
+  "title": "TRY/EXCEPT Error Handling",
+  "category": "00-fundamentals",
+  "order": 9,
+  "difficulty": "intermediate-to-advanced",
+  "estimatedTime": "50 minutes",
+  "description": "Master error handling with TRY/EXCEPT blocks to build resilient test suites that gracefully handle failures.",
+  "story": {
+    "setup": "MENTOR-9: \"The ship's systems are unpredictable. Some operations might fail—sensors might timeout, connections might drop. We need error handling to prevent total diagnostic failure when one component fails.\"",
+    "context": "TRY/EXCEPT blocks allow tests to handle errors gracefully instead of crashing. This is critical for resilient automation in unstable environments.",
+    "arc": "Learn to catch and handle errors, use ELSE and FINALLY blocks, and build robust error-recovery workflows."
+  },
+  "exercises": [
+    "ex-00-09-01",
+    "ex-00-09-02",
+    "ex-00-09-03",
+    "ex-00-09-04",
+    "ex-00-09-05"
+  ],
+  "challenges": ["ch-00-09"]
+}

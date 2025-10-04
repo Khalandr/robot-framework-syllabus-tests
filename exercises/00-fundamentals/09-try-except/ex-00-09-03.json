@@ -1,0 +1,60 @@
+{
+  "id": "ex-00-09-03",
+  "type": "exercise",
+  "section": "09-try-except",
+  "category": "00-fundamentals",
+  "title": "TRY/EXCEPT/ELSE Flow",
+  "difficulty": "intermediate",
+  "estimatedTime": "12 minutes",
+  "order": 3,
+  "description": "Use ELSE block to run code only when no error occurs in TRY block.",
+  "story": {
+    "setup": "MENTOR-9: \"Sometimes you want to do something ONLY if the operation succeeded—like logging success or proceeding to next step. That's what ELSE is for.\"",
+    "context": "ELSE block runs only when TRY succeeds (no error). This creates clean success/failure paths without nested IF statements.",
+    "success": "MENTOR-9: \"Perfect! Navigation check succeeded, so ELSE block ran and logged 'Navigation online'. If it had failed, EXCEPT would have run instead. Clean branching logic.\""
+  },
+  "instructions": [
+    "Create test case 'Navigation System Check'",
+    "Create variable ${nav_status} = 'checking'",
+    "Use TRY block",
+    "Inside TRY:",
+    "  - Log 'Testing navigation system...'",
+    "  - Set ${nav_status} = 'online'",
+    "  - Log 'Navigation test passed'",
+    "  - (Do NOT use Fail - let it succeed)",
+    "Use EXCEPT    AS    ${error} block",
+    "Inside EXCEPT:",
+    "  - Log 'Navigation failed: ${error}'",
+    "  - Set ${nav_status} = 'offline'",
+    "Use ELSE block",
+    "Inside ELSE:",
+    "  - Log 'Navigation online - proceeding to route calculation'",
+    "Close with END",
+    "After TRY/EXCEPT/ELSE, log 'Final status: ${nav_status}'"
+  ],
+  "hints": [
+    "ELSE comes after EXCEPT, before END",
+    "ELSE runs ONLY if TRY succeeded (no error)",
+    "If error occurs: TRY → EXCEPT (skip ELSE)",
+    "If no error: TRY → ELSE (skip EXCEPT)",
+    "Both EXCEPT and ELSE are optional (but useful)",
+    "Try changing solution to use Fail in TRY to see EXCEPT run instead of ELSE"
+  ],
+  "initialCode": "",
+  "solution": "*** Test Cases ***\nNavigation System Check\n    ${nav_status}=    Set Variable    checking\n    TRY\n        Log    Testing navigation system...\n        ${nav_status}=    Set Variable    online\n        Log    Navigation test passed\n    EXCEPT    AS    ${error}\n        Log    Navigation failed: ${error}\n        ${nav_status}=    Set Variable    offline\n    ELSE\n        Log    Navigation online - proceeding to route calculation\n    END\n    Log    Final status: ${nav_status}",
+  "validation": {
+    "mustContain": ["*** Test Cases ***", "TRY", "EXCEPT", "ELSE", "END", "${nav_status}"],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Exercise 3.2.3: TRY/EXCEPT/ELSE",
+    "content": "<div class=\"story-intro\"><p>MENTOR-9: \"You've learned to handle errors with EXCEPT. But what about handling SUCCESS? That's where ELSE comes in—code that runs ONLY when TRY succeeds.\"</p></div><div class=\"concept-explain\"><h3>TRY/EXCEPT/ELSE Flow Control</h3><p><strong>ELSE</strong> block runs only when TRY completes without error:</p><pre><code>TRY\n    # Code that might fail\n    Operation\nEXCEPT\n    # Runs if error occurs\n    Log    Error path\nELSE\n    # Runs if NO error occurs\n    Log    Success path\nEND</code></pre><p><strong>Execution Flow:</strong></p><ul><li><strong>If TRY succeeds:</strong> TRY → ELSE (skip EXCEPT)</li><li><strong>If TRY fails:</strong> TRY → EXCEPT (skip ELSE)</li><li>Code after END always runs</li></ul></div><div class=\"code-demo\"><h4>Example: Success vs Failure Paths</h4><pre><code>${status}=    Set Variable    unknown\nTRY\n    Log    Checking sensor...\n    # Fail    Sensor offline  # Uncomment to test error path\n    ${status}=    Set Variable    ok\nEXCEPT    AS    ${err}\n    Log    Sensor check failed: ${err}\n    ${status}=    Set Variable    error\nELSE\n    Log    Sensor check passed - calibrating...\nEND\nLog    Sensor status: ${status}</code></pre><p><strong>Without Fail (success path):</strong> Logs \"Checking sensor...\", \"Sensor check passed - calibrating...\", \"Sensor status: ok\"</p><p><strong>With Fail (error path):</strong> Logs \"Checking sensor...\", \"Sensor check failed: Sensor offline\", \"Sensor status: error\"</p></div><div class=\"rules-box\"><h4>⚠️ TRY/EXCEPT/ELSE Rules</h4><ul><li>ELSE must come AFTER EXCEPT</li><li>ELSE is optional (can have just TRY/EXCEPT)</li><li>ELSE never runs if error occurred</li><li>Use ELSE for success-specific logic (logging, next steps)</li><li>Cleaner than nested IF statements checking for errors</li></ul></div>",
+    "estimatedReadTime": "6-7 minutes"
+  },
+  "metadata": {
+    "tags": ["try-except", "else-block", "success-path", "flow-control"],
+    "prerequisites": ["ex-00-09-02"],
+    "nextExercises": ["ex-00-09-04"]
+  }
+}

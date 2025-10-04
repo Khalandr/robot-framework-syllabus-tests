@@ -63,6 +63,11 @@
       "id": "08-while-loops",
       "name": "Section 3.1: WHILE Loops",
       "order": 8
+    },
+    {
+      "id": "09-try-except",
+      "name": "Section 3.2: TRY/EXCEPT Error Handling",
+      "order": 9
     }
   ],
   "learningObjectives": [
