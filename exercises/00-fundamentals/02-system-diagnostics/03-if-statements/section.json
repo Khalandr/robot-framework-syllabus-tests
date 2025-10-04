@@ -1,0 +1,40 @@
+{
+  "id": "03-if-statements",
+  "section": "2.3",
+  "title": "IF Statements",
+  "chapter": "02-system-diagnostics",
+  "category": "00-fundamentals",
+  "order": 3,
+  "difficulty": "beginner-to-intermediate",
+  "estimatedTime": "35-40 minutes",
+  "story": {
+    "introduction": "Day 10 on planet Syntax-IV. The diagnostic systems need decision-making capabilities.\n\n\"PROTO-7, tests can't just follow a script - they need to DECIDE! IF statements let your tests make choices based on conditions.\"\n\n\"If power is low → charge batteries. If sensors fail → run backup diagnostics. Decision-making is the key to intelligent automation.\"",
+    "context": "IF statements enable conditional execution. Tests can check values, compare data, and execute different code paths based on runtime conditions."
+  },
+  "learningObjectives": [
+    "Understand IF statement syntax and structure",
+    "Use IF...ELSE for binary decisions",
+    "Implement ELSE IF for multiple conditions",
+    "Apply comparison operators (==, !=, <, >, <=, >=)",
+    "Combine conditions with boolean logic (AND, OR, NOT)",
+    "Nest IF statements for complex logic"
+  ],
+  "conceptsCovered": [
+    "IF statement syntax",
+    "IF...ELSE structure",
+    "ELSE IF chaining",
+    "Comparison operators",
+    "Boolean expressions",
+    "Conditional execution"
+  ],
+  "exercises": [
+    "ex-2-3-1",
+    "ex-2-3-2",
+    "ex-2-3-3",
+    "ex-2-3-4",
+    "ex-2-3-5"
+  ],
+  "challenges": [
+    "challenge-2-3"
+  ]
+}

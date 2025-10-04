@@ -1,0 +1,63 @@
+{
+  "id": "ex-2-3-4",
+  "type": "exercise",
+  "section": "03-if-statements",
+  "chapter": "02-system-diagnostics",
+  "category": "00-fundamentals",
+  "title": "Comparison Operators - Testing Equality and Inequality",
+  "difficulty": "beginner",
+  "estimatedTime": "7 minutes",
+  "order": 4,
+  "description": "Master comparison operators: ==, !=, <, >, <=, >= for condition testing.",
+  "story": {
+    "setup": "MENTOR-9: \"PROTO-7, conditions need operators. Is power EQUAL to 100? NOT EQUAL to 0? LESS THAN 50? These are your comparison tools.\"",
+    "context": "Comparison operators test relationships between values: equality (==), inequality (!=), greater/less than (>, <), or combinations (>=, <=).",
+    "success": "MENTOR-9: \"Perfect! You've mastered all comparison operators. Now you can test any relationship between values!\""
+  },
+  "instructions": [
+    "Create the *** Test Cases *** section",
+    "Create test 'Operator Tests'",
+    "Set ${status} to 'operational'",
+    "Set ${temp} to 72",
+    "Test 1 - IF    ${status} == 'operational'",
+    "    Log: 'Status check: PASS'",
+    "Test 2 - IF    ${temp} != 100",
+    "    Log: 'Temperature not at maximum'",
+    "Test 3 - IF    ${temp} <= 75",
+    "    Log: 'Temperature within safe range'",
+    "Add END after each IF",
+    "Note: == tests equality, != tests inequality, <=/>= test range"
+  ],
+  "hints": [
+    "== checks if values are equal",
+    "!= checks if values are NOT equal",
+    "<= means less than OR equal to",
+    ">= means greater than OR equal to",
+    "String comparisons need quotes: 'text'"
+  ],
+  "initialCode": "",
+  "solution": "*** Test Cases ***\nOperator Tests\n    ${status}=    Set Variable    operational\n    ${temp}=    Set Variable    72\n    IF    ${status} == 'operational'\n        Log    Status check: PASS\n    END\n    IF    ${temp} != 100\n        Log    Temperature not at maximum\n    END\n    IF    ${temp} <= 75\n        Log    Temperature within safe range\n    END",
+  "validation": {
+    "mustContain": [
+      "*** Test Cases ***",
+      "Operator Tests",
+      "${status}",
+      "${temp}",
+      "operational",
+      "72",
+      "==",
+      "!=",
+      "<=",
+      "Status check: PASS",
+      "Temperature not at maximum",
+      "Temperature within safe range",
+      "END"
+    ],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Exercise 2.3.4: Comparison Operators",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/section-2-3/ex-2-3-4-comparison-operators.png\" alt=\"MENTOR-9 showing PROTO-7 a holographic toolkit with 6 glowing comparison operator symbols: == (equals), != (not equals), < (less than), > (greater than), <= (less/equal), >= (greater/equal)\" />\n</div>\n\n<div class=\"story-intro\">\n  <h3>⚖️ The Comparison Toolkit</h3>\n  <p><strong>MENTOR-9</strong>: \"PROTO-7, conditions need tools to test relationships. Is A equal to B? Is X greater than Y? These operators are your measuring instruments.\"</p>\n  <p>\"Six operators cover every comparison: equality, inequality, greater, less, and combinations.\"</p>\n</div>\n\n<div class=\"concept-explain\">\n  <h3>🔍 Comparison Operators</h3>\n  <p><strong>Equality Operators:</strong></p>\n  <ul>\n    <li>✅ <strong>==</strong> - Equal to (5 == 5 → TRUE, 5 == 3 → FALSE)</li>\n    <li>✅ <strong>!=</strong> - Not equal to (5 != 3 → TRUE, 5 != 5 → FALSE)</li>\n  </ul>\n  <p><strong>Relational Operators:</strong></p>\n  <ul>\n    <li>✅ <strong>&lt;</strong> - Less than (3 < 5 → TRUE, 5 < 3 → FALSE)</li>\n    <li>✅ <strong>&gt;</strong> - Greater than (5 > 3 → TRUE, 3 > 5 → FALSE)</li>\n    <li>✅ <strong>&lt;=</strong> - Less than OR equal (3 <= 5 → TRUE, 5 <= 5 → TRUE)</li>\n    <li>✅ <strong>&gt;=</strong> - Greater than OR equal (5 >= 3 → TRUE, 5 >= 5 → TRUE)</li>\n  </ul>\n  <p><strong>String Comparisons:</strong></p>\n  <ul>\n    <li>🔹 'hello' == 'hello' → TRUE</li>\n    <li>🔹 'hello' != 'world' → TRUE</li>\n    <li>🔹 Case-sensitive: 'Hello' != 'hello'</li>\n  </ul>\n</div>\n\n<div class=\"code-demo\">\n  <h3>📝 Operators in Action</h3>\n  <pre><code>*** Test Cases ***\nComparison Examples\n    ${x}=    Set Variable    10\n    ${y}=    Set Variable    20\n    ${name}=    Set Variable    Robot\n    \n    IF    ${x} == 10        # TRUE\n        Log    X equals 10\n    END\n    \n    IF    ${x} != ${y}      # TRUE (10 != 20)\n        Log    X and Y differ\n    END\n    \n    IF    ${x} < ${y}       # TRUE (10 < 20)\n        Log    X less than Y\n    END\n    \n    IF    ${name} == 'Robot'  # TRUE\n        Log    Name matches\n    END</code></pre>\n</div>\n\n<div class=\"rules-box\">\n  <h3>📋 Comparison Operator Rules</h3>\n  <ul>\n    <li>🔹 <strong>Numbers</strong>: Direct comparison (5 < 10)</li>\n    <li>🔹 <strong>Strings</strong>: Must use quotes ('text' == 'text')</li>\n    <li>🔹 <strong>Variables</strong>: ${var1} == ${var2}</li>\n    <li>🔹 <strong>Case-sensitive</strong>: 'Hello' != 'hello'</li>\n    <li>🔹 <strong>Spacing</strong>: Use spaces around operators</li>\n  </ul>\n</div>\n\n<div class=\"try-it\">\n  <h3>🎯 Your Task</h3>\n  <p>Test three different operators: == for equality, != for inequality, <= for range. Master the comparison toolkit!</p>\n</div>"
+  }
+}
