@@ -1,0 +1,433 @@
+{
+  "section": "03-system-checks",
+  "exercises": [
+    {
+      "id": "ex-1-3-1",
+      "type": "exercise",
+      "section": "03-system-checks",
+      "title": "Should Be Equal - Basic Comparison",
+      "difficulty": "beginner",
+      "estimatedTime": "8 minutes",
+      "order": 1,
+      "description": "Learn the most fundamental assertion: checking if two values are exactly equal.",
+      "story": {
+        "setup": "MENTOR-9: \"Storing data means nothing if we can't verify it's correct. The Should Be Equal keyword is your primary validation tool\u00e2\u20ac\u201dit checks if actual matches expected.\"",
+        "context": "Assertions are Robot Framework's way of validating that your system behaves correctly. If values don't match, the test fails immediately, alerting you to problems.",
+        "success": "MENTOR-9: \"Perfect! The assertion passed because 'Operational' equals 'Operational'. If they hadn't matched, the test would have failed with a clear error message. That's how we catch bugs.\""
+      },
+      "instructions": [
+        "Create the *** Test Cases *** section",
+        "Create a test case named 'System Status Validation'",
+        "Create ${actual_status} with value 'Operational'",
+        "Create ${expected_status} with value 'Operational'",
+        "Use Should Be Equal to compare ${actual_status} and ${expected_status}",
+        "Log a success message: 'Status check passed!'",
+        "Create ${ship_name} with value 'Starlight Explorer'",
+        "Use Should Be Equal to verify ${ship_name} equals 'Starlight Explorer'",
+        "Log 'Ship name verified successfully'"
+      ],
+      "hints": [
+        "Should Be Equal syntax: Should Be Equal    ${actual}    ${expected}",
+        "Arguments must be separated by at least 2 spaces (4 recommended)",
+        "If values don't match, test fails with descriptive error",
+        "Should Be Equal compares as strings by default",
+        "The keyword is case-insensitive: should be equal = SHOULD BE EQUAL",
+        "First argument is 'actual', second is 'expected' (convention)"
+      ],
+      "initialCode": "",
+      "solution": "*** Test Cases ***\nSystem Status Validation\n    ${actual_status}      Set Variable    Operational\n    ${expected_status}    Set Variable    Operational\n    Should Be Equal       ${actual_status}    ${expected_status}\n    Log                   Status check passed!\n    \n    ${ship_name}          Set Variable    Starlight Explorer\n    Should Be Equal       ${ship_name}    Starlight Explorer\n    Log                   Ship name verified successfully",
+      "validation": {
+        "mustContain": [
+          "*** Test Cases ***",
+          "Should Be Equal",
+          "${actual_status}",
+          "${expected_status}",
+          "Log"
+        ],
+        "forbiddenKeywords": [],
+        "mustPass": true
+      },
+      "theory": {
+        "title": "Exercise 1.3.1: Should Be Equal - The Foundation of Validation",
+        "content": "<div class=\"theory-visual\">\n<img src=\"assets/images/theory/section-1-3/ex-1-3-1-should-be-equal.png\" alt=\"PROTO-7 comparing two glowing values with a checkmark appearing when they match\" loading=\"lazy\" width=\"1920\" height=\"1080\" />\n</div>\n\n<div class=\"story-intro\">\n<p>MENTOR-9 brings up two holographic panels side by side, both displaying \"OPERATIONAL\".</p>\n<p>\"PROTO-7, storing data is only half the job. We must <strong>verify</strong> it's correct. The <span class=\"keyword\">Should Be Equal</span> keyword is your primary validation tool\u00e2\u20ac\u201dit compares actual vs expected values.\"</p>\n</div>\n\n<div class=\"concept-explain\">\n<h3>What Are Assertions?</h3>\n<p><strong>Assertions</strong> are statements that validate expected conditions. If the condition is true, the test continues. If false, the test <strong>fails immediately</strong> with an error.</p>\n\n<h4>Why Assertions Matter</h4>\n<ul>\n<li><strong>Catch bugs early:</strong> Test fails when behavior changes unexpectedly</li>\n<li><strong>Document expectations:</strong> Code shows what should happen</li>\n<li><strong>Prevent regressions:</strong> Ensure fixes don't break again</li>\n<li><strong>Build confidence:</strong> Passing tests mean working software</li>\n</ul>\n\n<h3>The Should Be Equal Keyword</h3>\n<p>The most fundamental assertion in Robot Framework:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>Should Be Equal    ${actual}    ${expected}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p><strong>Behavior:</strong></p>\n<ul>\n<li>\u00e2\u015b\u2026 If <code>${actual}</code> == <code>${expected}</code> \u00e2\u2020\u2019 Test continues</li>\n<li>\u00e2\u0165\u015a If <code>${actual}</code> \u00e2\u2030\u00a0 <code>${expected}</code> \u00e2\u2020\u2019 Test fails with error message</li>\n</ul>\n\n<h3>Basic Usage</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nSimple Equality Check\n    ${status}           Set Variable    Operational\n    Should Be Equal     ${status}    Operational\n    Log                 Validation passed!</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>What Happens:</h4>\n<ol>\n<li>Create variable <code>${status}</code> with value \"Operational\"</li>\n<li>Compare <code>${status}</code> to \"Operational\"</li>\n<li>They match \u00e2\u2020\u2019 assertion passes \u00e2\u2020\u2019 test continues</li>\n<li>Log success message</li>\n</ol>\n\n<h3>When Assertions Fail</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nFailing Assertion Example\n    ${status}           Set Variable    Damaged\n    Should Be Equal     ${status}    Operational\n    # \u00e2\u0165\u015a TEST FAILS HERE - next line never executes\n    Log                 This won't run</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>Error Message:</h4>\n<pre><code>AssertionError: Damaged != Operational</code></pre>\n\n<p>The test stops at the failed assertion. Subsequent keywords don't execute.</p>\n\n<h3>Comparing Variables</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nCompare Two Variables\n    ${actual}           Set Variable    Robot Framework\n    ${expected}         Set Variable    Robot Framework\n    Should Be Equal     ${actual}    ${expected}\n    Log                 Both variables match!</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>String Comparison (Default)</h3>\n<p>By default, Should Be Equal compares values as <strong>strings</strong>:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nString Comparison\n    ${number_as_string}    Set Variable    42\n    Should Be Equal        ${number_as_string}    42      # \u00e2\u015b\u2026 Works: \"42\" == \"42\"\n    Should Be Equal        ${number_as_string}    042     # \u00e2\u0165\u015a Fails: \"42\" != \"042\"</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Adding Custom Error Messages</h3>\n<p>You can add a custom message as the third argument:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nCustom Error Message\n    ${status}    Set Variable    Damaged\n    Should Be Equal    ${status}    Operational    msg=System status check failed! Expected Operational but got ${status}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>Error Output:</h4>\n<pre><code>AssertionError: System status check failed! Expected Operational but got Damaged</code></pre>\n\n<h3>Common Use Cases</h3>\n\n<h4>1. API Response Validation</h4>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nAPI Status Check\n    ${response_status}    Set Variable    200\n    Should Be Equal       ${response_status}    200    msg=Expected HTTP 200 OK</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>2. Configuration Verification</h4>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nConfig Check\n    ${env}              Set Variable    production\n    ${expected_env}     Set Variable    production\n    Should Be Equal     ${env}    ${expected_env}    msg=Environment mismatch!</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>3. User Input Validation</h4>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nLogin Check\n    ${username}         Set Variable    admin@example.com\n    Should Be Equal     ${username}    admin@example.com</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Should Be Equal vs Should Be Equal As Strings</h3>\n\n<table>\n<tr><th>Keyword</th><th>Behavior</th><th>When to Use</th></tr>\n<tr>\n<td><strong>Should Be Equal</strong></td>\n<td>String comparison (default)</td>\n<td>Most common cases</td>\n</tr>\n<tr>\n<td><strong>Should Be Equal As Strings</strong></td>\n<td>Explicit string comparison</td>\n<td>When clarity needed</td>\n</tr>\n<tr>\n<td><strong>Should Be Equal As Integers</strong></td>\n<td>Numeric comparison</td>\n<td>Comparing numbers: 42 == 042</td>\n</tr>\n<tr>\n<td><strong>Should Be Equal As Numbers</strong></td>\n<td>Float/decimal comparison</td>\n<td>Comparing 3.14 == 3.140</td>\n</tr>\n</table>\n\n<h3>Case Sensitivity</h3>\n<p>String comparisons ARE case-sensitive:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nCase Matters\n    ${status}           Set Variable    operational\n    Should Be Equal     ${status}    Operational    # \u00e2\u0165\u015a FAILS: \"operational\" != \"Operational\"</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p>Use <code>Should Be Equal As Strings</code> with <code>ignore_case=True</code> for case-insensitive:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nCase Insensitive\n    ${status}                      Set Variable    operational\n    Should Be Equal As Strings     ${status}    Operational    ignore_case=True    # \u00e2\u015b\u2026 PASSES</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Assertion Keyword Flexibility</h3>\n<p>Like all Robot Framework keywords, assertion keywords are case-insensitive and spacing-flexible:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nKeyword Variations\n    ${x}    Set Variable    test\n    \n    Should Be Equal          ${x}    test    # Standard\n    should be equal          ${x}    test    # Lowercase\n    SHOULD BE EQUAL          ${x}    test    # Uppercase\n    Should\u00c2\u00b7\u00c2\u00b7Be\u00c2\u00b7\u00c2\u00b7Equal        ${x}    test    # Extra spaces\n    ShouldBeEqual            ${x}    test    # No spaces\n    \n    # All are IDENTICAL!</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Best Practices</h3>\n\n<h4>1. Descriptive Variable Names</h4>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nGood Practice\n    ${actual_status}      Set Variable    OK\n    ${expected_status}    Set Variable    OK\n    Should Be Equal       ${actual_status}    ${expected_status}\n    \n    # Clear what's being compared</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>2. Use Custom Error Messages for Complex Checks</h4>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nClear Errors\n    ${user_role}    Set Variable    guest\n    Should Be Equal    ${user_role}    admin    msg=User does not have admin privileges (role: ${user_role})</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>3. One Assertion Per Logical Check</h4>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nMultiple Checks\n    ${status}    Set Variable    active\n    ${role}      Set Variable    admin\n    \n    Should Be Equal    ${status}    active    msg=Status check failed\n    Should Be Equal    ${role}      admin     msg=Role check failed\n    \n    # Separate assertions = separate failure messages</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Common Mistakes</h3>\n\n<h4>\u00e2\u0165\u015a Wrong: Comparing without storing</h4>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nWrong Approach\n    Should Be Equal    Operational    Operational    # Works but no actual value tested</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>\u00e2\u015b\u2026 Right: Store actual value first</h4>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nCorrect Approach\n    ${status}           Set Variable    Operational\n    Should Be Equal     ${status}    Operational</code></pre>\n</div>\n\n<div class=\"try-it\">\n<p>MENTOR-9: \"Create two variables: one for actual ship status, one for expected. Use Should Be Equal to validate they match. Then verify the ship name. Show me you can catch discrepancies before they become disasters.\"</p>\n</div>",
+        "estimatedReadTime": "6-7 minutes"
+      },
+      "metadata": {
+        "tags": [
+          "beginner",
+          "assertions",
+          "validation",
+          "should-be-equal",
+          "comparison"
+        ],
+        "prerequisites": [
+          "ex-1-2-1",
+          "ex-1-2-2"
+        ],
+        "nextExercises": [
+          "ex-1-3-2"
+        ]
+      }
+    },
+    {
+      "id": "ex-1-3-2",
+      "type": "exercise",
+      "section": "03-system-checks",
+      "title": "Should Contain - Substring Validation",
+      "difficulty": "beginner",
+      "estimatedTime": "8 minutes",
+      "order": 2,
+      "description": "Learn to validate that strings contain specific substrings\u2014essential for error messages and flexible validation.",
+      "story": {
+        "setup": "MENTOR-9: \"Not all validation needs exact matches. Often you just need to verify a message contains specific text. Should Contain is perfect for this.\"",
+        "context": "Error messages, status strings, and log outputs often have variable parts. Substring checking lets you validate the important parts while ignoring the rest.",
+        "success": "MENTOR-9: \"Perfect! The error message contains 'breach'\u2014that's what matters. Substring validation is more flexible than exact matching.\""
+      },
+      "instructions": [
+        "Create the *** Test Cases *** section",
+        "Create a test case named 'Error Message Validation'",
+        "Create ${error_msg} with value 'Hull breach detected in sector 7'",
+        "Use Should Contain to verify ${error_msg} contains 'breach'",
+        "Use Should Contain to verify ${error_msg} contains 'sector 7'",
+        "Log 'Error message validation passed'",
+        "Create ${status_report} with value 'System diagnostic: 3 warnings, 1 critical error'",
+        "Use Should Contain to verify ${status_report} contains 'critical error'",
+        "Log 'Status report validated successfully'"
+      ],
+      "hints": [
+        "Should Contain syntax: Should Contain    ${string}    ${substring}",
+        "First argument is the full string, second is the substring to find",
+        "Substring search IS case-sensitive: 'Breach' \u2260 'breach'",
+        "If substring not found, test fails",
+        "The keyword is flexible: should contain = SHOULD CONTAIN",
+        "Use this for partial matches when exact match isn't needed"
+      ],
+      "initialCode": "",
+      "solution": "*** Test Cases ***\nError Message Validation\n    ${error_msg}         Set Variable    Hull breach detected in sector 7\n    Should Contain       ${error_msg}    breach\n    Should Contain       ${error_msg}    sector 7\n    Log                  Error message validation passed\n    \n    ${status_report}     Set Variable    System diagnostic: 3 warnings, 1 critical error\n    Should Contain       ${status_report}    critical error\n    Log                  Status report validated successfully",
+      "validation": {
+        "mustContain": [
+          "*** Test Cases ***",
+          "Should Contain",
+          "${error_msg}",
+          "Log"
+        ],
+        "forbiddenKeywords": [],
+        "mustPass": true
+      },
+      "theory": {
+        "title": "Exercise 1.3.2: Should Contain - Flexible String Validation",
+        "content": "THEORY_PLACEHOLDER_2",
+        "estimatedReadTime": "5-6 minutes"
+      },
+      "metadata": {
+        "tags": [
+          "beginner",
+          "assertions",
+          "should-contain",
+          "substring",
+          "validation"
+        ],
+        "prerequisites": [
+          "ex-1-3-1"
+        ],
+        "nextExercises": [
+          "ex-1-3-3"
+        ]
+      }
+    },
+    {
+      "id": "ex-1-3-3",
+      "type": "exercise",
+      "section": "03-system-checks",
+      "title": "Should Be True/False - Boolean Validation",
+      "difficulty": "beginner",
+      "estimatedTime": "8 minutes",
+      "order": 3,
+      "description": "Learn to validate boolean conditions and logical expressions.",
+      "story": {
+        "setup": "MENTOR-9: \"Sometimes you need to evaluate conditions\u2014is the temperature safe? Are repairs complete? Boolean assertions handle this.\"",
+        "context": "Boolean validations check if conditions are True or False. Essential for conditional logic verification.",
+        "success": "MENTOR-9: \"Excellent! You verified that 5 > 3 is True. Boolean logic is the foundation of intelligent testing.\""
+      },
+      "instructions": [
+        "Create the *** Test Cases *** section",
+        "Create a test case named 'Conditional Validation'",
+        "Create ${temp} with value 45",
+        "Create ${max_temp} with value 50",
+        "Use Should Be True with expression: ${temp} < ${max_temp}",
+        "Log 'Temperature within safe limits'",
+        "Create ${repairs_done} with value ${True}",
+        "Use Should Be True to verify ${repairs_done}",
+        "Create ${system_offline} with value ${False}",
+        "Use Should Be False to verify ${system_offline}",
+        "Log 'Boolean checks passed'"
+      ],
+      "hints": [
+        "Should Be True syntax: Should Be True    ${condition} or ${expression}",
+        "Should Be False syntax: Should Be False    ${condition}",
+        "Expressions: ${x} > ${y}, ${x} < ${y}, ${x} == ${y}",
+        "${True} and ${False} are Robot Framework boolean constants",
+        "Expressions are evaluated as Python expressions",
+        "Use quotes for string comparisons: '${x}' == 'value'"
+      ],
+      "initialCode": "",
+      "solution": "*** Test Cases ***\nConditional Validation\n    ${temp}              Set Variable    45\n    ${max_temp}          Set Variable    50\n    Should Be True       ${temp} < ${max_temp}\n    Log                  Temperature within safe limits\n    \n    ${repairs_done}      Set Variable    ${True}\n    Should Be True       ${repairs_done}\n    \n    ${system_offline}    Set Variable    ${False}\n    Should Be False      ${system_offline}\n    Log                  Boolean checks passed",
+      "validation": {
+        "mustContain": [
+          "*** Test Cases ***",
+          "Should Be True",
+          "Should Be False",
+          "${True}",
+          "${False}"
+        ],
+        "forbiddenKeywords": [],
+        "mustPass": true
+      },
+      "theory": {
+        "title": "Exercise 1.3.3: Should Be True/False - Boolean Logic",
+        "content": "THEORY_PLACEHOLDER_3",
+        "estimatedReadTime": "5-6 minutes"
+      },
+      "metadata": {
+        "tags": [
+          "beginner",
+          "assertions",
+          "boolean",
+          "should-be-true",
+          "should-be-false"
+        ],
+        "prerequisites": [
+          "ex-1-3-2"
+        ],
+        "nextExercises": [
+          "ex-1-3-4"
+        ]
+      }
+    },
+    {
+      "id": "ex-1-3-4",
+      "type": "exercise",
+      "section": "03-system-checks",
+      "title": "Numeric Comparisons - Greater/Less Than",
+      "difficulty": "beginner",
+      "estimatedTime": "8 minutes",
+      "order": 4,
+      "description": "Learn to validate numeric ranges and thresholds.",
+      "story": {
+        "setup": "MENTOR-9: \"Temperature limits, response times\u2014numbers need range checks.\"",
+        "context": "Numeric assertions verify values fall within acceptable ranges.",
+        "success": "MENTOR-9: \"Perfect! Numeric assertions prevent critical failures.\""
+      },
+      "instructions": [
+        "Create *** Test Cases *** section",
+        "Create test case 'Numeric Range Validation'",
+        "Create ${temperature} = 75",
+        "Create ${max_safe_temp} = 100",
+        "Use Should Be Less Than: ${temperature} < ${max_safe_temp}",
+        "Log 'Temperature within safe range'",
+        "Create ${damage_count} = 5",
+        "Create ${min_critical} = 3",
+        "Use Should Be Greater Than: ${damage_count} > ${min_critical}",
+        "Log 'Critical threshold exceeded'"
+      ],
+      "hints": [
+        "Should Be Less Than: ${actual} ${max}",
+        "Should Be Greater Than: ${actual} ${min}"
+      ],
+      "initialCode": "",
+      "solution": "*** Test Cases ***\nNumeric Range Validation\n    ${temperature}       Set Variable    75\n    ${max_safe_temp}     Set Variable    100\n    Should Be Less Than  ${temperature}    ${max_safe_temp}\n    Log                  Temperature within safe range\n    \n    ${damage_count}      Set Variable    5\n    ${min_critical}      Set Variable    3\n    Should Be Greater Than    ${damage_count}    ${min_critical}\n    Log                  Critical threshold exceeded",
+      "validation": {
+        "mustContain": [
+          "Should Be Less Than",
+          "Should Be Greater Than"
+        ],
+        "forbiddenKeywords": [],
+        "mustPass": true
+      },
+      "theory": {
+        "title": "Exercise 1.3.4: Numeric Comparisons",
+        "content": "THEORY_PLACEHOLDER_4",
+        "estimatedReadTime": "5-6 minutes"
+      },
+      "metadata": {
+        "tags": [
+          "numeric",
+          "assertions"
+        ],
+        "prerequisites": [
+          "ex-1-3-3"
+        ],
+        "nextExercises": [
+          "ex-1-3-5"
+        ]
+      }
+    },
+    {
+      "id": "ex-1-3-5",
+      "type": "exercise",
+      "section": "03-system-checks",
+      "title": "Length Validations - Collection Size",
+      "difficulty": "beginner",
+      "estimatedTime": "8 minutes",
+      "order": 5,
+      "description": "Validate the size of strings, lists, and collections.",
+      "story": {
+        "setup": "MENTOR-9: \"How many damaged systems? Length validations verify sizes.\"",
+        "context": "Length checks validate data completeness.",
+        "success": "MENTOR-9: \"Excellent! 5 systems confirmed, error code correct length.\""
+      },
+      "instructions": [
+        "Create *** Test Cases *** section",
+        "Create test case 'Length Validation'",
+        "Create @{damaged_systems} with 5 items",
+        "Use Length Should Be: length 5",
+        "Create ${error_code} = 'ERR-2157-03-15-HULL'",
+        "Use Length Should Be: length 19",
+        "Create empty list @{empty_repairs}",
+        "Use Should Be Empty",
+        "Log 'No repairs completed'"
+      ],
+      "hints": [
+        "Length Should Be: ${item} ${expected_length}",
+        "Should Be Empty for zero items"
+      ],
+      "initialCode": "",
+      "solution": "*** Test Cases ***\nLength Validation\n    @{damaged_systems}    Create List    Navigation    Power    Life Support    Communications    Sensors\n    Length Should Be      ${damaged_systems}    5\n    Log                   Damage count verified\n    \n    ${error_code}         Set Variable    ERR-2157-03-15-HULL\n    Length Should Be      ${error_code}    19\n    \n    @{empty_repairs}      Create List\n    Should Be Empty       ${empty_repairs}\n    Log                   No repairs completed",
+      "validation": {
+        "mustContain": [
+          "Length Should Be",
+          "Should Be Empty"
+        ],
+        "forbiddenKeywords": [],
+        "mustPass": true
+      },
+      "theory": {
+        "title": "Exercise 1.3.5: Length Validations",
+        "content": "THEORY_PLACEHOLDER_5",
+        "estimatedReadTime": "5 minutes"
+      },
+      "metadata": {
+        "tags": [
+          "length",
+          "assertions"
+        ],
+        "prerequisites": [
+          "ex-1-3-4"
+        ],
+        "nextExercises": [
+          "ex-1-3-6"
+        ]
+      }
+    },
+    {
+      "id": "ex-1-3-6",
+      "type": "exercise",
+      "section": "03-system-checks",
+      "title": "Assertion Flexibility - Keyword Variations",
+      "difficulty": "beginner",
+      "estimatedTime": "8 minutes",
+      "order": 6,
+      "description": "Understand assertion keywords are case-insensitive and spacing-flexible.",
+      "story": {
+        "setup": "MENTOR-9: \"Assertions follow the same flexibility rules as all keywords.\"",
+        "context": "Case-insensitive, spacing-flexible\u2014just like everything else.",
+        "success": "MENTOR-9: \"See? All assertion styles work identically.\""
+      },
+      "instructions": [
+        "Create test case 'Assertion Flexibility'",
+        "Create ${value} = 'test'",
+        "Use 'Should Be Equal' (standard)",
+        "Use 'should be equal' (lowercase)",
+        "Use 'SHOULD BE EQUAL' (uppercase)",
+        "Log 'All variations work!'"
+      ],
+      "hints": [
+        "Case-insensitive: Should Be Equal = should be equal",
+        "Spacing flexible"
+      ],
+      "initialCode": "",
+      "solution": "*** Test Cases ***\nAssertion Flexibility\n    ${value}         Set Variable    test\n    Should Be Equal  ${value}    test\n    should be equal  ${value}    test\n    SHOULD BE EQUAL  ${value}    test\n    Log              All variations work!",
+      "validation": {
+        "mustContain": [
+          "should be equal",
+          "SHOULD BE EQUAL"
+        ],
+        "forbiddenKeywords": [],
+        "mustPass": true
+      },
+      "theory": {
+        "title": "Exercise 1.3.6: Assertion Flexibility",
+        "content": "THEORY_PLACEHOLDER_6",
+        "estimatedReadTime": "4 minutes"
+      },
+      "metadata": {
+        "tags": [
+          "flexibility",
+          "assertions"
+        ],
+        "prerequisites": [
+          "ex-1-3-5"
+        ],
+        "nextExercises": [
+          "ex-1-3-7"
+        ]
+      }
+    },
+    {
+      "id": "ex-1-3-7",
+      "type": "exercise",
+      "section": "03-system-checks",
+      "title": "Collection Assertions - List and Dictionary",
+      "difficulty": "beginner",
+      "estimatedTime": "10 minutes",
+      "order": 7,
+      "description": "Validate collections with specialized assertion keywords.",
+      "story": {
+        "setup": "MENTOR-9: \"Collections need special assertions. Does our list contain 'Navigation'?\"",
+        "context": "Collection-specific assertions verify membership and keys.",
+        "success": "MENTOR-9: \"Perfect! Navigation found, Power key exists.\""
+      },
+      "instructions": [
+        "Create test case 'Collection Validation'",
+        "Create @{systems} list with 3 items",
+        "Use List Should Contain Value: verify 'Navigation' exists",
+        "Use List Should Contain Value: verify 'Power' exists",
+        "Create &{status} dictionary",
+        "Use Dictionary Should Contain Key: verify 'Navigation'",
+        "Use Dictionary Should Contain Key: verify 'Power'",
+        "Log 'Collection validated'"
+      ],
+      "hints": [
+        "List Should Contain Value: ${list} ${value}",
+        "Dictionary Should Contain Key: ${dict} ${key}"
+      ],
+      "initialCode": "",
+      "solution": "*** Test Cases ***\nCollection Validation\n    @{systems}                       Create List    Navigation    Power    Life Support\n    List Should Contain Value        ${systems}    Navigation\n    List Should Contain Value        ${systems}    Power\n    Log                              Systems found\n    \n    &{status}                        Create Dictionary    Navigation=OFFLINE    Power=CRITICAL\n    Dictionary Should Contain Key    ${status}    Navigation\n    Dictionary Should Contain Key    ${status}    Power\n    Log                              Dictionary validated",
+      "validation": {
+        "mustContain": [
+          "List Should Contain Value",
+          "Dictionary Should Contain Key"
+        ],
+        "forbiddenKeywords": [],
+        "mustPass": true
+      },
+      "theory": {
+        "title": "Exercise 1.3.7: Collection Assertions",
+        "content": "THEORY_PLACEHOLDER_7",
+        "estimatedReadTime": "6 minutes"
+      },
+      "metadata": {
+        "tags": [
+          "collections",
+          "assertions"
+        ],
+        "prerequisites": [
+          "ex-1-3-6"
+        ],
+        "nextExercises": [
+          "challenge-1-3"
+        ]
+      }
+    }
+  ]
+}

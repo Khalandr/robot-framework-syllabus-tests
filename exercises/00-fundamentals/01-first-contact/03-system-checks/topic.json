@@ -1,0 +1,13 @@
+{
+  "id": "03-system-checks",
+  "title": "System Checks",
+  "description": "Learn Robot Framework's assertion keywords to validate data—the foundation of test automation.",
+  "order": 3,
+  "exerciseFiles": [
+    "exercises.json",
+    "challenge.json"
+  ],
+  "totalExercises": 7,
+  "totalChallenges": 1,
+  "estimatedTime": "90 minutes"
+}

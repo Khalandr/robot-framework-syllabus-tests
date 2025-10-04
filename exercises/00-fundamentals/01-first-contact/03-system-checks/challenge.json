@@ -1,0 +1,140 @@
+{
+  "id": "challenge-1-3",
+  "type": "challenge",
+  "section": "03-system-checks",
+  "title": "MINI-CHALLENGE: Complete Ship Validation Suite",
+  "difficulty": "beginner",
+  "estimatedTime": "20 minutes",
+  "order": 8,
+  "story": {
+    "setup": "MENTOR-9: \"Time to prove your validation mastery. Create a comprehensive diagnostic that checks EVERYTHING—status, errors, thresholds, collections. Leave no system unverified.\"",
+    "requirements": "Build a complete validation suite using all assertion types: equality, contains, boolean, numeric, length, and collection checks. This mirrors real-world test scenarios.",
+    "success": "MENTOR-9: \"Outstanding! That's a production-grade validation suite. Chapter 1 complete—you can communicate, store data, and validate it. The ship's basic diagnostics are online. Now we organize complex test suites.\""
+  },
+  "description": "Create a comprehensive validation suite that integrates ALL Section 1.3 assertion concepts.",
+  "requirements": [
+    "Use all 6+ assertion types learned in Section 1.3",
+    "Validate scalars with Should Be Equal",
+    "Validate substrings with Should Contain",
+    "Validate boolean conditions with Should Be True/False",
+    "Validate numeric ranges with Should Be Greater/Less Than",
+    "Validate collection sizes with Length Should Be",
+    "Validate collection contents with List/Dictionary assertions",
+    "Demonstrate assertion keyword flexibility (lowercase or uppercase variation)",
+    "All assertions must pass for challenge to succeed"
+  ],
+  "constraints": [
+    "Minimum 8 different assertions",
+    "At least 6 different assertion keyword types",
+    "Must validate at least one list and one dictionary",
+    "Must include at least one numeric comparison",
+    "Must include at least one boolean check",
+    "At least one assertion keyword must use non-standard case (lowercase/uppercase)",
+    "All variables must follow naming conventions"
+  ],
+  "instructions": [
+    "Create *** Variables *** section with constants: ${SHIP_NAME} = 'Starlight Explorer', ${MAX_TEMP} = 100, ${MIN_POWER} = 50",
+    "Create *** Test Cases *** section with test named 'Complete Ship Validation'",
+    "Validate ship name: Create ${ship_name} and verify it equals ${SHIP_NAME}",
+    "Validate error message: Create ${error} = 'Critical hull breach in sector 7' and verify it contains 'breach'",
+    "Validate status report: Create ${report} = 'Diagnostic: 3 warnings, 1 critical error' and verify it contains 'critical'",
+    "Validate temperature: Create ${temp} = 75 and verify it's less than ${MAX_TEMP}",
+    "Validate power: Create ${power} = 60 and verify it's greater than ${MIN_POWER}",
+    "Validate boolean: Create ${repairs_done} = ${True} and verify it's True",
+    "Validate list: Create @{systems} with 5 items, verify length is 5, verify it contains 'Navigation'",
+    "Validate dictionary: Create &{status} with 3 pairs, verify it has key 'Power', verify it has key 'Navigation'",
+    "Demonstrate flexibility: Use at least one assertion in lowercase (e.g., 'should be equal') or uppercase",
+    "Log final success message"
+  ],
+  "hints": [
+    "*** Variables *** section must come before *** Test Cases ***",
+    "Use constants from *** Variables *** in your test",
+    "Should Be Equal: ${actual}    ${expected}",
+    "Should Contain: ${string}    ${substring}",
+    "Should Be True: ${condition}",
+    "Should Be Less/Greater Than: ${actual}    ${threshold}",
+    "Length Should Be: ${collection}    ${expected_length}",
+    "List Should Contain Value: ${list}    ${value}",
+    "Dictionary Should Contain Key: ${dict}    ${key}",
+    "Remember: assertion keywords are case-insensitive",
+    "Don't forget to use ${list} notation with Length Should Be, not @{list}",
+    "Create Dictionary uses key=value syntax",
+    "All assertions must pass for the challenge to succeed"
+  ],
+  "initialCode": "",
+  "solution": "*** Variables ***\n${SHIP_NAME}     Starlight Explorer\n${MAX_TEMP}      100\n${MIN_POWER}     50\n\n*** Test Cases ***\nComplete Ship Validation\n    # Equality checks\n    ${ship_name}           Set Variable    Starlight Explorer\n    Should Be Equal        ${ship_name}    ${SHIP_NAME}\n    \n    # Substring checks\n    ${error}               Set Variable    Critical hull breach in sector 7\n    Should Contain         ${error}    breach\n    \n    ${report}              Set Variable    Diagnostic: 3 warnings, 1 critical error\n    SHOULD CONTAIN         ${report}    critical\n    \n    # Numeric comparisons\n    ${temp}                Set Variable    75\n    Should Be Less Than    ${temp}    ${MAX_TEMP}\n    \n    ${power}               Set Variable    60\n    Should Be Greater Than    ${power}    ${MIN_POWER}\n    \n    # Boolean check\n    ${repairs_done}        Set Variable    ${True}\n    Should Be True         ${repairs_done}\n    \n    # List validation\n    @{systems}             Create List    Navigation    Power    Life Support    Communications    Sensors\n    Length Should Be       ${systems}    5\n    List Should Contain Value    ${systems}    Navigation\n    \n    # Dictionary validation\n    &{status}              Create Dictionary    Navigation=OFFLINE    Power=CRITICAL    Life_Support=OPERATIONAL\n    Dictionary Should Contain Key    ${status}    Power\n    Dictionary Should Contain Key    ${status}    Navigation\n    \n    Log                    Complete validation suite passed!",
+  "validation": {
+    "mustContain": [
+      "*** Variables ***",
+      "*** Test Cases ***",
+      "${SHIP_NAME}",
+      "${MAX_TEMP}",
+      "${MIN_POWER}",
+      "Should Be Equal",
+      "Should Contain",
+      "Should Be True",
+      "Should Be Less Than",
+      "Should Be Greater Than",
+      "Length Should Be",
+      "List Should Contain Value",
+      "Dictionary Should Contain Key"
+    ],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Section 1.3 Mini-Challenge: Comprehensive Validation Mastery",
+    "content": "THEORY_CHALLENGE_PLACEHOLDER",
+    "estimatedReadTime": "7-8 minutes"
+  },
+  "successCriteria": [
+    "*** Variables *** section with at least 3 constants",
+    "*** Test Cases *** section with comprehensive test",
+    "Equality assertion (Should Be Equal)",
+    "Substring assertion (Should Contain)",
+    "Boolean assertion (Should Be True or Should Be False)",
+    "Numeric comparison (Should Be Greater/Less Than)",
+    "Length validation (Length Should Be)",
+    "List validation (List Should Contain Value)",
+    "Dictionary validation (Dictionary Should Contain Key)",
+    "At least one assertion using non-standard case",
+    "All assertions pass",
+    "Final success log message",
+    "Proper variable naming conventions"
+  ],
+  "metadata": {
+    "tags": [
+      "challenge",
+      "section-1-3",
+      "integration",
+      "assertions",
+      "validation",
+      "comprehensive"
+    ],
+    "prerequisites": [
+      "ex-1-3-1",
+      "ex-1-3-2",
+      "ex-1-3-3",
+      "ex-1-3-4",
+      "ex-1-3-5",
+      "ex-1-3-6",
+      "ex-1-3-7"
+    ],
+    "nextExercises": [
+      "ex-2-1-1"
+    ],
+    "conceptsIntegrated": [
+      "Should Be Equal - exact value comparison",
+      "Should Contain - substring validation",
+      "Should Be True/False - boolean logic",
+      "Should Be Greater/Less Than - numeric ranges",
+      "Length Should Be - collection sizes",
+      "Should Be Empty - empty collection check",
+      "List Should Contain Value - list membership",
+      "Dictionary Should Contain Key - dictionary key validation",
+      "Assertion keyword flexibility",
+      "*** Variables *** section usage",
+      "Complete validation patterns"
+    ]
+  }
+}
