@@ -40,18 +40,33 @@
   "initialCode": "",
   "solution": "*** Settings ***\nLibrary    DateTime\n\n*** Test Cases ***\nSchedule Reactor Cooldown\n    ${start_time}=    Get Current Date    result_format=%Y-%m-%d %H:%M:%S\n    Log    Cooldown started: ${start_time}\n    ${completion_time}=    Add Time To Date    ${start_time}    2 hours\n    Log    Cooldown completes: ${completion_time}\n    Should Not Be Equal    ${start_time}    ${completion_time}\n\nSchedule Next Diagnostic\n    ${now}=    Get Current Date    result_format=%Y-%m-%d %H:%M:%S\n    ${next_check}=    Add Time To Date    ${now}    30 minutes\n    Log    Next diagnostic: ${next_check}\n    ${next_day}=    Add Time To Date    ${now}    1 day\n    Log    Tomorrow same time: ${next_day}\n    Should Contain    ${next_day}    -",
   "validation": {
-    "mustContain": ["*** Settings ***", "Library", "DateTime", "Get Current Date", "Add Time To Date"],
+    "mustContain": [
+      "*** Settings ***",
+      "Library",
+      "DateTime",
+      "Get Current Date",
+      "Add Time To Date"
+    ],
     "forbiddenKeywords": [],
     "mustPass": true
   },
   "theory": {
     "title": "Exercise 4.3.2: Add Time To Date",
-    "content": "<div class=\"story-intro\"><p>MENTOR-9: \"Operations take time. Cooldowns, warmups, delays. Add Time To Date calculates when future events will occur based on current time plus duration.\"</p></div><div class=\"concept-explain\"><h3>Add Time To Date</h3><p>Calculate future timestamps:</p><pre><code>Library    DateTime\n\n${now}=    Get Current Date    result_format=%Y-%m-%d %H:%M:%S\n\n${in_2_hours}=    Add Time To Date    ${now}    2 hours\n# Current + 2 hours\n\n${tomorrow}=    Add Time To Date    ${now}    1 day\n# Current + 24 hours\n\n${complex}=    Add Time To Date    ${now}    1 hour 30 minutes 45 seconds\n# Multiple units</code></pre><p><strong>Time Units:</strong></p><ul><li><strong>seconds</strong> or <strong>s</strong></li><li><strong>minutes</strong> or <strong>min</strong></li><li><strong>hours</strong> or <strong>h</strong></li><li><strong>days</strong> or <strong>d</strong></li><li><strong>weeks</strong> or <strong>w</strong></li></ul></div><div class=\"code-demo\"><h4>Example: Timeout Calculation</h4><pre><code>*** Settings ***\nLibrary    DateTime\n\n*** Test Cases ***\nCalculate Timeout\n    ${start}=    Get Current Date\n    ${timeout}=    Add Time To Date    ${start}    5 minutes\n    Log    Operation must complete by: ${timeout}\n    \n    # ... operation ...\n    \n    ${end}=    Get Current Date\n    ${exceeded}=    Subtract Date From Date    ${end}    ${timeout}\n    IF    ${exceeded} > 0\n        Fail    Operation exceeded timeout!\n    END</code></pre></div><div class=\"rules-box\"><h4>⚠️ Add Time To Date Tips</h4><ul><li>Returns new date (doesn't modify original)</li><li>Can combine multiple units</li><li>Works with any date format</li><li>Use for: scheduling, timeouts, deadlines</li><li>Negative values allowed: Add Time To Date    ${now}    -1 hour (goes backward)</li></ul></div>",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/13-datetime-library/ex-00-13-02-add-time-to-date.png\" alt=\"Exercise visualization\" />\n</div>\n\n<div class=\"story-intro\"><p>MENTOR-9: \"Operations take time. Cooldowns, warmups, delays. Add Time To Date calculates when future events will occur based on current time plus duration.\"</p></div><div class=\"concept-explain\"><h3>Add Time To Date</h3><p>Calculate future timestamps:</p><pre><code>Library    DateTime\n\n${now}=    Get Current Date    result_format=%Y-%m-%d %H:%M:%S\n\n${in_2_hours}=    Add Time To Date    ${now}    2 hours\n# Current + 2 hours\n\n${tomorrow}=    Add Time To Date    ${now}    1 day\n# Current + 24 hours\n\n${complex}=    Add Time To Date    ${now}    1 hour 30 minutes 45 seconds\n# Multiple units</code></pre><p><strong>Time Units:</strong></p><ul><li><strong>seconds</strong> or <strong>s</strong></li><li><strong>minutes</strong> or <strong>min</strong></li><li><strong>hours</strong> or <strong>h</strong></li><li><strong>days</strong> or <strong>d</strong></li><li><strong>weeks</strong> or <strong>w</strong></li></ul></div><div class=\"code-demo\"><h4>Example: Timeout Calculation</h4><pre><code>*** Settings ***\nLibrary    DateTime\n\n*** Test Cases ***\nCalculate Timeout\n    ${start}=    Get Current Date\n    ${timeout}=    Add Time To Date    ${start}    5 minutes\n    Log    Operation must complete by: ${timeout}\n    \n    # ... operation ...\n    \n    ${end}=    Get Current Date\n    ${exceeded}=    Subtract Date From Date    ${end}    ${timeout}\n    IF    ${exceeded} > 0\n        Fail    Operation exceeded timeout!\n    END</code></pre></div><div class=\"rules-box\"><h4>⚠️ Add Time To Date Tips</h4><ul><li>Returns new date (doesn't modify original)</li><li>Can combine multiple units</li><li>Works with any date format</li><li>Use for: scheduling, timeouts, deadlines</li><li>Negative values allowed: Add Time To Date    ${now}    -1 hour (goes backward)</li></ul></div>",
     "estimatedReadTime": "6-7 minutes"
   },
   "metadata": {
-    "tags": ["datetime", "add-time", "scheduling", "future-calculation"],
-    "prerequisites": ["ex-00-13-01"],
-    "nextExercises": ["ex-00-13-03"]
+    "tags": [
+      "datetime",
+      "add-time",
+      "scheduling",
+      "future-calculation"
+    ],
+    "prerequisites": [
+      "ex-00-13-01"
+    ],
+    "nextExercises": [
+      "ex-00-13-03"
+    ]
   }
 }

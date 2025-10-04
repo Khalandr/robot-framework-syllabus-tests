@@ -45,18 +45,34 @@
   "initialCode": "",
   "solution": "*** Test Cases ***\nSensor Data Processing\n    ${sensor_value}=    Set Variable    invalid_data\n    TRY\n        Log    Processing sensor data: ${sensor_value}\n        ${result}=    Evaluate    int('${sensor_value}')\n        Log    Converted to: ${result}\n    EXCEPT    ValueError    AS    ${err}\n        Log    ValueError caught: ${err}\n        Log    Using default value instead\n        ${result}=    Set Variable    0\n    EXCEPT    AS    ${err}\n        Log    Other error: ${err}\n        Fail    Unexpected error type\n    END\n    Log    Processing result: ${result}",
   "validation": {
-    "mustContain": ["*** Test Cases ***", "TRY", "EXCEPT", "ValueError", "END", "Evaluate"],
+    "mustContain": [
+      "*** Test Cases ***",
+      "TRY",
+      "EXCEPT",
+      "ValueError",
+      "END",
+      "Evaluate"
+    ],
     "forbiddenKeywords": [],
     "mustPass": true
   },
   "theory": {
     "title": "Exercise 3.2.5: Specific Exception Types",
-    "content": "<div class=\"story-intro\"><p>MENTOR-9: \"A timeout is not the same as bad data. A connection failure is not the same as a permission error. Different errors need different responses. That's why we can catch specific exception types.\"</p></div><div class=\"concept-explain\"><h3>Multiple EXCEPT Blocks</h3><p>Use <strong>specific exception types</strong> to handle different errors differently:</p><pre><code>TRY\n    Risky Operation\nEXCEPT    ValueError    AS    ${err}\n    # Handle ValueError specifically\n    Log    Bad value: ${err}\nEXCEPT    TypeError    AS    ${err}\n    # Handle TypeError specifically\n    Log    Wrong type: ${err}\nEXCEPT    AS    ${err}\n    # Catch all other errors\n    Log    Other error: ${err}\nEND</code></pre><p><strong>Common Error Types:</strong></p><ul><li><strong>ValueError</strong>: Invalid value (e.g., int('abc'))</li><li><strong>TypeError</strong>: Wrong data type</li><li><strong>AssertionError</strong>: Failed assertion</li><li><strong>*</strong> (or no type): Catches all errors</li></ul></div><div class=\"code-demo\"><h4>Example: Retry Logic for Timeouts</h4><pre><code>${attempts}=    Set Variable    0\nWHILE    ${attempts} < 3\n    TRY\n        Log    Attempt ${attempts + 1}: Connecting...\n        Fail    Connection timeout  # Simulates timeout\n    EXCEPT    *timeout*    AS    ${err}\n        Log    Timeout detected, retrying...\n        ${attempts}=    Set Variable    ${attempts + 1}\n    EXCEPT    AS    ${err}\n        Log    Non-timeout error, aborting: ${err}\n        BREAK\n    END\nEND</code></pre><p><strong>Result:</strong> Retries on timeout, aborts on other errors.</p></div><div class=\"rules-box\"><h4>⚠️ Multiple EXCEPT Tips</h4><ul><li>More specific EXCEPT blocks should come first</li><li>General EXCEPT (without type) catches all remaining errors</li><li>Can use glob patterns: EXCEPT    *timeout*</li><li>EXCEPT without type acts as catch-all</li><li>Only ONE EXCEPT block executes (first match)</li><li>Use for retry logic, fallback values, error-specific logging</li></ul></div>",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/09-try-except/ex-00-09-05-exception-types.png\" alt=\"Exercise visualization\" />\n</div>\n\n<div class=\"story-intro\"><p>MENTOR-9: \"A timeout is not the same as bad data. A connection failure is not the same as a permission error. Different errors need different responses. That's why we can catch specific exception types.\"</p></div><div class=\"concept-explain\"><h3>Multiple EXCEPT Blocks</h3><p>Use <strong>specific exception types</strong> to handle different errors differently:</p><pre><code>TRY\n    Risky Operation\nEXCEPT    ValueError    AS    ${err}\n    # Handle ValueError specifically\n    Log    Bad value: ${err}\nEXCEPT    TypeError    AS    ${err}\n    # Handle TypeError specifically\n    Log    Wrong type: ${err}\nEXCEPT    AS    ${err}\n    # Catch all other errors\n    Log    Other error: ${err}\nEND</code></pre><p><strong>Common Error Types:</strong></p><ul><li><strong>ValueError</strong>: Invalid value (e.g., int('abc'))</li><li><strong>TypeError</strong>: Wrong data type</li><li><strong>AssertionError</strong>: Failed assertion</li><li><strong>*</strong> (or no type): Catches all errors</li></ul></div><div class=\"code-demo\"><h4>Example: Retry Logic for Timeouts</h4><pre><code>${attempts}=    Set Variable    0\nWHILE    ${attempts} < 3\n    TRY\n        Log    Attempt ${attempts + 1}: Connecting...\n        Fail    Connection timeout  # Simulates timeout\n    EXCEPT    *timeout*    AS    ${err}\n        Log    Timeout detected, retrying...\n        ${attempts}=    Set Variable    ${attempts + 1}\n    EXCEPT    AS    ${err}\n        Log    Non-timeout error, aborting: ${err}\n        BREAK\n    END\nEND</code></pre><p><strong>Result:</strong> Retries on timeout, aborts on other errors.</p></div><div class=\"rules-box\"><h4>⚠️ Multiple EXCEPT Tips</h4><ul><li>More specific EXCEPT blocks should come first</li><li>General EXCEPT (without type) catches all remaining errors</li><li>Can use glob patterns: EXCEPT    *timeout*</li><li>EXCEPT without type acts as catch-all</li><li>Only ONE EXCEPT block executes (first match)</li><li>Use for retry logic, fallback values, error-specific logging</li></ul></div>",
     "estimatedReadTime": "7-8 minutes"
   },
   "metadata": {
-    "tags": ["try-except", "exception-types", "multiple-except", "error-filtering"],
-    "prerequisites": ["ex-00-09-04"],
-    "nextExercises": ["ch-00-09"]
+    "tags": [
+      "try-except",
+      "exception-types",
+      "multiple-except",
+      "error-filtering"
+    ],
+    "prerequisites": [
+      "ex-00-09-04"
+    ],
+    "nextExercises": [
+      "ch-00-09"
+    ]
   }
 }

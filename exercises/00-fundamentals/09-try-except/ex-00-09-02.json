@@ -36,18 +36,34 @@
   "initialCode": "",
   "solution": "*** Test Cases ***\nPower System Error Capture\n    TRY\n        Log    Checking power systems...\n        Fail    Power surge detected\n    EXCEPT    AS    ${error}\n        Log    Error occurred: ${error}\n        Log    Activating backup power\n    END\n    Log    Power diagnostic complete",
   "validation": {
-    "mustContain": ["*** Test Cases ***", "TRY", "EXCEPT", "AS", "END", "${error}"],
+    "mustContain": [
+      "*** Test Cases ***",
+      "TRY",
+      "EXCEPT",
+      "AS",
+      "END",
+      "${error}"
+    ],
     "forbiddenKeywords": [],
     "mustPass": true
   },
   "theory": {
     "title": "Exercise 3.2.2: Capturing Error Messages",
-    "content": "<div class=\"story-intro\"><p>MENTOR-9: \"Knowing THAT an error occurred isn't enough. We need to know WHAT the error was. That's where 'AS' comes in.\"</p></div><div class=\"concept-explain\"><h3>EXCEPT AS - Capturing Error Details</h3><p>Use <strong>AS</strong> to capture the error message in a variable:</p><pre><code>TRY\n    Risky Operation\nEXCEPT    AS    ${error}\n    Log    The error was: ${error}\nEND</code></pre><p><strong>What Gets Captured:</strong></p><ul><li>The error message text (e.g., from Fail keyword)</li><li>The error type (if different exceptions)</li><li>Full error details for logging/debugging</li></ul></div><div class=\"code-demo\"><h4>Example: Logging Error Details</h4><pre><code>TRY\n    Log    Connecting to navigation system...\n    Fail    Connection refused: port 5000 unreachable\nEXCEPT    AS    ${error_msg}\n    Log    Navigation error: ${error_msg}\n    Log    Retrying with backup connection...\nEND</code></pre><p><strong>Output:</strong></p><pre>Connecting to navigation system...\nNavigation error: Connection refused: port 5000 unreachable\nRetrying with backup connection...</pre></div><div class=\"rules-box\"><h4>⚠️ EXCEPT AS Tips</h4><ul><li>Variable can be any valid name: ${error}, ${err}, ${exception}</li><li>Error message includes text from Fail or other failures</li><li>Variable only exists within EXCEPT block scope</li><li>Useful for conditional logic based on error content</li><li>Great for debugging and diagnostic logging</li></ul></div>",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/09-try-except/ex-00-09-02-error-message-capture.png\" alt=\"Exercise visualization\" />\n</div>\n\n<div class=\"story-intro\"><p>MENTOR-9: \"Knowing THAT an error occurred isn't enough. We need to know WHAT the error was. That's where 'AS' comes in.\"</p></div><div class=\"concept-explain\"><h3>EXCEPT AS - Capturing Error Details</h3><p>Use <strong>AS</strong> to capture the error message in a variable:</p><pre><code>TRY\n    Risky Operation\nEXCEPT    AS    ${error}\n    Log    The error was: ${error}\nEND</code></pre><p><strong>What Gets Captured:</strong></p><ul><li>The error message text (e.g., from Fail keyword)</li><li>The error type (if different exceptions)</li><li>Full error details for logging/debugging</li></ul></div><div class=\"code-demo\"><h4>Example: Logging Error Details</h4><pre><code>TRY\n    Log    Connecting to navigation system...\n    Fail    Connection refused: port 5000 unreachable\nEXCEPT    AS    ${error_msg}\n    Log    Navigation error: ${error_msg}\n    Log    Retrying with backup connection...\nEND</code></pre><p><strong>Output:</strong></p><pre>Connecting to navigation system...\nNavigation error: Connection refused: port 5000 unreachable\nRetrying with backup connection...</pre></div><div class=\"rules-box\"><h4>⚠️ EXCEPT AS Tips</h4><ul><li>Variable can be any valid name: ${error}, ${err}, ${exception}</li><li>Error message includes text from Fail or other failures</li><li>Variable only exists within EXCEPT block scope</li><li>Useful for conditional logic based on error content</li><li>Great for debugging and diagnostic logging</li></ul></div>",
     "estimatedReadTime": "5-6 minutes"
   },
   "metadata": {
-    "tags": ["try-except", "error-messages", "as-keyword", "error-capture"],
-    "prerequisites": ["ex-00-09-01"],
-    "nextExercises": ["ex-00-09-03"]
+    "tags": [
+      "try-except",
+      "error-messages",
+      "as-keyword",
+      "error-capture"
+    ],
+    "prerequisites": [
+      "ex-00-09-01"
+    ],
+    "nextExercises": [
+      "ex-00-09-03"
+    ]
   }
 }

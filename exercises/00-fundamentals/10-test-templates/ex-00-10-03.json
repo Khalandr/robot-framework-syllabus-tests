@@ -40,18 +40,34 @@
   "initialCode": "",
   "solution": "*** Settings ***\nTest Template    Should Be Equal\n\n*** Test Cases ***\nNavigation Check\n    Navigation    Operational\n    Navigation    Operational\n    Navigation    Operational\n\nPower Check\n    Power    Online\n    Power    Online\n    Power    Online",
   "validation": {
-    "mustContain": ["*** Settings ***", "Test Template", "*** Test Cases ***", "Should Be Equal"],
-    "forbiddenKeywords": ["[Template]"],
+    "mustContain": [
+      "*** Settings ***",
+      "Test Template",
+      "*** Test Cases ***",
+      "Should Be Equal"
+    ],
+    "forbiddenKeywords": [
+      "[Template]"
+    ],
     "mustPass": true
   },
   "theory": {
     "title": "Exercise 2.3.3: Suite-Level Test Template",
-    "content": "<div class=\"story-intro\"><p>MENTOR-9: \"Sometimes an entire test file is dedicated to one type of validation—API response codes, database queries, calculation results. In those cases, use Test Template in Settings to avoid repeating [Template] in every test case.\"</p></div><div class=\"concept-explain\"><h3>Test Template in Settings</h3><p><strong>Test Template</strong> in *** Settings *** applies to ALL test cases:</p><pre><code>*** Settings ***\nTest Template    Validate Response\n\n*** Test Cases ***\nTest Case 1\n    endpoint1    200\n    endpoint2    200\n\nTest Case 2\n    endpoint3    404\n    endpoint4    500</code></pre><p><strong>Difference from [Template]:</strong></p><ul><li><strong>Test Template</strong> (Settings): Applies to ALL tests in file</li><li><strong>[Template]</strong> (Test level): Applies to ONE test only</li><li>No need to repeat [Template] in each test</li><li>Entire file becomes data-driven</li></ul></div><div class=\"code-demo\"><h4>Example: Calculation Validation Suite</h4><pre><code>*** Settings ***\nTest Template    Should Be Equal\n\n*** Test Cases ***\nAddition Tests\n    ${2 + 2}    ${4}\n    ${10 + 5}   ${15}\n    ${100 + 1}  ${101}\n\nMultiplication Tests\n    ${2 * 3}    ${6}\n    ${5 * 5}    ${25}\n    ${10 * 0}   ${0}\n\nSubtraction Tests\n    ${10 - 5}   ${5}\n    ${20 - 15}  ${5}</code></pre><p>Three test cases, all using Should Be Equal from Test Template. No [Template] tags needed.</p></div><div class=\"rules-box\"><h4>⚠️ Test Template Best Practices</h4><ul><li>Use when ALL tests in file use same template</li><li>Individual tests can override with [Template]    NONE</li><li>Great for: validation suites, regression tests, batch checks</li><li>Keeps test file focused on data, not structure</li><li>Can still mix templated and non-templated tests (use NONE)</li><li>More maintainable for large data-driven test files</li></ul></div>",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/10-test-templates/ex-00-10-03-suite-template.png\" alt=\"Exercise visualization\" />\n</div>\n\n<div class=\"story-intro\"><p>MENTOR-9: \"Sometimes an entire test file is dedicated to one type of validation—API response codes, database queries, calculation results. In those cases, use Test Template in Settings to avoid repeating [Template] in every test case.\"</p></div><div class=\"concept-explain\"><h3>Test Template in Settings</h3><p><strong>Test Template</strong> in *** Settings *** applies to ALL test cases:</p><pre><code>*** Settings ***\nTest Template    Validate Response\n\n*** Test Cases ***\nTest Case 1\n    endpoint1    200\n    endpoint2    200\n\nTest Case 2\n    endpoint3    404\n    endpoint4    500</code></pre><p><strong>Difference from [Template]:</strong></p><ul><li><strong>Test Template</strong> (Settings): Applies to ALL tests in file</li><li><strong>[Template]</strong> (Test level): Applies to ONE test only</li><li>No need to repeat [Template] in each test</li><li>Entire file becomes data-driven</li></ul></div><div class=\"code-demo\"><h4>Example: Calculation Validation Suite</h4><pre><code>*** Settings ***\nTest Template    Should Be Equal\n\n*** Test Cases ***\nAddition Tests\n    ${2 + 2}    ${4}\n    ${10 + 5}   ${15}\n    ${100 + 1}  ${101}\n\nMultiplication Tests\n    ${2 * 3}    ${6}\n    ${5 * 5}    ${25}\n    ${10 * 0}   ${0}\n\nSubtraction Tests\n    ${10 - 5}   ${5}\n    ${20 - 15}  ${5}</code></pre><p>Three test cases, all using Should Be Equal from Test Template. No [Template] tags needed.</p></div><div class=\"rules-box\"><h4>⚠️ Test Template Best Practices</h4><ul><li>Use when ALL tests in file use same template</li><li>Individual tests can override with [Template]    NONE</li><li>Great for: validation suites, regression tests, batch checks</li><li>Keeps test file focused on data, not structure</li><li>Can still mix templated and non-templated tests (use NONE)</li><li>More maintainable for large data-driven test files</li></ul></div>",
     "estimatedReadTime": "6-7 minutes"
   },
   "metadata": {
-    "tags": ["templates", "test-template", "settings-section", "suite-level"],
-    "prerequisites": ["ex-00-10-02"],
-    "nextExercises": ["ex-00-10-04"]
+    "tags": [
+      "templates",
+      "test-template",
+      "settings-section",
+      "suite-level"
+    ],
+    "prerequisites": [
+      "ex-00-10-02"
+    ],
+    "nextExercises": [
+      "ex-00-10-04"
+    ]
   }
 }

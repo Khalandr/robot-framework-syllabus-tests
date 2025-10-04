@@ -41,18 +41,34 @@
   "initialCode": "",
   "solution": "*** Keywords ***\nCheck System Status\n    [Arguments]    ${system}    ${expected_status}\n    Log    Checking ${system}...\n    Should Be Equal    ${expected_status}    OK\n    Log    ${system} is operational\n\n*** Test Cases ***\nSystem Status Validation\n    [Template]    Check System Status\n    Navigation        OK\n    Power            OK\n    Life Support     OK\n    Communications   OK\n    Engines          OK",
   "validation": {
-    "mustContain": ["*** Keywords ***", "*** Test Cases ***", "[Template]", "[Arguments]", "Check System Status", "Should Be Equal"],
+    "mustContain": [
+      "*** Keywords ***",
+      "*** Test Cases ***",
+      "[Template]",
+      "[Arguments]",
+      "Check System Status",
+      "Should Be Equal"
+    ],
     "forbiddenKeywords": [],
     "mustPass": true
   },
   "theory": {
     "title": "Exercise 2.3.2: Custom Keyword Templates",
-    "content": "<div class=\"story-intro\"><p>MENTOR-9: \"Built-in keyword templates are useful, but the real power comes when you template YOUR OWN keywords. Multi-step test logic, executed many times with different data.\"</p></div><div class=\"concept-explain\"><h3>Templating Custom Keywords</h3><p>Any keyword can be templated—including your custom keywords:</p><pre><code>*** Keywords ***\nValidate Component\n    [Arguments]    ${name}    ${min_value}    ${max_value}\n    Log    Validating ${name}\n    Should Be Greater Than    ${min_value}    0\n    Should Be Less Than    ${max_value}    100\n    Log    ${name} within range\n\n*** Test Cases ***\nComponent Validation\n    [Template]    Validate Component\n    Temperature    20    80\n    Pressure       10    90\n    Flow Rate      5     95</code></pre><p><strong>Benefits:</strong></p><ul><li>Complex logic (multiple keywords) executed repeatedly</li><li>Arguments passed to custom keyword</li><li>Clean data separation from logic</li><li>Reusable test procedures</li></ul></div><div class=\"code-demo\"><h4>Example: Login Validation</h4><pre><code>*** Keywords ***\nAttempt Login\n    [Arguments]    ${username}    ${password}    ${should_succeed}\n    Log    Trying: ${username} / ${password}\n    IF    '${should_succeed}' == 'True'\n        Should Not Be Equal    ${password}    wrong\n        Log    Login succeeded\n    ELSE\n        Should Be Equal    ${password}    wrong\n        Log    Login failed as expected\n    END\n\n*** Test Cases ***\nLogin Tests\n    [Template]    Attempt Login\n    admin      password123    True\n    user1      wrong          False\n    guest      guestpass      True</code></pre><p>Three login attempts, different usernames/passwords, validation logic runs each time.</p></div><div class=\"rules-box\"><h4>⚠️ Custom Keyword Template Tips</h4><ul><li>Keyword must accept arguments matching data row columns</li><li>Data row argument count must match [Arguments] count</li><li>Keyword can contain any complexity (IF, FOR, TRY, etc.)</li><li>Each data row = one full keyword execution</li><li>Great for: repeated workflows, batch validations, test scenarios</li></ul></div>",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/10-test-templates/ex-00-10-02-keyword-template.png\" alt=\"Exercise visualization\" />\n</div>\n\n<div class=\"story-intro\"><p>MENTOR-9: \"Built-in keyword templates are useful, but the real power comes when you template YOUR OWN keywords. Multi-step test logic, executed many times with different data.\"</p></div><div class=\"concept-explain\"><h3>Templating Custom Keywords</h3><p>Any keyword can be templated—including your custom keywords:</p><pre><code>*** Keywords ***\nValidate Component\n    [Arguments]    ${name}    ${min_value}    ${max_value}\n    Log    Validating ${name}\n    Should Be Greater Than    ${min_value}    0\n    Should Be Less Than    ${max_value}    100\n    Log    ${name} within range\n\n*** Test Cases ***\nComponent Validation\n    [Template]    Validate Component\n    Temperature    20    80\n    Pressure       10    90\n    Flow Rate      5     95</code></pre><p><strong>Benefits:</strong></p><ul><li>Complex logic (multiple keywords) executed repeatedly</li><li>Arguments passed to custom keyword</li><li>Clean data separation from logic</li><li>Reusable test procedures</li></ul></div><div class=\"code-demo\"><h4>Example: Login Validation</h4><pre><code>*** Keywords ***\nAttempt Login\n    [Arguments]    ${username}    ${password}    ${should_succeed}\n    Log    Trying: ${username} / ${password}\n    IF    '${should_succeed}' == 'True'\n        Should Not Be Equal    ${password}    wrong\n        Log    Login succeeded\n    ELSE\n        Should Be Equal    ${password}    wrong\n        Log    Login failed as expected\n    END\n\n*** Test Cases ***\nLogin Tests\n    [Template]    Attempt Login\n    admin      password123    True\n    user1      wrong          False\n    guest      guestpass      True</code></pre><p>Three login attempts, different usernames/passwords, validation logic runs each time.</p></div><div class=\"rules-box\"><h4>⚠️ Custom Keyword Template Tips</h4><ul><li>Keyword must accept arguments matching data row columns</li><li>Data row argument count must match [Arguments] count</li><li>Keyword can contain any complexity (IF, FOR, TRY, etc.)</li><li>Each data row = one full keyword execution</li><li>Great for: repeated workflows, batch validations, test scenarios</li></ul></div>",
     "estimatedReadTime": "6-7 minutes"
   },
   "metadata": {
-    "tags": ["templates", "custom-keywords", "data-driven", "reusable-logic"],
-    "prerequisites": ["ex-00-10-01"],
-    "nextExercises": ["ex-00-10-03"]
+    "tags": [
+      "templates",
+      "custom-keywords",
+      "data-driven",
+      "reusable-logic"
+    ],
+    "prerequisites": [
+      "ex-00-10-01"
+    ],
+    "nextExercises": [
+      "ex-00-10-03"
+    ]
   }
 }

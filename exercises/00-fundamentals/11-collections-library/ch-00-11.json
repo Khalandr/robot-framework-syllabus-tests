@@ -63,18 +63,40 @@
   "initialCode": "",
   "solution": "*** Settings ***\nLibrary    Collections\n\n*** Test Cases ***\nBuild Ship Inventory\n    @{inventory}=    Create List\n    &{c1}=    Create Dictionary    name=Navigation    type=Navigation    status=Online    priority=1\n    &{c2}=    Create Dictionary    name=Power Core    type=Power    status=Online    priority=1\n    &{c3}=    Create Dictionary    name=Backup Power    type=Power    status=Offline    priority=3\n    &{c4}=    Create Dictionary    name=Main Engine    type=Propulsion    status=Online    priority=1\n    &{c5}=    Create Dictionary    name=Life Support    type=Life Support    status=Online    priority=1\n    &{c6}=    Create Dictionary    name=Sensors    type=Sensors    status=Offline    priority=2\n    Append To List    ${inventory}    ${c1}    ${c2}    ${c3}    ${c4}    ${c5}    ${c6}\n    ${total}=    Get Length    ${inventory}\n    Log    Total components: ${total}\n    Should Be Equal As Integers    ${total}    6\n    Set Suite Variable    @{INVENTORY}    @{inventory}\n\nFind Critical Components\n    @{critical}=    Create List\n    FOR    ${component}    IN    @{INVENTORY}\n        ${priority}=    Get From Dictionary    ${component}    priority\n        IF    ${priority} == 1\n            Append To List    ${critical}    ${component}\n        END\n    END\n    ${count}=    Get Length    ${critical}\n    Log    Critical components: ${count}\n    Should Be Equal As Integers    ${count}    4\n\nFind Offline Systems\n    @{offline}=    Create List\n    FOR    ${component}    IN    @{INVENTORY}\n        ${status}=    Get From Dictionary    ${component}    status\n        IF    '${status}' == 'Offline'\n            ${name}=    Get From Dictionary    ${component}    name\n            Append To List    ${offline}    ${name}\n        END\n    END\n    Log Many    @{offline}\n    ${count}=    Get Length    ${offline}\n    Should Be Equal As Integers    ${count}    2\n    List Should Contain Value    ${offline}    Backup Power\n    List Should Contain Value    ${offline}    Sensors\n\nInventory Summary\n    ${total}=    Get Length    ${INVENTORY}\n    ${online_count}=    Set Variable    0\n    ${offline_count}=    Set Variable    0\n    FOR    ${component}    IN    @{INVENTORY}\n        ${status}=    Get From Dictionary    ${component}    status\n        IF    '${status}' == 'Online'\n            ${online_count}=    Set Variable    ${online_count + 1}\n        ELSE\n            ${offline_count}=    Set Variable    ${offline_count + 1}\n        END\n    END\n    Log    === INVENTORY SUMMARY ===\n    Log    Total Components: ${total}\n    Log    Online: ${online_count}\n    Log    Offline: ${offline_count}\n    Should Be Equal As Integers    ${online_count}    4\n    Should Be Equal As Integers    ${offline_count}    2",
   "validation": {
-    "mustContain": ["*** Settings ***", "Library", "Collections", "Create Dictionary", "Append To List", "Get From Dictionary", "FOR", "IF", "List Should Contain Value"],
+    "mustContain": [
+      "*** Settings ***",
+      "Library",
+      "Collections",
+      "Create Dictionary",
+      "Append To List",
+      "Get From Dictionary",
+      "FOR",
+      "IF",
+      "List Should Contain Value"
+    ],
     "forbiddenKeywords": [],
     "mustPass": true
   },
   "theory": {
     "title": "Challenge 4.1: System Inventory Management",
-    "content": "<div class=\"story-intro\"><p>MENTOR-9: \"This is real-world data management, PROTO-7. Inventory systems, asset tracking, configuration management—all use these patterns. Build, query, filter, report. You're doing what enterprise automation does every day.\"</p></div><div class=\"concept-explain\"><h3>Complete Data Management Workflow</h3><p>Production systems need:</p><ul><li><strong>Data modeling</strong>: Lists of dicts for records</li><li><strong>Filtering</strong>: FOR + IF to find matching items</li><li><strong>Aggregation</strong>: Count, sum, categorize</li><li><strong>Validation</strong>: Assertions on filtered results</li><li><strong>Reporting</strong>: Summary statistics and logs</li></ul><p>This challenge combines all Collections skills into one cohesive system.</p></div><div class=\"rules-box\"><h4>⚠️ Challenge Architecture</h4><ul><li><strong>Suite variable</strong>: @{INVENTORY} shared across tests</li><li><strong>Nested data</strong>: List of component dicts (6 components)</li><li><strong>Filtering pattern</strong>: FOR + IF + Append To List</li><li><strong>Counting pattern</strong>: Variable increment in loop</li><li><strong>Validation</strong>: List Should Contain Value checks</li><li>This scales to 1000+ items with same code</li></ul></div><div class=\"code-demo\"><h4>Real-World Applications</h4><p>This challenge demonstrates patterns used in:</p><ul><li>Asset/inventory management systems</li><li>Configuration management databases (CMDB)</li><li>Test result aggregation and reporting</li><li>API response filtering and validation</li><li>Database query result processing</li></ul><p>You've mastered Collections library—a critical skill for data-driven automation.</p></div>",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/11-collections-library/ch-00-11-inventory-management-challenge.png\" alt=\"Exercise visualization\" />\n</div>\n\n<div class=\"story-intro\"><p>MENTOR-9: \"This is real-world data management, PROTO-7. Inventory systems, asset tracking, configuration management—all use these patterns. Build, query, filter, report. You're doing what enterprise automation does every day.\"</p></div><div class=\"concept-explain\"><h3>Complete Data Management Workflow</h3><p>Production systems need:</p><ul><li><strong>Data modeling</strong>: Lists of dicts for records</li><li><strong>Filtering</strong>: FOR + IF to find matching items</li><li><strong>Aggregation</strong>: Count, sum, categorize</li><li><strong>Validation</strong>: Assertions on filtered results</li><li><strong>Reporting</strong>: Summary statistics and logs</li></ul><p>This challenge combines all Collections skills into one cohesive system.</p></div><div class=\"rules-box\"><h4>⚠️ Challenge Architecture</h4><ul><li><strong>Suite variable</strong>: @{INVENTORY} shared across tests</li><li><strong>Nested data</strong>: List of component dicts (6 components)</li><li><strong>Filtering pattern</strong>: FOR + IF + Append To List</li><li><strong>Counting pattern</strong>: Variable increment in loop</li><li><strong>Validation</strong>: List Should Contain Value checks</li><li>This scales to 1000+ items with same code</li></ul></div><div class=\"code-demo\"><h4>Real-World Applications</h4><p>This challenge demonstrates patterns used in:</p><ul><li>Asset/inventory management systems</li><li>Configuration management databases (CMDB)</li><li>Test result aggregation and reporting</li><li>API response filtering and validation</li><li>Database query result processing</li></ul><p>You've mastered Collections library—a critical skill for data-driven automation.</p></div>",
     "estimatedReadTime": "5-6 minutes"
   },
   "metadata": {
-    "tags": ["collections", "challenge", "inventory", "data-management", "filtering"],
-    "prerequisites": ["ex-00-11-01", "ex-00-11-02", "ex-00-11-03", "ex-00-11-04", "ex-00-11-05"],
+    "tags": [
+      "collections",
+      "challenge",
+      "inventory",
+      "data-management",
+      "filtering"
+    ],
+    "prerequisites": [
+      "ex-00-11-01",
+      "ex-00-11-02",
+      "ex-00-11-03",
+      "ex-00-11-04",
+      "ex-00-11-05"
+    ],
     "nextExercises": []
   }
 }

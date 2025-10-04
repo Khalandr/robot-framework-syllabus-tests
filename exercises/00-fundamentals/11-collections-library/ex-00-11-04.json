@@ -38,18 +38,33 @@
   "initialCode": "",
   "solution": "*** Settings ***\nLibrary    Collections\n\n*** Test Cases ***\nSensor Reading Analysis\n    @{readings}=    Create List    10    15    20    25    30    35    40    45    50\n    Log    All readings: ${readings}\n    ${first_three}=    Get Slice From List    ${readings}    0    3\n    Log    First 3: ${first_three}\n    ${last_three}=    Get Slice From List    ${readings}    -3\n    Log    Last 3: ${last_three}\n    ${middle}=    Get Slice From List    ${readings}    3    6\n    Log    Middle range: ${middle}\n    Should Be Equal    ${first_three}[0]    10\n    Should Be Equal    ${last_three}[-1]    50",
   "validation": {
-    "mustContain": ["*** Settings ***", "Library", "Collections", "Get Slice From List", "Create List"],
+    "mustContain": [
+      "*** Settings ***",
+      "Library",
+      "Collections",
+      "Get Slice From List",
+      "Create List"
+    ],
     "forbiddenKeywords": [],
     "mustPass": true
   },
   "theory": {
     "title": "Exercise 4.1.4: List Slicing",
-    "content": "<div class=\"story-intro\"><p>MENTOR-9: \"You don't always need the entire list. First 10 results for pagination. Last 5 errors for recent issues. Middle section for sampling. Slicing extracts exactly what you need.\"</p></div><div class=\"concept-explain\"><h3>Get Slice From List</h3><p>Extract sub-lists without modifying original:</p><pre><code>@{items}=    Create List    A    B    C    D    E    F\n\n# First 3 items\n${first}=    Get Slice From List    ${items}    0    3\n# Returns: [A, B, C]\n\n# Last 2 items\n${last}=    Get Slice From List    ${items}    -2\n# Returns: [E, F]\n\n# Middle items (index 2 to 4)\n${mid}=    Get Slice From List    ${items}    2    5\n# Returns: [C, D, E]</code></pre><p><strong>Slicing Rules:</strong></p><ul><li>Start index: inclusive (0-based)</li><li>End index: exclusive (item at end_index NOT included)</li><li>Negative index: counts from end (-1 = last item)</li><li>Omit end: slices to list end</li><li>Original list unchanged</li></ul></div><div class=\"code-demo\"><h4>Example: Pagination</h4><pre><code>*** Settings ***\nLibrary    Collections\n\n*** Test Cases ***\nPaginate Results\n    @{results}=    Create List    ${RANGE(1, 101)}  # 1-100\n    ${page_size}=    Set Variable    10\n    ${page_1}=    Get Slice From List    ${results}    0    10\n    ${page_2}=    Get Slice From List    ${results}    10    20\n    Log    Page 1: ${page_1}\n    Log    Page 2: ${page_2}</code></pre></div><div class=\"rules-box\"><h4>⚠️ Slicing Tips</h4><ul><li>Returns new list (doesn't modify original)</li><li>Start=0, End=3 returns 3 items (0, 1, 2)</li><li>Use negative index for \"last N items\"</li><li>Great for: pagination, sampling, windowing</li><li>Combine with FOR loops for batch processing</li></ul></div>",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/11-collections-library/ex-00-11-04-get-slice.png\" alt=\"Exercise visualization\" />\n</div>\n\n<div class=\"story-intro\"><p>MENTOR-9: \"You don't always need the entire list. First 10 results for pagination. Last 5 errors for recent issues. Middle section for sampling. Slicing extracts exactly what you need.\"</p></div><div class=\"concept-explain\"><h3>Get Slice From List</h3><p>Extract sub-lists without modifying original:</p><pre><code>@{items}=    Create List    A    B    C    D    E    F\n\n# First 3 items\n${first}=    Get Slice From List    ${items}    0    3\n# Returns: [A, B, C]\n\n# Last 2 items\n${last}=    Get Slice From List    ${items}    -2\n# Returns: [E, F]\n\n# Middle items (index 2 to 4)\n${mid}=    Get Slice From List    ${items}    2    5\n# Returns: [C, D, E]</code></pre><p><strong>Slicing Rules:</strong></p><ul><li>Start index: inclusive (0-based)</li><li>End index: exclusive (item at end_index NOT included)</li><li>Negative index: counts from end (-1 = last item)</li><li>Omit end: slices to list end</li><li>Original list unchanged</li></ul></div><div class=\"code-demo\"><h4>Example: Pagination</h4><pre><code>*** Settings ***\nLibrary    Collections\n\n*** Test Cases ***\nPaginate Results\n    @{results}=    Create List    ${RANGE(1, 101)}  # 1-100\n    ${page_size}=    Set Variable    10\n    ${page_1}=    Get Slice From List    ${results}    0    10\n    ${page_2}=    Get Slice From List    ${results}    10    20\n    Log    Page 1: ${page_1}\n    Log    Page 2: ${page_2}</code></pre></div><div class=\"rules-box\"><h4>⚠️ Slicing Tips</h4><ul><li>Returns new list (doesn't modify original)</li><li>Start=0, End=3 returns 3 items (0, 1, 2)</li><li>Use negative index for \"last N items\"</li><li>Great for: pagination, sampling, windowing</li><li>Combine with FOR loops for batch processing</li></ul></div>",
     "estimatedReadTime": "6-7 minutes"
   },
   "metadata": {
-    "tags": ["collections", "slice", "get-slice-from-list", "sub-list"],
-    "prerequisites": ["ex-00-11-03"],
-    "nextExercises": ["ex-00-11-05"]
+    "tags": [
+      "collections",
+      "slice",
+      "get-slice-from-list",
+      "sub-list"
+    ],
+    "prerequisites": [
+      "ex-00-11-03"
+    ],
+    "nextExercises": [
+      "ex-00-11-05"
+    ]
   }
 }

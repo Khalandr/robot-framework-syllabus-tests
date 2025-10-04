@@ -62,18 +62,40 @@
   "initialCode": "",
   "solution": "*** Settings ***\nLibrary    String\nLibrary    Collections\n\n*** Test Cases ***\nParse Communication Logs\n    @{raw_logs}=    Create List\n    ...    ${SPACE}${SPACE}2025-10-04 14:30:15 | ERROR | NAV-101 | Navigation system offline${SPACE}${SPACE}\n    ...    2025-10-04 14:31:22|WARN|PWR-205|Power fluctuation detected\n    ...    ${SPACE}${SPACE}2025-10-04 14:32:10 | INFO | SYS-100 | System diagnostic complete${SPACE}${SPACE}\n    ...    2025-10-04 14:33:45|ERROR|ENG-350|Engine temperature critical\n    ...    ${SPACE}${SPACE}2025-10-04 14:34:00 | INFO | NAV-102 | Navigation restored${SPACE}${SPACE}\n    @{parsed_logs}=    Create List\n    FOR    ${log}    IN    @{raw_logs}\n        ${clean_log}=    Strip String    ${log}\n        @{fields}=    Split String    ${clean_log}    |\n        ${timestamp}=    Strip String    ${fields}[0]\n        ${level}=    Strip String    ${fields}[1]\n        ${level}=    Convert To Upper Case    ${level}\n        ${code}=    Strip String    ${fields}[2]\n        ${message}=    Strip String    ${fields}[3]\n        &{log_dict}=    Create Dictionary    timestamp=${timestamp}    level=${level}    code=${code}    message=${message}\n        Append To List    ${parsed_logs}    ${log_dict}\n    END\n    ${count}=    Get Length    ${parsed_logs}\n    Log    Parsed ${count} log entries\n    Should Be Equal As Integers    ${count}    5\n    Set Suite Variable    @{PARSED_LOGS}    @{parsed_logs}\n\nFilter Error Logs\n    @{errors}=    Create List\n    FOR    ${log}    IN    @{PARSED_LOGS}\n        ${level}=    Get From Dictionary    ${log}    level\n        IF    '${level}' == 'ERROR'\n            Append To List    ${errors}    ${log}\n        END\n    END\n    ${error_count}=    Get Length    ${errors}\n    Log    Error count: ${error_count}\n    Should Be Equal As Integers    ${error_count}    2\n\nGenerate Report\n    ${report}=    Set Variable    === LOG ANALYSIS REPORT ===\\n\n    FOR    ${log}    IN    @{PARSED_LOGS}\n        ${timestamp}=    Get From Dictionary    ${log}    timestamp\n        ${level}=    Get From Dictionary    ${log}    level\n        ${code}=    Get From Dictionary    ${log}    code\n        ${message}=    Get From Dictionary    ${log}    message\n        ${line}=    Set Variable    [${timestamp}] ${level}: ${message} (${code})\\n\n        ${report}=    Set Variable    ${report}${line}\n    END\n    Log    ${report}\n    Should Contain    ${report}    Navigation system offline\n    Should Contain    ${report}    ERROR",
   "validation": {
-    "mustContain": ["*** Settings ***", "Library", "String", "Collections", "Strip String", "Split String", "Convert To Upper Case", "FOR", "Create Dictionary"],
+    "mustContain": [
+      "*** Settings ***",
+      "Library",
+      "String",
+      "Collections",
+      "Strip String",
+      "Split String",
+      "Convert To Upper Case",
+      "FOR",
+      "Create Dictionary"
+    ],
     "forbiddenKeywords": [],
     "mustPass": true
   },
   "theory": {
     "title": "Challenge 4.2: Communication Log Parser",
-    "content": "<div class=\"story-intro\"><p>MENTOR-9: \"This is real-world log processing, PROTO-7. Parse messy text, extract structured data, filter by criteria, generate reports. Every production system needs log analysis.\"</p></div><div class=\"concept-explain\"><h3>Complete Text Processing Pipeline</h3><p>Production log parsing requires:</p><ul><li><strong>Cleaning</strong>: Strip whitespace, normalize format</li><li><strong>Parsing</strong>: Split delimited text into fields</li><li><strong>Extraction</strong>: Get specific data from positions</li><li><strong>Normalization</strong>: Convert case, standardize values</li><li><strong>Structuring</strong>: Convert text to dicts/lists</li><li><strong>Filtering</strong>: Find logs matching criteria</li><li><strong>Reporting</strong>: Format output for humans</li></ul></div><div class=\"rules-box\"><h4>⚠️ Challenge Architecture</h4><ul><li><strong>Input</strong>: 5 raw log strings (messy, inconsistent)</li><li><strong>Cleaning</strong>: Strip String on full log and each field</li><li><strong>Parsing</strong>: Split String by '|' delimiter</li><li><strong>Normalization</strong>: Convert To Upper Case for level</li><li><strong>Structuring</strong>: Create Dictionary for each log</li><li><strong>Storage</strong>: Suite variable @{PARSED_LOGS} shared across tests</li><li><strong>Filtering</strong>: FOR + IF to find ERROR logs</li><li><strong>Reporting</strong>: String concatenation for formatted output</li></ul></div><div class=\"code-demo\"><h4>Real-World Applications</h4><p>This challenge demonstrates patterns used in:</p><ul><li>Log aggregation and analysis systems</li><li>ETL (Extract, Transform, Load) pipelines</li><li>Data cleaning and normalization</li><li>Report generation from raw data</li><li>API response parsing and formatting</li></ul><p>You've mastered String library—essential for all text processing automation.</p></div>",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/12-string-library/ch-00-12-log-parser-challenge.png\" alt=\"Exercise visualization\" />\n</div>\n\n<div class=\"story-intro\"><p>MENTOR-9: \"This is real-world log processing, PROTO-7. Parse messy text, extract structured data, filter by criteria, generate reports. Every production system needs log analysis.\"</p></div><div class=\"concept-explain\"><h3>Complete Text Processing Pipeline</h3><p>Production log parsing requires:</p><ul><li><strong>Cleaning</strong>: Strip whitespace, normalize format</li><li><strong>Parsing</strong>: Split delimited text into fields</li><li><strong>Extraction</strong>: Get specific data from positions</li><li><strong>Normalization</strong>: Convert case, standardize values</li><li><strong>Structuring</strong>: Convert text to dicts/lists</li><li><strong>Filtering</strong>: Find logs matching criteria</li><li><strong>Reporting</strong>: Format output for humans</li></ul></div><div class=\"rules-box\"><h4>⚠️ Challenge Architecture</h4><ul><li><strong>Input</strong>: 5 raw log strings (messy, inconsistent)</li><li><strong>Cleaning</strong>: Strip String on full log and each field</li><li><strong>Parsing</strong>: Split String by '|' delimiter</li><li><strong>Normalization</strong>: Convert To Upper Case for level</li><li><strong>Structuring</strong>: Create Dictionary for each log</li><li><strong>Storage</strong>: Suite variable @{PARSED_LOGS} shared across tests</li><li><strong>Filtering</strong>: FOR + IF to find ERROR logs</li><li><strong>Reporting</strong>: String concatenation for formatted output</li></ul></div><div class=\"code-demo\"><h4>Real-World Applications</h4><p>This challenge demonstrates patterns used in:</p><ul><li>Log aggregation and analysis systems</li><li>ETL (Extract, Transform, Load) pipelines</li><li>Data cleaning and normalization</li><li>Report generation from raw data</li><li>API response parsing and formatting</li></ul><p>You've mastered String library—essential for all text processing automation.</p></div>",
     "estimatedReadTime": "5-6 minutes"
   },
   "metadata": {
-    "tags": ["string", "challenge", "log-parsing", "text-processing", "data-extraction"],
-    "prerequisites": ["ex-00-12-01", "ex-00-12-02", "ex-00-12-03", "ex-00-12-04", "ex-00-12-05"],
+    "tags": [
+      "string",
+      "challenge",
+      "log-parsing",
+      "text-processing",
+      "data-extraction"
+    ],
+    "prerequisites": [
+      "ex-00-12-01",
+      "ex-00-12-02",
+      "ex-00-12-03",
+      "ex-00-12-04",
+      "ex-00-12-05"
+    ],
     "nextExercises": []
   }
 }

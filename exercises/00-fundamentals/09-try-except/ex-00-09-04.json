@@ -43,18 +43,34 @@
   "initialCode": "",
   "solution": "*** Test Cases ***\nCommunication Port Test\n    ${port_open}=    Set Variable    False\n    TRY\n        Log    Opening communication port 8080...\n        ${port_open}=    Set Variable    True\n        Log    Port opened\n        Fail    Data transmission error\n    EXCEPT    AS    ${error}\n        Log    Communication error: ${error}\n    FINALLY\n        Log    Closing port (runs regardless of error)\n        ${port_open}=    Set Variable    False\n    END\n    Log    Port status: ${port_open}",
   "validation": {
-    "mustContain": ["*** Test Cases ***", "TRY", "EXCEPT", "FINALLY", "END", "${port_open}"],
+    "mustContain": [
+      "*** Test Cases ***",
+      "TRY",
+      "EXCEPT",
+      "FINALLY",
+      "END",
+      "${port_open}"
+    ],
     "forbiddenKeywords": [],
     "mustPass": true
   },
   "theory": {
     "title": "Exercise 3.2.4: FINALLY - Guaranteed Cleanup",
-    "content": "<div class=\"story-intro\"><p>MENTOR-9: \"Resources must be cleaned up—connections closed, locks released, files saved. FINALLY ensures cleanup happens even if errors occur. It's like a safety net for your cleanup code.\"</p></div><div class=\"concept-explain\"><h3>FINALLY Block - Always Executes</h3><p><strong>FINALLY</strong> runs regardless of success or failure:</p><pre><code>TRY\n    Open Resource\n    Risky Operation\nEXCEPT\n    Handle Error\nFINALLY\n    Close Resource  # Always runs\nEND</code></pre><p><strong>Execution Scenarios:</strong></p><ul><li><strong>Success:</strong> TRY → ELSE (if present) → FINALLY</li><li><strong>Failure:</strong> TRY → EXCEPT → FINALLY</li><li><strong>Both cases:</strong> FINALLY always executes</li></ul></div><div class=\"code-demo\"><h4>Example: Database Connection</h4><pre><code>${connected}=    Set Variable    False\nTRY\n    Log    Connecting to database...\n    ${connected}=    Set Variable    True\n    Log    Executing query...\n    Fail    Query timeout  # Simulates error\nEXCEPT    AS    ${err}\n    Log    Database error: ${err}\nFINALLY\n    IF    ${connected}\n        Log    Closing database connection\n        ${connected}=    Set Variable    False\n    END\nEND\nLog    Connection status: ${connected}  # Will be False</code></pre><p><strong>Output:</strong> Even though query failed, FINALLY closed the connection. No resource leak.</p></div><div class=\"rules-box\"><h4>⚠️ FINALLY Best Practices</h4><ul><li>Use for cleanup: close files, connections, release locks</li><li>FINALLY runs even if EXCEPT re-raises error</li><li>Order: TRY → EXCEPT → ELSE → FINALLY → END</li><li>Common pattern: open in TRY, close in FINALLY</li><li>Prevents resource leaks in long-running tests</li><li>Similar concept to teardown, but scoped to code block</li></ul></div>",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/09-try-except/ex-00-09-04-finally-cleanup.png\" alt=\"Exercise visualization\" />\n</div>\n\n<div class=\"story-intro\"><p>MENTOR-9: \"Resources must be cleaned up—connections closed, locks released, files saved. FINALLY ensures cleanup happens even if errors occur. It's like a safety net for your cleanup code.\"</p></div><div class=\"concept-explain\"><h3>FINALLY Block - Always Executes</h3><p><strong>FINALLY</strong> runs regardless of success or failure:</p><pre><code>TRY\n    Open Resource\n    Risky Operation\nEXCEPT\n    Handle Error\nFINALLY\n    Close Resource  # Always runs\nEND</code></pre><p><strong>Execution Scenarios:</strong></p><ul><li><strong>Success:</strong> TRY → ELSE (if present) → FINALLY</li><li><strong>Failure:</strong> TRY → EXCEPT → FINALLY</li><li><strong>Both cases:</strong> FINALLY always executes</li></ul></div><div class=\"code-demo\"><h4>Example: Database Connection</h4><pre><code>${connected}=    Set Variable    False\nTRY\n    Log    Connecting to database...\n    ${connected}=    Set Variable    True\n    Log    Executing query...\n    Fail    Query timeout  # Simulates error\nEXCEPT    AS    ${err}\n    Log    Database error: ${err}\nFINALLY\n    IF    ${connected}\n        Log    Closing database connection\n        ${connected}=    Set Variable    False\n    END\nEND\nLog    Connection status: ${connected}  # Will be False</code></pre><p><strong>Output:</strong> Even though query failed, FINALLY closed the connection. No resource leak.</p></div><div class=\"rules-box\"><h4>⚠️ FINALLY Best Practices</h4><ul><li>Use for cleanup: close files, connections, release locks</li><li>FINALLY runs even if EXCEPT re-raises error</li><li>Order: TRY → EXCEPT → ELSE → FINALLY → END</li><li>Common pattern: open in TRY, close in FINALLY</li><li>Prevents resource leaks in long-running tests</li><li>Similar concept to teardown, but scoped to code block</li></ul></div>",
     "estimatedReadTime": "6-7 minutes"
   },
   "metadata": {
-    "tags": ["try-except", "finally-block", "cleanup", "resource-management"],
-    "prerequisites": ["ex-00-09-03"],
-    "nextExercises": ["ex-00-09-05"]
+    "tags": [
+      "try-except",
+      "finally-block",
+      "cleanup",
+      "resource-management"
+    ],
+    "prerequisites": [
+      "ex-00-09-03"
+    ],
+    "nextExercises": [
+      "ex-00-09-05"
+    ]
   }
 }

@@ -38,18 +38,33 @@
   "initialCode": "",
   "solution": "*** Settings ***\nLibrary    String\n\n*** Test Cases ***\nNormalize Error Codes\n    ${error1}=    Set Variable    ERR-101\n    ${error2}=    Set Variable    ERR-205\n    ${error3}=    Set Variable    ERR-350\n    ${normalized1}=    Replace String    ${error1}    -    ${EMPTY}\n    ${normalized2}=    Replace String    ${error2}    -    ${EMPTY}\n    ${normalized3}=    Replace String    ${error3}    -    ${EMPTY}\n    Log    Normalized: ${normalized1}, ${normalized2}, ${normalized3}\n    Should Be Equal    ${normalized1}    ERR101\n    Should Be Equal    ${normalized2}    ERR205\n    Should Be Equal    ${normalized3}    ERR350",
   "validation": {
-    "mustContain": ["*** Settings ***", "Library", "String", "Replace String", "${EMPTY}"],
+    "mustContain": [
+      "*** Settings ***",
+      "Library",
+      "String",
+      "Replace String",
+      "${EMPTY}"
+    ],
     "forbiddenKeywords": [],
     "mustPass": true
   },
   "theory": {
     "title": "Exercise 4.2.2: Replace String",
-    "content": "<div class=\"story-intro\"><p>MENTOR-9: \"Data rarely comes clean. Extra spaces, inconsistent delimiters, unwanted characters. Replace String is your data cleaning tool—find and replace any pattern.\"</p></div><div class=\"concept-explain\"><h3>Replace String</h3><p>Substitute text patterns:</p><pre><code>Library    String\n\n${text}=    Set Variable    Hello-World-Test\n${clean}=    Replace String    ${text}    -    ${SPACE}\n# Result: 'Hello World Test'</code></pre><p><strong>Common Use Cases:</strong></p><ul><li>Remove characters: replace with ${EMPTY}</li><li>Normalize delimiters: replace tabs with spaces</li><li>Clean whitespace: replace multiple spaces with one</li><li>Format conversion: underscores to hyphens</li></ul><p><strong>Replace String Using Regexp</strong> - Pattern matching:</p><pre><code>${text}=    Set Variable    Error123Code456\n${clean}=    Replace String Using Regexp    ${text}    \\\\d+    X\n# Result: 'ErrorXCodeX'</code></pre></div><div class=\"code-demo\"><h4>Example: Clean File Paths</h4><pre><code>*** Settings ***\nLibrary    String\n\n*** Test Cases ***\nNormalize Path\n    ${win_path}=    Set Variable    C:\\\\Users\\\\test\\\\file.txt\n    ${unix_path}=    Replace String    ${win_path}    \\\\    /\n    Log    Unix path: ${unix_path}\n    # Result: C:/Users/test/file.txt</code></pre></div><div class=\"rules-box\"><h4>⚠️ Replace String Tips</h4><ul><li>Case-sensitive by default</li><li>Use Replace String    case_insensitive=True for case-insensitive</li><li>Returns new string (original unchanged)</li><li>Replaces ALL occurrences (not just first)</li><li>For patterns, use Replace String Using Regexp</li><li>${EMPTY} built-in variable for empty string</li></ul></div>",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/12-string-library/ex-00-12-02-replace-string.png\" alt=\"Exercise visualization\" />\n</div>\n\n<div class=\"story-intro\"><p>MENTOR-9: \"Data rarely comes clean. Extra spaces, inconsistent delimiters, unwanted characters. Replace String is your data cleaning tool—find and replace any pattern.\"</p></div><div class=\"concept-explain\"><h3>Replace String</h3><p>Substitute text patterns:</p><pre><code>Library    String\n\n${text}=    Set Variable    Hello-World-Test\n${clean}=    Replace String    ${text}    -    ${SPACE}\n# Result: 'Hello World Test'</code></pre><p><strong>Common Use Cases:</strong></p><ul><li>Remove characters: replace with ${EMPTY}</li><li>Normalize delimiters: replace tabs with spaces</li><li>Clean whitespace: replace multiple spaces with one</li><li>Format conversion: underscores to hyphens</li></ul><p><strong>Replace String Using Regexp</strong> - Pattern matching:</p><pre><code>${text}=    Set Variable    Error123Code456\n${clean}=    Replace String Using Regexp    ${text}    \\\\d+    X\n# Result: 'ErrorXCodeX'</code></pre></div><div class=\"code-demo\"><h4>Example: Clean File Paths</h4><pre><code>*** Settings ***\nLibrary    String\n\n*** Test Cases ***\nNormalize Path\n    ${win_path}=    Set Variable    C:\\\\Users\\\\test\\\\file.txt\n    ${unix_path}=    Replace String    ${win_path}    \\\\    /\n    Log    Unix path: ${unix_path}\n    # Result: C:/Users/test/file.txt</code></pre></div><div class=\"rules-box\"><h4>⚠️ Replace String Tips</h4><ul><li>Case-sensitive by default</li><li>Use Replace String    case_insensitive=True for case-insensitive</li><li>Returns new string (original unchanged)</li><li>Replaces ALL occurrences (not just first)</li><li>For patterns, use Replace String Using Regexp</li><li>${EMPTY} built-in variable for empty string</li></ul></div>",
     "estimatedReadTime": "6-7 minutes"
   },
   "metadata": {
-    "tags": ["string", "replace-string", "text-cleaning", "normalization"],
-    "prerequisites": ["ex-00-12-01"],
-    "nextExercises": ["ex-00-12-03"]
+    "tags": [
+      "string",
+      "replace-string",
+      "text-cleaning",
+      "normalization"
+    ],
+    "prerequisites": [
+      "ex-00-12-01"
+    ],
+    "nextExercises": [
+      "ex-00-12-03"
+    ]
   }
 }

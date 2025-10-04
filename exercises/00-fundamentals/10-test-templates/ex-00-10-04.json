@@ -45,18 +45,35 @@
   "initialCode": "",
   "solution": "*** Variables ***\n${MIN_POWER}     20\n${MAX_POWER}     100\n@{SYSTEMS}       Navigation    Power    Engines    Life Support\n\n*** Keywords ***\nValidate Power Range\n    [Arguments]    ${system}    ${power_level}\n    Log    ${system} power: ${power_level}%\n    Should Be True    ${power_level} >= ${MIN_POWER}\n    Should Be True    ${power_level} <= ${MAX_POWER}\n\n*** Test Cases ***\nPower Range Validation\n    [Template]    Validate Power Range\n    ${SYSTEMS}[0]    ${75}\n    ${SYSTEMS}[1]    ${90}\n    ${SYSTEMS}[2]    ${50}\n    ${SYSTEMS}[3]    ${85}",
   "validation": {
-    "mustContain": ["*** Variables ***", "*** Keywords ***", "*** Test Cases ***", "[Template]", "${MIN_POWER}", "${MAX_POWER}", "@{SYSTEMS}"],
+    "mustContain": [
+      "*** Variables ***",
+      "*** Keywords ***",
+      "*** Test Cases ***",
+      "[Template]",
+      "${MIN_POWER}",
+      "${MAX_POWER}",
+      "@{SYSTEMS}"
+    ],
     "forbiddenKeywords": [],
     "mustPass": true
   },
   "theory": {
     "title": "Exercise 2.3.4: Templates with Variables",
-    "content": "<div class=\"story-intro\"><p>MENTOR-9: \"Hardcoded test data is brittle. Change one threshold, and you edit 50 data rows. Use variables instead—change once, update everywhere. That's maintainable automation.\"</p></div><div class=\"concept-explain\"><h3>Variables in Template Data</h3><p>Template data rows can use variables for flexibility:</p><pre><code>*** Variables ***\n${API_URL}     https://api.example.com\n${TIMEOUT}     30\n@{ENDPOINTS}   /users    /posts    /comments\n\n*** Keywords ***\nCheck Endpoint\n    [Arguments]    ${endpoint}    ${expected_code}\n    Log    GET ${API_URL}${endpoint}\n    # Validation logic here\n\n*** Test Cases ***\nAPI Validation\n    [Template]    Check Endpoint\n    ${ENDPOINTS}[0]    200\n    ${ENDPOINTS}[1]    200\n    ${ENDPOINTS}[2]    200</code></pre><p><strong>Benefits:</strong></p><ul><li>Change ${API_URL} once, updates all tests</li><li>List variables for repeated test subjects</li><li>Scalar variables for thresholds, limits, constants</li><li>Easier to maintain large test suites</li></ul></div><div class=\"code-demo\"><h4>Example: Threshold Testing</h4><pre><code>*** Variables ***\n${MIN_TEMP}    -20\n${MAX_TEMP}    80\n\n*** Keywords ***\nValidate Temperature\n    [Arguments]    ${location}    ${temp}\n    Log    ${location}: ${temp}°C\n    Should Be True    ${temp} >= ${MIN_TEMP}\n    Should Be True    ${temp} <= ${MAX_TEMP}\n    Log    Temperature within safe range\n\n*** Test Cases ***\nTemperature Validation\n    [Template]    Validate Temperature\n    Engine Room      ${45}\n    Bridge          ${22}\n    Cargo Bay       ${-5}\n    Reactor         ${75}</code></pre><p>Change ${MIN_TEMP} or ${MAX_TEMP}, all validations update automatically.</p></div><div class=\"rules-box\"><h4>⚠️ Variable + Template Best Practices</h4><ul><li>Use *** Variables *** section for constants and lists</li><li>Reference variables in template data rows</li><li>List variables: access with ${list}[index]</li><li>Makes test data maintainable and configurable</li><li>Great for: API URLs, thresholds, test subjects, configuration</li><li>Combine with FOR loops for even more power (advanced)</li></ul></div>",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/10-test-templates/ex-00-10-04-templates-variables.png\" alt=\"Exercise visualization\" />\n</div>\n\n<div class=\"story-intro\"><p>MENTOR-9: \"Hardcoded test data is brittle. Change one threshold, and you edit 50 data rows. Use variables instead—change once, update everywhere. That's maintainable automation.\"</p></div><div class=\"concept-explain\"><h3>Variables in Template Data</h3><p>Template data rows can use variables for flexibility:</p><pre><code>*** Variables ***\n${API_URL}     https://api.example.com\n${TIMEOUT}     30\n@{ENDPOINTS}   /users    /posts    /comments\n\n*** Keywords ***\nCheck Endpoint\n    [Arguments]    ${endpoint}    ${expected_code}\n    Log    GET ${API_URL}${endpoint}\n    # Validation logic here\n\n*** Test Cases ***\nAPI Validation\n    [Template]    Check Endpoint\n    ${ENDPOINTS}[0]    200\n    ${ENDPOINTS}[1]    200\n    ${ENDPOINTS}[2]    200</code></pre><p><strong>Benefits:</strong></p><ul><li>Change ${API_URL} once, updates all tests</li><li>List variables for repeated test subjects</li><li>Scalar variables for thresholds, limits, constants</li><li>Easier to maintain large test suites</li></ul></div><div class=\"code-demo\"><h4>Example: Threshold Testing</h4><pre><code>*** Variables ***\n${MIN_TEMP}    -20\n${MAX_TEMP}    80\n\n*** Keywords ***\nValidate Temperature\n    [Arguments]    ${location}    ${temp}\n    Log    ${location}: ${temp}°C\n    Should Be True    ${temp} >= ${MIN_TEMP}\n    Should Be True    ${temp} <= ${MAX_TEMP}\n    Log    Temperature within safe range\n\n*** Test Cases ***\nTemperature Validation\n    [Template]    Validate Temperature\n    Engine Room      ${45}\n    Bridge          ${22}\n    Cargo Bay       ${-5}\n    Reactor         ${75}</code></pre><p>Change ${MIN_TEMP} or ${MAX_TEMP}, all validations update automatically.</p></div><div class=\"rules-box\"><h4>⚠️ Variable + Template Best Practices</h4><ul><li>Use *** Variables *** section for constants and lists</li><li>Reference variables in template data rows</li><li>List variables: access with ${list}[index]</li><li>Makes test data maintainable and configurable</li><li>Great for: API URLs, thresholds, test subjects, configuration</li><li>Combine with FOR loops for even more power (advanced)</li></ul></div>",
     "estimatedReadTime": "7-8 minutes"
   },
   "metadata": {
-    "tags": ["templates", "variables", "data-driven", "maintainability"],
-    "prerequisites": ["ex-00-10-03"],
-    "nextExercises": ["ex-00-10-05"]
+    "tags": [
+      "templates",
+      "variables",
+      "data-driven",
+      "maintainability"
+    ],
+    "prerequisites": [
+      "ex-00-10-03"
+    ],
+    "nextExercises": [
+      "ex-00-10-05"
+    ]
   }
 }

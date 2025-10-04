@@ -40,18 +40,34 @@
   "initialCode": "",
   "solution": "*** Settings ***\nLibrary    String\n\n*** Test Cases ***\nClean User Input\n    ${input1}=    Set Variable    ${SPACE}${SPACE}Navigation${SPACE}${SPACE}\n    ${input2}=    Set Variable    ${SPACE}Power${SPACE}\n    ${input3}=    Set Variable    Engines\n    Log    Raw inputs: '${input1}', '${input2}', '${input3}'\n    ${clean1}=    Strip String    ${input1}\n    ${clean2}=    Strip String    ${input2}\n    ${clean3}=    Strip String    ${input3}\n    Log    Clean inputs: '${clean1}', '${clean2}', '${clean3}'\n    Should Be Equal    ${clean1}    Navigation\n    Should Be Equal    ${clean2}    Power\n    Should Be Equal    ${clean3}    Engines",
   "validation": {
-    "mustContain": ["*** Settings ***", "Library", "String", "Strip String", "${SPACE}"],
+    "mustContain": [
+      "*** Settings ***",
+      "Library",
+      "String",
+      "Strip String",
+      "${SPACE}"
+    ],
     "forbiddenKeywords": [],
     "mustPass": true
   },
   "theory": {
     "title": "Exercise 4.2.5: Strip String",
-    "content": "<div class=\"story-intro\"><p>MENTOR-9: \"Invisible characters cause visible problems. ' admin ' doesn't equal 'admin' because of spaces. Strip String makes text clean and comparable.\"</p></div><div class=\"concept-explain\"><h3>Strip String</h3><p>Remove leading and trailing whitespace:</p><pre><code>Library    String\n\n${messy}=    Set Variable    ${SPACE}${SPACE}Hello${SPACE}\n${clean}=    Strip String    ${messy}\n# Result: 'Hello'</code></pre><p><strong>Related Keywords:</strong></p><ul><li><strong>Strip String</strong>: Remove from both ends</li><li><strong>Strip String    mode=left</strong>: Leading only</li><li><strong>Strip String    mode=right</strong>: Trailing only</li><li><strong>Strip String    characters=.</strong>: Remove specific chars</li></ul><p><strong>Whitespace Types Removed:</strong></p><ul><li>Spaces ( )</li><li>Tabs (\\t)</li><li>Newlines (\\n, \\r)</li><li>Other Unicode whitespace</li></ul></div><div class=\"code-demo\"><h4>Example: Clean CSV Fields</h4><pre><code>*** Settings ***\nLibrary    String\n\n*** Test Cases ***\nParse CSV Line\n    ${csv}=    Set Variable    Navigation , Online , 75 \n    @{fields}=    Split String    ${csv}    ,\n    @{clean_fields}=    Create List\n    FOR    ${field}    IN    @{fields}\n        ${clean}=    Strip String    ${field}\n        Append To List    ${clean_fields}    ${clean}\n    END\n    Log Many    @{clean_fields}\n    # Result: [Navigation, Online, 75]</code></pre></div><div class=\"rules-box\"><h4>⚠️ Strip String Tips</h4><ul><li>Use before comparisons to avoid whitespace issues</li><li>Middle whitespace preserved (not removed)</li><li>Can strip custom characters with characters= parameter</li><li>Returns new string (doesn't modify original)</li><li>Essential for user input processing</li><li>Combine with FOR loop to clean lists</li></ul></div>",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/12-string-library/ex-00-12-05-strip-string.png\" alt=\"Exercise visualization\" />\n</div>\n\n<div class=\"story-intro\"><p>MENTOR-9: \"Invisible characters cause visible problems. ' admin ' doesn't equal 'admin' because of spaces. Strip String makes text clean and comparable.\"</p></div><div class=\"concept-explain\"><h3>Strip String</h3><p>Remove leading and trailing whitespace:</p><pre><code>Library    String\n\n${messy}=    Set Variable    ${SPACE}${SPACE}Hello${SPACE}\n${clean}=    Strip String    ${messy}\n# Result: 'Hello'</code></pre><p><strong>Related Keywords:</strong></p><ul><li><strong>Strip String</strong>: Remove from both ends</li><li><strong>Strip String    mode=left</strong>: Leading only</li><li><strong>Strip String    mode=right</strong>: Trailing only</li><li><strong>Strip String    characters=.</strong>: Remove specific chars</li></ul><p><strong>Whitespace Types Removed:</strong></p><ul><li>Spaces ( )</li><li>Tabs (\\t)</li><li>Newlines (\\n, \\r)</li><li>Other Unicode whitespace</li></ul></div><div class=\"code-demo\"><h4>Example: Clean CSV Fields</h4><pre><code>*** Settings ***\nLibrary    String\n\n*** Test Cases ***\nParse CSV Line\n    ${csv}=    Set Variable    Navigation , Online , 75 \n    @{fields}=    Split String    ${csv}    ,\n    @{clean_fields}=    Create List\n    FOR    ${field}    IN    @{fields}\n        ${clean}=    Strip String    ${field}\n        Append To List    ${clean_fields}    ${clean}\n    END\n    Log Many    @{clean_fields}\n    # Result: [Navigation, Online, 75]</code></pre></div><div class=\"rules-box\"><h4>⚠️ Strip String Tips</h4><ul><li>Use before comparisons to avoid whitespace issues</li><li>Middle whitespace preserved (not removed)</li><li>Can strip custom characters with characters= parameter</li><li>Returns new string (doesn't modify original)</li><li>Essential for user input processing</li><li>Combine with FOR loop to clean lists</li></ul></div>",
     "estimatedReadTime": "6-7 minutes"
   },
   "metadata": {
-    "tags": ["string", "strip", "whitespace", "cleaning", "normalization"],
-    "prerequisites": ["ex-00-12-04"],
-    "nextExercises": ["ch-00-12"]
+    "tags": [
+      "string",
+      "strip",
+      "whitespace",
+      "cleaning",
+      "normalization"
+    ],
+    "prerequisites": [
+      "ex-00-12-04"
+    ],
+    "nextExercises": [
+      "ch-00-12"
+    ]
   }
 }

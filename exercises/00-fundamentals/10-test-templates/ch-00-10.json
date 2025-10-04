@@ -72,18 +72,39 @@
   "initialCode": "",
   "solution": "*** Variables ***\n@{COMPONENTS}              Navigation    Power    Engines    Life Support    Communications\n@{FIRMWARE_VERSIONS}       v2.1.0    v2.2.0    v2.3.0\n${MIN_COMPATIBILITY_SCORE}    85\n\n*** Keywords ***\nCheck Component Compatibility\n    [Arguments]    ${component}    ${firmware}    ${compatibility_score}\n    Log    Testing ${component} with firmware ${firmware}\n    Should Be True    ${compatibility_score} >= ${MIN_COMPATIBILITY_SCORE}    msg=Compatibility too low: ${compatibility_score}\n    Log    ${component} compatible with ${firmware} (score: ${compatibility_score})\n\n*** Test Cases ***\nNavigation Compatibility Matrix\n    [Template]    Check Component Compatibility\n    ${COMPONENTS}[0]    ${FIRMWARE_VERSIONS}[0]    ${92}\n    ${COMPONENTS}[0]    ${FIRMWARE_VERSIONS}[1]    ${95}\n    ${COMPONENTS}[0]    ${FIRMWARE_VERSIONS}[2]    ${98}\n\nPower System Compatibility Matrix\n    [Template]    Check Component Compatibility\n    ${COMPONENTS}[1]    ${FIRMWARE_VERSIONS}[0]    ${88}\n    ${COMPONENTS}[1]    ${FIRMWARE_VERSIONS}[1]    ${91}\n    ${COMPONENTS}[1]    ${FIRMWARE_VERSIONS}[2]    ${94}\n\nEngines Compatibility Matrix\n    [Template]    Check Component Compatibility\n    ${COMPONENTS}[2]    ${FIRMWARE_VERSIONS}[0]    ${90}\n    ${COMPONENTS}[2]    ${FIRMWARE_VERSIONS}[1]    ${93}\n    ${COMPONENTS}[2]    ${FIRMWARE_VERSIONS}[2]    ${96}\n\nLife Support Compatibility Matrix\n    [Template]    Check Component Compatibility\n    ${COMPONENTS}[3]    ${FIRMWARE_VERSIONS}[0]    ${87}\n    ${COMPONENTS}[3]    ${FIRMWARE_VERSIONS}[1]    ${90}\n    ${COMPONENTS}[3]    ${FIRMWARE_VERSIONS}[2]    ${93}\n\nSummary Report\n    [Template]    NONE\n    Log    Compatibility Matrix Testing Complete\n    ${total_tests}=    Set Variable    12\n    ${components_tested}=    Evaluate    len(${COMPONENTS})\n    ${firmware_versions}=    Evaluate    len(${FIRMWARE_VERSIONS})\n    Log    Components tested: ${components_tested}\n    Log    Firmware versions: ${firmware_versions}\n    Log    Total compatibility checks: ${total_tests}",
   "validation": {
-    "mustContain": ["*** Variables ***", "*** Keywords ***", "*** Test Cases ***", "[Template]", "@{COMPONENTS}", "@{FIRMWARE_VERSIONS}", "Check Component Compatibility", "NONE"],
+    "mustContain": [
+      "*** Variables ***",
+      "*** Keywords ***",
+      "*** Test Cases ***",
+      "[Template]",
+      "@{COMPONENTS}",
+      "@{FIRMWARE_VERSIONS}",
+      "Check Component Compatibility",
+      "NONE"
+    ],
     "forbiddenKeywords": [],
     "mustPass": true
   },
   "theory": {
     "title": "Challenge 2.3: Component Compatibility Matrix",
-    "content": "<div class=\"story-intro\"><p>MENTOR-9: \"This is production-scale data-driven testing, PROTO-7. Testing component compatibility matrices is real-world QA. We could write 60 separate test cases, or we could use templates intelligently and write it once. Which sounds better?\"</p></div><div class=\"concept-explain\"><h3>Data-Driven Testing at Scale</h3><p>Real automation often involves testing matrices:</p><ul><li><strong>Compatibility testing</strong>: Components × Firmware versions</li><li><strong>API testing</strong>: Endpoints × HTTP methods × Auth types</li><li><strong>Browser testing</strong>: Features × Browsers × OS combinations</li><li><strong>Data validation</strong>: Fields × Data types × Constraints</li></ul><p><strong>Templates make this manageable:</strong></p><ol><li>Define validation logic ONCE (custom keyword)</li><li>Create variables for test subjects (lists)</li><li>Use templates to execute matrix efficiently</li><li>Scale to hundreds of tests with minimal code</li></ol></div><div class=\"rules-box\"><h4>⚠️ Challenge Architecture</h4><ul><li><strong>Variables</strong>: Store components, firmware versions, thresholds</li><li><strong>Custom Keyword</strong>: Complex validation logic (compatibility check)</li><li><strong>Templates</strong>: Execute keyword with matrix data</li><li><strong>Test Organization</strong>: One test per component, data rows for versions</li><li><strong>Summary Test</strong>: Uses [Template] NONE for reporting</li><li>This pattern scales: add more components or firmware = just more data rows</li><li>Maintainable: Change MIN_COMPATIBILITY_SCORE once, updates all tests</li></ul></div><div class=\"code-demo\"><h4>Real-World Application</h4><p>This challenge demonstrates patterns used in:</p><ul><li>Cross-browser testing (Selenium/Playwright)</li><li>API contract testing (multiple endpoints)</li><li>Database migration validation (schema × data)</li><li>Regression test suites (features × environments)</li></ul><p>You've learned to structure complex test matrices efficiently—a critical skill for scalable test automation.</p></div>",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/10-test-templates/ch-00-10-compatibility-matrix-challenge.png\" alt=\"Exercise visualization\" />\n</div>\n\n<div class=\"story-intro\"><p>MENTOR-9: \"This is production-scale data-driven testing, PROTO-7. Testing component compatibility matrices is real-world QA. We could write 60 separate test cases, or we could use templates intelligently and write it once. Which sounds better?\"</p></div><div class=\"concept-explain\"><h3>Data-Driven Testing at Scale</h3><p>Real automation often involves testing matrices:</p><ul><li><strong>Compatibility testing</strong>: Components × Firmware versions</li><li><strong>API testing</strong>: Endpoints × HTTP methods × Auth types</li><li><strong>Browser testing</strong>: Features × Browsers × OS combinations</li><li><strong>Data validation</strong>: Fields × Data types × Constraints</li></ul><p><strong>Templates make this manageable:</strong></p><ol><li>Define validation logic ONCE (custom keyword)</li><li>Create variables for test subjects (lists)</li><li>Use templates to execute matrix efficiently</li><li>Scale to hundreds of tests with minimal code</li></ol></div><div class=\"rules-box\"><h4>⚠️ Challenge Architecture</h4><ul><li><strong>Variables</strong>: Store components, firmware versions, thresholds</li><li><strong>Custom Keyword</strong>: Complex validation logic (compatibility check)</li><li><strong>Templates</strong>: Execute keyword with matrix data</li><li><strong>Test Organization</strong>: One test per component, data rows for versions</li><li><strong>Summary Test</strong>: Uses [Template] NONE for reporting</li><li>This pattern scales: add more components or firmware = just more data rows</li><li>Maintainable: Change MIN_COMPATIBILITY_SCORE once, updates all tests</li></ul></div><div class=\"code-demo\"><h4>Real-World Application</h4><p>This challenge demonstrates patterns used in:</p><ul><li>Cross-browser testing (Selenium/Playwright)</li><li>API contract testing (multiple endpoints)</li><li>Database migration validation (schema × data)</li><li>Regression test suites (features × environments)</li></ul><p>You've learned to structure complex test matrices efficiently—a critical skill for scalable test automation.</p></div>",
     "estimatedReadTime": "5-6 minutes"
   },
   "metadata": {
-    "tags": ["templates", "challenge", "data-driven", "matrix-testing", "scalability"],
-    "prerequisites": ["ex-00-10-01", "ex-00-10-02", "ex-00-10-03", "ex-00-10-04", "ex-00-10-05"],
+    "tags": [
+      "templates",
+      "challenge",
+      "data-driven",
+      "matrix-testing",
+      "scalability"
+    ],
+    "prerequisites": [
+      "ex-00-10-01",
+      "ex-00-10-02",
+      "ex-00-10-03",
+      "ex-00-10-04",
+      "ex-00-10-05"
+    ],
     "nextExercises": []
   }
 }
