@@ -1,7 +1,7 @@
 {
   "id": "ex-1-3-2",
   "type": "exercise",
-  "section": "03-system-checks",
+  "section": "03-assertions",
   "title": "Should Contain - Substring Validation",
   "difficulty": "beginner",
   "estimatedTime": "8 minutes",

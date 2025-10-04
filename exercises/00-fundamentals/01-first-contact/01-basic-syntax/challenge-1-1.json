@@ -1,7 +1,7 @@
 {
   "id": "challenge-1-1",
   "type": "challenge",
-  "section": "01-system-boot",
+  "section": "01-basic-syntax",
   "title": "MINI-CHALLENGE: Complete Boot Diagnostic",
   "difficulty": "beginner",
   "estimatedTime": "20 minutes",
