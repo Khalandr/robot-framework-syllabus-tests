@@ -11,30 +11,20 @@
       "totalExercises": 84,
       "totalChallenges": 4,
       "hasFinalProject": true
-    },
+    }
+  ],
+  "_futureCategories": [
     {
       "id": "10-mastering-builtin",
       "name": "Mastering BuiltIn Library",
-      "description": "Back at the robot academy, you're training to become a BuiltIn specialist. The BuiltIn library is every robot's core toolkit—always available, never imported. Master logging, assertions, variable scoping, collections, and advanced control flow to earn your certification.",
-      "icon": "🔧",
-      "difficulty": "intermediate",
-      "estimatedTime": "8-10 hours",
-      "order": 1,
-      "totalExercises": 40,
-      "totalChallenges": 4,
-      "hasFinalProject": true
+      "status": "planned",
+      "note": "Will be enabled when exercises are created"
     },
     {
       "id": "20-api-testing",
       "name": "API Testing with Robot Framework",
-      "description": "Your first real mission: test the Galactic Communication Network's APIs. Systems across the galaxy rely on these endpoints. Learn HTTP methods, authentication protocols, JSON validation, and advanced patterns to ensure the network stays operational.",
-      "icon": "🌐",
-      "difficulty": "intermediate-to-advanced",
-      "estimatedTime": "10-12 hours",
-      "order": 2,
-      "totalExercises": 45,
-      "totalChallenges": 4,
-      "hasFinalProject": true
+      "status": "planned",
+      "note": "Will be enabled when exercises are created"
     }
   ]
 }
