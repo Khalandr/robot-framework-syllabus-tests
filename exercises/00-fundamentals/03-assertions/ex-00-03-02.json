@@ -1,0 +1,67 @@
+{
+  "id": "ex-00-03-02",
+  "type": "exercise",
+  "section": "03-assertions",
+  "title": "Should Contain - Substring Validation",
+  "difficulty": "beginner",
+  "estimatedTime": "8 minutes",
+  "order": 2,
+  "description": "Learn to validate that strings contain specific substrings—essential for error messages and flexible validation.",
+  "story": {
+    "setup": "MENTOR-9: \"Not all validation needs exact matches. Often you just need to verify a message contains specific text. Should Contain is perfect for this.\"",
+    "context": "Error messages, status strings, and log outputs often have variable parts. Substring checking lets you validate the important parts while ignoring the rest.",
+    "success": "MENTOR-9: \"Perfect! The error message contains 'breach'—that's what matters. Substring validation is more flexible than exact matching.\""
+  },
+  "instructions": [
+    "Create the *** Test Cases *** section",
+    "Create a test case named 'Error Message Validation'",
+    "Create ${error_msg} with value 'Hull breach detected in sector 7'",
+    "Use Should Contain to verify ${error_msg} contains 'breach'",
+    "Use Should Contain to verify ${error_msg} contains 'sector 7'",
+    "Log 'Error message validation passed'",
+    "Create ${status_report} with value 'System diagnostic: 3 warnings, 1 critical error'",
+    "Use Should Contain to verify ${status_report} contains 'critical error'",
+    "Log 'Status report validated successfully'"
+  ],
+  "hints": [
+    "Should Contain syntax: Should Contain    ${string}    ${substring}",
+    "First argument is the full string, second is the substring to find",
+    "Substring search IS case-sensitive: 'Breach' ≠ 'breach'",
+    "If substring not found, test fails",
+    "The keyword is flexible: should contain = SHOULD CONTAIN",
+    "Use this for partial matches when exact match isn't needed"
+  ],
+  "initialCode": "",
+  "solution": "*** Test Cases ***\nError Message Validation\n    ${error_msg}         Set Variable    Hull breach detected in sector 7\n    Should Contain       ${error_msg}    breach\n    Should Contain       ${error_msg}    sector 7\n    Log                  Error message validation passed\n    \n    ${status_report}     Set Variable    System diagnostic: 3 warnings, 1 critical error\n    Should Contain       ${status_report}    critical error\n    Log                  Status report validated successfully",
+  "validation": {
+    "mustContain": [
+      "*** Test Cases ***",
+      "Should Contain",
+      "${error_msg}",
+      "Log"
+    ],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Exercise 1.3.2: Should Contain - Flexible String Validation",
+    "content": "<div class=\"theory-visual\">\n<img src=\"assets/images/theory/03-assertions/ex-1-3-2-should-contain.png\" alt=\"PROTO-7 finding substring within larger error message with magnifying glass\" loading=\"lazy\" width=\"1920\" height=\"1080\" />\n</div>\n\n<div class=\"story-intro\">\n<p>MENTOR-9 displays a holographic error message with specific words highlighted.</p>\n<p>\"PROTO-7, exact matches aren't always practical. Error messages have timestamps, IDs, variable data. The <span class=\"keyword\">Should Contain</span> keyword lets you verify the important parts while ignoring the rest.\"</p>\n</div>\n\n<div class=\"concept-explain\">\n<h3>What is Should Contain?</h3>\n<p><strong>Should Contain</strong> validates that a string contains a specific substring. It's a <strong>partial match</strong> assertion.</p>\n\n<h4>Why Partial Matching Matters</h4>\n<ul>\n<li><strong>Error messages:</strong> \"Error at 14:23:47 - Hull breach detected\" contains \"breach\"</li>\n<li><strong>Dynamic content:</strong> \"User #1234 logged in successfully\" contains \"logged in\"</li>\n<li><strong>Flexible validation:</strong> Don't care about exact format, just key information</li>\n<li><strong>Real-world data:</strong> Timestamps, IDs, and variable parts change constantly</li>\n</ul>\n\n<h3>Basic Syntax</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>Should Contain    ${string}    ${substring}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p><strong>Arguments:</strong></p>\n<ul>\n<li><strong>First argument:</strong> The full string to search in</li>\n<li><strong>Second argument:</strong> The substring to find</li>\n</ul>\n\n<h3>Simple Example</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nError Message Check\n    ${error}           Set Variable    Hull breach detected in sector 7\n    Should Contain     ${error}    breach\n    Log                Error contains 'breach' - validation passed!</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>What Happens:</h4>\n<ol>\n<li>Create variable with full error message</li>\n<li>Check if \"breach\" exists anywhere in the message</li>\n<li>✅ Found → assertion passes</li>\n<li>Log success</li>\n</ol>\n\n<h3>Case Sensitivity</h3>\n<p><strong>Important:</strong> Should Contain is <strong>case-sensitive</strong> by default!</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nCase Sensitive Search\n    ${message}         Set Variable    Hull Breach detected\n    Should Contain     ${message}    Breach     # ✅ PASSES - exact case match\n    Should Contain     ${message}    breach     # ❌ FAILS - case mismatch</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p>For case-insensitive matching, convert to same case first:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nCase Insensitive Check\n    ${message}         Set Variable    Hull Breach Detected\n    ${lower_msg}       Convert To Lowercase    ${message}\n    Should Contain     ${lower_msg}    breach    # ✅ PASSES</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Multiple Substring Checks</h3>\n<p>You can verify multiple substrings in the same message:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nMulti-Check Validation\n    ${report}          Set Variable    Diagnostic: 3 warnings, 1 critical error\n    Should Contain     ${report}    warnings\n    Should Contain     ${report}    critical\n    Should Contain     ${report}    error\n    Log                All key terms found!</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Real-World Use Cases</h3>\n\n<h4>1. Error Log Validation</h4>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nCheck Error Logs\n    ${log_entry}       Set Variable    [2157-03-15 14:23:47] ERROR: Connection timeout - retry failed\n    Should Contain     ${log_entry}    ERROR\n    Should Contain     ${log_entry}    timeout\n    Should Contain     ${log_entry}    retry failed</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>2. API Response Validation</h4>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nAPI Response Check\n    ${response}        Set Variable    {\"status\": \"success\", \"user_id\": 1234, \"message\": \"Login successful\"}\n    Should Contain     ${response}    success\n    Should Contain     ${response}    user_id</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>3. Page Content Validation</h4>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nWeb Page Validation\n    ${page_content}    Set Variable    Welcome to Starlight Explorer Dashboard\n    Should Contain     ${page_content}    Welcome\n    Should Contain     ${page_content}    Dashboard</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Should Contain vs Should Be Equal</h3>\n\n<table>\n<tr><th>Aspect</th><th>Should Be Equal</th><th>Should Contain</th></tr>\n<tr>\n<td><strong>Match Type</strong></td>\n<td>Exact match</td>\n<td>Partial match (substring)</td>\n</tr>\n<tr>\n<td><strong>When to Use</strong></td>\n<td>Values must be identical</td>\n<td>Only care about key parts</td>\n</tr>\n<tr>\n<td><strong>Flexibility</strong></td>\n<td>Strict</td>\n<td>Flexible</td>\n</tr>\n<tr>\n<td><strong>Example</strong></td>\n<td>\"Error\" == \"Error\"</td>\n<td>\"Error at 14:23\" contains \"Error\"</td>\n</tr>\n</table>\n\n<h3>Custom Error Messages</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nCustom Message\n    ${status}    Set Variable    System operational - no errors\n    Should Contain    ${status}    error    msg=Status message should contain 'error' keyword</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>Failure Output:</h4>\n<pre><code>AssertionError: Status message should contain 'error' keyword</code></pre>\n\n<h3>Related Keywords</h3>\n\n<h4>Should Not Contain</h4>\n<p>Verifies a string does NOT contain a substring:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nNegative Check\n    ${status}              Set Variable    System operational\n    Should Not Contain     ${status}    error    # ✅ PASSES - no 'error' found</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>Should Contain X Times</h4>\n<p>Verifies exact number of occurrences:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nCount Occurrences\n    ${log}                      Set Variable    ERROR: failed, ERROR: timeout, ERROR: disconnect\n    Should Contain X Times      ${log}    ERROR    3</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Best Practices</h3>\n\n<h4>1. Choose Meaningful Substrings</h4>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nGood Substring Choice\n    ${error}    Set Variable    Critical hull breach in sector 7 - immediate action required\n\n    # ✅ Good: Specific key term\n    Should Contain    ${error}    breach\n\n    # ❌ Bad: Too generic\n    Should Contain    ${error}    in</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>2. Be Careful with Case</h4>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nCase Awareness\n    ${msg}    Set Variable    ERROR: System Failure\n\n    # Know your data's case!\n    Should Contain    ${msg}    ERROR     # ✅ PASSES\n    Should Contain    ${msg}    error     # ❌ FAILS</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>3. Combine with Other Assertions</h4>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nCombined Validation\n    ${response}    Set Variable    {\"status\": \"error\", \"code\": 500}\n\n    Should Contain     ${response}    error          # Has error\n    Should Contain     ${response}    500            # Has status code\n    Length Should Be   ${response}    35             # Correct length</code></pre>\n</div>\n\n<div class=\"try-it\">\n<p>MENTOR-9: \"Create an error message with dynamic parts. Use Should Contain to verify it includes 'breach' and 'sector 7'. Then check a status report for 'critical error'. Show me you can extract meaning from messy real-world data.\"</p>\n</div>",
+    "estimatedReadTime": "5-6 minutes"
+  },
+  "metadata": {
+    "tags": [
+      "beginner",
+      "assertions",
+      "should-contain",
+      "substring",
+      "validation"
+    ],
+    "prerequisites": [
+      "ex-00-03-1"
+    ],
+    "nextExercises": [
+      "ex-00-03-3"
+    ]
+  },
+  "category": "00-fundamentals"
+}

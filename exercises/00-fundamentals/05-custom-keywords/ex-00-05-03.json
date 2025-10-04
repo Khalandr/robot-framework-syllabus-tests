@@ -1,0 +1,56 @@
+{
+  "id": "ex-00-05-03",
+  "type": "exercise",
+  "section": "05-custom-keywords",
+  "category": "00-fundamentals",
+  "category": "00-fundamentals",
+  "title": "Keywords with Arguments - Flexible Procedures",
+  "difficulty": "beginner-to-intermediate",
+  "estimatedTime": "8 minutes",
+  "order": 3,
+  "description": "Create keywords that accept arguments for flexible, reusable procedures.",
+  "story": {
+    "setup": "MENTOR-9: \"PROTO-7, your keywords work, but they're rigid. What if you want to check DIFFERENT systems? Arguments make keywords flexible!\"",
+    "context": "Keyword arguments are like function parameters. They let you pass data into keywords, making them adaptable to different situations.",
+    "success": "MENTOR-9: \"Perfect! Now one keyword can check ANY system. Arguments transform rigid procedures into flexible tools!\""
+  },
+  "instructions": [
+    "Create the *** Test Cases *** section",
+    "Create test 'System Checks' with three calls to 'Check System' keyword:",
+    "  - Check System    power",
+    "  - Check System    sensors",
+    "  - Check System    navigation",
+    "Create the *** Keywords *** section",
+    "Create keyword 'Check System' with argument [Arguments]    ${system_name}",
+    "Inside keyword, log: 'Checking ${system_name} system'",
+    "Inside keyword, log: '${system_name} operational'",
+    "Note: [Arguments] defines parameters, ${system_name} accesses the passed value"
+  ],
+  "hints": [
+    "[Arguments] must be the FIRST line inside keyword (before any Log)",
+    "Argument names use ${variable} syntax",
+    "Multiple arguments: [Arguments]    ${arg1}    ${arg2}",
+    "Pass arguments separated by 4 spaces after keyword name"
+  ],
+  "initialCode": "",
+  "solution": "*** Test Cases ***\nSystem Checks\n    Check System    power\n    Check System    sensors\n    Check System    navigation\n\n*** Keywords ***\nCheck System\n    [Arguments]    ${system_name}\n    Log    Checking ${system_name} system\n    Log    ${system_name} operational",
+  "validation": {
+    "mustContain": [
+      "*** Test Cases ***",
+      "*** Keywords ***",
+      "System Checks",
+      "Check System",
+      "[Arguments]",
+      "${system_name}",
+      "power",
+      "sensors",
+      "navigation"
+    ],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Exercise 2.2.3: Keywords with Arguments",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/05-custom-keywords/ex-2-2-3-keyword-arguments.png\" alt=\"MENTOR-9 demonstrating a modular keyword tool with input slots - showing different values (power, sensors, navigation) being plugged into the same keyword procedure\" />\n</div>\n\n<div class=\"story-intro\">\n  <h3>🔌 Making Keywords Flexible</h3>\n  <p><strong>MENTOR-9</strong>: \"PROTO-7, imagine a wrench that only fits ONE bolt. Useless! Arguments are like adjustable wrenches - they adapt to different situations.\"</p>\n  <p>\"Instead of 'Check Power' and 'Check Sensors' as separate keywords, create ONE flexible 'Check System' that accepts WHICH system to check.\"</p>\n</div>\n\n<div class=\"concept-explain\">\n  <h3>⚙️ What are Keyword Arguments?</h3>\n  <p><strong>Arguments</strong> - Parameters that keywords accept for flexible behavior</p>\n  <ul>\n    <li>✅ <strong>Flexibility</strong> - One keyword handles multiple scenarios</li>\n    <li>✅ <strong>DRY Principle</strong> - Don't Repeat Yourself</li>\n    <li>✅ <strong>Maintainability</strong> - Change logic in one place</li>\n    <li>✅ <strong>Expressiveness</strong> - Keywords read like natural language</li>\n  </ul>\n  <p><strong>Without Arguments (Rigid):</strong></p>\n  <pre><code>Check Power System\n    Log    Checking power\n\nCheck Sensor System\n    Log    Checking sensors</code></pre>\n  <p><strong>With Arguments (Flexible):</strong></p>\n  <pre><code>Check System\n    [Arguments]    ${system}\n    Log    Checking ${system}</code></pre>\n</div>\n\n<div class=\"code-demo\">\n  <h3>📝 Keyword Arguments Syntax</h3>\n  <pre><code>*** Keywords ***\nGreet Person\n    [Arguments]    ${name}\n    Log    Hello ${name}!\n\nAdd Numbers\n    [Arguments]    ${a}    ${b}\n    ${result}=    Evaluate    ${a} + ${b}\n    Log    Result: ${result}</code></pre>\n  <p><strong>Calling with Arguments:</strong></p>\n  <pre><code>*** Test Cases ***\nGreeting Test\n    Greet Person    Alice\n    Greet Person    Bob\n\nMath Test\n    Add Numbers    5    3</code></pre>\n</div>\n\n<div class=\"rules-box\">\n  <h3>📋 Keyword Arguments Rules</h3>\n  <ul>\n    <li>🔹 <strong>[Arguments]</strong>: Must be FIRST line inside keyword</li>\n    <li>🔹 <strong>Syntax</strong>: <code>[Arguments]    ${arg1}    ${arg2}</code></li>\n    <li>🔹 <strong>Spacing</strong>: 4 spaces between arguments</li>\n    <li>🔹 <strong>Naming</strong>: Use descriptive ${variable} names</li>\n    <li>🔹 <strong>Passing</strong>: Arguments passed after keyword name</li>\n  </ul>\n</div>\n\n<div class=\"try-it\">\n  <h3>🎯 Your Task</h3>\n  <p>Create a flexible 'Check System' keyword that accepts the system name as an argument. Call it three times with different systems!</p>\n</div>"
+  }
+}

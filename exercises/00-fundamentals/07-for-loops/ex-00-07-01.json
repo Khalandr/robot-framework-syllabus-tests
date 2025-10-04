@@ -1,0 +1,52 @@
+{
+  "id": "ex-00-07-01",
+  "type": "exercise",
+  "section": "07-for-loops",
+  "category": "00-fundamentals",
+  "title": "Basic FOR Loop Iteration",
+  "difficulty": "beginner",
+  "estimatedTime": "8 minutes",
+  "order": 1,
+  "description": "Learn FOR loop syntax by iterating through a fixed list of system names.",
+  "story": {
+    "setup": "MENTOR-9: \"PROTO-7, we need to check three systems: power, sensors, and navigation. Instead of writing Log three times, let's use a FOR loop!\"",
+    "context": "FOR loops iterate over items in a collection. Each iteration, the loop variable takes the next value and executes the indented body.",
+    "success": "MENTOR-9: \"Perfect! One FOR loop, three iterations. Imagine if we had 100 systems!\""
+  },
+  "instructions": [
+    "Create the *** Test Cases *** section with test: 'System Check Loop'",
+    "Create a list variable: @{systems}    power    sensors    navigation",
+    "Start a FOR loop: FOR    ${system}    IN    @{systems}",
+    "Inside the loop (indented 4 spaces): Log    Checking ${system} system",
+    "End the loop with: END"
+  ],
+  "hints": [
+    "FOR loop structure: FOR ${var} IN @{list} ... END",
+    "Loop body must be indented (4 spaces recommended)",
+    "END must align with FOR (same indentation level)",
+    "The ${system} variable changes each iteration"
+  ],
+  "initialCode": "",
+  "solution": "*** Test Cases ***\nSystem Check Loop\n    @{systems}=    Create List    power    sensors    navigation\n    FOR    ${system}    IN    @{systems}\n        Log    Checking ${system} system\n    END",
+  "validation": {
+    "mustContain": [
+      "*** Test Cases ***",
+      "System Check Loop",
+      "@{systems}",
+      "power",
+      "sensors",
+      "navigation",
+      "FOR",
+      "${system}",
+      "IN",
+      "Log",
+      "END"
+    ],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Exercise 2.4.1: Basic FOR Loop",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/07-for-loops/ex-2-4-1-basic-for.png\" alt=\"PROTO-7 standing before three glowing system panels labeled power/sensors/navigation - a FOR loop visualization showing iteration arrow cycling through each panel\" />\n</div>\n\n<div class=\"story-intro\">\n  <h3>🔁 The Power of Iteration</h3>\n  <p><strong>MENTOR-9</strong>: \"PROTO-7, checking systems one by one works... but what if you had 1000 systems?\"</p>\n  <p>\"FOR loops are the automation superpower. Write the check ONCE, iterate through ANY number of systems.\"</p>\n</div>\n\n<div class=\"concept-explain\">\n  <h3>📘 FOR Loop Basics</h3>\n  <p><strong>Syntax:</strong></p>\n  <pre><code>FOR    ${variable}    IN    @{list}\n    # Body (indented)\n    Log    Processing ${variable}\nEND</code></pre>\n  <ul>\n    <li><code>FOR</code> - Loop keyword (starts iteration)</li>\n    <li><code>${variable}</code> - Loop variable (changes each iteration)</li>\n    <li><code>IN</code> - Separator keyword</li>\n    <li><code>@{list}</code> - Collection to iterate</li>\n    <li><code>END</code> - Closes the loop</li>\n  </ul>\n</div>\n\n<div class=\"code-demo\">\n  <h3>💡 How It Works</h3>\n  <pre><code>@{systems}=    Create List    power    sensors    navigation\n\nFOR    ${system}    IN    @{systems}\n    Log    Checking ${system} system\nEND\n\n# Iteration 1: ${system} = 'power' → Log \"Checking power system\"\n# Iteration 2: ${system} = 'sensors' → Log \"Checking sensors system\"\n# Iteration 3: ${system} = 'navigation' → Log \"Checking navigation system\"</code></pre>\n</div>\n\n<div class=\"rules-box\">\n  <h3>⚙️ Key Rules</h3>\n  <ul>\n    <li>🔹 <strong>Indentation matters</strong>: Loop body MUST be indented (4 spaces recommended)</li>\n    <li>🔹 <strong>END alignment</strong>: END must align with FOR (same indentation)</li>\n    <li>🔹 <strong>Loop variable scope</strong>: ${system} only exists inside the loop</li>\n    <li>🔹 <strong>Empty lists</strong>: Loop skips if list is empty (0 iterations)</li>\n  </ul>\n</div>\n\n<div class=\"try-it\">\n  <h3>🎯 Your Task</h3>\n  <p>Create a FOR loop that checks three systems: power, sensors, and navigation. One loop, three iterations!</p>\n</div>"
+  }
+}
