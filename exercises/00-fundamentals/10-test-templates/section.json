@@ -1,0 +1,23 @@
+{
+  "id": "10-test-templates",
+  "section": "2.3",
+  "title": "Test Templates",
+  "category": "00-fundamentals",
+  "order": 10,
+  "difficulty": "intermediate",
+  "estimatedTime": "45 minutes",
+  "description": "Master data-driven testing using test templates to run the same test logic with multiple data sets.",
+  "story": {
+    "setup": "MENTOR-9: \"We have 50 systems to check, but they all use the same test procedure—just different inputs. Instead of copying tests 50 times, we use TEMPLATES. Write the test once, run it with many data sets.\"",
+    "context": "Templates are Robot Framework's data-driven testing feature. Define test logic once, then provide rows of data to execute that logic repeatedly with different inputs.",
+    "arc": "Learn test-level templates, suite-level templates, combining templates with variables, and when to use templates vs loops."
+  },
+  "exercises": [
+    "ex-00-10-01",
+    "ex-00-10-02",
+    "ex-00-10-03",
+    "ex-00-10-04",
+    "ex-00-10-05"
+  ],
+  "challenges": ["ch-00-10"]
+}

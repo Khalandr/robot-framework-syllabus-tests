@@ -68,6 +68,11 @@
       "id": "09-try-except",
       "name": "Section 3.2: TRY/EXCEPT Error Handling",
       "order": 9
+    },
+    {
+      "id": "10-test-templates",
+      "name": "Section 2.3: Test Templates",
+      "order": 10
     }
   ],
   "learningObjectives": [

@@ -1,0 +1,61 @@
+{
+  "id": "ex-00-10-05",
+  "type": "exercise",
+  "section": "10-test-templates",
+  "category": "00-fundamentals",
+  "title": "Disabling Template with NONE",
+  "difficulty": "intermediate",
+  "estimatedTime": "10 minutes",
+  "order": 5,
+  "description": "Use [Template] NONE to create a regular test case when Test Template is defined in Settings.",
+  "story": {
+    "setup": "MENTOR-9: \"What if you have a suite-level Test Template, but ONE test needs to be different—not templated? Use [Template] NONE to override.\"",
+    "context": "Sometimes you need a mix: mostly templated tests, but a few regular tests. NONE lets you opt out of the suite template for specific tests.",
+    "success": "MENTOR-9: \"Good! The first two tests used the suite template, but the third test used [Template] NONE and ran normally. Flexibility when you need it.\""
+  },
+  "instructions": [
+    "Create *** Settings *** section",
+    "Add: Test Template    Should Be Equal",
+    "Create *** Test Cases *** section",
+    "Create first test 'Template Test 1'",
+    "  - Provide 2 data rows (inherits template):",
+    "    - Navigation    Operational",
+    "    - Power        Online",
+    "Create second test 'Template Test 2'",
+    "  - Provide 2 data rows:",
+    "    - Engines           Ready",
+    "    - Life Support     Active",
+    "Create third test 'Regular Test'",
+    "  - Add: [Template]    NONE",
+    "  - Add regular keywords (not template data):",
+    "    - Log    This is a regular test",
+    "    - ${status} =    Set Variable    Complete",
+    "    - Should Be Equal    ${status}    Complete",
+    "    - Log    Regular test passed"
+  ],
+  "hints": [
+    "[Template]    NONE disables template for that specific test",
+    "NONE must be in all caps",
+    "After NONE, write regular keywords (not data rows)",
+    "Other tests still use suite-level Test Template",
+    "Useful for: setup tests, teardown tests, special cases",
+    "Indentation: [Template] at keyword level (4 spaces)"
+  ],
+  "initialCode": "",
+  "solution": "*** Settings ***\nTest Template    Should Be Equal\n\n*** Test Cases ***\nTemplate Test 1\n    Navigation    Operational\n    Power        Online\n\nTemplate Test 2\n    Engines           Ready\n    Life Support     Active\n\nRegular Test\n    [Template]    NONE\n    Log    This is a regular test\n    ${status}=    Set Variable    Complete\n    Should Be Equal    ${status}    Complete\n    Log    Regular test passed",
+  "validation": {
+    "mustContain": ["*** Settings ***", "Test Template", "*** Test Cases ***", "[Template]", "NONE", "Should Be Equal"],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Exercise 2.3.5: Disabling Templates with NONE",
+    "content": "<div class=\"story-intro\"><p>MENTOR-9: \"Templates are powerful, but sometimes you need an exception. Maybe one test does setup, or cleanup, or something unique. Use [Template] NONE to opt out of the suite template for that specific test.\"</p></div><div class=\"concept-explain\"><h3>[Template] NONE</h3><p>Use <strong>NONE</strong> to disable suite-level Test Template for specific tests:</p><pre><code>*** Settings ***\nTest Template    Validate Data\n\n*** Test Cases ***\nTest 1\n    data1    expected1\n    data2    expected2\n\nTest 2\n    data3    expected3\n\nSpecial Setup Test\n    [Template]    NONE\n    Log    Running special setup\n    ${config}=    Set Variable    Custom\n    Log    Setup complete: ${config}</code></pre><p><strong>When to Use NONE:</strong></p><ul><li>Suite setup/teardown style tests</li><li>One-off validation that doesn't fit template</li><li>Logging or reporting tests</li><li>Mix templated and non-templated in same file</li></ul></div><div class=\"code-demo\"><h4>Example: Mixed Test Suite</h4><pre><code>*** Settings ***\nTest Template    Should Be Greater Than\n\n*** Test Cases ***\nPerformance Tests\n    ${response_time_1}    ${0.5}\n    ${response_time_2}    ${0.5}\n    ${response_time_3}    ${0.5}\n\nLoad Tests\n    ${concurrent_users}    ${100}\n    ${requests_per_sec}    ${50}\n\nTest Cleanup\n    [Template]    NONE\n    Log    All performance tests complete\n    ${total_tests}=    Set Variable    5\n    Log    Total tests run: ${total_tests}\n    Log    Cleanup successful</code></pre><p>First two tests are templated (Should Be Greater Than), third test is regular (cleanup).</p></div><div class=\"rules-box\"><h4>⚠️ Template NONE Tips</h4><ul><li>NONE must be uppercase (not none or None)</li><li>Only needed when Test Template exists in Settings</li><li>After NONE, write regular keywords (not data rows)</li><li>Can mix [Template] NONE and templated tests freely</li><li>Great for: cleanup, logging, special validations</li><li>Keeps suite focused but allows exceptions</li></ul></div>",
+    "estimatedReadTime": "6-7 minutes"
+  },
+  "metadata": {
+    "tags": ["templates", "template-none", "override", "mixed-tests"],
+    "prerequisites": ["ex-00-10-04"],
+    "nextExercises": ["ch-00-10"]
+  }
+}

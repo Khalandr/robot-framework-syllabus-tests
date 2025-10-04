@@ -1,0 +1,52 @@
+{
+  "id": "ex-00-10-01",
+  "type": "exercise",
+  "section": "10-test-templates",
+  "category": "00-fundamentals",
+  "title": "First Template - Basic Data-Driven Test",
+  "difficulty": "beginner",
+  "estimatedTime": "10 minutes",
+  "order": 1,
+  "description": "Create your first test template using [Template] tag to run the same keyword with multiple data sets.",
+  "story": {
+    "setup": "MENTOR-9: \"We need to verify power levels for 5 different systems. Instead of writing 5 separate test cases, use a template. One test, five data rows.\"",
+    "context": "Templates execute the same keyword multiple times with different arguments. Each data row becomes one test execution.",
+    "success": "MENTOR-9: \"Perfect! You ran 'Should Be True' five times with different conditions—one template, five executions. That's data-driven testing.\""
+  },
+  "instructions": [
+    "Create test case 'Power Level Validation'",
+    "Add [Template] tag: [Template]    Should Be True",
+    "Provide 5 data rows (no keyword names, just arguments):",
+    "  - ${50} >= 20",
+    "  - ${75} >= 20",
+    "  - ${90} >= 20",
+    "  - ${45} >= 20",
+    "  - ${100} >= 20",
+    "Each row runs Should Be True with that condition"
+  ],
+  "hints": [
+    "[Template] goes right after test case name",
+    "Indentation: [Template] at same level as keywords (4 spaces)",
+    "Data rows: Just the arguments, no keyword name",
+    "Each row executes the template keyword",
+    "All 5 conditions should pass (all >= 20)",
+    "Template syntax: [Template]    Keyword Name"
+  ],
+  "initialCode": "",
+  "solution": "*** Test Cases ***\nPower Level Validation\n    [Template]    Should Be True\n    ${50} >= 20\n    ${75} >= 20\n    ${90} >= 20\n    ${45} >= 20\n    ${100} >= 20",
+  "validation": {
+    "mustContain": ["*** Test Cases ***", "[Template]", "Should Be True", ">="],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Exercise 2.3.1: Test Templates - Data-Driven Testing",
+    "content": "<div class=\"story-intro\"><p>MENTOR-9: \"Imagine checking 100 systems with the same validation logic. Without templates, you'd copy-paste 100 test cases. With templates, you write the test ONCE and provide 100 data rows. That's the power of data-driven testing.\"</p></div><div class=\"concept-explain\"><h3>Test Templates</h3><p>A <strong>test template</strong> executes the same keyword repeatedly with different arguments:</p><pre><code>*** Test Cases ***\nValidation Test\n    [Template]    Keyword Name\n    arg1    arg2    # First execution\n    arg3    arg4    # Second execution\n    arg5    arg6    # Third execution</code></pre><p><strong>How It Works:</strong></p><ul><li><strong>[Template]</strong> tag specifies which keyword to run</li><li>Each subsequent line provides arguments for one execution</li><li>No keyword names on data rows—just arguments</li><li>Each row = one test execution</li><li>Perfect for repetitive validations with different data</li></ul></div><div class=\"code-demo\"><h4>Example: Multiple Assertions</h4><pre><code>*** Test Cases ***\nSystem Status Check\n    [Template]    Should Be Equal\n    Navigation      OK\n    Power          OK\n    Life Support   OK\n    Engines        OK</code></pre><p><strong>Execution:</strong></p><ul><li>Should Be Equal    Navigation    OK</li><li>Should Be Equal    Power    OK</li><li>Should Be Equal    Life Support    OK</li><li>Should Be Equal    Engines    OK</li></ul><p>Four executions of the same assertion, four different systems.</p></div><div class=\"rules-box\"><h4>⚠️ Template Rules</h4><ul><li>[Template] must be indented (same level as keywords)</li><li>Data rows contain ONLY arguments (no keyword name)</li><li>Each row must match keyword's argument count</li><li>Template runs each row as separate execution</li><li>If one row fails, others still execute</li><li>Great for: validations, data verification, batch operations</li></ul></div>",
+    "estimatedReadTime": "5-6 minutes"
+  },
+  "metadata": {
+    "tags": ["templates", "data-driven", "test-template", "repetition"],
+    "prerequisites": [],
+    "nextExercises": ["ex-00-10-02"]
+  }
+}
