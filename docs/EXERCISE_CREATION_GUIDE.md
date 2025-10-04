@@ -57,8 +57,13 @@ exercises/00-fundamentals/{section-id}/{exercise-id}.json
   },
   "theory": {
     "title": "Exercise Title: Concept Name",
-    "content": "<div class=\"theory-visual\"><img src=\"assets/images/theory/section-{id}/ex-{id}-{name}.png\" /></div><div class=\"story-intro\"><p>MENTOR-9: ...</p></div>",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/{section-id}/ex-00-{section}-{number}-{brief-description}.png\" alt=\"Exercise visualization\" />\n</div>\n\n<div class=\"story-intro\"><p>MENTOR-9: ...</p></div><div class=\"concept-explain\"><h3>Concept</h3><p>Educational content...</p></div>",
     "estimatedReadTime": "5-6 minutes"
+  },
+  "metadata": {
+    "tags": ["tag1", "tag2", "tag3"],
+    "prerequisites": [],
+    "nextExercises": ["ex-00-07-02"]
   }
 }
 ```
@@ -120,14 +125,50 @@ Same structure as exercise but:
 - More complex requirements
 - Integrates multiple concepts
 
-## Step 5: Add Theory Images
+## Step 5: Add Theory Image Placeholder
 
+**IMPORTANT**: Every exercise MUST include an image placeholder in the theory.content field.
+
+**Image Placeholder Format:**
+```html
+<div class="theory-visual">
+  <img src="assets/images/theory/{section-id}/{image-filename}.png" alt="Exercise visualization" />
+</div>
+
+```
+
+**Placement**: The image placeholder MUST be at the very beginning of the `theory.content` field, before any other content.
+
+**Example theory.content structure:**
+```html
+<div class="theory-visual">
+  <img src="assets/images/theory/07-for-loops/ex-00-07-01-basic-for-loop.png" alt="Exercise visualization" />
+</div>
+
+<div class="story-intro"><p>MENTOR-9: "Story introduction..."</p></div>
+<div class="concept-explain"><h3>Concept Title</h3><p>Educational content...</p></div>
+```
+
+**Image Naming Convention:**
+- Exercises: `ex-{category}-{section}-{number}-{brief-description}.png`
+  - Example: `ex-00-07-01-basic-for-loop.png`
+- Challenges: `ch-{category}-{section}-{brief-description}.png`
+  - Example: `ch-00-07-system-check-challenge.png`
+
+**Creating Image Prompts:**
 Create AI image generation prompts in:
 ```
-assets/images/theory/section-07/IMAGE_PROMPTS.md
+assets/images/theory/{section-id}/IMAGE_PROMPTS.md
 ```
 
 Use the character reference from existing sections (PROTO-7, MENTOR-9).
+
+**Automated Script (Optional):**
+If you forget to add image placeholders, you can use the `add_image_placeholders.py` script:
+```bash
+python add_image_placeholders.py
+```
+(Update the SECTIONS dictionary in the script with your new section data first)
 
 ## Step 6: Test Exercise
 
@@ -210,3 +251,43 @@ exercises/
 
 - **mustPass**: Boolean - if true, all Robot Framework tests must pass
   - Validation fails if any test case fails
+
+---
+
+## Quick Reference Checklist
+
+When creating a new exercise, ensure you have:
+
+- [ ] Created individual exercise file: `ex-00-XX-YY.json`
+- [ ] Set `"initialCode": ""` (zero scaffolding)
+- [ ] Added image placeholder at start of `theory.content`
+- [ ] Defined validation rules (mustContain, forbiddenKeywords, mustPass)
+- [ ] Included story elements (setup, context, success)
+- [ ] Added clear instructions (6-12 steps)
+- [ ] Provided helpful hints (3-5 hints)
+- [ ] Written complete solution code
+- [ ] Updated `section.json` exercises array
+- [ ] Created IMAGE_PROMPTS.md for section (if new section)
+- [ ] Tested exercise in browser
+- [ ] Verified validation works correctly
+- [ ] Committed changes with descriptive message
+
+---
+
+## Common Mistakes to Avoid
+
+1. **Forgetting Image Placeholder**: Every exercise needs `<div class="theory-visual">` at the start of theory.content
+2. **Non-empty initialCode**: ALWAYS use `"initialCode": ""` (zero scaffolding philosophy)
+3. **Inconsistent Naming**: Use `ex-00-XX-YY.json` format (not `exercise-1.json`)
+4. **Missing END statements in solution**: All WHILE, FOR, IF blocks need END
+5. **Incorrect image paths**: Use `assets/images/theory/{section-id}/{filename}.png`
+6. **Forgetting to restart servers**: Both frontend and backend must restart after adding exercises
+7. **Not updating section.json**: New exercises won't appear without being added to exercises array
+
+---
+
+## Current Exercise Status
+
+See `docs/EXERCISE_INVENTORY.md` for complete inventory of all 86 exercises across 14 sections.
+
+**Last Updated**: October 2025
