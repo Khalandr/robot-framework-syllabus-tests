@@ -27,33 +27,39 @@ const exercise = {
 
             // Load exercises for each category
             for (const cat of this.categories) {
+                console.log(`📂 Loading category: ${cat.id}`);
                 const categoryExercises = [];
 
                 try {
                     // Load category.json to get topics
                     const categoryResponse = await fetch(`exercises/${cat.id}/category.json`);
                     if (!categoryResponse.ok) {
-                        console.log(`No category.json for ${cat.id}`);
+                        console.log(`❌ No category.json for ${cat.id}`);
                         continue;
                     }
                     const categoryData = await categoryResponse.json();
+                    console.log(`   Found ${categoryData.topics.length} topics in ${cat.id}`);
 
                     // Load exercises from each topic (may have nested sections)
                     for (const topic of categoryData.topics) {
+                        console.log(`   📁 Loading topic: ${topic.id}`);
                         try {
                             // First try loading topic.json to check for sections
                             const topicResponse = await fetch(`exercises/${cat.id}/${topic.id}/topic.json`);
                             if (topicResponse.ok) {
                                 const topicData = await topicResponse.json();
+                                console.log(`      Topic has ${topicData.sections?.length || 0} sections`);
 
                                 // If topic has sections, load exercises from each section
                                 if (topicData.sections && topicData.sections.length > 0) {
                                     for (const section of topicData.sections) {
+                                        console.log(`      📄 Loading section: ${section.id}`);
                                         try {
                                             // NEW: Load section.json to get exercise IDs
                                             const sectionResponse = await fetch(`exercises/${cat.id}/${topic.id}/${section.id}/section.json`);
                                             if (sectionResponse.ok) {
                                                 const sectionData = await sectionResponse.json();
+                                                console.log(`         Found ${sectionData.exercises.length} exercises, ${sectionData.challenges.length} challenges`);
 
                                                 // Load individual exercise files in parallel
                                                 const exercisePromises = (sectionData.exercises || []).map(exerciseId =>
@@ -73,8 +79,11 @@ const exercise = {
                                                 const challenges = await Promise.all(challengePromises);
 
                                                 // Add non-null exercises and challenges
-                                                categoryExercises.push(...exercises.filter(e => e !== null));
-                                                categoryExercises.push(...challenges.filter(c => c !== null));
+                                                const validExercises = exercises.filter(e => e !== null);
+                                                const validChallenges = challenges.filter(c => c !== null);
+                                                console.log(`         ✅ Loaded ${validExercises.length} exercises, ${validChallenges.length} challenges`);
+                                                categoryExercises.push(...validExercises);
+                                                categoryExercises.push(...validChallenges);
                                             } else {
                                                 // FALLBACK: Try old structure (exercises.json) if section.json doesn't exist
                                                 const exercisesResponse = await fetch(`exercises/${cat.id}/${topic.id}/${section.id}/exercises.json`);
@@ -125,6 +134,9 @@ const exercise = {
                 if (categoryExercises.length > 0) {
                     this.exercisesByCategory[cat.id] = categoryExercises;
                     this.allExercises.push(...categoryExercises);
+                    console.log(`✅ Category ${cat.id}: ${categoryExercises.length} total exercises loaded`);
+                } else {
+                    console.log(`⚠️  Category ${cat.id}: No exercises found`);
                 }
             }
 
