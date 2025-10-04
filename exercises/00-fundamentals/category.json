@@ -53,6 +53,11 @@
       "id": "06-if-statements",
       "name": "Section 2.3: IF Statements",
       "order": 6
+    },
+    {
+      "id": "07-for-loops",
+      "name": "Section 2.4: FOR Loops",
+      "order": 7
     }
   ],
   "learningObjectives": [

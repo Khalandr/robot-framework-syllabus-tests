@@ -1,0 +1,39 @@
+{
+  "id": "07-for-loops",
+  "section": "2.4",
+  "title": "FOR Loops",
+  "category": "00-fundamentals",
+  "order": 7,
+  "difficulty": "beginner-to-intermediate",
+  "estimatedTime": "40-45 minutes",
+  "story": {
+    "introduction": "Day 12 on planet Syntax-IV. The ship's systems need repetitive checks on multiple components.\n\n\"PROTO-7, diagnostics can't check systems one by one forever. Time to learn FOR loops - the power of iteration!\"\n\n\"One loop can check ten systems. One hundred. One thousand. This is automation at its finest.\"",
+    "context": "FOR loops enable iteration over ranges, lists, and sequences. Write the logic once, execute it repeatedly with different data."
+  },
+  "learningObjectives": [
+    "Understand FOR loop syntax and structure",
+    "Use FOR...IN RANGE for numeric iteration",
+    "Iterate over list variables with FOR...IN",
+    "Use FOR...IN ENUMERATE for index + value",
+    "Implement nested FOR loops",
+    "Master loop indentation and END keyword"
+  ],
+  "conceptsCovered": [
+    "FOR loop syntax",
+    "IN RANGE iteration",
+    "List iteration",
+    "ENUMERATE function",
+    "Nested loops",
+    "Loop variable scope"
+  ],
+  "exercises": [
+    "ex-2-4-1",
+    "ex-2-4-2",
+    "ex-2-4-3",
+    "ex-2-4-4",
+    "ex-2-4-5"
+  ],
+  "challenges": [
+    "challenge-2-4"
+  ]
+}
