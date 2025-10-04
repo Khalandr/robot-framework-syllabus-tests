@@ -88,6 +88,11 @@
       "id": "13-datetime-library",
       "name": "Section 4.3: DateTime Library",
       "order": 13
+    },
+    {
+      "id": "14-final-integration",
+      "name": "Section 5.1: Final Integration - Ship Launch",
+      "order": 14
     }
   ],
   "learningObjectives": [
