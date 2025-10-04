@@ -456,20 +456,212 @@ exercises/00-fundamentals/01-first-contact/01-system-boot/
 
 See REFACTORING_PLAN.md for complete implementation details.
 
+---
+
+## 📚 HOW TO CREATE NEW EXERCISES (Step-by-Step Guide)
+
+### Prerequisites
+- Frontend running: `npm run dev` (port 8080)
+- Backend running: `cd backend && uvicorn app.main:app --reload` (port 8000)
+- Both must be restarted after adding new exercises
+
+### Step 1: Create Individual Exercise File
+
+**File location pattern:**
+```
+exercises/00-fundamentals/01-first-contact/{section-id}/{exercise-id}.json
+```
+
+**Example:** Create `ex-1-4-1.json` for a new exercise:
+
+```json
+{
+  "id": "ex-1-4-1",
+  "type": "exercise",
+  "section": "04-new-section",
+  "chapter": "01-first-contact",
+  "title": "Your Exercise Title",
+  "difficulty": "beginner",
+  "estimatedTime": "10 minutes",
+  "order": 1,
+  "description": "One-sentence description",
+  "story": {
+    "setup": "MENTOR-9: \"Setup dialogue...\"",
+    "context": "Why this matters...",
+    "success": "MENTOR-9: \"Success feedback...\""
+  },
+  "instructions": [
+    "Step 1: Do this",
+    "Step 2: Do that",
+    "Step 3: Verify result"
+  ],
+  "hints": [
+    "Hint 1: Remember...",
+    "Hint 2: Don't forget..."
+  ],
+  "initialCode": "",
+  "solution": "*** Test Cases ***\nExample\n    Log    Solution",
+  "validation": {
+    "mustContain": ["*** Test Cases ***", "Log"],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Exercise Title: Concept Name",
+    "content": "<div class=\"theory-visual\"><img src=\"assets/images/theory/section-{id}/ex-{id}-{name}.png\" /></div><div class=\"story-intro\"><p>MENTOR-9: ...</p></div>",
+    "estimatedReadTime": "5-6 minutes"
+  }
+}
+```
+
+### Step 2: Update section.json
+
+Add your exercise ID to the section's exercise list:
+
+```json
+{
+  "id": "04-new-section",
+  "title": "Section Title",
+  "exercises": [
+    "ex-1-4-1",
+    "ex-1-4-2"
+  ],
+  "challenges": [
+    "challenge-1-4"
+  ]
+}
+```
+
+### Step 3: Update topic.json (If New Section)
+
+If creating a NEW section, add it to the parent topic:
+
+```json
+{
+  "id": "01-first-contact",
+  "sections": [
+    {
+      "id": "01-system-boot",
+      "name": "Section 1.1: System Boot",
+      "order": 1,
+      "exerciseCount": 5,
+      "hasChallengeExercise": true
+    },
+    {
+      "id": "04-new-section",
+      "name": "Section 1.4: New Concept",
+      "order": 4,
+      "exerciseCount": 2,
+      "hasChallengeExercise": true
+    }
+  ]
+}
+```
+
+### Step 4: Create Challenge (Optional)
+
+**File:** `challenge-1-4.json`
+
+Same structure as exercise but:
+- `"type": "challenge"`
+- More complex requirements
+- Integrates multiple concepts
+
+### Step 5: Add Theory Images
+
+Create AI image generation prompts in:
+```
+assets/images/theory/section-1-4/IMAGE_PROMPTS.md
+```
+
+Use the character reference from existing sections (PROTO-7, MENTOR-9).
+
+### Step 6: Test Exercise
+
+1. **Restart servers:**
+   ```bash
+   # Kill frontend (Ctrl+C in npm terminal)
+   npm run dev
+
+   # Kill backend (Ctrl+C in uvicorn terminal)
+   cd backend
+   uvicorn app.main:app --reload
+   ```
+
+2. **Test in browser:**
+   - Navigate to Exercises tab
+   - Select category
+   - Find your exercise
+   - Try solving it
+   - Verify validation works
+
+3. **Check console:**
+   - No errors loading exercise
+   - Validation messages appear
+   - Code execution works
+
+### Step 7: Commit Changes
+
+```bash
+git add exercises/00-fundamentals/01-first-contact/{section-id}/
+git commit -m "Add exercise {id}: {title}"
+git push origin feature/code-exercises
+```
+
+---
+
+## 🚨 IMPORTANT RULES
+
+### Zero Scaffolding Philosophy
+- **ALWAYS** set `"initialCode": ""`
+- Students must write COMPLETE tests from scratch
+- No starter code, no templates
+
+### File Naming Conventions
+- Exercises: `ex-{chapter}-{section}-{number}.json`
+- Challenges: `challenge-{chapter}-{section}.json`
+- Examples: `ex-1-1-1.json`, `challenge-1-3.json`
+
+### Theory Content
+- Must include `<div class="theory-visual">` with image
+- Use `<div class="story-intro">` for MENTOR-9 dialogue
+- Use `<div class="concept-explain">` for educational content
+- Use `<div class="code-demo">` for code examples
+- Use `<div class="try-it">` for practice prompts
+
+### Validation Rules
+- `mustContain`: Case-sensitive string matching
+- `forbiddenKeywords`: Block specific keywords (e.g., "Library")
+- `mustPass`: Require all RF tests to pass
+
+---
+
+## 📂 Current Exercise Inventory
+
+**Completed:**
+- Section 1.1: System Boot (5 exercises + 1 challenge) ✅
+- Section 1.2: Memory Banks (7 exercises + 1 challenge) ✅
+- Section 1.3: System Checks (7 exercises + 1 challenge) ✅
+
+**Total:** 21 exercises implemented
+
+**Remaining:** 63 exercises across chapters 2-5
+
+---
+
 ### Next Steps
 
 #### Short Term (Ready to Proceed)
-- Fix 404 errors in RF log/report internal navigation (minor UX issue)
-- Implement remaining 63 exercises across 4 chapters
-- Add intermediate difficulty exercises
+- Continue implementing remaining exercises using above guide
+- Section 1.4 onwards (63 exercises remaining)
+- Generate AI images for existing exercises
 - Add Docker-based sandboxing for production deployment
-- Deploy backend to cloud (AWS Lambda/Cloud Run)
 
 #### Long Term
 - User progress tracking (optional)
 - Exercise difficulty progression system
 - Community-contributed exercises
-- Integration tests for exercise validation
+- Deploy backend to cloud (AWS Lambda/Cloud Run)
 
 ## Important Notes
 
@@ -537,63 +729,88 @@ This approach ensures:
 
 ## Code Exercises - Technical Details
 
-### Exercise JSON Structure
+### ✅ CURRENT EXERCISE STRUCTURE (After Refactoring)
 
-**Current Structure** (Story-Driven with Sections):
+**Modular Structure: 1 Exercise = 1 File**
+
 ```
 exercises/
+├── index.json                                    # Root index (lists active categories)
 └── 00-fundamentals/
-    ├── index.json                           # Category metadata
-    ├── category.json                        # Topics list
+    ├── category.json                             # Category metadata + topics list
     └── 01-first-contact/
-        ├── topic.json                       # Sections list
+        ├── topic.json                            # Topic metadata + sections list
         └── 01-system-boot/
-            ├── exercises.json               # 5 regular exercises
-            ├── challenge.json               # 1 mini-challenge
-            └── topic.json                   # Section metadata
+            ├── section.json                      # Section metadata + exercise/challenge IDs
+            ├── ex-1-1-1.json                    # Individual exercise file
+            ├── ex-1-1-2.json                    # Individual exercise file
+            ├── ex-1-1-3.json
+            ├── ex-1-1-4.json
+            ├── ex-1-1-5.json
+            ├── challenge-1-1.json               # Individual challenge file
+            └── OLD_STRUCTURE_BACKUP/            # Backups (gitignored)
 ```
 
-**Exercise File Format** (exercises.json):
+**Benefits:**
+- ✅ Edit one exercise without affecting others
+- ✅ Clean git diffs (only changed file appears)
+- ✅ Parallel development (no merge conflicts)
+- ✅ Direct file access by exercise ID
+
+### Individual Exercise File Format (ex-1-1-1.json):
 ```json
 {
+  "id": "ex-1-1-1",
+  "type": "exercise",
   "section": "01-system-boot",
-  "exercises": [
-    {
-      "id": "ex-1-1-1",
-      "title": "First Boot Sequence",
-      "difficulty": "beginner",
-      "estimatedTime": "8 minutes",
-      "order": 1,
-      "description": "Create a complete boot sequence with multiple sequential status messages.",
-      "story": {
-        "setup": "MENTOR-9: \"Let's verify your core functions...\"",
-        "context": "Sequential execution is how robots communicate...",
-        "success": "MENTOR-9: \"Excellent! All five boot messages...\""
-      },
-      "instructions": [
-        "Create the *** Test Cases *** section header at the left margin",
-        "Create a test case named 'Boot Sequence'",
-        "Log 5 sequential boot messages showing system initialization stages"
-      ],
-      "hints": [
-        "Remember: Test case names start at left margin (no indentation)",
-        "Keywords must be indented with at least 2 spaces (4 recommended)"
-      ],
-      "initialCode": "",
-      "solution": "*** Test Cases ***\nBoot Sequence\n    Log    Initializing...",
-      "validation": {
-        "mustContain": ["*** Test Cases ***", "Boot Sequence", "Log"],
-        "forbiddenKeywords": [],
-        "mustPass": true
-      },
-      "theory": {
-        "title": "Exercise 1.1.1: Sequential Execution",
-        "content": "<div class=\"theory-visual\">\n<img src=\"assets/images/theory/section-1-1/ex-1-1-1-boot-sequence.png\" ... />\n</div>\n\n<div class=\"story-intro\">...</div>\n<div class=\"concept-explain\">...</div>"
-      }
-    }
-  ]
+  "chapter": "01-first-contact",
+  "title": "First Boot Sequence",
+  "difficulty": "beginner",
+  "estimatedTime": "8 minutes",
+  "order": 1,
+  "description": "Create a complete boot sequence with multiple sequential status messages.",
+  "story": {
+    "setup": "MENTOR-9: \"Let's verify your core functions...\"",
+    "context": "Sequential execution is how robots communicate...",
+    "success": "MENTOR-9: \"Excellent! All five boot messages...\""
+  },
+  "instructions": [
+    "Create the *** Test Cases *** section header at the left margin",
+    "Create a test case named 'Boot Sequence'",
+    "Log 5 sequential boot messages showing system initialization stages"
+  ],
+  "hints": [
+    "Remember: Test case names start at left margin (no indentation)",
+    "Keywords must be indented with at least 2 spaces (4 recommended)"
+  ],
+  "initialCode": "",
+  "solution": "*** Test Cases ***\nBoot Sequence\n    Log    Initializing...",
+  "validation": {
+    "mustContain": ["*** Test Cases ***", "Boot Sequence", "Log"],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Exercise 1.1.1: Sequential Execution",
+    "content": "<div class=\"theory-visual\">...</div>...",
+    "estimatedReadTime": "5-6 minutes"
+  },
+  "metadata": {
+    "tags": ["fundamentals", "sequential-execution", "logging"],
+    "prerequisites": [],
+    "nextExercises": ["ex-1-1-2"]
+  }
 }
 ```
+
+**Key Fields:**
+- `id`: Unique identifier (ex-{chapter}-{section}-{number})
+- `type`: "exercise" or "challenge"
+- `section`/`chapter`: Parent references
+- `initialCode`: ALWAYS blank (zero scaffolding philosophy)
+- `validation.mustContain`: Required keywords/text (case-sensitive)
+- `validation.mustPass`: If true, all RF tests must pass
+- `theory.content`: Full HTML theory with images and styled divs
 
 **Validation Rules Explained:**
 - **mustContain**: Array of strings that MUST appear in the code (case-sensitive)
