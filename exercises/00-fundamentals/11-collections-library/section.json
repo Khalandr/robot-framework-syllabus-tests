@@ -1,0 +1,23 @@
+{
+  "id": "11-collections-library",
+  "section": "4.1",
+  "title": "Collections Library",
+  "category": "00-fundamentals",
+  "order": 11,
+  "difficulty": "intermediate-to-advanced",
+  "estimatedTime": "50 minutes",
+  "description": "Master the Collections library for advanced list and dictionary operations.",
+  "story": {
+    "setup": "MENTOR-9: \"We've been using basic list and dictionary operations with BuiltIn library. But for complex data manipulation—sorting, filtering, merging, searching—we need the Collections library. It's like upgrading from basic tools to professional equipment.\"",
+    "context": "Collections library provides powerful keywords for working with lists and dictionaries. Real automation often involves complex data structures that need advanced manipulation.",
+    "arc": "Learn to import libraries, use advanced list operations (Append, Sort, Get Slice), dictionary operations (Set/Get From Dictionary), and work with nested data structures."
+  },
+  "exercises": [
+    "ex-00-11-01",
+    "ex-00-11-02",
+    "ex-00-11-03",
+    "ex-00-11-04",
+    "ex-00-11-05"
+  ],
+  "challenges": ["ch-00-11"]
+}

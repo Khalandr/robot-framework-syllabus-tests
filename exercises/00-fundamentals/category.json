@@ -73,6 +73,11 @@
       "id": "10-test-templates",
       "name": "Section 2.3: Test Templates",
       "order": 10
+    },
+    {
+      "id": "11-collections-library",
+      "name": "Section 4.1: Collections Library",
+      "order": 11
     }
   ],
   "learningObjectives": [

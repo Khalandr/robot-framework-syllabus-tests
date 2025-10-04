@@ -1,0 +1,53 @@
+{
+  "id": "ex-00-11-01",
+  "type": "exercise",
+  "section": "11-collections-library",
+  "category": "00-fundamentals",
+  "title": "Importing Collections Library",
+  "difficulty": "beginner",
+  "estimatedTime": "8 minutes",
+  "order": 1,
+  "description": "Import the Collections library and use Append To List to add items dynamically.",
+  "story": {
+    "setup": "MENTOR-9: \"BuiltIn library is always available, but Collections library must be imported. Add 'Library    Collections' to your Settings section, then you can use advanced keywords like Append To List.\"",
+    "context": "Libraries extend Robot Framework's capabilities. Collections provides list/dict manipulation that BuiltIn doesn't have.",
+    "success": "MENTOR-9: \"Perfect! You imported Collections and used Append To List to add items dynamically. That's how we extend RF's functionality.\""
+  },
+  "instructions": [
+    "Create *** Settings *** section",
+    "Add: Library    Collections",
+    "Create *** Test Cases *** section",
+    "Create test case 'Dynamic System List'",
+    "  - Create empty list: @{systems} =    Create List",
+    "  - Append To List    ${systems}    Navigation",
+    "  - Append To List    ${systems}    Power",
+    "  - Append To List    ${systems}    Engines",
+    "  - Log Many    @{systems}",
+    "  - ${count} =    Get Length    ${systems}",
+    "  - Should Be Equal As Integers    ${count}    3"
+  ],
+  "hints": [
+    "Library import goes in *** Settings *** section",
+    "Syntax: Library    Collections (capital C)",
+    "Append To List adds items to existing list",
+    "Get Length returns number of items",
+    "Log Many displays all list items"
+  ],
+  "initialCode": "",
+  "solution": "*** Settings ***\nLibrary    Collections\n\n*** Test Cases ***\nDynamic System List\n    @{systems}=    Create List\n    Append To List    ${systems}    Navigation\n    Append To List    ${systems}    Power\n    Append To List    ${systems}    Engines\n    Log Many    @{systems}\n    ${count}=    Get Length    ${systems}\n    Should Be Equal As Integers    ${count}    3",
+  "validation": {
+    "mustContain": ["*** Settings ***", "Library", "Collections", "*** Test Cases ***", "Append To List", "Get Length"],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Exercise 4.1.1: Importing Libraries",
+    "content": "<div class=\"story-intro\"><p>MENTOR-9: \"Robot Framework has three types of libraries: BuiltIn (always available), Standard libraries (included but must be imported), and External libraries (installed separately). Collections is a standard library—it ships with RF but needs explicit import.\"</p></div><div class=\"concept-explain\"><h3>Library Imports</h3><p>Use <strong>Library</strong> setting to import libraries:</p><pre><code>*** Settings ***\nLibrary    Collections\nLibrary    String\nLibrary    DateTime</code></pre><p><strong>Collections Library Keywords:</strong></p><ul><li><strong>Append To List</strong>: Add items dynamically</li><li><strong>Remove Values From List</strong>: Delete specific values</li><li><strong>Sort List</strong>: Sort alphabetically or numerically</li><li><strong>Get Slice From List</strong>: Extract sub-list</li><li><strong>List Should Contain Value</strong>: Assertion for membership</li></ul></div><div class=\"code-demo\"><h4>Example: Building List Dynamically</h4><pre><code>*** Settings ***\nLibrary    Collections\n\n*** Test Cases ***\nBuild Component List\n    @{components}=    Create List    Engine\n    Append To List    ${components}    Navigation    Power\n    Log    Components: ${components}\n    ${length}=    Get Length    ${components}\n    Should Be Equal As Integers    ${length}    3</code></pre></div><div class=\"rules-box\"><h4>⚠️ Library Import Rules</h4><ul><li>Import in *** Settings *** section</li><li>Library names are case-sensitive</li><li>Standard libraries: Collections, String, DateTime, OperatingSystem</li><li>Once imported, keywords available in entire file</li><li>No need to re-import in every test</li></ul></div>",
+    "estimatedReadTime": "5-6 minutes"
+  },
+  "metadata": {
+    "tags": ["collections", "library-import", "append-to-list", "settings"],
+    "prerequisites": [],
+    "nextExercises": ["ex-00-11-02"]
+  }
+}
