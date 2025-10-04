@@ -83,6 +83,11 @@
       "id": "12-string-library",
       "name": "Section 4.2: String Library",
       "order": 12
+    },
+    {
+      "id": "13-datetime-library",
+      "name": "Section 4.3: DateTime Library",
+      "order": 13
     }
   ],
   "learningObjectives": [

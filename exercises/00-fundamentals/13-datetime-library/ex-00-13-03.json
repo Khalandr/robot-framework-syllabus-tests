@@ -1,0 +1,61 @@
+{
+  "id": "ex-00-13-03",
+  "type": "exercise",
+  "section": "13-datetime-library",
+  "category": "00-fundamentals",
+  "title": "Subtract Date From Date - Duration Calculation",
+  "difficulty": "intermediate",
+  "estimatedTime": "12 minutes",
+  "order": 3,
+  "description": "Use Subtract Date From Date to calculate elapsed time between two timestamps.",
+  "story": {
+    "setup": "MENTOR-9: \"Diagnostic started at 14:00, ended at 14:15. How long did it take? Subtract Date From Date calculates the duration between two timestamps.\"",
+    "context": "Subtracting dates gives elapsed time. Essential for performance measurement, timeout validation, and duration tracking.",
+    "success": "MENTOR-9: \"Perfect! You calculated the diagnostic took 900 seconds (15 minutes). Duration calculation is critical for performance testing.\""
+  },
+  "instructions": [
+    "Create *** Settings *** section with Library    DateTime",
+    "Create *** Test Cases *** section",
+    "Create test case 'Measure Diagnostic Duration'",
+    "  - ${start_time} =    Get Current Date",
+    "  - Log    Diagnostic started",
+    "  - Sleep    2s",
+    "  - ${end_time} =    Get Current Date",
+    "  - Log    Diagnostic completed",
+    "  - ${duration} =    Subtract Date From Date    ${end_time}    ${start_time}",
+    "  - Log    Duration: ${duration} seconds",
+    "  - ${duration_num} =    Convert To Number    ${duration}",
+    "  - Should Be True    ${duration_num} >= 2",
+    "  - Should Be True    ${duration_num} < 3",
+    "Create test case 'Calculate Time Difference'",
+    "  - ${time1} =    Convert Date    2025-10-04 14:00:00    result_format=%Y-%m-%d %H:%M:%S",
+    "  - ${time2} =    Convert Date    2025-10-04 14:15:00    result_format=%Y-%m-%d %H:%M:%S",
+    "  - ${diff} =    Subtract Date From Date    ${time2}    ${time1}",
+    "  - Log    Time difference: ${diff} seconds",
+    "  - Should Be Equal As Numbers    ${diff}    900"
+  ],
+  "hints": [
+    "Subtract Date From Date returns seconds (as string)",
+    "Syntax: later_date    earlier_date",
+    "Result is positive if date1 > date2",
+    "Convert To Number for arithmetic operations",
+    "Sleep keyword pauses execution (for testing)"
+  ],
+  "initialCode": "",
+  "solution": "*** Settings ***\nLibrary    DateTime\n\n*** Test Cases ***\nMeasure Diagnostic Duration\n    ${start_time}=    Get Current Date\n    Log    Diagnostic started\n    Sleep    2s\n    ${end_time}=    Get Current Date\n    Log    Diagnostic completed\n    ${duration}=    Subtract Date From Date    ${end_time}    ${start_time}\n    Log    Duration: ${duration} seconds\n    ${duration_num}=    Convert To Number    ${duration}\n    Should Be True    ${duration_num} >= 2\n    Should Be True    ${duration_num} < 3\n\nCalculate Time Difference\n    ${time1}=    Convert Date    2025-10-04 14:00:00    result_format=%Y-%m-%d %H:%M:%S\n    ${time2}=    Convert Date    2025-10-04 14:15:00    result_format=%Y-%m-%d %H:%M:%S\n    ${diff}=    Subtract Date From Date    ${time2}    ${time1}\n    Log    Time difference: ${diff} seconds\n    Should Be Equal As Numbers    ${diff}    900",
+  "validation": {
+    "mustContain": ["*** Settings ***", "Library", "DateTime", "Subtract Date From Date", "Sleep"],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Exercise 4.3.3: Subtract Date From Date",
+    "content": "<div class=\"story-intro\"><p>MENTOR-9: \"How long did it take? How much time remains? Subtract Date From Date gives you the duration between two timestamps—essential for performance measurement.\"</p></div><div class=\"concept-explain\"><h3>Subtract Date From Date</h3><p>Calculate time difference:</p><pre><code>Library    DateTime\n\n${start}=    Get Current Date\nSleep    5s\n${end}=    Get Current Date\n\n${duration}=    Subtract Date From Date    ${end}    ${start}\n# Result: ~5.0 (seconds as string)\n\n${elapsed}=    Convert To Number    ${duration}\n# Convert for arithmetic</code></pre><p><strong>Result Format:</strong></p><ul><li>Default: seconds as string</li><li>Use result_format for custom units</li><li>Positive if date1 > date2</li><li>Negative if date1 < date2</li></ul><p><strong>Result Format Options:</strong></p><pre><code>${days}=    Subtract Date From Date    ${d2}    ${d1}    result_format=number\n${verbose}=    Subtract Date From Date    ${d2}    ${d1}    result_format=verbose\n# verbose: '2 days 3 hours 15 minutes'</code></pre></div><div class=\"code-demo\"><h4>Example: Performance Validation</h4><pre><code>*** Settings ***\nLibrary    DateTime\n\n*** Test Cases ***\nValidate Response Time\n    ${start}=    Get Current Date\n    # API call or operation\n    ${end}=    Get Current Date\n    ${elapsed}=    Subtract Date From Date    ${end}    ${start}\n    ${elapsed_num}=    Convert To Number    ${elapsed}\n    Should Be True    ${elapsed_num} < 3    msg=Response too slow: ${elapsed}s</code></pre></div><div class=\"rules-box\"><h4>⚠️ Subtract Date From Date Tips</h4><ul><li>Returns seconds by default (as string)</li><li>Order matters: later_date minus earlier_date</li><li>Convert To Number for comparisons</li><li>Use for: duration, performance, timeout validation</li><li>result_format=verbose for human-readable output</li></ul></div>",
+    "estimatedReadTime": "6-7 minutes"
+  },
+  "metadata": {
+    "tags": ["datetime", "subtract-date", "duration", "elapsed-time", "performance"],
+    "prerequisites": ["ex-00-13-02"],
+    "nextExercises": ["ex-00-13-04"]
+  }
+}
