@@ -95,7 +95,7 @@ const exercise = {
                                                 }
                                             }
                                         } catch (err) {
-                                            console.log(`No exercises for ${cat.id}/${topic.id}/${section.id}`);
+                                            console.error(`Error loading section ${cat.id}/${topic.id}/${section.id}:`, err);
                                         }
                                     }
                                 } else {
@@ -128,7 +128,8 @@ const exercise = {
                 }
             }
 
-            console.log(`Loaded ${this.allExercises.length} exercises across ${Object.keys(this.exercisesByCategory).length} categories`);
+            console.log(`✅ Loaded ${this.allExercises.length} exercises across ${Object.keys(this.exercisesByCategory).length} categories`);
+            console.log('Exercises by category:', this.exercisesByCategory);
             this.displayCategoryList();
         } catch (error) {
             console.error('Error loading exercises:', error);
