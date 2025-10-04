@@ -1,0 +1,829 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## 🚀 Quick Start - Running the Application
+
+### Multiple-Choice Tests (Production - main branch)
+```bash
+npm run dev
+# Opens at http://localhost:8080
+# No backend needed - pure frontend application
+```
+
+### Code Exercises (MVP - feature/code-exercises branch)
+
+**Terminal 1 - Frontend:**
+```bash
+npm run dev
+# Opens at http://localhost:8080
+```
+
+**Terminal 2 - Backend:**
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+# API running at http://localhost:8000
+```
+
+**Test the MVP:**
+1. Navigate to Exercises tab
+2. Select "Basic Syntax & Structure" category
+3. Try any exercise
+4. Write code and click "Run Code"
+5. See results in Console/Log/Report tabs
+
+---
+
+## ⚠️ Important: Maintaining This Document
+**CRITICAL**: After any significant architectural changes, feature additions, or structural modifications to the project, you MUST update this CLAUDE.md file to reflect the changes. This ensures future Claude sessions have accurate context about the project.
+
+## Repository Overview
+
+This is a Robot Framework training and practice platform with two main features:
+
+1. **Multiple-Choice Tests** (Production - main branch)
+   - 562 questions across 5 chapters
+   - Multiple practice modes (Chapter, Subchapter, Random, Exam, Review)
+   - Pure frontend, no backend needed
+   - Deployed on GitHub Pages
+
+2. **Code Exercises** (Working MVP - feature/code-exercises branch)
+   - Interactive RF coding challenges with real execution
+   - **Story-driven learning**: PROTO-7 & MENTOR-9 narrative on planet Syntax-IV
+   - **Comic-style visuals**: AI-generated images for each exercise theory
+   - **21 exercises implemented**: Section 1.1 (6) + Section 1.2 (8) + Section 1.3 (7) + 3 challenges - 84 total planned
+   - FastAPI backend + Monaco editor frontend
+   - **Full validation system** with exercise requirements checking
+   - **Zero scaffolding philosophy**: Blank initialCode forces complete test writing
+   - **Production-ready architecture** after recent refactoring
+   - ⚠️ **REQUIRES REFACTORING**: Current structure groups exercises in single JSON files per section (see REFACTORING_PLAN.md)
+
+## Project Architecture
+
+### **Architecture: Multiple-Choice Tests**
+- **Technology**: Vanilla JavaScript, HTML5, CSS3 (no heavy frameworks)
+- **Design**: Minimalistic, responsive design using Robot Framework Foundation official colors
+- **Deployment**: Static files deployed to GitHub Pages
+- **Security**: Password protection using SHA-256 hashing (frontend-based, session storage)
+- **Status**: Production-ready ✅
+
+### **Architecture: Code Exercises (Production-Ready MVP)**
+- **Learning Approach**: Story-driven with PROTO-7 (student) & MENTOR-9 (teacher) characters
+- **Narrative**: Crashed on planet Syntax-IV, repair ship diagnostics to escape (20-day timeline)
+- **Visual Design**: Comic-style AI-generated images for each exercise (1920x1080 PNG)
+- **Exercise Structure**:
+  - Zero scaffolding (blank initialCode)
+  - Story setup in each exercise (setup, context, success)
+  - Comprehensive instructions (8-12 steps)
+  - HTML-based theory content with styled sections
+  - Images displayed directly in theory section (after header, before collapsible content)
+- **Frontend**: Full-screen 3-panel layout (Task | Code Editor | Output)
+- **Backend**: Python/FastAPI with Robot Framework 7.0 execution
+- **Execution**: Subprocess-based with regex security validation (case-insensitive)
+- **Validation System**: Comprehensive exercise requirement checking (mustContain, forbiddenKeywords, mustPass)
+- **Configuration**: Centralized config module with dev/prod environment detection
+- **Styling**: CSS variables system with opacity/spacing/radius scales
+- **Output**: Console + RF log.html/report.html in iframes
+- **Storage**: Stateless (no user progress tracking)
+- **Security**: Code validation, 30s timeout, 5KB limit, regex-based keyword filtering
+- **Status**: Production-ready architecture ✅ (refactored for scalability)
+- **Branch**: `feature/code-exercises`
+- **Ports**: Frontend on 8080, Backend on 8000
+
+### Question Storage Structure
+```
+questions/
+├── chapter-1/
+│   ├── 1.1-subchapter-name.json
+│   ├── 1.2-subchapter-name.json
+│   └── ...
+├── chapter-2/
+│   ├── 2.1-subchapter-name.json
+│   ├── 2.2-subchapter-name.json
+│   └── ...
+├── chapter-3/
+├── chapter-4/
+└── chapter-5/
+```
+
+### Question JSON Schema
+
+#### Single Correct Answer Question
+```json
+{
+  "chapter": "1-Introduction to Robot Framework",
+  "subchapter": "1.1-Basic Concepts",
+  "questions": [
+    {
+      "id": "unique-id",
+      "question": "Question text",
+      "type": "single",
+      "options": [
+        {
+          "text": "Option A",
+          "correct": true
+        },
+        {
+          "text": "Option B",
+          "correct": false,
+          "explanation": "Why this is wrong"
+        },
+        {
+          "text": "Option C",
+          "correct": false,
+          "explanation": "Why this is wrong"
+        },
+        {
+          "text": "Option D",
+          "correct": false,
+          "explanation": "Why this is wrong"
+        }
+      ]
+    }
+  ]
+}
+```
+
+#### Multiple Correct Answers Question
+```json
+{
+  "chapter": "2-Robot Framework Architecture",
+  "subchapter": "2.3-Test Libraries",
+  "questions": [
+    {
+      "id": "unique-id-2",
+      "question": "Which of the following are built-in Robot Framework libraries? (Select all that apply)",
+      "type": "multiple",
+      "options": [
+        {
+          "text": "BuiltIn",
+          "correct": true
+        },
+        {
+          "text": "Collections",
+          "correct": true
+        },
+        {
+          "text": "SeleniumLibrary",
+          "correct": false,
+          "explanation": "SeleniumLibrary is an external library, not built-in"
+        },
+        {
+          "text": "String",
+          "correct": true
+        },
+        {
+          "text": "RequestsLibrary",
+          "correct": false,
+          "explanation": "RequestsLibrary is an external library, not built-in"
+        }
+      ]
+    }
+  ]
+}
+```
+
+## Key Features
+
+### Navigation & UI Structure
+- **Tab-based Navigation**: Two main sections
+  - **Tests Tab**: Multiple-choice practice questions
+  - **Exercises Tab**: Code challenges (coming soon)
+- **Visual Distinction**: Clear separation between theory (tests) and practice (exercises)
+- **Password Gate**: Both sections protected by same authentication
+
+### Password Protection
+- **Access Control**: Password gate before accessing practice questions
+- **Hash Method**: SHA-256 hashing for password verification
+- **Default Password**: "admin" (hash: `9bf32d...19d1f`)
+- **Configuration**: Password hash stored in `js/config.js` as `PASSWORD_HASH`
+- **Session Persistence**: Authentication stored in sessionStorage (lasts for browser session)
+- **Security Level**: Frontend-only protection (not suitable for highly sensitive data, but adequate for practice app)
+- **Changing Password**:
+  1. Generate SHA-256 hash of new password (use: https://emn178.github.io/online-tools/sha256.html)
+  2. Update `PASSWORD_HASH` value in `js/config.js`
+  3. Auth module automatically uses `config.PASSWORD_HASH`
+
+### Practice Modes
+1. **Chapter Practice**: Practice all questions from a selected chapter
+2. **Subchapter Practice**: Practice questions from a specific subchapter (x.x level)
+3. **Random Practice**: Shuffle random questions from all chapters
+4. **Exam Mode**: 40-question test with proportional distribution from all chapters
+5. **Review Mode**: Review all questions with IDs in constant order, with export functionality
+
+### Question Handling
+- Answer options are shuffled each time a question is displayed
+- Questions within practice sets are shuffled
+- Wrong answer explanations are provided after submission
+- Supports both single and multiple correct answer questions
+- For multiple answer questions, user must select all correct answers to get full credit
+
+### Statistics & Feedback
+- Track correct/wrong answers per chapter and subchapter
+- Display performance statistics after each practice session
+- Provide recommendations on topics to review based on results
+
+## Development Commands
+
+### Setup
+```bash
+# Install dependencies (if any)
+npm install
+
+# Run local development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Run tests
+npm test
+```
+
+### Deployment
+```bash
+# Deploy to GitHub Pages
+npm run deploy
+
+# Or simply serve the static files from any web server
+```
+
+## Robot Framework Foundation Colors & Design
+Based on the official RFCP certification page:
+- Primary Teal/Cyan: #5AB3B3 (main brand color)
+- Dark Background: #1A1A1A (very dark gray/black)
+- Card Background: #2A3F3F (dark teal/gray)
+- Accent Red: #DC3545 (for badges/highlights)
+- Text Light: #FFFFFF (primary text on dark)
+- Text Muted: #B8C5C5 (secondary text)
+- Success Green: #28A745 (for correct answers)
+- Warning Yellow: #FFC107 (for warnings)
+
+Design characteristics:
+- Dark theme with high contrast
+- Hexagonal badge/logo design elements
+- Card-based layouts with rounded corners
+- Clean, modern typography (sans-serif)
+
+## File Structure
+```
+/
+├── index.html              # Main application entry point (with password screen, tabs)
+├── css/
+│   └── styles.css         # Main styles with CSS variables, responsive design, full-screen exercises
+├── js/
+│   ├── config.js          # ✨ Centralized configuration (API URLs, limits, chapter structure)
+│   ├── auth.js            # Password protection using config.PASSWORD_HASH
+│   ├── app.js             # Main application logic, tab switching
+│   ├── questions.js       # Question loading and management
+│   ├── quiz.js            # Quiz logic and scoring
+│   ├── stats.js           # Statistics calculation and display
+│   └── exercises.js       # Exercise loading, Monaco editor, validation, API calls
+├── questions/             # Question JSON files
+│   ├── chapter-1/         # 5 subchapter files (1.1 - 1.5)
+│   ├── chapter-2/         # 6 subchapter files (2.1 - 2.6)
+│   ├── chapter-3/         # 5 subchapter files (3.1 - 3.5)
+│   ├── chapter-4/         # 5 subchapter files (4.1 - 4.5)
+│   └── chapter-5/         # 2 subchapter files (5.1 - 5.2)
+├── exercises/             # Category-based exercise structure
+│   ├── basic-syntax/
+│   │   └── beginner.json  # 3 exercises
+│   ├── variables/
+│   │   └── beginner.json  # 2 exercises
+│   ├── keywords/          # (coming soon)
+│   ├── control-flow/      # (coming soon)
+│   └── organization/      # (coming soon)
+├── backend/               # FastAPI server with validation system
+│   ├── app/
+│   │   └── main.py        # API endpoints, RF execution, exercise validation
+│   ├── requirements.txt   # Python dependencies
+│   └── Dockerfile         # Docker config (for future sandboxing)
+├── assets/
+│   └── rf_logo.svg        # Official Robot Framework logo
+├── package.json           # Project configuration (npm run dev on port 8080)
+├── .gitignore            # Git ignore file
+├── CLAUDE.md             # This file - Claude Code instructions
+└── README.md             # User documentation
+```
+
+## Project Status
+
+### Completed Features ✅
+
+#### Multiple-Choice Tests (Production)
+- **Password Protection**: SHA-256 hashed password gate with session persistence (default: "admin")
+- **UI/UX Design**: Complete with Robot Framework official branding and colors
+- **Logo Integration**: Official RF logo implemented in header and as favicon
+- **Responsive Layout**: Mobile-first design with proper button layouts
+- **Core Application Structure**: All JavaScript modules and HTML structure ready
+- **Question Database**: Complete with 23 question files across all 5 chapters (562 questions total)
+- **Review Mode**: Constant order question review with export functionality
+- **All Practice Modes**: Chapter, Subchapter, Random, Exam (40 questions), Review
+
+#### Code Exercises (Production-Ready MVP - feature/code-exercises branch)
+- **Tab Navigation**: Tests vs Exercises distinction in UI
+- **Exercise Categories**: 5 categories with clean, minimal design (matching Tests tab style)
+- **Full-Screen Workspace**: 400px task panel + remaining space for editor/output (100vh fixed layout)
+- **Monaco Editor Integration**: VS Code editor with Python syntax (RF compatible)
+- **Backend API**: FastAPI server with `/api/execute` endpoint
+- **RF Execution**: Subprocess-based execution with Robot Framework 7.0
+- **Exercise Validation System** ✨:
+  - **mustContain validation**: Check for required keywords/text in code
+  - **forbiddenKeywords validation**: Prevent use of specific keywords
+  - **mustPass validation**: Ensure tests pass before accepting solution
+  - **Detailed error messages**: Frontend displays validation issues
+  - **Debug logging**: Backend tracks validation flow
+- **Configuration System** ✨:
+  - **Centralized config.js**: Single source of truth for all settings
+  - **Environment detection**: Auto-detects dev (localhost) vs prod
+  - **API URL management**: Dynamic base URL configuration
+  - **Configurable limits**: Timeout, code size, exercise settings
+- **CSS Architecture** ✨:
+  - **CSS Variables**: Comprehensive theming system in :root
+  - **Opacity variants**: 5, 10, 20, 30, 40% for all colors
+  - **Spacing scale**: xs, sm, md, base, lg, xl, 2xl
+  - **Border radius scale**: sm, md, lg, xl
+  - **Shadow scale**: Consistent elevation system
+  - **50+ hardcoded values replaced**: Maintainable, scalable styling
+- **Security** ✨:
+  - **Regex-based validation**: Case-insensitive pattern matching
+  - **30s timeout**: Prevent infinite loops
+  - **5KB code limit**: Prevent abuse
+  - **Keyword filtering**: Block dangerous operations
+- **Category-Based Structure** ✨:
+  - **Organized folders**: exercises/basic-syntax/, exercises/variables/, etc.
+  - **Multiple difficulty files**: beginner.json, intermediate.json per category
+  - **Scalable to 75+ exercises**: Clean architecture supports growth
+- **Output Display**: Console, Log (iframe), Report (iframe) tabs
+- **Exercise Navigation**: Back | Previous | Next buttons (centered, equal width)
+- **21 Exercises Implemented**:
+  - Section 1.1: System Boot (5 exercises + 1 challenge) ✅
+  - Section 1.2: Memory Banks (7 exercises + 1 challenge) ✅
+  - Section 1.3: System Checks (7 exercises + 1 challenge) ✅
+- **Real-time Feedback**: Pass/Fail status with execution time and validation errors
+- **Reset & Run Buttons**: Code editor controls with initial code reset
+
+### Known Issues
+- **404 in RF Reports**: Internal links between log.html and report.html don't work in iframes (minor UX issue)
+- ⚠️ **Architecture Needs Refactoring**: Current structure groups all exercises/challenges in single JSON files per section. This blocks future updates and maintainability. See REFACTORING_PLAN.md for migration strategy.
+
+### Recent Refactoring (Completed) ✅
+
+**Context**: Before scaling to 75+ exercises, a comprehensive refactoring was performed to ensure production-ready architecture.
+
+#### Exercise Validation System (CRITICAL)
+- **Problem**: Exercises ran code but didn't validate against requirements
+- **Solution**: Full validation system in backend with ValidationRule model
+- **Implementation**:
+  - `validate_exercise_rules()` function checks mustContain, forbiddenKeywords
+  - Frontend sends validation rules from exercise JSON
+  - Backend returns detailed validation_errors array
+  - Frontend displays validation issues before/after execution
+- **Status**: Tested and confirmed working ✅
+
+#### Configuration Centralization
+- **Problem**: Hardcoded API URLs, hashes, limits scattered across files
+- **Solution**: Created `js/config.js` as single source of truth
+- **Benefits**:
+  - Environment detection (localhost vs production)
+  - Easy setting changes
+  - Consistent configuration access via `config.getApiUrl()`, etc.
+- **Files Updated**: auth.js, exercises.js use config module
+
+#### CSS Variables System
+- **Problem**: 50+ hardcoded rgba() values, magic numbers everywhere
+- **Solution**: Comprehensive CSS variable system in :root
+- **Implementation**:
+  - Opacity variants: --primary-teal-5, --primary-teal-10, etc.
+  - Spacing scale: --spacing-xs to --spacing-2xl
+  - Border radius scale: --radius-sm to --radius-xl
+  - Shadow scale: --shadow-sm to --shadow-lg
+- **Result**: Maintainable, themeable, scalable styling
+
+#### Security Improvements
+- **Problem**: Case-sensitive validation could be bypassed
+- **Solution**: Regex-based validation with `re.IGNORECASE`
+- **Patterns**: Blocks import, Library, eval, exec, os., subprocess, socket
+
+#### File Structure Analysis
+- **Analysis**: Checked if files too large and should be split
+- **Decision**: NO SPLITTING NEEDED
+  - Largest files: styles.css (1059 lines), quiz.js (503 lines)
+  - All files appropriately sized for their purpose
+  - Splitting would add HTTP requests without benefit
+  - Current: 7 requests vs 20-25 if split
+
+### Next Steps
+
+#### CRITICAL - Architecture Refactoring (MUST DO BEFORE CONTINUING)
+⚠️ **STOP**: Before implementing more exercises, refactor the JSON structure
+- **Current Problem**: exercises.json and challenge.json contain arrays of multiple exercises
+- **Blocking Issue**: Updating one exercise requires rewriting entire file
+- **Required Change**: Split to 1 exercise = 1 JSON file
+- **See**: REFACTORING_PLAN.md for complete migration strategy
+- **Status**: Plan created, refactoring NOT yet performed
+
+#### Short Term (After Refactoring)
+- Fix 404 errors in RF log/report internal navigation (minor UX issue)
+- Implement remaining 63 exercises across 4 chapters
+- Add intermediate difficulty exercises
+- Add Docker-based sandboxing for production deployment
+- Deploy backend to cloud (AWS Lambda/Cloud Run)
+
+#### Long Term
+- User progress tracking (optional)
+- Exercise difficulty progression system
+- Community-contributed exercises
+- Integration tests for exercise validation
+
+## Important Notes
+
+- Questions should be based on the Robot Framework syllabus PDF
+- Follow the MC question writing guidelines from "Writing MC Questions.pdf"
+- Questions can have either single or multiple correct answers (use "type" field)
+- For single answer questions: exactly one correct answer
+- For multiple answer questions: one or more correct answers
+- Each wrong answer should include an explanation
+- Maintain consistent JSON structure across all question files
+- Test on desktop, tablet, and mobile viewports before deployment
+
+## Question Creation Guidelines
+
+When creating questions in the next session:
+1. **Chapter Organization**: Follow the 5-chapter structure from the syllabus
+2. **Question Types**: Mix of single and multiple answer questions
+3. **Difficulty Levels**: Range from basic concepts to advanced implementation
+4. **Explanations**: Provide clear explanations for incorrect answers
+5. **Real-world Examples**: Include practical Robot Framework scenarios
+6. **Certification Focus**: Align with RFCP exam requirements
+
+### Balance of Question Categories
+Create a balanced mix of question types:
+
+#### Theoretical Questions (~40%)
+- Conceptual understanding (e.g., "What is Robot Framework?")
+- Definitions and terminology (e.g., "What are the three specification styles?")
+- Architecture and principles (e.g., "Which layer contains the execution engine?")
+- Best practices and recommendations (e.g., "Why is RF not used for component testing?")
+
+#### Code-Based Questions (~60%)
+- **Syntax Analysis**: Identify errors or issues in code snippets
+- **Code Interpretation**: Determine what code does or which style it uses
+- **Output Prediction**: What will happen when code executes
+- **Code Comparison**: Compare different implementations and identify differences
+- **Practical Application**: Select correct syntax for a given requirement
+
+**Code Question Best Practices:**
+- Use proper code block formatting with \`\`\`robot syntax
+- Include realistic, executable examples when possible
+- Test edge cases and common mistakes
+- Use visual markers (like '·' for spaces) when teaching spacing rules
+- Include both correct and incorrect code examples for comparison
+- Ensure code examples follow Robot Framework conventions (4-space indentation, proper sections, etc.)
+
+**Example of Good Code-Based Question:**
+```
+Question: "Consider this Robot Framework test case:
+\`\`\`robot
+*** Test Cases ***
+Login Test
+ Login User admin password123
+  Check Dashboard
+   Verify User Status
+    Logout
+\`\`\`
+What is wrong with this test case?"
+```
+
+This approach ensures:
+- Students understand both theory and practical application
+- Questions mirror real-world certification exam format
+- Comprehensive coverage of both conceptual and hands-on skills
+
+## Code Exercises - Technical Details
+
+### Exercise JSON Structure
+
+**Current Structure** (Story-Driven with Sections):
+```
+exercises/
+└── 00-fundamentals/
+    ├── index.json                           # Category metadata
+    ├── category.json                        # Topics list
+    └── 01-first-contact/
+        ├── topic.json                       # Sections list
+        └── 01-system-boot/
+            ├── exercises.json               # 5 regular exercises
+            ├── challenge.json               # 1 mini-challenge
+            └── topic.json                   # Section metadata
+```
+
+**Exercise File Format** (exercises.json):
+```json
+{
+  "section": "01-system-boot",
+  "exercises": [
+    {
+      "id": "ex-1-1-1",
+      "title": "First Boot Sequence",
+      "difficulty": "beginner",
+      "estimatedTime": "8 minutes",
+      "order": 1,
+      "description": "Create a complete boot sequence with multiple sequential status messages.",
+      "story": {
+        "setup": "MENTOR-9: \"Let's verify your core functions...\"",
+        "context": "Sequential execution is how robots communicate...",
+        "success": "MENTOR-9: \"Excellent! All five boot messages...\""
+      },
+      "instructions": [
+        "Create the *** Test Cases *** section header at the left margin",
+        "Create a test case named 'Boot Sequence'",
+        "Log 5 sequential boot messages showing system initialization stages"
+      ],
+      "hints": [
+        "Remember: Test case names start at left margin (no indentation)",
+        "Keywords must be indented with at least 2 spaces (4 recommended)"
+      ],
+      "initialCode": "",
+      "solution": "*** Test Cases ***\nBoot Sequence\n    Log    Initializing...",
+      "validation": {
+        "mustContain": ["*** Test Cases ***", "Boot Sequence", "Log"],
+        "forbiddenKeywords": [],
+        "mustPass": true
+      },
+      "theory": {
+        "title": "Exercise 1.1.1: Sequential Execution",
+        "content": "<div class=\"theory-visual\">\n<img src=\"assets/images/theory/section-1-1/ex-1-1-1-boot-sequence.png\" ... />\n</div>\n\n<div class=\"story-intro\">...</div>\n<div class=\"concept-explain\">...</div>"
+      }
+    }
+  ]
+}
+```
+
+**Validation Rules Explained:**
+- **mustContain**: Array of strings that MUST appear in the code (case-sensitive)
+  - Example: `["Log", "Hello Robot Framework"]` - both must be present
+- **forbiddenKeywords**: Array of keywords that should NOT be used
+  - Example: `["Library", "Import"]` - blocks external libraries
+- **mustPass**: Boolean - if true, all Robot Framework tests must pass
+  - Validation fails if any test case fails
+
+### Backend Implementation (Production-Ready MVP)
+
+**Current Stack:**
+- **Framework**: FastAPI (Python 3.11+)
+- **Execution**: `subprocess.run()` with Robot Framework 7.0
+- **Port**: 8000 (localhost)
+- **CORS**: Configured for localhost:8080 frontend
+
+**Validation System:**
+- ✅ **Exercise-specific validation** via `ValidationRule` model
+- ✅ **Regex-based security** with case-insensitive pattern matching
+- ✅ **Pre-execution checks**: mustContain, forbiddenKeywords validation
+- ✅ **Post-execution checks**: mustPass validation
+- ✅ **Detailed error reporting**: Returns validation_errors array
+
+**Security Measures:**
+- ✅ **Regex validation** (forbidden patterns: import, Library, eval, exec, os., subprocess, socket)
+- ✅ **Case-insensitive matching** with `re.IGNORECASE` flag
+- ✅ **Execution timeout**: 30 seconds
+- ✅ **Code size limit**: 5KB
+- ✅ **Temporary directory isolation** (`tempfile.TemporaryDirectory`)
+- ⚠️ No Docker sandbox yet (subprocess only)
+
+**API Models:**
+```python
+class ValidationRule(BaseModel):
+    mustContain: List[str] = []
+    mustPass: bool = True
+    forbiddenKeywords: List[str] = []
+
+class CodeExecutionRequest(BaseModel):
+    code: str
+    exercise_id: str
+    validation: Optional[ValidationRule] = None
+
+class CodeExecutionResponse(BaseModel):
+    success: bool
+    log_html: str = ""
+    report_html: str = ""
+    output_xml: str = ""
+    passed: bool = False
+    error: str = ""
+    execution_time: float = 0.0
+    validation_errors: List[str] = []
+```
+
+**API Endpoint:**
+```python
+POST /api/execute
+Body: {
+  "code": "*** Test Cases ***...",
+  "exercise_id": "ex-1-1",
+  "validation": {
+    "mustContain": ["Log", "Hello Robot Framework"],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  }
+}
+
+Response: {
+  "success": true,
+  "log_html": "<html>...</html>",
+  "report_html": "<html>...</html>",
+  "output_xml": "<xml>...</xml>",
+  "passed": true,
+  "error": "",
+  "execution_time": 1.23,
+  "validation_errors": []  // Empty if all validations pass
+}
+```
+
+**Validation Flow:**
+1. **Security check**: Validate code against dangerous patterns (regex, case-insensitive)
+2. **Pre-execution validation**: Check mustContain and forbiddenKeywords
+3. **Execute code**: Run Robot Framework if validation passes
+4. **Post-execution validation**: Check mustPass requirement
+5. **Return results**: Include validation_errors array if any checks failed
+
+**Running the Backend:**
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn app.main:app --reload --port 8000
+```
+
+**Future Enhancement: Docker Sandboxing**
+```dockerfile
+FROM python:3.11-slim
+RUN pip install robotframework==7.0
+WORKDIR /workspace
+USER nobody  # Non-root user
+# Future: Add memory limits, network restrictions
+```
+
+### Frontend Implementation
+
+**Full-Screen Layout (Production-Ready):**
+- **Fixed Positioning**: Covers entire viewport (100vh, z-index: 1000)
+- **Grid Layout**: `grid-template-columns: 400px 1fr`
+- **No Header**: Maximizes coding space
+- **Dark Background**: Matches application theme
+
+**Left Panel (400px fixed):**
+- Exercise title and difficulty badge
+- Description text
+- Instructions list (ordered steps)
+- Collapsible hints section (💡 Show/Hide Hints)
+- Footer navigation:
+  - Back | Previous | Next buttons
+  - Centered alignment, equal width (140px each)
+  - Previous/Next disabled at boundaries
+
+**Right Panel (Remaining space):**
+- **Top Section (50%)**: Monaco code editor
+  - Python syntax mode (closest to Robot Framework)
+  - Dark theme (vs-dark)
+  - 4-space indentation, word wrap enabled
+  - No minimap, automatic layout
+  - Editor controls: Reset | ▶ Run Code
+- **Bottom Section (50%)**: Tabbed output viewer
+  - **Console tab**: Execution summary
+    - ✅/❌ Pass/Fail status
+    - Execution time
+    - Validation errors (if any)
+    - Visual border: green (pass) / red (fail)
+  - **Log tab**: RF log.html in iframe
+  - **Report tab**: RF report.html in iframe
+
+**Category List UI:**
+- Matches Tests tab style (removed icons and counters)
+- Simple cards: Title + Description
+- "Coming Soon" label for empty categories
+- Consistent card heights
+
+**Exercise List UI:**
+- Vertical scrollable list (max-height: 400px)
+- Card-based items with title + difficulty badge
+- Matches Tests tab design (no icons)
+- Clean, minimal styling
+
+**Navigation Flow:**
+1. **Category Selection**: Choose from 5 categories on main screen
+2. **Exercise List**: View exercises in selected category (scrollable)
+3. **Workspace**: Full-screen coding environment
+4. **Navigation**: Previous/Next to move between exercises
+5. **Back**: Returns to exercise list (not mode selection)
+
+**Configuration Usage:**
+```javascript
+// Centralized configuration
+const response = await fetch(config.getApiUrl('/api/execute'), {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+        code: code,
+        exercise_id: this.currentExercise.id,
+        validation: {
+            mustContain: this.currentExercise.validation.mustContain || [],
+            mustPass: this.currentExercise.validation.mustPass !== false,
+            forbiddenKeywords: this.currentExercise.validation.forbiddenKeywords || []
+        }
+    })
+});
+```
+
+**Validation Display:**
+```javascript
+// Display validation errors in console
+if (result.validation_errors && result.validation_errors.length > 0) {
+    validationMsg = '\n\n⚠️ Validation Issues:\n' +
+        result.validation_errors.map(err => `  • ${err}`).join('\n');
+}
+consoleOutput.innerHTML = `<pre>${status}${timeInfo}${validationMsg}\n\n${result.error}</pre>`;
+```
+
+**CSS Variables in Use:**
+```css
+.exercise-item {
+    background: var(--primary-teal-5);
+    border: 1px solid var(--border-color);
+    padding: var(--spacing-base);
+    border-radius: var(--radius-lg);
+}
+
+.btn-primary {
+    background: var(--primary-teal);
+    box-shadow: var(--shadow-md);
+}
+```
+
+### Story-Driven Learning & Visual Design
+
+**Narrative Approach:**
+- **Characters**: PROTO-7 (student robot) and MENTOR-9 (teacher robot)
+- **Setting**: Crashed on planet Syntax-IV, must repair ship diagnostics to escape
+- **Timeline**: 20-day countdown creates urgency and progression
+- **Story Integration**: Each exercise has setup, context, and success dialogue from MENTOR-9
+
+**Visual Design System:**
+- **Comic-Style Images**: AI-generated illustrations (1920x1080 PNG) for each exercise
+- **Image Generation**: Prompts in `assets/images/theory/section-{id}/IMAGE_PROMPTS.md`
+  - Section 1.1: 6 image prompts (complete)
+  - Section 1.2: 8 image prompts (complete)
+- **Storage**: `assets/images/theory/section-{id}/ex-{id}-{name}.png`
+- **Display**: Images shown directly in theory section after header, before collapsible content
+- **File Sizes**: Currently 2-3MB per image (optimization to ~200KB planned)
+
+**Theory Content Structure:**
+- HTML-based with styled divs (`.story-intro`, `.concept-explain`, `.code-demo`, `.rules-box`, `.try-it`)
+- Images embedded at top of theory.content as `<div class="theory-visual">...</div>`
+- JavaScript extracts and displays image separately, removes from collapsible content
+- CSS styling: Border, shadow, hover effects, responsive design
+
+**Curriculum Plan:**
+- **Documentation**: `docs/FUNDAMENTALS_SECTION_PLAN.md` - 84 exercises across 5 chapters
+- **Story Arc**: `docs/FUNDAMENTALS_STORY.md` - Complete narrative with character descriptions
+- **Philosophy**: Zero scaffolding, syntax flexibility, single-file mastery
+
+### Exercise Categories
+
+**Current Implementation** (Category: 00-fundamentals):
+1. ✅ **Chapter 1: First Contact** - 14/21 exercises complete
+   - ✅ Section 1.1: System Boot (5 exercises + 1 challenge) - COMPLETE
+   - ✅ Section 1.2: Memory Banks (7 exercises + 1 challenge) - COMPLETE
+   - 📚 Section 1.3: System Checks (7 exercises + 1 challenge) - PLANNED
+
+**Planned Categories:**
+2. 📚 **Chapter 2**: System Diagnostics (23 exercises + 1 challenge)
+3. 📚 **Chapter 3**: Logic Circuits (19 exercises + 1 challenge)
+4. 📚 **Chapter 4**: Component Assembly (16 exercises + 1 challenge)
+5. 📚 **Chapter 5**: Launch Sequence (5 exercises + final challenge)
+
+**Total Planned**: 84 exercises + 5 challenges across 5 chapters
+
+### Running the Complete Application
+
+**Frontend (Port 8080):**
+```bash
+npm run dev
+# Opens at http://localhost:8080
+```
+
+**Backend (Port 8000):**
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+# API at http://localhost:8000
+```
+
+**Testing the MVP:**
+1. Start both frontend and backend
+2. Navigate to Exercises tab
+3. Select "Basic Syntax & Structure"
+4. Try exercise #1: "Your First Robot Test"
+5. Write code, click "Run Code"
+6. See results in Console/Log/Report tabs
