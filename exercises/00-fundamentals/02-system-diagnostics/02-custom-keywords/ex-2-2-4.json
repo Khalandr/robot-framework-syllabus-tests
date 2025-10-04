@@ -1,0 +1,55 @@
+{
+  "id": "ex-2-2-4",
+  "type": "exercise",
+  "section": "02-custom-keywords",
+  "chapter": "02-system-diagnostics",
+  "category": "00-fundamentals",
+  "title": "Keywords with Return Values - Passing Data Back",
+  "difficulty": "intermediate",
+  "estimatedTime": "8 minutes",
+  "order": 4,
+  "description": "Create keywords that return values using the RETURN statement.",
+  "story": {
+    "setup": "MENTOR-9: \"PROTO-7, keywords can also GIVE data back to the caller. The RETURN statement sends a value back to whoever called the keyword.\"",
+    "context": "Return values let keywords calculate or fetch data and pass it back to tests. This makes keywords act like functions in programming.",
+    "success": "MENTOR-9: \"Excellent! Your keyword calculated a status and returned it. Now tests can use that data for further checks!\""
+  },
+  "instructions": [
+    "Create the *** Test Cases *** section",
+    "Create test 'Status Check'",
+    "Call 'Get System Status' keyword and store result in ${status} variable",
+    "Log the ${status} variable",
+    "Use Should Be Equal to verify ${status} equals 'operational'",
+    "Create the *** Keywords *** section",
+    "Create keyword 'Get System Status' (no arguments)",
+    "Inside keyword, log: 'Checking system status'",
+    "Use RETURN statement to return the string 'operational'",
+    "Note: RETURN sends a value back to the caller"
+  ],
+  "hints": [
+    "Capture return value: ${var}=    Keyword Name",
+    "RETURN statement: RETURN    value_to_return",
+    "RETURN is a built-in keyword (capital letters)",
+    "Only one RETURN per keyword (last statement usually)"
+  ],
+  "initialCode": "",
+  "solution": "*** Test Cases ***\nStatus Check\n    ${status}=    Get System Status\n    Log    ${status}\n    Should Be Equal    ${status}    operational\n\n*** Keywords ***\nGet System Status\n    Log    Checking system status\n    RETURN    operational",
+  "validation": {
+    "mustContain": [
+      "*** Test Cases ***",
+      "*** Keywords ***",
+      "Status Check",
+      "${status}",
+      "Get System Status",
+      "Should Be Equal",
+      "RETURN",
+      "operational"
+    ],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Exercise 2.2.4: Keywords with Return Values",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/section-2-2/ex-2-2-4-return-values.png\" alt=\"PROTO-7 calling a keyword shown as a machine, the machine processing data internally, then returning a glowing data package back to PROTO-7\" />\n</div>\n\n<div class=\"story-intro\">\n  <h3>📤 Getting Data Back</h3>\n  <p><strong>MENTOR-9</strong>: \"PROTO-7, sometimes you don't just want keywords to DO things - you want them to TELL you things. That's what RETURN is for.\"</p>\n  <p>\"A keyword can calculate a value, fetch data, or make a decision, then RETURN that information to whoever called it.\"</p>\n</div>\n\n<div class=\"concept-explain\">\n  <h3>↩️ What is RETURN?</h3>\n  <p><strong>RETURN</strong> - Statement that sends a value back from a keyword to its caller</p>\n  <ul>\n    <li>✅ <strong>Data flow</strong> - Keywords can produce values</li>\n    <li>✅ <strong>Calculations</strong> - Return computed results</li>\n    <li>✅ <strong>Queries</strong> - Fetch and return data</li>\n    <li>✅ <strong>Status</strong> - Report operational state</li>\n  </ul>\n  <p><strong>Without RETURN (Action only):</strong></p>\n  <pre><code>Check Power\n    Log    Power is OK\n    # No data returned</code></pre>\n  <p><strong>With RETURN (Action + Data):</strong></p>\n  <pre><code>Get Power Level\n    Log    Reading power\n    RETURN    95.5\n    # Caller gets the value 95.5</code></pre>\n</div>\n\n<div class=\"code-demo\">\n  <h3>📝 RETURN Statement Syntax</h3>\n  <pre><code>*** Keywords ***\nCalculate Sum\n    [Arguments]    ${a}    ${b}\n    ${result}=    Evaluate    ${a} + ${b}\n    RETURN    ${result}\n\nGet Status\n    RETURN    operational\n\nGet Multiple Values\n    RETURN    value1    value2    value3</code></pre>\n  <p><strong>Capturing Return Values:</strong></p>\n  <pre><code>*** Test Cases ***\nMath Test\n    ${sum}=    Calculate Sum    5    3\n    Log    Sum is ${sum}\n\nStatus Test\n    ${status}=    Get Status\n    Should Be Equal    ${status}    operational\n\nMultiple Values Test\n    ${v1}    ${v2}    ${v3}=    Get Multiple Values</code></pre>\n</div>\n\n<div class=\"rules-box\">\n  <h3>📋 RETURN Statement Rules</h3>\n  <ul>\n    <li>🔹 <strong>Syntax</strong>: <code>RETURN    value</code> (capital RETURN)</li>\n    <li>🔹 <strong>Position</strong>: Usually last statement in keyword</li>\n    <li>🔹 <strong>Multiple values</strong>: RETURN    val1    val2    val3</li>\n    <li>🔹 <strong>Capture</strong>: ${var}=    Keyword Name</li>\n    <li>🔹 <strong>Optional</strong>: Keywords without RETURN return None</li>\n  </ul>\n</div>\n\n<div class=\"try-it\">\n  <h3>🎯 Your Task</h3>\n  <p>Create a keyword that returns 'operational'. Capture that value in a variable and verify it with Should Be Equal!</p>\n</div>"
+  }
+}

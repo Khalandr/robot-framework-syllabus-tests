@@ -1,0 +1,41 @@
+{
+  "id": "02-custom-keywords",
+  "section": "2.2",
+  "title": "Custom Keywords",
+  "chapter": "02-system-diagnostics",
+  "category": "00-fundamentals",
+  "order": 2,
+  "difficulty": "beginner-to-intermediate",
+  "estimatedTime": "40-45 minutes",
+  "story": {
+    "introduction": "Day 8 on planet Syntax-IV. Settings are configured, but MENTOR-9 notices repeated code patterns.\n\n\"PROTO-7, you're writing the same diagnostic steps over and over. Time to learn custom keywords - reusable procedures that make your tests cleaner and more maintainable.\"\n\n\"The *** Keywords *** section is where you build your own diagnostic library.\"",
+    "context": "Custom keywords are user-defined procedures that encapsulate common test operations. They promote code reuse, improve readability, and make tests easier to maintain."
+  },
+  "learningObjectives": [
+    "Understand the *** Keywords *** section structure",
+    "Create simple custom keywords without arguments",
+    "Build keywords with arguments for flexibility",
+    "Return values from keywords using RETURN statement",
+    "Document keywords with [Documentation] setting",
+    "Apply keyword naming best practices"
+  ],
+  "conceptsCovered": [
+    "*** Keywords *** section syntax",
+    "Custom keyword creation",
+    "Keyword arguments",
+    "RETURN statement",
+    "Keyword documentation",
+    "Code reuse patterns"
+  ],
+  "exercises": [
+    "ex-2-2-1",
+    "ex-2-2-2",
+    "ex-2-2-3",
+    "ex-2-2-4",
+    "ex-2-2-5",
+    "ex-2-2-6"
+  ],
+  "challenges": [
+    "challenge-2-2"
+  ]
+}

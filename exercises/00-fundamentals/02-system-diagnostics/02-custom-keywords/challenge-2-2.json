@@ -1,0 +1,79 @@
+{
+  "id": "challenge-2-2",
+  "type": "challenge",
+  "section": "02-custom-keywords",
+  "chapter": "02-system-diagnostics",
+  "category": "00-fundamentals",
+  "title": "Challenge 2.2: Complete Diagnostic Keyword Library",
+  "difficulty": "intermediate",
+  "estimatedTime": "12 minutes",
+  "order": 7,
+  "description": "Build a complete diagnostic keyword library with arguments, return values, documentation, and hierarchical structure.",
+  "story": {
+    "setup": "MENTOR-9: \"PROTO-7, it's time to prove your mastery. Build a COMPLETE diagnostic keyword library - arguments, returns, documentation, hierarchy - all of it!\"",
+    "context": "This challenge combines everything: documented keywords with arguments and return values, keywords calling keywords, and clean test abstraction.",
+    "success": "MENTOR-9: \"OUTSTANDING! You've built a professional-grade keyword library. This is how real test automation is structured!\""
+  },
+  "instructions": [
+    "Create the *** Test Cases *** section with ONE test: 'Complete Diagnostic Suite'",
+    "Test should call ONE keyword: Run Full Diagnostics",
+    "",
+    "Create the *** Keywords *** section with these keywords:",
+    "",
+    "1. 'Run Full Diagnostics' (no args):",
+    "   [Documentation]: Executes complete diagnostic suite on all ship systems",
+    "   Calls: Check All Systems",
+    "   Calls: Generate Diagnostic Report",
+    "",
+    "2. 'Check All Systems' (no args):",
+    "   [Documentation]: Checks all three critical systems",
+    "   ${power_ok}=    Check Individual System    power",
+    "   ${nav_ok}=    Check Individual System    navigation",
+    "   ${life_ok}=    Check Individual System    life-support",
+    "   Logs all three results",
+    "",
+    "3. 'Check Individual System' (arg: ${system_name}):",
+    "   [Documentation]: Checks a specific system and returns OK or FAIL",
+    "   [Arguments]    ${system_name}",
+    "   Log    Checking ${system_name} system",
+    "   RETURN    OK",
+    "",
+    "4. 'Generate Diagnostic Report' (no args):",
+    "   [Documentation]: Creates final diagnostic summary",
+    "   Log    === Diagnostic Report ===",
+    "   Log    All systems checked successfully"
+  ],
+  "hints": [
+    "Test → Run Full Diagnostics → Check All Systems + Generate Report",
+    "Check All Systems calls Check Individual System 3 times",
+    "Capture return values with ${var}=",
+    "[Documentation] first, then [Arguments], then keyword body",
+    "Build hierarchy: Test → High-level → Mid-level → Low-level"
+  ],
+  "initialCode": "",
+  "solution": "*** Test Cases ***\nComplete Diagnostic Suite\n    Run Full Diagnostics\n\n*** Keywords ***\nRun Full Diagnostics\n    [Documentation]    Executes complete diagnostic suite on all ship systems\n    Check All Systems\n    Generate Diagnostic Report\n\nCheck All Systems\n    [Documentation]    Checks all three critical systems\n    ${power_ok}=    Check Individual System    power\n    ${nav_ok}=    Check Individual System    navigation\n    ${life_ok}=    Check Individual System    life-support\n    Log    Power: ${power_ok}\n    Log    Navigation: ${nav_ok}\n    Log    Life Support: ${life_ok}\n\nCheck Individual System\n    [Documentation]    Checks a specific system and returns OK or FAIL\n    [Arguments]    ${system_name}\n    Log    Checking ${system_name} system\n    RETURN    OK\n\nGenerate Diagnostic Report\n    [Documentation]    Creates final diagnostic summary\n    Log    === Diagnostic Report ===\n    Log    All systems checked successfully",
+  "validation": {
+    "mustContain": [
+      "*** Test Cases ***",
+      "*** Keywords ***",
+      "Complete Diagnostic Suite",
+      "Run Full Diagnostics",
+      "Check All Systems",
+      "Check Individual System",
+      "Generate Diagnostic Report",
+      "[Documentation]",
+      "[Arguments]",
+      "${system_name}",
+      "RETURN",
+      "power",
+      "navigation",
+      "life-support"
+    ],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Challenge 2.2: Complete Keyword Library",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/section-2-2/challenge-2-2-complete-library.png\" alt=\"PROTO-7 standing before a massive holographic library of keyword modules - hierarchical structure with documentation, arguments, return values all glowing and interconnected\" />\n</div>\n\n<div class=\"story-intro\">\n  <h3>🏆 Master Keyword Engineer</h3>\n  <p><strong>MENTOR-9</strong>: \"PROTO-7, this is it. The complete package. Every keyword technique we've learned, combined into one elegant diagnostic library.\"</p>\n  <p>\"One test, calling one keyword, which orchestrates everything underneath. This is professional test automation.\"</p>\n</div>\n\n<div class=\"concept-explain\">\n  <h3>🎯 Challenge Requirements</h3>\n  <p><strong>You Must Demonstrate:</strong></p>\n  <ul>\n    <li>✅ <strong>[Documentation]</strong> - Document all four keywords</li>\n    <li>✅ <strong>[Arguments]</strong> - Check Individual System accepts ${system_name}</li>\n    <li>✅ <strong>RETURN</strong> - Check Individual System returns status</li>\n    <li>✅ <strong>Variable capture</strong> - ${var}= to capture return values</li>\n    <li>✅ <strong>Hierarchy</strong> - Test → High → Mid → Low keyword structure</li>\n    <li>✅ <strong>Reusability</strong> - Check Individual System called 3 times</li>\n  </ul>\n</div>\n\n<div class=\"code-demo\">\n  <h3>📝 Expected Structure</h3>\n  <pre><code>Test: Complete Diagnostic Suite\n  ↓\nRun Full Diagnostics [documented]\n  ↓\n  ├→ Check All Systems [documented]\n  │   ↓\n  │   ├→ Check Individual System (power) [documented, with args, returns]\n  │   ├→ Check Individual System (navigation) [reused]\n  │   └→ Check Individual System (life-support) [reused]\n  │\n  └→ Generate Diagnostic Report [documented]</code></pre>\n</div>\n\n<div class=\"rules-box\">\n  <h3>🏅 Success Criteria</h3>\n  <ul>\n    <li>🔹 <strong>4 keywords total</strong>: All properly documented</li>\n    <li>🔹 <strong>Hierarchical calls</strong>: Test → High → Mid → Low</li>\n    <li>🔹 <strong>Arguments used</strong>: ${system_name} parameter</li>\n    <li>🔹 <strong>Returns captured</strong>: ${power_ok}, ${nav_ok}, ${life_ok}</li>\n    <li>🔹 <strong>All tests pass</strong>: Complete execution succeeds</li>\n  </ul>\n</div>\n\n<div class=\"try-it\">\n  <h3>🎯 Your Challenge</h3>\n  <p>Build the complete diagnostic library! This is your graduation from keyword basics to professional test automation architecture.</p>\n</div>"
+  }
+}
