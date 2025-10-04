@@ -1,8 +1,61 @@
-# Section 1.2: Memory Banks - Image Generation Prompts
+# Image Generation Prompts - Section 1.2: Memory Banks
+## Ready to Copy & Paste into AI Image Generators
 
-**Visual Style**: Comic book style, dark teal/cyan color scheme (#5AB3B3), sci-fi setting on crashed spaceship
-**Characters**: PROTO-7 (smaller student robot with glowing cyan chest), MENTOR-9 (larger teacher robot with amber/orange accents)
-**Setting**: Inside damaged ship on planet Syntax-IV, holographic displays, technical panels
+---
+
+## CHARACTER REFERENCE (Use for ALL images)
+
+### PROTO-7 (Student Robot - YOU)
+- **Size**: Smaller robot, approximately 70% height of MENTOR-9, compact build
+- **Body Design**: Sleek, modern, rounded edges, smooth metallic surfaces
+- **Color Scheme**:
+  - Primary body: Dark gray/silver metallic (#2A3F3F)
+  - Chest light: Glowing cyan/teal circular core (#5AB3B3) - bright and prominent
+  - Eyes: Bright cyan optical sensors, expressive
+- **Details**: "PROTO-7" designation visible on chest or shoulder
+- **Posture**: Curious, eager, learning-focused (leaning forward, attentive stance)
+- **Expression**: Conveys eagerness through eye glow and body language
+- **Reference Style**: Wall-E meets BB-8 aesthetic - approachable, student-like
+
+### MENTOR-9 (Teacher Robot)
+- **Size**: Larger, more imposing presence, taller and broader than PROTO-7
+- **Body Design**: Angular, geometric, battle-worn surfaces with visible scratches/wear
+- **Color Scheme**:
+  - Primary body: Darker metallic with weathered finish (#1A1A1A base)
+  - Accent panels: Warm amber/orange trim and panel lights (#FFA500)
+  - Eyes: Steady amber glow, wise appearance
+- **Details**: "MENTOR-9" designation visible, multiple sensor arrays on head
+- **Posture**: Patient, authoritative (standing upright, gesturing instructively)
+- **Expression**: Calm, wise demeanor through gestures and eye brightness
+- **Reference Style**: Atlas from Portal 2 meets Optimus Prime - experienced mentor
+
+### ENVIRONMENT CONSISTENCY (All images)
+- **Location**: Interior of crashed spaceship "Starlight Explorer"
+- **Condition**: Damaged but functional - exposed wiring, cracked panels, flickering lights
+- **Lighting**:
+  - Primary: Teal/cyan emergency lighting (#5AB3B3) creating dramatic shadows
+  - Secondary: Warm orange emergency lights in background (#FFC107)
+  - Accent: Holographic displays as main light sources (bright teal glow)
+- **Background Details**: Visible damage, sparking wires, broken viewports, technical panels
+- **Planet View**: If viewport visible, show barren purple-tinted alien landscape (planet Syntax-IV)
+- **Atmosphere**: Dark, moody, sci-fi survival aesthetic with hope through teal glow
+
+---
+
+## TECHNICAL SPECIFICATIONS (All images)
+
+- **Aspect Ratio**: 16:9 (1920×1080 pixels minimum)
+- **Art Style**: Comic book illustration, cell-shaded, bold outlines, high contrast
+- **Color Palette**:
+  - Primary: Teal/Cyan (#5AB3B3)
+  - Dark: Near-black gray (#1A1A1A)
+  - Accent: Amber/Orange (#FFA500)
+  - Success: Green (#28A745)
+  - Warning: Yellow (#FFC107)
+  - Error: Red (#DC3545)
+- **Mood**: Sci-fi educational, sense of discovery and urgency
+- **Composition**: Wide shots showing both characters and visual concepts clearly
+- **Text Readability**: All code and labels must be large, crisp, and legible
 
 ---
 
@@ -10,12 +63,11 @@
 
 **Filename**: `ex-1-2-1-scalar-variables.png`
 
-**Prompt**:
-```
-Comic book style illustration of two robots in a dark sci-fi spaceship interior. PROTO-7 (small robot with glowing cyan chest light) watches as MENTOR-9 (larger robot with orange/amber accents) points to a holographic display showing a glowing container labeled "${SHIP_NAME}" with the value "Starlight Explorer" inside. The holographic display has cyan/teal color scheme (#5AB3B3). Background shows damaged ship panels with flickering lights. Dark atmosphere with dramatic lighting from the hologram. Technical sci-fi aesthetic. Wide cinematic composition showing both robots and the holographic variable container clearly.
-```
+**Concept**: ${variable} stores single values
 
-**Alt Text**: "PROTO-7 learning scalar variable storage as MENTOR-9 demonstrates ${SHIP_NAME} variable with glowing holographic container"
+```
+Comic book style illustration, 16:9 aspect ratio, 1920x1080 resolution. Interior of crashed spaceship "Starlight Explorer" with teal emergency lighting (#5AB3B3). PROTO-7 (small sleek robot, rounded design, dark gray/silver metallic #2A3F3F, glowing cyan chest light #5AB3B3, bright cyan eyes, "PROTO-7" designation visible, standing on left, attentive posture leaning forward, watching intently). MENTOR-9 (larger angular battle-worn robot, dark metallic #1A1A1A, amber panel lights #FFA500, amber eyes, "MENTOR-9" designation visible, multiple sensor arrays, standing on right, right arm extended pointing at large holographic display between them). The hologram shows a glowing teal container (#5AB3B3) with clear label at top "${SHIP_NAME}" in bold text (20pt), arrow pointing down to contained value "Starlight Explorer" in bright white text (18pt) inside glowing box. Container has variable syntax emphasis with ${} symbols highlighted. Background: damaged ship panels with exposed wiring, cracked control surfaces, flickering indicator lights. Dark atmosphere with dramatic lighting from hologram casting teal glow on both robots' faces. Technical sci-fi aesthetic with data stream particles floating around hologram. Comic book bold outlines, cell-shaded style. Wide cinematic composition showing both robots clearly with holographic variable container as focal point in center.
+```
 
 ---
 
@@ -23,12 +75,11 @@ Comic book style illustration of two robots in a dark sci-fi spaceship interior.
 
 **Filename**: `ex-1-2-2-naming-rules.png`
 
-**Prompt**:
-```
-Comic book style illustration showing MENTOR-9 presenting a holographic checklist to PROTO-7 in damaged spaceship. The hologram displays variable names in two columns: LEFT side shows VALID names in glowing green checkmarks (${my_var}, ${MyVar}, ${MY_VAR}, ${my var}, ${var123}), RIGHT side shows INVALID names in red X marks (${my-var}, ${123var}, ${var$}). PROTO-7 studies the display intently. Dark teal/cyan color scheme (#5AB3B3) for the hologram borders. Dramatic lighting from the holographic display illuminating both robots. Technical sci-fi setting with damaged panels in background. Wide composition showing the complete checklist clearly.
-```
+**Concept**: Valid vs invalid variable names (underscores yes, hyphens no)
 
-**Alt Text**: "MENTOR-9 teaching PROTO-7 variable naming rules with holographic checklist showing valid and invalid name patterns"
+```
+Comic book style illustration, 16:9 aspect ratio, 1920x1080 resolution. Interior of crashed spaceship "Starlight Explorer" with teal emergency lighting (#5AB3B3). MENTOR-9 (larger angular battle-worn robot, dark metallic #1A1A1A, amber panel lights #FFA500, amber eyes, "MENTOR-9" designation visible, multiple sensor arrays, both arms raised gesturing, presenting holographic checklist floating in center). PROTO-7 (small sleek robot, rounded design, dark gray/silver metallic #2A3F3F, glowing cyan chest light #5AB3B3, bright cyan eyes, "PROTO-7" designation visible, standing in front, studying posture, looking up at display intently with one hand on chin thinking pose). The hologram displays two columns with clear header "VARIABLE NAMING RULES" at top (24pt bold teal): LEFT column labeled "VALID ✓" in glowing GREEN (#28A745) shows 5 examples with green checkmarks - "${my_var}", "${MyVar}", "${MY_VAR}", "${my var}", "${var123}" (each 16pt); RIGHT column labeled "INVALID ✗" in glowing RED (#DC3545) shows 3 examples with red X marks - "${my-var}", "${123var}", "${var$}" (each 16pt). Each item in its own glowing container. Teal hologram border (#5AB3B3) with technical grid pattern. Background: damaged ship panels, exposed wiring, cracked surfaces. Dark atmosphere with dramatic lighting from holographic display illuminating both robots' faces creating split GREEN/RED color cast. Comic book bold outlines, cell-shaded style. Wide composition showing complete checklist clearly centered.
+```
 
 ---
 
@@ -36,12 +87,11 @@ Comic book style illustration showing MENTOR-9 presenting a holographic checklis
 
 **Filename**: `ex-1-2-3-list-variables.png`
 
-**Prompt**:
-```
-Comic book style illustration of PROTO-7 and MENTOR-9 examining a holographic list display in damaged spaceship. The hologram shows a vertical glowing list marked "@{damaged_systems}" containing 5 items stacked vertically: "Hull Breach Sector 7", "Sensor Array Offline", "Navigation Gyro Failed", "Communication Antenna Damaged", "Life Support Degraded". Each item in a glowing teal container (#5AB3B3) connected by vertical lines showing ordered sequence. PROTO-7 looks amazed at the organized data. Dark sci-fi atmosphere with cyan/teal holographic glow. Wide composition showing both robots and the complete list clearly. Technical interface aesthetic.
-```
+**Concept**: @{list} stores ordered collections of items
 
-**Alt Text**: "PROTO-7 learning list variables as MENTOR-9 shows ordered collection of damaged ship systems in holographic array"
+```
+Comic book style illustration, 16:9 aspect ratio, 1920x1080 resolution. Interior of crashed spaceship "Starlight Explorer" with teal emergency lighting (#5AB3B3). PROTO-7 (small sleek robot, rounded design, dark gray/silver metallic #2A3F3F, glowing cyan chest light #5AB3B3, bright cyan eyes, "PROTO-7" designation visible, standing on left, eyes WIDE with impressed expression, leaning forward with both hands reaching toward hologram). MENTOR-9 (larger angular battle-worn robot, dark metallic #1A1A1A, amber panel lights #FFA500, amber eyes, "MENTOR-9" designation visible, multiple sensor arrays, standing on right, gesturing toward the display). Large holographic list floating in center displays vertical array with header "@{damaged_systems}" in bold teal text (22pt) at top with @{} syntax highlighted. Below, 5 items stacked vertically in numbered glowing teal containers (#5AB3B3): "[0] Hull Breach Sector 7", "[1] Sensor Array Offline", "[2] Navigation Gyro Failed", "[3] Communication Antenna Damaged", "[4] Life Support Degraded" (each item 14pt, readable). Each container connected by vertical glowing teal lines with small arrow indicators showing ordered sequence top-to-bottom. Index numbers [0] through [4] visible on left of each item. Background: damaged ship interior, exposed wiring, cracked panels. Dark sci-fi atmosphere with cyan/teal holographic glow illuminating both robots. Comic book bold outlines, cell-shaded style. Wide composition showing both robots and complete vertical list clearly as focal point.
+```
 
 ---
 
@@ -49,12 +99,11 @@ Comic book style illustration of PROTO-7 and MENTOR-9 examining a holographic li
 
 **Filename**: `ex-1-2-4-list-access.png`
 
-**Prompt**:
-```
-Comic book style illustration showing PROTO-7 reaching toward a holographic list while MENTOR-9 guides. The hologram displays a vertical list with index numbers [0], [1], [2], [3], [4] on the left, and [-5], [-4], [-3], [-2], [-1] on the right of each item. Three items are highlighted: the FIRST item [0] glowing bright cyan, the MIDDLE item [2] glowing medium, and the LAST item [-1] glowing bright. PROTO-7's hand extends toward the [0] item. Dark teal color scheme (#5AB3B3). Damaged spaceship interior with technical panels. Dramatic lighting from hologram. Wide composition showing zero-based indexing concept clearly.
-```
+**Concept**: ${list}[0] = first, ${list}[-1] = last, zero-based indexing
 
-**Alt Text**: "PROTO-7 learning list indexing with MENTOR-9 demonstrating [0], [2], and [-1] access patterns on holographic array"
+```
+Comic book style illustration, 16:9 aspect ratio, 1920x1080 resolution. Interior of crashed spaceship "Starlight Explorer" with teal emergency lighting (#5AB3B3). PROTO-7 (small sleek robot, rounded design, dark gray/silver metallic #2A3F3F, glowing cyan chest light #5AB3B3, bright cyan eyes, "PROTO-7" designation visible, positioned on left side, eyes focused, right arm extended with hand/manipulator reaching toward the [0] item in hologram). MENTOR-9 (larger angular battle-worn robot, dark metallic #1A1A1A, amber panel lights #FFA500, amber eyes, "MENTOR-9" designation visible, multiple sensor arrays, standing behind/beside PROTO-7, guiding gesture with left arm pointing to list). Large holographic vertical list floating in center displays 5 items with DUAL indexing system: LEFT side shows positive indices [0], [1], [2], [3], [4] and RIGHT side shows negative indices [-5], [-4], [-3], [-2], [-1] beside same items. THREE items are HIGHLIGHTED: FIRST item [0]/[-5] glowing BRIGHT cyan with pulsing aura, MIDDLE item [2]/[-3] glowing medium intensity, LAST item [4]/[-1] glowing BRIGHT cyan with pulsing aura. Items shown: "Hull Breach", "Sensor Array", "Navigation", "Antenna", "Life Support" (14pt each). PROTO-7's hand reaching specifically toward [0] item with connecting light beam. Background: damaged spaceship interior with technical panels, exposed wiring. Dark atmosphere with dramatic teal lighting (#5AB3B3) from hologram creating emphasis on zero-based indexing. Comic book bold outlines, cell-shaded style. Wide composition showing dual indexing concept clearly with focus on [0] and [-1] access patterns.
+```
 
 ---
 
@@ -62,12 +111,11 @@ Comic book style illustration showing PROTO-7 reaching toward a holographic list
 
 **Filename**: `ex-1-2-5-dictionary-variables.png`
 
-**Prompt**:
-```
-Comic book style illustration of MENTOR-9 presenting a holographic dictionary structure to PROTO-7 in damaged spaceship. The hologram shows a glowing table marked "&{system_status}" with two columns: LEFT column labeled "KEY" shows system names (Navigation, Power Core, Hull Integrity, Sensors, Communications), RIGHT column labeled "VALUE" shows statuses (OPERATIONAL, STABLE, COMPROMISED, DEGRADED, FAILED). Keys and values connected by glowing cyan arrows (#5AB3B5). PROTO-7 studies the key-value mapping. Dark sci-fi atmosphere with teal holographic glow. Wide composition showing complete dictionary structure clearly. Technical aesthetic with grid patterns.
-```
+**Concept**: &{dict} stores key-value pairs (name → value mapping)
 
-**Alt Text**: "MENTOR-9 teaching PROTO-7 dictionary variables with holographic key-value pairs showing ship system statuses"
+```
+Comic book style illustration, 16:9 aspect ratio, 1920x1080 resolution. Interior of crashed spaceship "Starlight Explorer" with teal emergency lighting (#5AB3B3). MENTOR-9 (larger angular battle-worn robot, dark metallic #1A1A1A, amber panel lights #FFA500, amber eyes, "MENTOR-9" designation visible, multiple sensor arrays, standing center-right, both arms raised presenting hologram). PROTO-7 (small sleek robot, rounded design, dark gray/silver metallic #2A3F3F, glowing cyan chest light #5AB3B3, bright cyan eyes, "PROTO-7" designation visible, standing center-left, attentive studying posture, looking at display intently). Large holographic table/dictionary structure floating in center displays header "&{system_status}" in bold teal text (22pt) at top with &{} syntax emphasized. Below shows glowing data table with TWO COLUMNS clearly labeled: LEFT column header "KEY" in bright teal (18pt bold) shows 5 system names - "Navigation", "Power Core", "Hull Integrity", "Sensors", "Communications" (each 14pt); RIGHT column header "VALUE" in bright teal (18pt bold) shows corresponding statuses - "OPERATIONAL" (green #28A745), "STABLE" (green #28A745), "COMPROMISED" (yellow #FFC107), "DEGRADED" (yellow #FFC107), "FAILED" (red #DC3545) (each 14pt, color-coded). Each key-value pair connected by glowing cyan arrows (→) showing mapping relationship. Table enclosed in teal holographic border (#5AB3B3) with technical grid pattern background within hologram. Background: damaged spaceship interior, exposed wiring, cracked panels. Dark sci-fi atmosphere with teal holographic glow illuminating both robots. Comic book bold outlines, cell-shaded style. Wide composition showing complete dictionary table structure clearly centered as focal point.
+```
 
 ---
 
@@ -75,12 +123,11 @@ Comic book style illustration of MENTOR-9 presenting a holographic dictionary st
 
 **Filename**: `ex-1-2-6-dictionary-access.png`
 
-**Prompt**:
-```
-Comic book style illustration showing PROTO-7 pointing at a key in a holographic dictionary while the corresponding value glows brightly. The hologram displays "&{system_status}" with the key "Navigation" highlighted in bright cyan, and an arrow pointing to its value "OPERATIONAL" which pulses with energy. MENTOR-9 observes approvingly. Multiple key-value pairs visible but dimmed in background. Dark teal color scheme (#5AB3B3). Damaged spaceship setting with flickering panels. Dramatic lighting showing the access pattern from key to value. Wide composition demonstrating the ${dict}[key] concept visually.
-```
+**Concept**: ${dict}[key] retrieves value by name (not index)
 
-**Alt Text**: "PROTO-7 accessing dictionary values as MENTOR-9 demonstrates Navigation key retrieving OPERATIONAL status"
+```
+Comic book style illustration, 16:9 aspect ratio, 1920x1080 resolution. Interior of crashed spaceship "Starlight Explorer" with teal emergency lighting (#5AB3B3). PROTO-7 (small sleek robot, rounded design, dark gray/silver metallic #2A3F3F, glowing cyan chest light #5AB3B3, bright cyan eyes, "PROTO-7" designation visible, positioned on left in active engaged stance, confident posture with right arm/hand pointing directly at "Navigation" key in hologram). MENTOR-9 (larger angular battle-worn robot, dark metallic #1A1A1A, amber panel lights #FFA500, amber eyes, "MENTOR-9" designation visible, multiple sensor arrays, standing on right, crossed arms in approving stance with subtle nod, observing with pride). Large holographic dictionary display floating in center shows "&{system_status}" header (20pt teal) at top. Dictionary contains 5 key-value pairs in rows, but ONE pair is HIGHLIGHTED: the key "Navigation" glows in BRIGHT PULSING cyan (#5AB3B3) with PROTO-7's hand touching it via light beam connection, thick glowing arrow (→) flows from key to value "OPERATIONAL" which PULSES with bright green energy (#28A745, animated glow effect). Other 4 pairs dimmed in background (40% opacity): "Power Core → STABLE", "Hull → COMPROMISED", "Sensors → DEGRADED", "Comms → FAILED". Syntax example "${system_status}[Navigation]" shown in floating code snippet (16pt) above the highlighted pair. Background: damaged spaceship setting with flickering panels, exposed wiring. Dramatic lighting from hologram showing access pattern from key to value with energy flow visualization. Comic book bold outlines, cell-shaded style. Dark teal color scheme. Wide composition clearly demonstrating dictionary key access concept with visual emphasis on retrieval flow.
+```
 
 ---
 
@@ -88,12 +135,11 @@ Comic book style illustration showing PROTO-7 pointing at a key in a holographic
 
 **Filename**: `ex-1-2-7-variable-flexibility.png`
 
-**Prompt**:
-```
-Comic book style illustration showing MENTOR-9 presenting two holographic panels side-by-side to PROTO-7 in damaged spaceship. LEFT panel labeled "KEYWORDS (Flexible)" shows "Set Variable" = "set variable" = "SET VARIABLE" all connected with equals signs, glowing green to show they're the same. RIGHT panel labeled "VARIABLES (Strict)" shows "${status}" ≠ "${Status}" ≠ "${STATUS}" with red ≠ symbols, each in separate containers to show they're different. PROTO-7 looks enlightened with an "aha!" expression. Dark teal/cyan color scheme (#5AB3B3). Dramatic contrast between the two panels. Wide composition showing both concepts clearly. Technical sci-fi aesthetic.
-```
+**Concept**: BOTH keywords AND variable names are flexible (case-insensitive, spacing-flexible)
 
-**Alt Text**: "MENTOR-9 teaching PROTO-7 critical distinction: keywords are case-insensitive but variable names are case-sensitive"
+```
+Comic book style illustration, 16:9 aspect ratio, 1920x1080 resolution. Interior of crashed spaceship "Starlight Explorer" with teal emergency lighting (#5AB3B3). MENTOR-9 (larger angular battle-worn robot, dark metallic #1A1A1A, amber panel lights #FFA500, amber eyes, "MENTOR-9" designation visible, multiple sensor arrays, standing in center-back, both arms raised gesturing triumphantly). PROTO-7 (small sleek robot, rounded design, dark gray/silver metallic #2A3F3F, glowing cyan chest light #5AB3B3, bright cyan eyes, "PROTO-7" designation visible, standing in center-front, eyes WIDE with enlightenment, "aha!" posture with arms raised in joy) with lightbulb/epiphany effect above head glowing yellow #FFC107. TWO holographic panels side-by-side: LEFT PANEL labeled "KEYWORDS (Flexible)" in header (18pt bold green #28A745) shows three variations connected with glowing EQUALS SIGNS (=): "Set Variable" = "set variable" = "SET VARIABLE", all glowing GREEN (#28A745) in connected containers showing they're identical. RIGHT PANEL labeled "VARIABLES (Also Flexible!)" in header (18pt bold green #28A745) shows three variations connected with glowing EQUALS SIGNS (=): "${status}" = "${Status}" = "${STATUS}" = "${s t a t u s}", all glowing GREEN (#28A745) in connected containers showing they're THE SAME variable. Each panel has teal border (#5AB3B3). Background: damaged spaceship interior, technical panels, exposed wiring. Dark atmosphere with dramatic GREEN lighting throughout showing everything is flexible. Comic book bold outlines, cell-shaded style. Wide composition showing both concepts clearly with PROTO-7's joyful enlightenment moment as emotional focal point - everything in Robot Framework is forgiving!
+```
 
 ---
 
@@ -101,69 +147,138 @@ Comic book style illustration showing MENTOR-9 presenting two holographic panels
 
 **Filename**: `challenge-1-2-data-model.png`
 
-**Prompt**:
+**Concept**: Integrate all variable types - mastery moment
+
 ```
-Comic book style illustration of PROTO-7 confidently working with multiple holographic data structures floating around them while MENTOR-9 observes with approval. Center shows a complex data model with THREE distinct sections: TOP section shows scalar variable "${SHIP_NAME}" in a single container, MIDDLE section shows list "@{damaged_systems}" with 5 items in vertical array, BOTTOM section shows dictionary "&{system_status}" with key-value table. All three structures interconnected with glowing cyan lines (#5AB3B3) forming a complete data model. PROTO-7 manipulating the holograms with both hands. Dark sci-fi spaceship interior. Dramatic lighting from multiple holographic sources. Wide composition showing the integrated data model clearly. Sense of mastery and accomplishment.
+Epic comic book style illustration, 16:9 aspect ratio, 1920x1080 resolution. Interior of crashed spaceship "Starlight Explorer" with teal emergency lighting (#5AB3B3). PROTO-7 (small sleek robot, rounded design, dark gray/silver metallic #2A3F3F, glowing cyan chest light #5AB3B3 EXTRA BRIGHT, bright cyan eyes, "PROTO-7" designation visible, positioned in center-front, confident heroic pose, BOTH arms/hands raised manipulating multiple holograms simultaneously like a conductor). MENTOR-9 (larger angular battle-worn robot, dark metallic #1A1A1A, amber panel lights #FFA500, amber eyes, "MENTOR-9" designation visible, multiple sensor arrays, standing in background observing, crossed arms stance showing pride and approval). THREE holographic data structures floating around PROTO-7 in vertical stack arrangement: TOP section displays scalar variable "${SHIP_NAME}" in single glowing teal container (#5AB3B3) with value "Starlight Explorer" (18pt), MIDDLE section displays list "@{damaged_systems}" with 5 items in vertical array - "[0] Hull", "[1] Sensors", "[2] Nav", "[3] Comms", "[4] Life Support" (14pt each) in stacked teal containers, BOTTOM section displays dictionary "&{system_status}" with compact key-value table showing 3 pairs: "Nav → OPERATIONAL", "Power → STABLE", "Hull → COMPROMISED" (14pt each, color-coded). All THREE structures interconnected with glowing cyan energy lines (#5AB3B3) forming web/network showing data relationships and integration. PROTO-7's hands have light beams extending to each structure showing active manipulation. Background: dark sci-fi spaceship interior with technical panels coming online, lights shifting from red to green (#28A745) showing systems recovering. Dramatic multi-source lighting from three holograms casting cyan glow on PROTO-7's figure creating sense of mastery. Comic book bold outlines, cell-shaded style. Wide composition showing integrated complete data model clearly with PROTO-7 as confident focal point demonstrating expertise and accomplishment.
 ```
 
-**Alt Text**: "PROTO-7 demonstrating mastery by integrating scalars, lists, and dictionaries into complete ship diagnostic data model"
+---
+
+## AI IMAGE GENERATOR SETTINGS
+
+### Midjourney (Recommended)
+**Append to every prompt**:
+```
+--ar 16:9 --style raw --v 6.1 --q 2
+```
+
+**Full workflow**:
+1. Copy prompt from exercise section above
+2. Paste into Midjourney
+3. Add parameters: `--ar 16:9 --style raw --v 6.1 --q 2`
+4. Generate 4 variations
+5. Upscale best result
+6. Download as PNG (1920×1080 minimum)
 
 ---
 
-## Character Consistency Guide
+### DALL-E 3 (ChatGPT Plus / API)
+**Settings**:
+- **Aspect Ratio**: Landscape (1792×1024)
+- **Style**: Vivid (for saturated teal colors)
+- **Quality**: HD
 
-### PROTO-7 (Student Robot)
-- **Size**: Smaller, roughly 70% height of MENTOR-9
-- **Color Scheme**:
-  - Primary: Dark gray/silver metallic body
-  - Accent: Glowing cyan chest light (#5AB3B3)
-  - Eyes: Bright cyan optical sensors
-- **Design**: Sleeker, more modern, rounded edges
-- **Expression**: Curious, eager, learning (conveyed through posture and eye glow)
-- **Chest Mark**: "PROTO-7" designation visible
-
-### MENTOR-9 (Teacher Robot)
-- **Size**: Larger, more imposing presence
-- **Color Scheme**:
-  - Primary: Darker metallic with worn/scratched surfaces
-  - Accent: Warm amber/orange panel lights and trim
-  - Eyes: Steady amber glow
-- **Design**: More angular, battle-worn, authority figure
-- **Expression**: Patient, wise, instructive (conveyed through gestures and posture)
-- **Chest Mark**: "MENTOR-9" designation visible
-
-### Environment Consistency
-- **Setting**: Interior of crashed spaceship "Starlight Explorer"
-- **Condition**: Damaged panels, flickering lights, exposed wiring
-- **Atmosphere**: Dark with dramatic lighting from holographic displays
-- **Color Temperature**: Cool teal/cyan from holograms, warm orange from emergency lights
-- **Planet**: Syntax-IV visible through cracked viewports (alien landscape)
+**Instructions**:
+1. Copy ENTIRE prompt exactly as written (do not summarize)
+2. Paste into ChatGPT with DALL-E enabled
+3. Request "vivid style, landscape format, HD quality"
+4. May need to regenerate 2-3 times for character consistency
+5. Download full resolution image
 
 ---
 
-## Technical Specifications
+### Stable Diffusion XL (ComfyUI / Automatic1111)
+**Model**: SDXL 1.0 or JuggernautXL (for comic book style)
 
-- **Resolution**: 1920x1080 pixels (16:9 aspect ratio)
-- **Art Style**: Comic book illustration, cell-shaded, high contrast
-- **Primary Color**: Teal/Cyan (#5AB3B3)
-- **Mood**: Sci-fi educational, sense of discovery
-- **Lighting**: Dramatic, primarily from holographic displays
-- **Composition**: Wide shots showing both characters and visual concepts clearly
+**Settings**:
+- **Resolution**: 1024×576 (native SDXL 16:9)
+- **Sampler**: DPM++ 2M Karras or Euler a
+- **Steps**: 35-45
+- **CFG Scale**: 7.5-8.5
+- **Clip Skip**: 2
+
+**Positive Prompt**: [Copy exercise prompt] + "masterpiece, best quality, highly detailed, sharp focus, professional illustration"
+
+**Negative Prompt**:
+```
+blurry, low quality, text artifacts, watermark, signature, photorealistic, 3d render, ugly, distorted, deformed, bad anatomy, extra limbs, jpeg artifacts, worst quality, low resolution, pixelated, noisy
+```
+
+**Workflow**:
+1. Generate at 1024×576
+2. Use ESRGAN or Ultimate SD Upscale to 1920×1080
+3. Export as PNG (high quality, no compression)
 
 ---
 
-## Generation Settings (Recommended)
+### Leonardo.AI (Alternative)
+**Model**: Leonardo Diffusion XL or Anime Pastel Dream
 
-**For Midjourney:**
-- Add `--ar 16:9 --style raw --v 6` to all prompts
-- Use `--q 2` for higher quality
+**Settings**:
+- **Aspect Ratio**: 16:9
+- **Quality**: High
+- **Prompt Magic**: Enabled (v2)
+- **Alchemy**: Enabled
 
-**For DALL-E 3:**
-- Use "wide" aspect ratio option
-- Select "vivid" style for color saturation
+**Instructions**:
+1. Copy prompt from exercise
+2. Enable "Prompt Magic v2" for better character consistency
+3. Generate 4-8 variations
+4. Use "Alchemy" refiner for final polish
 
-**For Stable Diffusion:**
-- Resolution: 1920x1080
-- Sampling: DPM++ 2M Karras
-- Steps: 30-40
-- CFG Scale: 7-9
+---
+
+## POST-GENERATION CHECKLIST
+
+Before saving image, verify:
+- [ ] **Resolution**: 1920×1080 or higher (16:9 ratio)
+- [ ] **Characters visible**: Both PROTO-7 and MENTOR-9 clearly shown (unless scene requires one)
+- [ ] **Character consistency**: PROTO-7 small/rounded/teal, MENTOR-9 large/angular/amber
+- [ ] **Text readable**: All code text, labels, and UI elements are crisp (14pt minimum equivalent)
+- [ ] **Color scheme**: Teal (#5AB3B3) is prominent, dark background (#1A1A1A)
+- [ ] **Environment**: Crashed ship interior visible, damage indicators present
+- [ ] **File format**: PNG (not JPEG - preserves quality)
+- [ ] **File size**: Optimize to ~200-500KB (use TinyPNG or similar after generation)
+- [ ] **Naming**: Follows convention `ex-{section}-{exercise}-{concept}.png`
+
+---
+
+## COLOR REFERENCE (Hex Codes)
+
+Copy these for manual color adjustments in post-processing:
+
+| Color Name | Hex Code | Usage |
+|------------|----------|-------|
+| **Primary Teal** | `#5AB3B3` | Holograms, PROTO-7 chest light, UI accents |
+| **Dark Gray** | `#1A1A1A` | Background, MENTOR-9 body, shadows |
+| **Card Background** | `#2A3F3F` | PROTO-7 body, secondary panels |
+| **Amber/Orange** | `#FFA500` | MENTOR-9 accents, emergency lights |
+| **Success Green** | `#28A745` | Passing tests, operational systems |
+| **Warning Yellow** | `#FFC107` | WARN log level, caution indicators |
+| **Error Red** | `#DC3545` | ERROR log level, critical systems |
+| **White Text** | `#FFFFFF` | Primary text on dark backgrounds |
+
+---
+
+## FILE NAMING CONVENTION
+
+```
+ex-{chapter}-{section}-{exercise}-{concept}.png
+
+Examples:
+ex-1-2-1-scalar-variables.png
+ex-1-2-4-list-access.png
+challenge-1-2-data-model.png
+```
+
+---
+
+## AFTER GENERATION WORKFLOW
+
+1. **Generate** image using preferred AI tool with prompt + parameters
+2. **Verify** against checklist above (resolution, characters, readability)
+3. **Optimize** file size using TinyPNG or similar (target 200-500KB)
+4. **Rename** following convention: `ex-{section}-{exercise}-{concept}.png`
+5. **Save** to `assets/images/theory/section-{id}/` folder
+6. **Test** in browser - verify image displays correctly in theory section
