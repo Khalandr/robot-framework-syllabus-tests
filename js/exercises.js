@@ -31,100 +31,51 @@ const exercise = {
                 const categoryExercises = [];
 
                 try {
-                    // Load category.json to get topics
+                    // Load category.json to get sections (flattened structure)
                     const categoryResponse = await fetch(`exercises/${cat.id}/category.json`);
                     if (!categoryResponse.ok) {
                         console.log(`❌ No category.json for ${cat.id}`);
                         continue;
                     }
                     const categoryData = await categoryResponse.json();
-                    console.log(`   Found ${categoryData.topics.length} topics in ${cat.id}`);
+                    console.log(`   Found ${categoryData.sections.length} sections in ${cat.id}`);
 
-                    // Load exercises from each topic (may have nested sections)
-                    for (const topic of categoryData.topics) {
-                        console.log(`   📁 Loading topic: ${topic.id}`);
+                    // Load exercises from each section (no chapter/topic layer)
+                    for (const section of categoryData.sections) {
+                        console.log(`   📄 Loading section: ${section.id}`);
                         try {
-                            // First try loading topic.json to check for sections
-                            const topicResponse = await fetch(`exercises/${cat.id}/${topic.id}/topic.json`);
-                            if (topicResponse.ok) {
-                                const topicData = await topicResponse.json();
-                                console.log(`      Topic has ${topicData.sections?.length || 0} sections`);
+                            // Load section.json to get exercise IDs
+                            const sectionResponse = await fetch(`exercises/${cat.id}/${section.id}/section.json`);
+                            if (sectionResponse.ok) {
+                                const sectionData = await sectionResponse.json();
+                                console.log(`      Found ${sectionData.exercises.length} exercises, ${sectionData.challenges.length} challenges`);
 
-                                // If topic has sections, load exercises from each section
-                                if (topicData.sections && topicData.sections.length > 0) {
-                                    for (const section of topicData.sections) {
-                                        console.log(`      📄 Loading section: ${section.id}`);
-                                        try {
-                                            // NEW: Load section.json to get exercise IDs
-                                            const sectionResponse = await fetch(`exercises/${cat.id}/${topic.id}/${section.id}/section.json`);
-                                            if (sectionResponse.ok) {
-                                                const sectionData = await sectionResponse.json();
-                                                console.log(`         Found ${sectionData.exercises.length} exercises, ${sectionData.challenges.length} challenges`);
+                                // Load individual exercise files in parallel
+                                const exercisePromises = (sectionData.exercises || []).map(exerciseId =>
+                                    fetch(`exercises/${cat.id}/${section.id}/${exerciseId}.json`)
+                                        .then(r => r.ok ? r.json() : null)
+                                        .catch(() => null)
+                                );
 
-                                                // Load individual exercise files in parallel
-                                                const exercisePromises = (sectionData.exercises || []).map(exerciseId =>
-                                                    fetch(`exercises/${cat.id}/${topic.id}/${section.id}/${exerciseId}.json`)
-                                                        .then(r => r.ok ? r.json() : null)
-                                                        .catch(() => null)
-                                                );
+                                const challengePromises = (sectionData.challenges || []).map(challengeId =>
+                                    fetch(`exercises/${cat.id}/${section.id}/${challengeId}.json`)
+                                        .then(r => r.ok ? r.json() : null)
+                                        .catch(() => null)
+                                );
 
-                                                const challengePromises = (sectionData.challenges || []).map(challengeId =>
-                                                    fetch(`exercises/${cat.id}/${topic.id}/${section.id}/${challengeId}.json`)
-                                                        .then(r => r.ok ? r.json() : null)
-                                                        .catch(() => null)
-                                                );
+                                // Wait for all to complete
+                                const exercises = await Promise.all(exercisePromises);
+                                const challenges = await Promise.all(challengePromises);
 
-                                                // Wait for all to complete
-                                                const exercises = await Promise.all(exercisePromises);
-                                                const challenges = await Promise.all(challengePromises);
-
-                                                // Add non-null exercises and challenges
-                                                const validExercises = exercises.filter(e => e !== null);
-                                                const validChallenges = challenges.filter(c => c !== null);
-                                                console.log(`         ✅ Loaded ${validExercises.length} exercises, ${validChallenges.length} challenges`);
-                                                categoryExercises.push(...validExercises);
-                                                categoryExercises.push(...validChallenges);
-                                            } else {
-                                                // FALLBACK: Try old structure (exercises.json) if section.json doesn't exist
-                                                const exercisesResponse = await fetch(`exercises/${cat.id}/${topic.id}/${section.id}/exercises.json`);
-                                                if (exercisesResponse.ok) {
-                                                    const exercisesData = await exercisesResponse.json();
-                                                    categoryExercises.push(...exercisesData.exercises);
-                                                }
-
-                                                // Also try old challenge.json
-                                                try {
-                                                    const challengeResponse = await fetch(`exercises/${cat.id}/${topic.id}/${section.id}/challenge.json`);
-                                                    if (challengeResponse.ok) {
-                                                        const challengeData = await challengeResponse.json();
-                                                        categoryExercises.push(challengeData);
-                                                    }
-                                                } catch (err) {
-                                                    // No challenge
-                                                }
-                                            }
-                                        } catch (err) {
-                                            console.error(`Error loading section ${cat.id}/${topic.id}/${section.id}:`, err);
-                                        }
-                                    }
-                                } else {
-                                    // No sections, try loading exercises directly from topic
-                                    const exercisesResponse = await fetch(`exercises/${cat.id}/${topic.id}/exercises.json`);
-                                    if (exercisesResponse.ok) {
-                                        const exercisesData = await exercisesResponse.json();
-                                        categoryExercises.push(...exercisesData.exercises);
-                                    }
-                                }
-                            } else {
-                                // No topic.json, try loading exercises directly
-                                const exercisesResponse = await fetch(`exercises/${cat.id}/${topic.id}/exercises.json`);
-                                if (exercisesResponse.ok) {
-                                    const exercisesData = await exercisesResponse.json();
-                                    categoryExercises.push(...exercisesData.exercises);
-                                }
+                                // Add non-null exercises and challenges
+                                const validExercises = exercises.filter(e => e !== null);
+                                const validChallenges = challenges.filter(c => c !== null);
+                                console.log(`      ✅ Loaded ${validExercises.length} exercises, ${validChallenges.length} challenges`);
+                                categoryExercises.push(...validExercises);
+                                categoryExercises.push(...validChallenges);
                             }
                         } catch (err) {
-                            console.log(`No exercises for ${cat.id}/${topic.id}`);
+                            console.error(`Error loading section ${cat.id}/${section.id}:`, err);
                         }
                     }
                 } catch (err) {

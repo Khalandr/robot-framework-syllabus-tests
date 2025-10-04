@@ -1,0 +1,66 @@
+{
+  "id": "ex-2-3-5",
+  "type": "exercise",
+  "section": "06-if-statements",
+  "chapter": "02-system-diagnostics",
+  "category": "00-fundamentals",
+  "title": "Boolean Logic - Combining Conditions",
+  "difficulty": "intermediate",
+  "estimatedTime": "8 minutes",
+  "order": 5,
+  "description": "Combine multiple conditions using AND, OR, and NOT logical operators.",
+  "story": {
+    "setup": "MENTOR-9: \"PROTO-7, real decisions are complex. Power must be >50 AND temperature <80. Or sensors OK OR backup active. Boolean logic combines conditions!\"",
+    "context": "AND requires ALL conditions TRUE. OR requires AT LEAST ONE TRUE. NOT inverts TRUE/FALSE. These build complex decision logic.",
+    "success": "MENTOR-9: \"Brilliant! You've mastered boolean logic. Now you can create sophisticated, multi-condition decision trees!\""
+  },
+  "instructions": [
+    "Create the *** Test Cases *** section",
+    "Create test 'Complex Conditions'",
+    "Set ${power}    60",
+    "Set ${temp}    75",
+    "Set ${sensors}    OK",
+    "Test 1 - IF    ${power} > 50 and ${temp} < 80",
+    "    Log: 'Power and temperature both acceptable'",
+    "Test 2 - IF    ${sensors} == 'OK' or ${power} > 80",
+    "    Log: 'At least one critical system is good'",
+    "Test 3 - IF    not ${temp} > 90",
+    "    Log: 'Temperature not critical'",
+    "Add END after each IF",
+    "Note: 'and' = both TRUE, 'or' = at least one TRUE, 'not' = inverts"
+  ],
+  "hints": [
+    "AND: condition1 and condition2 (both must be TRUE)",
+    "OR: condition1 or condition2 (at least one TRUE)",
+    "NOT: not condition (inverts TRUE↔FALSE)",
+    "Use lowercase: 'and', 'or', 'not'",
+    "Can combine: (A and B) or C"
+  ],
+  "initialCode": "",
+  "solution": "*** Test Cases ***\nComplex Conditions\n    ${power}=    Set Variable    60\n    ${temp}=    Set Variable    75\n    ${sensors}=    Set Variable    OK\n    IF    ${power} > 50 and ${temp} < 80\n        Log    Power and temperature both acceptable\n    END\n    IF    ${sensors} == 'OK' or ${power} > 80\n        Log    At least one critical system is good\n    END\n    IF    not ${temp} > 90\n        Log    Temperature not critical\n    END",
+  "validation": {
+    "mustContain": [
+      "*** Test Cases ***",
+      "Complex Conditions",
+      "${power}",
+      "${temp}",
+      "${sensors}",
+      "60",
+      "75",
+      "OK",
+      "and",
+      "or",
+      "not",
+      "Power and temperature both acceptable",
+      "At least one critical system is good",
+      "Temperature not critical",
+      "END"
+    ],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Exercise 2.3.5: Boolean Logic",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/section-2-3/ex-2-3-5-boolean-logic.png\" alt=\"PROTO-7 examining three glowing logic gates - AND gate (both inputs must glow), OR gate (at least one input glows), NOT gate (inverts glow state)\" />\n</div>\n\n<div class=\"story-intro\">\n  <h3>🔗 Combining Conditions</h3>\n  <p><strong>MENTOR-9</strong>: \"PROTO-7, single conditions are simple. But reality is complex. You need power >50 AND temp <80. Or sensors OK OR backup active.\"</p>\n  <p>\"Boolean logic - AND, OR, NOT - lets you combine conditions into sophisticated decision-making.\"</p>\n</div>\n\n<div class=\"concept-explain\">\n  <h3>🧮 Boolean Operators</h3>\n  <p><strong>AND</strong> - ALL conditions must be TRUE</p>\n  <ul>\n    <li>✅ TRUE and TRUE → TRUE</li>\n    <li>❌ TRUE and FALSE → FALSE</li>\n    <li>❌ FALSE and FALSE → FALSE</li>\n  </ul>\n  <p><strong>OR</strong> - AT LEAST ONE condition must be TRUE</p>\n  <ul>\n    <li>✅ TRUE or FALSE → TRUE</li>\n    <li>✅ TRUE or TRUE → TRUE</li>\n    <li>❌ FALSE or FALSE → FALSE</li>\n  </ul>\n  <p><strong>NOT</strong> - Inverts the condition</p>\n  <ul>\n    <li>✅ not FALSE → TRUE</li>\n    <li>❌ not TRUE → FALSE</li>\n  </ul>\n</div>\n\n<div class=\"code-demo\">\n  <h3>📝 Boolean Logic Examples</h3>\n  <pre><code>*** Test Cases ***\nBoolean Examples\n    ${temp}=    Set Variable    72\n    ${power}=    Set Variable    85\n    ${alarm}=    Set Variable    ${FALSE}\n    \n    # AND - Both must be TRUE\n    IF    ${temp} < 80 and ${power} > 50\n        Log    Safe operation\n    END\n    \n    # OR - At least one TRUE\n    IF    ${power} > 90 or ${temp} > 100\n        Log    Warning condition\n    END\n    \n    # NOT - Inverts condition\n    IF    not ${alarm}\n        Log    No alarms active\n    END\n    \n    # Combined\n    IF    (${temp} > 70 and ${power} < 60) or ${alarm}\n        Log    Caution needed\n    END</code></pre>\n</div>\n\n<div class=\"rules-box\">\n  <h3>📋 Boolean Logic Rules</h3>\n  <ul>\n    <li>🔹 <strong>Lowercase</strong>: Use 'and', 'or', 'not' (not AND/OR/NOT)</li>\n    <li>🔹 <strong>Spacing</strong>: Spaces around operators</li>\n    <li>🔹 <strong>Parentheses</strong>: Group complex logic (A and B) or C</li>\n    <li>🔹 <strong>Priority</strong>: NOT > AND > OR (use parentheses for clarity)</li>\n    <li>🔹 <strong>Short-circuit</strong>: AND stops at first FALSE, OR stops at first TRUE</li>\n  </ul>\n</div>\n\n<div class=\"try-it\">\n  <h3>🎯 Your Task</h3>\n  <p>Create three complex conditions: one with AND (both must pass), one with OR (either passes), one with NOT (inverts). Master boolean logic!</p>\n</div>"
+  }
+}

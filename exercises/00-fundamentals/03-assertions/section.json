@@ -1,0 +1,21 @@
+{
+  "id": "03-assertions",
+  "section": "1.3",
+  "title": "Assertions",
+  "category": "00-fundamentals",
+  "order": 3,
+  "difficulty": "beginner",
+  "estimatedTime": "90 minutes",
+  "exercises": [
+    "ex-1-3-1",
+    "ex-1-3-2",
+    "ex-1-3-3",
+    "ex-1-3-4",
+    "ex-1-3-5",
+    "ex-1-3-6",
+    "ex-1-3-7"
+  ],
+  "challenges": [
+    "challenge-1-3"
+  ]
+}

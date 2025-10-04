@@ -1,0 +1,51 @@
+{
+  "id": "ex-2-1-4",
+  "type": "exercise",
+  "section": "04-settings-section",
+  "chapter": "02-system-diagnostics",
+  "category": "00-fundamentals",
+  "title": "Default Tags - Auto-Tagging Tests",
+  "difficulty": "beginner",
+  "estimatedTime": "6 minutes",
+  "order": 4,
+  "description": "Use Default Tags to automatically tag all tests in the suite.",
+  "story": {
+    "setup": "MENTOR-9: \"PROTO-7, we need to categorize our tests. Tags help us run specific test groups - like 'critical' tests or 'smoke' tests. Default Tags auto-tag ALL tests in this suite.\"",
+    "context": "Default Tags automatically apply tags to every test case in the suite. No need to manually tag each test - it's done once in Settings.",
+    "success": "MENTOR-9: \"Excellent! All tests now carry the 'diagnostic' and 'critical' tags. We can run just critical tests with --include critical!\""
+  },
+  "instructions": [
+    "Create the *** Settings *** section",
+    "Add Documentation: 'Critical diagnostic suite'",
+    "Add Default Tags with TWO tags: 'diagnostic' and 'critical'",
+    "Create the *** Test Cases *** section",
+    "Create test case 'System Status' that logs: 'Checking system status'",
+    "Create test case 'Power Status' that logs: 'Checking power status'",
+    "Note: Both tests will automatically have 'diagnostic' and 'critical' tags"
+  ],
+  "hints": [
+    "Default Tags syntax: 'Default Tags    tag1    tag2'",
+    "Tags are separated by 4 spaces (or 2+ tabs)",
+    "All tests in the suite inherit these tags automatically",
+    "You can add multiple tags on one line"
+  ],
+  "initialCode": "",
+  "solution": "*** Settings ***\nDocumentation    Critical diagnostic suite\nDefault Tags     diagnostic    critical\n\n*** Test Cases ***\nSystem Status\n    Log    Checking system status\n\nPower Status\n    Log    Checking power status",
+  "validation": {
+    "mustContain": [
+      "*** Settings ***",
+      "Default Tags",
+      "diagnostic",
+      "critical",
+      "*** Test Cases ***",
+      "System Status",
+      "Power Status"
+    ],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Exercise 2.1.4: Default Tags",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/section-2-1/ex-2-1-4-default-tags.png\" alt=\"MENTOR-9 holding a label maker, automatically applying glowing teal 'diagnostic' and 'critical' tag badges to multiple floating test case cards\" />\n</div>\n\n<div class=\"story-intro\">\n  <h3>🏷️ Auto-Tagging Test Cases</h3>\n  <p><strong>MENTOR-9</strong>: \"PROTO-7, imagine you have 50 tests. Some are critical, some are smoke tests, some are regression. How do you categorize them?\"</p>\n  <p>\"<strong>Tags</strong> are labels for tests. <strong>Default Tags</strong> automatically apply tags to ALL tests in a suite. One line in Settings = all tests tagged!\"</p>\n</div>\n\n<div class=\"concept-explain\">\n  <h3>🔖 What are Default Tags?</h3>\n  <p><strong>Default Tags</strong> - Automatically apply tags to ALL test cases in the suite</p>\n  <ul>\n    <li>✅ <strong>Suite-level tagging</strong>: Tag all tests at once</li>\n    <li>✅ <strong>No duplication</strong>: Set once, applies everywhere</li>\n    <li>✅ <strong>Selective execution</strong>: Run only tagged tests</li>\n    <li>✅ <strong>Test organization</strong>: Group tests by category</li>\n  </ul>\n  <p><strong>Common Tag Categories:</strong></p>\n  <ul>\n    <li>🔹 <strong>Priority</strong>: critical, high, medium, low</li>\n    <li>🔹 <strong>Type</strong>: smoke, regression, integration</li>\n    <li>🔹 <strong>Component</strong>: login, api, ui, database</li>\n    <li>🔹 <strong>Speed</strong>: fast, slow</li>\n  </ul>\n</div>\n\n<div class=\"code-demo\">\n  <h3>📝 Default Tags Example</h3>\n  <pre><code>*** Settings ***\nDefault Tags    smoke    critical\n\n*** Test Cases ***\nLogin Test\n    Log    Testing login\n    # This test has tags: smoke, critical\n\nLogout Test\n    Log    Testing logout\n    # This test has tags: smoke, critical</code></pre>\n  <p><strong>Running Tagged Tests:</strong></p>\n  <pre><code># Run only critical tests\nrobot --include critical tests.robot\n\n# Run only smoke tests\nrobot --include smoke tests.robot\n\n# Exclude slow tests\nrobot --exclude slow tests.robot</code></pre>\n</div>\n\n<div class=\"rules-box\">\n  <h3>📋 Default Tags Rules</h3>\n  <ul>\n    <li>🔹 <strong>Syntax</strong>: <code>Default Tags    tag1    tag2    tag3</code></li>\n    <li>🔹 <strong>Applies to</strong>: ALL test cases in the suite</li>\n    <li>🔹 <strong>Spacing</strong>: Tags separated by 4 spaces (or 2+ tabs)</li>\n    <li>🔹 <strong>Case-insensitive</strong>: 'Critical' and 'critical' are the same</li>\n    <li>🔹 <strong>Override</strong>: Individual tests can add more tags with [Tags]</li>\n  </ul>\n</div>\n\n<div class=\"try-it\">\n  <h3>🎯 Your Task</h3>\n  <p>Create a suite with Default Tags 'diagnostic' and 'critical'. Add two test cases - they'll both automatically inherit these tags without you specifying them per test.</p>\n</div>"
+  }
+}

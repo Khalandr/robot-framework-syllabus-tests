@@ -23,56 +23,36 @@
     ],
     "arc": "Wake up → Learn basics → Check systems → Build logic → Organize diagnostics → Escape the planet"
   },
-  "topics": [
+  "sections": [
     {
-      "id": "01-first-contact",
-      "name": "Chapter 1: First Contact",
-      "order": 1,
-      "story": "PROTO-7 wakes up after crash. MENTOR-9 teaches basic communication protocols.",
-      "learningArc": "Test basics → Variables → Simple assertions",
-      "estimatedTime": "3-4 hours",
-      "exerciseCount": 21,
-      "hasChallengeExercise": true
+      "id": "01-basic-syntax",
+      "name": "Section 1.1: Basic Syntax",
+      "order": 1
     },
     {
-      "id": "02-system-diagnostics",
-      "name": "Chapter 2: System Diagnostics",
-      "order": 2,
-      "story": "MENTOR-9 teaches how to organize diagnostics and create reusable checks.",
-      "learningArc": "Settings section → Custom keywords → IF statements → FOR loops",
-      "estimatedTime": "5-6 hours",
-      "exerciseCount": 23,
-      "hasChallengeExercise": true
+      "id": "02-variables",
+      "name": "Section 1.2: Variables",
+      "order": 2
     },
     {
-      "id": "03-logic-circuits",
-      "name": "Chapter 3: Logic Circuits",
-      "order": 3,
-      "story": "Ship's logic circuits need complex decision-making and iteration.",
-      "learningArc": "IF/ELSE → FOR loops → WHILE → Advanced control flow",
-      "estimatedTime": "2-3 hours",
-      "exerciseCount": 19,
-      "hasChallengeExercise": true
+      "id": "03-assertions",
+      "name": "Section 1.3: Assertions",
+      "order": 3
     },
     {
-      "id": "04-component-assembly",
-      "name": "Chapter 4: Component Assembly",
-      "order": 4,
-      "story": "Organize complex ship systems using advanced RF patterns.",
-      "learningArc": "Standard libraries → Resource files → Data-driven testing",
-      "estimatedTime": "2-3 hours",
-      "exerciseCount": 16,
-      "hasChallengeExercise": true
+      "id": "04-settings-section",
+      "name": "Section 2.1: Settings Section",
+      "order": 4
     },
     {
-      "id": "05-launch-sequence",
-      "name": "Chapter 5: Launch Sequence",
-      "order": 5,
-      "story": "All systems repaired. Time to execute the launch sequence and escape.",
-      "learningArc": "Integration of all concepts → Final escape",
-      "estimatedTime": "2-3 hours",
-      "exerciseCount": 5,
-      "hasFinalChallenge": true
+      "id": "05-custom-keywords",
+      "name": "Section 2.2: Custom Keywords",
+      "order": 5
+    },
+    {
+      "id": "06-if-statements",
+      "name": "Section 2.3: IF Statements",
+      "order": 6
     }
   ],
   "learningObjectives": [

@@ -1,0 +1,43 @@
+{
+  "id": "04-settings-section",
+  "section": "2.1",
+  "title": "Settings Section",
+  "category": "00-fundamentals",
+  "order": 1,
+  "difficulty": "beginner",
+  "estimatedTime": "45-50 minutes",
+  "story": {
+    "introduction": "Day 6 on planet Syntax-IV. The ship's core systems are stable, but now we need to configure the diagnostic framework itself.\n\nMENTOR-9: \"PROTO-7, we've mastered basic tests and validation. Now it's time to learn the Settings section - the control panel of every test suite.\"\n\n\"Settings configure how your tests run: lifecycle hooks, timeouts, library imports, and more. Think of it as the mission briefing before each diagnostic scan.\"",
+    "context": "The *** Settings *** section is where you configure suite-level behavior: setup/teardown procedures, default tags, test timeouts, and library imports. It's the foundation of organized test automation."
+  },
+  "learningObjectives": [
+    "Understand the *** Settings *** section structure",
+    "Use Suite Setup and Suite Teardown hooks",
+    "Apply Test Setup and Test Teardown for individual tests",
+    "Implement Default Tags for test organization",
+    "Set Test Timeout to prevent infinite loops",
+    "Import built-in libraries (Collections, String, DateTime)",
+    "Master settings syntax flexibility (spacing, header variations)"
+  ],
+  "conceptsCovered": [
+    "*** Settings *** section syntax",
+    "Suite lifecycle hooks",
+    "Test lifecycle hooks",
+    "Test tagging",
+    "Timeout configuration",
+    "Library imports",
+    "Settings header variations"
+  ],
+  "exercises": [
+    "ex-2-1-1",
+    "ex-2-1-2",
+    "ex-2-1-3",
+    "ex-2-1-4",
+    "ex-2-1-5",
+    "ex-2-1-6",
+    "ex-2-1-7"
+  ],
+  "challenges": [
+    "challenge-2-1"
+  ]
+}
