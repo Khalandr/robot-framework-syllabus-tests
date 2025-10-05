@@ -31,53 +31,38 @@ const exercise = {
                 const categoryExercises = [];
 
                 try {
-                    // Load category.json to get sections (flattened structure)
-                    const categoryResponse = await fetch(`exercises/${cat.id}/category.json`);
-                    if (!categoryResponse.ok) {
-                        console.log(`❌ No category.json for ${cat.id}`);
+                    // Load category index.json (flat structure - all exercises in root)
+                    const indexResponse = await fetch(`exercises/${cat.id}/index.json`);
+                    if (!indexResponse.ok) {
+                        console.log(`❌ No index.json for ${cat.id}`);
                         continue;
                     }
-                    const categoryData = await categoryResponse.json();
-                    console.log(`   Found ${categoryData.sections.length} sections in ${cat.id}`);
+                    const indexData = await indexResponse.json();
+                    console.log(`   Found ${indexData.exercises.length} exercises, ${indexData.challenges.length} challenges`);
 
-                    // Load exercises from each section (no chapter/topic layer)
-                    for (const section of categoryData.sections) {
-                        console.log(`   📄 Loading section: ${section.id}`);
-                        try {
-                            // Load section.json to get exercise IDs
-                            const sectionResponse = await fetch(`exercises/${cat.id}/${section.id}/section.json`);
-                            if (sectionResponse.ok) {
-                                const sectionData = await sectionResponse.json();
-                                console.log(`      Found ${sectionData.exercises.length} exercises, ${sectionData.challenges.length} challenges`);
+                    // Load individual exercise files in parallel (flat structure)
+                    const exercisePromises = (indexData.exercises || []).map(exerciseId =>
+                        fetch(`exercises/${cat.id}/${exerciseId}.json`)
+                            .then(r => r.ok ? r.json() : null)
+                            .catch(() => null)
+                    );
 
-                                // Load individual exercise files in parallel
-                                const exercisePromises = (sectionData.exercises || []).map(exerciseId =>
-                                    fetch(`exercises/${cat.id}/${section.id}/${exerciseId}.json`)
-                                        .then(r => r.ok ? r.json() : null)
-                                        .catch(() => null)
-                                );
+                    const challengePromises = (indexData.challenges || []).map(challengeId =>
+                        fetch(`exercises/${cat.id}/${challengeId}.json`)
+                            .then(r => r.ok ? r.json() : null)
+                            .catch(() => null)
+                    );
 
-                                const challengePromises = (sectionData.challenges || []).map(challengeId =>
-                                    fetch(`exercises/${cat.id}/${section.id}/${challengeId}.json`)
-                                        .then(r => r.ok ? r.json() : null)
-                                        .catch(() => null)
-                                );
+                    // Wait for all to complete
+                    const exercises = await Promise.all(exercisePromises);
+                    const challenges = await Promise.all(challengePromises);
 
-                                // Wait for all to complete
-                                const exercises = await Promise.all(exercisePromises);
-                                const challenges = await Promise.all(challengePromises);
-
-                                // Add non-null exercises and challenges
-                                const validExercises = exercises.filter(e => e !== null);
-                                const validChallenges = challenges.filter(c => c !== null);
-                                console.log(`      ✅ Loaded ${validExercises.length} exercises, ${validChallenges.length} challenges`);
-                                categoryExercises.push(...validExercises);
-                                categoryExercises.push(...validChallenges);
-                            }
-                        } catch (err) {
-                            console.error(`Error loading section ${cat.id}/${section.id}:`, err);
-                        }
-                    }
+                    // Add non-null exercises and challenges
+                    const validExercises = exercises.filter(e => e !== null);
+                    const validChallenges = challenges.filter(c => c !== null);
+                    console.log(`   ✅ Loaded ${validExercises.length} exercises, ${validChallenges.length} challenges`);
+                    categoryExercises.push(...validExercises);
+                    categoryExercises.push(...validChallenges);
                 } catch (err) {
                     console.log(`Error loading category ${cat.id}:`, err);
                 }
