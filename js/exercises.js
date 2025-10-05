@@ -161,9 +161,13 @@ const exercise = {
         if (!this.currentExercise) return;
 
         // Update UI
-        document.getElementById('exerciseTitle').textContent = this.currentExercise.title;
+        document.getElementById('exerciseTitle').textContent = this.currentExercise.id;
         document.getElementById('exerciseDifficulty').textContent = this.currentExercise.difficulty;
-        document.getElementById('exerciseDescription').textContent = this.currentExercise.description;
+
+        // Style description as MENTOR-9 speech (similar to story-intro)
+        const descElement = document.getElementById('exerciseDescription');
+        descElement.textContent = this.currentExercise.description;
+        descElement.className = 'task-mentor-speech';
 
         // Render Theory Section
         if (this.currentExercise.theory) {
@@ -175,28 +179,48 @@ const exercise = {
             // Check if there's a theory visual image in the content
             let content = theory.content || '';
             const imageMatch = content.match(/<div class="theory-visual">.*?<img src="([^"]+)" alt="([^"]+)"[^>]*>.*?<\/div>/s);
+            const storyMatch = content.match(/<div class="story-intro">.*?<\/div>/s);
 
-            // Remove any existing theory visual from previous exercise
+            // Remove any existing theory visual and story intro from previous exercise
             const existingVisual = document.querySelector('#theorySection .theory-visual');
             if (existingVisual && existingVisual.parentNode.id === 'theorySection') {
                 existingVisual.remove();
             }
+            const existingStory = document.querySelector('#theorySection .story-intro');
+            if (existingStory && existingStory.parentNode.id === 'theorySection') {
+                existingStory.remove();
+            }
+
+            const theorySection = document.getElementById('theorySection');
+            const theoryHeader = theorySection.querySelector('.theory-header');
+            let lastInsertedElement = theoryHeader;
 
             if (imageMatch) {
                 // Insert the image directly in theorySection, after the header
-                const theorySection = document.getElementById('theorySection');
-                const theoryHeader = theorySection.querySelector('.theory-header');
-
                 const visualDiv = document.createElement('div');
                 visualDiv.className = 'theory-visual';
                 visualDiv.innerHTML = `<img src="${imageMatch[1]}" alt="${imageMatch[2]}" loading="lazy" width="1920" height="1080" />`;
 
-                theoryHeader.insertAdjacentElement('afterend', visualDiv);
+                lastInsertedElement.insertAdjacentElement('afterend', visualDiv);
+                lastInsertedElement = visualDiv;
 
                 // Remove the image from the theory content to avoid duplication
-                // Also remove any leading escaped newlines and actual newlines
                 content = content.replace(/<div class="theory-visual">.*?<\/div>/s, '')
-                    .replace(/^[\s\\n]+/, '')  // Remove leading whitespace and \n
+                    .replace(/^[\s\\n]+/, '')
+                    .trim();
+            }
+
+            if (storyMatch) {
+                // Insert the story intro after the image (or header if no image)
+                const storyDiv = document.createElement('div');
+                storyDiv.className = 'story-intro';
+                storyDiv.innerHTML = storyMatch[0].replace(/<\/?div[^>]*>/g, '').trim();
+
+                lastInsertedElement.insertAdjacentElement('afterend', storyDiv);
+
+                // Remove the story intro from the theory content to avoid duplication
+                content = content.replace(/<div class="story-intro">.*?<\/div>/s, '')
+                    .replace(/^[\s\\n]+/, '')
                     .trim();
             }
 

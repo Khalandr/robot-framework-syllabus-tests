@@ -309,6 +309,79 @@ See **[docs/EXERCISE_CREATION_GUIDE.md](docs/EXERCISE_CREATION_GUIDE.md)** for d
 
 ---
 
+## ✨ Exercise Content Guidelines (Updated 2025-01-05)
+
+Based on refinements made to Exercise 01 (`ex-00-01-01.json`):
+
+### UI Display Rules
+1. **Exercise Title Display**: Show exercise ID (e.g., `ex-00-01-01`) instead of title field in the top header
+   - Displayed alongside difficulty badge
+   - No estimated time shown in header
+   - Title field still used in exercise list view
+
+2. **Theory Section Structure** (appears above "Read More" button):
+   - `<div class="theory-visual">` - Image extracted and placed after theory header
+   - `<div class="story-intro">` - Story narrative extracted and placed after image
+   - Both elements appear **before** collapsible content (always visible)
+
+3. **Story Intro Formatting**:
+   - First paragraph: Regular narrative text (setup context)
+   - Last paragraph: MENTOR-9's dialogue (styled with italic, teal color, decorative quotes)
+   - Background: Gradient with teal accent, left border, shadow
+   - Text alignment: Justified
+   - Line height: 1.6 (tight spacing)
+   - CSS class: `.story-intro`
+
+4. **Task Section Formatting**:
+   - Header: "TASK" (uppercase, not "Task")
+   - Description: MENTOR-9's speech styled like `.story-intro`
+   - CSS class for description: `.task-mentor-speech`
+   - Same styling as story intro (gradient, quotes, italic, teal)
+
+### Theory Content Structure
+1. **Story intro** - Wrapped in `<div class="story-intro">` (extracted, always visible)
+2. **Section headers** - Use `<h3>` tags to organize collapsible content:
+   - Example: `<h3>Understanding Robot Framework</h3>`
+   - Example: `<h3>The Basic Pattern</h3>`
+   - Example: `<h3>Critical: Spacing Rules</h3>`
+3. **No "Your Task" section** - Removed from theory (task is in Task section)
+4. **Narrative style** - Write like a story/explanation, not documentation term-definition format
+5. **Non-technical language** - Easy to read for non-technical users, avoid overwhelming with terms
+6. **High-level understanding** - Focus on practice and conceptual understanding
+
+### Instructions Format
+1. **High-level goals** - Not step-by-step syntax (e.g., "Create the Test Cases section" not "Type *** Test Cases ***")
+2. **Styled syntax elements** - Wrap in single quotes for auto-formatting as `<code>`:
+   - Example: `'*** Test Cases ***'` → renders as code
+   - Example: `'Log'` → renders as keyword
+   - Example: `'Boot Sequence'` → renders as test name
+3. **Include exploration tasks** - Ask to inspect output (e.g., "Inspect the Log tab to find your boot messages and pay attention to the log level (INFO, WARN, ERROR, etc.)")
+4. **Provide exact arguments** - When specifying messages/arguments, give full text
+5. **Singular vs plural** - Use singular "test" not "tests" when referring to one test
+
+### Validation Rules
+1. **mustContain**: Use **exact full text** of arguments, not partial keywords
+   - ✅ Good: `"Hello World"`, `"Initializing core systems..."`
+   - ❌ Bad: `"Initializing"`, `"core"`
+2. **Match instructions**: Validation must check for exact messages specified in instructions
+
+### CSS Styling Classes
+- `.story-intro` - Story narrative box (gradient background, always visible above "Read More")
+- `.task-mentor-speech` - Task description (MENTOR-9's instruction, styled like story intro)
+- `.concept-explain` - Theory explanation paragraphs
+- `.code-demo` - Code examples
+- `.rules-box` - Important rules/warnings
+
+### JavaScript Extraction Logic (`js/exercises.js`)
+The code automatically extracts and positions:
+1. `<div class="theory-visual">` → Placed after theory header (always visible)
+2. `<div class="story-intro">` → Placed after image (always visible)
+3. Remaining content → Inside collapsible `#theoryFullContent`
+
+Both extracted elements appear **before** the "Read More" button.
+
+---
+
 ## 📚 Additional Documentation
 
 - **[docs/EXERCISE_CREATION_GUIDE.md](docs/EXERCISE_CREATION_GUIDE.md)** - Step-by-step exercise creation

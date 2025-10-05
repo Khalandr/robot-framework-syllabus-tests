@@ -1598,3 +1598,104 @@ code.robot {
 .theory-content .theory-visual:first-child {
     margin-top: 0;
 }
+
+/* Story Intro Section (appears above "Read More" button) */
+.story-intro {
+    background: linear-gradient(135deg, rgba(42, 63, 63, 0.6) 0%, rgba(90, 179, 179, 0.15) 100%);
+    border: 2px solid var(--primary-teal-30);
+    border-left: 6px solid var(--primary-teal);
+    padding: 1.5rem 2rem;
+    border-radius: var(--radius-lg);
+    margin: 1.5rem 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(90, 179, 179, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.story-intro p {
+    margin: 0;
+    line-height: 1.6;
+    color: var(--text-light);
+    font-size: 1.05rem;
+    position: relative;
+    z-index: 1;
+    text-align: justify;
+}
+
+.story-intro p + p {
+    margin-top: 0.8rem;
+}
+
+.story-intro p:first-child {
+    font-style: normal;
+    color: var(--text-light);
+    font-size: 1.05rem;
+    font-weight: 400;
+}
+
+.story-intro p:last-child {
+    font-style: italic;
+    color: var(--primary-teal);
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    margin-top: 1rem;
+}
+
+.story-intro p:last-child::before {
+    content: '"';
+    color: var(--primary-teal);
+    font-size: 1.8rem;
+    margin-right: 0.25rem;
+    opacity: 0.6;
+    line-height: 0;
+    vertical-align: middle;
+}
+
+.story-intro p:last-child::after {
+    content: '"';
+    color: var(--primary-teal);
+    font-size: 1.8rem;
+    margin-left: 0.25rem;
+    opacity: 0.6;
+    line-height: 0;
+    vertical-align: middle;
+}
+
+/* Task Mentor Speech (MENTOR-9's task instruction) */
+.task-mentor-speech {
+    background: linear-gradient(135deg, rgba(42, 63, 63, 0.6) 0%, rgba(90, 179, 179, 0.15) 100%);
+    border: 2px solid var(--primary-teal-30);
+    border-left: 6px solid var(--primary-teal);
+    padding: 1.5rem 2rem;
+    border-radius: var(--radius-lg);
+    margin: 1rem 0 1.5rem 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(90, 179, 179, 0.1);
+    font-style: italic;
+    color: var(--primary-teal);
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    line-height: 1.6;
+    text-align: justify;
+}
+
+.task-mentor-speech::before {
+    content: '"';
+    color: var(--primary-teal);
+    font-size: 1.8rem;
+    margin-right: 0.25rem;
+    opacity: 0.6;
+    line-height: 0;
+    vertical-align: middle;
+}
+
+.task-mentor-speech::after {
+    content: '"';
+    color: var(--primary-teal);
+    font-size: 1.8rem;
+    margin-left: 0.25rem;
+    opacity: 0.6;
+    line-height: 0;
+    vertical-align: middle;
+}
