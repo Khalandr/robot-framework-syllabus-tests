@@ -1,8 +1,14 @@
 # Exercise Review Plan - Variables & Control Flow
 
 ## Current Status
-- ✅ Completed: Exercises 01-03 (Basic Syntax, Log Levels, Log To Console)
-- 🔄 Next: Review and refactor exercises 04-33
+- ✅ Completed & Reviewed: Exercises 01-05 (Basic Syntax, Variables - Text & Numbers)
+- 🔄 In Progress: Exercise 06-07 (List & Dictionary Variables)
+- 📝 Next: Review exercises 06-33
+
+## Recent Updates (2025-01-XX)
+- ✅ Updated CLAUDE.md with comprehensive exercise content guidelines
+- ✅ ex-00-04: Refactored story/theory (no speaker labels, concise, conversational)
+- ✅ ex-00-05: Task-oriented description, high-level instructions, shortened theory
 
 ## Proposed Structure (Adjusted)
 
@@ -21,13 +27,15 @@
 ### Topic 2: Variables (ex-00-04 to ex-00-10) - 7 exercises
 Focus: Introduction to variable types and basic usage
 
-1. **ex-00-04**: Scalar Variables - Text
+1. **ex-00-04**: Scalar Variables - Text ✅ REVIEWED
    - Create and log text variables
-   - Simple string operations
+   - String concatenation (3 methods)
+   - Variable name flexibility (case-insensitive, space=underscore)
 
-2. **ex-00-05**: Scalar Variables - Numbers & Evaluate
-   - Create and log number variables
-   - Math operations with Evaluate keyword (add, subtract, multiply, divide)
+2. **ex-00-05**: Scalar Variables - Numbers & Evaluate ✅ REVIEWED
+   - Integer vs Float syntax (${42} vs ${3.14})
+   - Math operations with Evaluate keyword
+   - Auto-conversion when concatenating with strings
 
 3. **ex-00-06**: List Variables Basics
    - Create list with Create List

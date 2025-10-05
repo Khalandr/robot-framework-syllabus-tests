@@ -250,6 +250,99 @@ Robot Framework training platform with two main features:
    - `git commit -m "Add exercise XX: [title]"`
    - `git push`
 
+### ⚠️ Exercise Content Guidelines
+
+#### **1. Description Field (Task-oriented)**
+- **Sound like a task**, not a concept explanation
+- **Focus on what to achieve**, not why or how
+- **Be specific about the goal**
+
+❌ Wrong: "Text variables are useful, but robots need to do math."
+✅ Correct: "Calculate the ship's total power output from three reactors. You'll need to store numeric values, add them together, find the average, and determine if there's a power deficit."
+
+#### **2. Story Sections (`story.setup`, `story.context`, `story.success`)**
+- **NO explicit speaker labels** - Don't use "MENTOR-9:" or "PROTO-7:"
+- **NO escaped quotes** - Story dialogue should NOT have escaped quotes like `\"`
+- **Implicit speakers** - Context makes it clear who is speaking
+- **Direct dialogue** - Use natural conversational flow
+
+❌ Wrong:
+```json
+"context": "\"PROTO-7, we need to calculate power output...\""
+```
+
+✅ Correct:
+```json
+"context": "PROTO-7, we need to calculate power output..."
+```
+
+#### **3. Instructions (High-level, formatted)**
+- **High-level steps** - Don't provide exact code, describe what to accomplish
+- **Format keywords** - Use quotes: '*** Test Cases ***', '${variable}', 'keyword'
+- **Specific but flexible** - Provide exact messages with variables, not hardcoded values
+
+❌ Wrong:
+```json
+"Create the Test Cases section",
+"Use Evaluate to calculate total power: ${reactor_1} + ${reactor_2} + ${reactor_3}",
+"Log the total power with message: 'Total power: 525'"
+```
+
+✅ Correct:
+```json
+"Create the '*** Test Cases ***' section",
+"Calculate the total power from all three reactors and store in '${total_power}'",
+"Log the total power with message: 'Total power: ${total_power}'"
+```
+
+#### **4. Theory Content (Conversational, concise)**
+- **Conversational style** - Not formal documentation
+- **Short and focused** - Remove redundant examples and explanations
+- **No escaped quotes in dialogue** - Only escape quotes in HTML attributes
+- **Code examples with 4-space indentation** - Use direct assignment, not Set Variable
+
+❌ Wrong:
+```html
+<p>\"Look at this. Three reactors, different outputs.\"</p>
+<p>A <strong>variable</strong> is a storage container.</p>
+
+<h3>Numeric Variables</h3>
+<p>Variables can store numbers:</p>
+<code>${count}    Set Variable    42</code>
+
+<p><strong>Integers</strong> are whole numbers:</p>
+<ul>
+<li>${42} - positive</li>
+<li>${-15} - negative</li>
+<li>${0} - zero</li>
+</ul>
+<p><strong>Floats</strong> have decimals:</p>
+<ul>
+<li>${3.14} - positive</li>
+<li>${-273.15} - negative</li>
+</ul>
+```
+
+✅ Correct:
+```html
+<p>Look at this. Three reactors, different outputs.</p>
+<p>Think of a <strong>variable</strong> like a labeled storage container.</p>
+
+<h3>Numbers: Integers and Floats</h3>
+<p>When you need actual numbers for math, wrap them in <code>${}</code>:</p>
+<code>
+${count}    42          # String "42"
+${real}     ${42}       # Integer 42
+${pi}       ${3.14}     # Float 3.14
+</code>
+<p>The difference: <code>42</code> is text, <code>${42}</code> is a number.</p>
+```
+
+#### **5. Reference Examples**
+- `ex-00-03.json` - Good story/theory style
+- `ex-00-04.json` - Task-oriented description, concise theory
+- `ex-00-05.json` - High-level instructions, formatted keywords
+
 ---
 
 ## 📊 Current Exercise Inventory

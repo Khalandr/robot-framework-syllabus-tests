@@ -4,25 +4,23 @@
   "difficulty": "beginner",
   "estimatedTime": "12 minutes",
   "order": 5,
-  "description": "MENTOR-9: \"Text variables are useful, but robots need to do math. Power calculations, distance measurements, resource counts—all require numeric variables and the Evaluate keyword.\"",
+  "description": "Calculate the ship's total power output from three reactors. You'll need to store numeric values, add them together, find the average, and determine if there's a power deficit.",
   "story": {
     "setup": "The ship's power systems need calibration. MENTOR-9 pulls up a diagnostic readout.",
-    "context": "\"PROTO-7, we need to calculate total power output. We have three reactors, each producing different amounts. We can't just log numbers—we need to DO MATH on them. That's where the Evaluate keyword comes in.\"",
-    "success": "MENTOR-9: \"Excellent! You've performed calculations with Evaluate. Addition, subtraction, multiplication, division—all the basic operations. This is how robots think numerically!\""
+    "context": "PROTO-7, we need to calculate total power output. We have three reactors, each producing different amounts. We can't just log numbers—we need to DO MATH on them. That's where the Evaluate keyword comes in.",
+    "success": "Excellent! You've performed calculations with Evaluate. Addition, subtraction, multiplication, division—all the basic operations. This is how robots think numerically!"
   },
   "instructions": [
-    "Create the 'Test Cases' section",
-    "Create a test case named 'Power Calculations'",
-    "Create a variable '${reactor_1}' with value 150 (use Set Variable)",
-    "Create a variable '${reactor_2}' with value 200",
-    "Create a variable '${reactor_3}' with value 175",
-    "Use Evaluate to calculate total power: '${reactor_1} + ${reactor_2} + ${reactor_3}' and store in '${total_power}'",
-    "Use Evaluate to calculate average power: '${total_power} / 3' and store in '${average_power}'",
-    "Use Evaluate to calculate power deficit: '600 - ${total_power}' and store in '${deficit}'",
-    "Log the total power with message: 'Total power: 525'",
-    "Log the average power with message: 'Average power: 175.0'",
-    "Log the deficit with message: 'Power deficit: 75'",
-    "Run the code and inspect the Console tab to see calculated values"
+    "Create the '*** Test Cases ***' section",
+    "Create a test named 'Power Calculations'",
+    "Store three reactor power values: '150', '200', and '175' in variables '${reactor_1}', '${reactor_2}', '${reactor_3}'",
+    "Calculate the total power from all three reactors and store in '${total_power}'",
+    "Calculate the average power output and store in '${average_power}'",
+    "Calculate the power deficit (required: 600, actual: total) and store in '${deficit}'",
+    "Log the total power with message: 'Total power: ${total_power}'",
+    "Log the average power with message: 'Average power: ${average_power}'",
+    "Log the deficit with message: 'Power deficit: ${deficit}'",
+    "Run the code and verify your calculations in the Console tab"
   ],
   "hints": [
     "Evaluate executes Python expressions",
@@ -50,7 +48,7 @@
   },
   "theory": {
     "title": "Scalar Variables: Numbers & Math with Evaluate",
-    "content": "<div class=\"theory-visual\">\n<img src=\"assets/images/theory/02-variables/ex-1-2-2-numbers-evaluate.png\" alt=\"Mathematical calculations visualization\" loading=\"lazy\" width=\"1920\" height=\"1080\" />\n</div>\n\n<div class=\"story-intro\">\n<p>MENTOR-9 gestures to the ship's power distribution panel, numbers flickering across holographic displays.</p>\n<p>MENTOR-9: \"Look at this. Three reactors, different outputs. We can't manually calculate the total every time. We need the computer to do the math. That's what Evaluate does—it performs calculations.\"</p>\n</div>\n\n<h3>Numeric Variables</h3>\n\n<p>Variables can store numbers just like they store text:</p>\n\n<div class=\"code-demo\">\n<pre><code>${count}    Set Variable    42\n${temperature}    Set Variable    -15\n${distance}    Set Variable    3.14159</code></pre>\n</div>\n\n<p>But storing numbers isn't enough—we need to <strong>calculate</strong> with them.</p>\n\n<h3>The Evaluate Keyword</h3>\n\n<p><strong>Evaluate</strong> executes Python expressions and returns the result. It's Robot Framework's calculator.</p>\n\n<div class=\"code-demo\">\n<pre><code>${result}    Evaluate    10 + 5\nLog    ${result}    # Outputs: 15</code></pre>\n</div>\n\n<h3>Math Operations</h3>\n\n<ul>\n<li><strong>Addition:</strong> <code>Evaluate    10 + 5</code> → 15</li>\n<li><strong>Subtraction:</strong> <code>Evaluate    10 - 5</code> → 5</li>\n<li><strong>Multiplication:</strong> <code>Evaluate    10 * 5</code> → 50</li>\n<li><strong>Division:</strong> <code>Evaluate    10 / 5</code> → 2.0</li>\n<li><strong>Integer Division:</strong> <code>Evaluate    10 // 3</code> → 3</li>\n<li><strong>Modulo (remainder):</strong> <code>Evaluate    10 % 3</code> → 1</li>\n<li><strong>Exponentiation:</strong> <code>Evaluate    2 ** 3</code> → 8</li>\n</ul>\n\n<h3>Using Variables in Calculations</h3>\n\n<p>The real power comes from using variables in expressions:</p>\n\n<div class=\"code-demo\">\n<pre><code>${width}    Set Variable    10\n${height}    Set Variable    5\n${area}    Evaluate    ${width} * ${height}\nLog    Area: ${area}    # Outputs: Area: 50</code></pre>\n</div>\n\n<p>Robot Framework replaces <code>${width}</code> and <code>${height}</code> with their values before evaluating.</p>\n\n<h3>Complex Expressions</h3>\n\n<p>You can combine multiple operations:</p>\n\n<div class=\"code-demo\">\n<pre><code>${total}    Evaluate    (${a} + ${b}) * ${c} / 2\n${average}    Evaluate    (${x} + ${y} + ${z}) / 3\n${percentage}    Evaluate    (${part} / ${whole}) * 100</code></pre>\n</div>\n\n<p>Standard mathematical operator precedence applies (multiplication/division before addition/subtraction).</p>\n\n<h3>Why Evaluate Instead of Built-in Math Keywords?</h3>\n\n<p>Robot Framework doesn't have built-in keywords like \"Add\" or \"Multiply.\" Instead, it uses <strong>Evaluate</strong> to leverage Python's powerful expression evaluation.</p>\n\n<p><strong>Advantages:</strong></p>\n<ul>\n<li>No need to learn separate math keywords</li>\n<li>Use familiar mathematical notation</li>\n<li>Access to full Python math capabilities</li>\n<li>Can evaluate complex expressions in one line</li>\n</ul>\n\n<h3>Common Use Cases</h3>\n\n<div class=\"code-demo\">\n<pre><code># Calculate total cost\n${total_cost}    Evaluate    ${quantity} * ${price}\n\n# Convert Celsius to Fahrenheit\n${fahrenheit}    Evaluate    (${celsius} * 9/5) + 32\n\n# Calculate percentage\n${pass_rate}    Evaluate    (${passed} / ${total}) * 100\n\n# Increment a counter\n${counter}    Evaluate    ${counter} + 1</code></pre>\n</div>\n\n<h3>Important Notes</h3>\n\n<ul>\n<li>Evaluate returns <strong>float</strong> for division: 10 / 3 = 3.333...</li>\n<li>Use // for integer division: 10 // 3 = 3</li>\n<li>Variables must already exist before using in Evaluate</li>\n<li>Python syntax rules apply inside Evaluate</li>\n</ul>",
+    "content": "<div class=\"theory-visual\">\n<img src=\"assets/images/theory/02-variables/ex-1-2-2-numbers-evaluate.png\" alt=\"Mathematical calculations visualization\" loading=\"lazy\" width=\"1920\" height=\"1080\" />\n</div>\n\n<div class=\"story-intro\">\n<p>MENTOR-9 gestures to the ship's power distribution panel, numbers flickering across holographic displays.</p>\n<p>Look at this. Three reactors, different outputs. We can't manually calculate the total every time. We need the computer to do the math. That's what Evaluate does—it performs calculations.</p>\n</div>\n\n<h3>Numbers: Integers and Floats</h3>\n\n<p>Remember how Robot Framework treats everything as strings by default? When you need actual numbers for math, wrap them in <code>${}</code>:</p>\n\n<div class=\"code-demo\">\n<pre><code>*** Variables ***\n${STRING}            This is a string\n${STILL_STRING}      8270    # Text: characters 8, 2, 7, 0\n${INTEGER}           ${42}   # Integer (whole number)\n${FLOAT}             ${3.14} # Float (decimal number)</code></pre>\n</div>\n\n<p>The difference: <code>42</code> is text, <code>${42}</code> is a number. But storing numbers isn't enough—we need to calculate with them.</p>\n\n<h3>The Evaluate Keyword</h3>\n\n<p>Evaluate executes Python math expressions. It's your calculator:</p>\n\n<div class=\"code-demo\">\n<pre><code>${result}    Evaluate    10 + 5    # Returns 15</code></pre>\n</div>\n\n<p>All the math operators work: <code>+</code> (add), <code>-</code> (subtract), <code>*</code> (multiply), <code>/</code> (divide), <code>//</code> (integer divide), <code>%</code> (remainder), <code>**</code> (power).</p>\n\n<p>Standard math rules apply: multiplication/division happen before addition/subtraction. Use parentheses to change order.</p>\n\n<h3>Using Variables in Calculations</h3>\n\n<p>Use variables in expressions—Robot Framework substitutes their values:</p>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nArea Calculation\n    ${width}     10\n    ${height}    5\n    ${area}      Evaluate    ${width} * ${height}\n    Log    Area: ${area}</code></pre>\n</div>\n\n<p><strong>Note:</strong> Numbers auto-convert to strings when logging.</p>",
     "estimatedReadTime": "6 minutes"
   },
   "metadata": {
