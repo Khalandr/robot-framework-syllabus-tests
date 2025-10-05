@@ -1,0 +1,50 @@
+{
+  "id": "ex-00-25",
+  "type": "exercise",
+  "section": "04-settings-section",
+  "category": "00-fundamentals",
+  "category": "00-fundamentals",
+  "title": "Library Imports - Extending Functionality",
+  "difficulty": "beginner",
+  "estimatedTime": "7 minutes",
+  "order": 6,
+  "description": "Import built-in libraries to access additional keywords.",
+  "story": {
+    "setup": "MENTOR-9: \"PROTO-7, the Log keyword is from BuiltIn library - it's auto-imported. But there are MORE libraries: Collections for lists, String for text, DateTime for time operations.\"",
+    "context": "Libraries extend Robot Framework with new keywords. Collections library provides list/dictionary manipulation. String library offers text operations.",
+    "success": "MENTOR-9: \"Excellent! You've imported Collections and String libraries. Now you have access to 100+ new keywords for data manipulation!\""
+  },
+  "instructions": [
+    "Create the *** Settings *** section",
+    "Add Documentation: 'Suite with library imports'",
+    "Import the Collections library",
+    "Import the String library",
+    "Create the *** Test Cases *** section",
+    "Create test case 'Library Check' that logs: 'Libraries loaded successfully'",
+    "Note: Collections and String are built-in libraries - no installation needed"
+  ],
+  "hints": [
+    "Library import syntax: 'Library    LibraryName'",
+    "Each library import is on its own line",
+    "Library names are case-sensitive: 'Collections' not 'collections'",
+    "BuiltIn library is auto-imported (provides Log keyword)"
+  ],
+  "initialCode": "",
+  "solution": "*** Settings ***\nDocumentation    Suite with library imports\nLibrary          Collections\nLibrary          String\n\n*** Test Cases ***\nLibrary Check\n    Log    Libraries loaded successfully",
+  "validation": {
+    "mustContain": [
+      "*** Settings ***",
+      "Library",
+      "Collections",
+      "String",
+      "*** Test Cases ***",
+      "Library Check"
+    ],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Exercise 2.1.6: Library Imports",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/04-settings-section/ex-2-1-6-library-imports.png\" alt=\"MENTOR-9 standing before a holographic library shelf with glowing modules labeled 'Collections', 'String', 'DateTime' floating and connecting to PROTO-7's systems\" />\n</div>\n\n<div class=\"story-intro\">\n  <h3>📚 Extending Your Toolkit</h3>\n  <p><strong>MENTOR-9</strong>: \"PROTO-7, Robot Framework comes with powerful built-in libraries. Think of them as tool modules you can plug into your tests.\"</p>\n  <p>\"<strong>Collections</strong> handles lists and dictionaries. <strong>String</strong> manipulates text. <strong>DateTime</strong> works with dates and times. Import them to unlock their keywords!\"</p>\n</div>\n\n<div class=\"concept-explain\">\n  <h3>📦 What are Library Imports?</h3>\n  <p><strong>Library</strong> - Import external functionality into your test suite</p>\n  <ul>\n    <li>✅ <strong>BuiltIn</strong> - Auto-imported (Log, Should Be Equal, etc.)</li>\n    <li>✅ <strong>Collections</strong> - List/dictionary operations (Append To List, Get From Dictionary)</li>\n    <li>✅ <strong>String</strong> - Text manipulation (Convert To Lowercase, Should Match Regexp)</li>\n    <li>✅ <strong>DateTime</strong> - Date/time operations (Get Current Date, Convert Date)</li>\n    <li>✅ <strong>OperatingSystem</strong> - File/directory operations (Create File, Directory Should Exist)</li>\n  </ul>\n  <p><strong>External Libraries (require installation):</strong></p>\n  <ul>\n    <li>🔹 <strong>SeleniumLibrary</strong> - Web browser automation</li>\n    <li>🔹 <strong>RequestsLibrary</strong> - HTTP API testing</li>\n    <li>🔹 <strong>DatabaseLibrary</strong> - SQL database operations</li>\n  </ul>\n</div>\n\n<div class=\"code-demo\">\n  <h3>📝 Library Import Example</h3>\n  <pre><code>*** Settings ***\nLibrary    Collections\nLibrary    String\n\n*** Test Cases ***\nUse Collections Keywords\n    @{mylist}=    Create List    alpha    beta    gamma\n    Append To List    ${mylist}    delta\n    Length Should Be    ${mylist}    4\n\nUse String Keywords\n    ${result}=    Convert To Lowercase    HELLO WORLD\n    Should Be Equal    ${result}    hello world</code></pre>\n</div>\n\n<div class=\"rules-box\">\n  <h3>📋 Library Import Rules</h3>\n  <ul>\n    <li>🔹 <strong>Syntax</strong>: <code>Library    LibraryName</code></li>\n    <li>🔹 <strong>Case-sensitive</strong>: 'Collections' not 'collections'</li>\n    <li>🔹 <strong>BuiltIn auto-imported</strong>: No need to import BuiltIn</li>\n    <li>🔹 <strong>Import location</strong>: *** Settings *** section only</li>\n    <li>🔹 <strong>With arguments</strong>: <code>Library    SeleniumLibrary    timeout=10</code></li>\n  </ul>\n</div>\n\n<div class=\"try-it\">\n  <h3>🎯 Your Task</h3>\n  <p>Import Collections and String libraries. These are built-in, so no installation needed. Later exercises will use keywords from these libraries!</p>\n</div>"
+  }
+}

@@ -1,0 +1,118 @@
+# Exercise Renaming Map - Old ID to New ID
+# Format: old_filename -> new_filename (old_id -> new_id)
+
+# Section 01: Basic Syntax (1.1) - 5 exercises
+ex-00-01-01.json -> ex-00-01.json (ex-00-01-01 -> ex-00-01)
+ex-00-01-02.json -> ex-00-02.json (ex-00-01-02 -> ex-00-02)
+ex-00-01-03.json -> ex-00-03.json (ex-00-01-03 -> ex-00-03)
+ex-00-01-04.json -> ex-00-04.json (ex-00-01-04 -> ex-00-04)
+ex-00-01-05.json -> ex-00-05.json (ex-00-01-05 -> ex-00-05)
+ch-00-01.json -> ch-00-01.json (ch-00-01 -> ch-00-01) # No change
+
+# Section 02: Variables (1.2) - 7 exercises
+ex-00-02-01.json -> ex-00-06.json (ex-00-02-01 -> ex-00-06)
+ex-00-02-02.json -> ex-00-07.json (ex-00-02-02 -> ex-00-07)
+ex-00-02-03.json -> ex-00-08.json (ex-00-02-03 -> ex-00-08)
+ex-00-02-04.json -> ex-00-09.json (ex-00-02-04 -> ex-00-09)
+ex-00-02-05.json -> ex-00-10.json (ex-00-02-05 -> ex-00-10)
+ex-00-02-06.json -> ex-00-11.json (ex-00-02-06 -> ex-00-11)
+ex-00-02-07.json -> ex-00-12.json (ex-00-02-07 -> ex-00-12)
+ch-00-02.json -> ch-00-02.json (ch-00-02 -> ch-00-02) # No change
+
+# Section 03: Assertions (1.3) - 7 exercises
+ex-00-03-01.json -> ex-00-13.json (ex-00-03-01 -> ex-00-13)
+ex-00-03-02.json -> ex-00-14.json (ex-00-03-02 -> ex-00-14)
+ex-00-03-03.json -> ex-00-15.json (ex-00-03-03 -> ex-00-15)
+ex-00-03-04.json -> ex-00-16.json (ex-00-03-04 -> ex-00-16)
+ex-00-03-05.json -> ex-00-17.json (ex-00-03-05 -> ex-00-17)
+ex-00-03-06.json -> ex-00-18.json (ex-00-03-06 -> ex-00-18)
+ex-00-03-07.json -> ex-00-19.json (ex-00-03-07 -> ex-00-19)
+ch-00-03.json -> ch-00-03.json (ch-00-03 -> ch-00-03) # No change
+
+# Section 04: Settings Section (2.1) - 7 exercises
+ex-00-04-01.json -> ex-00-20.json (ex-00-04-01 -> ex-00-20)
+ex-00-04-02.json -> ex-00-21.json (ex-00-04-02 -> ex-00-21)
+ex-00-04-03.json -> ex-00-22.json (ex-00-04-03 -> ex-00-22)
+ex-00-04-04.json -> ex-00-23.json (ex-00-04-04 -> ex-00-23)
+ex-00-04-05.json -> ex-00-24.json (ex-00-04-05 -> ex-00-24)
+ex-00-04-06.json -> ex-00-25.json (ex-00-04-06 -> ex-00-25)
+ex-00-04-07.json -> ex-00-26.json (ex-00-04-07 -> ex-00-26)
+ch-00-04.json -> ch-00-04.json (ch-00-04 -> ch-00-04) # No change
+
+# Section 05: Custom Keywords (2.2) - 6 exercises
+ex-00-05-01.json -> ex-00-27.json (ex-00-05-01 -> ex-00-27)
+ex-00-05-02.json -> ex-00-28.json (ex-00-05-02 -> ex-00-28)
+ex-00-05-03.json -> ex-00-29.json (ex-00-05-03 -> ex-00-29)
+ex-00-05-04.json -> ex-00-30.json (ex-00-05-04 -> ex-00-30)
+ex-00-05-05.json -> ex-00-31.json (ex-00-05-05 -> ex-00-31)
+ex-00-05-06.json -> ex-00-32.json (ex-00-05-06 -> ex-00-32)
+ch-00-05.json -> ch-00-05.json (ch-00-05 -> ch-00-05) # No change
+
+# Section 06: IF Statements (2.3) - 5 exercises
+ex-00-06-01.json -> ex-00-33.json (ex-00-06-01 -> ex-00-33)
+ex-00-06-02.json -> ex-00-34.json (ex-00-06-02 -> ex-00-34)
+ex-00-06-03.json -> ex-00-35.json (ex-00-06-03 -> ex-00-35)
+ex-00-06-04.json -> ex-00-36.json (ex-00-06-04 -> ex-00-36)
+ex-00-06-05.json -> ex-00-37.json (ex-00-06-05 -> ex-00-37)
+ch-00-06.json -> ch-00-06.json (ch-00-06 -> ch-00-06) # No change
+
+# Section 07: FOR Loops (2.4) - 5 exercises
+ex-00-07-01.json -> ex-00-38.json (ex-00-07-01 -> ex-00-38)
+ex-00-07-02.json -> ex-00-39.json (ex-00-07-02 -> ex-00-39)
+ex-00-07-03.json -> ex-00-40.json (ex-00-07-03 -> ex-00-40)
+ex-00-07-04.json -> ex-00-41.json (ex-00-07-04 -> ex-00-41)
+ex-00-07-05.json -> ex-00-42.json (ex-00-07-05 -> ex-00-42)
+ch-00-07.json -> ch-00-07.json (ch-00-07 -> ch-00-07) # No change
+
+# Section 08: WHILE Loops (3.1) - 5 exercises
+ex-00-08-01.json -> ex-00-43.json (ex-00-08-01 -> ex-00-43)
+ex-00-08-02.json -> ex-00-44.json (ex-00-08-02 -> ex-00-44)
+ex-00-08-03.json -> ex-00-45.json (ex-00-08-03 -> ex-00-45)
+ex-00-08-04.json -> ex-00-46.json (ex-00-08-04 -> ex-00-46)
+ex-00-08-05.json -> ex-00-47.json (ex-00-08-05 -> ex-00-47)
+ch-00-08.json -> ch-00-08.json (ch-00-08 -> ch-00-08) # No change
+
+# Section 09: TRY/EXCEPT (3.2) - 5 exercises
+ex-00-09-01.json -> ex-00-48.json (ex-00-09-01 -> ex-00-48)
+ex-00-09-02.json -> ex-00-49.json (ex-00-09-02 -> ex-00-49)
+ex-00-09-03.json -> ex-00-50.json (ex-00-09-03 -> ex-00-50)
+ex-00-09-04.json -> ex-00-51.json (ex-00-09-04 -> ex-00-51)
+ex-00-09-05.json -> ex-00-52.json (ex-00-09-05 -> ex-00-52)
+ch-00-09.json -> ch-00-09.json (ch-00-09 -> ch-00-09) # No change
+
+# Section 10: Test Templates (2.3) - 5 exercises
+ex-00-10-01.json -> ex-00-53.json (ex-00-10-01 -> ex-00-53)
+ex-00-10-02.json -> ex-00-54.json (ex-00-10-02 -> ex-00-54)
+ex-00-10-03.json -> ex-00-55.json (ex-00-10-03 -> ex-00-55)
+ex-00-10-04.json -> ex-00-56.json (ex-00-10-04 -> ex-00-56)
+ex-00-10-05.json -> ex-00-57.json (ex-00-10-05 -> ex-00-57)
+ch-00-10.json -> ch-00-10.json (ch-00-10 -> ch-00-10) # No change
+
+# Section 11: Collections Library (4.1) - 5 exercises
+ex-00-11-01.json -> ex-00-58.json (ex-00-11-01 -> ex-00-58)
+ex-00-11-02.json -> ex-00-59.json (ex-00-11-02 -> ex-00-59)
+ex-00-11-03.json -> ex-00-60.json (ex-00-11-03 -> ex-00-60)
+ex-00-11-04.json -> ex-00-61.json (ex-00-11-04 -> ex-00-61)
+ex-00-11-05.json -> ex-00-62.json (ex-00-11-05 -> ex-00-62)
+ch-00-11.json -> ch-00-11.json (ch-00-11 -> ch-00-11) # No change
+
+# Section 12: String Library (4.2) - 5 exercises
+ex-00-12-01.json -> ex-00-63.json (ex-00-12-01 -> ex-00-63)
+ex-00-12-02.json -> ex-00-64.json (ex-00-12-02 -> ex-00-64)
+ex-00-12-03.json -> ex-00-65.json (ex-00-12-03 -> ex-00-65)
+ex-00-12-04.json -> ex-00-66.json (ex-00-12-04 -> ex-00-66)
+ex-00-12-05.json -> ex-00-67.json (ex-00-12-05 -> ex-00-67)
+ch-00-12.json -> ch-00-12.json (ch-00-12 -> ch-00-12) # No change
+
+# Section 13: DateTime Library (4.3) - 5 exercises
+ex-00-13-01.json -> ex-00-68.json (ex-00-13-01 -> ex-00-68)
+ex-00-13-02.json -> ex-00-69.json (ex-00-13-02 -> ex-00-69)
+ex-00-13-03.json -> ex-00-70.json (ex-00-13-03 -> ex-00-70)
+ex-00-13-04.json -> ex-00-71.json (ex-00-13-04 -> ex-00-71)
+ex-00-13-05.json -> ex-00-72.json (ex-00-13-05 -> ex-00-72)
+ch-00-13.json -> ch-00-13.json (ch-00-13 -> ch-00-13) # No change
+
+# Section 14: Final Integration (5.1) - No regular exercises, just challenge
+ch-00-14.json -> ch-00-14.json (ch-00-14 -> ch-00-14) # No change
+
+# TOTAL: 72 exercises, 14 challenges

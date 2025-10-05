@@ -1,0 +1,79 @@
+{
+  "id": "ex-00-62",
+  "type": "exercise",
+  "section": "11-collections-library",
+  "category": "00-fundamentals",
+  "title": "Nested Data Structures",
+  "difficulty": "advanced",
+  "estimatedTime": "15 minutes",
+  "order": 5,
+  "description": "Work with lists of dictionaries representing complex nested data.",
+  "story": {
+    "setup": "MENTOR-9: \"Real-world data is nested—lists of dictionaries, dictionaries of lists. Like JSON API responses or database query results. Let's build and query a list of system status dictionaries.\"",
+    "context": "Nested structures combine lists and dicts for complex data. Each ship system is a dictionary, all systems in a list.",
+    "success": "MENTOR-9: \"Excellent! You created a list of system dictionaries, iterated through them, and extracted specific values. This is how real API testing works.\""
+  },
+  "instructions": [
+    "Create *** Settings *** section with Library    Collections",
+    "Create *** Test Cases *** section",
+    "Create test case 'Ship Systems Inventory'",
+    "  - Create empty list: @{systems} =    Create List",
+    "  - Create dict 1: &{nav} =    Create Dictionary    name=Navigation    status=Online    power=75",
+    "  - Create dict 2: &{pwr} =    Create Dictionary    name=Power    status=Online    power=90",
+    "  - Create dict 3: &{eng} =    Create Dictionary    name=Engines    status=Offline    power=0",
+    "  - Append To List    ${systems}    ${nav}    ${pwr}    ${eng}",
+    "  - Log    Systems: ${systems}",
+    "  - ${count} =    Get Length    ${systems}",
+    "  - Should Be Equal As Integers    ${count}    3",
+    "  - Use FOR loop: FOR ${system} IN @{systems}",
+    "    - ${name} =    Get From Dictionary    ${system}    name",
+    "    - ${status} =    Get From Dictionary    ${system}    status",
+    "    - Log    ${name}: ${status}",
+    "  - Close FOR with END",
+    "  - ${first_system} =    Get From List    ${systems}    0",
+    "  - ${first_name} =    Get From Dictionary    ${first_system}    name",
+    "  - Should Be Equal    ${first_name}    Navigation"
+  ],
+  "hints": [
+    "List of dictionaries: each list item is a dictionary",
+    "Access pattern: ${systems}[0] gets first dict, then Get From Dictionary",
+    "FOR loop iterates through list, each ${system} is a dictionary",
+    "Can use Get From Dictionary inside loop",
+    "Nested structures common in API responses"
+  ],
+  "initialCode": "",
+  "solution": "*** Settings ***\nLibrary    Collections\n\n*** Test Cases ***\nShip Systems Inventory\n    @{systems}=    Create List\n    &{nav}=    Create Dictionary    name=Navigation    status=Online    power=75\n    &{pwr}=    Create Dictionary    name=Power    status=Online    power=90\n    &{eng}=    Create Dictionary    name=Engines    status=Offline    power=0\n    Append To List    ${systems}    ${nav}    ${pwr}    ${eng}\n    Log    Systems: ${systems}\n    ${count}=    Get Length    ${systems}\n    Should Be Equal As Integers    ${count}    3\n    FOR    ${system}    IN    @{systems}\n        ${name}=    Get From Dictionary    ${system}    name\n        ${status}=    Get From Dictionary    ${system}    status\n        Log    ${name}: ${status}\n    END\n    ${first_system}=    Get From List    ${systems}    0\n    ${first_name}=    Get From Dictionary    ${first_system}    name\n    Should Be Equal    ${first_name}    Navigation",
+  "validation": {
+    "mustContain": [
+      "*** Settings ***",
+      "Library",
+      "Collections",
+      "Create Dictionary",
+      "Append To List",
+      "Get From Dictionary",
+      "FOR",
+      "END"
+    ],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Exercise 4.1.5: Nested Data Structures",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/11-collections-library/ex-00-11-05-nested-data.png\" alt=\"Exercise visualization\" />\n</div>\n\n<div class=\"story-intro\"><p>MENTOR-9: \"API responses, database records, configuration files—they're all nested structures. A user object has addresses (list), each address has properties (dict). You need to navigate multiple levels of nesting.\"</p></div><div class=\"concept-explain\"><h3>Lists of Dictionaries</h3><p>Combine lists and dictionaries for complex data:</p><pre><code>@{users}=    Create List\n&{user1}=    Create Dictionary    name=Alice    role=Admin\n&{user2}=    Create Dictionary    name=Bob    role=User\nAppend To List    ${users}    ${user1}    ${user2}\n\nFOR    ${user}    IN    @{users}\n    ${name}=    Get From Dictionary    ${user}    name\n    Log    User: ${name}\nEND</code></pre><p><strong>Access Patterns:</strong></p><ul><li><strong>Get list item</strong>: ${users}[0] → first dict</li><li><strong>Get dict value</strong>: Get From Dictionary    ${users}[0]    name</li><li><strong>Iterate list</strong>: FOR loop, each item is dict</li><li><strong>Query values</strong>: Get From Dictionary inside loop</li></ul></div><div class=\"code-demo\"><h4>Example: API Response Processing</h4><pre><code>*** Settings ***\nLibrary    Collections\n\n*** Test Cases ***\nProcess API Response\n    @{products}=    Create List\n    &{p1}=    Create Dictionary    id=101    price=29.99    stock=50\n    &{p2}=    Create Dictionary    id=102    price=49.99    stock=0\n    Append To List    ${products}    ${p1}    ${p2}\n    \n    FOR    ${product}    IN    @{products}\n        ${stock}=    Get From Dictionary    ${product}    stock\n        IF    ${stock} == 0\n            ${id}=    Get From Dictionary    ${product}    id\n            Log    Product ${id} out of stock!\n        END\n    END</code></pre></div><div class=\"rules-box\"><h4>⚠️ Nested Structure Tips</h4><ul><li>Common pattern: list of dicts (records/rows)</li><li>Also: dict of lists (categories with items)</li><li>Use FOR loops to iterate outer structure</li><li>Use Get From Dictionary/List for inner access</li><li>Real-world: JSON API responses, database results</li><li>Can nest 3+ levels deep (list of dicts of lists...)</li></ul></div>",
+    "estimatedReadTime": "7-8 minutes"
+  },
+  "metadata": {
+    "tags": [
+      "collections",
+      "nested-structures",
+      "list-of-dicts",
+      "complex-data"
+    ],
+    "prerequisites": [
+      "ex-00-61"
+    ],
+    "nextExercises": [
+      "ch-00-11"
+    ]
+  }
+}

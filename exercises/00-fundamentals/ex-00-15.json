@@ -1,0 +1,70 @@
+{
+  "id": "ex-00-15",
+  "type": "exercise",
+  "section": "03-assertions",
+  "title": "Should Be True/False - Boolean Validation",
+  "difficulty": "beginner",
+  "estimatedTime": "8 minutes",
+  "order": 3,
+  "description": "Learn to validate boolean conditions and logical expressions.",
+  "story": {
+    "setup": "MENTOR-9: \"Sometimes you need to evaluate conditions—is the temperature safe? Are repairs complete? Boolean assertions handle this.\"",
+    "context": "Boolean validations check if conditions are True or False. Essential for conditional logic verification.",
+    "success": "MENTOR-9: \"Excellent! You verified that 5 > 3 is True. Boolean logic is the foundation of intelligent testing.\""
+  },
+  "instructions": [
+    "Create the *** Test Cases *** section",
+    "Create a test case named 'Conditional Validation'",
+    "Create ${temp} with value 45",
+    "Create ${max_temp} with value 50",
+    "Use Should Be True with expression: ${temp} < ${max_temp}",
+    "Log 'Temperature within safe limits'",
+    "Create ${repairs_done} with value ${True}",
+    "Use Should Be True to verify ${repairs_done}",
+    "Create ${system_offline} with value ${False}",
+    "Use Should Be False to verify ${system_offline}",
+    "Log 'Boolean checks passed'"
+  ],
+  "hints": [
+    "Should Be True syntax: Should Be True    ${condition} or ${expression}",
+    "Should Be False syntax: Should Be False    ${condition}",
+    "Expressions: ${x} > ${y}, ${x} < ${y}, ${x} == ${y}",
+    "${True} and ${False} are Robot Framework boolean constants",
+    "Expressions are evaluated as Python expressions",
+    "Use quotes for string comparisons: '${x}' == 'value'"
+  ],
+  "initialCode": "",
+  "solution": "*** Test Cases ***\nConditional Validation\n    ${temp}              Set Variable    45\n    ${max_temp}          Set Variable    50\n    Should Be True       ${temp} < ${max_temp}\n    Log                  Temperature within safe limits\n    \n    ${repairs_done}      Set Variable    ${True}\n    Should Be True       ${repairs_done}\n    \n    ${system_offline}    Set Variable    ${False}\n    Should Be False      ${system_offline}\n    Log                  Boolean checks passed",
+  "validation": {
+    "mustContain": [
+      "*** Test Cases ***",
+      "Should Be True",
+      "Should Be False",
+      "${True}",
+      "${False}"
+    ],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Exercise 1.3.3: Should Be True/False - Boolean Logic",
+    "content": "<div class=\"theory-visual\">\n<img src=\"assets/images/theory/03-assertions/ex-1-3-3-boolean-validation.png\" alt=\"PROTO-7 evaluating boolean logic gates with TRUE/FALSE results glowing\" loading=\"lazy\" width=\"1920\" height=\"1080\" />\n</div>\n\n<div class=\"story-intro\">\n<p>MENTOR-9 projects three holographic logic gates, each showing different boolean evaluations.</p>\n<p>\"PROTO-7, not all validations compare values. Sometimes you need to evaluate <strong>conditions</strong>—is the temperature safe? Are repairs complete? The <span class=\"keyword\">Should Be True</span> and <span class=\"keyword\">Should Be False</span> keywords handle boolean logic.\"</p>\n</div>\n\n<div class=\"concept-explain\">\n<h3>What are Boolean Assertions?</h3>\n<p><strong>Boolean assertions</strong> validate that conditions evaluate to True or False. They're essential for:</p>\n<ul>\n<li><strong>Conditional checks:</strong> Is temperature below maximum?</li>\n<li><strong>State validation:</strong> Are repairs complete?</li>\n<li><strong>Logical expressions:</strong> Is count greater than threshold?</li>\n<li><strong>Flag verification:</strong> Is system online?</li>\n</ul>\n\n<h3>Should Be True</h3>\n<p>Validates that a condition or expression evaluates to True:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>Should Be True    ${condition}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p><strong>Behavior:</strong></p>\n<ul>\n<li>✅ If condition is True → assertion passes</li>\n<li>❌ If condition is False → test fails</li>\n</ul>\n\n<h3>Should Be False</h3>\n<p>Validates that a condition or expression evaluates to False:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>Should Be False    ${condition}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p><strong>Behavior:</strong></p>\n<ul>\n<li>✅ If condition is False → assertion passes</li>\n<li>❌ If condition is True → test fails</li>\n</ul>\n\n<h3>Boolean Constants</h3>\n<p>Robot Framework provides boolean constants:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nBoolean Constants\n    ${flag1}           Set Variable    ${True}      # Boolean True\n    ${flag2}           Set Variable    ${False}     # Boolean False\n    Should Be True     ${flag1}                     # ✅ PASSES\n    Should Be False    ${flag2}                     # ✅ PASSES</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p><strong>Important:</strong> <code>${True}</code> and <code>${False}</code> are special Robot Framework variables (note the capital T and F).</p>\n\n<h3>Evaluating Expressions</h3>\n<p>The real power comes from evaluating Python-style expressions:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nExpression Evaluation\n    ${temp}            Set Variable    45\n    ${max_temp}        Set Variable    50\n\n    # Evaluate: is 45 < 50?\n    Should Be True     ${temp} < ${max_temp}        # ✅ PASSES</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Comparison Operators</h3>\n\n<table>\n<tr><th>Operator</th><th>Meaning</th><th>Example</th></tr>\n<tr>\n<td><strong>&lt;</strong></td>\n<td>Less than</td>\n<td>${temp} &lt; ${max}</td>\n</tr>\n<tr>\n<td><strong>&gt;</strong></td>\n<td>Greater than</td>\n<td>${count} &gt; ${min}</td>\n</tr>\n<tr>\n<td><strong>==</strong></td>\n<td>Equal to</td>\n<td>${status} == 'OK'</td>\n</tr>\n<tr>\n<td><strong>!=</strong></td>\n<td>Not equal to</td>\n<td>${error} != 'None'</td>\n</tr>\n<tr>\n<td><strong>&lt;=</strong></td>\n<td>Less than or equal</td>\n<td>${value} &lt;= 100</td>\n</tr>\n<tr>\n<td><strong>&gt;=</strong></td>\n<td>Greater than or equal</td>\n<td>${score} &gt;= 75</td>\n</tr>\n</table>\n\n<h3>Numeric Comparisons</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nTemperature Check\n    ${current_temp}    Set Variable    75\n    ${max_safe}        Set Variable    100\n    ${min_safe}        Set Variable    0\n\n    Should Be True     ${current_temp} < ${max_safe}     # Below max\n    Should Be True     ${current_temp} > ${min_safe}     # Above min\n    Log                Temperature within safe range!</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>String Comparisons</h3>\n<p>For string comparisons, use quotes around the expected value:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nStatus Check\n    ${status}          Set Variable    operational\n\n    # String comparison - need quotes!\n    Should Be True     '${status}' == 'operational'      # ✅ PASSES\n    Should Be False    '${status}' == 'offline'          # ✅ PASSES</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Logical Operators</h3>\n<p>Combine conditions with <code>and</code>, <code>or</code>, <code>not</code>:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nCombined Conditions\n    ${temp}            Set Variable    75\n    ${pressure}        Set Variable    850\n\n    # AND: both must be true\n    Should Be True     ${temp} < 100 and ${pressure} < 1000\n\n    # OR: at least one must be true\n    Should Be True     ${temp} > 80 or ${pressure} > 900\n\n    # NOT: negates condition\n    Should Be True     not ${temp} > 100</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Real-World Use Cases</h3>\n\n<h4>1. Safety Threshold Validation</h4>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nSafety Check\n    ${radiation_level}    Set Variable    45\n    ${safe_limit}         Set Variable    50\n\n    Should Be True        ${radiation_level} < ${safe_limit}\n    Log                   Radiation within safe limits</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>2. Status Flag Verification</h4>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nSystem Status\n    ${repairs_complete}    Set Variable    ${True}\n    ${system_damaged}      Set Variable    ${False}\n\n    Should Be True         ${repairs_complete}\n    Should Be False        ${system_damaged}\n    Log                    All systems operational</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>3. Range Validation</h4>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nValue Range Check\n    ${power_level}     Set Variable    65\n\n    # Value must be between 50 and 100\n    Should Be True     ${power_level} >= 50 and ${power_level} <= 100\n    Log                Power level within operational range</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Error Messages</h3>\n<p>When boolean assertions fail, the error shows the evaluated expression:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nFailed Boolean Check\n    ${temp}            Set Variable    110\n    ${max}             Set Variable    100\n\n    Should Be True     ${temp} < ${max}\n    # ❌ ERROR: 110 < 100 should be true but was not</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Custom Error Messages</h3>\n<p>Add custom messages for clarity:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nClear Error Message\n    ${damage_count}    Set Variable    5\n    ${max_allowed}     Set Variable    3\n\n    Should Be True     ${damage_count} <= ${max_allowed}\n    ...                msg=Damage count ${damage_count} exceeds maximum ${max_allowed}!</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>Failure Output:</h4>\n<pre><code>AssertionError: Damage count 5 exceeds maximum 3!</code></pre>\n\n<h3>Should Be True vs Numeric Assertions</h3>\n\n<table>\n<tr><th>Aspect</th><th>Should Be True</th><th>Should Be Greater/Less Than</th></tr>\n<tr>\n<td><strong>Syntax</strong></td>\n<td>Should Be True ${x} &lt; ${y}</td>\n<td>Should Be Less Than ${x} ${y}</td>\n</tr>\n<tr>\n<td><strong>Flexibility</strong></td>\n<td>Any boolean expression</td>\n<td>Only comparisons</td>\n</tr>\n<tr>\n<td><strong>When to Use</strong></td>\n<td>Complex conditions, logical operators</td>\n<td>Simple numeric comparisons</td>\n</tr>\n<tr>\n<td><strong>Example</strong></td>\n<td>${x} &lt; ${y} and ${z} &gt; 0</td>\n<td>Compare two numbers</td>\n</tr>\n</table>\n\n<h3>Advanced: Variable Type Checking</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nType Validation\n    ${value}           Set Variable    ${True}\n    ${number}          Set Variable    42\n\n    # Check if variable is boolean True\n    Should Be True     ${value} is ${True}\n\n    # Check if value is numeric\n    Should Be True     isinstance(${number}, int)</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Best Practices</h3>\n\n<h4>1. Use Quotes for String Comparisons</h4>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nString Comparison\n    ${status}    Set Variable    OK\n\n    # ✅ Correct: Quotes around strings\n    Should Be True    '${status}' == 'OK'\n\n    # ❌ Wrong: Without quotes may cause errors\n    Should Be True    ${status} == OK</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>2. Simplify When Possible</h4>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nSimplification\n    ${flag}    Set Variable    ${True}\n\n    # ❌ Redundant\n    Should Be True    ${flag} == ${True}\n\n    # ✅ Simpler\n    Should Be True    ${flag}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>3. Combine Related Checks</h4>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nCombined Checks\n    ${temp}        Set Variable    75\n    ${pressure}    Set Variable    900\n\n    # ✅ Good: One assertion for related conditions\n    Should Be True    ${temp} < 100 and ${pressure} < 1000\n\n    # Less efficient: Separate assertions\n    Should Be True    ${temp} < 100\n    Should Be True    ${pressure} < 1000</code></pre>\n</div>\n\n<div class=\"try-it\">\n<p>MENTOR-9: \"Validate temperature and repair status. Create ${temp}=45, ${max_temp}=50, and verify temp is below max. Then create ${repairs_done}=${True} and validate it. Finally, create ${system_offline}=${False} and verify it's False. Show me you understand boolean logic.\"</p>\n</div>",
+    "estimatedReadTime": "5-6 minutes"
+  },
+  "metadata": {
+    "tags": [
+      "beginner",
+      "assertions",
+      "boolean",
+      "should-be-true",
+      "should-be-false"
+    ],
+    "prerequisites": [
+      "ex-00-03-2"
+    ],
+    "nextExercises": [
+      "ex-00-03-4"
+    ]
+  },
+  "category": "00-fundamentals"
+}

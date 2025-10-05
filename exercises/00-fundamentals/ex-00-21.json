@@ -1,0 +1,53 @@
+{
+  "id": "ex-00-21",
+  "type": "exercise",
+  "section": "04-settings-section",
+  "category": "00-fundamentals",
+  "category": "00-fundamentals",
+  "title": "Suite Setup & Teardown - Lifecycle Hooks",
+  "difficulty": "beginner",
+  "estimatedTime": "7 minutes",
+  "order": 2,
+  "description": "Configure suite-level setup and teardown procedures.",
+  "story": {
+    "setup": "MENTOR-9: \"Before running diagnostics, we need to power up systems. After tests finish, we power them down. That's what Suite Setup and Teardown do.\"",
+    "context": "Suite Setup runs ONCE before ALL tests. Suite Teardown runs ONCE after ALL tests complete. They're perfect for expensive initialization/cleanup.",
+    "success": "MENTOR-9: \"Excellent! The diagnostic system now boots up before tests and shuts down gracefully after. Lifecycle management complete!\""
+  },
+  "instructions": [
+    "Create the *** Settings *** section",
+    "Add Suite Setup with the keyword: Log    Suite initialization starting",
+    "Add Suite Teardown with the keyword: Log    Suite cleanup completed",
+    "Add Documentation: 'Suite with lifecycle hooks'",
+    "Create the *** Test Cases *** section",
+    "Create a test case named 'Diagnostic Scan'",
+    "Log a message: 'Running diagnostic test'",
+    "Note: Suite Setup runs BEFORE all tests, Suite Teardown runs AFTER all tests"
+  ],
+  "hints": [
+    "Suite Setup syntax: 'Suite Setup    Log    Your message'",
+    "Suite Teardown syntax: 'Suite Teardown    Log    Your message'",
+    "Settings are indented with at least 2 spaces",
+    "The keyword (Log) is separated by 4 spaces from the setting name"
+  ],
+  "initialCode": "",
+  "solution": "*** Settings ***\nDocumentation    Suite with lifecycle hooks\nSuite Setup      Log    Suite initialization starting\nSuite Teardown   Log    Suite cleanup completed\n\n*** Test Cases ***\nDiagnostic Scan\n    Log    Running diagnostic test",
+  "validation": {
+    "mustContain": [
+      "*** Settings ***",
+      "Suite Setup",
+      "Suite Teardown",
+      "Log",
+      "Suite initialization starting",
+      "Suite cleanup completed",
+      "*** Test Cases ***",
+      "Diagnostic Scan"
+    ],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Exercise 2.1.2: Suite Setup & Teardown",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/04-settings-section/ex-2-1-2-suite-lifecycle.png\" alt=\"Timeline diagram showing PROTO-7 powering up systems (Suite Setup), running three tests in sequence, then powering down (Suite Teardown)\" />\n</div>\n\n<div class=\"story-intro\">\n  <h3>🔌 Power Up, Test, Power Down</h3>\n  <p><strong>MENTOR-9</strong>: \"PROTO-7, imagine our ship's diagnostic system. Before running ANY tests, we need to power up subsystems. After ALL tests finish, we shut down safely.\"</p>\n  <p>\"Suite Setup runs <strong>once before all tests</strong>. Suite Teardown runs <strong>once after all tests</strong>. No matter if you have 1 test or 100 tests - these run exactly once per suite.\"</p>\n</div>\n\n<div class=\"concept-explain\">\n  <h3>⚙️ What are Suite Hooks?</h3>\n  <p><strong>Suite Setup</strong> - Runs <strong>ONCE</strong> before the first test in the suite</p>\n  <ul>\n    <li>✅ Initialize databases or connections</li>\n    <li>✅ Power up test environments</li>\n    <li>✅ Load configuration files</li>\n    <li>✅ Create test data</li>\n  </ul>\n  <p><strong>Suite Teardown</strong> - Runs <strong>ONCE</strong> after the last test in the suite</p>\n  <ul>\n    <li>✅ Close database connections</li>\n    <li>✅ Clean up test data</li>\n    <li>✅ Power down systems</li>\n    <li>✅ Generate reports</li>\n  </ul>\n</div>\n\n<div class=\"code-demo\">\n  <h3>📝 Suite Lifecycle Example</h3>\n  <pre><code>*** Settings ***\nSuite Setup      Log    Powering up diagnostic systems\nSuite Teardown   Log    Shutting down all systems\n\n*** Test Cases ***\nTest 1\n    Log    Running first test\n\nTest 2\n    Log    Running second test</code></pre>\n  <p><strong>Execution Order:</strong></p>\n  <ol>\n    <li>🔹 <strong>Suite Setup</strong> runs: \"Powering up diagnostic systems\"</li>\n    <li>🔹 <strong>Test 1</strong> runs: \"Running first test\"</li>\n    <li>🔹 <strong>Test 2</strong> runs: \"Running second test\"</li>\n    <li>🔹 <strong>Suite Teardown</strong> runs: \"Shutting down all systems\"</li>\n  </ol>\n</div>\n\n<div class=\"rules-box\">\n  <h3>📋 Suite Hooks Rules</h3>\n  <ul>\n    <li>🔹 <strong>Frequency</strong>: Run exactly ONCE per suite execution</li>\n    <li>🔹 <strong>Syntax</strong>: <code>Suite Setup    Keyword    Arguments</code></li>\n    <li>🔹 <strong>Position</strong>: Declared in *** Settings *** section</li>\n    <li>🔹 <strong>Failure Handling</strong>: If Suite Setup fails, NO tests run</li>\n    <li>🔹 <strong>Teardown Guarantee</strong>: Suite Teardown runs even if tests fail</li>\n  </ul>\n</div>\n\n<div class=\"try-it\">\n  <h3>🎯 Your Task</h3>\n  <p>Create a suite with both Suite Setup and Suite Teardown. Watch the execution order in the log - you'll see the setup run first, then your test, then the teardown last.</p>\n</div>"
+  }
+}

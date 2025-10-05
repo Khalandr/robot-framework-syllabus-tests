@@ -1,0 +1,82 @@
+{
+  "id": "ex-00-05",
+  "title": "Section Headers - The Framework's Structure",
+  "difficulty": "beginner",
+  "estimatedTime": "10 minutes",
+  "order": 5,
+  "description": "Learn all Robot Framework sections and header formatting rules.",
+  "story": {
+    "setup": "MENTOR-9: \"Every Robot Framework file is divided into sections. You've been using *** Test Cases ***, but there's more. Let me show you ALL the sections and their header variations.\"",
+    "context": "A complete RF file has four main sections: Settings (configuration), Variables (data), Test Cases (tests), and Keywords (reusable functions). Understanding the complete structure is essential before building complex suites.",
+    "success": "MENTOR-9: \"Good! You've seen that header spacing is flexible too. The framework is remarkably tolerant. This is intentional design—it focuses on WHAT you test, not HOW you format. Though we'll adopt conventions for team clarity.\""
+  },
+  "instructions": [
+    "Create a complete Robot Framework file with all four sections:",
+    "1. *** Settings *** section:",
+    "   - Add Documentation line: 'This is a complete RF file structure demonstration'",
+    "2. *** Variables *** section:",
+    "   - Define ${SHIP_NAME}    Starlight Explorer",
+    "   - Define ${STATUS}    Operational",
+    "3. *** Test Cases *** section:",
+    "   - Create test 'Structure Demonstration'",
+    "   - Log the message: 'All four sections are present'",
+    "   - Log To Console the message: 'This demonstrates complete file structure'",
+    "4. *** Keywords *** section:",
+    "   - Create a keyword named 'Custom Logging Keyword'",
+    "   - Inside it, Log the message: 'This is a custom keyword'",
+    "Note: You won't call the custom keyword yet—just define it"
+  ],
+  "hints": [
+    "The four main sections: Settings, Variables, Test Cases, Keywords",
+    "Section headers use *** Section Name *** format",
+    "Settings section can have Documentation, Library imports, etc.",
+    "Variables section defines ${scalar}, @{list}, &{dict} variables",
+    "Test Cases section contains your tests",
+    "Keywords section defines custom reusable keywords",
+    "Section order is conventional but not enforced (Settings usually first)",
+    "Indentation rules: section headers at left margin, content indented"
+  ],
+  "initialCode": "",
+  "solution": "*** Settings ***\nDocumentation    This is a complete RF file structure demonstration\n\n*** Variables ***\n${SHIP_NAME}    Starlight Explorer\n${STATUS}    Operational\n\n*** Test Cases ***\nStructure Demonstration\n    Log    All four sections are present\n    Log To Console    This demonstrates complete file structure\n\n*** Keywords ***\nCustom Logging Keyword\n    Log    This is a custom keyword",
+  "validation": {
+    "mustContain": [
+      "*** Settings ***",
+      "Documentation",
+      "*** Variables ***",
+      "${SHIP_NAME}",
+      "Starlight Explorer",
+      "${STATUS}",
+      "*** Test Cases ***",
+      "Structure Demonstration",
+      "Log",
+      "*** Keywords ***",
+      "Custom Logging Keyword"
+    ],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Robot Framework File Structure: All Sections",
+    "content": "<div class=\"theory-visual\">\\n<img src=\"assets/images/theory/01-basic-syntax/ex-1-1-5-file-structure.png\" alt=\"Blueprint-style diagram showing Robot Framework's four main sections stacked vertically\" loading=\"lazy\" width=\"1920\" height=\"1080\" />\\n</div>\\n\\n<div class=\"story-intro\">\n<p>MENTOR-9 projects a hologram of a Robot Framework file, divided into glowing sections.</p>\n<p>\"You've been writing tests in isolation. But real RF files are <strong>organized</strong>. They have multiple sections, each with a specific purpose.\"</p>\n</div>\n\n<div class=\"concept-explain\">\n<h3>The Main Sections</h3>\n\n<table>\n<tr><th>Section</th><th>Purpose</th><th>What Goes Here</th></tr>\n<tr>\n<td><strong>*** Settings ***</strong></td>\n<td>Configuration</td>\n<td>Documentation, library imports, setup/teardown, tags, timeouts</td>\n</tr>\n<tr>\n<td><strong>*** Variables ***</strong></td>\n<td>Data definitions</td>\n<td>${scalar}, @{list}, &{dict} variable definitions</td>\n</tr>\n<tr>\n<td><strong>*** Test Cases ***</strong></td>\n<td>Your tests</td>\n<td>All test cases with their keywords</td>\n</tr>\n<tr>\n<td><strong>*** Keywords ***</strong></td>\n<td>Reusable functions</td>\n<td>Custom keywords you create for reuse across tests</td>\n</tr>\n<tr>\n<td><strong>*** Comments ***</strong></td>\n<td>File comments</td>\n<td>Multi-line comments ignored by RF (rarely used)</td>\n</tr>\n</table>\n\n<p><strong>Note:</strong> The four sections you'll use 99% of the time are Settings, Variables, Test Cases, and Keywords. The *** Comments *** section exists but is rarely used (single-line comments with # are more common).</p>\n\n<h3>Complete File Example</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Settings ***\nDocumentation    Ship diagnostic test suite\nLibrary          Collections\n\n*** Variables ***\n${SHIP_NAME}     Starlight Explorer\n@{SYSTEMS}       Navigation  Power  Life Support\n\n*** Test Cases ***\nSystem Check\n    Log    Checking ${SHIP_NAME} systems\n    Check All Systems\n\n*** Keywords ***\nCheck All Systems\n    FOR    ${system}    IN    @{SYSTEMS}\n        Log    Checking ${system}...\n    END</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>Section Details</h4>\n\n<h5>1. Settings Section</h5>\n<p>Configuration and imports. Common settings:</p>\n<ul>\n<li><strong>Documentation:</strong> Describes the test suite</li>\n<li><strong>Library:</strong> Import external libraries (Collections, String, etc.)</li>\n<li><strong>Suite Setup/Teardown:</strong> Run keywords before/after all tests</li>\n<li><strong>Test Setup/Teardown:</strong> Run keywords before/after each test</li>\n<li><strong>Force Tags:</strong> Apply tags to all tests</li>\n<li><strong>Test Timeout:</strong> Maximum time for tests</li>\n</ul>\n\n<h5>2. Variables Section</h5>\n<p>Define variables used throughout the file:</p>\n<ul>\n<li><strong>${scalar}:</strong> Single values (strings, numbers)</li>\n<li><strong>@{list}:</strong> Lists of items</li>\n<li><strong>&{dict}:</strong> Key-value pairs (dictionaries)</li>\n</ul>\n\n<h5>3. Test Cases Section</h5>\n<p>Your actual tests. You've been using this section already!</p>\n\n<h5>4. Keywords Section</h5>\n<p>Custom keywords you create. Like functions in programming—reusable blocks of actions.</p>\n\n<h3>Section Header Formatting</h3>\n<p>Like keywords, section headers have <strong>spacing flexibility</strong>:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Settings ***     # Standard (3 spaces inside)\n***Settings***       # No spaces (valid)\n*** Settings***      # Left space only (valid)\n***Settings ***      # Right space only (valid)\n***  Settings  ***   # Multiple spaces (valid)</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p><strong>All are valid!</strong> But the standard is <code>*** Section ***</code> with 1 space on each side.</p>\n\n<h3>Section Order Conventions</h3>\n<p>While not enforced, the standard order is:</p>\n<ol>\n<li>Settings (configuration comes first)</li>\n<li>Variables (define data before using it)</li>\n<li>Test Cases (the main content)</li>\n<li>Keywords (helper functions at the end)</li>\n</ol>\n\n<p>This is <strong>convention</strong>, not requirement. RF will parse sections in any order. But following conventions makes code predictable.</p>\n\n<h4>Optional Sections</h4>\n<p>You don't need all four sections in every file:</p>\n<ul>\n<li>A file with just <code>*** Test Cases ***</code> is valid</li>\n<li>You can skip Settings, Variables, or Keywords if not needed</li>\n<li>But <code>*** Test Cases ***</code> is required (otherwise, what are you testing?)</li>\n</ul>\n\n<h3>Real-World Structure</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Settings ***\nDocumentation    User authentication tests\nLibrary          SeleniumLibrary\nSuite Setup      Open Browser    ${URL}    chrome\nSuite Teardown   Close All Browsers\n\n*** Variables ***\n${URL}           https://example.com\n${USERNAME}      testuser@example.com\n${PASSWORD}      SecurePass123\n\n*** Test Cases ***\nSuccessful Login\n    Enter Credentials    ${USERNAME}    ${PASSWORD}\n    Click Login Button\n    Verify Dashboard Loaded\n\nInvalid Password\n    Enter Credentials    ${USERNAME}    WrongPassword\n    Click Login Button\n    Verify Error Message    Invalid credentials\n\n*** Keywords ***\nEnter Credentials\n    [Arguments]    ${user}    ${pass}\n    Input Text     id=username    ${user}\n    Input Text     id=password    ${pass}\n\nClick Login Button\n    Click Button    id=login\n\nVerify Dashboard Loaded\n    Wait Until Page Contains    Welcome</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p>This shows a complete, realistic test file with all sections working together.</p>\n</div>\n\n<div class=\"try-it\">\n<p>MENTOR-9: \"Create a file with all four sections. Add documentation, define variables, write a test, and create a custom keyword. Show me you understand the complete structure.\"</p>\n</div>",
+    "estimatedReadTime": "7-8 minutes"
+  },
+  "metadata": {
+    "tags": [
+      "beginner",
+      "file-structure",
+      "sections",
+      "settings",
+      "variables",
+      "keywords",
+      "organization"
+    ],
+    "prerequisites": [
+      "ex-00-01-4"
+    ],
+    "nextExercises": [
+      "challenge-1-1"
+    ]
+  },
+  "section": "01-basic-syntax",
+  "category": "00-fundamentals"
+}

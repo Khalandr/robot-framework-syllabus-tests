@@ -1,0 +1,68 @@
+{
+  "id": "ex-00-68",
+  "type": "exercise",
+  "section": "13-datetime-library",
+  "category": "00-fundamentals",
+  "title": "Get Current Date - Timestamps",
+  "difficulty": "beginner",
+  "estimatedTime": "10 minutes",
+  "order": 1,
+  "description": "Use Get Current Date to capture timestamps for logging and time-based operations.",
+  "story": {
+    "setup": "MENTOR-9: \"Every diagnostic needs a timestamp. When did the test run? How long ago did an error occur? Get Current Date gives us the current time in various formats.\"",
+    "context": "Timestamps are essential for logging, audit trails, time-based validation, and scheduling. DateTime library provides current time access.",
+    "success": "MENTOR-9: \"Perfect! You captured the current timestamp and formatted it. This is how we track when operations happen.\""
+  },
+  "instructions": [
+    "Create *** Settings *** section with Library    DateTime",
+    "Create *** Test Cases *** section",
+    "Create test case 'Capture Diagnostic Timestamp'",
+    "  - ${current_time} =    Get Current Date",
+    "  - Log    Current timestamp: ${current_time}",
+    "  - ${formatted} =    Get Current Date    result_format=%Y-%m-%d %H:%M:%S",
+    "  - Log    Formatted: ${formatted}",
+    "  - ${date_only} =    Get Current Date    result_format=%Y-%m-%d",
+    "  - Log    Date only: ${date_only}",
+    "  - ${time_only} =    Get Current Date    result_format=%H:%M:%S",
+    "  - Log    Time only: ${time_only}",
+    "  - Should Not Be Empty    ${current_time}",
+    "  - Should Contain    ${formatted}    -"
+  ],
+  "hints": [
+    "Get Current Date returns current timestamp",
+    "Default format: YYYY-MM-DD HH:MM:SS.mmmmmm",
+    "result_format parameter customizes output",
+    "%Y = year, %m = month, %d = day",
+    "%H = hour, %M = minute, %S = second"
+  ],
+  "initialCode": "",
+  "solution": "*** Settings ***\nLibrary    DateTime\n\n*** Test Cases ***\nCapture Diagnostic Timestamp\n    ${current_time}=    Get Current Date\n    Log    Current timestamp: ${current_time}\n    ${formatted}=    Get Current Date    result_format=%Y-%m-%d %H:%M:%S\n    Log    Formatted: ${formatted}\n    ${date_only}=    Get Current Date    result_format=%Y-%m-%d\n    Log    Date only: ${date_only}\n    ${time_only}=    Get Current Date    result_format=%H:%M:%S\n    Log    Time only: ${time_only}\n    Should Not Be Empty    ${current_time}\n    Should Contain    ${formatted}    -",
+  "validation": {
+    "mustContain": [
+      "*** Settings ***",
+      "Library",
+      "DateTime",
+      "Get Current Date",
+      "result_format"
+    ],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Exercise 4.3.1: Get Current Date",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/13-datetime-library/ex-00-13-01-get-current-date.png\" alt=\"Exercise visualization\" />\n</div>\n\n<div class=\"story-intro\"><p>MENTOR-9: \"Time is critical in automation. When did this test run? How old is this log entry? Get Current Date gives you the current time in any format you need.\"</p></div><div class=\"concept-explain\"><h3>Get Current Date</h3><p>Get current timestamp:</p><pre><code>Library    DateTime\n\n${now}=    Get Current Date\n# Default: 2025-10-04 14:30:15.123456\n\n${formatted}=    Get Current Date    result_format=%Y-%m-%d\n# Result: 2025-10-04\n\n${time}=    Get Current Date    result_format=%H:%M:%S\n# Result: 14:30:15</code></pre><p><strong>Format Codes:</strong></p><ul><li><strong>%Y</strong>: 4-digit year (2025)</li><li><strong>%m</strong>: Month (01-12)</li><li><strong>%d</strong>: Day (01-31)</li><li><strong>%H</strong>: Hour 24h (00-23)</li><li><strong>%M</strong>: Minute (00-59)</li><li><strong>%S</strong>: Second (00-59)</li><li><strong>epoch</strong>: Unix timestamp</li></ul></div><div class=\"code-demo\"><h4>Example: Test Execution Log</h4><pre><code>*** Settings ***\nLibrary    DateTime\n\n*** Test Cases ***\nTimestamped Test\n    ${start}=    Get Current Date    result_format=%Y-%m-%d %H:%M:%S\n    Log    Test started: ${start}\n    # ... test logic ...\n    ${end}=    Get Current Date    result_format=%Y-%m-%d %H:%M:%S\n    Log    Test ended: ${end}</code></pre></div><div class=\"rules-box\"><h4>⚠️ Get Current Date Tips</h4><ul><li>Default format includes microseconds</li><li>Use result_format for custom output</li><li>epoch format returns seconds since 1970-01-01</li><li>UTC option: Get Current Date    time_zone=UTC</li><li>Increment time: Get Current Date    increment=1 hour</li></ul></div>",
+    "estimatedReadTime": "5-6 minutes"
+  },
+  "metadata": {
+    "tags": [
+      "datetime",
+      "timestamp",
+      "get-current-date",
+      "time"
+    ],
+    "prerequisites": [],
+    "nextExercises": [
+      "ex-00-69"
+    ]
+  }
+}

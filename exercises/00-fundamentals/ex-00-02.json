@@ -1,0 +1,67 @@
+{
+  "id": "ex-00-02",
+  "title": "System Diagnostics with Severity",
+  "difficulty": "beginner",
+  "estimatedTime": "8 minutes",
+  "order": 2,
+  "description": "Analyze our ship systems. Report on 3 different systems using appropriate log levels. Show me you can communicate priority—what's working, what's concerning, what's critical.",
+  "story": {
+    "setup": "MENTOR-9: \"Good, but you're sending everything at the same priority. Not all messages are equal—learn to indicate severity. Some systems are fine, some have warnings, some are critical.\"",
+    "context": "The ship has multiple system states. Log levels help prioritize what to fix first. INFO for normal status, WARN for potential issues, ERROR for critical problems.",
+    "success": "MENTOR-9: \"Perfect! Now I can see at a glance: navigation is stable (INFO), hull has minor damage (WARN), and life support needs urgent attention (ERROR). Severity indicators save lives.\""
+  },
+  "instructions": [
+    "Create the '*** Test Cases ***' section",
+    "Define a test case called 'System Status Report'",
+    "Log exactly 3 messages with their severity levels: 'Navigation system: Operational' (INFO), 'Hull breach detected in sector 7' (WARN), 'Life support: Critical failure imminent' (ERROR)",
+    "Run your code and verify all tests pass",
+    "Inspect the Log tab to see how different severity levels are color-coded",
+    "Verify the Console output shows your test execution results"
+  ],
+  "hints": [
+    "Syntax for log levels: Log    message    LEVEL",
+    "Valid levels: INFO, WARN, ERROR, DEBUG, TRACE (uppercase)",
+    "INFO is the default if no level is specified",
+    "The level comes AFTER the message, separated by spaces",
+    "Use INFO for normal status, WARN for concerns, ERROR for critical issues"
+  ],
+  "initialCode": "",
+  "solution": "*** Test Cases ***\nSystem Status Report\n    Log    Navigation system: Operational    INFO\n    Log    Hull breach detected in sector 7    WARN\n    Log    Life support: Critical failure imminent    ERROR",
+  "validation": {
+    "mustContain": [
+      "*** Test Cases ***",
+      "System Status Report",
+      "Log",
+      "Navigation system: Operational",
+      "Hull breach detected in sector 7",
+      "Life support: Critical failure imminent",
+      "INFO",
+      "WARN",
+      "ERROR"
+    ],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Log Levels and Message Severity",
+    "content": "<div class=\"theory-visual\">\\n<img src=\"assets/images/theory/01-basic-syntax/ex-1-1-2-log-levels.png\" alt=\"Ship system status hologram showing INFO, WARN, and ERROR severity levels color-coded\" loading=\"lazy\" width=\"1920\" height=\"1080\" />\\n</div>\\n\\n<div class=\"story-intro\">\n<p>MENTOR-9 pulls up the ship's log display. It's cluttered with hundreds of messages—all appearing equally important.</p>\n<p>This is chaos, PROTO-7. We need to prioritize. That's where log levels come in.</p>\n</div>\n\n<h3>Understanding Log Levels</h3>\n\n<div class=\"concept-explain\">\n<p>When your ship's computer talks to you, not every message has the same urgency. Some are routine status updates. Others are warnings. Some scream fix this NOW! Log levels let you tag each message with its importance.</p>\n\n<p>Think of it like a triage system. You have several priority levels:</p>\n\n<ul>\n<li><strong>INFO</strong> - Everything's normal, routine status updates</li>\n<li><strong>WARN</strong> - Something's not quite right, but not critical</li>\n<li><strong>ERROR</strong> - Serious problem that needs immediate attention</li>\n<li><strong>DEBUG</strong> - Detailed technical information for troubleshooting</li>\n<li><strong>TRACE</strong> - Very detailed debugging information</li>\n</ul>\n\n<p>In the log report, different levels appear in different colors, making critical issues instantly visible.</p>\n</div>\n\n<h3>How to Add Log Levels</h3>\n\n<div class=\"concept-explain\">\n<p>The syntax is simple—just add the level after your message:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nShip Status\n    Log    Navigation online    INFO\n    Log    Hull breach in sector 7    WARN\n    Log    Life support failing    ERROR</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p>If you don't specify a level, Robot Framework uses INFO by default.</p>\n</div>\n\n<h3>When to Use Each Level</h3>\n\n<div class=\"concept-explain\">\n<p>Here's a quick guide:</p>\n\n<ul>\n<li><strong>INFO:</strong> Normal operations, things working as expected, progress updates</li>\n<li><strong>WARN:</strong> Something's off but the system keeps running, degraded performance, things to investigate later</li>\n<li><strong>ERROR:</strong> Critical problems, system failures, things that need fixing right now</li>\n<li><strong>DEBUG:</strong> Technical details helpful during development and troubleshooting</li>\n<li><strong>TRACE:</strong> Very verbose output for deep debugging (rarely used)</li>\n</ul>\n</div>",
+    "estimatedReadTime": "5-6 minutes"
+  },
+  "metadata": {
+    "tags": [
+      "beginner",
+      "log-levels",
+      "severity",
+      "info-warn-error",
+      "prioritization"
+    ],
+    "prerequisites": [
+      "ex-00-01"
+    ],
+    "nextExercises": [
+      "ex-00-03"
+    ]
+  },
+  "section": "01-basic-syntax",
+  "category": "00-fundamentals"
+}

@@ -1,0 +1,73 @@
+{
+  "id": "ex-00-67",
+  "type": "exercise",
+  "section": "12-string-library",
+  "category": "00-fundamentals",
+  "title": "Strip String - Remove Whitespace",
+  "difficulty": "intermediate",
+  "estimatedTime": "10 minutes",
+  "order": 5,
+  "description": "Use Strip String to remove leading and trailing whitespace from text.",
+  "story": {
+    "setup": "MENTOR-9: \"User input is messy—extra spaces, tabs, newlines. '  Navigation  ' should match 'Navigation'. Use Strip String to remove leading/trailing whitespace.\"",
+    "context": "Whitespace causes comparison failures. Strip String cleans text by removing spaces, tabs, and newlines from start/end.",
+    "success": "MENTOR-9: \"Excellent! You cleaned all the inputs. Stripping whitespace is essential for reliable data processing.\""
+  },
+  "instructions": [
+    "Create *** Settings *** section with Library    String",
+    "Create *** Test Cases *** section",
+    "Create test case 'Clean User Input'",
+    "  - ${input1} =    Set Variable    ${SPACE}${SPACE}Navigation${SPACE}${SPACE}",
+    "  - ${input2} =    Set Variable    ${SPACE}Power${SPACE}",
+    "  - ${input3} =    Set Variable    Engines",
+    "  - Log    Raw inputs: '${input1}', '${input2}', '${input3}'",
+    "  - ${clean1} =    Strip String    ${input1}",
+    "  - ${clean2} =    Strip String    ${input2}",
+    "  - ${clean3} =    Strip String    ${input3}",
+    "  - Log    Clean inputs: '${clean1}', '${clean2}', '${clean3}'",
+    "  - Should Be Equal    ${clean1}    Navigation",
+    "  - Should Be Equal    ${clean2}    Power",
+    "  - Should Be Equal    ${clean3}    Engines",
+    "  - Should Be Equal    ${clean1}    ${clean3.replace('Engines', 'Navigation')}"
+  ],
+  "hints": [
+    "Strip String removes whitespace from both ends",
+    "${SPACE} is built-in variable for space character",
+    "Also removes tabs, newlines, and other whitespace",
+    "Middle spaces are preserved (not removed)",
+    "Returns new string (original unchanged)"
+  ],
+  "initialCode": "",
+  "solution": "*** Settings ***\nLibrary    String\n\n*** Test Cases ***\nClean User Input\n    ${input1}=    Set Variable    ${SPACE}${SPACE}Navigation${SPACE}${SPACE}\n    ${input2}=    Set Variable    ${SPACE}Power${SPACE}\n    ${input3}=    Set Variable    Engines\n    Log    Raw inputs: '${input1}', '${input2}', '${input3}'\n    ${clean1}=    Strip String    ${input1}\n    ${clean2}=    Strip String    ${input2}\n    ${clean3}=    Strip String    ${input3}\n    Log    Clean inputs: '${clean1}', '${clean2}', '${clean3}'\n    Should Be Equal    ${clean1}    Navigation\n    Should Be Equal    ${clean2}    Power\n    Should Be Equal    ${clean3}    Engines",
+  "validation": {
+    "mustContain": [
+      "*** Settings ***",
+      "Library",
+      "String",
+      "Strip String",
+      "${SPACE}"
+    ],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Exercise 4.2.5: Strip String",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/12-string-library/ex-00-12-05-strip-string.png\" alt=\"Exercise visualization\" />\n</div>\n\n<div class=\"story-intro\"><p>MENTOR-9: \"Invisible characters cause visible problems. ' admin ' doesn't equal 'admin' because of spaces. Strip String makes text clean and comparable.\"</p></div><div class=\"concept-explain\"><h3>Strip String</h3><p>Remove leading and trailing whitespace:</p><pre><code>Library    String\n\n${messy}=    Set Variable    ${SPACE}${SPACE}Hello${SPACE}\n${clean}=    Strip String    ${messy}\n# Result: 'Hello'</code></pre><p><strong>Related Keywords:</strong></p><ul><li><strong>Strip String</strong>: Remove from both ends</li><li><strong>Strip String    mode=left</strong>: Leading only</li><li><strong>Strip String    mode=right</strong>: Trailing only</li><li><strong>Strip String    characters=.</strong>: Remove specific chars</li></ul><p><strong>Whitespace Types Removed:</strong></p><ul><li>Spaces ( )</li><li>Tabs (\\t)</li><li>Newlines (\\n, \\r)</li><li>Other Unicode whitespace</li></ul></div><div class=\"code-demo\"><h4>Example: Clean CSV Fields</h4><pre><code>*** Settings ***\nLibrary    String\n\n*** Test Cases ***\nParse CSV Line\n    ${csv}=    Set Variable    Navigation , Online , 75 \n    @{fields}=    Split String    ${csv}    ,\n    @{clean_fields}=    Create List\n    FOR    ${field}    IN    @{fields}\n        ${clean}=    Strip String    ${field}\n        Append To List    ${clean_fields}    ${clean}\n    END\n    Log Many    @{clean_fields}\n    # Result: [Navigation, Online, 75]</code></pre></div><div class=\"rules-box\"><h4>⚠️ Strip String Tips</h4><ul><li>Use before comparisons to avoid whitespace issues</li><li>Middle whitespace preserved (not removed)</li><li>Can strip custom characters with characters= parameter</li><li>Returns new string (doesn't modify original)</li><li>Essential for user input processing</li><li>Combine with FOR loop to clean lists</li></ul></div>",
+    "estimatedReadTime": "6-7 minutes"
+  },
+  "metadata": {
+    "tags": [
+      "string",
+      "strip",
+      "whitespace",
+      "cleaning",
+      "normalization"
+    ],
+    "prerequisites": [
+      "ex-00-66"
+    ],
+    "nextExercises": [
+      "ch-00-12"
+    ]
+  }
+}

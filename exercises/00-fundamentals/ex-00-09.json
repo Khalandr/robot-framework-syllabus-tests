@@ -1,0 +1,82 @@
+{
+  "id": "ex-00-09",
+  "title": "List Access - Retrieving Elements",
+  "difficulty": "beginner",
+  "estimatedTime": "10 minutes",
+  "order": 4,
+  "description": "Access individual list items using index notation and slicing.",
+  "story": {
+    "setup": "MENTOR-9: \"You've stored a list, but can you retrieve specific elements? Access the first item, the last item, a range of items. Lists are useless if you can't extract their contents.\"",
+    "context": "Lists maintain order. Each item has an index starting at 0. You can access items by position: first [0], last [-1], or ranges [1:3]. This is how you extract specific data from collections.",
+    "success": "MENTOR-9: \"Excellent! You pulled the first damaged system, the last system, and a range. List indexing works like most languages—zero-based, with negative indices for reverse access.\""
+  },
+  "instructions": [
+    "Create the *** Test Cases *** section",
+    "Create a test case named 'List Indexing Test'",
+    "Create @{systems} with Create List containing 5 items:",
+    "  - 'Navigation'",
+    "  - 'Power Core'",
+    "  - 'Life Support'",
+    "  - 'Weapons'",
+    "  - 'Shields'",
+    "Access and log the first item: ${systems}[0]",
+    "Access and log the last item: ${systems}[-1]",
+    "Access and log the third item: ${systems}[2]",
+    "Create ${first_three} using list slicing: ${systems}[0:3]",
+    "Log the sliced list",
+    "Create ${last_two} using negative slicing: ${systems}[-2:]",
+    "Log the last two items"
+  ],
+  "hints": [
+    "List indexing uses ${list}[index] syntax (note the $ not @)",
+    "First item: [0], second: [1], third: [2]",
+    "Last item: [-1], second-to-last: [-2]",
+    "Slicing: [start:end] - includes start, excludes end",
+    "[0:3] gets items at index 0, 1, 2 (first three items)",
+    "[-2:] gets last two items",
+    "Slices return new lists"
+  ],
+  "initialCode": "",
+  "solution": "*** Test Cases ***\nList Indexing Test\n    @{systems}      Create List    Navigation    Power Core    Life Support    Weapons    Shields\n    ${first}        Set Variable    ${systems}[0]\n    Log             First system: ${first}\n    ${last}         Set Variable    ${systems}[-1]\n    Log             Last system: ${last}\n    ${third}        Set Variable    ${systems}[2]\n    Log             Third system: ${third}\n    ${first_three}  Set Variable    ${systems}[0:3]\n    Log             First three: ${first_three}\n    ${last_two}     Set Variable    ${systems}[-2:]\n    Log             Last two: ${last_two}",
+  "validation": {
+    "mustContain": [
+      "*** Test Cases ***",
+      "List Indexing Test",
+      "@{systems}",
+      "Create List",
+      "Navigation",
+      "Power Core",
+      "Life Support",
+      "Weapons",
+      "Shields",
+      "${systems}[0]",
+      "${systems}[-1]",
+      "${systems}[2]",
+      "Log"
+    ],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "List Indexing and Slicing: Accessing Elements",
+    "content": "<div class=\"theory-visual\">\n<img src=\"assets/images/theory/02-variables/ex-1-2-4-list-access.png\" alt=\"List indexing diagram showing zero-based indices and negative indices for reverse access\" loading=\"lazy\" width=\"1920\" height=\"1080\" />\n</div>\n\n<div class=\"story-intro\">\n<p>MENTOR-9 highlights specific items in the damaged systems list.</p>\n<p>\"PROTO-7, you can store lists, but accessing individual items is equally important. Let me show you <strong>indexing</strong>—the art of extracting specific elements.\"</p>\n</div>\n\n<div class=\"concept-explain\">\n<h3>List Indexing Basics</h3>\n<p>Every item in a list has an <strong>index</strong> (position number). In Robot Framework (like Python), indexing is <strong>zero-based</strong>:</p>\n\n<table>\n<tr><th>Item</th><th>Index</th><th>Negative Index</th></tr>\n<tr><td>First item</td><td>0</td><td>-5 (if list has 5 items)</td></tr>\n<tr><td>Second item</td><td>1</td><td>-4</td></tr>\n<tr><td>Third item</td><td>2</td><td>-3</td></tr>\n<tr><td>Fourth item</td><td>3</td><td>-2</td></tr>\n<tr><td>Fifth item</td><td>4</td><td>-1 (last)</td></tr>\n</table>\n\n<p><strong>Key insight:</strong> Negative indices count from the end!</p>\n\n<h3>Accessing Individual Items</h3>\n<p>Use <span class=\"code\">${list}[index]</span> syntax (note the <code>$</code>, not <code>@</code>):</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nIndexing Example\n    @{fruits}    Create List    Apple    Banana    Cherry    Date    Elderberry\n    \n    ${first}     Set Variable    ${fruits}[0]     # Apple\n    ${second}    Set Variable    ${fruits}[1]     # Banana\n    ${last}      Set Variable    ${fruits}[-1]    # Elderberry\n    ${second_last}    Set Variable    ${fruits}[-2]    # Date\n    \n    Log    First: ${first}\n    Log    Second: ${second}\n    Log    Last: ${last}\n    Log    Second to last: ${second_last}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>Why ${list}[index] and not @{list}[index]?</h4>\n<ul>\n<li><strong>@{list}:</strong> Expands to ALL items (for passing to keywords)</li>\n<li><strong>${list}[index]:</strong> Accesses ONE item (returns scalar value)</li>\n</ul>\n\n<h3>Direct Access in Log</h3>\n<p>You don't always need to store in a variable first:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nDirect Access\n    @{systems}    Create List    Nav    Power    Life Support\n    \n    Log    First system: ${systems}[0]\n    Log    Last system: ${systems}[-1]\n    Log    Middle system: ${systems}[1]</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>List Slicing: Getting Ranges</h3>\n<p><strong>Slicing</strong> extracts a sub-list using <span class=\"code\">[start:end]</span> syntax:</p>\n<ul>\n<li><strong>start:</strong> First index to include</li>\n<li><strong>end:</strong> First index to EXCLUDE (stops before this)</li>\n</ul>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nSlicing Example\n    @{numbers}    Create List    0    1    2    3    4    5    6    7    8    9\n    \n    ${first_three}     Set Variable    ${numbers}[0:3]     # [0, 1, 2]\n    ${middle}          Set Variable    ${numbers}[3:7]     # [3, 4, 5, 6]\n    ${last_three}      Set Variable    ${numbers}[-3:]     # [7, 8, 9]\n    ${all_but_last}    Set Variable    ${numbers}[:-1]     # [0, 1, 2, 3, 4, 5, 6, 7, 8]\n    ${every_second}    Set Variable    ${numbers}[::2]     # [0, 2, 4, 6, 8]\n    \n    Log    First three: ${first_three}\n    Log    Middle: ${middle}\n    Log    Last three: ${last_three}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>Slicing Syntax Breakdown</h4>\n<table>\n<tr><th>Syntax</th><th>Meaning</th><th>Example Result</th></tr>\n<tr><td>[start:end]</td><td>From start to end-1</td><td>[2:5] → items 2, 3, 4</td></tr>\n<tr><td>[:end]</td><td>From beginning to end-1</td><td>[:3] → items 0, 1, 2</td></tr>\n<tr><td>[start:]</td><td>From start to end</td><td>[3:] → items 3, 4, 5...</td></tr>\n<tr><td>[-n:]</td><td>Last n items</td><td>[-2:] → last 2 items</td></tr>\n<tr><td>[:-n]</td><td>All except last n</td><td>[:-1] → all but last</td></tr>\n<tr><td>[::step]</td><td>Every step-th item</td><td>[::2] → every 2nd item</td></tr>\n</table>\n\n<h3>Common Patterns</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nCommon Patterns\n    @{items}    Create List    A    B    C    D    E    F\n    \n    # First item\n    ${first}         Set Variable    ${items}[0]\n    \n    # Last item\n    ${last}          Set Variable    ${items}[-1]\n    \n    # First three\n    ${first_three}   Set Variable    ${items}[:3]\n    \n    # Last two\n    ${last_two}      Set Variable    ${items}[-2:]\n    \n    # All except first\n    ${skip_first}    Set Variable    ${items}[1:]\n    \n    # All except last\n    ${skip_last}     Set Variable    ${items}[:-1]\n    \n    # Middle items (skip first and last)\n    ${middle}        Set Variable    ${items}[1:-1]</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Index Out of Range Errors</h3>\n<p>Accessing an index that doesn't exist causes an error:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nIndex Errors\n    @{items}    Create List    A    B    C\n    \n    ${valid}      Set Variable    ${items}[2]     # ✅ OK (index 2 exists: 'C')\n    ${invalid}    Set Variable    ${items}[5]     # ❌ ERROR: Index 5 out of range</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p><strong>Slicing is safer:</strong> Out-of-range slices return empty lists instead of errors:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nSafe Slicing\n    @{items}    Create List    A    B    C\n    \n    ${safe}    Set Variable    ${items}[5:10]    # ✅ Returns empty list []</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>Real-World Example: Processing API Results</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nProcess Search Results\n    @{results}    Create List    Result1    Result2    Result3    Result4    Result5\n    \n    # Get top result\n    ${top_result}    Set Variable    ${results}[0]\n    Log    Top result: ${top_result}\n    \n    # Get top 3 results\n    ${top_three}     Set Variable    ${results}[:3]\n    Log Many    Top three:    @{top_three}\n    \n    # Check if we have results\n    ${count}         Get Length    ${results}\n    Log    Total results: ${count}</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h3>List Access vs List Expansion</h3>\n<p>Important distinction:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nAccess vs Expansion\n    @{colors}    Create List    Red    Green    Blue\n    \n    # EXPANSION: @{colors} → passes 3 separate arguments\n    Log Many    @{colors}    # Logs each color separately\n    \n    # ACCESS: ${colors} → passes the list object\n    Log    ${colors}        # Logs: ['Red', 'Green', 'Blue']\n    \n    # INDEX ACCESS: ${colors}[0] → passes one item\n    Log    ${colors}[0]     # Logs: Red</code></pre>\n</div>\n\n<div class=\"try-it\">\n<p>MENTOR-9: \"Create a list of ship systems. Access the first, last, and third items. Create slices for the first three and last two. Show me you can extract data from collections.\"</p>\n</div>",
+    "estimatedReadTime": "7-8 minutes"
+  },
+  "metadata": {
+    "tags": [
+      "beginner",
+      "list-indexing",
+      "list-slicing",
+      "zero-based-indexing",
+      "negative-indices"
+    ],
+    "prerequisites": [
+      "ex-00-02-3"
+    ],
+    "nextExercises": [
+      "ex-00-02-5"
+    ]
+  },
+  "section": "02-variables",
+  "category": "00-fundamentals"
+}

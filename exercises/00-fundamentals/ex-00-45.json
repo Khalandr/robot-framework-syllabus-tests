@@ -1,0 +1,53 @@
+{
+  "id": "ex-00-45",
+  "type": "exercise",
+  "section": "08-while-loops",
+  "category": "00-fundamentals",
+  "title": "Status Check Loop",
+  "difficulty": "intermediate",
+  "estimatedTime": "10 minutes",
+  "order": 3,
+  "description": "Use WHILE loop with boolean flag to simulate system status checking.",
+  "story": {
+    "setup": "MENTOR-9: \"The navigation system is rebooting. We need to keep checking its status until it reports 'ready'. We'll use a boolean variable to track whether we're done.\"",
+    "context": "Boolean flags are common in WHILE loops. You set a flag to False, then change it to True when the desired condition is met. This pattern is useful when the exit condition is complex or determined by external factors.",
+    "success": "MENTOR-9: \"Excellent! You used a boolean flag to control the loop. This pattern is very common in real automation—keep checking until something changes.\""
+  },
+  "instructions": [
+    "Create test case 'Navigation System Check'",
+    "Create variable ${ready} set to 'False'",
+    "Create variable ${checks} set to 0 (to count iterations)",
+    "Use WHILE loop with condition: '${ready}' == 'False'",
+    "Inside loop:",
+    "  - Increment ${checks} by 1",
+    "  - Log 'Check ${checks}: System not ready'",
+    "  - IF ${checks} == 3, set ${ready} to 'True'",
+    "  - Use END for IF",
+    "Use END for WHILE",
+    "After loop, log 'Navigation system ready after ${checks} checks'"
+  ],
+  "hints": [
+    "String comparison: '${ready}' == 'False'",
+    "IF syntax: IF    ${checks} == 3",
+    "Boolean values must be strings: 'True' and 'False'",
+    "Nested IF inside WHILE needs proper indentation",
+    "Both IF and WHILE need END statements"
+  ],
+  "initialCode": "",
+  "solution": "*** Test Cases ***\nNavigation System Check\n    ${ready}=    Set Variable    False\n    ${checks}=    Set Variable    0\n    WHILE    '${ready}' == 'False'\n        ${checks}=    Set Variable    ${checks + 1}\n        Log    Check ${checks}: System not ready\n        IF    ${checks} == 3\n            ${ready}=    Set Variable    True\n        END\n    END\n    Log    Navigation system ready after ${checks} checks",
+  "validation": {
+    "mustContain": ["*** Test Cases ***", "WHILE", "IF", "END", "${ready}", "${checks}"],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Exercise 3.1.3: Boolean Flags in WHILE Loops",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/08-while-loops/ex-00-08-03-status-check.png\" alt=\"Navigation system status check with boolean flag visualization\" />\n</div>\n\n<div class=\"story-intro\"><p>MENTOR-9: \"Sometimes you don't know how many iterations you'll need. You just know you'll keep going until something specific happens. That's when boolean flags shine.\"</p></div><div class=\"concept-explain\"><h3>Boolean Flag Pattern</h3><p>A <strong>boolean flag</strong> is a variable that tracks whether a condition has been met:</p><pre><code>${done}=    Set Variable    False\nWHILE    '${done}' == 'False'\n    # Do work...\n    IF    ${some_condition}\n        ${done}=    Set Variable    True\n    END\nEND</code></pre><p><strong>Why Use Flags?</strong></p><ul><li>Exit condition depends on complex logic</li><li>Multiple conditions might end the loop</li><li>Makes code more readable than complex expressions</li></ul></div><div class=\"rules-box\"><h4>⚠️ String vs Boolean</h4><p>In Robot Framework, boolean values are typically strings:</p><ul><li>Use: <code>'True'</code> and <code>'False'</code> (strings)</li><li>Or: <code>${True}</code> and <code>${False}</code> (built-in variables)</li><li>Comparison: <code>'${var}' == 'True'</code></li></ul></div>",
+    "estimatedReadTime": "4-5 minutes"
+  },
+  "metadata": {
+    "tags": ["while-loop", "boolean-flag", "nested-if", "status-check"],
+    "prerequisites": ["ex-00-44", "ex-00-33"],
+    "nextExercises": ["ex-00-46"]
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "id": "ex-00-44",
+  "type": "exercise",
+  "section": "08-while-loops",
+  "category": "00-fundamentals",
+  "title": "Power Level Monitor",
+  "difficulty": "intermediate",
+  "estimatedTime": "10 minutes",
+  "order": 2,
+  "description": "Monitor ship power levels using WHILE loop until power reaches safe threshold.",
+  "story": {
+    "setup": "MENTOR-9: \"The ship's power is recharging, but we need to wait until it hits at least 75% before we can restart systems. Let's monitor it with a WHILE loop.\"",
+    "context": "In real automation, you often wait for a condition to be met. WHILE loops are perfect for polling—repeatedly checking a value until it meets your criteria.",
+    "success": "MENTOR-9: \"Good! The power reached 75% and the loop stopped. In real tests, you'd be checking actual system status instead of incrementing a variable, but the pattern is the same.\""
+  },
+  "instructions": [
+    "Create test case 'Monitor Power Levels'",
+    "Set initial power to 50 using ${power}",
+    "Use WHILE loop with condition: ${power} < 75",
+    "Inside loop:",
+    "  - Log current power: 'Power at ${power}%'",
+    "  - Increment power by 5: ${power} = ${power + 5}",
+    "After loop, log 'Power sufficient! Systems can restart.'"
+  ],
+  "hints": [
+    "Condition checks if power is LESS than 75",
+    "Increment: ${power}=    Set Variable    ${power + 5}",
+    "Loop will stop when power reaches 75 or higher",
+    "Don't forget the END statement"
+  ],
+  "initialCode": "",
+  "solution": "*** Test Cases ***\nMonitor Power Levels\n    ${power}=    Set Variable    50\n    WHILE    ${power} < 75\n        Log    Power at ${power}%\n        ${power}=    Set Variable    ${power + 5}\n    END\n    Log    Power sufficient! Systems can restart.",
+  "validation": {
+    "mustContain": ["*** Test Cases ***", "WHILE", "${power}", "END", "Set Variable"],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Exercise 3.1.2: Monitoring with WHILE Loops",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/08-while-loops/ex-00-08-02-power-monitor.png\" alt=\"Power gauge rising from 50% to 75% with WHILE loop monitoring visualization\" />\n</div>\n\n<div class=\"story-intro\"><p>MENTOR-9 shows you the power gauge slowly climbing.</p><p>\"We can't control how fast it charges, but we CAN wait until it's safe. This is a classic polling pattern—check, wait, check again, until the condition is met.\"</p></div><div class=\"concept-explain\"><h3>Polling Pattern</h3><p>Polling means repeatedly checking a value until it meets a condition. Common in automation:</p><ul><li>Waiting for page to load</li><li>Monitoring system status</li><li>Checking file existence</li><li>Waiting for process completion</li></ul><p><strong>Basic Pattern:</strong></p><pre><code>WHILE    ${current_value} != ${target_value}\n    ${current_value}=    Get Current Status\n    Sleep    1s  # Wait before checking again\nEND</code></pre></div>",
+    "estimatedReadTime": "3-4 minutes"
+  },
+  "metadata": {
+    "tags": ["while-loop", "polling", "monitoring", "increment"],
+    "prerequisites": ["ex-00-43"],
+    "nextExercises": ["ex-00-45"]
+  }
+}

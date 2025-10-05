@@ -1,0 +1,53 @@
+{
+  "id": "ex-00-39",
+  "type": "exercise",
+  "section": "07-for-loops",
+  "category": "00-fundamentals",
+  "title": "FOR Loop with IN RANGE",
+  "difficulty": "beginner",
+  "estimatedTime": "8 minutes",
+  "order": 2,
+  "description": "Use IN RANGE to iterate through numeric sequences for countdown timers and counters.",
+  "story": {
+    "setup": "MENTOR-9: \"Sometimes you don't have a list - you just need numbers. Count from 1 to 5, or countdown from 10 to 0. That's what IN RANGE does!\"",
+    "context": "IN RANGE generates numeric sequences without creating explicit lists. Perfect for counters, timers, and indexed operations.",
+    "success": "MENTOR-9: \"Excellent! Countdown complete. IN RANGE is your friend for numeric iteration.\""
+  },
+  "instructions": [
+    "Create the *** Test Cases *** section with test: 'Launch Countdown'",
+    "Create a FOR loop: FOR    ${count}    IN RANGE    5    0    -1",
+    "Inside the loop: Log    T-minus ${count} seconds",
+    "After END, add: Log    Liftoff!",
+    "Note: IN RANGE    5    0    -1 means: start=5, stop=0 (exclusive), step=-1 (countdown)"
+  ],
+  "hints": [
+    "IN RANGE syntax: FOR ${i} IN RANGE start stop step",
+    "Stop value is EXCLUSIVE (5 to 0 excludes 0, so: 5,4,3,2,1)",
+    "Step -1 means count down",
+    "Without step, defaults to +1",
+    "Single argument: FOR ${i} IN RANGE 5 → 0,1,2,3,4"
+  ],
+  "initialCode": "",
+  "solution": "*** Test Cases ***\nLaunch Countdown\n    FOR    ${count}    IN RANGE    5    0    -1\n        Log    T-minus ${count} seconds\n    END\n    Log    Liftoff!",
+  "validation": {
+    "mustContain": [
+      "*** Test Cases ***",
+      "Launch Countdown",
+      "FOR",
+      "${count}",
+      "IN RANGE",
+      "5",
+      "0",
+      "-1",
+      "T-minus",
+      "END",
+      "Liftoff"
+    ],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Exercise 2.4.2: IN RANGE Iteration",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/07-for-loops/ex-2-4-2-in-range.png\" alt=\"PROTO-7 watching a countdown display showing 5,4,3,2,1 with glowing numbers descending - IN RANGE visualization with start/stop/step indicators\" />\n</div>\n\n<div class=\"story-intro\">\n  <h3>🔢 Numeric Iteration</h3>\n  <p><strong>MENTOR-9</strong>: \"Lists are great, but sometimes you just need NUMBERS. Count up, count down, skip by twos...\"</p>\n  <p>\"That's where IN RANGE shines. No list needed - just start, stop, and step!\"</p>\n</div>\n\n<div class=\"concept-explain\">\n  <h3>📘 IN RANGE Syntax</h3>\n  <p><strong>Three Forms:</strong></p>\n  <pre><code># 1. Single argument (0 to N, exclusive)\nFOR    ${i}    IN RANGE    5\n    # Iterates: 0, 1, 2, 3, 4\nEND\n\n# 2. Start and stop (start to stop, exclusive)\nFOR    ${i}    IN RANGE    1    6\n    # Iterates: 1, 2, 3, 4, 5\nEND\n\n# 3. Start, stop, step (with custom increment)\nFOR    ${i}    IN RANGE    5    0    -1\n    # Iterates: 5, 4, 3, 2, 1 (countdown!)\nEND</code></pre>\n</div>\n\n<div class=\"code-demo\">\n  <h3>💡 Common Patterns</h3>\n  <pre><code># Countdown timer\nFOR    ${count}    IN RANGE    10    0    -1\n    Log    ${count}...\nEND\nLog    Blastoff!\n\n# Count by twos\nFOR    ${i}    IN RANGE    0    10    2\n    Log    Even number: ${i}    # 0, 2, 4, 6, 8\nEND\n\n# Simple 1-10 loop\nFOR    ${i}    IN RANGE    1    11\n    Log    Item ${i}    # 1, 2, 3... 10\nEND</code></pre>\n</div>\n\n<div class=\"rules-box\">\n  <h3>⚙️ Key Rules</h3>\n  <ul>\n    <li>🔹 <strong>Stop is EXCLUSIVE</strong>: RANGE 1 5 → 1,2,3,4 (not 5)</li>\n    <li>🔹 <strong>Default step is 1</strong>: RANGE 0 5 → 0,1,2,3,4</li>\n    <li>🔹 <strong>Negative step</strong>: Counts down (start > stop)</li>\n    <li>🔹 <strong>Zero iterations</strong>: RANGE 5 5 → empty (no loop)</li>\n  </ul>\n</div>\n\n<div class=\"try-it\">\n  <h3>🎯 Your Task</h3>\n  <p>Create a countdown from 5 to 1 using IN RANGE, then log \"Liftoff!\" after the loop.</p>\n</div>"
+  }
+}

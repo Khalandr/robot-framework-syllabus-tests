@@ -66,7 +66,7 @@
   },
   "metadata": {
     "tags": ["while-loop", "challenge", "nested-loops", "complex-logic", "monitoring-system"],
-    "prerequisites": ["ex-00-08-01", "ex-00-08-02", "ex-00-08-03", "ex-00-08-04", "ex-00-08-05"],
+    "prerequisites": ["ex-00-43", "ex-00-44", "ex-00-45", "ex-00-46", "ex-00-47"],
     "nextExercises": []
   }
 }

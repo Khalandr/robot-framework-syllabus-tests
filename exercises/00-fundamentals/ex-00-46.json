@@ -1,0 +1,52 @@
+{
+  "id": "ex-00-46",
+  "type": "exercise",
+  "section": "08-while-loops",
+  "category": "00-fundamentals",
+  "title": "Emergency BREAK",
+  "difficulty": "intermediate",
+  "estimatedTime": "10 minutes",
+  "order": 4,
+  "description": "Use BREAK statement to exit WHILE loop early when critical condition is met.",
+  "story": {
+    "setup": "MENTOR-9: \"The ship is scanning for safe landing zones. We'll check up to 10 zones, but if we find one that's 'safe', we should stop immediately. That's what BREAK is for.\"",
+    "context": "BREAK allows you to exit a loop early, before the main condition becomes false. It's essential for efficiency—why keep looping if you've already found what you need?",
+    "success": "MENTOR-9: \"Perfect! You found the safe zone at position 4 and stopped immediately. BREAK saved us 6 unnecessary checks. In real automation, this saves time and resources.\""
+  },
+  "instructions": [
+    "Create test case 'Landing Zone Scan'",
+    "Create variable ${zone} set to 1",
+    "Create list ${zones} with values: dangerous, dangerous, dangerous, safe, dangerous, dangerous",
+    "Use WHILE loop with condition: ${zone} <= 10",
+    "Inside loop:",
+    "  - Get zone status: ${status} = ${zones}[${zone - 1}]",
+    "  - Log 'Zone ${zone}: ${status}'",
+    "  - IF ${status} equals 'safe', log 'Safe zone found!' and BREAK",
+    "  - Increment ${zone} by 1",
+    "After loop, log 'Scan complete'"
+  ],
+  "hints": [
+    "Create List: @{zones}=    Create List    dangerous    dangerous    dangerous    safe    ...",
+    "List access: ${zones}[${zone - 1}] (lists are 0-indexed)",
+    "String comparison: '${status}' == 'safe'",
+    "BREAK exits the loop immediately",
+    "No END needed after BREAK (it's a single statement)"
+  ],
+  "initialCode": "",
+  "solution": "*** Test Cases ***\nLanding Zone Scan\n    ${zone}=    Set Variable    1\n    @{zones}=    Create List    dangerous    dangerous    dangerous    safe    dangerous    dangerous\n    WHILE    ${zone} <= 10\n        ${status}=    Set Variable    ${zones}[${zone - 1}]\n        Log    Zone ${zone}: ${status}\n        IF    '${status}' == 'safe'\n            Log    Safe zone found!\n            BREAK\n        END\n        ${zone}=    Set Variable    ${zone + 1}\n    END\n    Log    Scan complete",
+  "validation": {
+    "mustContain": ["*** Test Cases ***", "WHILE", "BREAK", "Create List", "IF", "END"],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Exercise 3.1.4: BREAK Statement",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/08-while-loops/ex-00-08-04-emergency-break.png\" alt=\"Emergency BREAK visualization with radiation zone search\" />\n</div>\n\n<div class=\"story-intro\"><p>MENTOR-9: \"Why waste energy checking all 10 zones if we find a safe one at zone 4? BREAK lets us exit immediately.\"</p></div><div class=\"concept-explain\"><h3>BREAK Statement</h3><p><strong>BREAK</strong> immediately exits the current loop, regardless of the loop condition:</p><pre><code>WHILE    ${condition}\n    IF    ${exit_condition}\n        BREAK\n    END\n    # More code...\nEND</code></pre><p><strong>When to Use BREAK:</strong></p><ul><li>Found what you're looking for (search successful)</li><li>Critical error occurred (stop processing)</li><li>Resource limit reached (max attempts)</li><li>Early exit improves performance</li></ul></div><div class=\"code-demo\"><h4>Example: Search with BREAK</h4><pre><code>WHILE    ${index} < ${max_items}\n    ${item}=    Get Item    ${index}\n    IF    '${item}' == '${target}'\n        Log    Found at position ${index}!\n        BREAK\n    END\n    ${index}=    Set Variable    ${index + 1}\nEND</code></pre></div><div class=\"rules-box\"><h4>⚠️ BREAK Rules</h4><ul><li>Only works inside loops (WHILE, FOR)</li><li>Exits the innermost loop only (if nested)</li><li>Code after BREAK in loop is skipped</li><li>No END needed for BREAK itself</li></ul></div>",
+    "estimatedReadTime": "4-5 minutes"
+  },
+  "metadata": {
+    "tags": ["while-loop", "break", "early-exit", "search-pattern"],
+    "prerequisites": ["ex-00-45"],
+    "nextExercises": ["ex-00-47"]
+  }
+}

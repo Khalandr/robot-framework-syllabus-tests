@@ -1,0 +1,72 @@
+{
+  "id": "ex-00-03",
+  "title": "Dual Channel Communication",
+  "difficulty": "beginner",
+  "estimatedTime": "8 minutes",
+  "order": 3,
+  "description": "Run an extended diagnostic. Use Log To Console for progress updates so I can monitor in real-time. Use Log for detailed technical findings that I'll review in the report later.",
+  "story": {
+    "setup": "MENTOR-9: \"The Log keyword writes to the HTML report. But sometimes you want immediate feedback in the console—especially during long diagnostics. We need both channels.\"",
+    "context": "Log outputs to log.html (visible after test completes). Log To Console outputs to the terminal in real-time. Long diagnostics need progress updates, and detailed logging for later review.",
+    "success": "MENTOR-9: \"Perfect! I saw your progress updates in real-time on console, and now I'm reviewing the detailed diagnostic log. You understand the dual-channel paradigm. This is how we monitor long-running operations.\""
+  },
+  "instructions": [
+    "Create the '*** Test Cases ***' section",
+    "Define a test case called 'Extended Diagnostic'",
+    "Use 'Log To Console' for real-time progress: 'Starting full system diagnostic...', 'Phase 1: Hardware scan - 25% complete', 'Phase 2: Software verification - 50% complete', 'Phase 3: Network connectivity - 75% complete', 'Diagnostic complete - 100%'",
+    "Use 'Log' for detailed records: 'Hardware scan: 47 components checked, 3 warnings found', 'Software verification: All protocols current, version 7.2.1', 'Network connectivity: Latency 45ms, bandwidth 1.2Gbps'",
+    "Run your code and verify all tests pass",
+    "Check the Console tab to see your real-time progress messages",
+    "Check the Log tab to see your detailed diagnostic records"
+  ],
+  "hints": [
+    "Log To Console shows immediate output in the Console tab",
+    "Log writes to log.html (detailed permanent record in the Log tab)",
+    "Use Log To Console for progress tracking (25%, 50%, 75%, 100%)",
+    "Use Log for detailed information you want in the report",
+    "Syntax: Log To Console    message (same as Log keyword)",
+    "Mix them appropriately: console for progress, log for details"
+  ],
+  "initialCode": "",
+  "solution": "*** Test Cases ***\nExtended Diagnostic\n    Log To Console    Starting full system diagnostic...\n    Log To Console    Phase 1: Hardware scan - 25% complete\n    Log    Hardware scan: 47 components checked, 3 warnings found\n    Log To Console    Phase 2: Software verification - 50% complete\n    Log    Software verification: All protocols current, version 7.2.1\n    Log To Console    Phase 3: Network connectivity - 75% complete\n    Log    Network connectivity: Latency 45ms, bandwidth 1.2Gbps\n    Log To Console    Diagnostic complete - 100%",
+  "validation": {
+    "mustContain": [
+      "*** Test Cases ***",
+      "Extended Diagnostic",
+      "Log To Console",
+      "Log",
+      "Starting full system diagnostic...",
+      "Phase 1: Hardware scan - 25% complete",
+      "Phase 2: Software verification - 50% complete",
+      "Phase 3: Network connectivity - 75% complete",
+      "Diagnostic complete - 100%",
+      "Hardware scan: 47 components checked, 3 warnings found",
+      "Software verification: All protocols current, version 7.2.1",
+      "Network connectivity: Latency 45ms, bandwidth 1.2Gbps"
+    ],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Log vs Log To Console: When to Use Each",
+    "content": "<div class=\"theory-visual\">\\n<img src=\"assets/images/theory/01-basic-syntax/ex-1-1-3-dual-channels.png\" alt=\"Split view showing console real-time output versus detailed log file display\" loading=\"lazy\" width=\"1920\" height=\"1080\" />\\n</div>\\n\\n<div class=\"story-intro\">\n<p>MENTOR-9 taps a display showing the HTML report from your last test.</p>\n<p>Notice how you only see Log messages after opening this report? Sometimes you need real-time feedback while tests run. That's where Log To Console comes in.</p>\n</div>\n\n<h3>Two Ways to Output Messages</h3>\n\n<div class=\"concept-explain\">\n<p>Think of Robot Framework as having two communication channels:</p>\n\n<p><strong>Log</strong> - Writes to the HTML report file (log.html). You see these messages after the test finishes. Perfect for detailed records you want to review later. Like writing notes in a logbook.</p>\n\n<p><strong>Log To Console</strong> - Writes directly to your terminal/console window. You see these messages immediately as the test runs. Perfect for tracking progress in real-time. Like speaking your status updates out loud.</p>\n</div>\n\n<h3>When to Use Each</h3>\n\n<div class=\"concept-explain\">\n<p>Use <strong>Log</strong> when you want a permanent record. Variable values, detailed steps, debugging information, anything you might need to review later.</p>\n\n<p>Use <strong>Log To Console</strong> when you want immediate feedback. Progress percentages, status updates, quick checks during test development.</p>\n\n<p>The syntax is identical for both:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nDiagnostic Check\n    Log To Console    Starting diagnostic...\n    Log               Hardware check: 47 components scanned</code></pre>\n</div>\n\n<h3>Using Both Together</h3>\n\n<div class=\"concept-explain\">\n<p>Here's the powerful part: you can use both in the same test. Give yourself real-time progress updates in the console while building a detailed record in the log file.</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nSystem Scan\n    Log To Console    Progress: 25%\n    Log               Scanned sector A: 12 nodes found\n    Log To Console    Progress: 50%\n    Log               Scanned sector B: 8 nodes found\n    Log To Console    Complete!</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p>The console shows your progress ticking up. The log file has all the technical details. Best of both worlds.</p>\n</div>",
+    "estimatedReadTime": "5-6 minutes"
+  },
+  "metadata": {
+    "tags": [
+      "beginner",
+      "log-to-console",
+      "console-output",
+      "real-time-feedback",
+      "progress-tracking"
+    ],
+    "prerequisites": [
+      "ex-00-01-2"
+    ],
+    "nextExercises": [
+      "ex-00-01-4"
+    ]
+  },
+  "section": "01-basic-syntax",
+  "category": "00-fundamentals"
+}

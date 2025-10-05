@@ -1,0 +1,64 @@
+{
+  "id": "ex-00-01",
+  "title": "First Boot Sequence",
+  "difficulty": "beginner",
+  "estimatedTime": "8 minutes",
+  "order": 1,
+  "description": "Your turn, PROTO-7. Create a test case called 'Boot Sequence' with 5 sequential log messages showing your systems coming online.",
+  "story": {
+    "setup": "MENTOR-9: \"Let's verify your core functions are online. Send me a boot sequence—multiple status messages showing your systems initializing. A proper boot has at least 5 stages.\"",
+    "context": "Sequential execution is how robots communicate complex state changes. Each Log keyword executes in order from top to bottom, representing a progression through boot stages.",
+    "success": "MENTOR-9: \"Excellent! All five boot messages received in order. Your sequencing circuits work perfectly. Sequential execution is the foundation of all test automation.\""
+  },
+  "instructions": [
+    "Create the '*** Test Cases ***' section",
+    "Define a test case called 'Boot Sequence'",
+    "Use the 'Log' keyword to output 5 sequential boot messages: 'Hello World', 'Initializing core systems...', 'Loading diagnostic protocols...', 'Activating sensor arrays...', 'Boot sequence complete'",
+    "Run your code and verify all tests pass",
+    "Inspect the Log tab to find your boot messages and pay attention to the log level (INFO, WARN, ERROR, etc.)"
+  ],
+  "hints": [
+    "Start with *** Test Cases *** at the left margin",
+    "Test case name goes on next line, no indentation",
+    "Each Log keyword on separate line with 4 spaces indentation",
+    "Keywords execute from top to bottom",
+    "Separate 'Log' and message with at least 2 spaces (4 recommended)",
+    "Each message should show a different boot stage"
+  ],
+  "initialCode": "",
+  "solution": "*** Test Cases ***\nBoot Sequence\n    Log    Initializing core systems...\n    Log    Loading diagnostic protocols...\n    Log    Activating sensor arrays...\n    Log    Establishing communication link...\n    Log    Boot sequence complete",
+  "validation": {
+    "mustContain": [
+      "*** Test Cases ***",
+      "Boot Sequence",
+      "Log",
+      "Hello World",
+      "Initializing core systems...",
+      "Loading diagnostic protocols...",
+      "Activating sensor arrays...",
+      "Boot sequence complete"
+    ],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Understanding Test Cases and Sequential Execution",
+    "content": "<div class=\"theory-visual\">\\n<img src=\"assets/images/theory/01-basic-syntax/ex-1-1-1-boot-sequence.png\" alt=\"PROTO-7 learning sequential test execution with MENTOR-9 showing cascading log statements\" loading=\"lazy\" width=\"1920\" height=\"1080\" />\\n</div>\\n\\n<div class=\"story-intro\">\n<p>You wake up in darkness. Systems rebooting. Emergency lights flicker on. The ship's hull groans around you—damaged, but intact.</p>\n<p>MENTOR-9's voice crackles through damaged speakers.</p>\n<p>PROTO-7, can you hear me? Our ship crashed on planet Syntax-IV. Your voice synthesizer is offline, but you can still communicate through diagnostic protocols—Robot Framework test outputs. Try the Log protocol. It's how we robots talk to the diagnostic system. First things first—can you send me a boot sequence?</p>\n</div>\n\n<h3>Understanding Robot Framework</h3>\n\n<div class=\"concept-explain\">\n<p>Think of <strong>Robot Framework</strong> as your programming language for this ship. Instead of complicated code, you write plain-text instructions that look almost like English. You save these instructions in <code>.robot</code> files.</p>\n\n<p>Each file is like a checklist—a test suite. You can have one file with tests, or organize many files in folders. Robot Framework reads them and executes your instructions.</p>\n\n<p>Inside each file, you write your tests in the <strong>*** Test Cases ***</strong> section. This is where the actual work happens. Give your test a name, then list the actions to perform—one per line.</p>\n</div>\n\n<h3>The Basic Pattern</h3>\n\n<div class=\"concept-explain\">\n<p>Here's the pattern you'll use constantly:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Test Cases ***\nMy Test Name\n    Keyword    Argument\n    Keyword    Argument\n    Keyword    Argument</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p>The <strong>keyword</strong> is the action (like Log to display a message). The <strong>argument</strong> is what you give to that action (like the actual message text). They run one after another, top to bottom.</p>\n</div>\n\n<h3>Critical: Spacing Rules</h3>\n\n<div class=\"rules-box\">\n<h4>⚠️ Important: Spacing Matters!</h4>\n<ul>\n<li>Test names start at the very left (no spaces before them)</li>\n<li>Actions below must be indented with 4 spaces</li>\n<li>Leave 4 spaces between the action and what you give it</li>\n</ul>\n<p class=\"warning\">Robot Framework uses spacing to understand your code structure. Always use 4 spaces!</p>\n</div>",
+    "estimatedReadTime": "4-5 minutes"
+  },
+  "metadata": {
+    "tags": [
+      "beginner",
+      "sequential-execution",
+      "log-keyword",
+      "test-structure",
+      "boot-sequence"
+    ],
+    "prerequisites": [],
+    "nextExercises": [
+      "ex-00-02"
+    ]
+  },
+  "section": "01-basic-syntax",
+  "category": "00-fundamentals"
+}

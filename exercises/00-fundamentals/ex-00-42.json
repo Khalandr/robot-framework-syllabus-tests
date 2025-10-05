@@ -1,0 +1,62 @@
+{
+  "id": "ex-00-42",
+  "type": "exercise",
+  "section": "07-for-loops",
+  "category": "00-fundamentals",
+  "title": "Nested FOR Loops",
+  "difficulty": "intermediate",
+  "estimatedTime": "10 minutes",
+  "order": 5,
+  "description": "Master nested iteration by checking multiple systems across multiple zones with loops inside loops.",
+  "story": {
+    "setup": "MENTOR-9: \"The ship has THREE zones, and each zone has THREE systems. That's 9 checks total. Time for nested loops!\"",
+    "context": "Nested FOR loops handle multi-dimensional iteration. Outer loop iterates zones, inner loop iterates systems in each zone. 3 × 3 = 9 checks!",
+    "success": "MENTOR-9: \"BRILLIANT! Nested loops - the power multiplier. 9 checks with just 2 loops!\""
+  },
+  "instructions": [
+    "Create the *** Test Cases *** section with test: 'Multi-Zone System Check'",
+    "Create zones list: @{zones}=    Create List    Alpha    Beta    Gamma",
+    "Create systems list: @{systems}=    Create List    power    sensors    life-support",
+    "Outer loop: FOR    ${zone}    IN    @{zones}",
+    "Inner loop (indented 8 spaces): FOR    ${system}    IN    @{systems}",
+    "Inside inner loop (indented 12 spaces): Log    Checking ${zone} zone - ${system} system",
+    "Close inner loop: END (indented 8 spaces)",
+    "Close outer loop: END (indented 4 spaces)"
+  ],
+  "hints": [
+    "Outer loop body = inner loop (indented)",
+    "Inner loop body = Log statement (double-indented)",
+    "Each END aligns with its FOR",
+    "3 zones × 3 systems = 9 total iterations",
+    "Inner loop runs completely for each outer iteration"
+  ],
+  "initialCode": "",
+  "solution": "*** Test Cases ***\nMulti-Zone System Check\n    @{zones}=    Create List    Alpha    Beta    Gamma\n    @{systems}=    Create List    power    sensors    life-support\n    FOR    ${zone}    IN    @{zones}\n        FOR    ${system}    IN    @{systems}\n            Log    Checking ${zone} zone - ${system} system\n        END\n    END",
+  "validation": {
+    "mustContain": [
+      "*** Test Cases ***",
+      "Multi-Zone System Check",
+      "@{zones}",
+      "Alpha",
+      "Beta",
+      "Gamma",
+      "@{systems}",
+      "power",
+      "sensors",
+      "life-support",
+      "FOR",
+      "${zone}",
+      "${system}",
+      "Checking",
+      "zone",
+      "system",
+      "END"
+    ],
+    "forbiddenKeywords": [],
+    "mustPass": true
+  },
+  "theory": {
+    "title": "Exercise 2.4.5: Nested Loops",
+    "content": "<div class=\"theory-visual\">\n  <img src=\"assets/images/theory/07-for-loops/ex-2-4-5-nested-loops.png\" alt=\"PROTO-7 viewing 3D grid of ship zones (Alpha/Beta/Gamma) with systems (power/sensors/life-support) in each - nested loop visualization showing outer loop cycling zones, inner loop cycling systems\" />\n</div>\n\n<div class=\"story-intro\">\n  <h3>🔄 Loops Within Loops</h3>\n  <p><strong>MENTOR-9</strong>: \"You've mastered single loops. But what if you have categories AND items? Zones AND systems?\"</p>\n  <p>\"Nested loops! The outer loop picks a zone, the inner loop checks every system IN that zone. Multiply your iterations!\"</p>\n</div>\n\n<div class=\"concept-explain\">\n  <h3>📘 Nested Loop Structure</h3>\n  <p><strong>Pattern:</strong></p>\n  <pre><code>FOR    ${outer}    IN    @{outer_list}\n    # Outer loop body\n    FOR    ${inner}    IN    @{inner_list}\n        # Inner loop body (runs for EACH outer iteration)\n        Log    ${outer} - ${inner}\n    END\n    # Back to outer loop\nEND</code></pre>\n  <ul>\n    <li>Outer loop iterates once per outer item</li>\n    <li>Inner loop runs COMPLETELY for each outer iteration</li>\n    <li>Total iterations = outer × inner</li>\n    <li>Indentation increases by 4 spaces per level</li>\n  </ul>\n</div>\n\n<div class=\"code-demo\">\n  <h3>💡 How Nested Loops Execute</h3>\n  <pre><code>@{zones}=    Create List    Alpha    Beta\n@{systems}=    Create List    power    sensors\n\nFOR    ${zone}    IN    @{zones}\n    FOR    ${system}    IN    @{systems}\n        Log    ${zone} - ${system}\n    END\nEND\n\n# Execution flow:\n# 1. Outer: zone=Alpha\n#    2. Inner: system=power → Log \"Alpha - power\"\n#    3. Inner: system=sensors → Log \"Alpha - sensors\"\n# 4. Outer: zone=Beta\n#    5. Inner: system=power → Log \"Beta - power\"\n#    6. Inner: system=sensors → Log \"Beta - sensors\"\n\n# Total: 2 zones × 2 systems = 4 iterations</code></pre>\n</div>\n\n<div class=\"rules-box\">\n  <h3>⚙️ Key Rules</h3>\n  <ul>\n    <li>🔹 <strong>Indentation critical</strong>: Inner loop indented +4 from outer</li>\n    <li>🔹 <strong>END alignment</strong>: Each END aligns with its FOR</li>\n    <li>🔹 <strong>Inner runs fully</strong>: Inner loop completes before outer advances</li>\n    <li>🔹 <strong>Variable scope</strong>: Both ${outer} and ${inner} available in inner loop</li>\n    <li>🔹 <strong>Multiplication</strong>: Total iterations = outer_count × inner_count</li>\n  </ul>\n</div>\n\n<div class=\"try-it\">\n  <h3>🎯 Your Task</h3>\n  <p>Check 3 zones (Alpha, Beta, Gamma) with 3 systems each (power, sensors, life-support). That's 9 checks with nested loops!</p>\n</div>"
+  }
+}
