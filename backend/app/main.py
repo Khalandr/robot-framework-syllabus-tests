@@ -36,6 +36,7 @@ class CodeExecutionResponse(BaseModel):
     log_html: str = ""
     report_html: str = ""
     output_xml: str = ""
+    console_output: str = ""
     passed: bool = False
     error: str = ""
     execution_time: float = 0.0
@@ -168,11 +169,17 @@ async def execute_code(request: CodeExecutionRequest):
             if request.validation and request.validation.mustPass and not passed:
                 final_validation_errors.append("Tests must pass but some tests failed")
 
+            # Combine stdout and stderr for full console output
+            console_output = result.stdout
+            if result.stderr:
+                console_output += f"\n\n--- ERRORS ---\n{result.stderr}"
+
             return CodeExecutionResponse(
                 success=True,
                 log_html=log_html,
                 report_html=report_html,
                 output_xml=output_xml,
+                console_output=console_output,
                 passed=passed and len(final_validation_errors) == 0,
                 error="" if passed else result.stderr,
                 execution_time=execution_time,

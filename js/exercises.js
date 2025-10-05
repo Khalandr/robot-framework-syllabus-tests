@@ -341,17 +341,17 @@ const exercise = {
             const result = await response.json();
 
             if (result.success) {
-                const status = result.passed ? '✅ Tests PASSED' : '❌ Tests FAILED';
-                const timeInfo = `\nExecution time: ${result.execution_time.toFixed(2)}s`;
+                // Display real Robot Framework console output
+                let consoleText = result.console_output || 'No console output available';
 
-                // Display validation errors if any
-                let validationMsg = '';
+                // Add validation errors at the top if any
                 if (result.validation_errors && result.validation_errors.length > 0) {
-                    validationMsg = '\n\n⚠️ Validation Issues:\n' +
-                        result.validation_errors.map(err => `  • ${err}`).join('\n');
+                    const validationMsg = '⚠️ Validation Issues:\n' +
+                        result.validation_errors.map(err => `  • ${err}`).join('\n') + '\n\n';
+                    consoleText = validationMsg + consoleText;
                 }
 
-                consoleOutput.innerHTML = `<pre>${status}${timeInfo}${validationMsg}\n\n${result.error || 'All tests completed successfully!'}</pre>`;
+                consoleOutput.innerHTML = `<pre>${consoleText}</pre>`;
 
                 // Update output tabs
                 this.updateOutputTab('log', result.log_html);

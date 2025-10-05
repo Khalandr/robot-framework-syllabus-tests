@@ -13,9 +13,10 @@
   "instructions": [
     "Create the '*** Test Cases ***' section",
     "Define a test case called 'System Status Report'",
-    "Use the 'Log' keyword with severity levels to report 3 ship systems: 'Navigation system: Operational' (INFO), 'Hull breach detected in sector 7' (WARN), 'Life support: Critical failure imminent' (ERROR)",
+    "Log exactly 3 messages with their severity levels: 'Navigation system: Operational' (INFO), 'Hull breach detected in sector 7' (WARN), 'Life support: Critical failure imminent' (ERROR)",
     "Run your code and verify all tests pass",
-    "Inspect the Log tab to see how different severity levels are color-coded (INFO, WARN, ERROR)"
+    "Inspect the Log tab to see how different severity levels are color-coded",
+    "Verify the Console output shows your test execution results"
   ],
   "hints": [
     "Syntax for log levels: Log    message    LEVEL",
