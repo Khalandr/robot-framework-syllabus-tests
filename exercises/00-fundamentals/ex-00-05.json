@@ -1,82 +1,74 @@
 {
   "id": "ex-00-05",
-  "title": "Section Headers - The Framework's Structure",
+  "title": "Scalar Variables - Numbers & Evaluate",
   "difficulty": "beginner",
-  "estimatedTime": "10 minutes",
+  "estimatedTime": "12 minutes",
   "order": 5,
-  "description": "Learn all Robot Framework sections and header formatting rules.",
+  "description": "MENTOR-9: \"Text variables are useful, but robots need to do math. Power calculations, distance measurements, resource counts—all require numeric variables and the Evaluate keyword.\"",
   "story": {
-    "setup": "MENTOR-9: \"Every Robot Framework file is divided into sections. You've been using *** Test Cases ***, but there's more. Let me show you ALL the sections and their header variations.\"",
-    "context": "A complete RF file has four main sections: Settings (configuration), Variables (data), Test Cases (tests), and Keywords (reusable functions). Understanding the complete structure is essential before building complex suites.",
-    "success": "MENTOR-9: \"Good! You've seen that header spacing is flexible too. The framework is remarkably tolerant. This is intentional design—it focuses on WHAT you test, not HOW you format. Though we'll adopt conventions for team clarity.\""
+    "setup": "The ship's power systems need calibration. MENTOR-9 pulls up a diagnostic readout.",
+    "context": "\"PROTO-7, we need to calculate total power output. We have three reactors, each producing different amounts. We can't just log numbers—we need to DO MATH on them. That's where the Evaluate keyword comes in.\"",
+    "success": "MENTOR-9: \"Excellent! You've performed calculations with Evaluate. Addition, subtraction, multiplication, division—all the basic operations. This is how robots think numerically!\""
   },
   "instructions": [
-    "Create a complete Robot Framework file with all four sections:",
-    "1. *** Settings *** section:",
-    "   - Add Documentation line: 'This is a complete RF file structure demonstration'",
-    "2. *** Variables *** section:",
-    "   - Define ${SHIP_NAME}    Starlight Explorer",
-    "   - Define ${STATUS}    Operational",
-    "3. *** Test Cases *** section:",
-    "   - Create test 'Structure Demonstration'",
-    "   - Log the message: 'All four sections are present'",
-    "   - Log To Console the message: 'This demonstrates complete file structure'",
-    "4. *** Keywords *** section:",
-    "   - Create a keyword named 'Custom Logging Keyword'",
-    "   - Inside it, Log the message: 'This is a custom keyword'",
-    "Note: You won't call the custom keyword yet—just define it"
+    "Create the 'Test Cases' section",
+    "Create a test case named 'Power Calculations'",
+    "Create a variable '${reactor_1}' with value 150 (use Set Variable)",
+    "Create a variable '${reactor_2}' with value 200",
+    "Create a variable '${reactor_3}' with value 175",
+    "Use Evaluate to calculate total power: '${reactor_1} + ${reactor_2} + ${reactor_3}' and store in '${total_power}'",
+    "Use Evaluate to calculate average power: '${total_power} / 3' and store in '${average_power}'",
+    "Use Evaluate to calculate power deficit: '600 - ${total_power}' and store in '${deficit}'",
+    "Log the total power with message: 'Total power: 525'",
+    "Log the average power with message: 'Average power: 175.0'",
+    "Log the deficit with message: 'Power deficit: 75'",
+    "Run the code and inspect the Console tab to see calculated values"
   ],
   "hints": [
-    "The four main sections: Settings, Variables, Test Cases, Keywords",
-    "Section headers use *** Section Name *** format",
-    "Settings section can have Documentation, Library imports, etc.",
-    "Variables section defines ${scalar}, @{list}, &{dict} variables",
-    "Test Cases section contains your tests",
-    "Keywords section defines custom reusable keywords",
-    "Section order is conventional but not enforced (Settings usually first)",
-    "Indentation rules: section headers at left margin, content indented"
+    "Evaluate executes Python expressions",
+    "Pattern: ${result}    Evaluate    expression here",
+    "You can use variables in expressions: ${var1} + ${var2}",
+    "Math operations: + - * / (add, subtract, multiply, divide)"
   ],
   "initialCode": "",
-  "solution": "*** Settings ***\nDocumentation    This is a complete RF file structure demonstration\n\n*** Variables ***\n${SHIP_NAME}    Starlight Explorer\n${STATUS}    Operational\n\n*** Test Cases ***\nStructure Demonstration\n    Log    All four sections are present\n    Log To Console    This demonstrates complete file structure\n\n*** Keywords ***\nCustom Logging Keyword\n    Log    This is a custom keyword",
+  "solution": "*** Test Cases ***\nPower Calculations\n    ${reactor_1}    Set Variable    150\n    ${reactor_2}    Set Variable    200\n    ${reactor_3}    Set Variable    175\n    ${total_power}    Evaluate    ${reactor_1} + ${reactor_2} + ${reactor_3}\n    ${average_power}    Evaluate    ${total_power} / 3\n    ${deficit}    Evaluate    600 - ${total_power}\n    Log    Total power: ${total_power}\n    Log    Average power: ${average_power}\n    Log    Power deficit: ${deficit}",
   "validation": {
     "mustContain": [
-      "*** Settings ***",
-      "Documentation",
-      "*** Variables ***",
-      "${SHIP_NAME}",
-      "Starlight Explorer",
-      "${STATUS}",
       "*** Test Cases ***",
-      "Structure Demonstration",
-      "Log",
-      "*** Keywords ***",
-      "Custom Logging Keyword"
+      "Power Calculations",
+      "Set Variable",
+      "Evaluate",
+      "150",
+      "200",
+      "175",
+      "Total power: ${total_power}",
+      "Average power: ${average_power}",
+      "Power deficit: ${deficit}"
     ],
     "forbiddenKeywords": [],
     "mustPass": true
   },
   "theory": {
-    "title": "Robot Framework File Structure: All Sections",
-    "content": "<div class=\"theory-visual\">\\n<img src=\"assets/images/theory/01-basic-syntax/ex-1-1-5-file-structure.png\" alt=\"Blueprint-style diagram showing Robot Framework's four main sections stacked vertically\" loading=\"lazy\" width=\"1920\" height=\"1080\" />\\n</div>\\n\\n<div class=\"story-intro\">\n<p>MENTOR-9 projects a hologram of a Robot Framework file, divided into glowing sections.</p>\n<p>\"You've been writing tests in isolation. But real RF files are <strong>organized</strong>. They have multiple sections, each with a specific purpose.\"</p>\n</div>\n\n<div class=\"concept-explain\">\n<h3>The Main Sections</h3>\n\n<table>\n<tr><th>Section</th><th>Purpose</th><th>What Goes Here</th></tr>\n<tr>\n<td><strong>*** Settings ***</strong></td>\n<td>Configuration</td>\n<td>Documentation, library imports, setup/teardown, tags, timeouts</td>\n</tr>\n<tr>\n<td><strong>*** Variables ***</strong></td>\n<td>Data definitions</td>\n<td>${scalar}, @{list}, &{dict} variable definitions</td>\n</tr>\n<tr>\n<td><strong>*** Test Cases ***</strong></td>\n<td>Your tests</td>\n<td>All test cases with their keywords</td>\n</tr>\n<tr>\n<td><strong>*** Keywords ***</strong></td>\n<td>Reusable functions</td>\n<td>Custom keywords you create for reuse across tests</td>\n</tr>\n<tr>\n<td><strong>*** Comments ***</strong></td>\n<td>File comments</td>\n<td>Multi-line comments ignored by RF (rarely used)</td>\n</tr>\n</table>\n\n<p><strong>Note:</strong> The four sections you'll use 99% of the time are Settings, Variables, Test Cases, and Keywords. The *** Comments *** section exists but is rarely used (single-line comments with # are more common).</p>\n\n<h3>Complete File Example</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Settings ***\nDocumentation    Ship diagnostic test suite\nLibrary          Collections\n\n*** Variables ***\n${SHIP_NAME}     Starlight Explorer\n@{SYSTEMS}       Navigation  Power  Life Support\n\n*** Test Cases ***\nSystem Check\n    Log    Checking ${SHIP_NAME} systems\n    Check All Systems\n\n*** Keywords ***\nCheck All Systems\n    FOR    ${system}    IN    @{SYSTEMS}\n        Log    Checking ${system}...\n    END</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<h4>Section Details</h4>\n\n<h5>1. Settings Section</h5>\n<p>Configuration and imports. Common settings:</p>\n<ul>\n<li><strong>Documentation:</strong> Describes the test suite</li>\n<li><strong>Library:</strong> Import external libraries (Collections, String, etc.)</li>\n<li><strong>Suite Setup/Teardown:</strong> Run keywords before/after all tests</li>\n<li><strong>Test Setup/Teardown:</strong> Run keywords before/after each test</li>\n<li><strong>Force Tags:</strong> Apply tags to all tests</li>\n<li><strong>Test Timeout:</strong> Maximum time for tests</li>\n</ul>\n\n<h5>2. Variables Section</h5>\n<p>Define variables used throughout the file:</p>\n<ul>\n<li><strong>${scalar}:</strong> Single values (strings, numbers)</li>\n<li><strong>@{list}:</strong> Lists of items</li>\n<li><strong>&{dict}:</strong> Key-value pairs (dictionaries)</li>\n</ul>\n\n<h5>3. Test Cases Section</h5>\n<p>Your actual tests. You've been using this section already!</p>\n\n<h5>4. Keywords Section</h5>\n<p>Custom keywords you create. Like functions in programming—reusable blocks of actions.</p>\n\n<h3>Section Header Formatting</h3>\n<p>Like keywords, section headers have <strong>spacing flexibility</strong>:</p>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Settings ***     # Standard (3 spaces inside)\n***Settings***       # No spaces (valid)\n*** Settings***      # Left space only (valid)\n***Settings ***      # Right space only (valid)\n***  Settings  ***   # Multiple spaces (valid)</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p><strong>All are valid!</strong> But the standard is <code>*** Section ***</code> with 1 space on each side.</p>\n\n<h3>Section Order Conventions</h3>\n<p>While not enforced, the standard order is:</p>\n<ol>\n<li>Settings (configuration comes first)</li>\n<li>Variables (define data before using it)</li>\n<li>Test Cases (the main content)</li>\n<li>Keywords (helper functions at the end)</li>\n</ol>\n\n<p>This is <strong>convention</strong>, not requirement. RF will parse sections in any order. But following conventions makes code predictable.</p>\n\n<h4>Optional Sections</h4>\n<p>You don't need all four sections in every file:</p>\n<ul>\n<li>A file with just <code>*** Test Cases ***</code> is valid</li>\n<li>You can skip Settings, Variables, or Keywords if not needed</li>\n<li>But <code>*** Test Cases ***</code> is required (otherwise, what are you testing?)</li>\n</ul>\n\n<h3>Real-World Structure</h3>\n</div>\n\n<div class=\"code-demo\">\n<pre><code>*** Settings ***\nDocumentation    User authentication tests\nLibrary          SeleniumLibrary\nSuite Setup      Open Browser    ${URL}    chrome\nSuite Teardown   Close All Browsers\n\n*** Variables ***\n${URL}           https://example.com\n${USERNAME}      testuser@example.com\n${PASSWORD}      SecurePass123\n\n*** Test Cases ***\nSuccessful Login\n    Enter Credentials    ${USERNAME}    ${PASSWORD}\n    Click Login Button\n    Verify Dashboard Loaded\n\nInvalid Password\n    Enter Credentials    ${USERNAME}    WrongPassword\n    Click Login Button\n    Verify Error Message    Invalid credentials\n\n*** Keywords ***\nEnter Credentials\n    [Arguments]    ${user}    ${pass}\n    Input Text     id=username    ${user}\n    Input Text     id=password    ${pass}\n\nClick Login Button\n    Click Button    id=login\n\nVerify Dashboard Loaded\n    Wait Until Page Contains    Welcome</code></pre>\n</div>\n\n<div class=\"concept-explain\">\n<p>This shows a complete, realistic test file with all sections working together.</p>\n</div>\n\n<div class=\"try-it\">\n<p>MENTOR-9: \"Create a file with all four sections. Add documentation, define variables, write a test, and create a custom keyword. Show me you understand the complete structure.\"</p>\n</div>",
-    "estimatedReadTime": "7-8 minutes"
+    "title": "Scalar Variables: Numbers & Math with Evaluate",
+    "content": "<div class=\"theory-visual\">\n<img src=\"assets/images/theory/02-variables/ex-1-2-2-numbers-evaluate.png\" alt=\"Mathematical calculations visualization\" loading=\"lazy\" width=\"1920\" height=\"1080\" />\n</div>\n\n<div class=\"story-intro\">\n<p>MENTOR-9 gestures to the ship's power distribution panel, numbers flickering across holographic displays.</p>\n<p>MENTOR-9: \"Look at this. Three reactors, different outputs. We can't manually calculate the total every time. We need the computer to do the math. That's what Evaluate does—it performs calculations.\"</p>\n</div>\n\n<h3>Numeric Variables</h3>\n\n<p>Variables can store numbers just like they store text:</p>\n\n<div class=\"code-demo\">\n<pre><code>${count}    Set Variable    42\n${temperature}    Set Variable    -15\n${distance}    Set Variable    3.14159</code></pre>\n</div>\n\n<p>But storing numbers isn't enough—we need to <strong>calculate</strong> with them.</p>\n\n<h3>The Evaluate Keyword</h3>\n\n<p><strong>Evaluate</strong> executes Python expressions and returns the result. It's Robot Framework's calculator.</p>\n\n<div class=\"code-demo\">\n<pre><code>${result}    Evaluate    10 + 5\nLog    ${result}    # Outputs: 15</code></pre>\n</div>\n\n<h3>Math Operations</h3>\n\n<ul>\n<li><strong>Addition:</strong> <code>Evaluate    10 + 5</code> → 15</li>\n<li><strong>Subtraction:</strong> <code>Evaluate    10 - 5</code> → 5</li>\n<li><strong>Multiplication:</strong> <code>Evaluate    10 * 5</code> → 50</li>\n<li><strong>Division:</strong> <code>Evaluate    10 / 5</code> → 2.0</li>\n<li><strong>Integer Division:</strong> <code>Evaluate    10 // 3</code> → 3</li>\n<li><strong>Modulo (remainder):</strong> <code>Evaluate    10 % 3</code> → 1</li>\n<li><strong>Exponentiation:</strong> <code>Evaluate    2 ** 3</code> → 8</li>\n</ul>\n\n<h3>Using Variables in Calculations</h3>\n\n<p>The real power comes from using variables in expressions:</p>\n\n<div class=\"code-demo\">\n<pre><code>${width}    Set Variable    10\n${height}    Set Variable    5\n${area}    Evaluate    ${width} * ${height}\nLog    Area: ${area}    # Outputs: Area: 50</code></pre>\n</div>\n\n<p>Robot Framework replaces <code>${width}</code> and <code>${height}</code> with their values before evaluating.</p>\n\n<h3>Complex Expressions</h3>\n\n<p>You can combine multiple operations:</p>\n\n<div class=\"code-demo\">\n<pre><code>${total}    Evaluate    (${a} + ${b}) * ${c} / 2\n${average}    Evaluate    (${x} + ${y} + ${z}) / 3\n${percentage}    Evaluate    (${part} / ${whole}) * 100</code></pre>\n</div>\n\n<p>Standard mathematical operator precedence applies (multiplication/division before addition/subtraction).</p>\n\n<h3>Why Evaluate Instead of Built-in Math Keywords?</h3>\n\n<p>Robot Framework doesn't have built-in keywords like \"Add\" or \"Multiply.\" Instead, it uses <strong>Evaluate</strong> to leverage Python's powerful expression evaluation.</p>\n\n<p><strong>Advantages:</strong></p>\n<ul>\n<li>No need to learn separate math keywords</li>\n<li>Use familiar mathematical notation</li>\n<li>Access to full Python math capabilities</li>\n<li>Can evaluate complex expressions in one line</li>\n</ul>\n\n<h3>Common Use Cases</h3>\n\n<div class=\"code-demo\">\n<pre><code># Calculate total cost\n${total_cost}    Evaluate    ${quantity} * ${price}\n\n# Convert Celsius to Fahrenheit\n${fahrenheit}    Evaluate    (${celsius} * 9/5) + 32\n\n# Calculate percentage\n${pass_rate}    Evaluate    (${passed} / ${total}) * 100\n\n# Increment a counter\n${counter}    Evaluate    ${counter} + 1</code></pre>\n</div>\n\n<h3>Important Notes</h3>\n\n<ul>\n<li>Evaluate returns <strong>float</strong> for division: 10 / 3 = 3.333...</li>\n<li>Use // for integer division: 10 // 3 = 3</li>\n<li>Variables must already exist before using in Evaluate</li>\n<li>Python syntax rules apply inside Evaluate</li>\n</ul>",
+    "estimatedReadTime": "6 minutes"
   },
   "metadata": {
     "tags": [
-      "beginner",
-      "file-structure",
-      "sections",
-      "settings",
       "variables",
-      "keywords",
-      "organization"
+      "scalar",
+      "numbers",
+      "evaluate",
+      "math",
+      "calculations"
     ],
     "prerequisites": [
-      "ex-00-01-4"
+      "ex-00-04"
     ],
     "nextExercises": [
-      "challenge-1-1"
+      "ex-00-06"
     ]
   },
-  "section": "01-basic-syntax",
+  "section": "02-variables",
   "category": "00-fundamentals"
 }
