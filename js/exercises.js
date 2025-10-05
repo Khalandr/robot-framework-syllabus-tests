@@ -310,17 +310,28 @@ const exercise = {
     },
 
     async runCode() {
+        // Run without validation - just execute and show output
+        await this._executeCode(false);
+    },
+
+    async submitCode() {
+        // Run with validation - check exercise requirements
+        await this._executeCode(true);
+    },
+
+    async _executeCode(withValidation) {
         if (!this.editor) return;
 
         const code = this.editor.getValue();
         const consoleOutput = document.getElementById('outputConsole');
 
         // Show loading
-        consoleOutput.innerHTML = '<pre>Executing Robot Framework code...\n</pre>';
+        const action = withValidation ? 'Validating and executing' : 'Executing';
+        consoleOutput.innerHTML = `<pre>${action} Robot Framework code...\n</pre>`;
 
         try {
-            // Prepare validation rules
-            const validation = this.currentExercise.validation ? {
+            // Prepare validation rules only if withValidation is true
+            const validation = withValidation && this.currentExercise.validation ? {
                 mustContain: this.currentExercise.validation.mustContain || [],
                 mustPass: this.currentExercise.validation.mustPass !== false,
                 forbiddenKeywords: this.currentExercise.validation.forbiddenKeywords || []
@@ -344,11 +355,25 @@ const exercise = {
                 // Display real Robot Framework console output
                 let consoleText = result.console_output || 'No console output available';
 
-                // Add validation errors at the top if any
-                if (result.validation_errors && result.validation_errors.length > 0) {
-                    const validationMsg = '⚠️ Validation Issues:\n' +
-                        result.validation_errors.map(err => `  • ${err}`).join('\n') + '\n\n';
-                    consoleText = validationMsg + consoleText;
+                // Add validation header if validation was performed
+                if (withValidation) {
+                    const hasValidationErrors = result.validation_errors && result.validation_errors.length > 0;
+                    const validationStatus = hasValidationErrors || !result.passed
+                        ? '❌ SUBMISSION FAILED'
+                        : '✅ SUBMISSION SUCCESSFUL';
+
+                    let header = `${validationStatus}\n${'='.repeat(50)}\n\n`;
+
+                    // Add validation errors if any
+                    if (hasValidationErrors) {
+                        header += '⚠️ Validation Issues:\n' +
+                            result.validation_errors.map(err => `  • ${err}`).join('\n') + '\n\n';
+                    }
+
+                    consoleText = header + consoleText;
+                } else {
+                    // Just running code, add simple header
+                    consoleText = `▶ RUN OUTPUT (no validation)\n${'='.repeat(50)}\n\n` + consoleText;
                 }
 
                 consoleOutput.innerHTML = `<pre>${consoleText}</pre>`;
@@ -357,11 +382,15 @@ const exercise = {
                 this.updateOutputTab('log', result.log_html);
                 this.updateOutputTab('report', result.report_html);
 
-                // Visual feedback
-                if (result.passed) {
-                    consoleOutput.style.borderLeft = '4px solid var(--success-green)';
+                // Visual feedback - only show green/red when validating
+                if (withValidation) {
+                    if (result.passed) {
+                        consoleOutput.style.borderLeft = '4px solid var(--success-green)';
+                    } else {
+                        consoleOutput.style.borderLeft = '4px solid var(--error-red)';
+                    }
                 } else {
-                    consoleOutput.style.borderLeft = '4px solid var(--error-red)';
+                    consoleOutput.style.borderLeft = '4px solid var(--primary-teal)';
                 }
             } else {
                 // Handle validation failures before execution
