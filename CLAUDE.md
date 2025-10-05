@@ -35,9 +35,10 @@ Robot Framework training platform with two main features:
    - Password protected (SHA-256)
 
 2. **Code Exercises** (Working MVP)
-   - 42 interactive RF coding challenges (37 exercises + 7 challenges across 7 sections)
+   - 72 interactive RF coding exercises + 14 challenges
    - Story-driven learning (PROTO-7 & MENTOR-9 on planet Syntax-IV)
    - FastAPI backend + Monaco editor frontend
+   - Flat file structure with sequential IDs
    - Production-ready architecture ✅
 
 ---
@@ -56,6 +57,10 @@ Robot Framework training platform with two main features:
 - **Validation**: mustContain, forbiddenKeywords, mustPass checks
 - **Security**: Regex validation, 30s timeout, 5KB limit
 - **Philosophy**: Zero scaffolding (blank initialCode)
+- **Execution Modes**:
+  - **Run Code**: Practice mode without validation (teal border feedback)
+  - **Submit**: Validation mode with requirement checks (green/red feedback)
+- **Output**: Real Robot Framework console output (stdout from `robot test.robot`)
 
 **Design Colors:**
 - Primary Teal: `#5AB3B3`
@@ -86,26 +91,21 @@ Robot Framework training platform with two main features:
 │   ├── chapter-3/          # 5 subchapters (3.1-3.5)
 │   ├── chapter-4/          # 5 subchapters (4.1-4.5)
 │   └── chapter-5/          # 2 subchapters (5.1-5.2)
-├── exercises/              # Code exercises (FLATTENED 2-LEVEL)
-│   ├── index.json          # Root index
-│   └── 00-fundamentals/    # Category folder
-│       ├── category.json   # Category metadata
-│       ├── 01-basic-syntax/        # Section folder
-│       │   ├── section.json        # Section metadata
-│       │   ├── ex-00-01-01.json    # Individual exercise
-│       │   ├── ex-00-01-02.json
-│       │   └── ch-00-01.json       # Challenge
-│       ├── 02-variables/
-│       ├── 03-assertions/
-│       ├── 04-settings-section/
-│       ├── 05-custom-keywords/
-│       ├── 06-if-statements/
-│       └── 07-for-loops/
+├── exercises/              # Code exercises (FLAT STRUCTURE)
+│   ├── index.json          # Root index (category list)
+│   └── 00-fundamentals/    # Category folder (all exercises here)
+│       ├── index.json      # Category index (exercise ID list)
+│       ├── ex-00-01.json   # Exercise 01 (Basic Syntax)
+│       ├── ex-00-02.json   # Exercise 02 (Log Levels)
+│       ├── ex-00-03.json   # Exercise 03 (Log To Console)
+│       ├── ...             # Exercises 04-72 (sequential)
+│       ├── ch-00-01.json   # Challenge 01
+│       └── ...             # Challenges 02-14
 ├── backend/
 │   ├── app/main.py         # FastAPI server
 │   └── requirements.txt
 ├── docs/
-│   ├── EXERCISE_CREATION_GUIDE.md  # How to create exercises
+│   ├── EXERCISE_PLAN.md            # Exercise roadmap & structure
 │   ├── REFACTORING_HISTORY.md      # Past refactoring work
 │   ├── FUNDAMENTALS_SECTION_PLAN.md
 │   └── FUNDAMENTALS_STORY.md
@@ -159,14 +159,16 @@ Robot Framework training platform with two main features:
 
 ## 🎯 Exercise JSON Schema
 
-**ID Naming Convention:**
-- Exercises: `ex-{category}-{section}-{number}` (e.g., `ex-00-01-01`)
-- Challenges: `ch-{category}-{section}` (e.g., `ch-00-01`)
+**ID Naming Convention (Flat Structure):**
+- Exercises: `ex-{category}-{sequential-number}` (e.g., `ex-00-01`, `ex-00-02`, etc.)
+- Challenges: `ch-{category}-{sequential-number}` (e.g., `ch-00-01`, `ch-00-02`, etc.)
+- All exercises numbered sequentially from 01 to 72
+- No section folders - all files in category root
 
-**Example: `ex-00-01-01.json`**
+**Example: `ex-00-01.json`**
 ```json
 {
-  "id": "ex-00-01-01",
+  "id": "ex-00-01",
   "type": "exercise",
   "section": "01-basic-syntax",
   "category": "00-fundamentals",
@@ -204,7 +206,7 @@ Robot Framework training platform with two main features:
   "metadata": {
     "tags": ["fundamentals", "sequential-execution"],
     "prerequisites": [],
-    "nextExercises": ["ex-00-01-02"]
+    "nextExercises": ["ex-00-02"]
   }
 }
 ```
@@ -220,30 +222,59 @@ Robot Framework training platform with two main features:
 
 ## 🛠️ Creating New Exercises
 
-See **[docs/EXERCISE_CREATION_GUIDE.md](docs/EXERCISE_CREATION_GUIDE.md)** for detailed step-by-step instructions.
+**Prerequisites:**
+- Frontend running: `npm run dev` (port 8080)
+- Backend running: `cd backend && uvicorn app.main:app --reload` (port 8000)
+- Both must be restarted after adding new exercises
 
-**Quick summary:**
-1. Create `ex-{category}-{section}-{number}.json` in section folder
-2. Update `section.json` with exercise ID
-3. Update `category.json` if new section
-4. Test with both servers running
-5. Commit changes
+**Steps:**
+
+1. **Create Exercise File**
+   - Location: `exercises/00-fundamentals/ex-00-{number}.json`
+   - Use next sequential number (e.g., if last is ex-00-72, create ex-00-73)
+   - Copy structure from existing exercise (e.g., ex-00-01.json)
+
+2. **Update Category Index**
+   - Edit `exercises/00-fundamentals/index.json`
+   - Add new ID to `exercises` array (or `challenges` array for challenges)
+   - Keep sequential order
+
+3. **Test**
+   - Restart both servers
+   - Navigate to Exercises tab
+   - Verify exercise appears and loads correctly
+   - Test Run Code and Submit functionality
+
+4. **Commit**
+   - `git add exercises/00-fundamentals/`
+   - `git commit -m "Add exercise XX: [title]"`
+   - `git push`
 
 ---
 
 ## 📊 Current Exercise Inventory
 
-**Completed (7 sections):**
-- Section 01 (1.1): Basic Syntax (5 exercises + 1 challenge) ✅
-- Section 02 (1.2): Variables (7 exercises + 1 challenge) ✅
-- Section 03 (1.3): Assertions (7 exercises + 1 challenge) ✅
-- Section 04 (2.1): Settings Section (7 exercises + 1 challenge) ✅
-- Section 05 (2.2): Custom Keywords (6 exercises + 1 challenge) ✅
-- Section 06 (2.3): IF Statements (5 exercises + 1 challenge) ✅
-- Section 07 (2.4): FOR Loops (5 exercises + 1 challenge) ✅
+**Sequential Structure (ex-00-01 to ex-00-72):**
+- ex-00-01 to ex-00-05: Basic Syntax (5 exercises)
+- ex-00-06 to ex-00-12: Variables (7 exercises)
+- ex-00-13 to ex-00-19: Assertions (7 exercises)
+- ex-00-20 to ex-00-26: Settings Section (7 exercises)
+- ex-00-27 to ex-00-32: Custom Keywords (6 exercises)
+- ex-00-33 to ex-00-37: IF Statements (5 exercises)
+- ex-00-38 to ex-00-42: FOR Loops (5 exercises)
+- ex-00-43 to ex-00-47: WHILE Loops (5 exercises)
+- ex-00-48 to ex-00-52: TRY/EXCEPT (5 exercises)
+- ex-00-53 to ex-00-57: Test Templates (5 exercises)
+- ex-00-58 to ex-00-62: Collections Library (5 exercises)
+- ex-00-63 to ex-00-67: String Library (5 exercises)
+- ex-00-68 to ex-00-72: DateTime Library (5 exercises)
 
-**Total:** 42 exercises + 7 challenges
-**Remaining:** ~42 exercises to reach 84 total
+**Challenges:** ch-00-01 to ch-00-14 (one per topic section)
+
+**Total:** 72 exercises + 14 challenges = 86 items
+
+**Status:** First 3 exercises (ex-00-01 to ex-00-03) fully reviewed and updated ✅
+**See:** [docs/EXERCISE_PLAN.md](docs/EXERCISE_PLAN.md) for planned refactoring of remaining exercises
 
 ---
 
@@ -384,7 +415,7 @@ Both extracted elements appear **before** the "Read More" button.
 
 ## 📚 Additional Documentation
 
-- **[docs/EXERCISE_CREATION_GUIDE.md](docs/EXERCISE_CREATION_GUIDE.md)** - Step-by-step exercise creation
+- **[docs/EXERCISE_PLAN.md](docs/EXERCISE_PLAN.md)** - Exercise roadmap and refactoring plan
 - **[docs/REFACTORING_HISTORY.md](docs/REFACTORING_HISTORY.md)** - Past refactoring work
 - **[docs/FUNDAMENTALS_SECTION_PLAN.md](docs/FUNDAMENTALS_SECTION_PLAN.md)** - Complete curriculum plan
 - **[docs/FUNDAMENTALS_STORY.md](docs/FUNDAMENTALS_STORY.md)** - Story arc & character details
